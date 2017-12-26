@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MultiProperties xmlns="hu.skzs.multiproperties">
+    <Version>1.2</Version>
+    <Name>AppMessages</Name>
+    <Description></Description>
+    <Handler>Java Properties Handler</Handler>
+    <Columns>
+        <Key>
+            <Width>200</Width>
+        </Key>
+        <Column>
+            <Name>default</Name>
+            <Description></Description>
+            <Width>150</Width>
+            <HandlerConfiguration>/hw-gae-client_core/src/main/resources/hu/hw/cloud/client/core/i18n/CoreMessages.properties|false|false|false|false</HandlerConfiguration>
+        </Column>
+        <Column>
+            <Name>hu_HU</Name>
+            <Description></Description>
+            <Width>150</Width>
+            <HandlerConfiguration>/hw-gae-client_core/src/main/resources/hu/hw/cloud/client/core/i18n/CoreMessages_hu_HU.properties|false|false|false|false</HandlerConfiguration>
+        </Column>
+    </Columns>
+    <Records>
+        <Property>
+            <Name>comOk</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">OK</Value>
+            <Value disabled="false">Rendben</Value>
+        </Property>
+        <Property>
+            <Name>comSave</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Save</Value>
+            <Value disabled="false">Mentés</Value>
+        </Property>
+        <Property>
+            <Name>comCancel</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Cancel</Value>
+            <Value disabled="false">Mégsem</Value>
+        </Property>
+        <Property>
+            <Name>comRequiredField</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">The field is requried!</Value>
+            <Value disabled="false">A mező kitöltése kötelező!</Value>
+        </Property>
+        <Comment>
+            <Value>LOGIN</Value>
+        </Comment>
+        <Property>
+            <Name>loginAccount</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Account Id</Value>
+            <Value disabled="false">Előfizetői azonosító</Value>
+        </Property>
+        <Property>
+            <Name>loginUsername</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Username</Value>
+            <Value disabled="false">Bejelenkezői név</Value>
+        </Property>
+        <Property>
+            <Name>loginPassword</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Password</Value>
+            <Value disabled="false">Jelszó</Value>
+        </Property>
+        <Property>
+            <Name>loginSubmit</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">LOG IN</Value>
+            <Value disabled="false">BEJELENTKEZEK</Value>
+        </Property>
+        <Property>
+            <Name>loginKeepMe</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Keep me logged in</Value>
+            <Value disabled="false">Jegyezz meg</Value>
+        </Property>
+        <Property>
+            <Name>loginCreate</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Create an Account</Value>
+            <Value disabled="false">Előfizetői fiók létrehozása</Value>
+        </Property>
+        <Comment>
+            <Value>REGISTRATION</Value>
+        </Comment>
+        <Property>
+            <Name>regCaption</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Registeration</Value>
+            <Value disabled="false">Regisztráció</Value>
+        </Property>
+        <Property>
+            <Name>regAccountName</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Account name</Value>
+            <Value disabled="false">Előfizetői név</Value>
+        </Property>
+        <Property>
+            <Name>regStreet</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Street and number</Value>
+            <Value disabled="false">Utca, házszám</Value>
+        </Property>
+        <Property>
+            <Name>regCity</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">City</Value>
+            <Value disabled="false">Város</Value>
+        </Property>
+        <Property>
+            <Name>regPostcode</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Postcode</Value>
+            <Value disabled="false">Irányítószám</Value>
+        </Property>
+        <Property>
+            <Name>regCountry</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Country</Value>
+            <Value disabled="false">Ország</Value>
+        </Property>
+        <Property>
+            <Name>regUsername</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Username</Value>
+            <Value disabled="false">Felhasználói név</Value>
+        </Property>
+        <Property>
+            <Name>regEmail</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Your email address</Value>
+            <Value disabled="false">Az Ön email címe</Value>
+        </Property>
+        <Property>
+            <Name>regEmail2</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Repeat email</Value>
+            <Value disabled="false">Email megismétlése</Value>
+        </Property>
+        <Property>
+            <Name>regPassword</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Password</Value>
+            <Value disabled="false">Jelszó</Value>
+        </Property>
+        <Property>
+            <Name>regPassword2</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Repeat password</Value>
+            <Value disabled="false">Jelszó megismétlése</Value>
+        </Property>
+        <Property>
+            <Name>regSubmit</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Submit</Value>
+            <Value disabled="false">Regisztrálok</Value>
+        </Property>
+        <Comment>
+            <Value>SUCCESS</Value>
+        </Comment>
+        <Property>
+            <Name>sucCaption</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Registration Success - Congratulations!</Value>
+            <Value disabled="false">Sikeres regisztráció - Gratulálunk!</Value>
+        </Property>
+        <Property>
+            <Name>sucLine1</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">You have successfully complited your registration.</Value>
+            <Value disabled="false">Ön sikeresen regisztrált.</Value>
+        </Property>
+        <Property>
+            <Name>sucLine2</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Your account id: {0}</Value>
+            <Value disabled="false">Az Ön előfizetői azonosítója: {0}</Value>
+        </Property>
+        <Property>
+            <Name>sucLine3</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Please check your email as we have sent you all your registration details and activate your account!</Value>
+            <Value disabled="false">Kérem tekintse meg a sikeres regisztrációrol küldött emailt és aktiválja előfizetését?</Value>
+        </Property>
+        <Comment>
+            <Value>ACTIVATE</Value>
+        </Comment>
+        <Property>
+            <Name>actCaption</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Account activation</Value>
+            <Value disabled="false">Elfizetői aktiválás</Value>
+        </Property>
+        <Property>
+            <Name>actLine1</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Your account is now active!</Value>
+            <Value disabled="false">Az Ön előfizetése aktív!</Value>
+        </Property>
+        <Property>
+            <Name>actLine2</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Clicking on the link below you can login and start your work:</Value>
+            <Value disabled="false">Az alábbi linkre kattintva bejelentkzehet és megkezdheti az app használatát:</Value>
+        </Property>
+        <Comment>
+            <Value>SIDE NAV</Value>
+        </Comment>
+        <Property>
+            <Name>mainMenuGroupConfig</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Configuration</Value>
+            <Value disabled="false">Beállítások</Value>
+        </Property>
+        <Comment>
+            <Value>SIDE PROFILE</Value>
+        </Comment>
+        <Property>
+            <Name>accountMenuItemSetup</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Account setup</Value>
+            <Value disabled="false">Előfizetői beállítások</Value>
+        </Property>
+        <Property>
+            <Name>accountMenuItemSystem</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">System setup</Value>
+            <Value disabled="false">Rendszer beállítások</Value>
+        </Property>
+        <Property>
+            <Name>userMenuItemProfile</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">User profile</Value>
+            <Value disabled="false">Felhasználói profil</Value>
+        </Property>
+        <Property>
+            <Name>userMenuItemSwitch</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Switch user</Value>
+            <Value disabled="false">Felhasználó váltás</Value>
+        </Property>
+        <Property>
+            <Name>userMenuItemLogout</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Log Out</Value>
+            <Value disabled="false">Kijelentkezés</Value>
+        </Property>
+        <Comment>
+            <Value>DASHBOARD</Value>
+        </Comment>
+        <Property>
+            <Name>pageDashboardTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Dashboard</Value>
+            <Value disabled="false">Infopult</Value>
+        </Property>
+    </Records>
+</MultiProperties>

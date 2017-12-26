@@ -1,0 +1,37 @@
+/**
+ * 
+ */
+package hu.hw.cloud.shared.dto.hotel;
+
+import java.util.Date;
+
+import hu.hw.cloud.shared.dto.Dto;
+
+/**
+ * @author CR
+ *
+ */
+@SuppressWarnings("serial")
+public class RoomAvailabilityDto implements Dto {
+
+	private Boolean available;
+
+	private Date date;
+
+	public Boolean getAvailable() {
+		return available;
+	}
+
+	public void setAvailable(Boolean available) {
+		this.available = available;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+}

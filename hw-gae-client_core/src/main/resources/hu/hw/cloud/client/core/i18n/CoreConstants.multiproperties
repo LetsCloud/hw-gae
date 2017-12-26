@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MultiProperties xmlns="hu.skzs.multiproperties">
+    <Version>1.2</Version>
+    <Name>ErrorCodeConstants</Name>
+    <Description></Description>
+    <Handler>Java Properties Handler</Handler>
+    <Columns>
+        <Key>
+            <Width>200</Width>
+        </Key>
+        <Column>
+            <Name>default</Name>
+            <Description></Description>
+            <Width>232</Width>
+            <HandlerConfiguration>/hw-gae-client_core/src/main/resources/hu/hw/cloud/client/core/i18n/CoreConstants.properties|false|false|false|false</HandlerConfiguration>
+        </Column>
+        <Column>
+            <Name>hu_HU</Name>
+            <Description></Description>
+            <Width>287</Width>
+            <HandlerConfiguration>/hw-gae-client_core/src/main/resources/hu/hw/cloud/client/core/i18n/CoreConstants_hu_HU.properties|false|false|false|false</HandlerConfiguration>
+        </Column>
+    </Columns>
+    <Records>
+        <Comment>
+            <Value>ERROR CODES</Value>
+        </Comment>
+        <Property>
+            <Name>erroCodeMap</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">LOGIN_UNKNOWN_PROBLEM,LOGIN_BAD_CREDENTIALS,LOGIN_DISABLED_USER</Value>
+            <Value disabled="false">LOGIN_UNKNOWN_PROBLEM,LOGIN_BAD_CREDENTIALS,LOGIN_DISABLED_USER</Value>
+        </Property>
+        <Property>
+            <Name>LOGIN_UNKNOWN_PROBLEM</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Unknown login problem!</Value>
+            <Value disabled="false">Ismeretlen bejelentkezési probléma!</Value>
+        </Property>
+        <Property>
+            <Name>LOGIN_BAD_CREDENTIALS</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Bad credentials!</Value>
+            <Value disabled="false">Téves bejelentkezési adatok!</Value>
+        </Property>
+        <Property>
+            <Name>LOGIN_DISABLED_USER</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">User not enabled!</Value>
+            <Value disabled="false">Nem engedélyezett felhasználó!</Value>
+        </Property>
+        <Property>
+            <Name>LOGIN_LOCKED_AUTHENTICATION</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">To many login attempts! Please try again in 15 minutes.</Value>
+            <Value disabled="false">Túl sok bejelentkezési próbálkozás! Kérem próbálpzzon 15 perc múlva</Value>
+        </Property>
+        <Comment>
+            <Value>ROOM STATUSIES</Value>
+        </Comment>
+        <Property>
+            <Name>roomStatusMap</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">DIRTY,CLEAN,INSPECTED</Value>
+            <Value disabled="false">DIRTY,CLEAN,INSPECTED</Value>
+        </Property>
+        <Property>
+            <Name>DIRTY</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Dirty</Value>
+            <Value disabled="false">Piszkos</Value>
+        </Property>
+        <Property>
+            <Name>CLEAN</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Clean</Value>
+            <Value disabled="false">Tiszta</Value>
+        </Property>
+        <Property>
+            <Name>INSPECTED</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Inspected</Value>
+            <Value disabled="false">Rendben</Value>
+        </Property>
+    </Records>
+</MultiProperties>

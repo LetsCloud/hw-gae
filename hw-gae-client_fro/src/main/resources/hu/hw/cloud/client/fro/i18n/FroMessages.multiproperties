@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MultiProperties xmlns="hu.skzs.multiproperties">
+    <Version>1.2</Version>
+    <Name>AppMessages</Name>
+    <Description></Description>
+    <Handler>Java Properties Handler</Handler>
+    <Columns>
+        <Key>
+            <Width>200</Width>
+        </Key>
+        <Column>
+            <Name>default</Name>
+            <Description></Description>
+            <Width>150</Width>
+            <HandlerConfiguration>/hw-gae-client_fro/src/main/resources/hu/hw/cloud/client/fro/i18n/FroMessages.properties|false|false|false|false</HandlerConfiguration>
+        </Column>
+        <Column>
+            <Name>hu_HU</Name>
+            <Description></Description>
+            <Width>150</Width>
+            <HandlerConfiguration>/hw-gae-client_fro/src/main/resources/hu/hw/cloud/client/fro/i18n/FroMessages_hu_HU.properties|false|false|false|false</HandlerConfiguration>
+        </Column>
+    </Columns>
+    <Records>
+        <Comment>
+            <Value>MAIN MENU</Value>
+        </Comment>
+        <Property>
+            <Name>mainMenuItemDashboard</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Dashboard</Value>
+            <Value disabled="false">Infopult</Value>
+        </Property>
+        <Property>
+            <Name>mainMenuGroupConfiguration</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Configurations</Value>
+            <Value disabled="false">Beállítások</Value>
+        </Property>
+        <Property>
+            <Name>mainMenuItemSystemConfig</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">System config</Value>
+            <Value disabled="false">Rendszer beállítások</Value>
+        </Property>
+        <Property>
+            <Name>mainMenuItemCommonConfig</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Common config</Value>
+            <Value disabled="false">Általános beállítások</Value>
+        </Property>
+        <Property>
+            <Name>mainMenuItemHotelConfig</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Hotel config</Value>
+            <Value disabled="false">Hotel beállítások</Value>
+        </Property>
+        <Comment>
+            <Value>USER EDITOR</Value>
+        </Comment>
+        <Property>
+            <Name>userEditorCreateTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Create User</Value>
+            <Value disabled="false">Felhasználó létrehozása</Value>
+        </Property>
+        <Property>
+            <Name>userEditorModifyTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Modify User</Value>
+            <Value disabled="false">Felhasználó módosítása</Value>
+        </Property>
+        <Property>
+            <Name>userEditorEmail</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Email</Value>
+            <Value disabled="false">Email</Value>
+        </Property>
+        <Property>
+            <Name>userEditorUsername</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Username</Value>
+            <Value disabled="false">Felhasználói név</Value>
+        </Property>
+        <Property>
+            <Name>userEditorPassword</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Password</Value>
+            <Value disabled="false">Jelszó</Value>
+        </Property>
+    </Records>
+</MultiProperties>

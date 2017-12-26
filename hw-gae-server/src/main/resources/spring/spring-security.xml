@@ -1,0 +1,124 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		   http://www.springframework.org/schema/security
+		   http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+	<beans:bean id="accessDecisionManager"
+		class="org.springframework.security.access.vote.AffirmativeBased">
+		<beans:constructor-arg>
+			<beans:list>
+				<beans:bean
+					class="org.springframework.security.access.vote.AuthenticatedVoter" />
+				<beans:bean class="org.springframework.security.access.vote.RoleVoter" />
+				<beans:bean
+					class="org.springframework.security.web.access.expression.WebExpressionVoter" />
+			</beans:list>
+		</beans:constructor-arg>
+	</beans:bean>
+
+	<beans:bean id="loginAttemptService"
+		class="hu.hw.cloud.server.security.LoginAttemptService" />
+
+	<beans:bean id="appUserDetailsService"
+		class="hu.hw.cloud.server.security.AppUserDetailsService">
+		<beans:constructor-arg ref="appUserService" />
+		<beans:constructor-arg ref="loginAttemptService" />
+	</beans:bean>
+
+	<beans:bean id="restAuthEntryPoint"
+		class="hu.hw.cloud.server.security.RestAuthenticationEntryPoint" />
+
+	<beans:bean id="authFailureHandler"
+		class="hu.hw.cloud.server.security.AuthFailureHandler" />
+
+	<beans:bean id="restAuthSuccessHandler"
+		class="hu.hw.cloud.server.security.RestAuthSuccessHandler">
+		<beans:constructor-arg ref="messageConverter" />
+		<beans:constructor-arg ref="loginAttemptService" />
+	</beans:bean>
+
+	<beans:bean id="logoutSuccessHandler"
+		class="hu.hw.cloud.server.security.HttpLogoutSuccessHandler" />
+
+	<beans:bean id="restAuthenticationProvider"
+		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<beans:property name="userDetailsService" ref="appUserDetailsService" />
+	</beans:bean>
+
+	<beans:bean id="appAuthenticationProvider"
+		class="hu.hw.cloud.server.security.AppAuthenticationProvider">
+		<beans:constructor-arg ref="appUserService" />
+		<beans:constructor-arg ref="loginAttemptService" />
+	</beans:bean>
+
+	<authentication-manager id="authenticationManager">
+		<authentication-provider ref="restAuthenticationProvider" />
+	</authentication-manager>
+
+
+	<!-- <authentication-manager alias="authenticationManager"> <authentication-provider> 
+		<user-service> <user name="eparaschiv" password="eparaschiv" authorities="ROLE_ADMIN" 
+		/> <user name="user" password="user" authorities="ROLE_USER" /> </user-service> 
+		</authentication-provider> </authentication-manager> -->
+
+	<beans:bean id="restApiEntryPoint"
+		class="org.springframework.security.web.authentication.www.DigestAuthenticationEntryPoint">
+		<beans:property name="key" value="myKey" />
+		<beans:property name="realmName" value="myrealm" />
+		<beans:property name="nonceValiditySeconds" value="300" />
+	</beans:bean>
+
+	<beans:bean id="digestAuthenticationFilter"
+		class="org.springframework.security.web.authentication.www.DigestAuthenticationFilter">
+		<beans:property name="authenticationEntryPoint" ref="restApiEntryPoint" />
+		<beans:property name="userDetailsService" ref="appUserDetailsService" />
+	</beans:bean>
+
+	<!-- ======================== -->
+	<!-- REST API SECURITY CONFIG -->
+	<!-- ======================== -->
+	<http use-expressions="true" authentication-manager-ref="authenticationManager"
+		entry-point-ref="restApiEntryPoint" create-session="stateless"
+		pattern="/api/v1/**">
+		<!-- <csrf disabled="true" /> 4.01-ből -->
+		<intercept-url pattern="/api/v1/**" access="isAuthenticated()" />
+		<custom-filter position="BASIC_AUTH_FILTER" ref="digestAuthenticationFilter" />
+		<!-- <expression-handler ref="restApiEntryPoint" /> -->
+		<form-login authentication-failure-handler-ref="authFailureHandler"
+			authentication-success-handler-ref="restAuthSuccessHandler"
+			login-processing-url="" password-parameter="" username-parameter="" />
+		<logout success-handler-ref="logoutSuccessHandler" />
+	</http>
+
+	<!-- =================== -->
+	<!-- APP SECURITY CONFIG -->
+	<!-- =================== -->
+	<http authentication-manager-ref="authenticationManager"
+		entry-point-ref="restAuthEntryPoint" access-decision-manager-ref="accessDecisionManager"
+		use-expressions="true">
+		<!-- <csrf disabled="true" /> 4.01-ből -->
+		<!-- <expression-handler ref="restAuthEntryPoint" /> -->
+		<intercept-url pattern="/fro" access="permitAll" />
+		<intercept-url pattern="/inf" access="permitAll" />
+		<intercept-url pattern="/kip" access="permitAll" />
+		<intercept-url pattern="/ModuleFro/**" access="permitAll" />
+		<intercept-url pattern="/ModuleInf/**" access="permitAll" />
+		<intercept-url pattern="/ModuleKip/**" access="permitAll" />
+		<intercept-url pattern="/_ah/**" access="permitAll" />
+		<form-login authentication-failure-handler-ref="authFailureHandler"
+			authentication-success-handler-ref="restAuthSuccessHandler"
+			login-processing-url="/spa/v1/login" password-parameter="password"
+			username-parameter="username" />
+		<logout success-handler-ref="logoutSuccessHandler" />
+		<remember-me token-validity-seconds="1209600"
+			remember-me-parameter="remember-me" />
+		<session-management>
+			<concurrency-control max-sessions="2" />
+		</session-management>
+	</http>
+
+	<!-- Enable the annotations for defining the secure role <global-method-security 
+		secured-annotations="enabled" /> -->
+</beans:beans>
