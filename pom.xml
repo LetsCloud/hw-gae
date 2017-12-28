@@ -79,7 +79,7 @@
 		<server-artifactId>hw-gae-server</server-artifactId>
 		<server-directory>${project.parent.basedir}/${server-artifactId}</server-directory>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<mavenVersion>3.0</mavenVersion>
+		<mavenVersion>3.5</mavenVersion>
 	</properties>
 
 	<prerequisites>

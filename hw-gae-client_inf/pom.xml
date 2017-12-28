@@ -10,7 +10,6 @@
 	</parent>
 
 	<artifactId>hw-gae-client_inf</artifactId>
-	<packaging>gwt-app</packaging>
 
 	<properties>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -127,37 +126,7 @@
 	</dependencies>
 
 	<build>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-			</resource>
-		</resources>
-
 		<plugins>
-
-			<!-- Copy webapp content to deploy folder -->
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.6</version>
-				<executions>
-					<execution>
-						<id>copy-resources</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${server-directory}/target/${server-artifactId}-${project.version}</outputDirectory>
-							<resources>
-								<resource>
-									<directory>src/main/webapp</directory>
-									<filtering>true</filtering>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 			<!-- ************************ -->
 			<!-- service worker generator -->
 			<!-- ************************ -->
