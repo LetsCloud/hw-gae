@@ -9,6 +9,9 @@ public class ApiPaths {
 		public static final String LOGIN = "/login";
 		public static final String CURRENTUSER = "/currentuser";
 		
+		public static final String NOTIFICATION = "/notification";
+		public static final String RECONNECT = "/reconnect";
+		
 		public static final String ACCOUNT = "/account";
 		
 		public static final String USER = "/user";

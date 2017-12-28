@@ -152,6 +152,12 @@
 			<artifactId>objectify</artifactId>
 		</dependency>
 
+        <!-- Web Push -->
+        <dependency>
+            <groupId>nl.martijndwars</groupId>
+            <artifactId>web-push</artifactId>
+        </dependency>
+
 		<!-- ***** -->
 		<!-- UTILS -->
 		<!-- ***** -->

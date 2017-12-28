@@ -23,6 +23,7 @@ import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.i18n.FroMessages;
 import hu.hw.cloud.shared.AuthService;
+import hu.hw.cloud.shared.NotificationService;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.dto.core.MenuItemDto;
 
@@ -40,9 +41,10 @@ public class FroAppPresenter extends AppPresenter<FroAppPresenter.MyProxy> {
 
 	@Inject
 	FroAppPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager, FroMessages i18n,
-			RestDispatch dispatch, AuthService authenticationService, CurrentUser currentUser,
-			MenuPresenter menuPresenter) {
-		super(eventBus, view, proxy, placeManager, dispatch, authenticationService, menuPresenter, currentUser);
+			RestDispatch dispatch, AuthService authenticationService, NotificationService notificationService,
+			CurrentUser currentUser, MenuPresenter menuPresenter) {
+		super(eventBus, view, proxy, placeManager, dispatch, authenticationService, notificationService, menuPresenter,
+				currentUser);
 
 		this.i18n = i18n;
 	}
@@ -64,7 +66,6 @@ public class FroAppPresenter extends AppPresenter<FroAppPresenter.MyProxy> {
 		atendantsItem.setNameToken(CoreNameTokens.HOME);
 		menuItems.add(atendantsItem);
 
-		
 		// Reservation
 
 		MenuItemDto resSubMenu = new MenuItemDto();
@@ -89,7 +90,6 @@ public class FroAppPresenter extends AppPresenter<FroAppPresenter.MyProxy> {
 		resMenuItem2.setNameToken(FroNameTokens.COMMON_CONFIG);
 		resSubMenu.addItem(resMenuItem2);
 
-		
 		// Cashier
 
 		MenuItemDto cashSubMenu = new MenuItemDto();
@@ -107,7 +107,6 @@ public class FroAppPresenter extends AppPresenter<FroAppPresenter.MyProxy> {
 		cashMenuItem1.setNameToken(FroNameTokens.COMMON_CONFIG);
 		cashSubMenu.addItem(cashMenuItem1);
 
-		
 		// Configuration
 
 		MenuItemDto configSubMenu = new MenuItemDto();
@@ -138,7 +137,6 @@ public class FroAppPresenter extends AppPresenter<FroAppPresenter.MyProxy> {
 		configMenuItem3.setText(i18n.mainMenuItemHotelConfig());
 		configMenuItem3.setNameToken(FroNameTokens.COMMON_CONFIG);
 		configSubMenu.addItem(configMenuItem3);
-
 
 		return menuItems;
 	}
