@@ -10,10 +10,9 @@
 	</parent>
 
 	<artifactId>hw-gae-client_inf</artifactId>
-	<packaging>jar</packaging>
+	<packaging>gwt-app</packaging>
 
 	<properties>
-		<jdk>${env.JAVA_HOME_8}</jdk>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
 	</properties>
@@ -128,29 +127,66 @@
 	</dependencies>
 
 	<build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
 
 		<plugins>
-			<!-- ********************* -->
-			<!-- maven-compiler-plugin -->
-			<!-- ********************* -->
+
+			<!-- Copy webapp content to deploy folder -->
 			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<compilerArguments>
-						<Agwtp.debug />
-						<Agwtp.module>hu.hw.cloud.client.InfModuleProd</Agwtp.module>
-					</compilerArguments>
-				</configuration>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${server-directory}/target/${server-artifactId}-${project.version}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/webapp</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- ************************ -->
+			<!-- service worker generator -->
+			<!-- ************************ -->
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
 
 	<profiles>
+		<profile>
+			<id>prod</id>
+			<build>
+				<plugins>
+					<!-- **************** -->
+					<!-- gwt-maven-plugin 2 -->
+					<!-- **************** -->
+					<plugin>
+						<groupId>net.ltgt.gwt.maven</groupId>
+						<artifactId>gwt-maven-plugin</artifactId>
+						<configuration>
+							<moduleName>hu.hw.cloud.InfModuleProd</moduleName>
+							<moduleShortName>inf_module</moduleShortName>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 		<profile>
 			<id>dev</id>
 			<build>

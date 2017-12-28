@@ -1,3 +1,6 @@
 /target/
 /.classpath
 /.project
+/node/
+/package-lock.json
+/node_modules/

@@ -240,6 +240,7 @@
 				<version>${guava.version}</version>
 			</dependency>
 
+
 			<!-- ***************************************************** -->
 			<!-- **************** SERVER DEPENDENCIES **************** -->
 			<!-- ***************************************************** -->
@@ -263,7 +264,7 @@
 				<artifactId>spring-webmvc</artifactId>
 				<version>${spring.framework.version}</version>
 			</dependency>
-			
+
 			<!-- *************** -->
 			<!-- SPRING SECURITY -->
 			<!-- *************** -->
@@ -648,6 +649,14 @@
 					<artifactId>gwt-maven-plugin</artifactId>
 					<version>${ltgt-gwt-maven-plugin.version}</version>
 					<extensions>true</extensions>
+					<executions>
+						<execution>
+							<goals>
+								<goal>compile</goal>
+								<goal>test</goal>
+							</goals>
+						</execution>
+					</executions>
 					<configuration>
 						<skipModule>true</skipModule>
 						<failOnError>true</failOnError>
@@ -658,6 +667,9 @@
 						</compilerArgs>
 						<classpathScope>compile+runtime</classpathScope>
 						<launcherDir>${server-directory}/target/${server-artifactId}-${project.version}</launcherDir>
+						<warDir>${server-directory}/target/${server-artifactId}-${project.version}</warDir>
+						<webappDirectory>${server-directory}/target/${server-artifactId}-${project.version}</webappDirectory>
+						<classpathScope>compile+runtime</classpathScope>
 					</configuration>
 				</plugin>
 
@@ -697,7 +709,8 @@
 							</goals>
 							<phase>prepare-package</phase>
 							<configuration>
-								<arguments>run-script generate ${project.build.finalName}</arguments>
+								<arguments>run-script generate
+									${server-directory}/target/${server-artifactId}-${project.version}</arguments>
 							</configuration>
 						</execution>
 					</executions>
