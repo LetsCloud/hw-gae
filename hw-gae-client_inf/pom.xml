@@ -156,13 +156,6 @@
 			<build>
 				<plugins>
 					<!-- **************** -->
-					<!-- gwt-maven-plugin -->
-					<!-- **************** -->
-					<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>gwt-maven-plugin</artifactId> 
-						<configuration> <modules> <module>hu.hw.cloud.InfModuleDev</module> </modules> 
-						</configuration> </plugin> -->
-
-					<!-- **************** -->
 					<!-- gwt-maven-plugin 2 -->
 					<!-- **************** -->
 					<plugin>

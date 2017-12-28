@@ -104,12 +104,6 @@
 			<artifactId>guava-gwt</artifactId>
 		</dependency>
 
-		<!-- ***************** -->
-		<!-- gwt-commons-codec -->
-		<!-- ***************** -->
-		<!-- <dependency> <groupId>de.knightsoft-net</groupId> <artifactId>gwt-commons-codec</artifactId> 
-			</dependency> -->
-
 		<dependency>
 			<groupId>com.googlecode.objectify</groupId>
 			<artifactId>objectify</artifactId>
@@ -121,9 +115,6 @@
 	</dependencies>
 
 	<build>
-		<!-- <resources> <resource> <directory>src/main/resources</directory> </resource> 
-			</resources> -->
-
 		<plugins>
 			<!-- ************************ -->
 			<!-- service worker generator -->
@@ -148,7 +139,7 @@
 						<artifactId>gwt-maven-plugin</artifactId>
 						<configuration>
 							<moduleName>hu.hw.cloud.KipModuleProd</moduleName>
-							<moduleShortName>inf_module</moduleShortName>
+							<moduleShortName>kip_module</moduleShortName>
 						</configuration>
 					</plugin>
 				</plugins>
@@ -166,7 +157,7 @@
 						<artifactId>gwt-maven-plugin</artifactId>
 						<configuration>
 							<moduleName>hu.hw.cloud.KipModuleDev</moduleName>
-							<moduleShortName>inf_module</moduleShortName>
+							<moduleShortName>kip_module</moduleShortName>
 						</configuration>
 					</plugin>
 				</plugins>

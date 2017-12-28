@@ -49,7 +49,6 @@ public class FroApp  implements Bootstrapper {
 	@Override
 	public void onBootstrap() {
 		appData.setAppCode(SubSystem.FRO);
-		//		appData.setAppCode("KIP");
 		placeManager.revealCurrentPlace();
 	}
 } 

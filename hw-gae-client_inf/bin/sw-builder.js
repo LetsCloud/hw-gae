@@ -19,7 +19,7 @@ browseAllFilesInDirectory(rootFolder);
 
 function browseAllFilesInDirectory(folder) {
     const filesRegExp = /\.(html|css|js|gif|png|jpeg|eot|ttf|woff|woff2)$/i;
-    const exceptions = ["WEB-INF", "META-INF", "kip_module", "fro_module", "kip_manifest.json", "fro_manifest.json", "kip_service-worker.js", "fro_service-worker.js", "kip.html", "fro.html"];
+    const exceptions = ["WEB-INF", "META-INF", "kip_module", "fro_module", "KIP_manifest.json", "FRO_manifest.json", "KIP_service-worker.js", "FRO_service-worker.js", "kip.html", "fro.html"];
 
     fs.readdirSync(folder).forEach(fileName => {
         const resource = folder + "/" + fileName;
@@ -45,7 +45,7 @@ fs.readFile("bin/sw-template.js", "utf8", (error, data) => {
     var template = Handlebars.compile(data);
     var serviceWorkerJs = template(swData);
 
-    fs.writeFile(buildFolderName + "/inf_service-worker.js", serviceWorkerJs, (error) => {
-        console.log("Successfully generated service worker inf_service-worker.js in " + rootFolder);
+    fs.writeFile(buildFolderName + "/INF_service-worker.js", serviceWorkerJs, (error) => {
+        console.log("Successfully generated service worker INF_service-worker.js in " + rootFolder);
     });
 });

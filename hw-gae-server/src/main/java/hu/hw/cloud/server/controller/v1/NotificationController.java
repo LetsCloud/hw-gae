@@ -31,6 +31,7 @@ import com.google.gson.JsonObject;
 import hu.hw.cloud.server.api.v1.BaseController;
 import hu.hw.cloud.server.push.Subscription;
 import hu.hw.cloud.server.push.WebPushAPI;
+import hu.hw.cloud.server.service.AppUserService;
 import hu.hw.cloud.shared.rpc.Message;
 import hu.hw.cloud.shared.rpc.NotificationDTO;
 
@@ -44,8 +45,11 @@ public class NotificationController extends BaseController {
 
 	static List<Subscription> subscriptions = new ArrayList<>();
 
+	private final AppUserService userService;
+
 	@Autowired
-	NotificationController() {
+	NotificationController(AppUserService userService) {
+		this.userService = userService;
 	}
 
 	@RequestMapping(method = GET, value = "/{input}")

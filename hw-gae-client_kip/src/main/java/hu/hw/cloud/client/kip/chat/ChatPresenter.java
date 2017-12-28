@@ -43,7 +43,7 @@ public class ChatPresenter extends Presenter<ChatPresenter.MyView, ChatPresenter
 	@ProxyStandard
 	@NameToken(KipNameTokens.HK_ASSIGNMENTS)
 	@UseGatekeeper(LoggedInGatekeeper.class)
-	interface MyProxy extends ProxyPlace<AssignmentsPresenter> {
+	interface MyProxy extends ProxyPlace<ChatPresenter> {
 	}
 
 	private final KipMessages i18n;

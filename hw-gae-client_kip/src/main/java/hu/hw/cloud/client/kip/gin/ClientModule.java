@@ -8,6 +8,7 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import hu.hw.cloud.client.kip.app.KipAppModule;
 import hu.hw.cloud.client.kip.assignments.AssignmentsModule;
 import hu.hw.cloud.client.kip.atendants.AtendantsModule;
+import hu.hw.cloud.client.kip.chat.ChatModule;
 import hu.hw.cloud.client.kip.gfilter.display.GfilterDisplayModule;
 import hu.hw.cloud.client.kip.roomstatus.DesktopRoomStatusModule;
 import hu.hw.cloud.client.kip.roomstatus.filter.RoomStatusFilterModule;
@@ -33,6 +34,7 @@ public class ClientModule extends AbstractPresenterModule {
 		install(new DesktopRoomStatusModule());
 		install(new RoomStatusListModule());
 		install(new RoomStatusFilterModule());
+		install(new ChatModule());
 		/*
 		install(new UserListModule());
 		install(new RoleListModule());

@@ -10,7 +10,6 @@
 	</parent>
 
 	<artifactId>hw-gae-client_fro</artifactId>
-	<packaging>jar</packaging>
 
 	<dependencies>
 		<dependency>
@@ -85,6 +84,14 @@
 		</dependency>
 
 		<!-- ***************** -->
+		<!-- GWT-UI Gwt Charts -->
+		<!-- ***************** -->
+		<dependency>
+			<groupId>com.googlecode.gwt-charts</groupId>
+			<artifactId>gwt-charts</artifactId>
+		</dependency>
+
+		<!-- ***************** -->
 		<!-- Google Guava -->
 		<!-- ***************** -->
 		<dependency>
@@ -97,7 +104,6 @@
 			<artifactId>guava-gwt</artifactId>
 		</dependency>
 
-
 		<dependency>
 			<groupId>com.googlecode.objectify</groupId>
 			<artifactId>objectify</artifactId>
@@ -109,63 +115,51 @@
 	</dependencies>
 
 	<build>
-		<!-- <resources> <resource> <directory>src/main/resources</directory> </resource> 
-			</resources> -->
-
 		<plugins>
-			<!-- ********************* -->
-			<!-- maven-compiler-plugin -->
-			<!-- ********************* -->
+			<!-- ************************ -->
+			<!-- service worker generator -->
+			<!-- ************************ -->
 			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<compilerArguments>
-						<Agwtp.debug />
-						<Agwtp.module>hu.hw.cloud.client.FroModuleProd</Agwtp.module>
-					</compilerArguments>
-				</configuration>
-			</plugin>
-
-			<!-- **************** -->
-			<!-- gwt-maven-plugin -->
-			<!-- **************** -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>gwt-maven-plugin</artifactId>
-				<configuration>
-					<modules>
-						<module>hu.hw.cloud.FroModuleProd</module>
-					</modules>
-				</configuration>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
 
 	<profiles>
 		<profile>
+			<id>prod</id>
+			<build>
+				<plugins>
+					<!-- **************** -->
+					<!-- gwt-maven-plugin 2 -->
+					<!-- **************** -->
+					<plugin>
+						<groupId>net.ltgt.gwt.maven</groupId>
+						<artifactId>gwt-maven-plugin</artifactId>
+						<configuration>
+							<moduleName>hu.hw.cloud.FroModuleProd</moduleName>
+							<moduleShortName>fro_module</moduleShortName>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
 			<id>dev</id>
 			<build>
 				<plugins>
 					<!-- **************** -->
-					<!-- gwt-maven-plugin -->
-					<!-- **************** -->
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>gwt-maven-plugin</artifactId>
-						<configuration>
-							<codeServerPort>9880</codeServerPort>
-							<modules>
-								<module>hu.hw.cloud.FroModuleDev</module>
-							</modules>
-						</configuration>
-					</plugin>
-
-					<!-- **************** -->
 					<!-- gwt-maven-plugin 2 -->
 					<!-- **************** -->
-					<!-- <plugin> <groupId>net.ltgt.gwt.maven</groupId> <artifactId>gwt-maven-plugin</artifactId> 
-						<extensions>true</extensions> <configuration> <moduleName>hu.hw.cloud.InfModuleDev</moduleName> 
-						<moduleShortName>inf_module</moduleShortName> </configuration> </plugin> -->
+					<plugin>
+						<groupId>net.ltgt.gwt.maven</groupId>
+						<artifactId>gwt-maven-plugin</artifactId>
+						<configuration>
+							<moduleName>hu.hw.cloud.FroModuleDev</moduleName>
+							<moduleShortName>fro_module</moduleShortName>
+						</configuration>
+					</plugin>
 				</plugins>
 			</build>
 		</profile>

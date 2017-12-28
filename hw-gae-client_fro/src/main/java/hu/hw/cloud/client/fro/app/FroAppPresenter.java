@@ -19,6 +19,7 @@ import gwt.material.design.client.constants.IconType;
 import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.app.AppPresenter;
 import hu.hw.cloud.client.core.menu.MenuPresenter;
+import hu.hw.cloud.client.core.security.AppData;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.i18n.FroMessages;
@@ -42,9 +43,9 @@ public class FroAppPresenter extends AppPresenter<FroAppPresenter.MyProxy> {
 	@Inject
 	FroAppPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager, FroMessages i18n,
 			RestDispatch dispatch, AuthService authenticationService, NotificationService notificationService,
-			CurrentUser currentUser, MenuPresenter menuPresenter) {
+			CurrentUser currentUser, MenuPresenter menuPresenter, AppData appData) {
 		super(eventBus, view, proxy, placeManager, dispatch, authenticationService, notificationService, menuPresenter,
-				currentUser);
+				currentUser, appData);
 
 		this.i18n = i18n;
 	}
