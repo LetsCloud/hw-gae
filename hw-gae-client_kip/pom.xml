@@ -10,7 +10,6 @@
 	</parent>
 
 	<artifactId>hw-gae-client_kip</artifactId>
-	<packaging>jar</packaging>
 
 	<dependencies>
 		<dependency>
@@ -126,59 +125,50 @@
 			</resources> -->
 
 		<plugins>
-			<!-- ********************* -->
-			<!-- maven-compiler-plugin -->
-			<!-- ********************* -->
+			<!-- ************************ -->
+			<!-- service worker generator -->
+			<!-- ************************ -->
 			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<compilerArguments>
-						<Agwtp.debug />
-						<Agwtp.module>hu.hw.cloud.client.KipModuleProd</Agwtp.module>
-					</compilerArguments>
-				</configuration>
-			</plugin>
-
-			<!-- **************** -->
-			<!-- gwt-maven-plugin -->
-			<!-- **************** -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>gwt-maven-plugin</artifactId>
-				<configuration>
-					<modules>
-						<module>hu.hw.cloud.KipModuleProd</module>
-					</modules>
-				</configuration>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
 
 	<profiles>
 		<profile>
+			<id>prod</id>
+			<build>
+				<plugins>
+					<!-- **************** -->
+					<!-- gwt-maven-plugin 2 -->
+					<!-- **************** -->
+					<plugin>
+						<groupId>net.ltgt.gwt.maven</groupId>
+						<artifactId>gwt-maven-plugin</artifactId>
+						<configuration>
+							<moduleName>hu.hw.cloud.KipModuleProd</moduleName>
+							<moduleShortName>inf_module</moduleShortName>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
 			<id>dev</id>
 			<build>
 				<plugins>
 					<!-- **************** -->
-					<!-- gwt-maven-plugin -->
-					<!-- **************** -->
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>gwt-maven-plugin</artifactId>
-						<configuration>
-							<codeServerPort>9877</codeServerPort>
-							<modules>
-								<module>hu.hw.cloud.KipModuleDev</module>
-							</modules>
-						</configuration>
-					</plugin>
-
-					<!-- **************** -->
 					<!-- gwt-maven-plugin 2 -->
 					<!-- **************** -->
-					<!-- <plugin> <groupId>net.ltgt.gwt.maven</groupId> <artifactId>gwt-maven-plugin</artifactId> 
-						<extensions>true</extensions> <configuration> <moduleName>hu.hw.cloud.InfModuleDev</moduleName> 
-						<moduleShortName>inf_module</moduleShortName> </configuration> </plugin> -->
+					<plugin>
+						<groupId>net.ltgt.gwt.maven</groupId>
+						<artifactId>gwt-maven-plugin</artifactId>
+						<configuration>
+							<moduleName>hu.hw.cloud.KipModuleDev</moduleName>
+							<moduleShortName>inf_module</moduleShortName>
+						</configuration>
+					</plugin>
 				</plugins>
 			</build>
 		</profile>
