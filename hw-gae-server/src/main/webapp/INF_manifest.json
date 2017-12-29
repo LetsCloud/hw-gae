@@ -23,7 +23,7 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "/",
+  "start_url": "inf.html?launcher=true",
   "display": "fullscreen",
   "background_color": "#FF9800",
   "theme_color": "#EF6C00"

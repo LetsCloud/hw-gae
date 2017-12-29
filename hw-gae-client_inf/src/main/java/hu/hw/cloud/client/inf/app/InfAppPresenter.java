@@ -5,6 +5,8 @@ package hu.hw.cloud.client.inf.app;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
@@ -37,6 +39,7 @@ import hu.hw.cloud.shared.dto.core.MenuItemDto;
  *
  */
 public class InfAppPresenter extends AppPresenter<InfAppPresenter.MyProxy> {
+	private static Logger logger = Logger.getLogger(InfAppPresenter.class.getName());
 
 	private final InfMessages i18n;
 	private final GpsDisplayPresenter gpsDisplayPresenter;
@@ -63,10 +66,17 @@ public class InfAppPresenter extends AppPresenter<InfAppPresenter.MyProxy> {
 	@Override
 	protected void onBind() {
 		super.onBind();
+		logger.log(Level.INFO, "InfAppPresenter.onBind()");
 		setInSlot(SLOT_MODAL, gpsConfigPresenter);
 		getMenuPresenter().setMenuItems(createMenuitems());
 		getMenuPresenter().setNavBarWidget(gpsDisplayPresenter);
 		gpsDisplayPresenter.setGpsConfigPresenter(gpsConfigPresenter);
+	}
+
+	@Override
+	protected void onReveal() {
+		super.onReveal();
+		logger.log(Level.INFO, "InfAppPresenter.onReveal()");
 	}
 
 	private List<MenuItemDto> createMenuitems() {

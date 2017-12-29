@@ -34,6 +34,7 @@ import hu.hw.cloud.client.core.pwa.NetworkStatusEvent.NetworkStatusHandler;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.shared.AuthService;
 import hu.hw.cloud.shared.NotificationService;
+import hu.hw.cloud.shared.dto.common.AppUserDto;
 
 public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<MyView, Proxy_>
 		implements NavigationHandler, SetPageTitleHandler, NetworkStatusHandler {
@@ -63,7 +64,7 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 			RestDispatch dispatch, AuthService authenticationService, NotificationService notificationService,
 			MenuPresenter menuPresenter, CurrentUser currentUser, String appCode) {
 		super(eventBus, view, proxy, RevealType.Root);
-		logger.info("ApplicationPresenter()");
+		logger.info("AppPresenter()");
 
 		this.placeManager = placeManager;
 		this.dispatch = dispatch;
@@ -77,19 +78,41 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 	@Override
 	protected void onBind() {
 		super.onBind();
-		logger.log(Level.INFO, "ApplicationPresenter.onBind()");
+		logger.log(Level.INFO, "AppPresenter.onBind()");
 		setInSlot(SLOT_MENU, menuPresenter);
 
 		addRegisteredHandler(NavigationEvent.getType(), this);
 		addRegisteredHandler(SetPageTitleEvent.TYPE, this);
 		addRegisteredHandler(NetworkStatusEvent.TYPE, this);
-
-		initPwa();
 	}
 
 	@Override
 	protected void onReveal() {
 		super.onReveal();
+		logger.log(Level.INFO, "AppPresenter.onReveal()");
+		checkCurrentUser();
+		initPwa();
+	}
+
+	private void checkCurrentUser() {
+		logger.log(Level.INFO, "AppPresenter.checkCurrentUser()");
+		dispatch.execute(authenticationService.getCurrentUser(), new AsyncCallback<AppUserDto>() {
+
+			@Override
+			public void onSuccess(AppUserDto result) {
+				if (result == null) {
+					currentUser.setLoggedIn(false);
+					return;
+				}
+				currentUser.setAppUserDto(result);
+				currentUser.setLoggedIn(true);
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+			}
+		});
 	}
 
 	public void logout() {
