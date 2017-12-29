@@ -2,6 +2,7 @@ package hu.hw.cloud.server.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import hu.hw.cloud.server.entity.VerificationToken;
 import hu.hw.cloud.server.entity.common.Account;
@@ -17,6 +18,7 @@ import hu.hw.cloud.shared.exception.UniqueIndexConflictException;
 
 public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserDto, AppUserRepository>
 		implements AppUserService {
+	private static final Logger LOGGER = Logger.getLogger(AppUserServiceImpl.class.getName());
 
 	private final LoggedInChecker loggedInChecker;
 	private AccountRepository accountRepository;
@@ -56,6 +58,7 @@ public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserDto, App
 
 	@Override
 	public Boolean isCurrentUserLoggedIn() {
+		LOGGER.info("isCurrentUserLoggedIn()");
 		return loggedInChecker.getLoggedInUser() != null;
 	}
 

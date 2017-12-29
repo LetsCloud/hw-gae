@@ -9,6 +9,7 @@ import static hu.hw.cloud.shared.api.ApiParameters.REMEMBER_ME;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.LOGIN;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.ROOT;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.CURRENTUSER;
+import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.IS_LOGGED_IN;
 import static javax.ws.rs.core.MediaType.APPLICATION_FORM_URLENCODED;
 
 import javax.ws.rs.Consumes;
@@ -40,7 +41,7 @@ public interface AuthService {
 	RestAction<Void> logout();
 
 	@GET
-	@Path(LOGIN)
+	@Path(LOGIN + IS_LOGGED_IN)
 	RestAction<Boolean> isCurrentUserLoggedIn();
 
 	@GET

@@ -71,6 +71,8 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 	public void prepareFromRequest(PlaceRequest request) {
 		logger.log(Level.INFO, "LoginPresenter.prepareFromRequest()");
 		placeToGo = request.getParameter("placeToGo", null);
+
+		checkCureentUser();
 	}
 
 	@Override
@@ -81,10 +83,39 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 	}
 
 	@Override
+	public boolean useManualReveal() {
+		return true;
+	}
+
+	@Override
 	protected void onReveal() {
 		super.onReveal();
 		logger.log(Level.INFO, "LoginPresenter.onReveal()");
+
 		getView().setAccountId(Cookies.getCookie(ACCOUNT_ID));
+	}
+
+	private void checkCureentUser() {
+		logger.log(Level.INFO, "LoginPresenter.checkCureentUser()");
+		dispatcher.execute(authService.isCurrentUserLoggedIn(), new AsyncCallback<Boolean>() {
+
+			@Override
+			public void onSuccess(Boolean result) {
+				logger.log(Level.INFO, "LoginPresenter.checkCureentUser().onSuccess()");
+				if (result) {
+					getProxy().manualRevealFailed();
+					onLoginSuccess();
+				} else {
+					getProxy().manualReveal(LoginPresenter.this);
+				}
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+				logger.log(Level.INFO, "LoginPresenter.checkCureentUser().onFailure()");
+				getProxy().manualReveal(LoginPresenter.this);
+			}
+		});
 	}
 
 	@Override
@@ -135,7 +166,6 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
 			}
 		});
-
 	}
 
 	private void goToPlace(String place) {

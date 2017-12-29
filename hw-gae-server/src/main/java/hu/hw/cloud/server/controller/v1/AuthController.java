@@ -6,6 +6,7 @@ package hu.hw.cloud.server.controller.v1;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.ROOT;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.LOGIN;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.CURRENTUSER;
+import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.IS_LOGGED_IN;
 
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -42,14 +43,14 @@ public class AuthController extends BaseController {
 		this.userService = userService;
 	}
 
-	@RequestMapping(method = GET)
+	@RequestMapping(method = GET, value = IS_LOGGED_IN)
 	@PermitAll
 	ResponseEntity<Boolean> isCurrentUserLoggedIn() {
 		LOGGER.info("isCurrentUserLoggedIn()");
-		return new ResponseEntity<>(userService.isCurrentUserLoggedIn(), OK);
+		return new ResponseEntity<Boolean>(userService.isCurrentUserLoggedIn(), OK);
 	}
 
-	@RequestMapping(value = CURRENTUSER, method = GET)
+	@RequestMapping(method = GET, value = CURRENTUSER)
 	ResponseEntity<AppUserDto> getCurrentUser() {
 		AppUserDto appUserDto = AppUser.createDto(userService.getCurrentUser());
 		LOGGER.info("getCurrentUser()->" + appUserDto);
