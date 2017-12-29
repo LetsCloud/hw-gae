@@ -31,7 +31,6 @@ import hu.hw.cloud.client.core.pwa.AppServiceWorkerManager;
 import hu.hw.cloud.client.core.pwa.HasNetworkStatus;
 import hu.hw.cloud.client.core.pwa.NetworkStatusEvent;
 import hu.hw.cloud.client.core.pwa.NetworkStatusEvent.NetworkStatusHandler;
-import hu.hw.cloud.client.core.security.AppData;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.shared.AuthService;
 import hu.hw.cloud.shared.NotificationService;
@@ -58,11 +57,11 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 	private final NotificationService notificationService;
 	private final CurrentUser currentUser;
 	private final MenuPresenter menuPresenter;
-	private final AppData appdata;
+	private final String appCode;
 
 	protected AppPresenter(EventBus eventBus, MyView view, Proxy_ proxy, PlaceManager placeManager,
 			RestDispatch dispatch, AuthService authenticationService, NotificationService notificationService,
-			MenuPresenter menuPresenter, CurrentUser currentUser, AppData appdata) {
+			MenuPresenter menuPresenter, CurrentUser currentUser, String appCode) {
 		super(eventBus, view, proxy, RevealType.Root);
 		logger.info("ApplicationPresenter()");
 
@@ -72,7 +71,7 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 		this.notificationService = notificationService;
 		this.menuPresenter = menuPresenter;
 		this.currentUser = currentUser;
-		this.appdata = appdata;
+		this.appCode = appCode;
 	}
 
 	@Override
@@ -126,12 +125,13 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 	}
 
 	protected void initPwa() {
+		logger.info("initPwa()");
 
-		serviceWorkerManager = new AppServiceWorkerManager(appdata.getAppCode() + "_service-worker.js", getEventBus(),
+		serviceWorkerManager = new AppServiceWorkerManager(appCode + "_service-worker.js", getEventBus(),
 				dispatch, notificationService);
 
 		PwaManager.getInstance().setServiceWorker(serviceWorkerManager)
-				.setWebManifest(appdata.getAppCode() + "_manifest.json").setThemeColor("#2196f3").load();
+				.setWebManifest(appCode + "_manifest.json").setThemeColor("#2196f3").load();
 	}
 
 	@Override

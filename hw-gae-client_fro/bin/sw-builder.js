@@ -19,7 +19,7 @@ browseAllFilesInDirectory(rootFolder);
 
 function browseAllFilesInDirectory(folder) {
     const filesRegExp = /\.(html|css|js|gif|png|jpeg|eot|ttf|woff|woff2)$/i;
-    const exceptions = ["WEB-INF", "META-INF", "kip_module", "inf_module", "KIP_manifest.json", "INF_manifest.json", "KIP_service-worker.js", "INF_service-worker.js", "kip.html", "inf.html"];
+    const exceptions = ["WEB-INF", "META-INF", "kip_module", "inf_module", "KIP_manifest.json", "INF_manifest.json", "KIP_service-worker.js", "INF_service-worker.js", "kip.html", "inf.html", "launcher-icons/kip", "launcher-icons/inf"];
 
     fs.readdirSync(folder).forEach(fileName => {
         const resource = folder + "/" + fileName;

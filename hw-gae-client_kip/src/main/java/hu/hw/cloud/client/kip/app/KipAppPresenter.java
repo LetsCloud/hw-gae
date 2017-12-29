@@ -29,6 +29,7 @@ import hu.hw.cloud.client.kip.i18n.KipMessages;
 import hu.hw.cloud.shared.AuthService;
 import hu.hw.cloud.shared.NotificationService;
 import hu.hw.cloud.shared.cnst.MenuItemType;
+import hu.hw.cloud.shared.cnst.SubSystem;
 import hu.hw.cloud.shared.dto.core.MenuItemDto;
 
 /**
@@ -36,7 +37,6 @@ import hu.hw.cloud.shared.dto.core.MenuItemDto;
  *
  */
 public class KipAppPresenter extends AppPresenter<KipAppPresenter.MyProxy> {
-	private static final String SERVICE_WORKER = "kip_service-worker.js";
 	private final KipMessages i18n;
 
 	@ProxyStandard
@@ -48,10 +48,11 @@ public class KipAppPresenter extends AppPresenter<KipAppPresenter.MyProxy> {
 
 	@Inject
 	KipAppPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager, KipMessages i18n,
-			RestDispatch dispatch, AuthService authenticationService, NotificationService notificationService, CurrentUser currentUser,
-			MenuPresenter menuPresenter, GfilterDisplayPresenter gfilterDisplayPresenter,
+			RestDispatch dispatch, AuthService authenticationService, NotificationService notificationService,
+			CurrentUser currentUser, MenuPresenter menuPresenter, GfilterDisplayPresenter gfilterDisplayPresenter,
 			GfilterConfigPresenterFactory gfilterConfigPresenterFactory, AppData appData) {
-		super(eventBus, view, proxy, placeManager, dispatch, authenticationService, notificationService, menuPresenter, currentUser, appData);
+		super(eventBus, view, proxy, placeManager, dispatch, authenticationService, notificationService, menuPresenter,
+				currentUser, SubSystem.KIP);
 
 		this.i18n = i18n;
 		this.gfilterDisplayPresenter = gfilterDisplayPresenter;
