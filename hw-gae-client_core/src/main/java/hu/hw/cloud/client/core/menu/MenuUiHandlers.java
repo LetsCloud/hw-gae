@@ -16,4 +16,6 @@ public interface MenuUiHandlers extends UiHandlers {
 	Boolean canReveal(String permissions);
 
 	void setContentPush(MenuState menuState);
+	
+	void logout();
 }

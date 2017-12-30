@@ -143,7 +143,7 @@
 						<m:MaterialLink text="{i18n.userMenuItemSwitch}"
 							iconType="SWAP_HORIZ" iconPosition="LEFT" textColor="BLACK"
 							waves="DEFAULT" />
-						<m:MaterialLink text="{i18n.userMenuItemLogout}"
+						<m:MaterialLink ui:field="logoutLink" text="{i18n.userMenuItemLogout}"
 							iconType="POWER_SETTINGS_NEW" iconPosition="LEFT" textColor="BLACK"
 							waves="DEFAULT" />
 					</m:MaterialDropDown>

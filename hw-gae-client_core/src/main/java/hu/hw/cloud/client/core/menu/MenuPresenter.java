@@ -8,19 +8,26 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.dispatch.rest.client.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
+import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.event.ContentPushEvent;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent;
 import hu.hw.cloud.client.core.event.ContentPushEvent.MenuState;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent.SetPageTitleHandler;
 import hu.hw.cloud.client.core.security.AppData;
+import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.core.security.HasPermissionsGatekeeper;
+import hu.hw.cloud.shared.AuthService;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.dto.core.MenuItemDto;
 
@@ -58,13 +65,22 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView>
 		void setAppCode(String appCode);
 	}
 
+	private final PlaceManager placeManager;
+	private final RestDispatch dispatcher;
+	private final AuthService authService;
+	private final CurrentUser currentUser;
 	private final AppData appData;
 
 	@Inject
-	MenuPresenter(EventBus eventBus, MyView view, AppData appData, HasPermissionsGatekeeper menItemGatekeeper) {
+	MenuPresenter(EventBus eventBus, MyView view, PlaceManager placeManager, RestDispatch dispatcher,
+			AuthService authService, CurrentUser currentUser, AppData appData, HasPermissionsGatekeeper menItemGatekeeper) {
 		super(eventBus, view);
 		logger.log(Level.INFO, "MenuPresenter()");
 
+		this.placeManager = placeManager;
+		this.dispatcher = dispatcher;
+		this.authService = authService;
+		this.currentUser = currentUser;
 		this.appData = appData;
 		this.menItemGatekeeper = menItemGatekeeper;
 
@@ -131,5 +147,22 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView>
 			getView().inactivateSingleLinks();
 		}
 
+	}
+
+	@Override
+	public void logout() {
+		dispatcher.execute(authService.logout(), new AsyncCallback<Void>() {
+
+			@Override
+			public void onSuccess(Void result) {
+				currentUser.setLoggedIn(false);
+				PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken(CoreNameTokens.LOGIN).build();
+				placeManager.revealPlace(placeRequest);
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+			}
+		});
 	}
 }

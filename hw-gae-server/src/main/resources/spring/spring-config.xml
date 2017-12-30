@@ -25,6 +25,7 @@
 		<property name="appUserService" ref="appUserService" />
 		<property name="messageSource" ref="messageSource" />
 	</bean>
+	<bean id="logoutSuccessHandler" class="hu.hw.cloud.server.security.HttpLogoutSuccessHandler" />
 
 	<!-- REPOSITORIES -->
 	<bean id="accountRepository" class="hu.hw.cloud.server.repository.ofy.AccountRepositoryImpl" />

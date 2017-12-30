@@ -9,6 +9,7 @@ public class ApiPaths {
 		public static final String LOGIN = "/login";
 		public static final String CURRENTUSER = "/currentuser";
 		public static final String IS_LOGGED_IN = "/isLoggedIn";
+		public static final String LOGOUT = "/logout";
 		
 		public static final String NOTIFICATION = "/notification";
 		public static final String RECONNECT = "/reconnect";

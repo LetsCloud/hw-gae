@@ -8,6 +8,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -60,6 +61,13 @@ public class LoginView extends ViewWithUiHandlers<LoginUiHandlers> implements Lo
 	@Override
 	public void setAccountId(String accounId) {
 		accountId.setText(accounId);
+		Timer t = new Timer() {
+			@Override
+			public void run() {
+				accountId.setFocus(true);
+			}
+		};
+		t.schedule(500);
 	}
 
 	@Override

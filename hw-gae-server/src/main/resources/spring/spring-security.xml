@@ -107,15 +107,12 @@
 		<intercept-url pattern="/fro" access="permitAll" />
 		<intercept-url pattern="/inf" access="permitAll" />
 		<intercept-url pattern="/kip" access="permitAll" />
-		<intercept-url pattern="/ModuleFro/**" access="permitAll" />
-		<intercept-url pattern="/ModuleInf/**" access="permitAll" />
-		<intercept-url pattern="/ModuleKip/**" access="permitAll" />
 		<intercept-url pattern="/_ah/**" access="permitAll" />
 		<form-login authentication-failure-handler-ref="authFailureHandler"
 			authentication-success-handler-ref="restAuthSuccessHandler"
 			login-processing-url="/spa/v1/login" password-parameter="password"
 			username-parameter="username" />
-		<logout success-handler-ref="logoutSuccessHandler" />
+		<logout logout-url="/spa/v1/logout" success-handler-ref="logoutSuccessHandler" />
 		<remember-me token-validity-seconds="1209600"
 			remember-me-parameter="remember-me" />
 		<session-management>

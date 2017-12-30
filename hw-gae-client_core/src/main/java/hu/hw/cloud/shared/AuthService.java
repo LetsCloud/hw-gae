@@ -7,6 +7,7 @@ import static hu.hw.cloud.shared.api.ApiParameters.PASSWORD;
 import static hu.hw.cloud.shared.api.ApiParameters.USERNAME;
 import static hu.hw.cloud.shared.api.ApiParameters.REMEMBER_ME;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.LOGIN;
+import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.LOGOUT;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.ROOT;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.CURRENTUSER;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.IS_LOGGED_IN;
@@ -36,8 +37,8 @@ public interface AuthService {
 	RestAction<Void> login(@FormParam(USERNAME) String username, @FormParam(PASSWORD) String password,
 			@FormParam(REMEMBER_ME) Boolean remeberMe);
 
-	@DELETE
-	@Path(LOGIN)
+	@GET
+	@Path(LOGOUT)
 	RestAction<Void> logout();
 
 	@GET

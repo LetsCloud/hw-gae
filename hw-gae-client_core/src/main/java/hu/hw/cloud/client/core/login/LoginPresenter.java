@@ -69,10 +69,9 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
 	@Override
 	public void prepareFromRequest(PlaceRequest request) {
-		logger.log(Level.INFO, "LoginPresenter.prepareFromRequest()");
 		placeToGo = request.getParameter("placeToGo", null);
 
-		checkCureentUser();
+		checkCurentUser();
 	}
 
 	@Override
@@ -90,21 +89,20 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 	@Override
 	protected void onReveal() {
 		super.onReveal();
-		logger.log(Level.INFO, "LoginPresenter.onReveal()");
-
 		getView().setAccountId(Cookies.getCookie(ACCOUNT_ID));
 	}
 
-	private void checkCureentUser() {
-		logger.log(Level.INFO, "LoginPresenter.checkCureentUser()");
+	/**
+	 * 
+	 */
+	private void checkCurentUser() {
 		dispatcher.execute(authService.isCurrentUserLoggedIn(), new AsyncCallback<Boolean>() {
 
 			@Override
 			public void onSuccess(Boolean result) {
-				logger.log(Level.INFO, "LoginPresenter.checkCureentUser().onSuccess()");
 				if (result) {
-					getProxy().manualRevealFailed();
-					onLoginSuccess();
+					logger.log(Level.INFO, "LoginPresenter().onSuccess().result="+result);
+					onSuccessLogin(false);
 				} else {
 					getProxy().manualReveal(LoginPresenter.this);
 				}
@@ -112,7 +110,6 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
 			@Override
 			public void onFailure(Throwable caught) {
-				logger.log(Level.INFO, "LoginPresenter.checkCureentUser().onFailure()");
 				getProxy().manualReveal(LoginPresenter.this);
 			}
 		});
@@ -124,25 +121,31 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 		sendLoginRequest(username, password, remeberMe);
 	}
 
+	/**
+	 * 
+	 * @param username
+	 * @param password
+	 * @param remeberMe
+	 */
 	private void sendLoginRequest(String username, String password, Boolean remeberMe) {
-		logger.log(Level.INFO, "LoginPresenter.sendLoginRequest()");
 		dispatcher.execute(authService.login(username, password, remeberMe), new AsyncCallback<Void>() {
 
 			@Override
 			public void onSuccess(Void result) {
-				onLoginSuccess();
+				onSuccessLogin(true);
 			}
 
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-
 			}
 		});
 	}
 
-	private void onLoginSuccess() {
-		logger.log(Level.INFO, "LoginPresenter.onLoginSuccess()");
+	/**
+	 * 
+	 * @param isLogin
+	 */
+	private void onSuccessLogin(Boolean isLogin) {
 		dispatcher.execute(authService.getCurrentUser(), new AsyncCallback<AppUserDto>() {
 
 			@Override
@@ -151,23 +154,29 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 				currentUser.setLoggedIn(true);
 				currentUser.setAppUserDto(result);
 				currentUser.setCurrentHotelDto(result.getDefaultHotelDto());
-				logger.log(Level.INFO, "LoginPresenter.onLoginSuccess()->onSuccess->result=" + result.toString());
 
 				if (Strings.isNullOrEmpty(placeToGo)) {
 					goToPlace(CoreNameTokens.HOME);
 				} else {
 					goToPlace(placeToGo);
 				}
+
+				if (!isLogin)
+					getProxy().manualRevealFailed();
 			}
 
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-
+				if (!isLogin)
+					getProxy().manualRevealFailed();
 			}
 		});
 	}
 
+	/**
+	 * 
+	 * @param place
+	 */
 	private void goToPlace(String place) {
 		PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken(place).build();
 		placeManager.revealPlace(placeRequest);

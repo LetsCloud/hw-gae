@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -64,6 +65,9 @@ public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements Menu
 
 	@UiField
 	SimplePanel navBarSlot;
+	
+	@UiField
+	MaterialLink logoutLink;
 
 	private final CoreResources res;
 	private List<MaterialLink> singleLinks = new ArrayList<MaterialLink>();
@@ -125,9 +129,9 @@ public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements Menu
 		MaterialToast.fireToast("Selected : " + ((MaterialLink) callback.getSelectedItem()).getText());
 	}
 
-	@UiHandler("userDropDown")
-	void onUserDropDown(SelectionEvent<Widget> callback) {
-		MaterialToast.fireToast("Selected : " + ((MaterialLink) callback.getSelectedItem()).getText());
+	@UiHandler("logoutLink")
+	void onLogout(ClickEvent event) {
+		getUiHandlers().logout();
 	}
 
 	@Override
