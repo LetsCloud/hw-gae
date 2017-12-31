@@ -23,8 +23,8 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "inf.html?launcher=true",
-  "display": "fullscreen",
+  "start_url": "/inf.html",
+  "display": "standalone",
   "background_color": "#FF9800",
   "theme_color": "#EF6C00"
 }
