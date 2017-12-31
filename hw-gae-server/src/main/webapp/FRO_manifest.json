@@ -3,22 +3,22 @@
   "short_name": "FRO",
   "icons": [
     {
-      "src": "launcher-icons/fro/launcher1x.png",
+      "src": "FRO_launcher-icons/launcher1x.png",
       "type": "image/png",
       "sizes": "48x48"
     },
     {
-      "src": "launcher-icons/fro/launcher2x.png",
+      "src": "FRO_launcher-icons/launcher2x.png",
       "type": "image/png",
       "sizes": "96x96"
     },
     {
-      "src": "launcher-icons/fro/launcher4x.png",
+      "src": "FRO_launcher-icons/launcher4x.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "launcher-icons/fro/launcher5x.png",
+      "src": "FRO_launcher-icons/launcher5x.png",
       "type": "image/png",
       "sizes": "512x512"
     }

@@ -10,6 +10,7 @@
 	</parent>
 
 	<artifactId>hw-gae-client_inf</artifactId>
+	<packaging>gwt-app</packaging>
 
 	<dependencies>
 		<dependency>
@@ -122,6 +123,23 @@
 
 	<build>
 		<plugins>
+			<!-- ********************** -->
+			<!-- maven-resources-plugin -->
+			<!-- ********************** -->
+			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+			</plugin>
+
+			<!-- **************** -->
+			<!-- gwt-maven-plugin -->
+			<!-- **************** -->
+			<plugin>
+				<groupId>net.ltgt.gwt.maven</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<extensions>true</extensions>
+			</plugin>
+
 			<!-- ************************ -->
 			<!-- service worker generator -->
 			<!-- ************************ -->
@@ -138,11 +156,12 @@
 			<build>
 				<plugins>
 					<!-- **************** -->
-					<!-- gwt-maven-plugin 2 -->
+					<!-- gwt-maven-plugin -->
 					<!-- **************** -->
 					<plugin>
 						<groupId>net.ltgt.gwt.maven</groupId>
 						<artifactId>gwt-maven-plugin</artifactId>
+						<extensions>true</extensions>
 						<configuration>
 							<moduleName>hu.hw.cloud.InfModuleProd</moduleName>
 							<moduleShortName>inf_module</moduleShortName>
@@ -156,11 +175,12 @@
 			<build>
 				<plugins>
 					<!-- **************** -->
-					<!-- gwt-maven-plugin 2 -->
+					<!-- gwt-maven-plugin -->
 					<!-- **************** -->
 					<plugin>
 						<groupId>net.ltgt.gwt.maven</groupId>
 						<artifactId>gwt-maven-plugin</artifactId>
+						<extensions>true</extensions>
 						<configuration>
 							<moduleName>hu.hw.cloud.InfModuleDev</moduleName>
 							<moduleShortName>inf_module</moduleShortName>

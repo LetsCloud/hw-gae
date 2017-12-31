@@ -3,22 +3,22 @@
   "short_name": "INF",
   "icons": [
     {
-      "src": "launcher-icons/inf/launcher1x.png",
+      "src": "INF_launcher-icons/launcher1x.png",
       "type": "image/png",
       "sizes": "48x48"
     },
     {
-      "src": "launcher-icons/inf/launcher2x.png",
+      "src": "INF_launcher-icons/launcher2x.png",
       "type": "image/png",
       "sizes": "96x96"
     },
     {
-      "src": "launcher-icons/inf/launcher4x.png",
+      "src": "INF_launcher-icons/launcher4x.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "launcher-icons/inf/launcher5x.png",
+      "src": "INF_launcher-icons/launcher5x.png",
       "type": "image/png",
       "sizes": "512x512"
     }

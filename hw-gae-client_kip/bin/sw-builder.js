@@ -19,7 +19,7 @@ browseAllFilesInDirectory(rootFolder);
 
 function browseAllFilesInDirectory(folder) {
     const filesRegExp = /\.(html|css|js|gif|png|jpeg|eot|ttf|woff|woff2)$/i;
-    const exceptions = ["WEB-INF", "META-INF", "inf_module", "fro_module", "INF_manifest.json", "FRO_manifest.json", "INF_service-worker.js", "FRO_service-worker.js", "inf.html", "fro.html", "launcher-icons/inf", "launcher-icons/fro"];
+    const exceptions = ["WEB-INF", "META-INF", "inf_module", "fro_module", "INF_manifest.json", "FRO_manifest.json", "INF_service-worker.js", "FRO_service-worker.js", "inf.html", "fro.html", "INF_launcher-icons", "FRO_launcher-icons"];
 
     fs.readdirSync(folder).forEach(fileName => {
         const resource = folder + "/" + fileName;

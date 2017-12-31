@@ -59,7 +59,7 @@
 	</servlet-mapping>
 	<!-- DISPATCHER END -->
 
-	<!-- hw-inf -->
+	<!-- hw-inf
 	<servlet>
 		<servlet-name>INF</servlet-name>
 		<servlet-class>hu.hw.cloud.server.InfHost</servlet-class>
@@ -68,8 +68,8 @@
 		<servlet-name>INF</servlet-name>
 		<url-pattern>/inf</url-pattern>
 	</servlet-mapping>
-
-	<!-- hw-kip -->
+ -->
+	<!-- hw-kip
 	<servlet>
 		<servlet-name>KIP</servlet-name>
 		<servlet-class>hu.hw.cloud.server.KipHost</servlet-class>
@@ -78,8 +78,8 @@
 		<servlet-name>KIP</servlet-name>
 		<url-pattern>/kip</url-pattern>
 	</servlet-mapping>
-
-	<!-- hw-fro -->
+ -->
+	<!-- hw-fro
 	<servlet>
 		<servlet-name>FRO</servlet-name>
 		<servlet-class>hu.hw.cloud.server.FroHost</servlet-class>
@@ -88,7 +88,7 @@
 		<servlet-name>FRO</servlet-name>
 		<url-pattern>/fro</url-pattern>
 	</servlet-mapping>
-
+ -->
 	<!-- WELCOME -->
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

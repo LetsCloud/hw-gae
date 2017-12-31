@@ -13,7 +13,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 
 		<appengine.app.id>hw-cloud1</appengine.app.id>
-		<appengine.app.version>4</appengine.app.version>
+		<appengine.app.version>5</appengine.app.version>
 
 		<!-- ********************** -->
 		<!-- Client side properties -->
@@ -62,12 +62,11 @@
 		<!-- *************** -->
 		<!-- Plugin versions -->
 		<!-- *************** -->
-		<gwt-maven-plugin.version>2.8.1</gwt-maven-plugin.version>
 		<ltgt-gwt-maven-plugin.version>1.0-rc-9</ltgt-gwt-maven-plugin.version>
 		<frontend-maven-plugin.version>1.6</frontend-maven-plugin.version>
 		<maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
 		<maven-war-plugin.version>2.6</maven-war-plugin.version>
-		<maven-resources-plugin.version>3.0.1</maven-resources-plugin.version>
+		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
 		<maven.surefire.version>2.19.1</maven.surefire.version>
 		<maven.failsafe.version>2.19.1</maven.failsafe.version>
 
@@ -133,30 +132,12 @@
 			<!-- ***************************************************** -->
 			<!-- **************** CLIENT DEPENDENCIES **************** -->
 			<!-- ***************************************************** -->
-			<!-- <dependency> <groupId>com.google.gwt</groupId> <artifactId>gwt</artifactId> 
-				<version>2.8.0</version> <type>pom</type> <scope>import</scope> </dependency> -->
 			<dependency>
 				<groupId>com.google.gwt</groupId>
-				<artifactId>gwt-servlet</artifactId>
+				<artifactId>gwt</artifactId>
 				<version>${gwt.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.google.gwt</groupId>
-				<artifactId>gwt-user</artifactId>
-				<version>${gwt.version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>com.google.gwt</groupId>
-				<artifactId>gwt-codeserver</artifactId>
-				<version>${gwt.version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>com.google.gwt</groupId>
-				<artifactId>gwt-dev</artifactId>
-				<version>${gwt.version}</version>
-				<scope>provided</scope>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
 
 			<!-- ************ -->
@@ -515,135 +496,6 @@
 					</executions>
 				</plugin>
 
-				<!-- **************** -->
-				<!-- gwt-maven-plugin -->
-				<!-- **************** -->
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>gwt-maven-plugin</artifactId>
-					<version>${gwt-maven-plugin.version}</version>
-
-					<configuration>
-						<!-- ************ -->
-						<!-- COMPILE GOAL -->
-						<!-- ************ -->
-
-						<!-- EXPERIMENTAL: Gather compiler metrics. Can be set from the command 
-							line using '-Dgwt.compiler.compilerMetrics=true'. Default value is: false. -->
-						<compilerMetrics>true</compilerMetrics>
-
-						<!-- Compile a report that tells the "Story of Your Compile". Can be 
-							set from command line using '-Dgwt.compiler.compileReport=true'. Default 
-							value is: false. -->
-						<compileReport>true</compileReport>
-
-						<!-- Extra JVM arguments that are passed to the GWT-Maven generated 
-							scripts (for compiler, shell, etc - typically use -Xmx512m here, or -XstartOnFirstThread, 
-							etc). Can be set from command line using '-Dgwt.extraJvmArgs=...', defaults 
-							to setting max Heap size to be large enough for most GWT use cases. -->
-						<extraJvmArgs>-Xmx1g</extraJvmArgs>
-
-						<!-- Fail compilation if any input file contains an error. Can be set 
-							from command line using '-Dgwt.compiler.strict=true'. Default value is: false. -->
-						<failOnError>true</failOnError>
-
-						<!-- GWT logging level (-logLevel ERROR, WARN, INFO, TRACE, DEBUG, 
-							SPAM, or ALL). Can be set from command line using '-Dgwt.logLevel=...' Default 
-							value is: INFO. -->
-						<logLevel>INFO</logLevel>
-
-						<!-- Specifies Java source level. Default value is: auto. -->
-						<sourceLevel>${java.version}</sourceLevel>
-
-						<!-- GWT JavaScript compiler output style (-style OBF[USCATED], PRETTY, 
-							or DETAILED). Can be set from command line using '-Dgwt.style=...' -->
-						<style>${gwt.style}</style>
-
-						<!-- Location of the web application static resources (same as maven-war-plugin 
-							parameter). Default value is: ${basedir}/src/main/webapp. -->
-						<warSourceDirectory>${server-directory}/src/main/webapp</warSourceDirectory>
-
-						<!-- Location on filesystem where GWT will write output files (-out 
-							option to GWTCompiler). Default value is: ${project.build.directory}/${project.build.finalName}. -->
-						<webappDirectory>${server-directory}/target/${server-artifactId}-${project.version}</webappDirectory>
-
-
-						<!-- ******************* -->
-						<!-- RUN-CODESERVER GOAL -->
-						<!-- ******************* -->
-
-						<codeServerWorkDir>${project.build.directory}/${project.build.finalName}/codeserverTemp</codeServerWorkDir>
-						<!-- Set SuperDevMode's bindAddress. Can be set from command line using 
-							'-Dgwt.bindAddress=...' -->
-						<!-- <bindAddress>0.0.0.0</bindAddress> -->
-
-						<!-- An output directory where files for launching Super Dev Mode will 
-							be written. (Optional.) mvn gwt:run-codeserver - won't have to use the bookmarklet. 
-							FONTOS: A codeserver ide menti a frissen fordított javascript kódot. -->
-						<launcherDir>${server-directory}/target/${server-artifactId}-${project.version}</launcherDir>
-
-
-						<!-- ******** -->
-						<!-- RUN GOAL -->
-						<!-- ******** -->
-
-						<!-- Copies the contents of warSourceDirectory to hostedWebapp. Can 
-							be set from command line using '-Dgwt.copyWebapp=...' -->
-						<copyWebapp>true</copyWebapp>
-
-						<!-- Location of the hosted-mode web application structure. Default: 
-							${project.build.directory}/${project.build.finalName}. -->
-						<hostedWebapp>${server-directory}/target/${server-artifactId}-${project.version}</hostedWebapp>
-
-						<!-- Prevents the embedded GWT Tomcat server from running (even if 
-							a port is specified). Can be set from command line using '-Dgwt.noserver=...' -->
-						<noServer>true</noServer>
-
-						<!-- Runs the embedded GWT server on the specified port. Default value 
-							is: 8888. -->
-						<port>8080</port>
-
-						<!-- URL that should be automatically opened in the GWT shell. For 
-							example com.myapp.gwt.Module/Module.html. When the host page is outside the 
-							module "public" folder (for example, at webapp root), the module MUST be 
-							specified (using a single <module> in configuration or by setting -Dgwt.module=..) 
-							and the runTarget parameter can only contain the host page URI. When the 
-							GWT module host page is part of the module "public" folder, the runTarget 
-							MAY define the full GWT module path (com.myapp.gwt.Module/Module.html) that 
-							will be automatically converted according to the rename-to directive into 
-							renamed/Module.html. -->
-						<runTarget>${server-directory}/target/${server-artifactId}-${project.version}/index.html</runTarget>
-
-
-						<!-- ********* -->
-						<!-- TEST GOAL -->
-						<!-- ********* -->
-
-						<!-- Configure test mode. Can be set to "manual", "htmlunit" or "selenium". 
-							If set to any other value, that value will be passed as the -runStyle argument, 
-							allowing you to use an arbitrary RunStyle when running tests. -->
-						<mode>htmlunit</mode>
-
-						<!-- Time out (in seconds) for test execution in dedicated JVM -->
-						<testTimeOut>180</testTimeOut>
-
-						<!-- Switch to a suite to run tests faster -->
-						<!-- <includes>**/*GwtTestSuite.java</includes> -->
-						<!-- <excludes>**/*GwtTest.java</excludes> -->
-						<includes>**/*GwtTest.java</includes>
-
-						<gen>${project.build.directory}/gwt-gen</gen>
-					</configuration>
-
-					<executions>
-						<execution>
-							<goals>
-								<goal>compile</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-
 				<!-- ****************** -->
 				<!-- gwt-maven-plugin 2 -->
 				<!-- ****************** -->
@@ -719,6 +571,32 @@
 					</executions>
 				</plugin>
 
+				<!-- ************************ -->
+				<!-- maven-resources-plugin -->
+				<!-- ************************ -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${maven-resources-plugin.version}</version>
+					<executions>
+						<execution>
+							<id>copy-webapp</id>
+							<phase>process-resources</phase>
+							<goals>
+								<goal>copy-resources</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${server-directory}/target/${server-artifactId}-${project.version}</outputDirectory>
+								<resources>
+									<resource>
+										<directory>${server-directory}/src/main/webapp/</directory>
+									</resource>
+								</resources>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
 				<!-- ********************** -->
 				<!-- appengine-maven-plugin -->
 				<!-- ********************** -->
@@ -772,30 +650,6 @@
 							</goals>
 						</execution>
 					</executions>
-				</plugin>
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.codehaus.mojo</groupId>
-										<artifactId>gwt-maven-plugin</artifactId>
-										<versionRange>[1.0,)</versionRange>
-										<goals>
-											<goal>resources</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<execute />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
 				</plugin>
 
 				<plugin>
