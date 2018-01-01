@@ -95,7 +95,7 @@ public class KipAppPresenter extends AppPresenter<KipAppPresenter.MyProxy> {
 		minBarItem.setType(MenuItemType.MENU_ITEM);
 		minBarItem.setIcon(IconType.LOCAL_BAR.name());
 		minBarItem.setText(i18n.mainMenuItemAssignment());
-		minBarItem.setNameToken(KipNameTokens.HK_ASSIGNMENTS);
+		minBarItem.setNameToken(KipNameTokens.NOTIFICATIONS);
 		menuItems.add(minBarItem);
 
 		// Perfomance
