@@ -14,7 +14,6 @@ import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.IS_LOGGED_IN;
 import static javax.ws.rs.core.MediaType.APPLICATION_FORM_URLENCODED;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;

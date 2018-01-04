@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.kip.push;
+package hu.hw.cloud.client.kip.notifications;
 
 import com.gwtplatform.mvp.client.UiHandlers;
 
@@ -14,4 +14,6 @@ import hu.hw.cloud.client.core.pwa.AppServiceWorkerManager;
 public interface NotificationsUiHandlers extends UiHandlers {
 
 	AppServiceWorkerManager getServiceWorkerManager();
+	
+	void createNotification();
 }

@@ -7,6 +7,11 @@ public class ApiParameters {
     public static final String PASSWORD = "password";
     public static final String REMEMBER_ME = "remember-me";
 
+    public static final String ENDPOINT = "endpoint";
+    public static final String AUTH = "auth";
+    public static final String KEY = "key";
+
+    
     public static final String HOTEL_KEY = "hotelKey";
     public static final String ROOM_KEY = "roomKey";
     public static final String ROOM_STATUS = "roomStatus";

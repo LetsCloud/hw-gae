@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.kip.push;
+package hu.hw.cloud.client.kip.notifications;
 
 import javax.inject.Inject;
 
@@ -10,9 +10,8 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwtplatform.dispatch.rest.client.RestDispatch;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 import gwt.material.design.addins.client.overlay.MaterialOverlay;
@@ -23,9 +22,6 @@ import gwt.material.design.client.ui.MaterialCard;
 import gwt.material.design.client.ui.MaterialPanel;
 import gwt.material.design.client.ui.MaterialSwitch;
 import gwt.material.design.client.ui.MaterialToast;
-
-import hu.hw.cloud.shared.NotificationService;
-import hu.hw.cloud.shared.rpc.Message;
 
 /**
  * @author robi
@@ -55,16 +51,16 @@ public class NotificationsView extends ViewWithUiHandlers<NotificationsUiHandler
 	@UiField
 	MaterialOverlay overlay;
 
-	private final NotificationService service;
-	private final RestDispatch dispatcher;
+	@UiField
+	SimplePanel modalSlot;
 
 	private AppInstaller appInstaller;
 
 	@Inject
-	NotificationsView(Binder uiBinder, RestDispatch dispatcher, NotificationService service) {
+	NotificationsView(Binder uiBinder) {
 		initWidget(uiBinder.createAndBindUi(this));
-		this.service = service;
-		this.dispatcher = dispatcher;
+
+		bindSlot(NotificationsPresenter.SLOT_MODAL, modalSlot);		
 	}
 
 	@Override
@@ -86,18 +82,7 @@ public class NotificationsView extends ViewWithUiHandlers<NotificationsUiHandler
 
 	@UiHandler("btnAdd")
 	void onAdd(ClickEvent e) {
-		dispatcher.execute(service.getMessage("Test"), new AsyncCallback<Message>() {
-
-			@Override
-			public void onSuccess(Message message) {
-				MaterialToast.fireToast("Connected to server via RPC : Response (" + message.getMessage() + ")");
-			}
-
-			@Override
-			public void onFailure(Throwable throwable) {
-				MaterialToast.fireToast(throwable.getMessage());
-			}
-		});
+		getUiHandlers().createNotification();
 	}
 
 	@UiHandler("install")

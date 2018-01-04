@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.kip.push;
+package hu.hw.cloud.client.kip.notifications;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
