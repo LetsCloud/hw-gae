@@ -3,27 +3,27 @@
   "short_name": "KIP",
   "icons": [
     {
-      "src": "KIP_launcher-icons/launcher1x.png",
+      "src": "launcher-icons/launcher1x.png",
       "type": "image/png",
       "sizes": "48x48"
     },
     {
-      "src": "KIP_launcher-icons/launcher2x.png",
+      "src": "launcher-icons/launcher2x.png",
       "type": "image/png",
       "sizes": "96x96"
     },
     {
-      "src": "KIP_launcher-icons/launcher4x.png",
+      "src": "launcher-icons/launcher4x.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "KIP_launcher-icons/launcher5x.png",
+      "src": "launcher-icons/launcher5x.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
-  "start_url": "kip.html?launcher=true",
+  "start_url": "index.html",
   "display": "fullscreen",
   "background_color": "#2196f3",
   "theme_color": "#1565c0"

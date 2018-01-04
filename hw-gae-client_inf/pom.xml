@@ -127,7 +127,7 @@
 			<!-- maven-resources-plugin -->
 			<!-- ********************** -->
 			<plugin>
-			    <groupId>org.apache.maven.plugins</groupId>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
 			</plugin>
 
@@ -138,6 +138,11 @@
 				<groupId>net.ltgt.gwt.maven</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
 				<extensions>true</extensions>
+				<configuration>
+					<launcherDir>${server-directory}/target/${server-artifactId}-${project.version}/inf</launcherDir>
+					<warDir>${server-directory}/target/${server-artifactId}-${project.version}/inf</warDir>
+					<webappDirectory>${server-directory}/target/${server-artifactId}-${project.version}/inf</webappDirectory>
+				</configuration>
 			</plugin>
 
 			<!-- ************************ -->
@@ -146,6 +151,19 @@
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>npm generate</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<phase>prepare-package</phase>
+						<configuration>
+							<arguments>run-script generate
+								${server-directory}/target/${server-artifactId}-${project.version}/inf</arguments>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

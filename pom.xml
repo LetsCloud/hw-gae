@@ -521,10 +521,6 @@
 							<arg>-XcompilerMetrics</arg>
 						</compilerArgs>
 						<classpathScope>compile+runtime</classpathScope>
-						<launcherDir>${server-directory}/target/${server-artifactId}-${project.version}</launcherDir>
-						<warDir>${server-directory}/target/${server-artifactId}-${project.version}</warDir>
-						<webappDirectory>${server-directory}/target/${server-artifactId}-${project.version}</webappDirectory>
-						<classpathScope>compile+runtime</classpathScope>
 					</configuration>
 				</plugin>
 
@@ -555,17 +551,6 @@
 							<phase>generate-resources</phase>
 							<configuration>
 								<arguments>install</arguments>
-							</configuration>
-						</execution>
-						<execution>
-							<id>npm generate</id>
-							<goals>
-								<goal>npm</goal>
-							</goals>
-							<phase>prepare-package</phase>
-							<configuration>
-								<arguments>run-script generate
-									${server-directory}/target/${server-artifactId}-${project.version}</arguments>
 							</configuration>
 						</execution>
 					</executions>
