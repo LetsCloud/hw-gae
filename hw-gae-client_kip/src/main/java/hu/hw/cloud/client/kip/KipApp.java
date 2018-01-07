@@ -49,6 +49,7 @@ public class KipApp  implements Bootstrapper {
 	public void onBootstrap() {
 		appData.setAppCode(SubSystem.KIP);
 		//		appData.setAppCode("KIP");
+
 		placeManager.revealCurrentPlace();
 	}
 } 

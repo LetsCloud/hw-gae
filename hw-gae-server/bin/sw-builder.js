@@ -34,7 +34,7 @@ function browseAllFilesInDirectory(folder) {
 }
 
 var swData = {
-    cacheName: gwtModuleName || "inf_cache_" + new Date().getTime().toString(),
+    cacheName: gwtModuleName || "hw_cache_" + new Date().getTime().toString(),
     filesToCache: filesToCache,
 };
 
@@ -45,7 +45,7 @@ fs.readFile("bin/sw-template.js", "utf8", (error, data) => {
     var template = Handlebars.compile(data);
     var serviceWorkerJs = template(swData);
 
-    fs.writeFile(buildFolderName + "/INF_service-worker.js", serviceWorkerJs, (error) => {
-        console.log("Successfully generated service worker INF_service-worker.js in " + rootFolder);
+    fs.writeFile(buildFolderName + "/service-worker.js", serviceWorkerJs, (error) => {
+        console.log("Successfully generated service worker service-worker.js in " + rootFolder);
     });
 });

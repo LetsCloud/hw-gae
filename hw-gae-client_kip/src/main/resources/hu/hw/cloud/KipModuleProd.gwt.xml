@@ -3,15 +3,22 @@
   "http://gwtproject.org/doctype/2.7.0/gwt-module.dtd">
 <module rename-to="kip_module">
 	<inherits name="hu.hw.cloud.KipModuleBase" />
+	
+<!-- 
 	<extend-property name="locale" values="hu_HU" />
 	<extend-property name="locale" values="en" />
 	<set-property-fallback name="locale" value="en" />
-<!-- 
-	<extend-property name="locale" values="hu_HU" />
+ -->
+ 	<inherits name="com.google.gwt.logging.Logging" />
+	<set-property name="gwt.logging.enabled" value="TRUE" />
+	<set-property name="gwt.logging.logLevel" value="ALL" />
+	<set-property name="gwt.logging.consoleHandler" value="ENABLED" />
+ 
+ 	<extend-property name="locale" values="hu_HU" />
 	<set-property name="locale" value="hu_HU" />
 
 	<set-property name="user.agent" value="safari" />
- -->
+
 
 	<add-linker name="xsiframe" />
 </module>

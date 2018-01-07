@@ -15,7 +15,7 @@ import gwt.material.design.client.pwa.serviceworker.DefaultServiceWorkerManager;
 import gwt.material.design.client.pwa.serviceworker.js.ServiceWorkerRegistration;
 import gwt.material.design.client.ui.MaterialToast;
 import gwt.material.design.jquery.client.api.Functions;
-import hu.hw.cloud.shared.NotificationService;
+import hu.hw.cloud.shared.FcmService;
 
 /**
  * @author CR
@@ -25,16 +25,16 @@ public class AppServiceWorkerManager extends DefaultServiceWorkerManager {
 
 	private final EventBus eventBus;
 	private final RestDispatch dispatch;
-	private final NotificationService notificationService;
+	private final FcmService fcmService;
 	private String endpoint, auth, key;
 	private PushNotificationManager pushNotificationManager;
 
 	public AppServiceWorkerManager(String resource, EventBus eventBus, RestDispatch dispatch,
-			NotificationService notificationService) {
+			FcmService fcmService) {
 		super(resource);
 		this.eventBus = eventBus;
 		this.dispatch = dispatch;
-		this.notificationService = notificationService;
+		this.fcmService = fcmService;
 		// Polling Interval should be every 1 minute
 		/* setPollingInterval(1000); */
 	}
@@ -63,22 +63,6 @@ public class AppServiceWorkerManager extends DefaultServiceWorkerManager {
 	}
 
 	protected void sendSubscriptionToServer(PushSubscription subscription) {
-		endpoint = subscription.endpoint;
-		key = PushCryptoHelper.arrayBufferToBase64(subscription.getKey("p256dh"));
-		auth = PushCryptoHelper.arrayBufferToBase64(subscription.getKey("auth"));
-
-		dispatch.execute(notificationService.subscribeUser(endpoint, auth, key), new AsyncCallback<Void>() {
-
-			@Override
-			public void onSuccess(Void result) {
-				MaterialToast.fireToast("Subscribed user to Server Web Push. Ready for receiving push notifications.");
-			}
-
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-			}
-		});
 	}
 
 	public void unsubscribe(Functions.Func callback) {

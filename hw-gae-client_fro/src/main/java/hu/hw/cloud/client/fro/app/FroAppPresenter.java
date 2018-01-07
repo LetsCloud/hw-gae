@@ -24,7 +24,7 @@ import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.i18n.FroMessages;
 import hu.hw.cloud.shared.AuthService;
-import hu.hw.cloud.shared.NotificationService;
+import hu.hw.cloud.shared.FcmService;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.cnst.SubSystem;
 import hu.hw.cloud.shared.dto.core.MenuItemDto;
@@ -43,7 +43,7 @@ public class FroAppPresenter extends AppPresenter<FroAppPresenter.MyProxy> {
 
 	@Inject
 	FroAppPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager, FroMessages i18n,
-			RestDispatch dispatch, AuthService authenticationService, NotificationService notificationService,
+			RestDispatch dispatch, AuthService authenticationService, FcmService notificationService,
 			CurrentUser currentUser, MenuPresenter menuPresenter, AppData appData) {
 		super(eventBus, view, proxy, placeManager, dispatch, authenticationService, notificationService, menuPresenter,
 				currentUser, SubSystem.FRO);

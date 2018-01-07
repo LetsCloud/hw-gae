@@ -29,7 +29,7 @@ import hu.hw.cloud.client.inf.gps.config.GpsConfigWidgetsFactory;
 import hu.hw.cloud.client.inf.gps.display.GpsDisplayPresenter;
 import hu.hw.cloud.client.inf.i18n.InfMessages;
 import hu.hw.cloud.shared.AuthService;
-import hu.hw.cloud.shared.NotificationService;
+import hu.hw.cloud.shared.FcmService;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.cnst.SubSystem;
 import hu.hw.cloud.shared.dto.core.MenuItemDto;
@@ -51,7 +51,7 @@ public class InfAppPresenter extends AppPresenter<InfAppPresenter.MyProxy> {
 
 	@Inject
 	InfAppPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager, InfMessages i18n,
-			RestDispatch dispatch, AuthService authenticationService, NotificationService notificationService,
+			RestDispatch dispatch, AuthService authenticationService, FcmService notificationService,
 			CurrentUser currentUser, MenuPresenter menuPresenter, GpsDisplayPresenter gpsDisplayPresenter,
 			GpsConfigWidgetsFactory gpsConfigWidgetsFactory, AppData appData) {
 		super(eventBus, view, proxy, placeManager, dispatch, authenticationService, notificationService, menuPresenter,

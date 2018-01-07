@@ -92,6 +92,7 @@
 			<artifactId>gwt-charts</artifactId>
 		</dependency>
 
+
 		<!-- ***************** -->
 		<!-- Google Guava -->
 		<!-- ***************** -->
@@ -117,14 +118,6 @@
 
 	<build>
 		<plugins>
-			<!-- ********************** -->
-			<!-- maven-resources-plugin -->
-			<!-- ********************** -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-			</plugin>
-
 			<!-- **************** -->
 			<!-- gwt-maven-plugin -->
 			<!-- **************** -->
@@ -132,31 +125,6 @@
 				<groupId>net.ltgt.gwt.maven</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
 				<extensions>true</extensions>
-				<configuration>
-					<launcherDir>${server-directory}/target/${server-artifactId}-${project.version}/kip</launcherDir>
-					<warDir>${server-directory}/target/${server-artifactId}-${project.version}/kip</warDir>
-					<webappDirectory>${server-directory}/target/${server-artifactId}-${project.version}/kip</webappDirectory>
-				</configuration>
-			</plugin>
-			<!-- ************************ -->
-			<!-- service worker generator -->
-			<!-- ************************ -->
-			<plugin>
-				<groupId>com.github.eirslett</groupId>
-				<artifactId>frontend-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>npm generate</id>
-						<goals>
-							<goal>npm</goal>
-						</goals>
-						<phase>prepare-package</phase>
-						<configuration>
-							<arguments>run-script generate
-								${server-directory}/target/${server-artifactId}-${project.version}/kip</arguments>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>

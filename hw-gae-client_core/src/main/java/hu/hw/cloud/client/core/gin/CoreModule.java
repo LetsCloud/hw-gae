@@ -34,7 +34,7 @@ public class CoreModule extends AbstractPresenterModule {
 
 		bind(AppData.class).asEagerSingleton();
 		bind(CurrentUser.class).asEagerSingleton();
-		
+
 		bindConstant().annotatedWith(DefaultPlace.class).to(CoreNameTokens.HOME);
 		bindConstant().annotatedWith(ErrorPlace.class).to(CoreNameTokens.LOGIN);
 		bindConstant().annotatedWith(UnauthorizedPlace.class).to(CoreNameTokens.LOGIN);

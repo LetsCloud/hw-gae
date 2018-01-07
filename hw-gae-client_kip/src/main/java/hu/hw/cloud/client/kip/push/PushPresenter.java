@@ -16,8 +16,8 @@ import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 
 import gwt.material.design.client.ui.MaterialToast;
-import hu.hw.cloud.shared.NotificationService;
-import hu.hw.cloud.shared.rpc.NotificationDTO;
+import hu.hw.cloud.shared.FcmService;
+import hu.hw.cloud.shared.dto.NotificationDto;
 
 /**
  * @author robi
@@ -33,13 +33,13 @@ public class PushPresenter extends PresenterWidget<PushPresenter.MyView> impleme
 	}
 
 	private final RestDispatch dispatcher;
-	private final NotificationService service;
+	private final FcmService fcmService;
 
 	@Inject
-	PushPresenter(EventBus eventBus, MyView view, RestDispatch dispatcher, NotificationService service) {
+	PushPresenter(EventBus eventBus, MyView view, RestDispatch dispatcher, FcmService fcmService) {
 		super(eventBus, view);
 		logger.log(Level.INFO, "PushPresenter()");
-		this.service = service;
+		this.fcmService = fcmService;
 		this.dispatcher = dispatcher;
 		getView().setUiHandlers(this);
 	}
@@ -55,8 +55,9 @@ public class PushPresenter extends PresenterWidget<PushPresenter.MyView> impleme
 	}
 
 	@Override
-	public void push(NotificationDTO notification) {
-		dispatcher.execute(service.notifyAllUser(notification), new AsyncCallback<Void>() {
+	public void push(NotificationDto notification) {
+
+		dispatcher.execute(fcmService.notifyAllUser(notification), new AsyncCallback<Void>() {
 
 			@Override
 			public void onSuccess(Void aVoid) {
@@ -68,5 +69,6 @@ public class PushPresenter extends PresenterWidget<PushPresenter.MyView> impleme
 				MaterialToast.fireToast(throwable.getMessage());
 			}
 		});
+
 	}
 }

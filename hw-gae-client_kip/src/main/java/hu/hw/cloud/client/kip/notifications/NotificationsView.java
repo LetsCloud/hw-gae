@@ -3,6 +3,9 @@
  */
 package hu.hw.cloud.client.kip.notifications;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.inject.Inject;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -19,6 +22,7 @@ import gwt.material.design.client.pwa.manifest.constants.DisplayMode;
 import gwt.material.design.client.pwa.manifest.js.AppInstaller;
 import gwt.material.design.client.ui.MaterialButton;
 import gwt.material.design.client.ui.MaterialCard;
+import gwt.material.design.client.ui.MaterialLabel;
 import gwt.material.design.client.ui.MaterialPanel;
 import gwt.material.design.client.ui.MaterialSwitch;
 import gwt.material.design.client.ui.MaterialToast;
@@ -29,12 +33,16 @@ import gwt.material.design.client.ui.MaterialToast;
  */
 public class NotificationsView extends ViewWithUiHandlers<NotificationsUiHandlers>
 		implements NotificationsPresenter.MyView {
+	private static Logger logger = Logger.getLogger(NotificationsView.class.getName());
 
 	interface Binder extends UiBinder<Widget, NotificationsView> {
 	}
 
 	@UiField
 	MaterialSwitch enablePushNotification;
+
+	@UiField
+	MaterialLabel tokenLabel;
 
 	@UiField
 	MaterialButton btnAdd;
@@ -60,7 +68,7 @@ public class NotificationsView extends ViewWithUiHandlers<NotificationsUiHandler
 	NotificationsView(Binder uiBinder) {
 		initWidget(uiBinder.createAndBindUi(this));
 
-		bindSlot(NotificationsPresenter.SLOT_MODAL, modalSlot);		
+		bindSlot(NotificationsPresenter.SLOT_MODAL, modalSlot);
 	}
 
 	@Override
@@ -71,6 +79,7 @@ public class NotificationsView extends ViewWithUiHandlers<NotificationsUiHandler
 		if (appInstaller.isLaunched(DisplayMode.FULLSCREEN)) {
 			install.setVisible(false);
 		}
+
 	}
 
 	@Override
@@ -97,10 +106,28 @@ public class NotificationsView extends ViewWithUiHandlers<NotificationsUiHandler
 
 	@UiHandler("enablePushNotification")
 	void enablePushNotification(ValueChangeEvent<Boolean> event) {
-		if (event.getValue()) {
-			getUiHandlers().getServiceWorkerManager().subscribe(() -> updateSwitch());
-		} else {
-			getUiHandlers().getServiceWorkerManager().unsubscribe(() -> updateSwitch());
+		logger.log(Level.INFO, "NotificationsView.enablePushNotification()");
+		/*
+		 * if (event.getValue()) {
+		 * getUiHandlers().getServiceWorkerManager().subscribe(() -> updateSwitch()); }
+		 * else { getUiHandlers().getServiceWorkerManager().unsubscribe(() ->
+		 * updateSwitch()); }
+		 */
+		getUiHandlers().getMessagingManager().requestPermission(() -> reqPerm());
+
+		getUiHandlers().getMessagingManager().getToken(token -> showToken(token));
+	}
+
+	protected void reqPerm() {
+		logger.log(Level.INFO, "NotificationsView.reqPerm()");
+		MaterialToast.fireToast("requestPermission");
+	}
+
+	protected void showToken(String token) {
+		logger.log(Level.INFO, "NotificationsView.showToken().token=" + token);
+		if (token != null) {
+			tokenLabel.setText(token);
+			getUiHandlers().subToServer(token);
 		}
 	}
 
@@ -111,5 +138,11 @@ public class NotificationsView extends ViewWithUiHandlers<NotificationsUiHandler
 		} else {
 			MaterialToast.fireToast("Unsubscribed to Push Notification");
 		}
+	}
+
+	@Override
+	public void resetUI() {
+		// TODO Auto-generated method stub
+
 	}
 }

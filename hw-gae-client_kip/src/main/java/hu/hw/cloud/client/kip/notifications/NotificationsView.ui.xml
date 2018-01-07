@@ -44,6 +44,7 @@
 				<m:MaterialLabel text="Enable Push Notication" />
 				<m:MaterialSwitch ui:field="enablePushNotification"
 					onLabel="Enable" offLabel="Disable" />
+				<m:MaterialLabel ui:field="tokenLabel"/>
 			</m:MaterialRow>
 		</m:MaterialColumn>
 

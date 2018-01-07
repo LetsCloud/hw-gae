@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.shared.rpc;
+package hu.hw.cloud.shared.dto;
 
 import java.io.Serializable;
 

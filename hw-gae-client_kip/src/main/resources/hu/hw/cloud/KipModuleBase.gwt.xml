@@ -34,7 +34,7 @@
 	<set-configuration-property name="gwtp.bootstrapper"
 		value="hu.hw.cloud.client.kip.KipApp" />
 
-	<public path="client/kip/resources" excludes="**/*.java,**/*.class"/>
+	<public path="client/kip/resources" excludes="**/*.java,**/*.class" />
 	<stylesheet src="css/fonts.css" />
 
 	<add-linker name="xsiframe" />

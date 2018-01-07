@@ -33,7 +33,7 @@ import hu.hw.cloud.client.core.pwa.NetworkStatusEvent;
 import hu.hw.cloud.client.core.pwa.NetworkStatusEvent.NetworkStatusHandler;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.shared.AuthService;
-import hu.hw.cloud.shared.NotificationService;
+import hu.hw.cloud.shared.FcmService;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
 
 public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<MyView, Proxy_>
@@ -55,13 +55,13 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 	private final PlaceManager placeManager;
 	private final RestDispatch dispatch;
 	private final AuthService authenticationService;
-	private final NotificationService notificationService;
+	private final FcmService notificationService;
 	private final CurrentUser currentUser;
 	private final MenuPresenter menuPresenter;
 	private final String appCode;
 
 	protected AppPresenter(EventBus eventBus, MyView view, Proxy_ proxy, PlaceManager placeManager,
-			RestDispatch dispatch, AuthService authenticationService, NotificationService notificationService,
+			RestDispatch dispatch, AuthService authenticationService, FcmService notificationService,
 			MenuPresenter menuPresenter, CurrentUser currentUser, String appCode) {
 		super(eventBus, view, proxy, RevealType.Root);
 		logger.info("AppPresenter()");
@@ -91,7 +91,7 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 		super.onReveal();
 		logger.log(Level.INFO, "AppPresenter.onReveal()");
 		checkCurrentUser();
-		initPwa();
+//		initPwa();
 	}
 
 	private void checkCurrentUser() {
@@ -150,7 +150,7 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 	protected void initPwa() {
 		logger.info("initPwa()");
 
-		serviceWorkerManager = new AppServiceWorkerManager(appCode + "_service-worker.js", getEventBus(),
+		serviceWorkerManager = new AppServiceWorkerManager("service-worker.js", getEventBus(),
 				dispatch, notificationService);
 
 		PwaManager.getInstance().setServiceWorker(serviceWorkerManager)

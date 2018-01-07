@@ -100,6 +100,7 @@
 		use-expressions="true">
 		<!-- <csrf disabled="true" /> 4.01-ből -->
 		<!-- <expression-handler ref="restAuthEntryPoint" /> -->
+		<intercept-url pattern="/firebase-messaging-sw.js" access="permitAll" />
 		<intercept-url pattern="/launcher-icons" access="permitAll" />
 		<intercept-url pattern="INF_manifest.json" access="permitAll" />
 		<intercept-url pattern="KIP_manifest.json" access="permitAll" />

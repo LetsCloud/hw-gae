@@ -18,7 +18,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import gwt.material.design.client.ui.MaterialModal;
 import gwt.material.design.client.ui.MaterialTextArea;
 import gwt.material.design.client.ui.MaterialTextBox;
-import hu.hw.cloud.shared.rpc.NotificationDTO;
+import hu.hw.cloud.shared.dto.NotificationDto;
 
 /**
  * @author robi
@@ -66,7 +66,7 @@ public class PushView extends ViewWithUiHandlers<PushUiHandlers> implements Push
 
 	@UiHandler("notifyAllUser")
 	void notifyAllUser(ClickEvent e) {
-		getUiHandlers().push(new NotificationDTO(title.getValue(), description.getValue(), image.getValue()));
+		getUiHandlers().push(new NotificationDto(title.getValue(), description.getValue(), image.getValue()));
 	}
 
 }
