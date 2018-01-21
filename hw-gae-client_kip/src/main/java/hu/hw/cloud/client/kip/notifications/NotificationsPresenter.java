@@ -25,8 +25,6 @@ import gwt.material.design.client.ui.MaterialToast;
 import hu.hw.cloud.client.core.pwa.AppServiceWorkerManager;
 import hu.hw.cloud.client.core.pwa.HasNetworkStatus;
 import hu.hw.cloud.client.core.pwa.NetworkStatusEvent;
-import hu.hw.cloud.client.firebase.Config;
-import hu.hw.cloud.client.firebase.Firebase;
 import hu.hw.cloud.client.firebase.messaging.MessagingManager;
 import hu.hw.cloud.client.kip.KipNameTokens;
 import hu.hw.cloud.client.kip.app.KipAppPresenter;
@@ -53,7 +51,7 @@ public class NotificationsPresenter extends Presenter<NotificationsPresenter.MyV
 	private final PushPresenter pushPresenter;
 	private final RestDispatch dispatcher;
 	private final FcmService fcmService;
-	private MessagingManager messagingManager;
+	private final MessagingManager messagingManager;
 
 	@ProxyStandard
 	@NameToken(KipNameTokens.NOTIFICATIONS)
@@ -62,12 +60,13 @@ public class NotificationsPresenter extends Presenter<NotificationsPresenter.MyV
 
 	@Inject
 	NotificationsPresenter(EventBus eventBus, MyView view, MyProxy proxy, PushPresenterFactory pushPresenterFactory,
-			RestDispatch dispatcher, FcmService fcmService) {
+			RestDispatch dispatcher, FcmService fcmService, MessagingManager messagingManager) {
 		super(eventBus, view, proxy, KipAppPresenter.SLOT_MAIN);
 
 		this.pushPresenter = pushPresenterFactory.createPushPresenter();
 		this.fcmService = fcmService;
 		this.dispatcher = dispatcher;
+		this.messagingManager = messagingManager;
 
 		addRegisteredHandler(NetworkStatusEvent.TYPE, this);
 		getView().setUiHandlers(this);
@@ -77,26 +76,9 @@ public class NotificationsPresenter extends Presenter<NotificationsPresenter.MyV
 	protected void onBind() {
 		super.onBind();
 
+		logger.log(Level.INFO, "NotificationsPresenter.onBind()");
+
 		setInSlot(SLOT_MODAL, pushPresenter);
-
-		logger.log(Level.INFO, "NotificationsPresenter.onReveal()");
-
-		Config config = new Config();
-		config.setApiKey("AIzaSyDeeu6_zljBv-yq93OIT54ZUEdkZKZCmz8");
-		config.setAuthDomain("hw-cloud1.firebaseapp.com");
-		config.setDatabaseURL("https://hw-cloud1.firebaseio.com");
-		config.setProjectId("hw-cloud1");
-		config.setStorageBucket("hw-cloud1.appspot.com");
-		config.setMessagingSenderId("489469080035");
-		Firebase firebase = Firebase.initializeApp(config);
-		logger.log(Level.INFO, "NotificationsPresenter.onBind().firebase.getName()" + firebase.getName());
-
-		messagingManager = new MessagingManager(firebase);
-		logger.log(Level.INFO, "NotificationsPresenter.onReveal().getMessagingManager()");
-
-		// messagingManager.useServiceWorker(getServiceWorkerManager().getServiceWorkerRegistration());
-		// logger.log(Level.INFO, "NotificationsPresenter.onReveal().useServiceWorker");
-
 	}
 
 	@Override
@@ -127,7 +109,7 @@ public class NotificationsPresenter extends Presenter<NotificationsPresenter.MyV
 
 	@Override
 	public void subToServer(String iidToken) {
-		dispatcher.execute(fcmService.subscribe(iidToken), new AsyncCallback<Void>() {
+		dispatcher.execute(fcmService.subscribe(iidToken, getUserAgent()), new AsyncCallback<Void>() {
 
 			@Override
 			public void onSuccess(Void response) {
@@ -140,5 +122,13 @@ public class NotificationsPresenter extends Presenter<NotificationsPresenter.MyV
 			}
 		});
 	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public static native String getUserAgent() /*-{
+		return $wnd.navigator.userAgent.toLowerCase();
+	}-*/;
 
 }

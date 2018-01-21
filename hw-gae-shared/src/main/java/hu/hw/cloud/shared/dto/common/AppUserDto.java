@@ -69,6 +69,11 @@ public class AppUserDto extends AccountChildDto {
 	/**
 	 * 
 	 */
+	private List<FcmTokenDto> fcmTokenDtos = new ArrayList<FcmTokenDto>();
+
+	/**
+	 * 
+	 */
 	private HotelDto defaultHotelDto;
 
 	public AppUserDto() {
@@ -178,6 +183,14 @@ public class AppUserDto extends AccountChildDto {
 
 	public void setGroup(UserGroupDto group) {
 		this.group = group;
+	}
+
+	public List<FcmTokenDto> getFcmTokenDtos() {
+		return fcmTokenDtos;
+	}
+
+	public void setFcmTokenDtos(List<FcmTokenDto> fcmTokenDtos) {
+		this.fcmTokenDtos = fcmTokenDtos;
 	}
 
 	@Override

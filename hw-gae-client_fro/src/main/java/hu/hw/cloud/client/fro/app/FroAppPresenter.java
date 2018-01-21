@@ -21,6 +21,7 @@ import hu.hw.cloud.client.core.app.AppPresenter;
 import hu.hw.cloud.client.core.menu.MenuPresenter;
 import hu.hw.cloud.client.core.security.AppData;
 import hu.hw.cloud.client.core.security.CurrentUser;
+import hu.hw.cloud.client.firebase.messaging.MessagingManager;
 import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.i18n.FroMessages;
 import hu.hw.cloud.shared.AuthService;
@@ -44,9 +45,9 @@ public class FroAppPresenter extends AppPresenter<FroAppPresenter.MyProxy> {
 	@Inject
 	FroAppPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager, FroMessages i18n,
 			RestDispatch dispatch, AuthService authenticationService, FcmService notificationService,
-			CurrentUser currentUser, MenuPresenter menuPresenter, AppData appData) {
+			CurrentUser currentUser, MenuPresenter menuPresenter, AppData appData, MessagingManager messagingManager) {
 		super(eventBus, view, proxy, placeManager, dispatch, authenticationService, notificationService, menuPresenter,
-				currentUser, SubSystem.FRO);
+				currentUser, SubSystem.FRO, messagingManager);
 
 		this.i18n = i18n;
 	}

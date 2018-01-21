@@ -23,6 +23,7 @@ import hu.hw.cloud.client.core.app.AppPresenter;
 import hu.hw.cloud.client.core.menu.MenuPresenter;
 import hu.hw.cloud.client.core.security.AppData;
 import hu.hw.cloud.client.core.security.CurrentUser;
+import hu.hw.cloud.client.firebase.messaging.MessagingManager;
 import hu.hw.cloud.client.inf.InfNameTokens;
 import hu.hw.cloud.client.inf.gps.config.GpsConfigPresenter;
 import hu.hw.cloud.client.inf.gps.config.GpsConfigWidgetsFactory;
@@ -53,9 +54,9 @@ public class InfAppPresenter extends AppPresenter<InfAppPresenter.MyProxy> {
 	InfAppPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager, InfMessages i18n,
 			RestDispatch dispatch, AuthService authenticationService, FcmService notificationService,
 			CurrentUser currentUser, MenuPresenter menuPresenter, GpsDisplayPresenter gpsDisplayPresenter,
-			GpsConfigWidgetsFactory gpsConfigWidgetsFactory, AppData appData) {
+			GpsConfigWidgetsFactory gpsConfigWidgetsFactory, AppData appData, MessagingManager messagingManager) {
 		super(eventBus, view, proxy, placeManager, dispatch, authenticationService, notificationService, menuPresenter,
-				currentUser, SubSystem.INF);
+				currentUser, SubSystem.INF,messagingManager);
 
 		this.i18n = i18n;
 		this.gpsDisplayPresenter = gpsDisplayPresenter;

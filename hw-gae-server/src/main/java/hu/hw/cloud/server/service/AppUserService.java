@@ -23,4 +23,6 @@ public interface AppUserService extends CrudService<AppUser, AppUserDto> {
 	void createVerificationToken(AppUser user, String token) throws Throwable;
 	
 	AppUser createAdminUser(RegisterDto registerDto) throws EntityValidationException, UniqueIndexConflictException;
+	
+	void fcmSubscribe(String iidToken, String userAgent) throws Throwable;
 }

@@ -41,6 +41,7 @@
 
 			<m:MaterialRow textAlign="CENTER" marginTop="40"
 				borderTop="1px solid #e9e9e9" paddingTop="20">
+				<m:MaterialLabel ui:field="clientIdLabel"/>
 				<m:MaterialLabel text="Enable Push Notication" />
 				<m:MaterialSwitch ui:field="enablePushNotification"
 					onLabel="Enable" offLabel="Disable" />

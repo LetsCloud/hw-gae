@@ -192,6 +192,14 @@
 				<version>${gwt-material.version}</version>
 			</dependency>
 
+
+			<dependency>
+				<groupId>com.10xdev</groupId>
+				<artifactId>gwt-jelement</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+				<scope>compile</scope>
+			</dependency>
+
 			<!-- ***************** -->
 			<!-- GWT-UI Gwt Charts -->
 			<!-- ***************** -->

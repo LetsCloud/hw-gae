@@ -7,7 +7,11 @@ public class ApiParameters {
     public static final String PASSWORD = "password";
     public static final String REMEMBER_ME = "remember-me";
 
+    /**
+     * FCM
+     */
     public static final String IID_TOKEN = "iidToken";
+    public static final String USER_AGENT = "userAgent";
     public static final String AUTH = "auth";
     public static final String KEY = "key";
 

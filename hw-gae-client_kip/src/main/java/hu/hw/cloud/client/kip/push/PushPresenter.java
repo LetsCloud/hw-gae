@@ -47,6 +47,7 @@ public class PushPresenter extends PresenterWidget<PushPresenter.MyView> impleme
 	@Override
 	protected void onBind() {
 		super.onBind();
+		logger.log(Level.INFO, "PushPresenter.onBind()");
 		getView().initView();
 	}
 

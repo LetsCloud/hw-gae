@@ -15,6 +15,7 @@ import com.googlecode.objectify.annotation.Index;
 
 import hu.hw.cloud.shared.dto.RegisterDto;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
+import hu.hw.cloud.shared.dto.common.FcmTokenDto;
 import hu.hw.cloud.shared.dto.common.RoleDto;
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
 import hu.hw.cloud.server.entity.VerificationToken;
@@ -82,6 +83,11 @@ public class AppUser extends AccountChild {
 	private List<Ref<Hotel>> accessibleHotels = new ArrayList<Ref<Hotel>>();
 
 	/**
+	 * Firebase Messaging Token
+	 */
+	private List<FcmToken> fcmTokens = new ArrayList<FcmToken>();
+
+	/**
 	 * Paraméter nélküli kontruktor Objectify-hoz
 	 */
 	public AppUser() {
@@ -134,6 +140,9 @@ public class AppUser extends AccountChild {
 
 		if (dto.getAccessibleHotelDtos() != null)
 			setAccessibleHotels(Hotel.createList(dto.getAccessibleHotelDtos()));
+
+		if (dto.getFcmTokenDtos() != null)
+			setFcmTokens(FcmToken.createList(dto.getFcmTokenDtos()));
 
 		if (dto.getDefaultHotelDto() != null)
 			setDefaultHotel(new Hotel(dto.getDefaultHotelDto()));
@@ -245,6 +254,14 @@ public class AppUser extends AccountChild {
 		this.defaultHotel = Ref.create(defaultHotel);
 	}
 
+	public List<FcmToken> getFcmTokens() {
+		return fcmTokens;
+	}
+
+	public void setFcmTokens(List<FcmToken> fcmTokens) {
+		this.fcmTokens = fcmTokens;
+	}
+
 	/**
 	 * DTO létrehozása entitásból
 	 * 
@@ -291,6 +308,12 @@ public class AppUser extends AccountChild {
 			dto.setAccessibleHotelDtos(Hotel.createDtos(this.getAccessibleHotels()));
 		} else {
 			dto.setAccessibleHotelDtos(new ArrayList<HotelDto>());
+		}
+
+		if (this.getFcmTokens() != null) {
+			dto.setFcmTokenDtos(FcmToken.createDtos(this.getFcmTokens()));
+		} else {
+			dto.setFcmTokenDtos(new ArrayList<FcmTokenDto>());
 		}
 
 		if (this.getDefaultHotel() != null)

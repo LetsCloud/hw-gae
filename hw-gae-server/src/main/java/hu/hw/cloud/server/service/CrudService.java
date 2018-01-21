@@ -18,6 +18,8 @@ public interface CrudService<T extends BaseEntity, D extends BaseDto> {
 
 	T read(String id) throws Throwable;
 
+	T update(T entity) throws Throwable;
+
 	T update(D dto) throws Throwable;
 
 	Boolean delete(String id) throws Throwable;

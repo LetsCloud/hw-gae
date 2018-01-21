@@ -11,7 +11,7 @@ import com.google.gwt.core.client.GWT;
 import gwt.material.design.client.pwa.serviceworker.js.ServiceWorkerRegistration;
 import gwt.material.design.jquery.client.api.Functions;
 import gwt.material.design.jquery.client.api.Functions.Func;
-import gwt.material.design.jquery.client.api.Functions.Func1;
+
 import hu.hw.cloud.client.firebase.Firebase;
 import hu.hw.cloud.client.firebase.messaging.js.Messaging;
 

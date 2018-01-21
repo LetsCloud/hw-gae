@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import hu.hw.cloud.server.entity.VerificationToken;
 import hu.hw.cloud.server.entity.common.Account;
 import hu.hw.cloud.server.entity.common.AppUser;
+import hu.hw.cloud.server.entity.common.FcmToken;
 import hu.hw.cloud.server.repository.AccountRepository;
 import hu.hw.cloud.server.repository.AppUserRepository;
 import hu.hw.cloud.server.security.LoggedInChecker;
@@ -21,8 +22,8 @@ public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserDto, App
 	private static final Logger LOGGER = Logger.getLogger(AppUserServiceImpl.class.getName());
 
 	private final LoggedInChecker loggedInChecker;
-	private AccountRepository accountRepository;
-	private AppUserRepository appUserRepository;
+	private final AccountRepository accountRepository;
+	private final AppUserRepository appUserRepository;
 
 	AppUserServiceImpl(LoggedInChecker loggedInChecker, AccountRepository accountRepository,
 			AppUserRepository appUserRepository) {
@@ -52,7 +53,7 @@ public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserDto, App
 
 	@Override
 	public AppUser getCurrentUser() {
-//		LOGGER.info("getCurrentUser()");
+		// LOGGER.info("getCurrentUser()");
 		return loggedInChecker.getLoggedInUser();
 	}
 
@@ -73,13 +74,13 @@ public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserDto, App
 
 	@Override
 	protected AppUser createEntity(AppUserDto dto) {
-//		LOGGER.info("createEntity->dto=" + dto);
+		// LOGGER.info("createEntity->dto=" + dto);
 		return new AppUser(dto);
 	}
 
 	@Override
 	protected AppUser updateEntity(AppUser entity, AppUserDto dto) {
-//		LOGGER.info("updateEntity");
+		// LOGGER.info("updateEntity");
 		entity.update(dto);
 		return entity;
 	}
@@ -102,16 +103,18 @@ public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserDto, App
 	}
 
 	@Override
-	public AppUser createAdminUser(RegisterDto registerDto) throws EntityValidationException, UniqueIndexConflictException {
-//		LOGGER.info("createAdminUser->registerDto.getAccountId()=" + registerDto.getAccountId());
+	public AppUser createAdminUser(RegisterDto registerDto)
+			throws EntityValidationException, UniqueIndexConflictException {
+		// LOGGER.info("createAdminUser->registerDto.getAccountId()=" +
+		// registerDto.getAccountId());
 		Account account = accountRepository.findById(registerDto.getAccountId());
-		
+
 		AppUser appUser = new AppUser(registerDto);
 		appUser.setAccount(account);
 		appUser.setAdmin(true);
-//		LOGGER.info("createAdminUser->before appUserRepository.save()");
+		// LOGGER.info("createAdminUser->before appUserRepository.save()");
 		appUser = appUserRepository.save(appUser);
-//		LOGGER.info("createAdminUser->after appUserRepository.save()");
+		// LOGGER.info("createAdminUser->after appUserRepository.save()");
 		return appUser;
 	}
 
@@ -127,5 +130,17 @@ public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserDto, App
 		user.setEnabled(true);
 		this.appUserRepository.save(user);
 		return true;
+	}
+
+	@Override
+	public void fcmSubscribe(String iidToken, String userAgent) throws Throwable {
+		AppUser currentUser = loggedInChecker.getLoggedInUser();
+		List<FcmToken> tokens = currentUser.getFcmTokens();
+
+		if (FcmToken.getToken(tokens, iidToken) == null) {
+			tokens.add(new FcmToken(iidToken, userAgent));
+			currentUser.setFcmTokens(tokens);
+			update(currentUser);
+		}
 	}
 }

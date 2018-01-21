@@ -21,6 +21,7 @@ import hu.hw.cloud.client.core.app.AppPresenter;
 import hu.hw.cloud.client.core.menu.MenuPresenter;
 import hu.hw.cloud.client.core.security.AppData;
 import hu.hw.cloud.client.core.security.CurrentUser;
+import hu.hw.cloud.client.firebase.messaging.MessagingManager;
 import hu.hw.cloud.client.kip.KipNameTokens;
 import hu.hw.cloud.client.kip.gfilter.config.GfilterConfigPresenter;
 import hu.hw.cloud.client.kip.gfilter.config.GfilterConfigPresenterFactory;
@@ -50,9 +51,9 @@ public class KipAppPresenter extends AppPresenter<KipAppPresenter.MyProxy> {
 	KipAppPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager, KipMessages i18n,
 			RestDispatch dispatch, AuthService authenticationService, FcmService notificationService,
 			CurrentUser currentUser, MenuPresenter menuPresenter, GfilterDisplayPresenter gfilterDisplayPresenter,
-			GfilterConfigPresenterFactory gfilterConfigPresenterFactory, AppData appData) {
+			GfilterConfigPresenterFactory gfilterConfigPresenterFactory, AppData appData, MessagingManager messagingManager) {
 		super(eventBus, view, proxy, placeManager, dispatch, authenticationService, notificationService, menuPresenter,
-				currentUser, SubSystem.KIP);
+				currentUser, SubSystem.KIP, messagingManager);
 
 		this.i18n = i18n;
 		this.gfilterDisplayPresenter = gfilterDisplayPresenter;

@@ -84,6 +84,11 @@
 			<artifactId>gwt-material-table</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.10xdev</groupId>
+			<artifactId>gwt-jelement</artifactId>
+		</dependency>
+
 		<!-- ***************** -->
 		<!-- GWT-UI Gwt Charts -->
 		<!-- ***************** -->

@@ -21,7 +21,7 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 import gwt.material.design.client.pwa.PwaManager;
-
+import gwt.material.design.client.ui.MaterialToast;
 import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.app.AppPresenter.MyView;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent;
@@ -32,6 +32,7 @@ import hu.hw.cloud.client.core.pwa.HasNetworkStatus;
 import hu.hw.cloud.client.core.pwa.NetworkStatusEvent;
 import hu.hw.cloud.client.core.pwa.NetworkStatusEvent.NetworkStatusHandler;
 import hu.hw.cloud.client.core.security.CurrentUser;
+import hu.hw.cloud.client.firebase.messaging.MessagingManager;
 import hu.hw.cloud.shared.AuthService;
 import hu.hw.cloud.shared.FcmService;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
@@ -59,10 +60,11 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 	private final CurrentUser currentUser;
 	private final MenuPresenter menuPresenter;
 	private final String appCode;
+	private final MessagingManager messagingManager;
 
 	protected AppPresenter(EventBus eventBus, MyView view, Proxy_ proxy, PlaceManager placeManager,
 			RestDispatch dispatch, AuthService authenticationService, FcmService notificationService,
-			MenuPresenter menuPresenter, CurrentUser currentUser, String appCode) {
+			MenuPresenter menuPresenter, CurrentUser currentUser, String appCode, MessagingManager messagingManager) {
 		super(eventBus, view, proxy, RevealType.Root);
 		logger.info("AppPresenter()");
 
@@ -73,6 +75,7 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 		this.menuPresenter = menuPresenter;
 		this.currentUser = currentUser;
 		this.appCode = appCode;
+		this.messagingManager = messagingManager;
 	}
 
 	@Override
@@ -91,7 +94,7 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 		super.onReveal();
 		logger.log(Level.INFO, "AppPresenter.onReveal()");
 		checkCurrentUser();
-//		initPwa();
+		// initPwa();
 	}
 
 	private void checkCurrentUser() {
@@ -106,6 +109,7 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 				}
 				currentUser.setAppUserDto(result);
 				currentUser.setLoggedIn(true);
+				requestFcbPermission();
 			}
 
 			@Override
@@ -114,6 +118,37 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 			}
 		});
 	}
+
+	private void requestFcbPermission() {
+		messagingManager.requestPermission(() -> getFcbToken());
+	}
+
+	protected void getFcbToken() {
+		messagingManager.getToken(token -> fcmSubscribe(token));
+	}
+
+	protected void fcmSubscribe(String iidToken) {
+		dispatch.execute(notificationService.subscribe(iidToken, getUserAgent()), new AsyncCallback<Void>() {
+
+			@Override
+			public void onSuccess(Void response) {
+				MaterialToast.fireToast("Sussecfull subscription!");
+			}
+
+			@Override
+			public void onFailure(Throwable throwable) {
+				MaterialToast.fireToast(throwable.getMessage());
+			}
+		});
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public static native String getUserAgent() /*-{
+												return $wnd.navigator.userAgent.toLowerCase();
+												}-*/;
 
 	public void logout() {
 		dispatch.execute(authenticationService.logout(), new AsyncCallback<Void>() {
@@ -150,11 +185,11 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 	protected void initPwa() {
 		logger.info("initPwa()");
 
-		serviceWorkerManager = new AppServiceWorkerManager("service-worker.js", getEventBus(),
-				dispatch, notificationService);
+		serviceWorkerManager = new AppServiceWorkerManager("service-worker.js", getEventBus(), dispatch,
+				notificationService);
 
-		PwaManager.getInstance().setServiceWorker(serviceWorkerManager)
-				.setWebManifest(appCode + "_manifest.json").setThemeColor("#2196f3").load();
+		PwaManager.getInstance().setServiceWorker(serviceWorkerManager).setWebManifest(appCode + "_manifest.json")
+				.setThemeColor("#2196f3").load();
 	}
 
 	@Override

@@ -76,6 +76,30 @@ public abstract class CrudServiceImpl<T extends BaseEntity, D extends BaseDto, R
 	}
 
 	@Override
+	public T update(final T entity) throws Throwable {
+		LOGGER.info("update-entity");
+
+		try {
+			T th = ofy().transact(new Work<T>() {
+				public T run() {
+					try {
+						LOGGER.info("update->before save");
+						T entity2 = repository.save(entity);
+						LOGGER.info("update->after save");
+						return entity2;
+					} catch (Throwable e) {
+						e.printStackTrace(System.out);
+						throw new RuntimeException(e);
+					}
+				}
+			});
+			return th;
+		} catch (RuntimeException re) {
+			throw re.getCause();
+		}
+	}
+
+	@Override
 	public T update(final D dto) throws Throwable {
 		LOGGER.info("update");
 

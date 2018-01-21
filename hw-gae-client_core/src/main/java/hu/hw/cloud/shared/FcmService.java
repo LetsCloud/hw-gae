@@ -20,6 +20,7 @@ import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.FCM;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.SUBSCRIBE;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.MESSAGE;
 import static hu.hw.cloud.shared.api.ApiParameters.IID_TOKEN;
+import static hu.hw.cloud.shared.api.ApiParameters.USER_AGENT;
 
 /**
  * @author CR
@@ -32,7 +33,7 @@ public interface FcmService {
 
 	@POST
 	@Path(SUBSCRIBE)
-	RestAction<Void> subscribe(@QueryParam(IID_TOKEN) String iidokenT);
+	RestAction<Void> subscribe(@QueryParam(IID_TOKEN) String iidToken, @QueryParam(USER_AGENT) String userAgent);
 
 	@DELETE
 	@Path(SUBSCRIBE)
