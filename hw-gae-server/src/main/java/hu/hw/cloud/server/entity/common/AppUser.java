@@ -17,6 +17,7 @@ import hu.hw.cloud.shared.dto.RegisterDto;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
 import hu.hw.cloud.shared.dto.common.FcmTokenDto;
 import hu.hw.cloud.shared.dto.common.RoleDto;
+import hu.hw.cloud.shared.dto.common.UserGroupDto;
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
 import hu.hw.cloud.server.entity.VerificationToken;
 import hu.hw.cloud.server.entity.hotel.Hotel;
@@ -88,6 +89,11 @@ public class AppUser extends AccountChild {
 	private List<FcmToken> fcmTokens = new ArrayList<FcmToken>();
 
 	/**
+	 * Firebase Messaging Token
+	 */
+	private List<Ref<UserGroup>> userGroups = new ArrayList<Ref<UserGroup>>();
+
+	/**
 	 * Paraméter nélküli kontruktor Objectify-hoz
 	 */
 	public AppUser() {
@@ -146,6 +152,9 @@ public class AppUser extends AccountChild {
 
 		if (dto.getDefaultHotelDto() != null)
 			setDefaultHotel(new Hotel(dto.getDefaultHotelDto()));
+
+		if (dto.getUserGroupDtos() != null)
+			setUserGroups(UserGroup.createList(dto.getUserGroupDtos()));
 	}
 
 	/**
@@ -240,7 +249,6 @@ public class AppUser extends AccountChild {
 		this.accessibleHotels = list;
 	}
 
-	
 	public Hotel getDefaultHotel() {
 		try {
 			return defaultHotel.get();
@@ -260,6 +268,22 @@ public class AppUser extends AccountChild {
 
 	public void setFcmTokens(List<FcmToken> fcmTokens) {
 		this.fcmTokens = fcmTokens;
+	}
+
+	public List<UserGroup> getUserGroups() {
+		List<UserGroup> list = new ArrayList<UserGroup>();
+		for (Ref<UserGroup> ref : userGroups) {
+			list.add(ref.get());
+		}
+		return list;
+	}
+
+	public void setUserGroups(List<UserGroup> userGroups) {
+		ArrayList<Ref<UserGroup>> list = new ArrayList<Ref<UserGroup>>();
+		for (UserGroup userGroup : userGroups) {
+			list.add(Ref.create(userGroup));
+		}
+		this.userGroups = list;
 	}
 
 	/**
@@ -282,7 +306,7 @@ public class AppUser extends AccountChild {
 	 */
 	public AppUserDto updateDto(AppUserDto dto) {
 		dto = (AppUserDto) super.updateDto(dto);
-		
+
 		if (this.getUsername() != null)
 			dto.setUsername(this.getUsername());
 
@@ -319,7 +343,34 @@ public class AppUser extends AccountChild {
 		if (this.getDefaultHotel() != null)
 			dto.setDefaultHotelDto(Hotel.createDto(this.getDefaultHotel()));
 
+		if (this.getUserGroups() != null) {
+			dto.setUserGroupDtos(UserGroup.createDtos(this.getUserGroups()));
+		} else {
+			dto.setUserGroupDtos(new ArrayList<UserGroupDto>());
+		}
+
 		return dto;
+	}
+
+	public static List<AppUserDto> createDtos(List<AppUser> entities) {
+		List<AppUserDto> dtos = new ArrayList<AppUserDto>();
+		for (AppUser entity : entities) {
+			dtos.add(AppUser.createDto(entity));
+		}
+		return dtos;
+	}
+
+	/**
+	 * 
+	 * @param dtos
+	 * @return
+	 */
+	public static List<AppUser> createList(List<AppUserDto> dtos) {
+		List<AppUser> result = new ArrayList<AppUser>();
+		for (AppUserDto dto : dtos) {
+			result.add(new AppUser(dto));
+		}
+		return result;
 	}
 
 	@Override

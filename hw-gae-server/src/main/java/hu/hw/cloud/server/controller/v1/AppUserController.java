@@ -42,7 +42,7 @@ public class AppUserController extends BaseController {
 		this.userService = userService;
 	}
 
-	@RequestMapping(value = "", method = GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(method = GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<List<AppUserDto>> list() {
 		LOGGER.info("list()");
 		List<AppUserDto> userDtos = new ArrayList<AppUserDto>();

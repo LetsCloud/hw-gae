@@ -74,13 +74,11 @@ public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserDto, App
 
 	@Override
 	protected AppUser createEntity(AppUserDto dto) {
-		// LOGGER.info("createEntity->dto=" + dto);
 		return new AppUser(dto);
 	}
 
 	@Override
 	protected AppUser updateEntity(AppUser entity, AppUserDto dto) {
-		// LOGGER.info("updateEntity");
 		entity.update(dto);
 		return entity;
 	}

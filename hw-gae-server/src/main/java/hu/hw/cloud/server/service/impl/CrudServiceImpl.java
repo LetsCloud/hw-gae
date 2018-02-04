@@ -50,6 +50,7 @@ public abstract class CrudServiceImpl<T extends BaseEntity, D extends BaseDto, R
 			// Objectify tranzakció indul
 			T th = ofy().transact(new Work<T>() {
 				public T run() {
+					LOGGER.info("create->run");
 					// A DTO-ból létrehozzuk a Hotel entitást
 					T entity = createEntity(dto);
 					try {
@@ -129,8 +130,8 @@ public abstract class CrudServiceImpl<T extends BaseEntity, D extends BaseDto, R
 	}
 
 	@Override
-	public Boolean delete(String id) {
-		repository.delete(id);
+	public Boolean delete(String webSafeKey) {
+		repository.delete(webSafeKey);
 		return true;
 	}
 

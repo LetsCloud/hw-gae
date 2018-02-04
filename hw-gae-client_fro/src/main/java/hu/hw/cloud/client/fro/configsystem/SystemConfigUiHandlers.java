@@ -3,6 +3,8 @@
  */
 package hu.hw.cloud.client.fro.configsystem;
 
+import java.util.Map;
+
 import com.gwtplatform.mvp.client.UiHandlers;
 
 /**
@@ -10,11 +12,10 @@ import com.gwtplatform.mvp.client.UiHandlers;
  *
  */
 public interface SystemConfigUiHandlers  extends UiHandlers {
-	
-	void showSystem();
-	void showUsers();
-	void showRoles();
-	
-	void createUser();
 
+	Map<Integer, TableStore> getTableMap();
+	
+	void showTable(Integer index);
+	
+	void addItem();
 }

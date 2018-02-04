@@ -1,31 +1,29 @@
 /**
  * 
  */
-package hu.hw.cloud.client.core.users;
+package hu.hw.cloud.client.core.ui.dtotable.appuser;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
-import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 import gwt.material.design.client.constants.IconType;
 import gwt.material.design.client.constants.TextAlign;
-import gwt.material.design.client.data.infinite.InfiniteDataView;
+import gwt.material.design.client.data.SelectionType;
 import gwt.material.design.client.ui.MaterialIcon;
-import gwt.material.design.client.ui.table.MaterialInfiniteDataTable;
+import gwt.material.design.client.ui.table.MaterialDataTable;
 import gwt.material.design.client.ui.table.cell.TextColumn;
 import gwt.material.design.client.ui.table.cell.WidgetColumn;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.shared.AppUserResource;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -33,44 +31,40 @@ import javax.inject.Inject;
  * @author CR
  *
  */
-public class UsersTable extends Composite {
-	private static Logger logger = Logger.getLogger(UsersTable.class.getName());
+public class AppUserTableView extends ViewWithUiHandlers<AppUserTableUiHandlers>
+		implements AppUserTablePresenter.MyView {
 
-	interface UsersTableUiBinder extends UiBinder<HTMLPanel, UsersTable> {
+	interface Binder extends UiBinder<HTMLPanel, AppUserTableView> {
 	}
-
-	private static UsersTableUiBinder binder = GWT.create(UsersTableUiBinder.class);
-
-	private Presenter<?, ?> presenter;
 
 	private final CoreMessages i18n;
 
-	@UiField(provided = true)
-	MaterialInfiniteDataTable<AppUserDto> table;
+	@UiField
+	MaterialDataTable<AppUserDto> table;
+
+	@UiField
+	SimplePanel editorPanel;
 
 	/**
+	 * 
 	 */
 	@Inject
-	UsersTable(ResourceDelegate<AppUserResource> usersDelegate, CoreMessages i18n) {
-		logger.log(Level.INFO, "UsersTable()");
-		table = new MaterialInfiniteDataTable<>(20, InfiniteDataView.DYNAMIC_VIEW,
-				new AppUserDataSource(usersDelegate));
+	AppUserTableView(Binder uiBinder, ResourceDelegate<AppUserResource> usersDelegate, CoreMessages i18n) {
+		initWidget(uiBinder.createAndBindUi(this));
 
 		this.i18n = i18n;
 
-		initWidget(binder.createAndBindUi(this));
+		bindSlot(AppUserTablePresenter.SLOT_EDITOR, editorPanel);
+
+		initTable();
+	}
+
+	private void initTable() {
+		table.setSelectionType(SelectionType.NONE);
 
 		table.setUseCategories(false);
-	}
 
-	public void setPresenter(Presenter<?, ?> presenter) {
-		this.presenter = presenter;
-	}
-
-	@Override
-	protected void onLoad() {
-		super.onLoad();
-		logger.log(Level.INFO, "UsersTable.onLoad()");
+		table.setUseCategories(false);
 		if (table.getColumns().size() > 0)
 			return;
 
@@ -116,7 +110,7 @@ public class UsersTable extends Composite {
 				icon.addClickHandler(new ClickHandler() {
 					@Override
 					public void onClick(ClickEvent event) {
-						UserEditEvent.fire(presenter);
+						getUiHandlers().editItem(object);
 					}
 				});
 
@@ -139,11 +133,11 @@ public class UsersTable extends Composite {
 		// return true;
 		// });
 
-		logger.log(Level.INFO, "UsersTable.onLoad()->end");
 	}
 
-	public void refresh() {
-		logger.log(Level.INFO, "UsersTable.refresh()");
+	@Override
+	public void setData(List<AppUserDto> data) {
+		table.setRowData(0, data);
 		table.getView().refresh();
 	}
 }

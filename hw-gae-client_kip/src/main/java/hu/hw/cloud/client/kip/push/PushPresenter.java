@@ -57,16 +57,19 @@ public class PushPresenter extends PresenterWidget<PushPresenter.MyView> impleme
 
 	@Override
 	public void push(NotificationDto notification) {
+		logger.log(Level.INFO, "push()");
 
 		dispatcher.execute(fcmService.notifyAllUser(notification), new AsyncCallback<Void>() {
 
 			@Override
 			public void onSuccess(Void aVoid) {
+				logger.log(Level.INFO, "push().onSuccess()");
 				MaterialToast.fireToast("Successfully notify all the users.");
 			}
 
 			@Override
 			public void onFailure(Throwable throwable) {
+				logger.log(Level.INFO, "push().onFailure()");
 				MaterialToast.fireToast(throwable.getMessage());
 			}
 		});

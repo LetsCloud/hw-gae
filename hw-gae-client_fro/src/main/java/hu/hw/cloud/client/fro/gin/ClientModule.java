@@ -10,7 +10,6 @@ import hu.hw.cloud.client.fro.configcommon.CommonConfigModule;
 import hu.hw.cloud.client.fro.configsystem.SystemConfigModule;
 import hu.hw.cloud.client.fro.dashboard.DashboardModule;
 import hu.hw.cloud.client.core.gin.CoreModule;
-import hu.hw.cloud.client.core.users.editor.UserEditModule;
 
 /**
  * @author CR
@@ -28,7 +27,5 @@ public class ClientModule extends AbstractPresenterModule {
 		install(new DashboardModule());
 		install(new SystemConfigModule());
 		install(new CommonConfigModule());
-		
-		install(new UserEditModule());
 	}
 }

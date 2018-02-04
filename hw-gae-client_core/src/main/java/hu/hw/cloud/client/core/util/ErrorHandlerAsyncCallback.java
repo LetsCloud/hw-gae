@@ -3,9 +3,13 @@
  */
 package hu.hw.cloud.client.core.util;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+import hu.hw.cloud.client.core.app.AppPresenter;
 import hu.hw.cloud.client.core.event.DisplayMessageEvent;
 import hu.hw.cloud.client.core.ui.message.Message;
 import hu.hw.cloud.client.core.ui.message.MessageStyle;
@@ -18,6 +22,7 @@ import hu.hw.cloud.client.core.util.exceptiontranslators.Translator;
  *
  */
 public abstract class ErrorHandlerAsyncCallback<R> implements AsyncCallback<R> {
+	private static Logger logger = Logger.getLogger(ErrorHandlerAsyncCallback.class.getName());
 
 	private final HasHandlers hasHandlers;
 
@@ -27,6 +32,8 @@ public abstract class ErrorHandlerAsyncCallback<R> implements AsyncCallback<R> {
 
 	@Override
 	public void onFailure(Throwable caught) {
+		logger.log(Level.INFO,
+				"onFailure()->caught.getMessage()=" + caught.getMessage());
 		Message message = new Message(translateCauses(caught), MessageStyle.ERROR);
 		DisplayMessageEvent.fire(hasHandlers, message);
 	}

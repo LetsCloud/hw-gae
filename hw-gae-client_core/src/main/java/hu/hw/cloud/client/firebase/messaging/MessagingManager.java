@@ -7,8 +7,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsonUtils;
 
 import gwt.material.design.client.pwa.serviceworker.js.ServiceWorkerRegistration;
+import gwt.material.design.jquery.client.api.Event;
 import gwt.material.design.jquery.client.api.Functions;
 import gwt.material.design.jquery.client.api.Functions.Func;
 
@@ -26,6 +29,10 @@ public class MessagingManager implements HasMessagingFeatures {
 
 	public MessagingManager(Firebase firebase) {
 		this.firebase = firebase;
+
+		firebase.messaging().onMessage((payload) -> {
+			logger.log(Level.INFO, "firebase.messaging().onMessage()->payload=" + JsonUtils.stringify(payload, null));
+		});
 	}
 
 	@Override
@@ -63,4 +70,7 @@ public class MessagingManager implements HasMessagingFeatures {
 		});
 	}
 
+	protected void onMessage() {
+		logger.log(Level.INFO, "onMessage()");
+	}
 }

@@ -9,6 +9,8 @@ import java.util.logging.Logger;
 import javax.inject.Singleton;
 
 import com.google.inject.Provides;
+import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.dispatch.rest.client.RestDispatch;
 import com.gwtplatform.mvp.client.annotations.DefaultPlace;
 import com.gwtplatform.mvp.client.annotations.ErrorPlace;
 import com.gwtplatform.mvp.client.annotations.UnauthorizedPlace;
@@ -21,14 +23,18 @@ import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.activate.ActivateModule;
 import hu.hw.cloud.client.core.login.LoginModule;
 import hu.hw.cloud.client.core.menu.MenuModule;
+import hu.hw.cloud.client.core.pwa.AppServiceWorkerManager;
 import hu.hw.cloud.client.core.register.RegisterModule;
 import hu.hw.cloud.client.core.security.AppData;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.core.success.SuccessModule;
+import hu.hw.cloud.client.core.ui.dtotable.DtoTableModule;
+import hu.hw.cloud.client.core.ui.editor.DtoEditorModule;
 import hu.hw.cloud.client.core.unauthorized.UnauthorizedModule;
 import hu.hw.cloud.client.firebase.Config;
 import hu.hw.cloud.client.firebase.Firebase;
 import hu.hw.cloud.client.firebase.messaging.MessagingManager;
+import hu.hw.cloud.shared.FcmService;
 
 /**
  * @author CR
@@ -58,6 +64,8 @@ public class CoreModule extends AbstractPresenterModule {
 		install(new RegisterModule());
 		install(new SuccessModule());
 		install(new ActivateModule());
+		install(new DtoTableModule());
+		install(new DtoEditorModule());
 	}
 
 	@Provides
@@ -75,9 +83,18 @@ public class CoreModule extends AbstractPresenterModule {
 
 		MessagingManager messagingManager = new MessagingManager(firebase);
 		logger.log(Level.INFO, "NotificationsPresenter.onReveal().getMessagingManager()");
-		// messagingManager.useServiceWorker(getServiceWorkerManager().getServiceWorkerRegistration());
-		// logger.log(Level.INFO, "NotificationsPresenter.onReveal().useServiceWorker");
 
 		return messagingManager;
+	}
+
+	@Provides
+	@Singleton
+	AppServiceWorkerManager provideAppServiceWorkerManager(EventBus eventBus, MessagingManager fcmManager,
+			RestDispatch dispatch, FcmService fcmService) {
+
+		AppServiceWorkerManager serviceWorkerManager = new AppServiceWorkerManager("service-worker.js", eventBus,
+				fcmManager, dispatch, fcmService);
+
+		return serviceWorkerManager;
 	}
 }

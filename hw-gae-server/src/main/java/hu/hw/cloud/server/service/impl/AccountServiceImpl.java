@@ -19,6 +19,7 @@ import hu.hw.cloud.server.service.AppUserService;
 import hu.hw.cloud.server.service.DataBuilderService;
 import hu.hw.cloud.shared.dto.RegisterDto;
 import hu.hw.cloud.shared.exception.EntityValidationException;
+import hu.hw.cloud.shared.exception.IdNotFoundException;
 import hu.hw.cloud.shared.exception.UniqueIndexConflictException;
 
 /**
@@ -58,25 +59,17 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public AppUser register(RegisterDto registerDto) throws EntityValidationException, UniqueIndexConflictException {
-		LOGGER.info("register->accountName=" + registerDto.getAccountName());
+	public AppUser register(RegisterDto registerDto)
+			throws EntityValidationException, IdNotFoundException, UniqueIndexConflictException {
 
 		Account account = accountRepository.save(new Account(registerDto));
 		if (account == null) {
-			LOGGER.info("account == null");
-			throw new UniqueIndexConflictException("Null Account entity", null);
+			throw new IdNotFoundException(Account.class.getSimpleName(), registerDto.getAccountId());
 		}
-		LOGGER.info("setAccountId()");
 		registerDto.setAccountId(account.getId());
 
-//		LOGGER.info("createDefaultRoles");
-//		roleService.createDefaultRoles(account);
-
-		LOGGER.info("register->before createAdminUser()");
 		AppUser appUser = appUserService.createAdminUser(registerDto);
 
-		LOGGER.info("register->after createAdminUser()");
-//		dataBuilderService.buildTestData(account.getWebSafeKey());
 		return appUser;
 	}
 

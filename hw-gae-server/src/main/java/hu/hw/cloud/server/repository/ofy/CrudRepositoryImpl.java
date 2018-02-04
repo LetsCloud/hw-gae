@@ -57,8 +57,8 @@ public abstract class CrudRepositoryImpl<T extends BaseEntity> extends Objectify
 	}
 
 	@Override
-	public void delete(String webSafeString) {
-		delete(getKey(webSafeString));
+	public void delete(String webSafeKey) {
+		delete(getKey(webSafeKey));
 	}
 
 	@Override

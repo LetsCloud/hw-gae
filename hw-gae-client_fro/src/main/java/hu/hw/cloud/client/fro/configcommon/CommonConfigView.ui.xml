@@ -35,11 +35,12 @@
 			<!-- My Drop Down -->
 			<m:MaterialDropDown activator="dp-2"
 				constrainWidth="true">
-				<m:MaterialLink text="First" />
-				<m:MaterialLink text="Second" />
+				<m:MaterialLink text="Users" />
+				<m:MaterialLink text="User Groups" />
 				<m:MaterialLink text="Third" />
 			</m:MaterialDropDown>
 		</m:MaterialPanel>
+		
 		<m:MaterialRow>
 			<m:MaterialColumn grid="l3">
 				<m:MaterialPanel hideOn="HIDE_ON_MED_DOWN" showOn="SHOW_ON_LARGE">
@@ -69,7 +70,7 @@
 				</m:MaterialPanel>
 			</m:MaterialColumn>
 
-			<m:MaterialColumn ui:field="contentPanel" grid="s12 m12 l9">
+			<m:MaterialColumn ui:field="tablePanel" grid="s12 m12 l9">
 
 			</m:MaterialColumn>
 		</m:MaterialRow>
@@ -79,7 +80,7 @@
 				backgroundColor="RED" iconType="ADD" size="LARGE" />
 		</m:MaterialFAB>
 
-		<g:SimplePanel ui:field="userEditPanel" />
+		<g:SimplePanel ui:field="editorPanel" />
 
 	</g:HTMLPanel>
 </ui:UiBinder> 

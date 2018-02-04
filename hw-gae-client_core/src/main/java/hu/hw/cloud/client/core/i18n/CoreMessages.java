@@ -18,12 +18,18 @@ public interface CoreMessages extends Messages {
 
 	@DefaultMessage("Save")
 	String comSave();
-	
+
 	@DefaultMessage("Cancel")
 	String comCancel();
 
 	@DefaultMessage("Required field")
 	String comRequiredField();
+
+	/*
+	 * Server data exceptions
+	 */
+	@DefaultMessage("Login")
+	String UNIQUE_INDEX_CONFLICT();
 
 	/*
 	 * LOGIN
@@ -169,6 +175,16 @@ public interface CoreMessages extends Messages {
 	String usersTableEmail();
 
 	/*
+	 * USERS TABLE
+	 */
+
+	@DefaultMessage("User Groups")
+	String userGroupTableTitle();
+
+	@DefaultMessage("Name")
+	String userGroupTableName();
+
+	/*
 	 * USER EDITOR
 	 */
 
@@ -186,5 +202,18 @@ public interface CoreMessages extends Messages {
 
 	@DefaultMessage("Password")
 	String userEditorPassword();
+
+	/*
+	 * USER_GROUP EDITOR
+	 */
+
+	@DefaultMessage("Create User Group")
+	String userGroupEditorCreateTitle();
+
+	@DefaultMessage("Modify User Group")
+	String userGroupEditorModifyTitle();
+
+	@DefaultMessage("Name")
+	String userGroupEditorName();
 
 }

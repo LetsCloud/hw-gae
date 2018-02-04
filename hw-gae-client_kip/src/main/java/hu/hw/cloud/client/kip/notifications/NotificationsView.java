@@ -132,12 +132,6 @@ public class NotificationsView extends ViewWithUiHandlers<NotificationsUiHandler
 	}
 
 	protected void updateSwitch() {
-		enablePushNotification.setValue(getUiHandlers().getServiceWorkerManager().isSubscribed());
-		if (getUiHandlers().getServiceWorkerManager().isSubscribed()) {
-			MaterialToast.fireToast("Subscribed to Push Notification");
-		} else {
-			MaterialToast.fireToast("Unsubscribed to Push Notification");
-		}
 	}
 
 	@Override

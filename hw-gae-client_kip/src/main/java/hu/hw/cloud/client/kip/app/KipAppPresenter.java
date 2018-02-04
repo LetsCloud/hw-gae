@@ -19,16 +19,15 @@ import gwt.material.design.client.constants.IconType;
 import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.app.AppPresenter;
 import hu.hw.cloud.client.core.menu.MenuPresenter;
+import hu.hw.cloud.client.core.pwa.AppServiceWorkerManager;
 import hu.hw.cloud.client.core.security.AppData;
 import hu.hw.cloud.client.core.security.CurrentUser;
-import hu.hw.cloud.client.firebase.messaging.MessagingManager;
 import hu.hw.cloud.client.kip.KipNameTokens;
 import hu.hw.cloud.client.kip.gfilter.config.GfilterConfigPresenter;
 import hu.hw.cloud.client.kip.gfilter.config.GfilterConfigPresenterFactory;
 import hu.hw.cloud.client.kip.gfilter.display.GfilterDisplayPresenter;
 import hu.hw.cloud.client.kip.i18n.KipMessages;
 import hu.hw.cloud.shared.AuthService;
-import hu.hw.cloud.shared.FcmService;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.cnst.SubSystem;
 import hu.hw.cloud.shared.dto.core.MenuItemDto;
@@ -49,11 +48,12 @@ public class KipAppPresenter extends AppPresenter<KipAppPresenter.MyProxy> {
 
 	@Inject
 	KipAppPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager, KipMessages i18n,
-			RestDispatch dispatch, AuthService authenticationService, FcmService notificationService,
-			CurrentUser currentUser, MenuPresenter menuPresenter, GfilterDisplayPresenter gfilterDisplayPresenter,
-			GfilterConfigPresenterFactory gfilterConfigPresenterFactory, AppData appData, MessagingManager messagingManager) {
-		super(eventBus, view, proxy, placeManager, dispatch, authenticationService, notificationService, menuPresenter,
-				currentUser, SubSystem.KIP, messagingManager);
+			RestDispatch dispatch, AuthService authenticationService, CurrentUser currentUser,
+			MenuPresenter menuPresenter, GfilterDisplayPresenter gfilterDisplayPresenter,
+			GfilterConfigPresenterFactory gfilterConfigPresenterFactory, AppData appData,
+			AppServiceWorkerManager messagingManager) {
+		super(eventBus, view, proxy, placeManager, dispatch, authenticationService, menuPresenter, currentUser,
+				SubSystem.KIP, messagingManager);
 
 		this.i18n = i18n;
 		this.gfilterDisplayPresenter = gfilterDisplayPresenter;

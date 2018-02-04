@@ -3,17 +3,16 @@
  */
 package hu.hw.cloud.client.fro.configsystem;
 
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
@@ -29,7 +28,6 @@ import gwt.material.design.client.ui.MaterialDropDown;
 import gwt.material.design.client.ui.MaterialIcon;
 import gwt.material.design.client.ui.MaterialLabel;
 import gwt.material.design.client.ui.MaterialLink;
-import hu.hw.cloud.client.fro.i18n.FroMessages;
 
 /**
  * @author CR
@@ -43,7 +41,7 @@ public class SystemConfigView extends ViewWithUiHandlers<SystemConfigUiHandlers>
 	}
 
 	@UiField
-	MaterialColumn contentPanel;
+	MaterialColumn tablePanel;
 
 	@UiField
 	MaterialDropDown mobileDropDown;
@@ -52,89 +50,42 @@ public class SystemConfigView extends ViewWithUiHandlers<SystemConfigUiHandlers>
 	MaterialCollection desktopMenu;
 
 	@UiField
-	SimplePanel userEditPanel;
-
-	@UiField
 	MaterialButton addButton;
 
-	private final FroMessages i18n;
-
 	@Inject
-	SystemConfigView(Binder uiBinder, FroMessages i18n) {
+	SystemConfigView(Binder uiBinder) {
 		logger.log(Level.INFO, "SystemConfigView()");
 		initWidget(uiBinder.createAndBindUi(this));
 
-		this.i18n = i18n;
-
-		bindSlot(SystemConfigPresenter.SLOT_CONTENT, contentPanel);
-		bindSlot(SystemConfigPresenter.SLOT_EDITOR, userEditPanel);
-
-		initMobileDropDown();
+		bindSlot(SystemConfigPresenter.SLOT_CONTENT, tablePanel);
 	}
 
-	private void initMobileDropDown() {
+	@Override
+	public void buildMenu() {
 		mobileDropDown.clear();
-
-		MaterialLink setupLink = new MaterialLink(i18n.systemConfigSetup());
-		setupLink.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				logger.log(Level.INFO, "SystemConfigView.onClick()");
-				getUiHandlers().showSystem();
-			}
-		});
-		mobileDropDown.add(setupLink);
-
-		MaterialLink usersLink = new MaterialLink(i18n.systemConfigUsers());
-		usersLink.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				logger.log(Level.INFO, "SystemConfigView.onClick()");
-				getUiHandlers().showUsers();
-			}
-		});
-		mobileDropDown.add(usersLink);
-
-		MaterialLink rolesLink = new MaterialLink(i18n.systemConfigRoles());
-		rolesLink.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				logger.log(Level.INFO, "SystemConfigView.onClick()");
-				getUiHandlers().showRoles();
-			}
-		});
-		mobileDropDown.add(rolesLink);
-
 		desktopMenu.clear();
-		MaterialCollectionItem setupItem = desktopMenuItem(i18n.systemConfigSetup());
-		setupItem.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				logger.log(Level.INFO, "SystemConfigView.onClick()");
-				getUiHandlers().showSystem();
-			}
-		});
-		desktopMenu.add(setupItem);
 
-		MaterialCollectionItem usersItem = desktopMenuItem(i18n.systemConfigUsers());
-		usersItem.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				logger.log(Level.INFO, "SystemConfigView.onClick()");
-				getUiHandlers().showUsers();
-			}
-		});
-		desktopMenu.add(usersItem);
+		for (Map.Entry<Integer, TableStore> entry : getUiHandlers().getTableMap().entrySet()) {
+			addMobileMenuItem(entry.getKey(), entry.getValue().getCaption());
+			addDesktopMenuItem(entry.getKey(), entry.getValue().getCaption());
+		}
+	}
 
-		MaterialCollectionItem rolesItem = desktopMenuItem(i18n.systemConfigRoles());
-		rolesItem.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				logger.log(Level.INFO, "SystemConfigView.onClick()");
-				getUiHandlers().showRoles();
-			}
+	private void addMobileMenuItem(Integer index, String caption) {
+		MaterialLink link = new MaterialLink(caption);
+		link.addClickHandler(handler -> {
+			getUiHandlers().showTable(index);
 		});
-		desktopMenu.add(rolesItem);
+		mobileDropDown.add(link);
+	}
+
+	private void addDesktopMenuItem(Integer index, String caption) {
+
+		MaterialCollectionItem item = desktopMenuItem(caption);
+		item.addClickHandler(handler -> {
+			getUiHandlers().showTable(index);
+		});
+		desktopMenu.add(item);
 	}
 
 	private MaterialCollectionItem desktopMenuItem(String caption) {
@@ -157,25 +108,13 @@ public class SystemConfigView extends ViewWithUiHandlers<SystemConfigUiHandlers>
 		return item;
 	}
 
-	@Override
-	public void setContent(Widget w) {
-		contentPanel.add(w);
-	}
-
-	@Override
-	public void refreshX() {
-		// TODO Auto-generated method stub
-
-	}
-
 	@UiHandler("addButton")
 	public void onAddClick(ClickEvent event) {
-		getUiHandlers().createUser();
+		getUiHandlers().addItem();
 	}
 
 	@Override
-	public void setDesktopMenu(int index) {
-		logger.log(Level.INFO, "SystemConfigView.setDesktopMenu()->index=" + index);
+	public void setDesktopMenu(Integer index) {
 		desktopMenu.setActive(index, true);
 	}
 }

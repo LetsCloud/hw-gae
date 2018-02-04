@@ -42,7 +42,7 @@
 				</m:MaterialPanel>
 			</m:MaterialColumn>
 
-			<m:MaterialColumn ui:field="contentPanel" grid="s12 m12 l9">
+			<m:MaterialColumn ui:field="tablePanel" grid="s12 m12 l9">
 
 			</m:MaterialColumn>
 		</m:MaterialRow>
@@ -51,8 +51,6 @@
 			<m:MaterialButton ui:field="addButton" type="FLOATING"
 				backgroundColor="RED" iconType="ADD" size="LARGE" />
 		</m:MaterialFAB>
-
-		<g:SimplePanel ui:field="userEditPanel" />
 
 	</g:HTMLPanel>
 </ui:UiBinder> 

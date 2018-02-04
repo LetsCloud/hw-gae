@@ -55,11 +55,14 @@ public interface FroMessages extends Messages {
 	@DefaultMessage("System setup")
 	String systemConfigSetup();
 
-	@DefaultMessage("Choose data type")
-	String systemConfigMobileSelect();
+	@DefaultMessage("User groups")
+	String systemConfigUserGroup();
 
 	@DefaultMessage("Users")
-	String systemConfigUsers();
+	String systemConfigAppUser();
+
+	@DefaultMessage("Choose data type")
+	String systemConfigMobileSelect();
 
 	@DefaultMessage("Roles")
 	String systemConfigRoles();

@@ -24,10 +24,10 @@ public class CommonConfigView extends ViewWithUiHandlers<CommonConfigUiHandlers>
 	}
 
 	@UiField
-	MaterialColumn contentPanel;
+	MaterialColumn tablePanel;
 
 	@UiField
-	SimplePanel userEditPanel;
+	SimplePanel editorPanel;
 	
 	@UiField
 	MaterialButton addButton;
@@ -36,13 +36,13 @@ public class CommonConfigView extends ViewWithUiHandlers<CommonConfigUiHandlers>
 	CommonConfigView(Binder uiBinder) {
 		initWidget(uiBinder.createAndBindUi(this));
 		logger.log(Level.INFO, "CommonConfigView()");
-		bindSlot(CommonConfigPresenter.SLOT_CONTENT, contentPanel);
-		bindSlot(CommonConfigPresenter.SLOT_EDITOR, userEditPanel);
+		bindSlot(CommonConfigPresenter.SLOT_TABLE, tablePanel);
+		bindSlot(CommonConfigPresenter.SLOT_EDITOR, editorPanel);
 	}
 
 	@Override
-	public void setContent(Widget w) {
-		contentPanel.add(w);
+	public void setTable(Widget w) {
+		tablePanel.add(w);
 	}
 
 	@Override
@@ -53,6 +53,6 @@ public class CommonConfigView extends ViewWithUiHandlers<CommonConfigUiHandlers>
 
 	@UiHandler("addButton")
 	public void onAddClick(ClickEvent event) {
-		getUiHandlers().createUser();
+		getUiHandlers().createItem();
 	}
 }

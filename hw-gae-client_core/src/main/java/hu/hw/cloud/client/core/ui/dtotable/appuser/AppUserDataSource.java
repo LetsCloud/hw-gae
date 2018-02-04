@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.core.users;
+package hu.hw.cloud.client.core.ui.dtotable.appuser;
 
 import java.util.List;
 import java.util.logging.Level;

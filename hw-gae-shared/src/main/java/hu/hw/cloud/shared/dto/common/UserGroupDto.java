@@ -14,7 +14,7 @@ public class UserGroupDto extends AccountChildDto {
 	
 	private String name;
 	
-	private List<AppUserDto> members;
+	private List<AppUserDto> memberDtos;
 
 	public String getName() {
 		return name;
@@ -24,12 +24,12 @@ public class UserGroupDto extends AccountChildDto {
 		this.name = name;
 	}
 
-	public List<AppUserDto> getMembers() {
-		return members;
+	public List<AppUserDto> getMemberDtos() {
+		return memberDtos;
 	}
 
-	public void setMembers(List<AppUserDto> members) {
-		this.members = members;
+	public void setMemberDtos(List<AppUserDto> memberDtos) {
+		this.memberDtos = memberDtos;
 	}
 
 }

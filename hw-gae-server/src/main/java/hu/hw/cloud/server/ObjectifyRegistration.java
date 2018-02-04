@@ -9,6 +9,7 @@ import hu.hw.cloud.server.entity.common.Account;
 import hu.hw.cloud.server.entity.common.AppUser;
 import hu.hw.cloud.server.entity.common.Currency;
 import hu.hw.cloud.server.entity.common.Role;
+import hu.hw.cloud.server.entity.common.UserGroup;
 import hu.hw.cloud.server.entity.cube.CubeActlPfm;
 import hu.hw.cloud.server.entity.cube.CubeBdgtPfm;
 import hu.hw.cloud.server.entity.cube.CubeFcstPfm;
@@ -31,6 +32,7 @@ public class ObjectifyRegistration {
 		LOGGER.info("ObjectifyService.register");
 		ObjectifyService.register(Account.class);
 		ObjectifyService.register(AppUser.class);
+		ObjectifyService.register(UserGroup.class);
 		ObjectifyService.register(Role.class);
 		ObjectifyService.register(Currency.class);
 		ObjectifyService.register(Service.class);

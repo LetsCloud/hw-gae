@@ -20,9 +20,8 @@ import hu.hw.cloud.client.core.app.AppPresenter;
 import hu.hw.cloud.client.core.event.ContentPushEvent;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent;
 import hu.hw.cloud.client.core.security.LoggedInGatekeeper;
-import hu.hw.cloud.client.core.users.UsersTable;
-import hu.hw.cloud.client.core.users.editor.UserEditPresenter;
-import hu.hw.cloud.client.core.users.editor.UserEditPresenterFactory;
+import hu.hw.cloud.client.core.ui.dtotable.appuser.AppUserTableView;
+import hu.hw.cloud.client.core.ui.dtotable.usergroup.UserGroupTableView;
 import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.i18n.FroMessages;
 import hu.hw.cloud.shared.cnst.MenuItemType;
@@ -32,10 +31,16 @@ public class CommonConfigPresenter extends Presenter<CommonConfigPresenter.MyVie
 	private static Logger logger = Logger.getLogger(CommonConfigPresenter.class.getName());
 
 	interface MyView extends View, HasUiHandlers<CommonConfigUiHandlers> {
-		void setContent(Widget w);
+		void setTable(Widget w);
 
 		void refreshX();
 	}
+
+	private enum ViewPage {
+		APP_USER, USER_GROUP
+	}
+
+	private ViewPage activePage;
 
 	@ProxyCodeSplit
 	@NameToken(FroNameTokens.COMMON_CONFIG)
@@ -43,21 +48,21 @@ public class CommonConfigPresenter extends Presenter<CommonConfigPresenter.MyVie
 	interface MyProxy extends ProxyPlace<CommonConfigPresenter> {
 	}
 
-	public static final SingleSlot<PresenterWidget<?>> SLOT_CONTENT = new SingleSlot<>();
+	public static final SingleSlot<PresenterWidget<?>> SLOT_TABLE = new SingleSlot<>();
 	public static final SingleSlot<PresenterWidget<?>> SLOT_EDITOR = new SingleSlot<>();
 
-	private final UsersTable usersTable;
-	private final UserEditPresenterFactory userEditPresenterFactory;
+	private final AppUserTableView appUserTable;
+	private final UserGroupTableView userGroupTable;
 	private final FroMessages i18n;
 
 	@Inject
-	CommonConfigPresenter(EventBus eventBus, MyView view, MyProxy proxy, UsersTable usersTable,
-			UserEditPresenterFactory userEditPresenterFactory, FroMessages i18n) {
+	CommonConfigPresenter(EventBus eventBus, MyView view, MyProxy proxy, AppUserTableView usersTable,
+			UserGroupTableView userGroupsTable, FroMessages i18n) {
 		super(eventBus, view, proxy, AppPresenter.SLOT_MAIN);
 		logger.log(Level.INFO, "CommonConfigPresenter()");
 
-		this.usersTable = usersTable;
-		this.userEditPresenterFactory = userEditPresenterFactory;
+		this.appUserTable = usersTable;
+		this.userGroupTable = userGroupsTable;
 		this.i18n = i18n;
 
 		getView().setUiHandlers(this);
@@ -69,7 +74,8 @@ public class CommonConfigPresenter extends Presenter<CommonConfigPresenter.MyVie
 	protected void onBind() {
 		super.onBind();
 		logger.log(Level.INFO, "CommonConfigPresenter.onBind()");
-		getView().setContent(usersTable);
+		activePage = ViewPage.APP_USER;
+//		getView().setTable(appUserTable);
 	}
 
 	@Override
@@ -78,7 +84,18 @@ public class CommonConfigPresenter extends Presenter<CommonConfigPresenter.MyVie
 		logger.log(Level.INFO, "CommonConfigPresenter.onReveal()");
 		SetPageTitleEvent.fire(i18n.mainMenuItemCommonConfig(), "", MenuItemType.MENU_ITEM, this);
 		// setInSlot(SLOT_CONTENT, new UsersTable(usersDelegate));
-		usersTable.refresh();
+		refreshActivaPage();
+	}
+
+	private void refreshActivaPage() {
+		switch (activePage) {
+		case APP_USER:
+			break;
+		case USER_GROUP:
+			break;
+		default:
+			break;
+		}
 	}
 
 	@Override
@@ -88,10 +105,42 @@ public class CommonConfigPresenter extends Presenter<CommonConfigPresenter.MyVie
 	}
 
 	@Override
-	public void createUser() {
-		UserEditPresenter userEditPresenter = userEditPresenterFactory.createUserEditPresenter();
-		setInSlot(SLOT_EDITOR, userEditPresenter);
-		userEditPresenter.create();
+	public void createItem() {
+		switch (activePage) {
+		case APP_USER:
+			createUser();
+			break;
+		case USER_GROUP:
+			createUserGroup();
+			break;
+		default:
+			createUser();
+			break;
+		}
+	}
+
+	private void createUser() {
+//		AppUserEditPresenter editor = appUserEditorFactory.createUserEditPresenter();
+//		setInSlot(SLOT_EDITOR, editor);
+//		editor.create();
+	}
+
+	private void createUserGroup() {
+//		UserGroupEditorPresenter editor = userGroupEditorFactory.createUserGroupEditorPresenter();
+//		setInSlot(SLOT_EDITOR, editor);
+//		editor.create();
+	}
+
+	@Override
+	public void showAppUserTable() {
+		activePage = ViewPage.APP_USER;
+//		getView().setTable(appUserTable);
+	}
+
+	@Override
+	public void showUserGroupTable() {
+		activePage = ViewPage.USER_GROUP;
+//		getView().setTable(userGroupTable);
 	}
 
 }

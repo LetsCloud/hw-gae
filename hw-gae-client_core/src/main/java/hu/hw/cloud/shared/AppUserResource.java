@@ -27,7 +27,6 @@ import hu.hw.cloud.shared.dto.common.AppUserDto;
 public interface AppUserResource {
 
 	@GET
-	@Path("")
 	List<AppUserDto> list();
 
 	@POST

@@ -63,8 +63,7 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 	}
 
 	/**
-	 * Elmenti az entitás gyűjteményt, majd visszaadja a visszaolvasott
-	 * értékeket
+	 * Elmenti az entitás gyűjteményt, majd visszaadja a visszaolvasott értékeket
 	 * 
 	 * @param entities
 	 * @return
@@ -361,8 +360,7 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 	}
 
 	/**
-	 * Visszaadja a szülő entitás megadott feltételnek megfelelő összes
-	 * gyermeket.
+	 * Visszaadja a szülő entitás megadott feltételnek megfelelő összes gyermeket.
 	 * 
 	 * @param parent
 	 *            Szülő entitás
@@ -377,8 +375,7 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 	}
 
 	/**
-	 * Visszaadja a szülő entitás megadott feltételeknek megfelelő összes
-	 * gyermeket.
+	 * Visszaadja a szülő entitás megadott feltételeknek megfelelő összes gyermeket.
 	 * 
 	 * @param parent
 	 *            Szülő entitás
@@ -498,7 +495,7 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 			Object value = uniqueIndexes.get(property);
 			// Az egyedi kulcs ütközés vizsgálata
 			if (isUniqueIndexConflict(parent, entity.getWebSafeKey(), property, value)) {
-				throw new UniqueIndexConflictException(property, value);
+				throw new UniqueIndexConflictException(entity.getClass().getSimpleName(), property, value);
 			}
 		}
 	}

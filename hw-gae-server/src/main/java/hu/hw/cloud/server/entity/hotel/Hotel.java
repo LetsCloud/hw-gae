@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
@@ -27,7 +24,6 @@ import hu.hw.cloud.shared.exception.ExceptionType;
  */
 @Entity
 public class Hotel extends AccountChild {
-	private static final Logger LOGGER = LoggerFactory.getLogger(Hotel.class.getName());
 
 	// private static final String PROPERTY_ACCOUNTID = "accounId";
 	private static final String PROPERTY_CODE = "code";

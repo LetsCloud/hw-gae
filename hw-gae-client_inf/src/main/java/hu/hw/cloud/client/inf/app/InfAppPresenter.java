@@ -21,16 +21,15 @@ import gwt.material.design.client.constants.IconType;
 import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.app.AppPresenter;
 import hu.hw.cloud.client.core.menu.MenuPresenter;
+import hu.hw.cloud.client.core.pwa.AppServiceWorkerManager;
 import hu.hw.cloud.client.core.security.AppData;
 import hu.hw.cloud.client.core.security.CurrentUser;
-import hu.hw.cloud.client.firebase.messaging.MessagingManager;
 import hu.hw.cloud.client.inf.InfNameTokens;
 import hu.hw.cloud.client.inf.gps.config.GpsConfigPresenter;
 import hu.hw.cloud.client.inf.gps.config.GpsConfigWidgetsFactory;
 import hu.hw.cloud.client.inf.gps.display.GpsDisplayPresenter;
 import hu.hw.cloud.client.inf.i18n.InfMessages;
 import hu.hw.cloud.shared.AuthService;
-import hu.hw.cloud.shared.FcmService;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.cnst.SubSystem;
 import hu.hw.cloud.shared.dto.core.MenuItemDto;
@@ -52,11 +51,12 @@ public class InfAppPresenter extends AppPresenter<InfAppPresenter.MyProxy> {
 
 	@Inject
 	InfAppPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager, InfMessages i18n,
-			RestDispatch dispatch, AuthService authenticationService, FcmService notificationService,
-			CurrentUser currentUser, MenuPresenter menuPresenter, GpsDisplayPresenter gpsDisplayPresenter,
-			GpsConfigWidgetsFactory gpsConfigWidgetsFactory, AppData appData, MessagingManager messagingManager) {
-		super(eventBus, view, proxy, placeManager, dispatch, authenticationService, notificationService, menuPresenter,
-				currentUser, SubSystem.INF,messagingManager);
+			RestDispatch dispatch, AuthService authenticationService, CurrentUser currentUser,
+			MenuPresenter menuPresenter, GpsDisplayPresenter gpsDisplayPresenter,
+			GpsConfigWidgetsFactory gpsConfigWidgetsFactory, AppData appData,
+			AppServiceWorkerManager messagingManager) {
+		super(eventBus, view, proxy, placeManager, dispatch, authenticationService, menuPresenter, currentUser,
+				SubSystem.INF, messagingManager);
 
 		this.i18n = i18n;
 		this.gpsDisplayPresenter = gpsDisplayPresenter;

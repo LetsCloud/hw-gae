@@ -10,7 +10,11 @@ import com.gwtplatform.mvp.client.UiHandlers;
  *
  */
 public interface CommonConfigUiHandlers extends UiHandlers {
-	
-	void createUser();
+
+	void showAppUserTable();
+
+	void showUserGroupTable();
+
+	void createItem();
 
 }

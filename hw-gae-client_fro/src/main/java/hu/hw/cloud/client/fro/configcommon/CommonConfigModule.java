@@ -5,7 +5,8 @@ package hu.hw.cloud.client.fro.configcommon;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
-import hu.hw.cloud.client.core.users.UsersTable;
+import hu.hw.cloud.client.core.ui.dtotable.appuser.AppUserTableView;
+import hu.hw.cloud.client.core.ui.dtotable.usergroup.UserGroupTableView;
 
 /**
  * @author CR
@@ -17,6 +18,7 @@ public class CommonConfigModule extends AbstractPresenterModule {
 		bindPresenter(CommonConfigPresenter.class, CommonConfigPresenter.MyView.class, CommonConfigView.class,
 				CommonConfigPresenter.MyProxy.class);
 		
-		bind(UsersTable.class);
+		bind(AppUserTableView.class);
+		bind(UserGroupTableView.class);
 	}
 }

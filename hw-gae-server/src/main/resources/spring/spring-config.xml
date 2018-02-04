@@ -30,6 +30,7 @@
 	<!-- REPOSITORIES -->
 	<bean id="accountRepository" class="hu.hw.cloud.server.repository.ofy.AccountRepositoryImpl" />
 	<bean id="appUserRepository" class="hu.hw.cloud.server.repository.ofy.AppUserRepositoryImpl" />
+	<bean id="userGroupRepository" class="hu.hw.cloud.server.repository.ofy.UserGroupRepositoryImpl" />
 	<bean id="currencyRepository"
 		class="hu.hw.cloud.server.repository.ofy.CurrencyRepositoryImpl" />
 	<bean id="guestRepository" class="hu.hw.cloud.server.repository.ofy.GuestRepositoryImpl" />
@@ -65,6 +66,10 @@
 		<constructor-arg ref="loggedInChecker" />
 		<constructor-arg ref="accountRepository" />
 		<constructor-arg ref="appUserRepository" />
+	</bean>
+	<bean id="userGroupService" class="hu.hw.cloud.server.service.impl.UserGroupServiceImpl">
+		<constructor-arg ref="userGroupRepository" />
+		<constructor-arg ref="accountRepository" />
 	</bean>
 	<bean id="dataBuilderService" class="hu.hw.cloud.server.service.impl.DataBuilderServiceImpl">
 		<property name="accountRepository" ref="accountRepository" />

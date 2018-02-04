@@ -23,7 +23,9 @@ public class ServiceModule extends AbstractPresenterModule {
 	@Override
 	protected void configure() {
 		// logger.log(Level.INFO, "configure()");
-		install(new RestDispatchAsyncModule.Builder().xsrfTokenHeaderName("Protection-Token").build());
+		RestDispatchAsyncModule.Builder rdapBuilder = new RestDispatchAsyncModule.Builder();
+		install(rdapBuilder.xsrfTokenHeaderName("Protection-Token").core()
+				.responseDeserializer(CustomResponseDeserializer.class).build());
 		bindConstant().annotatedWith(SecurityCookie.class).to("JSESSIONID");
 	}
 

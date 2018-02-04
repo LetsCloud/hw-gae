@@ -7,9 +7,12 @@
 	</ui:style>
 
 	<g:HTMLPanel>
-		<m.table:MaterialInfiniteDataTable
+		<m.table:MaterialDataTable
 			ui:field="table" shadow="1" height="calc(100vh - 300px)"
 			useLoadOverlay="false" useStickyHeader="false" useCategories="false"
 			selectionType="SINGLE" />
+
+		<g:SimplePanel ui:field="editorPanel" />
+			
 	</g:HTMLPanel>
 </ui:UiBinder> 

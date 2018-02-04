@@ -54,7 +54,7 @@ public class AppUserDto extends AccountChildDto {
 	/**
 	 * 
 	 */
-	private UserGroupDto group;
+	private List<UserGroupDto> userGroupDtos;
 
 	/**
 	 * 
@@ -177,12 +177,12 @@ public class AppUserDto extends AccountChildDto {
 		this.picture = picture;
 	}
 
-	public UserGroupDto getGroup() {
-		return group;
+	public List<UserGroupDto> getUserGroupDtos() {
+		return userGroupDtos;
 	}
 
-	public void setGroup(UserGroupDto group) {
-		this.group = group;
+	public void setUserGroupDtos(List<UserGroupDto> userGroupDtos) {
+		this.userGroupDtos = userGroupDtos;
 	}
 
 	public List<FcmTokenDto> getFcmTokenDtos() {

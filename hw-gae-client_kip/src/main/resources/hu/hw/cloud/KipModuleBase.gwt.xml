@@ -21,8 +21,6 @@
 	<inherits name="gwt.material.design.GwtMaterialTableBasic" />
 	<inherits name="gwt.material.design.addins.GwtMaterialAddinsBasic" />
 	
-	<inherits name="gwt.jelement.JElement" />
-	
 	<inherits name="com.google.common.collect.Collect" />
 
 	<!--Titkosításhoz <inherits name="org.apache.commons.GWTCommonsCodec" /> -->
