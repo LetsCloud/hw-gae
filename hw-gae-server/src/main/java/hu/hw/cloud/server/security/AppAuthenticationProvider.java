@@ -20,7 +20,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import hu.hw.cloud.server.entity.common.AppUser;
 import hu.hw.cloud.server.service.AppUserService;
-import hu.hw.cloud.shared.cnst.ErrorCode;
+import hu.hw.cloud.shared.exception.ExceptionType;
 
 /**
  * @author CR
@@ -49,8 +49,7 @@ public class AppAuthenticationProvider implements AuthenticationProvider {
 
 		String[] split = name.split(":");
 		if (split.length < 2) {
-			LOGGER.info("authenticate()->" + ErrorCode.LOGIN_BAD_CREDENTIALS.name());
-			throw new InsufficientAuthenticationException(ErrorCode.LOGIN_BAD_CREDENTIALS.name());
+			throw new InsufficientAuthenticationException(ExceptionType.LOGIN_INSUFFICIENT_AUTHENTICATION.name());
 		}
 		String username = split[0];
 		String corporateId = split[1];
@@ -61,18 +60,15 @@ public class AppAuthenticationProvider implements AuthenticationProvider {
 		AppUser appUser = userService.getUserByUsername(username, new Long(corporateId));
 
 		if (appUser == null) {
-			LOGGER.info("authenticate()->" + ErrorCode.LOGIN_BAD_CREDENTIALS.name());
-			throw new UsernameNotFoundException(ErrorCode.LOGIN_BAD_CREDENTIALS.name());
+			throw new UsernameNotFoundException(ExceptionType.LOGIN_USERNAME_NOT_FOUND.name());
 		}
 
 		if (!appUser.getPassword().equals(password)) {
-			LOGGER.info("authenticate()->" + ErrorCode.LOGIN_BAD_CREDENTIALS.name());
-			throw new BadCredentialsException(ErrorCode.LOGIN_BAD_CREDENTIALS.name());
+			throw new BadCredentialsException(ExceptionType.LOGIN_BAD_CREDENTIALS.name());
 		}
 
 		if (!appUser.getEnabled()) {
-			LOGGER.info("authenticate()->" + ErrorCode.LOGIN_DISABLED_USER.name());
-			throw new DisabledException(ErrorCode.LOGIN_DISABLED_USER.name());
+			throw new DisabledException(ExceptionType.LOGIN_DISABLED_USER.name());
 		}
 
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();

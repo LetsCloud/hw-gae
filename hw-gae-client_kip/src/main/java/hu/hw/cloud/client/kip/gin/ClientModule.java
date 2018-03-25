@@ -8,9 +8,11 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import hu.hw.cloud.client.kip.app.KipAppModule;
 import hu.hw.cloud.client.kip.assignments.AssignmentsModule;
 import hu.hw.cloud.client.kip.atendants.AtendantsModule;
-import hu.hw.cloud.client.kip.chat.ChatModule;
+import hu.hw.cloud.client.kip.chat.ChatRoomModule;
+import hu.hw.cloud.client.kip.chat.creator.ChatCreatorModule;
+import hu.hw.cloud.client.kip.chat.editor.ChatEditorModule;
+import hu.hw.cloud.client.kip.chat.list.ChatListModule;
 import hu.hw.cloud.client.kip.gfilter.display.GfilterDisplayModule;
-import hu.hw.cloud.client.kip.notifications.NotificationsModule;
 import hu.hw.cloud.client.kip.push.PushModule;
 import hu.hw.cloud.client.kip.roomstatus.DesktopRoomStatusModule;
 import hu.hw.cloud.client.kip.roomstatus.filter.RoomStatusFilterModule;
@@ -26,7 +28,7 @@ public class ClientModule extends AbstractPresenterModule {
 	@Override
 	protected void configure() {
 		install(new CoreModule());
-		
+
 		bind(ResourceLoader.class).asEagerSingleton();
 
 		install(new KipAppModule());
@@ -36,13 +38,14 @@ public class ClientModule extends AbstractPresenterModule {
 		install(new DesktopRoomStatusModule());
 		install(new RoomStatusListModule());
 		install(new RoomStatusFilterModule());
-		install(new ChatModule());
-		install(new NotificationsModule());
+		install(new ChatRoomModule());
 		install(new PushModule());
+		install(new ChatListModule());
+		install(new ChatCreatorModule());
+		install(new ChatEditorModule());
 		/*
-		install(new UserListModule());
-		install(new RoleListModule());
-		install(new HotelListModule());
-		*/
+		 * install(new UserListModule()); install(new RoleListModule()); install(new
+		 * HotelListModule());
+		 */
 	}
 }

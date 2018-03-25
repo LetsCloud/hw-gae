@@ -3,6 +3,7 @@
  */
 package hu.hw.cloud.shared.dto.common;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,10 +12,19 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class UserGroupDto extends AccountChildDto {
-	
+
 	private String name;
-	
-	private List<AppUserDto> memberDtos;
+
+	private List<AppUserDto> memberDtos = new ArrayList<AppUserDto>();
+
+	public UserGroupDto() {
+	}
+
+	public UserGroupDto(AppUserDto appUserDto) {
+		super(appUserDto);
+		this.name = appUserDto.getName();
+		this.memberDtos.add(appUserDto);
+	}
 
 	public String getName() {
 		return name;

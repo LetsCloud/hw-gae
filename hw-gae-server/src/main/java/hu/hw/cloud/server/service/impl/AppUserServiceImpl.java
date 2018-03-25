@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import hu.hw.cloud.server.entity.VerificationToken;
+import hu.hw.cloud.server.entity.chat.FcmToken;
 import hu.hw.cloud.server.entity.common.Account;
 import hu.hw.cloud.server.entity.common.AppUser;
-import hu.hw.cloud.server.entity.common.FcmToken;
 import hu.hw.cloud.server.repository.AccountRepository;
 import hu.hw.cloud.server.repository.AppUserRepository;
 import hu.hw.cloud.server.security.LoggedInChecker;
@@ -19,7 +19,7 @@ import hu.hw.cloud.shared.exception.UniqueIndexConflictException;
 
 public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserDto, AppUserRepository>
 		implements AppUserService {
-	private static final Logger LOGGER = Logger.getLogger(AppUserServiceImpl.class.getName());
+	private static final Logger logger = Logger.getLogger(AppUserServiceImpl.class.getName());
 
 	private final LoggedInChecker loggedInChecker;
 	private final AccountRepository accountRepository;
@@ -59,7 +59,7 @@ public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserDto, App
 
 	@Override
 	public Boolean isCurrentUserLoggedIn() {
-		LOGGER.info("isCurrentUserLoggedIn()");
+		logger.info("isCurrentUserLoggedIn()");
 		return loggedInChecker.getLoggedInUser() != null;
 	}
 
@@ -133,6 +133,7 @@ public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserDto, App
 	@Override
 	public void fcmSubscribe(String iidToken, String userAgent) throws Throwable {
 		AppUser currentUser = loggedInChecker.getLoggedInUser();
+		currentUser = appUserRepository.findByWebSafeKey(currentUser.getWebSafeKey());
 		List<FcmToken> tokens = currentUser.getFcmTokens();
 
 		if (FcmToken.getToken(tokens, iidToken) == null) {

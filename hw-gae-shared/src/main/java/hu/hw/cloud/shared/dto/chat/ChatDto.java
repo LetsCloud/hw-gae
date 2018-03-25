@@ -3,10 +3,12 @@
  */
 package hu.hw.cloud.shared.dto.chat;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import hu.hw.cloud.shared.dto.common.AccountChildDto;
-import hu.hw.cloud.shared.dto.common.UserGroupDto;
+import hu.hw.cloud.shared.dto.common.AppUserDto;
 
 /**
  * @author CR
@@ -15,24 +17,91 @@ import hu.hw.cloud.shared.dto.common.UserGroupDto;
 @SuppressWarnings("serial")
 public class ChatDto extends AccountChildDto {
 
-	private UserGroupDto receiver;
+	private AppUserDto sender;
 
-	private List<MessageDto> replies;
+	private List<AppUserDto> receivers = new ArrayList<AppUserDto>();
 
-	public UserGroupDto getReceiver() {
-		return receiver;
+	private String message;
+
+	private List<ChatPostDto> posts = new ArrayList<ChatPostDto>();
+
+	private Date created;
+
+	private Date updated;
+
+	private Date closed;
+
+	private String url;
+
+	public ChatDto() {
 	}
 
-	public void setReceiver(UserGroupDto receiver) {
-		this.receiver = receiver;
+	public AppUserDto getSender() {
+		return sender;
 	}
 
-	public List<MessageDto> getReplies() {
-		return replies;
+	public void setSender(AppUserDto sender) {
+		this.sender = sender;
 	}
 
-	public void setReplies(List<MessageDto> replies) {
-		this.replies = replies;
+	public List<AppUserDto> getReceivers() {
+		return receivers;
+	}
+
+	public void setReceivers(List<AppUserDto> receivers) {
+		this.receivers = receivers;
+	}
+
+	public void addReceiver(AppUserDto receiver) {
+		this.receivers.add(receiver);
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public List<ChatPostDto> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<ChatPostDto> posts) {
+		this.posts = posts;
+	}
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public Date getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
+
+	public Date getClosed() {
+		return closed;
+	}
+
+	public void setClosed(Date closed) {
+		this.closed = closed;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }

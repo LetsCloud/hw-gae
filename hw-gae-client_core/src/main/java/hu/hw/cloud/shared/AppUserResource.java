@@ -9,6 +9,7 @@ import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
 import static hu.hw.cloud.shared.api.ApiPaths.PATH_WEBSAFEKEY;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.ROOT;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.USER;
+import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.INVITE;
 
 import java.util.List;
 
@@ -31,6 +32,10 @@ public interface AppUserResource {
 
 	@POST
 	AppUserDto create(AppUserDto userDto);
+
+	@POST
+	@Path(INVITE)
+	AppUserDto invite(AppUserDto userDto);
 
 	@GET
 	@Path(PATH_WEBSAFEKEY)

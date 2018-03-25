@@ -3,6 +3,7 @@
  */
 package hu.hw.cloud.client.core.ui.dtotable.usergroup;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,6 +20,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import gwt.material.design.client.constants.IconType;
 import gwt.material.design.client.constants.TextAlign;
 import gwt.material.design.client.data.SelectionType;
+import gwt.material.design.client.data.component.RowComponent;
 import gwt.material.design.client.ui.MaterialIcon;
 import gwt.material.design.client.ui.table.MaterialDataTable;
 import gwt.material.design.client.ui.table.cell.TextColumn;
@@ -79,6 +81,11 @@ public class UserGroupTableView extends ViewWithUiHandlers<UserGroupTableUiHandl
 			}
 
 			@Override
+			public Comparator<? super RowComponent<UserGroupDto>> sortComparator() {
+				return (o1, o2) -> o1.getData().getName().compareToIgnoreCase(o2.getData().getName());
+			}
+
+			@Override
 			public String getValue(UserGroupDto object) {
 				return object.getName();
 			}
@@ -107,7 +114,6 @@ public class UserGroupTableView extends ViewWithUiHandlers<UserGroupTableUiHandl
 				return icon;
 			}
 		});
-
 
 		/**
 		 * Edit Icon

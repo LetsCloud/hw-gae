@@ -4,14 +4,13 @@
 
 	<ui:style>
 	.base {
-		background: #fafafa;
 		height: 100%;
 	}
 	
 	.panel {
 		width: 100%;
 		/*		padding: 60px 5px 150px 5px; */
-		padding: 10px 50px 150px 50px;
+		padding: 10px 50px 0px 50px;
 		background: #FFF;
 		box-sizing: border-box;
 		-webkit-box-sizing: border-box;
@@ -28,7 +27,7 @@
 	}
 	</ui:style>
 
-	<g:HTMLPanel> <!-- addStyleNames="{style.base}" -->
+	<g:HTMLPanel> <!-- styleName="{style.base}" -->
 
 		<g:HTMLPanel ui:field="menu" />
 
@@ -44,12 +43,6 @@
 			<g:HTMLPanel addStyleNames="{style.panel} panel">
 				<m:MaterialRow ui:field="main" addStyleNames="main-sheet" />
 			</g:HTMLPanel>
-
-			<m:MaterialPanel>
-				<g:HTMLPanel>
-					<input type="hidden" name="IL_IN_TAG" value="1" />
-				</g:HTMLPanel>
-			</m:MaterialPanel>
 		</m:MaterialContainer>
 
 		<g:SimplePanel ui:field="modalSlot" />

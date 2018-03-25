@@ -3,16 +3,16 @@
   "http://gwtproject.org/doctype/2.7.0/gwt-module.dtd">
 <module rename-to="inf_module">
 	<inherits name="hu.hw.cloud.InfModuleBase" />
-
+<!-- 
 	<extend-property name="locale" values="hu_HU" />
 	<extend-property name="locale" values="en" />
 	<set-property-fallback name="locale" value="en" />
-<!-- 
+-->
 	<extend-property name="locale" values="hu_HU" />
 	<set-property name="locale" value="hu_HU" />
 
 	<set-property name="user.agent" value="safari" />
- -->
+ 
 
 	<add-linker name="xsiframe" />
 </module>

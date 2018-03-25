@@ -52,6 +52,8 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView>
 
 		void setUserName(String userName);
 
+		void setUserImageUrl(String url);
+
 		void setHotelName(String hotelName);
 
 		void setBusinessDate(Date businessDate);
@@ -164,5 +166,14 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView>
 			public void onFailure(Throwable caught) {
 			}
 		});
+	}
+
+	@Override
+	public void referesh() {
+		logger.log(Level.INFO, "MenuPresenter.referesh()");
+		getView().setAccountName(currentUser.getAppUserDto().getAccountDto().getName());
+//		getView().setHotelName(currentUser.getCurrentHotelDto().getName());
+		getView().setUserImageUrl(currentUser.getAppUserDto().getPicture());
+		getView().setUserName(currentUser.getAppUserDto().getName());
 	}
 }

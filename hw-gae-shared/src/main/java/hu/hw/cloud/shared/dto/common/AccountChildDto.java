@@ -16,6 +16,14 @@ public class AccountChildDto extends BaseDto {
 
 	private String accountWebSafeKey;
 
+	public AccountChildDto() {}
+
+	public AccountChildDto(AccountChildDto dto) {
+		super(dto);
+		this.accountDto = dto.getAccountDto();
+		this.accountWebSafeKey = dto.getAccountWebSafeKey();
+	}
+	
 	public AccountDto getAccountDto() {
 		return accountDto;
 	}

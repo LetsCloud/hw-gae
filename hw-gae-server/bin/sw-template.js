@@ -38,6 +38,22 @@ self.addEventListener('install', function (e) {
     );
 });
 
+//UPDATE SERVICE WORKER
+//
+self.addEventListener('activate', function (e) {
+ console.log('[ServiceWorker] Activate');
+ e.waitUntil(
+     caches.keys().then(function (keyList) {
+         return Promise.all(keyList.map(function (key) {
+             console.log('[ServiceWorker] Removing old cache', key);
+             if (key !== cacheName) {
+                 return caches.delete(key);
+             }
+         }));
+     })
+ );
+});
+
 // CACHE AND RETURN REQUESTS
 //
 // After a service worker is installed and the user navigates to a different
@@ -45,36 +61,13 @@ self.addEventListener('install', function (e) {
 // will begin to receive fetch events
 //
 
-self.addEventListener('fetch', function(event) {
-    event.respondWith(
+self.addEventListener('fetch', function(e) {
+    console.log('[ServiceWorker] Fetch', e.request.url);
+    e.respondWith(
         // Try the cache
-        caches.match(event.request).then(function(response) {
+        caches.match(e.request).then(function(response) {
             // Fall back to network
-            return response || fetch(event.request);
-        }).catch(function() {
-            // If both fail, show a generic fallback:
-            // return caches.match('/offline.html');
-            // However, in reality you'd have many different
-            // fallbacks, depending on URL & headers.
-            // Eg, a fallback silhouette image for avatars.
-            sendMessageToAllClients("failingServer");
-            return new Response("Can't Connect to server");
-        })
-    );
-});
-
-// UPDATE SERVICE WORKER
-//
-self.addEventListener('activate', function (e) {
-    console.log('[ServiceWorker] Activate');
-    e.waitUntil(
-        caches.keys().then(function (keyList) {
-            return Promise.all(keyList.map(function (key) {
-                console.log('[ServiceWorker] Removing old cache', key);
-                if (key !== cacheName) {
-                    return caches.delete(key);
-                }
-            }));
+            return response || fetch(e.request);
         })
     );
 });
@@ -86,30 +79,12 @@ self.addEventListener('activate', function (e) {
 // fire once.
 // You can force it to fire again by visiting this page in an Incognito window.
 self.addEventListener('message', function (e) {
+    console.log('[Service Worker] message->' + e);
     if (e.data == 'skipWaiting') {
         self.skipWaiting();
     }
 });
 
-// The PushEvent interface of the Push API represents a push message that has
-// been received.
-// This event is sent to the global scope of a ServiceWorker.
-// It contains the information sent from an application server to a
-// PushSubscription.
-// self.addEventListener('push', function(event) {
-// console.log('[Service Worker] Push Received.');
-// console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
-//    
-// var jsonObject = JSON.parse(event.data.text());
-//
-// const title = jsonObject.title;
-// const options = {
-// body: jsonObject.description,
-// icon: jsonObject.image
-// };
-//
-// event.waitUntil(self.registration.showNotification(title, options));
-// });
 
 //
 // Notifications API
@@ -118,51 +93,58 @@ self.addEventListener('message', function (e) {
 // The notificationclick event is fired to indicate that a system notification
 // spawned
 // by ServiceWorkerRegistration.showNotification() has been clicked.
-self.addEventListener('notificationclick', function(event) {
-    console.log('[Service Worker] Notification click Received.');
+self.addEventListener('notificationclick', event => {
+	console.log('On notification click.');
 
-    event.notification.close();
+	event.notification.close();
 
-    event.waitUntil(
-        clients.openWindow('https://www.google.com.ph')
-    );
+	const msgPayload = event.notification.data;
+	const clickAction =  msgPayload['data']['click_action'];
+	var pos = clickAction.indexOf("#");
+	const rootUrl = clickAction.substr(0,pos);
+	
+	if (!clickAction) {
+		// Nothing to do.
+	    return;
+	}
+
+	const promiseChain = this.getWindowClient_(rootUrl)
+		.then(windowClient => {
+	        if (!windowClient) {
+	          // Unable to find window client so need to open one.
+	          return clients.openWindow(clickAction);
+	        }
+	        return windowClient;
+	 	})
+	 	.then(windowClient => {
+	 		if (!windowClient) {
+	 			// Window Client will not be returned if it's for a third party origin.
+	 			return;
+	 		}
+
+	 		const internalMsg = {
+	 				'firebase-messaging-msg-type': 'notification-clicked',
+	 				'firebase-messaging-msg-data': msgPayload
+	 		};
+
+	 		// Attempt to send a message to the client to handle the data
+	        // Is affected by: https://github.com/slightlyoff/ServiceWorker/issues/728
+	        return this.attemptToMessageClient_(windowClient, internalMsg);
+	 	});
+
+		event.waitUntil(promiseChain);	
 });
 
-// *function sendMessageToClient(client, message){
-// * return new Promise(function(resolve, reject){
-// * var messageChannel = new MessageChannel();
-
-// * messageChannel.port1.onmessage = function(e){
-// * if(e.data.error){
-// * reject(e.data.error);
-// * }else{
-// * resolve(e.data);
-// * }
-// * };
-
-// * client.postMessage(message, [messageChannel.port2]);
-// * });
-// *}
-
-// *function sendMessageToAllClients(msg){
-// * clients.matchAll().then(clients => {
-// * clients.forEach(client => {
-// * sendMessageToClient(client, msg).then(m => console.log("SW Received
-// Message: "+m));
-// * })
-// * })
-// *}
 
 // Import and configure the Firebase SDK
 // These scripts are made available when the app is served or deployed on
 // Firebase Hosting
 // If you do not serve/host your project using Firebase Hosting see
 // https://firebase.google.com/docs/web/setup
-importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js');
-importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js');
-importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase.js');
+importScripts('https://www.gstatic.com/firebasejs/4.11.0/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/4.11.0/firebase-messaging.js');
 
-firebase.initializeApp({messagingSenderId: "489469080035"});
+firebase.initializeApp({'messagingSenderId': '1069431891980'});
 	  
 const messaging = firebase.messaging();
 
@@ -170,17 +152,71 @@ const messaging = firebase.messaging();
 // background (Web app is closed or not in browser focus) then you should
 // implement this optional method.
 // [START background_handler]
-// messaging.setBackgroundMessageHandler(function(payload) {
-// console.log('[firebase-messaging-sw.js] Received background message ',
-// payload);
-	// Customize notification here
-// const notificationTitle = 'Background Message Title';
-// const notificationOptions = {
-// body: 'Background Message body.',
-// icon: '/firebase-logo.png'
-// };
+messaging.setBackgroundMessageHandler(function(msgPayload) {
+	
+	console.log('Received background message.');
+    
+	var notificationTitle = msgPayload['data']['title'];
+	var notificationOptions = {
+		body: msgPayload['data']['body'], 
+		icon: msgPayload['data']['icon'],
+		data: msgPayload
+	};
+
+	return self.registration.showNotification(notificationTitle, notificationOptions);
+});
+
 //
-// return self.registration.showNotification(notificationTitle,
-// notificationOptions);
-// });
+// @private
+// @param {string} url The URL to look for when focusing a client.
+// @return {Object} Returns an existing window client or a newly opened
+// WindowClient.
+//
+function getWindowClient_(url) {
+	// Use URL to normalize the URL when comparing to windowClients.
+	// This at least handles whether to include trailing slashes or not
+	const parsedURL = new URL(url).href;
+
+	return clients.matchAll({
+		type: 'window',
+		includeUncontrolled: true
+    })
+    .then(clientList => {
+    	let suitableClient = null;
+    	for (let i = 0; i < clientList.length; i++) {
+    		const parsedClientUrl = new URL(clientList[i].url).href;
+    		if (parsedClientUrl.startsWith(parsedURL)) {
+    			suitableClient = clientList[i];
+    			break;
+    		}
+    	}
+
+    	if (suitableClient) {
+    		suitableClient.focus();
+    		return suitableClient;
+    	}
+    });
+}
+
+//
+// This message will attempt to send the message to a window client.
+// @private
+// @param {Object} client The WindowClient to send the message to.
+// @param {Object} message The message to send to the client.
+// @returns {Promise} Returns a promise that resolves after sending the
+// message. This does not guarantee that the message was successfully
+// received.
+//
+function attemptToMessageClient_(client, message) {
+	return new Promise((resolve, reject) => {
+		if (!client) {
+			return reject(
+					console.log('No Window Client')    		  
+			);
+		}
+
+		client.postMessage(message);
+		resolve();
+	});
+}
 // [END background_handler]

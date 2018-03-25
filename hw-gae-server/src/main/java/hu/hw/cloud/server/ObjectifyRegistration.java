@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.googlecode.objectify.ObjectifyService;
 
+import hu.hw.cloud.server.entity.chat.Chat;
 import hu.hw.cloud.server.entity.common.Account;
 import hu.hw.cloud.server.entity.common.AppUser;
 import hu.hw.cloud.server.entity.common.Currency;
@@ -42,6 +43,7 @@ public class ObjectifyRegistration {
 		ObjectifyService.register(Hotel.class);
 		ObjectifyService.register(RoomType.class);
 		ObjectifyService.register(Room.class);
+		ObjectifyService.register(Chat.class);
 		ObjectifyService.register(Reservation.class);
 		ObjectifyService.register(CubeBdgtCap.class);
 		ObjectifyService.register(CubeBdgtPfm.class);

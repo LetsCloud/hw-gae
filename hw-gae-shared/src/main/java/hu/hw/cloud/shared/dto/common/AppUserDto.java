@@ -15,7 +15,6 @@ import hu.hw.cloud.shared.dto.hotel.HotelDto;
 @SuppressWarnings("serial")
 public class AppUserDto extends AccountChildDto {
 
-	private String picture;
 	/**
 	 * Kód
 	 */
@@ -25,6 +24,11 @@ public class AppUserDto extends AccountChildDto {
 	 * Név
 	 */
 	private String name;
+
+	/**
+	 * Fotó
+	 */
+	private String picture;
 
 	/**
 	 * Bejelentkezőnév
@@ -54,7 +58,7 @@ public class AppUserDto extends AccountChildDto {
 	/**
 	 * 
 	 */
-	private List<UserGroupDto> userGroupDtos;
+	private List<UserGroupDto> userGroupDtos = new ArrayList<UserGroupDto>();
 
 	/**
 	 * 

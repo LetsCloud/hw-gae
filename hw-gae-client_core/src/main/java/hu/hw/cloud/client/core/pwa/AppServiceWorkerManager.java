@@ -5,25 +5,24 @@ package hu.hw.cloud.client.core.pwa;
 
 import java.util.logging.Logger;
 
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.rest.client.RestDispatch;
 
-import gwt.material.design.client.pwa.push.PushNotificationManager;
-import gwt.material.design.client.pwa.serviceworker.DefaultServiceWorkerManager;
+import gwt.material.design.client.pwa.serviceworker.ServiceEvent;
+import gwt.material.design.client.pwa.serviceworker.ServiceWorkerManager;
 import gwt.material.design.client.pwa.serviceworker.js.ServiceWorkerRegistration;
 import gwt.material.design.client.ui.MaterialToast;
-import gwt.material.design.jquery.client.api.Functions;
-import hu.hw.cloud.client.core.app.AppPresenter;
+import hu.hw.cloud.client.core.promise.xgwt.Fn;
 import hu.hw.cloud.client.firebase.messaging.MessagingManager;
+import hu.hw.cloud.client.firebase.messaging.js.Fnx;
 import hu.hw.cloud.shared.FcmService;
 
 /**
  * @author CR
  *
  */
-public class AppServiceWorkerManager extends DefaultServiceWorkerManager {
+public class AppServiceWorkerManager extends ServiceWorkerManager {
 	private static Logger logger = Logger.getLogger(AppServiceWorkerManager.class.getName());
 
 	private final EventBus eventBus;
@@ -44,57 +43,26 @@ public class AppServiceWorkerManager extends DefaultServiceWorkerManager {
 	}
 
 	@Override
-	public void onRegistered(ServiceWorkerRegistration registration) {
-		fcmManager.useServiceWorker(registration);
+	public boolean onRegistered(ServiceEvent event, ServiceWorkerRegistration registration) {
+		boolean result = super.onRegistered(event, registration);
+		logger.info("Service Worker is registered");
 
-		/*
-		pushNotificationManager = new PushNotificationManager(registration);
-		pushNotificationManager.load(param1 -> {
-			if (param1 == null) {
-				MaterialToast.fireToast("Not subscribed Push Notifications");
-			} else {
-				MaterialToast.fireToast("Subscribed to Push Notifications");
-			}
-		});
-		*/
-	}
+		if (result)
+			fcmManager.useServiceWorker(registration);
 
-	@Override
-	protected void onServerFailing() {
-		super.onServerFailing();
-		String newURL = Window.Location.createUrlBuilder().setHash("NameTokens.MAINTENANCE").buildString();
-		Window.Location.replace(newURL);
-	}
-
-	@Override
-	public void onActivated() {
-		super.onActivated();
-		logger.info("AppServiceWorkerManager.onActivated()");
-	}
-
-	@Override
-	protected void onOffline() {
-		super.onOffline();
-		logger.info("AppServiceWorkerManager.onOffline()");
-		eventBus.fireEvent(new NetworkStatusEvent(false));
-	}
-
-	@Override
-	protected void onOnline() {
-		super.onOnline();
-		logger.info("AppServiceWorkerManager.onOnline()");
-		eventBus.fireEvent(new NetworkStatusEvent(true));
+		return result;
 	}
 
 	/*
-	 * FCM 
+	 * FCM
 	 */
 
 	/**
 	 * 
 	 * @param callback
 	 */
-	public void requestFcbPermission(Functions.Func callback) {
+	public void requestFcbPermission(Fn.NoArg callback) {
+		logger.info("AppServiceWorkerManager.requestFcbPermission()");
 		fcmManager.requestPermission(callback);
 	}
 
@@ -102,8 +70,27 @@ public class AppServiceWorkerManager extends DefaultServiceWorkerManager {
 	 * 
 	 * @param callback
 	 */
-	public void getFcbToken(Functions.Func1<String> callback) {
+	public void getFcbToken(Fn.Arg<String> callback) {
+		logger.info("AppServiceWorkerManager.getFcbToken()");
 		fcmManager.getToken(callback);
+	}
+
+	/**
+	 * 
+	 * @param callback
+	 */
+	public void onFcmTokenRefresh(Fn.Arg<String> callback) {
+		logger.info("AppServiceWorkerManager.onFcmTokenRefresh()");
+		fcmManager.onTokenRefresh(callback);
+	}
+
+	/**
+	 * 
+	 * @param callback
+	 */
+	public void onFcmMessage(Fnx.Arg callback) {
+		logger.info("AppServiceWorkerManager.onFcmMessage()");
+		fcmManager.onMessage(callback);
 	}
 
 	/**
@@ -111,6 +98,7 @@ public class AppServiceWorkerManager extends DefaultServiceWorkerManager {
 	 * @param iidToken
 	 */
 	public void fcmSubscribe(String iidToken) {
+		logger.info("AppServiceWorkerManager.fcmSubscribe()");
 		dispatch.execute(fcmService.subscribe(iidToken, getUserAgent()), new AsyncCallback<Void>() {
 
 			@Override

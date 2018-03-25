@@ -4,8 +4,6 @@
 package hu.hw.cloud.client.core.gin;
 
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -26,7 +24,6 @@ import hu.hw.cloud.shared.dto.ErrorResponseDto;
  *
  */
 public class CustomResponseDeserializer implements ResponseDeserializer {
-	private static Logger logger = Logger.getLogger(CustomResponseDeserializer.class.getName());
 
 	private final Provider<Set<Serialization>> serializationsProvider;
 
@@ -43,19 +40,15 @@ public class CustomResponseDeserializer implements ResponseDeserializer {
 			return getDeserializedResponse(action, response);
 		} else {
 			String resultClass = ErrorResponseDto.class.getName();
-			logger.log(Level.INFO, "deserialize()->resultClass=" + resultClass);
 
 			ContentType contentType = ContentType.valueOf(response.getHeader(HttpHeaders.CONTENT_TYPE));
-			logger.log(Level.INFO, "deserialize()->contentType=" + contentType);
 
 			Serialization serialization = findSerialization(resultClass, contentType);
 
 			if (serialization != null) {
-				logger.log(Level.INFO, "deserialize()->serialization != null");
 				ErrorResponseDto dto = deserializeValue(serialization, resultClass, contentType, response.getText());
 				throw new CustomActionException(response.getText(), dto);
 			}
-			logger.log(Level.INFO, "deserialize()->END");
 
 			throw new ActionException(response.getText() + "XX");
 		}
@@ -74,11 +67,7 @@ public class CustomResponseDeserializer implements ResponseDeserializer {
 	 *         <code>false</code> otherwise.
 	 */
 	protected Serialization findSerialization(String resultType, ContentType contentType) {
-		logger.log(Level.INFO, "findSerialization()->resultType=" + resultType);
-		logger.log(Level.INFO, "findSerialization()->contentType.getType()=" + contentType.getType());
-		logger.log(Level.INFO, "findSerialization()->contentType.getSubType()=" + contentType.getSubType());
 		for (Serialization serialization : getSerializations()) {
-			logger.log(Level.INFO, "findSerialization()->serialization=" + serialization);
 			if (serialization.canDeserialize(resultType, contentType)) {
 				return serialization;
 			}
@@ -119,11 +108,9 @@ public class CustomResponseDeserializer implements ResponseDeserializer {
 
 	private <R> R getDeserializedResponse(RestAction<R> action, Response response) throws ActionException {
 		String resultClass = action.getResultClass();
-		logger.log(Level.INFO, "getDeserializedResponse()->resultClass=" + resultClass);
 
 		if (resultClass != null) {
 			ContentType contentType = ContentType.valueOf(response.getHeader(HttpHeaders.CONTENT_TYPE));
-			logger.log(Level.INFO, "getDeserializedResponse()->contentType=" + contentType);
 			Serialization serialization = findSerialization(resultClass, contentType);
 
 			if (serialization != null) {

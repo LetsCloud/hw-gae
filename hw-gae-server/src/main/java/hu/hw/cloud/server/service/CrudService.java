@@ -16,7 +16,7 @@ public interface CrudService<T extends BaseEntity, D extends BaseDto> {
 
 	T create(D dto) throws Throwable;
 
-	T read(String id) throws Throwable;
+	T read(String webSafeKey) throws Throwable;
 
 	T update(T entity) throws Throwable;
 

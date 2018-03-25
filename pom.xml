@@ -12,8 +12,8 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
 
-		<appengine.app.id>hw-cloud1</appengine.app.id>
-		<appengine.app.version>5</appengine.app.version>
+		<appengine.app.id>hw-cloud3</appengine.app.id>
+		<appengine.app.version>1</appengine.app.version>
 
 		<!-- ********************** -->
 		<!-- Client side properties -->
@@ -43,7 +43,6 @@
 		<commons-collections4.version>4.1</commons-collections4.version>
 		<gae-studio.version>1.0</gae-studio.version>
 		<validation-api.version>1.1.0.Final</validation-api.version>
-		<web-push.version>3.0.1</web-push.version>
 
 		<!-- ***************** -->
 		<!-- Common properties -->
@@ -175,21 +174,25 @@
 				<groupId>com.github.gwtmaterialdesign</groupId>
 				<artifactId>gwt-material</artifactId>
 				<version>${gwt-material.version}</version>
+				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>com.github.gwtmaterialdesign</groupId>
 				<artifactId>gwt-material-themes</artifactId>
 				<version>${gwt-material.version}</version>
+				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>com.github.gwtmaterialdesign</groupId>
 				<artifactId>gwt-material-addins</artifactId>
 				<version>${gwt-material.version}</version>
+				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>com.github.gwtmaterialdesign</groupId>
 				<artifactId>gwt-material-table</artifactId>
 				<version>${gwt-material.version}</version>
+				<scope>provided</scope>
 			</dependency>
 
 			<!-- ***************** -->
@@ -303,14 +306,6 @@
 				<groupId>joda-time</groupId>
 				<artifactId>joda-time</artifactId>
 				<version>2.9.7</version>
-			</dependency>
-
-
-			<!-- Web Push -->
-			<dependency>
-				<groupId>nl.martijndwars</groupId>
-				<artifactId>web-push</artifactId>
-				<version>${web-push.version}</version>
 			</dependency>
 
 

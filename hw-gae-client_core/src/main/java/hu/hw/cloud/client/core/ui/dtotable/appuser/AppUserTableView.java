@@ -15,6 +15,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import gwt.material.design.client.constants.IconType;
 import gwt.material.design.client.constants.TextAlign;
 import gwt.material.design.client.data.SelectionType;
+import gwt.material.design.client.data.component.RowComponent;
 import gwt.material.design.client.ui.MaterialIcon;
 import gwt.material.design.client.ui.table.MaterialDataTable;
 import gwt.material.design.client.ui.table.cell.TextColumn;
@@ -23,7 +24,10 @@ import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.shared.AppUserResource;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
@@ -33,6 +37,7 @@ import javax.inject.Inject;
  */
 public class AppUserTableView extends ViewWithUiHandlers<AppUserTableUiHandlers>
 		implements AppUserTablePresenter.MyView {
+	private static Logger logger = Logger.getLogger(AppUserTableView.class.getName());
 
 	interface Binder extends UiBinder<HTMLPanel, AppUserTableView> {
 	}
@@ -64,7 +69,6 @@ public class AppUserTableView extends ViewWithUiHandlers<AppUserTableUiHandlers>
 
 		table.setUseCategories(false);
 
-		table.setUseCategories(false);
 		if (table.getColumns().size() > 0)
 			return;
 
@@ -73,6 +77,10 @@ public class AppUserTableView extends ViewWithUiHandlers<AppUserTableUiHandlers>
 		// table.setLoadMask(true);
 
 		// Add the tables columns
+
+		/*
+		 * NAME
+		 */
 		table.addColumn(new TextColumn<AppUserDto>() {
 			@Override
 			public boolean isSortable() {
@@ -80,11 +88,19 @@ public class AppUserTableView extends ViewWithUiHandlers<AppUserTableUiHandlers>
 			}
 
 			@Override
+			public Comparator<? super RowComponent<AppUserDto>> sortComparator() {
+				return (o1, o2) -> o1.getData().getName().compareToIgnoreCase(o2.getData().getName());
+			}
+
+			@Override
 			public String getValue(AppUserDto object) {
-				return object.getUsername();
+				return object.getName();
 			}
 		}, i18n.userEditorUsername());
 
+		/*
+		 * EMAIL ADDRESS
+		 */
 		table.addColumn(new TextColumn<AppUserDto>() {
 			@Override
 			public boolean isSortable() {
@@ -96,8 +112,10 @@ public class AppUserTableView extends ViewWithUiHandlers<AppUserTableUiHandlers>
 				return object.getEmailAddress();
 			}
 		}, i18n.usersTableEmail());
-		// Example of a widget column!
-		// You can add any handler to the column cells widget.
+		
+		//
+		// EDIT ICON
+		// 
 		table.addColumn(new WidgetColumn<AppUserDto, MaterialIcon>() {
 			@Override
 			public TextAlign textAlign() {
@@ -115,6 +133,54 @@ public class AppUserTableView extends ViewWithUiHandlers<AppUserTableUiHandlers>
 				});
 
 				icon.setIconType(IconType.EDIT);
+				return icon;
+			}
+		});
+		
+		//
+		// INVITE ICON
+		// 
+		table.addColumn(new WidgetColumn<AppUserDto, MaterialIcon>() {
+			@Override
+			public TextAlign textAlign() {
+				return TextAlign.CENTER;
+			}
+
+			@Override
+			public MaterialIcon getValue(AppUserDto object) {
+				MaterialIcon icon = new MaterialIcon();
+				icon.addClickHandler(new ClickHandler() {
+					@Override
+					public void onClick(ClickEvent event) {
+						getUiHandlers().inviteItem(object);
+					}
+				});
+
+				icon.setIconType(IconType.DRAFTS);
+				return icon;
+			}
+		});
+		
+		//
+		// CLEAR FCM TOKENS ICON
+		// 
+		table.addColumn(new WidgetColumn<AppUserDto, MaterialIcon>() {
+			@Override
+			public TextAlign textAlign() {
+				return TextAlign.CENTER;
+			}
+
+			@Override
+			public MaterialIcon getValue(AppUserDto object) {
+				MaterialIcon icon = new MaterialIcon();
+				icon.addClickHandler(new ClickHandler() {
+					@Override
+					public void onClick(ClickEvent event) {
+						getUiHandlers().clearFcmTokens(object);
+					}
+				});
+
+				icon.setIconType(IconType.REMOVE_FROM_QUEUE);
 				return icon;
 			}
 		});
@@ -137,7 +203,9 @@ public class AppUserTableView extends ViewWithUiHandlers<AppUserTableUiHandlers>
 
 	@Override
 	public void setData(List<AppUserDto> data) {
+		logger.log(Level.INFO, "setData()");
+		table.getView().clearRows(true);
 		table.setRowData(0, data);
-		table.getView().refresh();
+		table.sort(0);
 	}
 }

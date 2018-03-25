@@ -31,7 +31,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 
 	private static final String SENDER_EMAIL = "csernikr@gmail.com";
 	private static final String SENDER_NAME = "HostWare Cloud Admin";
-	private static final String ACTIVATION_URL = "https://hw-cloud1.appspot.com/inf#/activate?token=";
+	private static final String ACTIVATION_URL = "https://hw-cloud3.appspot.com//spa/v1/user/activate/";
 
 	private static final String ACT_SUBJECT = "actSubject";
 	private static final String ACT_MESSAGE = "actMessage";
@@ -57,12 +57,16 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 		LOGGER.info("confirmRegistration");
 		
 		AppUser user = event.getUser();
+		LOGGER.info("confirmRegistration->user=" + user);
+
 		String token = UUID.randomUUID().toString();
 		try {
 			appUserService.createVerificationToken(user, token);
 		} catch (Throwable e1) {
+			LOGGER.info("confirmRegistration->" + e1.getMessage());
 			e1.printStackTrace();
 		}
+		LOGGER.info("confirmRegistration-2");
 
 		String recipientAddress = user.getEmailAddress();
 		String recipientName = user.getUsername();
@@ -73,12 +77,14 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 		Session session = Session.getDefaultInstance(props, null);
 
 		try {
+			LOGGER.info("confirmRegistration-3");
 			Message msg = new MimeMessage(session);
 			msg.setFrom(new InternetAddress(SENDER_EMAIL, SENDER_NAME));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(recipientAddress, recipientName));
 			msg.setSubject(subject);
 			msg.setText(message + " " + ACTIVATION_URL+ token);
 			Transport.send(msg);
+			LOGGER.info("confirmRegistration-4");
 		} catch (AddressException e) {
 			LOGGER.info("AddressException");
 		} catch (MessagingException e) {

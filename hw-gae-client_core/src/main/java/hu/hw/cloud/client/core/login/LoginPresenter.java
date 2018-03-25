@@ -21,9 +21,12 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 import hu.hw.cloud.client.core.CoreNameTokens;
+import hu.hw.cloud.client.core.gin.CustomActionException;
+import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.security.AppData;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.shared.AuthService;
+import hu.hw.cloud.shared.dto.EntityPropertyCode;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
 
 public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresenter.MyProxy>
@@ -36,6 +39,8 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 		void setAccountId(String accountId);
 
 		void setAppCode(String appCode);
+
+		void displayError(EntityPropertyCode code, String message);
 	}
 
 	@NameToken(CoreNameTokens.LOGIN)
@@ -49,12 +54,13 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 	private final AuthService authService;
 	private final AppData appData;
 	private final CurrentUser currentUser;
+	private final CoreMessages i18n;
 
 	private String placeToGo;
 
 	@Inject
 	LoginPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager, RestDispatch dispatcher,
-			AuthService authService, AppData appData, CurrentUser currentUser) {
+			AuthService authService, AppData appData, CurrentUser currentUser, CoreMessages i18n) {
 		super(eventBus, view, proxy, RevealType.Root);
 		logger.log(Level.INFO, "LoginPresenter()");
 
@@ -63,6 +69,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 		this.authService = authService;
 		this.appData = appData;
 		this.currentUser = currentUser;
+		this.i18n = i18n;
 
 		getView().setUiHandlers(this);
 	}
@@ -100,8 +107,8 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
 			@Override
 			public void onSuccess(Boolean result) {
+				logger.log(Level.INFO, "LoginPresenter().checkCurentUser().onSuccess().result=" + result);
 				if (result) {
-					logger.log(Level.INFO, "LoginPresenter().onSuccess().result="+result);
 					onSuccessLogin(false);
 				} else {
 					getProxy().manualReveal(LoginPresenter.this);
@@ -110,6 +117,11 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
 			@Override
 			public void onFailure(Throwable caught) {
+				if (caught instanceof CustomActionException) {
+					customMessage((CustomActionException) caught);
+					return;
+				}
+				logger.log(Level.INFO, "LoginPresenter().checkCurentUser().onFailure()");
 				getProxy().manualReveal(LoginPresenter.this);
 			}
 		});
@@ -132,11 +144,17 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
 			@Override
 			public void onSuccess(Void result) {
+				logger.log(Level.INFO, "LoginPresenter().sendLoginRequest().onSuccess()");
 				onSuccessLogin(true);
 			}
 
 			@Override
 			public void onFailure(Throwable caught) {
+				if (caught instanceof CustomActionException) {
+					customMessage((CustomActionException) caught);
+					return;
+				}
+				logger.log(Level.INFO, "LoginPresenter().sendLoginRequest().onFailure()");
 			}
 		});
 	}
@@ -180,5 +198,31 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 	private void goToPlace(String place) {
 		PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken(place).build();
 		placeManager.revealPlace(placeRequest);
+	}
+
+	private void customMessage(CustomActionException e) {
+		String message;
+		switch (e.getErDto().getExceptionType()) {
+		case LOGIN_INSUFFICIENT_AUTHENTICATION:
+			message = i18n.loginInsufficientAuthentication();
+			break;
+		case LOGIN_USERNAME_NOT_FOUND:
+			message = i18n.loginUsernameNotFound();
+			break;
+		case LOGIN_BAD_CREDENTIALS:
+			message = i18n.loginErrorBadCredentials();
+			break;
+		case LOGIN_DISABLED_USER:
+			message = i18n.loginErrorDisabledUser();
+			break;
+		case LOGIN_UNKNOWN_PROBLEM:
+			message = i18n.loginErrorUnknownProblem();
+			break;
+		default:
+			message = i18n.loginErrorUnknownProblem();
+			break;
+		}
+
+		getView().displayError(EntityPropertyCode.NONE, message);
 	}
 }

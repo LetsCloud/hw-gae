@@ -5,9 +5,7 @@ package hu.hw.cloud.server.entity.common;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.logging.Logger;
 
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
@@ -20,7 +18,9 @@ import hu.hw.cloud.shared.dto.common.RoleDto;
 import hu.hw.cloud.shared.dto.common.UserGroupDto;
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
 import hu.hw.cloud.server.entity.VerificationToken;
+import hu.hw.cloud.server.entity.chat.FcmToken;
 import hu.hw.cloud.server.entity.hotel.Hotel;
+import hu.hw.cloud.server.security.RegistrationListener;
 
 /**
  * @author CR
@@ -28,13 +28,28 @@ import hu.hw.cloud.server.entity.hotel.Hotel;
  */
 @Entity
 public class AppUser extends AccountChild {
-	private static final Logger LOGGER = LoggerFactory.getLogger(AppUser.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(RegistrationListener.class.getName());
 
 	/**
 	 * 
 	 */
 	private static final String PROPERTY_USERNAME = "username";
 	private static final String PROPERTY_EMAILADDRESS = "emailAddress";
+
+	/**
+	 * Kód
+	 */
+	private String code;
+
+	/**
+	 * Név
+	 */
+	private String name;
+
+	/**
+	 * Fotó
+	 */
+	private String picture;
 
 	/**
 	 * Bejelentkezőnév
@@ -113,51 +128,6 @@ public class AppUser extends AccountChild {
 	}
 
 	/**
-	 * Entitás módosítása DTO alapján
-	 * 
-	 * @param dto
-	 */
-	public void update(AppUserDto dto) {
-		clearUniqueIndexes();
-
-		super.update(dto);
-
-		if (dto.getAdmin() != null)
-			setAdmin(dto.getAdmin());
-
-		if (dto.getEmailAddress() != null) {
-			setEmailAddress(dto.getEmailAddress());
-			addUniqueIndex(PROPERTY_EMAILADDRESS, dto.getEmailAddress());
-		}
-
-		if (dto.getEnabled() != null)
-			setEnabled(dto.getEnabled());
-
-		if (dto.getUsername() != null) {
-			setUsername(dto.getUsername());
-			addUniqueIndex(PROPERTY_USERNAME, dto.getUsername());
-		}
-
-		if (dto.getPassword() != null)
-			setPassword(dto.getPassword());
-
-		if (dto.getRoleDtos() != null)
-			setRoles(Role.createList(dto.getRoleDtos()));
-
-		if (dto.getAccessibleHotelDtos() != null)
-			setAccessibleHotels(Hotel.createList(dto.getAccessibleHotelDtos()));
-
-		if (dto.getFcmTokenDtos() != null)
-			setFcmTokens(FcmToken.createList(dto.getFcmTokenDtos()));
-
-		if (dto.getDefaultHotelDto() != null)
-			setDefaultHotel(new Hotel(dto.getDefaultHotelDto()));
-
-		if (dto.getUserGroupDtos() != null)
-			setUserGroups(UserGroup.createList(dto.getUserGroupDtos()));
-	}
-
-	/**
 	 * Kontruktor RegisterDTO-ból
 	 * 
 	 * @param registerDto
@@ -167,6 +137,30 @@ public class AppUser extends AccountChild {
 		setUsername(registerDto.getUsername());
 		setPassword(registerDto.getUserPassword());
 		setEmailAddress(registerDto.getUserEmail());
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 
 	public String getUsername() {
@@ -287,6 +281,66 @@ public class AppUser extends AccountChild {
 	}
 
 	/**
+	 * Entitás módosítása DTO alapján
+	 * 
+	 * @param dto
+	 */
+	public void update(AppUserDto dto) {
+		clearUniqueIndexes();
+
+		super.update(dto);
+
+		if (dto.getCode() != null)
+			setCode(dto.getCode());
+
+		if (dto.getName() != null)
+			setName(dto.getName());
+
+		if (dto.getPicture() != null)
+			setPicture(dto.getPicture());
+
+		if (dto.getAdmin() != null)
+			setAdmin(dto.getAdmin());
+
+		if (dto.getEmailAddress() != null) {
+			if (!dto.getEmailAddress().equals(getEmailAddress())) {
+				LOGGER.info("PROPERTY_EMAILADDRESS"+dto.getEmailAddress()+"/"+getEmailAddress());
+				setEmailAddress(dto.getEmailAddress());
+				addUniqueIndex(PROPERTY_EMAILADDRESS, dto.getEmailAddress());
+			}
+		}
+
+		if (dto.getEnabled() != null)
+			setEnabled(dto.getEnabled());
+
+		if (dto.getUsername() != null) {
+			if (!dto.getUsername().equals(getUsername())) {
+				LOGGER.info("PROPERTY_USERNAME->"+dto.getUsername()+"/"+getUsername());
+				setUsername(dto.getUsername());
+				addUniqueIndex(PROPERTY_USERNAME, dto.getUsername());
+			}
+		}
+
+		if (dto.getPassword() != null)
+			setPassword(dto.getPassword());
+
+		if (dto.getRoleDtos() != null)
+			setRoles(Role.createList(dto.getRoleDtos()));
+
+		if (dto.getAccessibleHotelDtos() != null)
+			setAccessibleHotels(Hotel.createList(dto.getAccessibleHotelDtos()));
+
+		if (dto.getFcmTokenDtos() != null)
+			setFcmTokens(FcmToken.createList(dto.getFcmTokenDtos()));
+
+		if (dto.getDefaultHotelDto() != null)
+			setDefaultHotel(new Hotel(dto.getDefaultHotelDto()));
+
+		if (dto.getUserGroupDtos() != null)
+			setUserGroups(UserGroup.createList(dto.getUserGroupDtos()));
+	}
+
+	/**
 	 * DTO létrehozása entitásból
 	 * 
 	 * @param entity
@@ -306,6 +360,15 @@ public class AppUser extends AccountChild {
 	 */
 	public AppUserDto updateDto(AppUserDto dto) {
 		dto = (AppUserDto) super.updateDto(dto);
+
+		if (this.getCode() != null)
+			dto.setCode(this.getCode());
+
+		if (this.getName() != null)
+			dto.setName(this.getName());
+
+		if (this.getPicture() != null)
+			dto.setPicture(this.getPicture());
 
 		if (this.getUsername() != null)
 			dto.setUsername(this.getUsername());
@@ -378,5 +441,21 @@ public class AppUser extends AccountChild {
 		String ret = "User:{" + super.toString() + ", username=" + username + ", password=" + password
 				+ ", emailAddress=" + emailAddress + ", enabled=" + enabled + ", admin=" + admin + "}";
 		return ret;
+	}
+
+	public static List<AppUser> ref2EntityList(List<Ref<AppUser>> refList) {
+		List<AppUser> list = new ArrayList<AppUser>();
+		for (Ref<AppUser> ref : refList) {
+			list.add(ref.get());
+		}
+		return list;
+	}
+
+	public static List<Ref<AppUser>> entity2RefList(List<AppUser> entityList) {
+		List<Ref<AppUser>> list = new ArrayList<Ref<AppUser>>();
+		for (AppUser entity : entityList) {
+			list.add(Ref.create(entity));
+		}
+		return list;
 	}
 }

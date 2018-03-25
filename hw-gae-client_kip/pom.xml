@@ -161,6 +161,10 @@
 						<configuration>
 							<moduleName>hu.hw.cloud.KipModuleDev</moduleName>
 							<moduleShortName>kip_module</moduleShortName>
+							<codeserverArgs>
+								<arg>-port</arg>
+								<arg>4532</arg>
+							</codeserverArgs>
 						</configuration>
 					</plugin>
 				</plugins>
