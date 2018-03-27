@@ -21,6 +21,8 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 import gwt.material.design.client.pwa.PwaManager;
+import gwt.material.design.client.ui.MaterialLink;
+import gwt.material.design.client.ui.MaterialToast;
 import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.app.AppPresenter.MyView;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent;
@@ -83,6 +85,22 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 
 		PwaManager.getInstance().setServiceWorker(swManager).setWebManifest(appCode + "_manifest.json")
 				.setThemeColor("#2196f3").load();
+		
+		configOnFcmMessage();
+		
+		swManager.onFcmTokenRefresh(token -> swManager.fcmSubscribe(token));
+
+	}
+
+	private void configOnFcmMessage() {
+		swManager.onFcmMessage(dataMessage -> {
+			String action = dataMessage.getData().getAction();
+			String href = action.substring(action.indexOf("#"));
+			MaterialLink link = new MaterialLink("MEGNYITOM");
+			link.setHref(href);
+			new MaterialToast(link).toast(
+					"ÜZENET:" + dataMessage.getData().getTitle() + "->" + dataMessage.getData().getBody(), 10000);
+		});
 	}
 
 	@Override
@@ -98,13 +116,20 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 
 			@Override
 			public void onSuccess(AppUserDto result) {
+				logger.log(Level.INFO, "AppPresenter.checkCurrentUser()->onSuccess()");
 				if (result == null) {
 					currentUser.setLoggedIn(false);
 					return;
 				}
 				currentUser.setAppUserDto(result);
 				currentUser.setLoggedIn(true);
-				swManager.requestFcbPermission(() -> swManager.getFcbToken(token -> swManager.fcmSubscribe(token)));
+				logger.log(Level.INFO, "AppPresenter.checkCurrentUser()->onSuccess()-2");
+				
+				menuPresenter.referesh();
+				
+				swManager.requestFcbPermission(() -> swManager.getFcbToken(token -> {
+					swManager.fcmSubscribe(token);
+				}));
 			}
 
 			@Override

@@ -55,6 +55,21 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("Create an Account")
 	String loginCreate();
 
+	@DefaultMessage("Insufficient authentication!")
+	String loginInsufficientAuthentication();
+
+	@DefaultMessage("Username not found!")
+	String loginUsernameNotFound();
+
+	@DefaultMessage("Bad credentials!")
+	String loginErrorBadCredentials();
+
+	@DefaultMessage("The user is disabled!")
+	String loginErrorDisabledUser();
+
+	@DefaultMessage("Umknwon login problem!")
+	String loginErrorUnknownProblem();
+
 	/*
 	 * REGISTER
 	 */
@@ -194,6 +209,12 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("Modify User")
 	String userEditorModifyTitle();
 
+	@DefaultMessage("Code")
+	String userEditorCode();
+
+	@DefaultMessage("Name")
+	String userEditorName();
+
 	@DefaultMessage("Email")
 	String userEditorEmail();
 
@@ -215,5 +236,36 @@ public interface CoreMessages extends Messages {
 
 	@DefaultMessage("Name")
 	String userGroupEditorName();
+
+	
+	/*
+	 * SEND MESSAGE
+	 */
+
+	@DefaultMessage("Type a message")
+	String sendMessagePlaceHolder();
+
+	
+	/*
+	 * CREATE CHAT
+	 */
+
+	@DefaultMessage("Create a Chat")
+	String createChatHeader();
+
+	@DefaultMessage("Feel free to communicate")
+	String createChatSubHeader();
+
+	@DefaultMessage("Invited groups and users")
+	String createChatInvited();
+	
+	@DefaultMessage("Choose group or user")
+	String createChatToInvite();
+	
+	@DefaultMessage("Groups")
+	String createChatGroupGroup();
+
+	@DefaultMessage("Users")
+	String createChatUserGroup();
 
 }

@@ -17,8 +17,10 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import gwt.material.design.client.ui.MaterialCheckBox;
 import gwt.material.design.client.ui.MaterialPanel;
 import gwt.material.design.client.ui.MaterialTextBox;
+import gwt.material.design.client.ui.MaterialToast;
 import hu.hw.cloud.client.core.resources.CoreResources;
 import hu.hw.cloud.shared.cnst.SubSystem;
+import hu.hw.cloud.shared.dto.EntityPropertyCode;
 
 public class LoginView extends ViewWithUiHandlers<LoginUiHandlers> implements LoginPresenter.MyView {
 	private static Logger logger = Logger.getLogger(LoginView.class.getName());
@@ -60,14 +62,15 @@ public class LoginView extends ViewWithUiHandlers<LoginUiHandlers> implements Lo
 
 	@Override
 	public void setAccountId(String accounId) {
-		accountId.setText(accounId);
+
 		Timer t = new Timer() {
 			@Override
 			public void run() {
 				accountId.setFocus(true);
+				accountId.setText(accounId);
 			}
 		};
-		t.schedule(500);
+		t.schedule(2000);
 	}
 
 	@Override
@@ -93,5 +96,10 @@ public class LoginView extends ViewWithUiHandlers<LoginUiHandlers> implements Lo
 			wallpaperStyle = res.wallpaperCss().orangeWallpaper();
 		}
 		headerPanel.addStyleName(wallpaperStyle);
+	}
+
+	@Override
+	public void displayError(EntityPropertyCode code, String message) {
+		MaterialToast.fireToast(message);
 	}
 }

@@ -9,6 +9,10 @@ import java.util.Set;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
+import hu.hw.cloud.client.firebase.messaging.MessagingRegistration;
+import hu.hw.cloud.client.firebase.messaging.js.Fnx;
+import hu.hw.cloud.client.firebase.messaging.js.Messaging;
+
 /**
  * @author robi
  *
@@ -17,6 +21,9 @@ public class FirebaseRegister {
 
     private final Map<HandlerRegistration, Boolean> handlerRegistrations = Maps.newHashMap();
 
+    public HandlerRegistration addMessaging(Messaging messaging, Fnx.Arg fn, boolean on) {
+        return add(new MessagingRegistration(messaging, fn), false, on);
+}
     public HandlerRegistration add(HandlerRegistration handlerRegistration, boolean auth, boolean on) {
         handlerRegistrations.put(handlerRegistration, auth);
         if (on) {

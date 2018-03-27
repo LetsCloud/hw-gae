@@ -22,7 +22,6 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
-import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent;
 import hu.hw.cloud.client.core.security.LoggedInGatekeeper;
 import hu.hw.cloud.client.kip.KipNameTokens;
@@ -46,7 +45,7 @@ public class AtendantsPresenter extends Presenter<AtendantsPresenter.MyView, Ate
 	}
 
 	@ProxyStandard
-	@NameToken(CoreNameTokens.HOME)
+	@NameToken(KipNameTokens.HK_ATENDANTS)
 	@UseGatekeeper(LoggedInGatekeeper.class)
 	interface MyProxy extends ProxyPlace<AtendantsPresenter> {
 	}

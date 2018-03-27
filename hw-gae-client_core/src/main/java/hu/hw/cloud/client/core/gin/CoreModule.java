@@ -72,12 +72,12 @@ public class CoreModule extends AbstractPresenterModule {
 	@Singleton
 	MessagingManager provideMessagingManager() {
 		Config config = new Config();
-		config.setApiKey("AIzaSyDeeu6_zljBv-yq93OIT54ZUEdkZKZCmz8");
-		config.setAuthDomain("hw-cloud1.firebaseapp.com");
-		config.setDatabaseURL("https://hw-cloud1.firebaseio.com");
-		config.setProjectId("hw-cloud1");
-		config.setStorageBucket("hw-cloud1.appspot.com");
-		config.setMessagingSenderId("489469080035");
+		config.setApiKey("AIzaSyBxdI9sQDSDks-6ux76lksux78agADWMm4");
+		config.setAuthDomain("hw-cloud3.firebaseapp.com");
+		config.setDatabaseURL("https://hw-cloud3.firebaseio.com");
+		config.setProjectId("hw-cloud3");
+		config.setStorageBucket("hw-cloud3.appspot.com");
+		config.setMessagingSenderId("1069431891980");
 		Firebase firebase = Firebase.initializeApp(config);
 		logger.log(Level.INFO, "NotificationsPresenter.onBind().firebase.getName()" + firebase.getName());
 

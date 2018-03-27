@@ -7,15 +7,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.JsonUtils;
 
 import gwt.material.design.client.pwa.serviceworker.js.ServiceWorkerRegistration;
-import gwt.material.design.jquery.client.api.Event;
-import gwt.material.design.jquery.client.api.Functions;
-import gwt.material.design.jquery.client.api.Functions.Func;
-
+import hu.hw.cloud.client.core.promise.xgwt.Fn;
 import hu.hw.cloud.client.firebase.Firebase;
+import hu.hw.cloud.client.firebase.messaging.js.Fnx;
 import hu.hw.cloud.client.firebase.messaging.js.Messaging;
 
 /**
@@ -25,25 +21,11 @@ import hu.hw.cloud.client.firebase.messaging.js.Messaging;
 public class MessagingManager implements HasMessagingFeatures {
 	private static Logger logger = Logger.getLogger(MessagingManager.class.getName());
 
-	private Firebase firebase;
+	private final Firebase firebase;
+	Fnx.NoArg unsubscribe;
 
 	public MessagingManager(Firebase firebase) {
 		this.firebase = firebase;
-
-		firebase.messaging().onMessage((payload) -> {
-			logger.log(Level.INFO, "firebase.messaging().onMessage()->payload=" + JsonUtils.stringify(payload, null));
-		});
-	}
-
-	@Override
-	public void getToken(Functions.Func1<String> callback) {
-		logger.log(Level.INFO, "MessagingManager.getToken()");
-		getMessaging().getToken().then(object -> {
-			logger.log(Level.INFO, "getMessaging().getToken().then(object=" + object);
-			String token = (String) object;
-			callback.call(token);
-			return true;
-		});
 	}
 
 	@Override
@@ -56,21 +38,44 @@ public class MessagingManager implements HasMessagingFeatures {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public void getToken(Fn.Arg<String> callback) {
+		logger.log(Level.INFO, "MessagingManager.getToken()");
+		getMessaging().getToken().then(object -> {
+			logger.log(Level.INFO, "getMessaging().getToken().then(object=" + object);
+			String token = (String) object;
+			callback.call(token);
+		}).katch(error -> {
+			logger.log(Level.INFO, "getMessaging().getToken().katch()" + error.toString());
+		});
+	}
+
 	@Override
 	public void useServiceWorker(ServiceWorkerRegistration r) {
 		firebase.messaging().useServiceWorker(r);
 	}
 
 	@Override
-	public void requestPermission(Func callback) {
+	public void requestPermission(Fn.NoArg callback) {
 		logger.log(Level.INFO, "MessagingManager.requestPermission()");
-		getMessaging().requestPermission().then(object -> {
+		getMessaging().requestPermission().then(() -> {
+			logger.log(Level.INFO, "MessagingManager.requestPermission().then");
 			callback.call();
-			return true;
 		});
 	}
 
-	protected void onMessage() {
+	@Override
+	public void onTokenRefresh(Fn.Arg<String> callback) {
+		getMessaging().onTokenRefresh(() -> {
+			logger.log(Level.INFO, "MessagingManager().onTokenRefresh()");
+			getToken(callback);
+		});
+	}
+
+	@Override
+	public void onMessage(Fnx.Arg callback) {
 		logger.log(Level.INFO, "onMessage()");
+		unsubscribe = getMessaging().onMessage(callback);
 	}
 }

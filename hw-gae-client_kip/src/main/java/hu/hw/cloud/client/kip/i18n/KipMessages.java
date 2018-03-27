@@ -15,6 +15,9 @@ public interface KipMessages extends Messages {
 	 * MAIN MENU
 	 */
 
+	@DefaultMessage("Chat Room")
+	String mainMenuItemChatRoom();
+
 	@DefaultMessage("Atendants")
 	String mainMenuItemAtendants();
 
@@ -56,6 +59,17 @@ public interface KipMessages extends Messages {
 
 	@DefaultMessage("Users & Roles")
 	String mainMenuItemUsers();
+	
+
+	/*
+	 * CHAT ROOM
+	 */
+
+	@DefaultMessage("Chat Room")
+	String chatRoomTitle();
+
+	@DefaultMessage("All attendants")
+	String chatRoomDescription();
 	
 
 	/*

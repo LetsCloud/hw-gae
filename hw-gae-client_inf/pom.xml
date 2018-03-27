@@ -168,6 +168,10 @@
 						<configuration>
 							<moduleName>hu.hw.cloud.InfModuleDev</moduleName>
 							<moduleShortName>inf_module</moduleShortName>
+							<codeserverArgs>
+								<arg>-port</arg>
+								<arg>4534</arg>
+							</codeserverArgs>
 						</configuration>
 					</plugin>
 				</plugins>

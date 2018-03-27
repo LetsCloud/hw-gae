@@ -112,7 +112,7 @@
 				</m:MaterialDropDown>
 
 				<!-- propertyLink -->
-				<m:MaterialLink text="Demo A Hotel" activates="propertyDropDown"
+				<m:MaterialLink ui:field="hotelLink" activates="propertyDropDown"
 					iconType="DOMAIN" iconPosition="LEFT" textColor="GREY_LIGHTEN_5"
 					addStyleNames="{style.clearBoth}" />
 
@@ -130,10 +130,10 @@
 				<!-- userBox -->
 				<m.html:Div addStyleNames="{style.userBox} {style.clearBoth}">
 					<!-- userImage -->
-					<m:MaterialImage resource="{res.profileImg}"
+					<m:MaterialImage ui:field="userImage"
 						addStyleNames="{style.userImg}" float="LEFT" />
 					<!-- userLink -->
-					<m:MaterialLink text="rm@demohotels.com" activates="userDropDown"
+					<m:MaterialLink ui:field="userLink" activates="userDropDown"
 						textColor="GREY_LIGHTEN_5" float="RIGHT" addStyleNames="{style.userDrop}" />
 					<!-- userDropDown -->
 					<m:MaterialDropDown ui:field="userDropDown"

@@ -72,6 +72,15 @@ public class KipAppPresenter extends AppPresenter<KipAppPresenter.MyProxy> {
 	private List<MenuItemDto> createMenuitems() {
 		List<MenuItemDto> menuItems = new ArrayList<MenuItemDto>();
 
+		// Assignemnts
+		MenuItemDto chatRoomItem = new MenuItemDto();
+		chatRoomItem.setIndex(1);
+		chatRoomItem.setType(MenuItemType.MENU_ITEM);
+		chatRoomItem.setIcon(IconType.FORUM.name());
+		chatRoomItem.setText(i18n.mainMenuItemChatRoom());
+		chatRoomItem.setNameToken(KipNameTokens.CHAT_ROOM);
+		menuItems.add(chatRoomItem);
+
 		// Attendants
 		MenuItemDto atendantsItem = new MenuItemDto();
 		atendantsItem.setIndex(1);
@@ -89,15 +98,6 @@ public class KipAppPresenter extends AppPresenter<KipAppPresenter.MyProxy> {
 		assignmentsItem.setText(i18n.mainMenuItemAssignment());
 		assignmentsItem.setNameToken(KipNameTokens.HK_ASSIGNMENTS);
 		menuItems.add(assignmentsItem);
-
-		// Assignemnts
-		MenuItemDto minBarItem = new MenuItemDto();
-		minBarItem.setIndex(1);
-		minBarItem.setType(MenuItemType.MENU_ITEM);
-		minBarItem.setIcon(IconType.LOCAL_BAR.name());
-		minBarItem.setText(i18n.mainMenuItemAssignment());
-		minBarItem.setNameToken(KipNameTokens.NOTIFICATIONS);
-		menuItems.add(minBarItem);
 
 		// Perfomance
 

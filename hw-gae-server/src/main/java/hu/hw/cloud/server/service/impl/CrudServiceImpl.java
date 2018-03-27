@@ -72,8 +72,8 @@ public abstract class CrudServiceImpl<T extends BaseEntity, D extends BaseDto, R
 	}
 
 	@Override
-	public T read(String id) throws Throwable {
-		return repository.findByWebSafeKey(id);
+	public T read(String webSafeKey) throws Throwable {
+		return repository.findByWebSafeKey(webSafeKey);
 	}
 
 	@Override

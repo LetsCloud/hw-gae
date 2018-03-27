@@ -33,8 +33,9 @@ public abstract class BaseDto implements Dto {
 
 	public BaseDto(BaseDto source) {
 		this();
-		this.id = source.id;
-		this.version = source.version;
+		this.id = source.getId();
+		this.version = source.getVersion();
+		this.webSafeKey = source.getWebSafeKey();
 	}
 
 	public Long getId() {

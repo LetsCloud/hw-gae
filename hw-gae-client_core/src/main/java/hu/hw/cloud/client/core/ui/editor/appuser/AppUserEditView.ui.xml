@@ -9,7 +9,35 @@
 		inDuration="500" outDuration="500">
 		<m:MaterialModalContent>
 			<m:MaterialTitle ui:field="title" />
+			<m:MaterialRow>
+				<m:MaterialColumn grid="s12 m6">
+					<m:MaterialButton text="Photos" iconType="ARROW_DROP_DOWN"
+						iconPosition="RIGHT" textColor="WHITE" activates="photoDrop" />
+					<!-- My Drop Down -->
+					<m:MaterialDropDown activator="photoDrop"
+						constrainWidth="true">
+						<m:MaterialLink ui:field="directorLink" text="Director" />
+						<m:MaterialLink ui:field="financeLink" text="Finance" />
+						<m:MaterialLink ui:field="salesLink" text="Sales" />
+						<m:MaterialLink ui:field="fomLink" text="FOM" />
+						<m:MaterialLink ui:field="recLink" text="Receptionist" />
+						<m:MaterialLink ui:field="fandbLink" text="F and B" />
+						<m:MaterialLink ui:field="eHousekeeperLink" text="Executive HK" />
+						<m:MaterialLink ui:field="housekeeper1Link" text="Housekeeper1" />
+						<m:MaterialLink ui:field="housekeeper2Link" text="Housekeeper2" />
+						<m:MaterialLink ui:field="maintenanceLink" text="Maintenance" />
+					</m:MaterialDropDown>
+				</m:MaterialColumn>
+				<m:MaterialColumn grid="s12 m6">
+					<m:MaterialImage ui:field="image" type="MATERIALBOXED"
+						caption="Photo" />
+				</m:MaterialColumn>
+			</m:MaterialRow>
 
+			<m:MaterialTextBox ui:field="code" type="TEXT"
+				label="{i18nCore.userEditorCode}" />
+			<m:MaterialTextBox ui:field="name" type="TEXT"
+				label="{i18nCore.userEditorName}" />
 			<m:MaterialTextBox ui:field="username" type="TEXT"
 				label="{i18nCore.userEditorUsername}" />
 			<m:MaterialTextBox ui:field="emailAddress" type="TEXT"

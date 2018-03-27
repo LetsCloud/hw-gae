@@ -50,7 +50,7 @@ public class RegisterView extends ViewWithUiHandlers<RegisterUiHandlers> impleme
 	public interface Driver extends SimpleBeanEditorDriver<RegisterDto, RegisterView> {
 	}
 
-	private CoreMessages i18n;
+	private final CoreMessages i18n;
 
 	@Inject
 	RegisterView(Binder uiBinder, CoreMessages i18n, CountryConstants countries) {

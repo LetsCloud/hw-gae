@@ -28,6 +28,7 @@ import gwt.material.design.client.constants.IconPosition;
 import gwt.material.design.client.constants.IconType;
 import gwt.material.design.client.ui.MaterialCollapsible;
 import gwt.material.design.client.ui.MaterialHeader;
+import gwt.material.design.client.ui.MaterialImage;
 import gwt.material.design.client.ui.MaterialLink;
 import gwt.material.design.client.ui.MaterialNavBar;
 import gwt.material.design.client.ui.MaterialSideNavPush;
@@ -65,9 +66,12 @@ public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements Menu
 
 	@UiField
 	SimplePanel navBarSlot;
-	
+
 	@UiField
-	MaterialLink logoutLink;
+	MaterialLink accountLink, hotelLink, userLink, logoutLink;
+
+	@UiField
+	MaterialImage userImage;
 
 	private final CoreResources res;
 	private List<MaterialLink> singleLinks = new ArrayList<MaterialLink>();
@@ -101,17 +105,17 @@ public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements Menu
 
 	@Override
 	public void setAccountName(String accountName) {
-		// profileWidget.setAccountName(accountName);
-	}
-
-	@Override
-	public void setUserName(String userName) {
-		// profileWidget.setUserName(userName);
+		accountLink.setText(accountName);
 	}
 
 	@Override
 	public void setHotelName(String hotelName) {
-		// profileWidget.setHotelName(hotelName);
+		hotelLink.setText(hotelName);
+	}
+
+	@Override
+	public void setUserName(String userName) {
+		userLink.setText(userName);
 	}
 
 	@Override
@@ -206,5 +210,10 @@ public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements Menu
 			break;
 		}
 
+	}
+
+	@Override
+	public void setUserImageUrl(String url) {
+		userImage.setUrl(url);
 	}
 }

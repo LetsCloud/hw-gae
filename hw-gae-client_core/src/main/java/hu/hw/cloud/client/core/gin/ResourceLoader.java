@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import com.google.gwt.dom.client.StyleInjector;
 
 import hu.hw.cloud.client.core.resources.CoreResources;
+import hu.hw.cloud.client.core.resources.GssResources;
 
 /**
  * @author CR
@@ -15,13 +16,14 @@ import hu.hw.cloud.client.core.resources.CoreResources;
  */
 public class ResourceLoader {
 	@Inject
-    ResourceLoader(CoreResources resources) {
+    ResourceLoader(CoreResources resources, GssResources gssResources) {
 
 		StyleInjector.injectAtStart(resources.materialize().getText());
 		StyleInjector.inject(resources.gwtMaterial().getText());
 		StyleInjector.injectAtEnd(resources.coreCss().getText());
 		
 		resources.wallpaperCss().ensureInjected();
-        
+		gssResources.common().ensureInjected();
+       
     }
 }

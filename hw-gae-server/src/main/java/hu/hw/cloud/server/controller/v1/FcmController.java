@@ -34,8 +34,8 @@ import org.springframework.web.context.request.WebRequest;
 import com.google.gson.JsonObject;
 
 import hu.hw.cloud.server.api.v1.BaseController;
+import hu.hw.cloud.server.entity.chat.FcmToken;
 import hu.hw.cloud.server.entity.common.AppUser;
-import hu.hw.cloud.server.entity.common.FcmToken;
 import hu.hw.cloud.server.service.AppUserService;
 import hu.hw.cloud.server.service.impl.fcm.FcmService;
 import hu.hw.cloud.server.service.impl.fcm.Subscription;

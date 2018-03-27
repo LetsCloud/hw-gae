@@ -33,6 +33,10 @@
 	<bean id="userGroupRepository" class="hu.hw.cloud.server.repository.ofy.UserGroupRepositoryImpl" />
 	<bean id="currencyRepository"
 		class="hu.hw.cloud.server.repository.ofy.CurrencyRepositoryImpl" />
+
+	<bean id="chatRepository"
+		class="hu.hw.cloud.server.repository.ofy.ChatRepositoryImpl" />
+	
 	<bean id="guestRepository" class="hu.hw.cloud.server.repository.ofy.GuestRepositoryImpl" />
 	<bean id="hkAssignmentRepo" class="hu.hw.cloud.server.repository.ofy.HkAssignmentRepoImpl" />
 	<bean id="hotelRepository" class="hu.hw.cloud.server.repository.ofy.HotelRepositoryImpl" />
@@ -69,6 +73,10 @@
 	</bean>
 	<bean id="userGroupService" class="hu.hw.cloud.server.service.impl.UserGroupServiceImpl">
 		<constructor-arg ref="userGroupRepository" />
+		<constructor-arg ref="accountRepository" />
+	</bean>
+	<bean id="chatService" class="hu.hw.cloud.server.service.impl.ChatServiceImpl">
+		<constructor-arg ref="chatRepository" />
 		<constructor-arg ref="accountRepository" />
 	</bean>
 	<bean id="dataBuilderService" class="hu.hw.cloud.server.service.impl.DataBuilderServiceImpl">

@@ -40,7 +40,11 @@ implements UserGroupService {
 		if (account == null)
 			return null;
 
-		return userGroupRepository.getByAccount(account);
+		List<UserGroup> result = userGroupRepository.getByAccount(account);
+		for (UserGroup group : result) {
+			group.getMembers();
+		}
+		return result;
 	}
 
 	@Override

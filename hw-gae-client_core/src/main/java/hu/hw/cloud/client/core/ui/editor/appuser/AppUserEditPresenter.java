@@ -4,6 +4,8 @@
 package hu.hw.cloud.client.core.ui.editor.appuser;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
@@ -30,6 +32,7 @@ import hu.hw.cloud.shared.dto.common.UserGroupDto;
  */
 public class AppUserEditPresenter extends PresenterWidget<AppUserEditPresenter.MyView>
 		implements AppUserEditUiHandlers {
+	private static Logger logger = Logger.getLogger(AppUserEditPresenter.class.getName());
 
 	private static final String FIRST_PASSWORD = "*";
 
@@ -79,6 +82,7 @@ public class AppUserEditPresenter extends PresenterWidget<AppUserEditPresenter.M
 
 	@Override
 	public void create() {
+		logger.log(Level.INFO, "create()");
 		isNew = true;
 
 		AppUserDto userDto = new AppUserDto();

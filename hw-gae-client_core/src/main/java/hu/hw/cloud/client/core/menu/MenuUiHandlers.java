@@ -18,4 +18,6 @@ public interface MenuUiHandlers extends UiHandlers {
 	void setContentPush(MenuState menuState);
 	
 	void logout();
+	
+	void referesh();
 }

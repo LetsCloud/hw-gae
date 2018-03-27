@@ -4,6 +4,8 @@
 package hu.hw.cloud.client.core.ui.dtotable.appuser;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
@@ -19,6 +21,7 @@ import hu.hw.cloud.client.core.ui.dtotable.AbstractTablePresenter;
 import hu.hw.cloud.client.core.ui.editor.DtoEditorFactory;
 import hu.hw.cloud.client.core.ui.editor.appuser.AppUserEditPresenter;
 import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
+import hu.hw.cloud.client.core.util.ErrorHandlerAsyncCallback;
 import hu.hw.cloud.shared.AppUserResource;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
 
@@ -28,6 +31,7 @@ import hu.hw.cloud.shared.dto.common.AppUserDto;
  */
 public class AppUserTablePresenter extends AbstractTablePresenter<AppUserTablePresenter.MyView>
 		implements AppUserTableUiHandlers {
+	private static Logger logger = Logger.getLogger(AppUserTablePresenter.class.getName());
 
 	public interface MyView extends View, HasUiHandlers<AppUserTableUiHandlers> {
 		void setData(List<AppUserDto> data);
@@ -58,9 +62,11 @@ public class AppUserTablePresenter extends AbstractTablePresenter<AppUserTablePr
 
 	@Override
 	protected void loadData() {
+		logger.log(Level.INFO, "loadData()");
 		resourceDelegate.withCallback(new AbstractAsyncCallback<List<AppUserDto>>() {
 			@Override
 			public void onSuccess(List<AppUserDto> result) {
+				logger.log(Level.INFO, "loadData().onSuccess");
 				getView().setData(result);
 			}
 		}).list();
@@ -68,6 +74,7 @@ public class AppUserTablePresenter extends AbstractTablePresenter<AppUserTablePr
 
 	@Override
 	public void addItem() {
+		logger.log(Level.INFO, "addItem()");
 		editor.create();
 	}
 
@@ -88,5 +95,32 @@ public class AppUserTablePresenter extends AbstractTablePresenter<AppUserTablePr
 				loadData();
 			}
 		}).delete(webSafeKey);
+	}
+
+	@Override
+	public void inviteItem(AppUserDto dto) {
+		resourceDelegate.withCallback(new ErrorHandlerAsyncCallback<AppUserDto>(this) {
+			@Override
+			public void onSuccess(AppUserDto userDto) {
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+			}
+		}).invite(dto);
+	}
+
+	@Override
+	public void clearFcmTokens(AppUserDto dto) {
+		dto.getFcmTokenDtos().clear();
+		resourceDelegate.withCallback(new ErrorHandlerAsyncCallback<AppUserDto>(this) {
+			@Override
+			public void onSuccess(AppUserDto userDto) {
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+			}
+		}).update(dto);
 	}
 }

@@ -15,6 +15,10 @@ public interface AppUserTableUiHandlers extends UiHandlers {
 
 	void editItem(AppUserDto dto);
 
+	void inviteItem(AppUserDto dto);
+	
+	void clearFcmTokens(AppUserDto dto);
+
 	void deleteItem(AppUserDto dto);
 
 }

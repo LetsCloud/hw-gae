@@ -8,7 +8,7 @@ public class KipNameTokens {
 	public static final String ROOM_AVAILABILITY = "/roomAvailability";
 
 	// Housekeeping
-	public static final String NOTIFICATIONS = "/notifications";
+	public static final String CHAT_ROOM = "/chatRoom";
 	public static final String HK_CHANGE_STATUS = "/hkChangeStatus";
 	public static final String HK_ATENDANTS = "/hkAtendants";
 	public static final String HK_ASSIGNMENTS = "/hkAssignments";
