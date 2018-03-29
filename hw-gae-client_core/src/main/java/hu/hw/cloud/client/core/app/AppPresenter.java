@@ -77,14 +77,15 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 	protected void onBind() {
 		super.onBind();
 		logger.log(Level.INFO, "AppPresenter.onBind()");
+		String manifest = appCode + "_manifest.json";
 		setInSlot(SLOT_MENU, menuPresenter);
 
 		addRegisteredHandler(NavigationEvent.getType(), this);
 		addRegisteredHandler(SetPageTitleEvent.TYPE, this);
 		addRegisteredHandler(NetworkStatusEvent.TYPE, this);
 
-		PwaManager.getInstance().setServiceWorker(swManager).setWebManifest(appCode + "_manifest.json")
-				.setThemeColor("#2196f3").load();
+//		PwaManager.getInstance().setServiceWorker(swManager).setWebManifest(manifest)
+//				.setThemeColor("#2196f3").load();
 		
 		configOnFcmMessage();
 		
@@ -92,7 +93,7 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 
 	}
 
-	private void configOnFcmMessage() {
+	private void configOnFcmMessage() {	
 		swManager.onFcmMessage(dataMessage -> {
 			String action = dataMessage.getData().getAction();
 			String href = action.substring(action.indexOf("#"));
