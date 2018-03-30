@@ -45,7 +45,6 @@ public class AppServiceWorkerManager extends ServiceWorkerManager {
 	@Override
 	public boolean onRegistered(ServiceEvent event, ServiceWorkerRegistration registration) {
 		boolean result = super.onRegistered(event, registration);
-		logger.info("Service Worker is registered");
 
 		if (result)
 			fcmManager.useServiceWorker(registration);
@@ -62,7 +61,6 @@ public class AppServiceWorkerManager extends ServiceWorkerManager {
 	 * @param callback
 	 */
 	public void requestFcbPermission(Fn.NoArg callback) {
-		logger.info("AppServiceWorkerManager.requestFcbPermission()");
 		fcmManager.requestPermission(callback);
 	}
 
@@ -71,7 +69,6 @@ public class AppServiceWorkerManager extends ServiceWorkerManager {
 	 * @param callback
 	 */
 	public void getFcbToken(Fn.Arg<String> callback) {
-		logger.info("AppServiceWorkerManager.getFcbToken()");
 		fcmManager.getToken(callback);
 	}
 
@@ -80,7 +77,6 @@ public class AppServiceWorkerManager extends ServiceWorkerManager {
 	 * @param callback
 	 */
 	public void onFcmTokenRefresh(Fn.Arg<String> callback) {
-		logger.info("AppServiceWorkerManager.onFcmTokenRefresh()");
 		fcmManager.onTokenRefresh(callback);
 	}
 
@@ -89,7 +85,6 @@ public class AppServiceWorkerManager extends ServiceWorkerManager {
 	 * @param callback
 	 */
 	public void onFcmMessage(Fnx.Arg callback) {
-		logger.info("AppServiceWorkerManager.onFcmMessage()");
 		fcmManager.onMessage(callback);
 	}
 
@@ -98,7 +93,6 @@ public class AppServiceWorkerManager extends ServiceWorkerManager {
 	 * @param iidToken
 	 */
 	public void fcmSubscribe(String iidToken) {
-		logger.info("AppServiceWorkerManager.fcmSubscribe()");
 		dispatch.execute(fcmService.subscribe(iidToken, getUserAgent()), new AsyncCallback<Void>() {
 
 			@Override

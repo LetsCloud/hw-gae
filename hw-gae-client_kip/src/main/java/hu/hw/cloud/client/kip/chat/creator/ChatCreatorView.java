@@ -17,19 +17,10 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
-import gwt.material.design.addins.client.combobox.MaterialComboBox;
 import gwt.material.design.addins.client.overlay.MaterialOverlay;
 import gwt.material.design.client.base.MaterialWidget;
-import gwt.material.design.client.constants.CheckBoxType;
-import gwt.material.design.client.constants.CollectionType;
-import gwt.material.design.client.constants.WavesType;
 import gwt.material.design.client.ui.MaterialButton;
-import gwt.material.design.client.ui.MaterialCheckBox;
 import gwt.material.design.client.ui.MaterialCollection;
-import gwt.material.design.client.ui.MaterialCollectionItem;
-import gwt.material.design.client.ui.MaterialCollectionSecondary;
-import gwt.material.design.client.ui.MaterialLabel;
-import gwt.material.design.client.ui.html.OptGroup;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.kip.chat.editor.SendMessageWidget;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
@@ -47,9 +38,6 @@ public class ChatCreatorView extends ViewWithUiHandlers<ChatCreatorUiHandlers> i
 
 	@UiField
 	MaterialOverlay overlay;
-
-//	@UiField
-//	MaterialComboBox<UserGroupDto> receiversComboBox;
 
 	@UiField
 	SendMessageWidget sendMessageWidget;
@@ -84,24 +72,19 @@ public class ChatCreatorView extends ViewWithUiHandlers<ChatCreatorUiHandlers> i
 
 	@Override
 	public void clearReceiverList() {
-//		receiversComboBox.clear();
 		receiverCollection.clear();
 	}
 
 	@Override
 	public void addUserGroupList(List<UserGroupDto> userGroups) {
-//		receiversComboBox.add(new OptGroup(i18n.createChatGroupGroup()));
 		for (UserGroupDto dto : userGroups) {
-//			receiversComboBox.addItem(dto.getName(), dto);
 			receiverCollection.add(new ReceiverItem(dto));
 		}
 	}
 
 	@Override
 	public void addAppUserList(List<UserGroupDto> appUsers) {
-//		receiversComboBox.add(new OptGroup(i18n.createChatUserGroup()));
 		for (UserGroupDto dto : appUsers) {
-//			receiversComboBox.addItem(dto.getName(), dto);
 			receiverCollection.add(new ReceiverItem(dto));
 		}
 	}
@@ -113,26 +96,12 @@ public class ChatCreatorView extends ViewWithUiHandlers<ChatCreatorUiHandlers> i
 		for (Widget w : receiverCollection) {
 			ReceiverItem ri = (ReceiverItem)w;
 			if (ri.isSelected()) {
-				logger.info("saveMessage()->userGroup.getName()=" + ri.getValue().getName());
 				for (AppUserDto receiver : ri.getValue().getMemberDtos()) {
-					logger.info("saveMessage()->receiver.getName()=" + receiver.getName());
 					receiver.getUserGroupDtos().clear();
 					receivers.add(receiver);
 				}
 			}
 		}
-/*		
-		List<UserGroupDto> selected = receiversComboBox.getSelectedValues();
-		for (UserGroupDto userGroup : selected) {
-			logger.info("saveMessage()->userGroup.getName()=" + userGroup.getName());
-			for (AppUserDto receiver : userGroup.getMemberDtos()) {
-				logger.info("saveMessage()->receiver.getName()=" + receiver.getName());
-				receiver.getUserGroupDtos().clear();
-				receivers.add(receiver);
-			}
-		}
-*/		
-		logger.info("saveMessage()-2");
 		getUiHandlers().saveChat(receivers, sendMessageWidget.getText());
 		sendMessageWidget.clearText();
 	}
@@ -145,23 +114,5 @@ public class ChatCreatorView extends ViewWithUiHandlers<ChatCreatorUiHandlers> i
 	@UiHandler("btnCloseOverlay")
 	public void onCloseOverlay(ClickEvent event) {
 		close();
-	}
-	
-	private MaterialCollectionItem createReceiverItem(UserGroupDto userGroup) {
-		MaterialCollectionItem item = new MaterialCollectionItem();
-		item.setType(CollectionType.CHECKBOX);
-		item.setWaves(WavesType.DEFAULT);
-		
-		item.add(new MaterialLabel(userGroup.getName()));
-		
-		MaterialCheckBox checkBox = new MaterialCheckBox();
-		checkBox.setType(CheckBoxType.FILLED);
-		
-		MaterialCollectionSecondary sec = new MaterialCollectionSecondary();
-		sec.add(checkBox);
-		
-		item.add(sec);
-		
-		return item;
 	}
 }

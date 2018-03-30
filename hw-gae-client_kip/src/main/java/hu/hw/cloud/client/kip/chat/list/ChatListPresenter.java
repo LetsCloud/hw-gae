@@ -4,7 +4,6 @@
 package hu.hw.cloud.client.kip.chat.list;
 
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
@@ -50,6 +49,8 @@ public class ChatListPresenter extends PresenterWidget<ChatListPresenter.MyView>
 	ChatListPresenter(EventBus eventBus, PlaceManager placeManager, MyView view,
 			ChatEditorFactory chatEditorPresenterFactory, ResourceDelegate<ChatResource> resourceDelegate) {
 		super(eventBus, view);
+		logger.info("ChatListPresenter()");
+
 		this.placeManager = placeManager;
 		this.chatEditorPresenter = chatEditorPresenterFactory.createChatEditorPresenter();
 		this.resourceDelegate = resourceDelegate;
@@ -65,7 +66,6 @@ public class ChatListPresenter extends PresenterWidget<ChatListPresenter.MyView>
 
 	@Override
 	public void loadData(String chatWebSafeKey) {
-		logger.log(Level.INFO, "loadData()->chatWebSafeKey=" + chatWebSafeKey);
 		getView().refreshPanel(!Strings.isNullOrEmpty(chatWebSafeKey));
 
 		resourceDelegate.withCallback(new AbstractAsyncCallback<List<ChatDto>>() {
@@ -86,7 +86,6 @@ public class ChatListPresenter extends PresenterWidget<ChatListPresenter.MyView>
 
 	@Override
 	public void onSelectChat(String chatWebSafeKey) {
-		logger.log(Level.INFO, "onSelectChat->chatWebSafeKey=" + chatWebSafeKey);
 		PlaceRequest placeRequest = new Builder().nameToken(CoreNameTokens.getHome())
 				.with("id", String.valueOf(chatWebSafeKey)).build();
 

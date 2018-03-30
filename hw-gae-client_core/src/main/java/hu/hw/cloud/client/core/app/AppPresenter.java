@@ -1,6 +1,5 @@
 package hu.hw.cloud.client.core.app;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.gwt.user.client.Timer;
@@ -73,7 +72,6 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 	@Override
 	protected void onBind() {
 		super.onBind();
-		logger.log(Level.INFO, "AppPresenter.onBind()");
 		String manifest = appCode + "_manifest.json";
 		setInSlot(SLOT_MENU, menuPresenter);
 
@@ -106,25 +104,20 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 	@Override
 	protected void onReveal() {
 		super.onReveal();
-		logger.log(Level.INFO, "AppPresenter.onReveal()");
 		checkCurrentUser();
 	}
 
 	private void checkCurrentUser() {
-		logger.log(Level.INFO, "AppPresenter.checkCurrentUser()");
 		dispatch.execute(authService.getCurrentUser(), new AsyncCallback<AppUserDto>() {
 
 			@Override
 			public void onSuccess(AppUserDto result) {
-				logger.log(Level.INFO, "AppPresenter.checkCurrentUser()->onSuccess()");
-				logger.log(Level.INFO, "checkCurrentUser()->onSuccess()->result=" + result);
 				if (result == null) {
 					currentUser.setLoggedIn(false);
 					return;
 				}
 				currentUser.setAppUserDto(result);
 				currentUser.setLoggedIn(true);
-				logger.log(Level.INFO, "AppPresenter.checkCurrentUser()->onSuccess()-2");
 
 				menuPresenter.referesh();
 

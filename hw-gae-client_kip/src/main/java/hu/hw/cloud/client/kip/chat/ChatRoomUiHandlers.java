@@ -21,7 +21,5 @@ public interface ChatRoomUiHandlers extends UiHandlers {
 	
 	void createChat(MaterialWidget source);
 	
-	void createNotification();
-	
 	void subToServer(String iidToken);
 }

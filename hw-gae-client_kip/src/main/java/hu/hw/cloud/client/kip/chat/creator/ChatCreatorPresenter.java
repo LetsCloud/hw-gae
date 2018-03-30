@@ -5,7 +5,6 @@ package hu.hw.cloud.client.kip.chat.creator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
@@ -62,7 +61,7 @@ public class ChatCreatorPresenter extends PresenterWidget<ChatCreatorPresenter.M
 			ResourceDelegate<ChatResource> chatResource, ResourceDelegate<AppUserResource> appUserResource,
 			CurrentUser currentUser) {
 		super(eventBus, view);
-		logger.log(Level.INFO, "ChatCreatorPresenter()");
+		logger.info("ChatCreatorPresenter()");
 
 		this.placeManager = placeManager;
 		this.chatResource = chatResource;

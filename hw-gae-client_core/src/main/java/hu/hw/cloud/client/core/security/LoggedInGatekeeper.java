@@ -1,6 +1,5 @@
 package hu.hw.cloud.client.core.security;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
@@ -23,14 +22,13 @@ public class LoggedInGatekeeper implements Gatekeeper {
 
 	@Inject
 	LoggedInGatekeeper(PlaceManager placeManager, CurrentUser currentUser) {
-		logger.log(Level.INFO, "LoggedInGatekeeper");
+		logger.info("LoggedInGatekeeper()");
 		this.placeManager = placeManager;
 		this.currentUser = currentUser;
 	}
 
 	@Override
 	public boolean canReveal() {
-		logger.log(Level.INFO, "LoggedInGatekeeper.canReveal()");
 		if (!currentUser.isLoggedIn())
 			goToLogin();
 		return currentUser.isLoggedIn();

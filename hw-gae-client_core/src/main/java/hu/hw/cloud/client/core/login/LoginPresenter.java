@@ -1,6 +1,5 @@
 package hu.hw.cloud.client.core.login;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
@@ -62,7 +61,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 	LoginPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager, RestDispatch dispatcher,
 			AuthService authService, AppData appData, CurrentUser currentUser, CoreMessages i18n) {
 		super(eventBus, view, proxy, RevealType.Root);
-		logger.log(Level.INFO, "LoginPresenter()");
+		logger.info("LoginPresenter()");
 
 		this.placeManager = placeManager;
 		this.dispatcher = dispatcher;
@@ -107,7 +106,6 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
 			@Override
 			public void onSuccess(Boolean result) {
-				logger.log(Level.INFO, "LoginPresenter().checkCurentUser().onSuccess().result=" + result);
 				if (result) {
 					onSuccessLogin(false);
 				} else {
@@ -121,7 +119,6 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 					customMessage((CustomActionException) caught);
 					return;
 				}
-				logger.log(Level.INFO, "LoginPresenter().checkCurentUser().onFailure()");
 				getProxy().manualReveal(LoginPresenter.this);
 			}
 		});
@@ -144,7 +141,6 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
 			@Override
 			public void onSuccess(Void result) {
-				logger.log(Level.INFO, "LoginPresenter().sendLoginRequest().onSuccess()");
 				onSuccessLogin(true);
 			}
 
@@ -154,7 +150,6 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 					customMessage((CustomActionException) caught);
 					return;
 				}
-				logger.log(Level.INFO, "LoginPresenter().sendLoginRequest().onFailure()");
 			}
 		});
 	}

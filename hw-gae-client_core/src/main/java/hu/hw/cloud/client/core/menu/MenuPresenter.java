@@ -5,7 +5,6 @@ package hu.hw.cloud.client.core.menu;
 
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -77,7 +76,7 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView>
 	MenuPresenter(EventBus eventBus, MyView view, PlaceManager placeManager, RestDispatch dispatcher,
 			AuthService authService, CurrentUser currentUser, AppData appData, HasPermissionsGatekeeper menItemGatekeeper) {
 		super(eventBus, view);
-		logger.log(Level.INFO, "MenuPresenter()");
+		logger.info("MenuPresenter()");
 
 		this.placeManager = placeManager;
 		this.dispatcher = dispatcher;
@@ -98,10 +97,8 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView>
 	@Override
 	protected void onReveal() {
 		super.onReveal();
-		logger.log(Level.INFO, "MenuPresenter.onReveal()->in");
 
 		if (appData.getAppCode() != null) {
-			logger.log(Level.INFO, "MenuPresenter.onReveal()->appData.getAppCode()=" + appData.getAppCode());
 			getView().setAppCode(appData.getAppCode());
 		}
 		/*
@@ -112,7 +109,6 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView>
 		 * getView().setBusinessDate(currentUser.getCurrentHotelDto().getBusinessDate())
 		 * ;
 		 */
-		logger.log(Level.INFO, "MenuPresenter.onReveal()->out");
 	}
 
 	@Override
@@ -170,7 +166,6 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView>
 
 	@Override
 	public void referesh() {
-		logger.log(Level.INFO, "MenuPresenter.referesh()");
 		getView().setAccountName(currentUser.getAppUserDto().getAccountDto().getName());
 //		getView().setHotelName(currentUser.getCurrentHotelDto().getName());
 		getView().setUserImageUrl(currentUser.getAppUserDto().getPicture());
