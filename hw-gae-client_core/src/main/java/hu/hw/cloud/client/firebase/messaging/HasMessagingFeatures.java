@@ -3,8 +3,6 @@
  */
 package hu.hw.cloud.client.firebase.messaging;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 import gwt.material.design.client.pwa.serviceworker.js.ServiceWorkerRegistration;
 import hu.hw.cloud.client.core.promise.xgwt.Fn;
 import hu.hw.cloud.client.firebase.messaging.js.Fnx;

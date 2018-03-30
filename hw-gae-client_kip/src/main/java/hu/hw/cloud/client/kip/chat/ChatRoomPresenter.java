@@ -34,8 +34,6 @@ import hu.hw.cloud.client.kip.chat.creator.ChatCreatorPresenter;
 import hu.hw.cloud.client.kip.chat.list.ChatListFactory;
 import hu.hw.cloud.client.kip.chat.list.ChatListPresenter;
 import hu.hw.cloud.client.kip.i18n.KipMessages;
-import hu.hw.cloud.client.kip.push.PushPresenter;
-import hu.hw.cloud.client.kip.push.PushPresenterFactory;
 import hu.hw.cloud.shared.FcmService;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 
@@ -55,7 +53,6 @@ public class ChatRoomPresenter extends Presenter<ChatRoomPresenter.MyView, ChatR
 
 	PwaManager manager = PwaManager.getInstance();
 
-	private final PushPresenter pushPresenter;
 	private final ChatListPresenter chatListPresenter;
 	private final ChatCreatorPresenter chatCreatorPresenter;
 	private final RestDispatch dispatcher;
@@ -69,12 +66,11 @@ public class ChatRoomPresenter extends Presenter<ChatRoomPresenter.MyView, ChatR
 	}
 
 	@Inject
-	ChatRoomPresenter(EventBus eventBus, MyView view, MyProxy proxy, PushPresenterFactory pushPresenterFactory,
+	ChatRoomPresenter(EventBus eventBus, MyView view, MyProxy proxy,
 			ChatListFactory chatListFactory, ChatCreatorFactory chatCreatorFactory, RestDispatch dispatcher,
 			FcmService fcmService, MessagingManager messagingManager, KipMessages i18n) {
 		super(eventBus, view, proxy, KipAppPresenter.SLOT_MAIN);
 
-		this.pushPresenter = pushPresenterFactory.createPushPresenter();
 		this.chatListPresenter = chatListFactory.createChatListPresenter();
 		this.chatCreatorPresenter = chatCreatorFactory.createChatCreatorPresenter();
 		this.fcmService = fcmService;
@@ -117,11 +113,6 @@ public class ChatRoomPresenter extends Presenter<ChatRoomPresenter.MyView, ChatR
 		GWT.log("Push Notification Manager is not yet registered");
 
 		return null;
-	}
-
-	@Override
-	public void createNotification() {
-		pushPresenter.open();
 	}
 
 	@Override
