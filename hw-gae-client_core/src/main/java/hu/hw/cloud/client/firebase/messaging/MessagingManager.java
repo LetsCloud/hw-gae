@@ -3,7 +3,6 @@
  */
 package hu.hw.cloud.client.firebase.messaging;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.gwt.core.client.GWT;
@@ -25,6 +24,7 @@ public class MessagingManager implements HasMessagingFeatures {
 	Fnx.NoArg unsubscribe;
 
 	public MessagingManager(Firebase firebase) {
+		logger.info("MessagingManager()");
 		this.firebase = firebase;
 	}
 
@@ -41,13 +41,11 @@ public class MessagingManager implements HasMessagingFeatures {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void getToken(Fn.Arg<String> callback) {
-		logger.log(Level.INFO, "MessagingManager.getToken()");
 		getMessaging().getToken().then(object -> {
-			logger.log(Level.INFO, "getMessaging().getToken().then(object=" + object);
 			String token = (String) object;
 			callback.call(token);
 		}).katch(error -> {
-			logger.log(Level.INFO, "getMessaging().getToken().katch()" + error.toString());
+			logger.info("getMessaging().getToken().katch()" + error.toString());
 		});
 	}
 
@@ -58,9 +56,7 @@ public class MessagingManager implements HasMessagingFeatures {
 
 	@Override
 	public void requestPermission(Fn.NoArg callback) {
-		logger.log(Level.INFO, "MessagingManager.requestPermission()");
 		getMessaging().requestPermission().then(() -> {
-			logger.log(Level.INFO, "MessagingManager.requestPermission().then");
 			callback.call();
 		});
 	}
@@ -68,14 +64,12 @@ public class MessagingManager implements HasMessagingFeatures {
 	@Override
 	public void onTokenRefresh(Fn.Arg<String> callback) {
 		getMessaging().onTokenRefresh(() -> {
-			logger.log(Level.INFO, "MessagingManager().onTokenRefresh()");
 			getToken(callback);
 		});
 	}
 
 	@Override
 	public void onMessage(Fnx.Arg callback) {
-		logger.log(Level.INFO, "onMessage()");
 		unsubscribe = getMessaging().onMessage(callback);
 	}
 }

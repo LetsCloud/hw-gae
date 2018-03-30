@@ -92,7 +92,6 @@
 			<artifactId>gwt-charts</artifactId>
 		</dependency>
 
-
 		<!-- ***************** -->
 		<!-- Google Guava -->
 		<!-- ***************** -->

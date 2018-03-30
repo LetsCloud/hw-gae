@@ -23,7 +23,7 @@ import hu.hw.cloud.shared.dto.NotificationDto;
 public class FcmService2 {
 	private static final String FCM_URL = "https://fcm.googleapis.com/fcm/send";
 //	private static final String FCM_URL = "https://fcm.googleapis.com/v1/projects/hw-cloud3/messages:send";
-	private static final String SERVER_KEY = "AAAA-P8bqAw:APA91bGpukMwvymODYN-zY__BRvE-3z21NL0pTY1xNj9IbMC6R3ckNbbB8m1ldKLqIU0lynERUEOCi744T26zPONmdFpDgQA4Ui7S0MKbOLJtgFIdXYsoBjOlKVfVN7ZCR60nZ6Q2z-2";
+	private static final String SERVER_KEY = "AAAAGAt6I4o:APA91bF4FBaCBtd9s6_ASAd0RaYiFFx6eb0TurFomRI26cmDwEiG_3OH5ax4PdJSxK-ZVkl_Y6fDv_L-9o-ti-rlfwQwCZ6yq-SklwQF7LEgwJEihJjyLF4p2iUPgtECgR0be4NJsZ0b";
 
 	/**
 	 *

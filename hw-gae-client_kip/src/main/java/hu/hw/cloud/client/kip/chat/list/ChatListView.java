@@ -4,7 +4,6 @@
 package hu.hw.cloud.client.kip.chat.list;
 
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
@@ -59,6 +58,8 @@ public class ChatListView extends ViewWithUiHandlers<ChatListUiHandlers> impleme
 	*/
 	@Inject
 	ChatListView(Binder uiBinder, CoreMessages i18n) {
+		logger.info("ChatListView()");
+
 		initWidget(uiBinder.createAndBindUi(this));
 
 		this.i18n = i18n;

@@ -13,7 +13,6 @@ import hu.hw.cloud.client.kip.chat.creator.ChatCreatorModule;
 import hu.hw.cloud.client.kip.chat.editor.ChatEditorModule;
 import hu.hw.cloud.client.kip.chat.list.ChatListModule;
 import hu.hw.cloud.client.kip.gfilter.display.GfilterDisplayModule;
-import hu.hw.cloud.client.kip.push.PushModule;
 import hu.hw.cloud.client.kip.roomstatus.DesktopRoomStatusModule;
 import hu.hw.cloud.client.kip.roomstatus.filter.RoomStatusFilterModule;
 import hu.hw.cloud.client.kip.roomstatus.list.RoomStatusListModule;
@@ -39,7 +38,6 @@ public class ClientModule extends AbstractPresenterModule {
 		install(new RoomStatusListModule());
 		install(new RoomStatusFilterModule());
 		install(new ChatRoomModule());
-		install(new PushModule());
 		install(new ChatListModule());
 		install(new ChatCreatorModule());
 		install(new ChatEditorModule());

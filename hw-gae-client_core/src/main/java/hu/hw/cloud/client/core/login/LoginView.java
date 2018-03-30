@@ -70,7 +70,7 @@ public class LoginView extends ViewWithUiHandlers<LoginUiHandlers> implements Lo
 				accountId.setText(accounId);
 			}
 		};
-		t.schedule(2000);
+		t.schedule(500);
 	}
 
 	@Override

@@ -23,8 +23,6 @@
 	
 	<inherits name="com.google.common.collect.Collect" />
 
-	<!--Titkosításhoz <inherits name="org.apache.commons.GWTCommonsCodec" /> -->
-
 	<source path="client" />
 	<source path="shared" />
 

@@ -18,7 +18,6 @@
 
 	<!-- GWT Material -->
 	<inherits name="gwt.material.design.GwtMaterialBasicWithJQuery" />
-	<!-- <inherits name="gwt.material.design.themes.ThemeHwRed" /> -->
 	<inherits name="gwt.material.design.GwtMaterialTableBasic" />
 	<inherits name="gwt.material.design.addins.GwtMaterialAddinsBasic" />
 

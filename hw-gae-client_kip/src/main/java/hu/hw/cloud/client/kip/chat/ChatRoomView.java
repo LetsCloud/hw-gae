@@ -54,11 +54,6 @@ public class ChatRoomView extends ViewWithUiHandlers<ChatRoomUiHandlers> impleme
 		super.onAttach();
 	}
 
-	@Override
-	public void updateUi(boolean online) {
-		btnAdd.setEnabled(online);
-	}
-
 	@UiHandler("btnAdd")
 	void onAdd(ClickEvent e) {
 //		getUiHandlers().createNotification();

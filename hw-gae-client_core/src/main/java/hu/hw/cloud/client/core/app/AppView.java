@@ -53,10 +53,4 @@ public class AppView extends ViewImpl implements AppPresenter.MyView {
 		this.title.setText(title);
 		this.description.setText(description);
 	}
-
-	@Override
-	public void updateUi(boolean online) {
-		// TODO Auto-generated method stub
-		
-	}
 }

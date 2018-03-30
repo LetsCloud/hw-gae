@@ -6,7 +6,6 @@ package hu.hw.cloud.client.core.menu;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
@@ -79,6 +78,8 @@ public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements Menu
 
 	@Inject
 	MenuView(Binder uiBinder, CoreResources res) {
+		logger.info("MenuView()");
+
 		initWidget(uiBinder.createAndBindUi(this));
 
 		this.res = res;
@@ -154,7 +155,6 @@ public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements Menu
 		MaterialCollapsible collapsible = null;
 
 		for (MenuItemDto menuItem : menuItems) {
-			logger.log(Level.INFO, "MenuView.setMenuItems()->menuItem=" + menuItem.getText());
 			if (menuItem.getType().equals(MenuItemType.MENU_ITEM))
 				sideNav.add(createMenuItem(menuItem));
 
