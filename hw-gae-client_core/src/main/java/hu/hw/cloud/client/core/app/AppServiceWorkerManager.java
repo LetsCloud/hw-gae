@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.core.pwa;
+package hu.hw.cloud.client.core.app;
 
 import java.util.logging.Logger;
 

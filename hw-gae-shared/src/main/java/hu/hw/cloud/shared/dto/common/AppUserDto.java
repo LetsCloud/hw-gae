@@ -83,16 +83,16 @@ public class AppUserDto extends AccountChildDto {
 	public AppUserDto() {
 	}
 
-	public AppUserDto(String picture, Boolean enabled, String name,String emailAddress) {
+	public AppUserDto(String picture, Boolean enabled, String name, String emailAddress) {
 		this();
 		this.picture = picture;
 		this.enabled = enabled;
 		this.name = name;
 		this.emailAddress = emailAddress;
 		this.picture = picture;
-		
+
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -199,9 +199,9 @@ public class AppUserDto extends AccountChildDto {
 
 	@Override
 	public String toString() {
-		String ret = "UserDto:{" + super.toString() + ", username=" + username + ", password=" + password
-				+ ", emailAddress=" + emailAddress + ", enabled=" + enabled + ", admin=" + admin + ", roleDtos="
-				+ roleDtos + "}";
+		String ret = "AppUserDto:{" + super.toString() + ", name=" + name + ", username=" + username + ", password="
+				+ password + ", emailAddress=" + emailAddress + ", picture=" + picture + ", enabled=" + enabled
+				+ ", admin=" + admin + ", roleDtos=" + roleDtos + "}";
 		return ret;
 	}
 }

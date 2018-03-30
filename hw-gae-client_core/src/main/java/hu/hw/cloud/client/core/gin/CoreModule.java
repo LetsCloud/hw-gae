@@ -21,9 +21,9 @@ import com.gwtplatform.mvp.shared.proxy.RouteTokenFormatter;
 
 import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.activate.ActivateModule;
+import hu.hw.cloud.client.core.app.AppServiceWorkerManager;
 import hu.hw.cloud.client.core.login.LoginModule;
 import hu.hw.cloud.client.core.menu.MenuModule;
-import hu.hw.cloud.client.core.pwa.AppServiceWorkerManager;
 import hu.hw.cloud.client.core.register.RegisterModule;
 import hu.hw.cloud.client.core.security.AppData;
 import hu.hw.cloud.client.core.security.CurrentUser;

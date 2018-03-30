@@ -3,6 +3,7 @@ package hu.hw.cloud.client.core.app;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
@@ -28,19 +29,15 @@ import hu.hw.cloud.client.core.app.AppPresenter.MyView;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent.SetPageTitleHandler;
 import hu.hw.cloud.client.core.menu.MenuPresenter;
-import hu.hw.cloud.client.core.pwa.AppServiceWorkerManager;
-import hu.hw.cloud.client.core.pwa.HasNetworkStatus;
-import hu.hw.cloud.client.core.pwa.NetworkStatusEvent;
-import hu.hw.cloud.client.core.pwa.NetworkStatusEvent.NetworkStatusHandler;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.shared.AuthService;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
 
 public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<MyView, Proxy_>
-		implements NavigationHandler, SetPageTitleHandler, NetworkStatusHandler {
+		implements NavigationHandler, SetPageTitleHandler {
 	private static Logger logger = Logger.getLogger(AppPresenter.class.getName());
 
-	public interface MyView extends View, HasNetworkStatus {
+	public interface MyView extends View {
 		void setPageTitle(String title, String description);
 
 		void displayUserName(String userName);
@@ -82,18 +79,20 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 
 		addRegisteredHandler(NavigationEvent.getType(), this);
 		addRegisteredHandler(SetPageTitleEvent.TYPE, this);
-		addRegisteredHandler(NetworkStatusEvent.TYPE, this);
 
-//		PwaManager.getInstance().setServiceWorker(swManager).setWebManifest(manifest)
-//				.setThemeColor("#2196f3").load();
-		
-		configOnFcmMessage();
-		
-		swManager.onFcmTokenRefresh(token -> swManager.fcmSubscribe(token));
+		Timer t = new Timer() {
 
+			@Override
+			public void run() {
+				PwaManager.getInstance().setServiceWorker(swManager).setWebManifest(manifest).load();
+				configOnFcmMessage();
+				swManager.onFcmTokenRefresh(token -> swManager.fcmSubscribe(token));
+			}
+		};
+		t.schedule(500);
 	}
 
-	private void configOnFcmMessage() {	
+	private void configOnFcmMessage() {
 		swManager.onFcmMessage(dataMessage -> {
 			String action = dataMessage.getData().getAction();
 			String href = action.substring(action.indexOf("#"));
@@ -118,6 +117,7 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 			@Override
 			public void onSuccess(AppUserDto result) {
 				logger.log(Level.INFO, "AppPresenter.checkCurrentUser()->onSuccess()");
+				logger.log(Level.INFO, "checkCurrentUser()->onSuccess()->result=" + result);
 				if (result == null) {
 					currentUser.setLoggedIn(false);
 					return;
@@ -125,9 +125,9 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 				currentUser.setAppUserDto(result);
 				currentUser.setLoggedIn(true);
 				logger.log(Level.INFO, "AppPresenter.checkCurrentUser()->onSuccess()-2");
-				
+
 				menuPresenter.referesh();
-				
+
 				swManager.requestFcbPermission(() -> swManager.getFcbToken(token -> {
 					swManager.fcmSubscribe(token);
 				}));
@@ -170,11 +170,6 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 
 	public MenuPresenter getMenuPresenter() {
 		return menuPresenter;
-	}
-
-	@Override
-	public void onNetworkStatus(NetworkStatusEvent event) {
-		getView().updateUi(event.isOnline());
 	}
 
 	public AppServiceWorkerManager getServiceWorkerManager() {

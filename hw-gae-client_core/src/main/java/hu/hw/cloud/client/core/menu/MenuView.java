@@ -115,6 +115,7 @@ public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements Menu
 
 	@Override
 	public void setUserName(String userName) {
+		logger.log(Level.INFO, "setUserName->userName=" + userName);
 		userLink.setText(userName);
 	}
 
@@ -214,6 +215,7 @@ public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements Menu
 
 	@Override
 	public void setUserImageUrl(String url) {
+		logger.log(Level.INFO, "setUserImageUrl->url=" + url);
 		userImage.setUrl(url);
 	}
 }
