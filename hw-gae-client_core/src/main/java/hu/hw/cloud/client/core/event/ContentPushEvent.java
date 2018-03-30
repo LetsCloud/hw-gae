@@ -3,7 +3,6 @@
  */
 package hu.hw.cloud.client.core.event;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.gwt.event.shared.EventHandler;
@@ -36,11 +35,11 @@ public class ContentPushEvent extends GwtEvent<ContentPushEvent.ContentPushHandl
 	}
 
 	public ContentPushEvent(MenuState menuState) {
+		LOGGER.info("ContentPushEvent()");
 		this.menuState = menuState;		
 	}
 
     public static void fire(HasHandlers source, MenuState menuState) {
-		LOGGER.log(Level.INFO, "fire()->menuState=" + menuState);
         source.fireEvent(new ContentPushEvent(menuState));
     }
 

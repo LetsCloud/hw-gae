@@ -4,13 +4,11 @@
 package hu.hw.cloud.client.kip.chat.editor;
 
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
 import com.google.gwt.editor.client.Editor;
-import com.google.gwt.editor.client.SimpleBeanEditorDriver;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -35,10 +33,6 @@ public class ChatEditorView extends ViewWithUiHandlers<ChatEditorUiHandlers>
 	interface Binder extends UiBinder<Widget, ChatEditorView> {
 	}
 
-	interface Driver extends SimpleBeanEditorDriver<ChatDto, ChatEditorView> {
-	}
-
-	private final Driver driver;
 	private final CoreMessages i18n;
 
 	@UiField
@@ -54,13 +48,12 @@ public class ChatEditorView extends ViewWithUiHandlers<ChatEditorUiHandlers>
 	 * 
 	 */
 	@Inject
-	ChatEditorView(Binder uiBinder, Driver driver, CoreMessages i18n) {
+	ChatEditorView(Binder uiBinder, CoreMessages i18n) {
+		logger.info("ChatEditorView()");
+
 		initWidget(uiBinder.createAndBindUi(this));
 
-		this.driver = driver;
 		this.i18n = i18n;
-
-		driver.initialize(this);
 
 		sendMessageWidget.addSendIconClickHandler(new ClickHandler() {
 			@Override
@@ -80,9 +73,7 @@ public class ChatEditorView extends ViewWithUiHandlers<ChatEditorUiHandlers>
 
 	@Override
 	public void setPosts(List<ChatPostDto> posts, String currentUserKey) {
-		logger.log(Level.INFO, "setPosts().start");
 		chatPostsWidget.setPosts(posts, currentUserKey);
-		logger.log(Level.INFO, "setPosts().end");
 	}
 
 	@Override

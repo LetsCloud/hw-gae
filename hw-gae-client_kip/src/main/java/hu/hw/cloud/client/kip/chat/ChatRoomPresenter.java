@@ -3,7 +3,6 @@
  */
 package hu.hw.cloud.client.kip.chat;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.gwt.core.client.GWT;
@@ -70,6 +69,7 @@ public class ChatRoomPresenter extends Presenter<ChatRoomPresenter.MyView, ChatR
 			ChatListFactory chatListFactory, ChatCreatorFactory chatCreatorFactory, RestDispatch dispatcher,
 			FcmService fcmService, MessagingManager messagingManager, KipMessages i18n) {
 		super(eventBus, view, proxy, KipAppPresenter.SLOT_MAIN);
+		logger.info("ChatRoomPresenter()");
 
 		this.chatListPresenter = chatListFactory.createChatListPresenter();
 		this.chatCreatorPresenter = chatCreatorFactory.createChatCreatorPresenter();
@@ -85,7 +85,6 @@ public class ChatRoomPresenter extends Presenter<ChatRoomPresenter.MyView, ChatR
 	protected void onBind() {
 		super.onBind();
 
-		logger.log(Level.INFO, "NotificationsPresenter.onBind()");
 
 		setInSlot(LIST_SLOT, chatListPresenter);
 		setInSlot(CREATOR_SLOT, chatCreatorPresenter);
@@ -94,7 +93,6 @@ public class ChatRoomPresenter extends Presenter<ChatRoomPresenter.MyView, ChatR
 	@Override
 	public void prepareFromRequest(PlaceRequest request) {
 		String param = request.getParameter("id", null);
-		logger.log(Level.INFO, "prepareFromRequest()->param=" + param);
 		chatListPresenter.loadData(param);
 	}
 
