@@ -6,7 +6,6 @@ package hu.hw.cloud.client.kip.chat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.google.common.base.Strings;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
@@ -28,8 +27,6 @@ import gwt.material.design.client.ui.MaterialToast;
 import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.app.AppServiceWorkerManager;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent;
-import hu.hw.cloud.client.core.pwa.HasNetworkStatus;
-import hu.hw.cloud.client.core.pwa.NetworkStatusEvent;
 import hu.hw.cloud.client.firebase.messaging.MessagingManager;
 import hu.hw.cloud.client.kip.app.KipAppPresenter;
 import hu.hw.cloud.client.kip.chat.creator.ChatCreatorFactory;
@@ -47,10 +44,10 @@ import hu.hw.cloud.shared.cnst.MenuItemType;
  *
  */
 public class ChatRoomPresenter extends Presenter<ChatRoomPresenter.MyView, ChatRoomPresenter.MyProxy>
-		implements NetworkStatusEvent.NetworkStatusHandler, ChatRoomUiHandlers {
+		implements ChatRoomUiHandlers {
 	private static Logger logger = Logger.getLogger(ChatRoomPresenter.class.getName());
 
-	interface MyView extends View, HasNetworkStatus, HasUiHandlers<ChatRoomUiHandlers> {
+	interface MyView extends View, HasUiHandlers<ChatRoomUiHandlers> {
 	}
 
 	public static final SingleSlot<PresenterWidget<?>> LIST_SLOT = new SingleSlot<>();
@@ -85,7 +82,6 @@ public class ChatRoomPresenter extends Presenter<ChatRoomPresenter.MyView, ChatR
 		this.messagingManager = messagingManager;
 		this.i18n = i18n;
 
-		addRegisteredHandler(NetworkStatusEvent.TYPE, this);
 		getView().setUiHandlers(this);
 	}
 
@@ -110,11 +106,6 @@ public class ChatRoomPresenter extends Presenter<ChatRoomPresenter.MyView, ChatR
 	protected void onReveal() {
 		super.onReveal();
 		SetPageTitleEvent.fire(i18n.chatRoomTitle(), i18n.chatRoomDescription(), MenuItemType.MENU_ITEM, this);
-	}
-
-	@Override
-	public void onNetworkStatus(NetworkStatusEvent event) {
-		getView().updateUi(event.isOnline());
 	}
 
 	@Override
