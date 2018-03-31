@@ -48,8 +48,6 @@ public class AppUserEditorPresenter
 	private static Logger logger = Logger.getLogger(AppUserEditorPresenter.class.getName());
 
 	private static final String FIRST_PASSWORD = "*";
-	private AppUserDto currentAppUser;
-	private Boolean createNew;
 
 	public interface MyView extends View, HasUiHandlers<AppUserEditorUiHandlers> {
 		void edit(Boolean isNew, AppUserDto dto);
@@ -67,10 +65,10 @@ public class AppUserEditorPresenter
 	private final PlaceManager placeManager;
 	private final ResourceDelegate<AppUserResource> resourceDelegate;
 	private final ResourceDelegate<UserGroupResource> userGroupresourceDelegate;
-
 	private final CurrentUser currentUser;
-
 	private final CoreMessages i18n;
+
+	private String dtoWebSafeKey;
 
 	@Inject
 	AppUserEditorPresenter(EventBus eventBus, PlaceManager placeManager, MyView view, MyProxy proxy,
@@ -91,41 +89,12 @@ public class AppUserEditorPresenter
 	@Override
 	public void prepareFromRequest(PlaceRequest request) {
 		logger.info("AppUserEditorPresenter().prepareFromRequest()");
-		String param = request.getParameter("id", null);
-		createNew = Strings.isNullOrEmpty(param);
-
-		if (!createNew) {
-			logger.info("AppUserEditorPresenter().prepareFromRequest()->param=" + param);
-			resourceDelegate.withCallback(new AsyncCallback<AppUserDto>() {
-				@Override
-				public void onSuccess(AppUserDto dto) {
-					logger.info("AppUserEditorPresenter().prepareFromRequest().onSuccess()->dto=" + dto);
-					getView().edit(false, dto);
-				}
-
-				@Override
-				public void onFailure(Throwable caught) {
-					getView().displayError(EntityPropertyCode.NONE, caught.getMessage());
-				}
-			}).read(param);
-		} else {
-			logger.info("AppUserEditorPresenter().prepareFromRequest()->createNew");
-			currentAppUser = new AppUserDto();
-			currentAppUser.setAccountDto(currentUser.getAppUserDto().getAccountDto());
-			currentAppUser.setPassword(FIRST_PASSWORD);
-			getView().edit(true, currentAppUser);
-		}
+		dtoWebSafeKey = request.getParameter("id", null);
 	}
 
 	@Override
 	protected void onReveal() {
 		super.onReveal();
-
-		if (createNew) {
-			SetPageTitleEvent.fire(i18n.userEditorCreateTitle(), "", MenuItemType.MENU_ITEM, this);
-		} else {
-			SetPageTitleEvent.fire(i18n.userEditorModifyTitle(), "", MenuItemType.MENU_ITEM, this);
-		}
 
 		loadUserGroupData();
 	}
@@ -135,13 +104,45 @@ public class AppUserEditorPresenter
 			@Override
 			public void onSuccess(List<UserGroupDto> result) {
 				getView().setUserGroupData(result);
+
+				if (Strings.isNullOrEmpty(dtoWebSafeKey)) {
+					SetPageTitleEvent.fire(i18n.userEditorCreateTitle(), "", MenuItemType.MENU_ITEM, AppUserEditorPresenter.this);
+					create();
+				} else {
+					SetPageTitleEvent.fire(i18n.userEditorModifyTitle(), "", MenuItemType.MENU_ITEM, AppUserEditorPresenter.this);
+					edit(dtoWebSafeKey);
+				}
 			}
 		}).list();
 	}
 
+	private void create() {
+		logger.info("AppUserEditorPresenter().create()");
+		AppUserDto dto = new AppUserDto();
+		dto.setAccountDto(currentUser.getAppUserDto().getAccountDto());
+		dto.setPassword(FIRST_PASSWORD);
+		getView().edit(true, dto);
+	}
+
+	private void edit(String webSafeKey) {
+		logger.info("AppUserEditorPresenter().edit()->webSafeKey=" + webSafeKey);
+		resourceDelegate.withCallback(new AsyncCallback<AppUserDto>() {
+			@Override
+			public void onSuccess(AppUserDto dto) {
+				logger.info("AppUserEditorPresenter().edit().onSuccess()->dto=" + dto);
+				getView().edit(false, dto);
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+				getView().displayError(EntityPropertyCode.NONE, caught.getMessage());
+			}
+		}).read(webSafeKey);
+	}
+
 	@Override
 	public void save(AppUserDto dto) {
-		if (createNew) {
+		if (Strings.isNullOrEmpty(dtoWebSafeKey)) {
 			createEntity(dto);
 		} else {
 			updateEntity(dto);

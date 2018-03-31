@@ -201,7 +201,7 @@ public class AppUserDto extends AccountChildDto {
 	public String toString() {
 		String ret = "AppUserDto:{" + super.toString() + ", name=" + name + ", username=" + username + ", password="
 				+ password + ", emailAddress=" + emailAddress + ", picture=" + picture + ", enabled=" + enabled
-				+ ", admin=" + admin + ", roleDtos=" + roleDtos + "}";
+				+ ", admin=" + admin + ", roleDtos=" + roleDtos + ", userGroupDtos=" + userGroupDtos +"}";
 		return ret;
 	}
 }
