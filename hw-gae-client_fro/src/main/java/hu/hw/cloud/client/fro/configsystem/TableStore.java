@@ -3,7 +3,7 @@
  */
 package hu.hw.cloud.client.fro.configsystem;
 
-import hu.hw.cloud.client.core.ui.dtotable.AbstractTablePresenter;
+import hu.hw.cloud.client.fro.table.AbstractTablePresenter;
 
 /**
  * @author robi

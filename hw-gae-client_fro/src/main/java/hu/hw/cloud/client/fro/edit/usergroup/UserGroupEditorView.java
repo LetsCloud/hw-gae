@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.core.ui.editor.usergroup;
+package hu.hw.cloud.client.fro.edit.usergroup;
 
 import javax.inject.Inject;
 

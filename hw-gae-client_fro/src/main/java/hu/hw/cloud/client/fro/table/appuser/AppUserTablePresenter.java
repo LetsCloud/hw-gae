@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.core.ui.dtotable.appuser;
+package hu.hw.cloud.client.fro.table.appuser;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -15,13 +15,15 @@ import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 
+import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.security.CurrentUser;
-import hu.hw.cloud.client.core.ui.dtotable.AbstractTablePresenter;
-import hu.hw.cloud.client.core.ui.editor.DtoEditorFactory;
-import hu.hw.cloud.client.core.ui.editor.appuser.AppUserEditPresenter;
 import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
 import hu.hw.cloud.client.core.util.ErrorHandlerAsyncCallback;
+import hu.hw.cloud.client.fro.table.AbstractTablePresenter;
 import hu.hw.cloud.shared.AppUserResource;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
 
@@ -39,17 +41,17 @@ public class AppUserTablePresenter extends AbstractTablePresenter<AppUserTablePr
 
 	public static final SingleSlot<PresenterWidget<?>> SLOT_EDITOR = new SingleSlot<>();
 
+	private final PlaceManager placeManager;
 	private final ResourceDelegate<AppUserResource> resourceDelegate;
 
-	private final AppUserEditPresenter editor;
-
 	@Inject
-	AppUserTablePresenter(EventBus eventBus, MyView view, ResourceDelegate<AppUserResource> userResourceDelegate,
-			CurrentUser currentUser, DtoEditorFactory dtoEditorFactory) {
+	AppUserTablePresenter(EventBus eventBus, PlaceManager placeManager, MyView view,
+			ResourceDelegate<AppUserResource> resourceDelegate, CurrentUser currentUser) {
 		super(eventBus, view);
+		logger.info("AppUserTablePresenter()");
 
-		this.resourceDelegate = userResourceDelegate;
-		this.editor = dtoEditorFactory.createAppUserEditor();
+		this.placeManager = placeManager;
+		this.resourceDelegate = resourceDelegate;
 
 		getView().setUiHandlers(this);
 	}
@@ -57,7 +59,6 @@ public class AppUserTablePresenter extends AbstractTablePresenter<AppUserTablePr
 	@Override
 	protected void onBind() {
 		super.onBind();
-		setInSlot(SLOT_EDITOR, editor);
 	}
 
 	@Override
@@ -66,7 +67,7 @@ public class AppUserTablePresenter extends AbstractTablePresenter<AppUserTablePr
 		resourceDelegate.withCallback(new AbstractAsyncCallback<List<AppUserDto>>() {
 			@Override
 			public void onSuccess(List<AppUserDto> result) {
-				logger.log(Level.INFO, "loadData().onSuccess");
+				logger.info("loadData()->onSuccess()");
 				getView().setData(result);
 			}
 		}).list();
@@ -75,12 +76,18 @@ public class AppUserTablePresenter extends AbstractTablePresenter<AppUserTablePr
 	@Override
 	public void addItem() {
 		logger.log(Level.INFO, "addItem()");
-		editor.create();
+		PlaceRequest placeRequest = new Builder().nameToken(CoreNameTokens.USER_EDITOR).build();
+
+		placeManager.revealPlace(placeRequest);
 	}
 
 	@Override
 	public void editItem(AppUserDto dto) {
-		editor.edit(dto);
+		logger.log(Level.INFO, "editItem()->dto=" + dto);
+		PlaceRequest placeRequest = new Builder().nameToken(CoreNameTokens.USER_EDITOR)
+				.with("id", String.valueOf(dto.getWebSafeKey())).build();
+
+		placeManager.revealPlace(placeRequest);
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.core.ui.dtotable.appuser;
+package hu.hw.cloud.client.fro.table.appuser;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -203,7 +203,7 @@ public class AppUserTableView extends ViewWithUiHandlers<AppUserTableUiHandlers>
 
 	@Override
 	public void setData(List<AppUserDto> data) {
-		logger.log(Level.INFO, "setData()");
+		logger.info("setData()");
 		table.getView().clearRows(true);
 		table.setRowData(0, data);
 		table.sort(0);

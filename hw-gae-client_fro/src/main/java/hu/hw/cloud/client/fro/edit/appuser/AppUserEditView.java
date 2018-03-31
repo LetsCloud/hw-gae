@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.core.ui.editor.appuser;
+package hu.hw.cloud.client.fro.edit.appuser;
 
 import java.util.List;
 import java.util.logging.Logger;

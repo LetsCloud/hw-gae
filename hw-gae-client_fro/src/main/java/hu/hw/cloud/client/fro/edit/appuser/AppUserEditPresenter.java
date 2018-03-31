@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.core.ui.editor.appuser;
+package hu.hw.cloud.client.fro.edit.appuser;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -82,7 +82,7 @@ public class AppUserEditPresenter extends PresenterWidget<AppUserEditPresenter.M
 
 	@Override
 	public void create() {
-		logger.log(Level.INFO, "create()");
+		logger.info("create()");
 		isNew = true;
 
 		AppUserDto userDto = new AppUserDto();
@@ -112,7 +112,7 @@ public class AppUserEditPresenter extends PresenterWidget<AppUserEditPresenter.M
 		resourceDelegate.withCallback(new AsyncCallback<AppUserDto>() {
 			@Override
 			public void onSuccess(AppUserDto userDto) {
-				RefreshTableEvent.fire(AppUserEditPresenter.this);
+				RefreshTableEvent.fire(AppUserEditPresenter.this, RefreshTableEvent.TableType.APP_USER);
 				getView().close();
 			}
 
@@ -127,7 +127,7 @@ public class AppUserEditPresenter extends PresenterWidget<AppUserEditPresenter.M
 		resourceDelegate.withCallback(new ErrorHandlerAsyncCallback<AppUserDto>(this) {
 			@Override
 			public void onSuccess(AppUserDto userDto) {
-				RefreshTableEvent.fire(AppUserEditPresenter.this);
+				RefreshTableEvent.fire(AppUserEditPresenter.this, RefreshTableEvent.TableType.APP_USER);
 				getView().close();
 			}
 

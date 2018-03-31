@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.core.ui.dtotable;
+package hu.hw.cloud.client.fro.table;
 
 import com.google.gwt.user.client.ui.IsWidget;
 

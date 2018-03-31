@@ -12,6 +12,7 @@ public class CoreNameTokens {
 	// Configuration
 	public static final String USERS = "!users";
 	public static final String USER_CONFIG = "/userconfig";
+	public static final String USER_EDITOR = "/userEditor";
 	public static final String ROLE_CONFIG = "/roleconfig";
 	public static final String HOTEL_CONFIG = "/hotelconfig";
 	public static final String SYSTEM_CONFIG = "!systemconfig";

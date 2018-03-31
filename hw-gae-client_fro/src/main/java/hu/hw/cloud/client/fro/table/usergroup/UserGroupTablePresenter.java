@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.core.ui.dtotable.usergroup;
+package hu.hw.cloud.client.fro.table.usergroup;
 
 import java.util.List;
 
@@ -16,10 +16,10 @@ import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
 
 import hu.hw.cloud.client.core.event.RefreshTableEvent;
 import hu.hw.cloud.client.core.security.CurrentUser;
-import hu.hw.cloud.client.core.ui.dtotable.AbstractTablePresenter;
-import hu.hw.cloud.client.core.ui.editor.DtoEditorFactory;
-import hu.hw.cloud.client.core.ui.editor.usergroup.UserGroupEditorPresenter;
 import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
+import hu.hw.cloud.client.fro.edit.DtoEditorFactory;
+import hu.hw.cloud.client.fro.edit.usergroup.UserGroupEditorPresenter;
+import hu.hw.cloud.client.fro.table.AbstractTablePresenter;
 import hu.hw.cloud.shared.UserGroupResource;
 import hu.hw.cloud.shared.dto.common.UserGroupDto;
 

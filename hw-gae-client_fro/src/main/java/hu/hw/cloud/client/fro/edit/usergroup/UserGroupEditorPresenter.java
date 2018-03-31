@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.core.ui.editor.usergroup;
+package hu.hw.cloud.client.fro.edit.usergroup;
 
 import javax.inject.Inject;
 
@@ -80,7 +80,7 @@ public class UserGroupEditorPresenter extends PresenterWidget<UserGroupEditorPre
 		resourceDelegate.withCallback(new AsyncCallback<UserGroupDto>() {
 			@Override
 			public void onSuccess(UserGroupDto dto) {
-				RefreshTableEvent.fire(UserGroupEditorPresenter.this);
+				RefreshTableEvent.fire(UserGroupEditorPresenter.this, RefreshTableEvent.TableType.USER_GROUP);
 				getView().close();
 			}
 
@@ -99,7 +99,7 @@ public class UserGroupEditorPresenter extends PresenterWidget<UserGroupEditorPre
 		resourceDelegate.withCallback(new AsyncCallback<UserGroupDto>() {
 			@Override
 			public void onSuccess(UserGroupDto dto) {
-				RefreshTableEvent.fire(UserGroupEditorPresenter.this);
+				RefreshTableEvent.fire(UserGroupEditorPresenter.this,RefreshTableEvent.TableType.USER_GROUP);
 				getView().close();
 			}
 

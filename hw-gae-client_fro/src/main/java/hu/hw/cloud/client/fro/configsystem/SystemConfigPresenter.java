@@ -21,9 +21,9 @@ import hu.hw.cloud.client.core.app.AppPresenter;
 import hu.hw.cloud.client.core.event.ContentPushEvent;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent;
 import hu.hw.cloud.client.core.security.LoggedInGatekeeper;
-import hu.hw.cloud.client.core.ui.dtotable.DtoTablePresenterFactory;
 import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.i18n.FroMessages;
+import hu.hw.cloud.client.fro.table.DtoTablePresenterFactory;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 
 public class SystemConfigPresenter extends Presenter<SystemConfigPresenter.MyView, SystemConfigPresenter.MyProxy>
@@ -54,7 +54,7 @@ public class SystemConfigPresenter extends Presenter<SystemConfigPresenter.MyVie
 	SystemConfigPresenter(EventBus eventBus, MyView view, MyProxy proxy,
 			DtoTablePresenterFactory dtoTablePresenterFactory, FroMessages i18n) {
 		super(eventBus, view, proxy, AppPresenter.SLOT_MAIN);
-		logger.log(Level.INFO, "SystemConfigPresenter()");
+		logger.info("SystemConfigPresenter()");
 
 		tableMap.put(1,
 				new TableStore(i18n.systemConfigUserGroup(), dtoTablePresenterFactory.createUserGroupTablePresenter()));
@@ -71,7 +71,6 @@ public class SystemConfigPresenter extends Presenter<SystemConfigPresenter.MyVie
 	@Override
 	protected void onBind() {
 		super.onBind();
-		logger.log(Level.INFO, "SystemConfigPresenter.onBind()");
 		getView().buildMenu();
 		showTable(1);
 	}
@@ -79,7 +78,6 @@ public class SystemConfigPresenter extends Presenter<SystemConfigPresenter.MyVie
 	@Override
 	protected void onReveal() {
 		super.onReveal();
-		logger.log(Level.INFO, "SystemConfigPresenter.onReveal()");
 		SetPageTitleEvent.fire(i18n.mainMenuItemCommonConfig(), "", MenuItemType.MENU_ITEM, this);
 	}
 

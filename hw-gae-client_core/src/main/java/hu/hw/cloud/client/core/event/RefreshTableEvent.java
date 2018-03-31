@@ -13,21 +13,28 @@ import com.google.gwt.event.shared.HasHandlers;
  */
 public class RefreshTableEvent extends GwtEvent<RefreshTableEvent.RefreshTableHandler> {
 
+	public enum TableType {
+		APP_USER, USER_GROUP;
+	}
+	
 	public interface RefreshTableHandler extends EventHandler {
 		void onRefresh(RefreshTableEvent event);
 	}
 
 	public static final Type<RefreshTableHandler> TYPE = new Type<>();
 
-	RefreshTableEvent() {
+	private TableType tableType;
+	
+	RefreshTableEvent(TableType tableType) {
+		this.tableType = tableType;
 	}
 
 	public static Type<RefreshTableHandler> getType() {
 		return TYPE;
 	}
 
-	public static void fire(HasHandlers source) {
-		source.fireEvent(new RefreshTableEvent());
+	public static void fire(HasHandlers source, TableType tableType) {
+		source.fireEvent(new RefreshTableEvent(tableType));
 	}
 
 	@Override
@@ -38,5 +45,9 @@ public class RefreshTableEvent extends GwtEvent<RefreshTableEvent.RefreshTableHa
 	@Override
 	protected void dispatch(RefreshTableHandler handler) {
 		handler.onRefresh(this);
+	}
+
+	public TableType getTableType() {
+		return tableType;
 	}
 }

@@ -28,8 +28,6 @@ import hu.hw.cloud.client.core.register.RegisterModule;
 import hu.hw.cloud.client.core.security.AppData;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.core.success.SuccessModule;
-import hu.hw.cloud.client.core.ui.dtotable.DtoTableModule;
-import hu.hw.cloud.client.core.ui.editor.DtoEditorModule;
 import hu.hw.cloud.client.core.unauthorized.UnauthorizedModule;
 import hu.hw.cloud.client.firebase.Config;
 import hu.hw.cloud.client.firebase.Firebase;
@@ -64,8 +62,6 @@ public class CoreModule extends AbstractPresenterModule {
 		install(new RegisterModule());
 		install(new SuccessModule());
 		install(new ActivateModule());
-		install(new DtoTableModule());
-		install(new DtoEditorModule());
 	}
 
 	@Provides

@@ -1,10 +1,10 @@
 /**
  * 
  */
-package hu.hw.cloud.client.core.ui.dtotable;
+package hu.hw.cloud.client.fro.table;
 
-import hu.hw.cloud.client.core.ui.dtotable.appuser.AppUserTablePresenter;
-import hu.hw.cloud.client.core.ui.dtotable.usergroup.UserGroupTablePresenter;
+import hu.hw.cloud.client.fro.table.appuser.AppUserTablePresenter;
+import hu.hw.cloud.client.fro.table.usergroup.UserGroupTablePresenter;
 
 /**
  * @author robi

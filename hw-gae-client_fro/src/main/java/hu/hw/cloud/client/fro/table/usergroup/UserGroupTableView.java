@@ -1,10 +1,11 @@
 /**
  * 
  */
-package hu.hw.cloud.client.core.ui.dtotable.usergroup;
+package hu.hw.cloud.client.fro.table.usergroup;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
@@ -26,6 +27,7 @@ import gwt.material.design.client.ui.table.MaterialDataTable;
 import gwt.material.design.client.ui.table.cell.TextColumn;
 import gwt.material.design.client.ui.table.cell.WidgetColumn;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
+import hu.hw.cloud.client.fro.table.appuser.AppUserTableView;
 import hu.hw.cloud.shared.UserGroupResource;
 import hu.hw.cloud.shared.dto.common.UserGroupDto;
 
@@ -35,6 +37,7 @@ import hu.hw.cloud.shared.dto.common.UserGroupDto;
  */
 public class UserGroupTableView extends ViewWithUiHandlers<UserGroupTableUiHandlers>
 		implements UserGroupTablePresenter.MyView {
+	private static Logger logger = Logger.getLogger(UserGroupTableView.class.getName());
 
 	interface Binder extends UiBinder<HTMLPanel, UserGroupTableView> {
 	}
@@ -155,7 +158,12 @@ public class UserGroupTableView extends ViewWithUiHandlers<UserGroupTableUiHandl
 
 	@Override
 	public void setData(List<UserGroupDto> data) {
+		logger.info("setData()_1");
 		table.getView().clearRows(true);
+		logger.info("setData()_2");
 		table.setRowData(0, data);
+		logger.info("setData()_3");
+		table.sort(0);
+		logger.info("setData()_4");
 	}
 }

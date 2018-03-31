@@ -1,15 +1,15 @@
 /**
  * 
  */
-package hu.hw.cloud.client.core.ui.dtotable;
+package hu.hw.cloud.client.fro.table;
 
 import com.google.gwt.inject.client.assistedinject.GinFactoryModuleBuilder;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
-import hu.hw.cloud.client.core.ui.dtotable.appuser.AppUserTablePresenter;
-import hu.hw.cloud.client.core.ui.dtotable.appuser.AppUserTableView;
-import hu.hw.cloud.client.core.ui.dtotable.usergroup.UserGroupTablePresenter;
-import hu.hw.cloud.client.core.ui.dtotable.usergroup.UserGroupTableView;
+import hu.hw.cloud.client.fro.table.appuser.AppUserTablePresenter;
+import hu.hw.cloud.client.fro.table.appuser.AppUserTableView;
+import hu.hw.cloud.client.fro.table.usergroup.UserGroupTablePresenter;
+import hu.hw.cloud.client.fro.table.usergroup.UserGroupTableView;
 
 /**
  * @author robi

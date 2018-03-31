@@ -1,10 +1,10 @@
 /**
  * 
  */
-package hu.hw.cloud.client.core.ui.editor;
+package hu.hw.cloud.client.fro.edit;
 
-import hu.hw.cloud.client.core.ui.editor.appuser.AppUserEditPresenter;
-import hu.hw.cloud.client.core.ui.editor.usergroup.UserGroupEditorPresenter;
+import hu.hw.cloud.client.fro.edit.appuser.AppUserEditPresenter;
+import hu.hw.cloud.client.fro.edit.usergroup.UserGroupEditorPresenter;
 
 /**
  * @author robi

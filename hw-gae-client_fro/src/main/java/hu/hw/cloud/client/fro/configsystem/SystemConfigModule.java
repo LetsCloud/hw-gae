@@ -5,7 +5,7 @@ package hu.hw.cloud.client.fro.configsystem;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
-import hu.hw.cloud.client.core.ui.dtotable.appuser.AppUserTableView;
+import hu.hw.cloud.client.fro.table.appuser.AppUserTableView;
 
 /**
  * @author CR

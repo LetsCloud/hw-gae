@@ -20,10 +20,10 @@ import hu.hw.cloud.client.core.app.AppPresenter;
 import hu.hw.cloud.client.core.event.ContentPushEvent;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent;
 import hu.hw.cloud.client.core.security.LoggedInGatekeeper;
-import hu.hw.cloud.client.core.ui.dtotable.appuser.AppUserTableView;
-import hu.hw.cloud.client.core.ui.dtotable.usergroup.UserGroupTableView;
 import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.i18n.FroMessages;
+import hu.hw.cloud.client.fro.table.appuser.AppUserTableView;
+import hu.hw.cloud.client.fro.table.usergroup.UserGroupTableView;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 
 public class CommonConfigPresenter extends Presenter<CommonConfigPresenter.MyView, CommonConfigPresenter.MyProxy>

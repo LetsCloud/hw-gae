@@ -94,9 +94,9 @@ public class AppUserController extends BaseController {
 		}
 	}
 
-	@RequestMapping(value = WEBSAFEKEY, method = GET)
-	public ResponseEntity<AppUserDto> read(@PathVariable String id) throws Throwable {
-		AppUser user = userService.read(id);
+	@RequestMapping(value = "{"+WEBSAFEKEY+"}", method = GET)
+	public ResponseEntity<AppUserDto> read(@PathVariable String webSafeKey) throws Throwable {
+		AppUser user = userService.read(webSafeKey);
 		AppUserDto userDto = AppUser.createDto(user);
 		return new ResponseEntity<AppUserDto>(userDto, OK);
 	}

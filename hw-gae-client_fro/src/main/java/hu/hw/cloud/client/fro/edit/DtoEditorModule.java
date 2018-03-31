@@ -1,15 +1,15 @@
 /**
  * 
  */
-package hu.hw.cloud.client.core.ui.editor;
+package hu.hw.cloud.client.fro.edit;
 
 import com.google.gwt.inject.client.assistedinject.GinFactoryModuleBuilder;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
-import hu.hw.cloud.client.core.ui.editor.appuser.AppUserEditPresenter;
-import hu.hw.cloud.client.core.ui.editor.appuser.AppUserEditView;
-import hu.hw.cloud.client.core.ui.editor.usergroup.UserGroupEditorPresenter;
-import hu.hw.cloud.client.core.ui.editor.usergroup.UserGroupEditorView;
+import hu.hw.cloud.client.fro.edit.appuser.AppUserEditPresenter;
+import hu.hw.cloud.client.fro.edit.appuser.AppUserEditView;
+import hu.hw.cloud.client.fro.edit.usergroup.UserGroupEditorPresenter;
+import hu.hw.cloud.client.fro.edit.usergroup.UserGroupEditorView;
 
 /**
  * @author robi

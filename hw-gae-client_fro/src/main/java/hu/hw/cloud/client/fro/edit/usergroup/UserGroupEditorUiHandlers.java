@@ -1,9 +1,9 @@
 /**
  * 
  */
-package hu.hw.cloud.client.core.ui.editor.usergroup;
+package hu.hw.cloud.client.fro.edit.usergroup;
 
-import hu.hw.cloud.client.core.ui.editor.IsDtoEditor;
+import hu.hw.cloud.client.fro.edit.IsDtoEditor;
 import hu.hw.cloud.shared.dto.common.UserGroupDto;
 
 /**

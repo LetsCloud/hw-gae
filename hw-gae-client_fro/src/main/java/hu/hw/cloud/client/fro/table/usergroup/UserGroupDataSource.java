@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.core.ui.dtotable.usergroup;
+package hu.hw.cloud.client.fro.table.usergroup;
 
 import java.util.List;
 
