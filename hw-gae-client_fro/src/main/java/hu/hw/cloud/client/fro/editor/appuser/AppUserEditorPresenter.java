@@ -8,13 +8,11 @@ import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
-import com.google.common.base.Strings;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 
 import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
-import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
@@ -31,6 +29,7 @@ import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
 import hu.hw.cloud.client.core.util.ErrorHandlerAsyncCallback;
 import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.editor.AbstractEditorPresenter;
+import hu.hw.cloud.client.fro.editor.EditorView;
 import hu.hw.cloud.shared.AppUserResource;
 import hu.hw.cloud.shared.UserGroupResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
@@ -43,14 +42,13 @@ import hu.hw.cloud.shared.dto.common.UserGroupDto;
  *
  */
 public class AppUserEditorPresenter
-		extends AbstractEditorPresenter<AppUserEditorPresenter.MyView, AppUserEditorPresenter.MyProxy>
+		extends AbstractEditorPresenter<AppUserDto, AppUserEditorPresenter.MyView, AppUserEditorPresenter.MyProxy>
 		implements AppUserEditorUiHandlers {
 	private static Logger logger = Logger.getLogger(AppUserEditorPresenter.class.getName());
 
 	private static final String FIRST_PASSWORD = "*";
 
-	public interface MyView extends View, HasUiHandlers<AppUserEditorUiHandlers> {
-		void edit(Boolean isNew, AppUserDto dto);
+	public interface MyView extends EditorView<AppUserDto>, HasUiHandlers<AppUserEditorUiHandlers> {
 
 		void setUserGroupData(List<UserGroupDto> data);
 
@@ -68,13 +66,11 @@ public class AppUserEditorPresenter
 	private final CurrentUser currentUser;
 	private final CoreMessages i18n;
 
-	private String dtoWebSafeKey;
-
 	@Inject
 	AppUserEditorPresenter(EventBus eventBus, PlaceManager placeManager, MyView view, MyProxy proxy,
 			ResourceDelegate<AppUserResource> resourceDelegate,
 			ResourceDelegate<UserGroupResource> userGroupresourceDelegate, CurrentUser currentUser, CoreMessages i18n) {
-		super(eventBus, view, proxy, AppPresenter.SLOT_MAIN);
+		super(eventBus, placeManager, view, proxy, AppPresenter.SLOT_MAIN);
 		logger.info("AppUserEditorPresenter()");
 
 		this.placeManager = placeManager;
@@ -87,41 +83,32 @@ public class AppUserEditorPresenter
 	}
 
 	@Override
-	public void prepareFromRequest(PlaceRequest request) {
-		logger.info("AppUserEditorPresenter().prepareFromRequest()");
-		dtoWebSafeKey = request.getParameter("id", null);
-	}
-
-	@Override
-	protected void onReveal() {
-		super.onReveal();
-
-		loadUserGroupData();
-	}
-
-	private void loadUserGroupData() {
+	protected void loadData() {
 		userGroupresourceDelegate.withCallback(new AbstractAsyncCallback<List<UserGroupDto>>() {
 			@Override
 			public void onSuccess(List<UserGroupDto> result) {
 				getView().setUserGroupData(result);
 
-				if (Strings.isNullOrEmpty(dtoWebSafeKey)) {
-					SetPageTitleEvent.fire(i18n.userEditorCreateTitle(), "", MenuItemType.MENU_ITEM, AppUserEditorPresenter.this);
+				if (isNew()) {
+					SetPageTitleEvent.fire(i18n.userEditorCreateTitle(), "", MenuItemType.MENU_ITEM,
+							AppUserEditorPresenter.this);
 					create();
 				} else {
-					SetPageTitleEvent.fire(i18n.userEditorModifyTitle(), "", MenuItemType.MENU_ITEM, AppUserEditorPresenter.this);
+					SetPageTitleEvent.fire(i18n.userEditorModifyTitle(), "", MenuItemType.MENU_ITEM,
+							AppUserEditorPresenter.this);
 					edit(dtoWebSafeKey);
 				}
 			}
 		}).list();
 	}
 
-	private void create() {
-		logger.info("AppUserEditorPresenter().create()");
+	@Override
+	protected AppUserDto createDto() {
+		logger.info("AppUserEditorPresenter().createDto()");
 		AppUserDto dto = new AppUserDto();
 		dto.setAccountDto(currentUser.getAppUserDto().getAccountDto());
 		dto.setPassword(FIRST_PASSWORD);
-		getView().edit(true, dto);
+		return dto;
 	}
 
 	private void edit(String webSafeKey) {
@@ -141,15 +128,7 @@ public class AppUserEditorPresenter
 	}
 
 	@Override
-	public void save(AppUserDto dto) {
-		if (Strings.isNullOrEmpty(dtoWebSafeKey)) {
-			createEntity(dto);
-		} else {
-			updateEntity(dto);
-		}
-	}
-
-	private void createEntity(AppUserDto userDto) {
+	protected void createEntity(AppUserDto userDto) {
 		resourceDelegate.withCallback(new AsyncCallback<AppUserDto>() {
 			@Override
 			public void onSuccess(AppUserDto userDto) {
@@ -164,7 +143,8 @@ public class AppUserEditorPresenter
 		}).create(userDto);
 	}
 
-	private void updateEntity(AppUserDto userDto) {
+	@Override
+	protected void updateEntity(AppUserDto userDto) {
 		resourceDelegate.withCallback(new ErrorHandlerAsyncCallback<AppUserDto>(this) {
 			@Override
 			public void onSuccess(AppUserDto userDto) {
@@ -177,11 +157,6 @@ public class AppUserEditorPresenter
 				getView().displayError(EntityPropertyCode.NONE, caught.getMessage());
 			}
 		}).update(userDto);
-	}
-
-	@Override
-	public void cancel() {
-		placeManager.navigateBack();
 	}
 
 }
