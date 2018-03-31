@@ -20,7 +20,6 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 import gwt.material.design.addins.client.combobox.MaterialComboBox;
-import gwt.material.design.client.ui.MaterialAnchorButton;
 import gwt.material.design.client.ui.MaterialFAB;
 import gwt.material.design.client.ui.MaterialImage;
 import gwt.material.design.client.ui.MaterialTextBox;
@@ -71,6 +70,7 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 		
 		userGroupDtos.setMultiple(true);
 		userGroupDtos.setPlaceholder("Válassz csoportot");
+		
 		driver.initialize(this);
 	}
 
@@ -96,9 +96,7 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 
 	@UiHandler("saveButton")
 	void onSaveClick(ClickEvent event) {
-		logger.info("AppUserEditorView().onSaveClick()");
 		AppUserDto dto = driver.flush();
-		logger.info("AppUserEditorView().onSaveClick()->dto=" + dto);
 		dto.setPicture(picture);
 		getUiHandlers().save(dto);
 	}

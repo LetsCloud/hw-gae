@@ -18,8 +18,8 @@
 	<g:HTMLPanel addStyleNames="{style.pp}">
 		<m:MaterialRow>
 			<m:MaterialColumn grid="s12 m6">
-				<m:MaterialImage ui:field="image"
-					type="MATERIALBOXED" caption="Photo" activates="photoDrop" />
+				<m:MaterialImage ui:field="image" caption="Photo"
+					activates="photoDrop" />
 				<!-- My Drop Down -->
 				<m:MaterialDropDown activator="photoDrop"
 					constrainWidth="true">
