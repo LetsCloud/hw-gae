@@ -17,10 +17,19 @@
 	</ui:style>
 
 	<g:HTMLPanel addStyleNames="{style.pp}">
+
+		<m:MaterialRow>
+			<m:MaterialNavBar ui:field="navBar" width="100%">
+				<m:MaterialBreadcrumb text="Home" />
+				<m:MaterialBreadcrumb text="Users" />
+				<m:MaterialBreadcrumb text="Editor" />
+			</m:MaterialNavBar>
+		</m:MaterialRow>
+
 		<m:MaterialRow>
 			<m:MaterialColumn grid="s12 m6 l4">
 				<m:MaterialImage ui:field="image" caption="Photo"
-					activates="photoDrop" />
+					activates="photoDrop" width="150px" height="150px"/>
 				<!-- My Drop Down -->
 				<m:MaterialDropDown activator="photoDrop"
 					constrainWidth="true">
@@ -60,6 +69,11 @@
 				<m:MaterialTextBox ui:field="username" type="TEXT"
 					label="{i18nCore.userEditorUsername}" />
 
+				<m:MaterialCheckBox ui:field="enabled"
+					text="Enabled" />
+
+				<m:MaterialCheckBox ui:field="admin" text="Admin" />
+
 				<combobox:MaterialComboBox
 					ui:field="hotelDtos" label="Elérhető hotelek" />
 
@@ -70,7 +84,7 @@
 					ui:field="userGroupDtos" label="Chat csoportok" />
 			</m:MaterialColumn>
 
-			<m:MaterialColumn grid="s12 m6 l4">
+			<m:MaterialColumn grid="s12 m12 l4">
 				<ma:richeditor.MaterialRichEditor
 					placeholder="Megjegyzések" />
 			</m:MaterialColumn>

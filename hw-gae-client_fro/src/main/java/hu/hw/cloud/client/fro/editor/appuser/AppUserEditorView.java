@@ -20,8 +20,10 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 import gwt.material.design.addins.client.combobox.MaterialComboBox;
+import gwt.material.design.client.ui.MaterialCheckBox;
 import gwt.material.design.client.ui.MaterialFAB;
 import gwt.material.design.client.ui.MaterialImage;
+import gwt.material.design.client.ui.MaterialNavBar;
 import gwt.material.design.client.ui.MaterialTextBox;
 
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
@@ -47,8 +49,15 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 	MaterialImage image;
 
 	@UiField
+	@Ignore
+	MaterialNavBar navBar;
+	
+	@UiField
 	MaterialTextBox code, name, username, emailAddress;
 
+	@UiField
+	MaterialCheckBox enabled, admin;
+	
 	@UiField
 	MaterialComboBox<UserGroupDto> userGroupDtos;
 
@@ -70,6 +79,8 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 		
 		userGroupDtos.setMultiple(true);
 		userGroupDtos.setPlaceholder("Válassz csoportot");
+//		image.setWidth("100px");
+//		image.setHeight("100px");		
 		
 		driver.initialize(this);
 	}
@@ -78,9 +89,12 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 	public void edit(Boolean isNew, AppUserDto dto) {
 		logger.info("AppUserEditorView().edit()->dto=" + dto);
 
-		if (dto.getPicture() != null)
-			setImageUrl(dto.getPicture());
-
+		if (dto.getPicture() != null) {
+			setImageUrl(dto.getPicture());			
+		} else {
+			setImageUrl(GWT.getHostPageBaseURL() + "image/user_plus.jpeg");			
+		}
+		
 		driver.edit(dto);
 		
 		fab.open();
