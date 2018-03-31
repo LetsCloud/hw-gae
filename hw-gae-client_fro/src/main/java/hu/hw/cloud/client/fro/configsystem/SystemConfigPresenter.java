@@ -100,7 +100,7 @@ public class SystemConfigPresenter extends Presenter<SystemConfigPresenter.MyVie
 
 	@Override
 	public void addItem() {
-		tableMap.get(ativeTable).getTable().addItem();
+		tableMap.get(ativeTable).getTable().create();
 	}
 
 }

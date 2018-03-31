@@ -3,23 +3,34 @@
  */
 package hu.hw.cloud.client.fro.table;
 
+import java.util.logging.Logger;
+
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 
 import hu.hw.cloud.client.core.event.RefreshTableEvent;
+import hu.hw.cloud.shared.dto.BaseDto;
 
 /**
  * @author robi
  *
  */
-public abstract class AbstractTablePresenter<T extends View> extends PresenterWidget<T>
-		implements RefreshTableEvent.RefreshTableHandler {
+public abstract class AbstractTablePresenter<T extends BaseDto, V extends View> extends PresenterWidget<V>
+		implements DtoTableUiHandlers<T>, IsDtoTable, RefreshTableEvent.RefreshTableHandler {
+	private static Logger logger = Logger.getLogger(AbstractTablePresenter.class.getName());
 
 	private String caption;
+	private final PlaceManager placeManager;
 
-	public AbstractTablePresenter(EventBus eventBus, T view) {
+	public AbstractTablePresenter(EventBus eventBus, V view, PlaceManager placeManager) {
 		super(eventBus, view);
+		logger.info("AbstractTablePresenter()");
+
+		this.placeManager = placeManager;
 
 		addRegisteredHandler(RefreshTableEvent.TYPE, this);
 	}
@@ -38,7 +49,23 @@ public abstract class AbstractTablePresenter<T extends View> extends PresenterWi
 		this.caption = caption;
 	}
 
-	public abstract void addItem();
+	protected abstract String getEditorNameToken();
+
+	@Override
+	public void create() {
+		logger.info("create()");
+		PlaceRequest placeRequest = new Builder().nameToken(getEditorNameToken()).build();
+		placeManager.revealPlace(placeRequest);
+	}
+
+	@Override
+	public void edit(T dto) {
+		logger.info("editItem()->dto=" + dto);
+		PlaceRequest placeRequest = new Builder().nameToken(getEditorNameToken())
+				.with("id", String.valueOf(dto.getWebSafeKey())).build();
+
+		placeManager.revealPlace(placeRequest);
+	}
 
 	protected abstract void loadData();
 
@@ -46,4 +73,11 @@ public abstract class AbstractTablePresenter<T extends View> extends PresenterWi
 	public void onRefresh(RefreshTableEvent event) {
 		loadData();
 	}
+
+	@Override
+	public void delete(T dto) {
+		deleteData(dto.getWebSafeKey());
+	}
+
+	protected abstract void deleteData(String webSafeKey);
 }

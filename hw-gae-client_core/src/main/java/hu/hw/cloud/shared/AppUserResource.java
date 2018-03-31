@@ -1,19 +1,20 @@
 package hu.hw.cloud.shared;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 
 import static hu.hw.cloud.shared.api.ApiParameters.TOKEN;
 import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
-import static hu.hw.cloud.shared.api.ApiPaths.PATH_WEBSAFEKEY;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.ROOT;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.USER;
-import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.INVITE;
 
 import java.util.List;
 
-import javax.ws.rs.DELETE;
+import static hu.hw.cloud.shared.api.ApiPaths.PATH_WEBSAFEKEY;
+import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.INVITE;
+
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -33,10 +34,6 @@ public interface AppUserResource {
 	@POST
 	AppUserDto create(AppUserDto userDto);
 
-	@POST
-	@Path(INVITE)
-	AppUserDto invite(AppUserDto userDto);
-
 	@GET
 	@Path(PATH_WEBSAFEKEY)
 	AppUserDto read(@PathParam(WEBSAFEKEY) String webSafeKey);
@@ -47,6 +44,10 @@ public interface AppUserResource {
 	@DELETE
 	@Path(PATH_WEBSAFEKEY)
 	void delete(@PathParam(WEBSAFEKEY) String webSafeKey);
+
+	@POST
+	@Path(INVITE)
+	AppUserDto invite(AppUserDto userDto);
 
 	@GET
 	@Path("/activate/{token}")

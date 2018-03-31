@@ -128,7 +128,7 @@ public class AppUserTableView extends ViewWithUiHandlers<AppUserTableUiHandlers>
 				icon.addClickHandler(new ClickHandler() {
 					@Override
 					public void onClick(ClickEvent event) {
-						getUiHandlers().editItem(object);
+						getUiHandlers().edit(object);
 					}
 				});
 

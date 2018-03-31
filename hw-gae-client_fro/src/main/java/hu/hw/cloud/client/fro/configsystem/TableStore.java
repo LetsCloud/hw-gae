@@ -13,9 +13,9 @@ public class TableStore {
 	
 	private String caption;
 	
-	private AbstractTablePresenter<?> table;
+	private AbstractTablePresenter<?,?> table;
 	
-	public TableStore(String caption, AbstractTablePresenter<?> table) {
+	public TableStore(String caption, AbstractTablePresenter<?,?> table) {
 		this.caption = caption;
 		this.table = table;
 	}
@@ -28,11 +28,11 @@ public class TableStore {
 		this.caption = caption;
 	}
 
-	public AbstractTablePresenter<?> getTable() {
+	public AbstractTablePresenter<?,?> getTable() {
 		return table;
 	}
 
-	public void setTable(AbstractTablePresenter<?> table) {
+	public void setTable(AbstractTablePresenter<?,?> table) {
 		this.table = table;
 	}
 

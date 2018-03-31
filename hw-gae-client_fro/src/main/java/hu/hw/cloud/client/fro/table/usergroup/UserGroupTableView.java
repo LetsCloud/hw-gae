@@ -27,7 +27,6 @@ import gwt.material.design.client.ui.table.MaterialDataTable;
 import gwt.material.design.client.ui.table.cell.TextColumn;
 import gwt.material.design.client.ui.table.cell.WidgetColumn;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
-import hu.hw.cloud.client.fro.table.appuser.AppUserTableView;
 import hu.hw.cloud.shared.UserGroupResource;
 import hu.hw.cloud.shared.dto.common.UserGroupDto;
 
@@ -109,7 +108,7 @@ public class UserGroupTableView extends ViewWithUiHandlers<UserGroupTableUiHandl
 				icon.addClickHandler(new ClickHandler() {
 					@Override
 					public void onClick(ClickEvent event) {
-						getUiHandlers().editItem(object);
+						getUiHandlers().edit(object);
 					}
 				});
 
@@ -133,7 +132,7 @@ public class UserGroupTableView extends ViewWithUiHandlers<UserGroupTableUiHandl
 				icon.addClickHandler(new ClickHandler() {
 					@Override
 					public void onClick(ClickEvent event) {
-						getUiHandlers().deleteItem(object);
+						getUiHandlers().delete(object);
 					}
 				});
 

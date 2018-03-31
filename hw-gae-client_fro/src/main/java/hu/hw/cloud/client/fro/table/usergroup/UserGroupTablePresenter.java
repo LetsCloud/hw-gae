@@ -13,6 +13,7 @@ import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 import hu.hw.cloud.client.core.event.RefreshTableEvent;
 import hu.hw.cloud.client.core.security.CurrentUser;
@@ -27,7 +28,7 @@ import hu.hw.cloud.shared.dto.common.UserGroupDto;
  * @author robi
  *
  */
-public class UserGroupTablePresenter extends AbstractTablePresenter<UserGroupTablePresenter.MyView>
+public class UserGroupTablePresenter extends AbstractTablePresenter<UserGroupDto, UserGroupTablePresenter.MyView>
 		implements UserGroupTableUiHandlers, RefreshTableEvent.RefreshTableHandler {
 
 	public interface MyView extends View, HasUiHandlers<UserGroupTableUiHandlers> {
@@ -41,9 +42,9 @@ public class UserGroupTablePresenter extends AbstractTablePresenter<UserGroupTab
 	private final UserGroupEditorPresenter editor;
 
 	@Inject
-	UserGroupTablePresenter(EventBus eventBus, MyView view, ResourceDelegate<UserGroupResource> resourceDelegate,
+	UserGroupTablePresenter(EventBus eventBus, PlaceManager placeManager, MyView view, ResourceDelegate<UserGroupResource> resourceDelegate,
 			CurrentUser currentUser, DtoEditorFactory dtoEditorFactory) {
-		super(eventBus, view);
+		super(eventBus, view, placeManager);
 
 		this.resourceDelegate = resourceDelegate;
 		this.editor = dtoEditorFactory.createUserGroupEditor();
@@ -68,26 +69,28 @@ public class UserGroupTablePresenter extends AbstractTablePresenter<UserGroupTab
 	}
 
 	@Override
-	public void addItem() {
+	public void create() {
 		editor.create();
 	}
 
 	@Override
-	public void editItem(UserGroupDto dto) {
+	public void edit(UserGroupDto dto) {
 		editor.edit(dto);
 	}
 
 	@Override
-	public void deleteItem(UserGroupDto dto) {
-		deleteData(dto.getWebSafeKey());
-	}
-
-	private void deleteData(String webSafeKey) {
+	protected void deleteData(String webSafeKey) {
 		resourceDelegate.withCallback(new AbstractAsyncCallback<Void>() {
 			@Override
 			public void onSuccess(Void result) {
 				loadData();
 			}
 		}).delete(webSafeKey);
+	}
+
+	@Override
+	protected String getEditorNameToken() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -11,6 +11,6 @@ import com.google.gwt.user.client.ui.IsWidget;
  */
 public interface IsDtoTable extends IsWidget {
 	
-	void addDto();
+	void create();
 
 }

@@ -3,22 +3,16 @@
  */
 package hu.hw.cloud.client.fro.table.appuser;
 
-import com.gwtplatform.mvp.client.UiHandlers;
-
+import hu.hw.cloud.client.fro.table.DtoTableUiHandlers;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
 
 /**
  * @author robi
  *
  */
-public interface AppUserTableUiHandlers extends UiHandlers {
-
-	void editItem(AppUserDto dto);
+public interface AppUserTableUiHandlers extends DtoTableUiHandlers<AppUserDto> {
 
 	void inviteItem(AppUserDto dto);
-	
+
 	void clearFcmTokens(AppUserDto dto);
-
-	void deleteItem(AppUserDto dto);
-
 }
