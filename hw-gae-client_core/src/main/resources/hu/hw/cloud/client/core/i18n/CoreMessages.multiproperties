@@ -327,14 +327,14 @@
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
             <Value disabled="false">Create User Profile</Value>
-            <Value disabled="false">Felhasználói profil létrehozása</Value>
+            <Value disabled="false">Felhasználói profil létrehozás</Value>
         </Property>
         <Property>
             <Name>userEditorModifyTitle</Name>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
             <Value disabled="false">Edit User Profile</Value>
-            <Value disabled="false">Felhasználói profile szerkesztése</Value>
+            <Value disabled="false">Felhasználói profil szerkesztés</Value>
         </Property>
         <Property>
             <Name>userEditorName</Name>
@@ -369,7 +369,7 @@
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
             <Value disabled="false">Username</Value>
-            <Value disabled="false">Felhasználó</Value>
+            <Value disabled="false">Felhasználónév</Value>
         </Property>
         <Property>
             <Name>userEditorEnabled</Name>

@@ -72,7 +72,7 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 	TakesValueEditor<HotelDto> defaultHotelDto;
 
 	String picture;
-
+	
 	@Inject
 	AppUserEditorView(Binder uiBinder, Driver driver, EventBus eventBus) {
 		logger.info("AppUserEditorView()");

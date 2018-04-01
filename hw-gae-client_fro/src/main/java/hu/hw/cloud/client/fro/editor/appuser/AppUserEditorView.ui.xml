@@ -11,6 +11,11 @@
 		margin-left: 10px;
 		margin-right: 10px;
 	}
+	
+	.cb {
+		margin-top: 15px;
+		margin-bottom: 25px;
+	}
 	</ui:style>
 
 	<ui:with field="i18nCore"
@@ -36,7 +41,7 @@
 		</m:MaterialRow>
 
 		<m:MaterialRow>
-			<m:MaterialColumn grid="s12 m6 l4">
+			<m:MaterialColumn grid="s12 m4">
 				<m:MaterialImage ui:field="image" caption="Photo"
 					activates="photoDrop" width="150px" height="150px" />
 				<!-- My Drop Down -->
@@ -61,6 +66,9 @@
 						text="Maintenance" />
 				</m:MaterialDropDown>
 
+				<m:MaterialTextBox ui:field="code" type="TEXT"
+					label="{i18nCore.userEditorCode}" />
+
 				<m:MaterialTextBox ui:field="name" type="TEXT"
 					label="{i18nCore.userEditorName}" />
 
@@ -71,45 +79,57 @@
 					type="TEXT" label="{i18nCore.userEditorEmail}" />
 			</m:MaterialColumn>
 
-			<m:MaterialColumn grid="s12 m6 l4">
-				<m:MaterialTextBox ui:field="code" type="TEXT"
-					label="{i18nCore.userEditorCode}" />
+			<m:MaterialColumn grid="s12 m8">
+				<m:MaterialTab ui:field="tab" indicatorColor="YELLOW"
+					shadow="1">
+					<m:MaterialTabItem waves="YELLOW" grid="s4">
+						<m:MaterialLink text="Beállítások" href="#tab1"
+							textColor="WHITE" />
+					</m:MaterialTabItem>
+					<m:MaterialTabItem waves="YELLOW" grid="s4">
+						<m:MaterialLink text="Jogosultság" href="#tab2"
+							textColor="WHITE" />
+					</m:MaterialTabItem>
+				</m:MaterialTab>
 
-				<m:MaterialTextBox ui:field="username" type="TEXT"
-					label="{i18nCore.userEditorUsername}" />
+				<!-- BEÁLLÍTÁSOK -->
+				<m:MaterialColumn m:id="tab1" grid="s12"
+					paddingTop="10">
+					<m:MaterialCheckBox ui:field="enabled"
+						text="{i18nCore.userEditorEnabled}" addStyleNames="{style.cb}" />
 
-				<m:MaterialCheckBox ui:field="enabled"
-					text="{i18nCore.userEditorEnabled}" />
+					<m:MaterialTextBox ui:field="username"
+						type="TEXT" label="{i18nCore.userEditorUsername}" />
 
-				<m:MaterialCheckBox ui:field="admin"
-					text="{i18nCore.userEditorIsAdmin}" />
+					<combobox:MaterialComboBox
+						ui:field="userGroupDtos" multiple="true"
+						label="{i18nCore.userEditorChatGroups}"
+						placeholder="{i18nCore.userEditorChooseGroup}" />
+				</m:MaterialColumn>
 
-				<combobox:MaterialComboBox
-					ui:field="availableHotelDtos" multiple="true"
-					label="{i18nCore.userEditorAvailableHotels}"
-					placeholder="{i18nCore.userEditorChooseHotel}" />
+				<!-- JOGOSULTSÁGOK -->
+				<m:MaterialColumn m:id="tab2" grid="s12"
+					paddingTop="10">
+					<m:MaterialCheckBox ui:field="admin"
+						text="{i18nCore.userEditorIsAdmin}" addStyleNames="{style.cb}" />
 
-				<combobox:MaterialComboBox
-					ui:field="defaultHotelDtox" multiple="false"
-					label="{i18nCore.userEditorDefaultHotel}"
-					placeholder="{i18nCore.userEditorChooseHotel}" />
+					<combobox:MaterialComboBox
+						ui:field="availableHotelDtos" multiple="true"
+						label="{i18nCore.userEditorAvailableHotels}"
+						placeholder="{i18nCore.userEditorChooseHotel}" marginTop="30" />
 
-				<combobox:MaterialComboBox
-					ui:field="userGroupDtos" multiple="true"
-					label="{i18nCore.userEditorChatGroups}"
-					placeholder="{i18nCore.userEditorChooseGroup}" />
-			</m:MaterialColumn>
-
-			<m:MaterialColumn grid="s12 m12 l4">
-				<ma:richeditor.MaterialRichEditor
-					placeholder="Megjegyzések" />
+					<combobox:MaterialComboBox
+						ui:field="defaultHotelDtox" multiple="false"
+						label="{i18nCore.userEditorDefaultHotel}"
+						placeholder="{i18nCore.userEditorChooseHotel}" marginTop="25" />
+				</m:MaterialColumn>
 			</m:MaterialColumn>
 		</m:MaterialRow>
 
 
 		<m:MaterialFAB>
-			<m:MaterialButton ui:field="saveButton" type="FLOATING"
-				backgroundColor="GREEN" iconType="SAVE" size="LARGE" />
+			<m:MaterialButton ui:field="saveButton"
+				type="FLOATING" backgroundColor="GREEN" iconType="SAVE" size="LARGE" />
 		</m:MaterialFAB>
 	</g:HTMLPanel>
 </ui:UiBinder> 
