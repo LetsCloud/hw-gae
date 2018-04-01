@@ -61,44 +61,16 @@ public class HotelTableView extends ViewWithUiHandlers<HotelTableUiHandlers> imp
 		initTable();
 
 	}
-
+	
 	private void initTable() {
 
 		table.getTableTitle().setText(i18n.hotelsTableTitle());
 
 		table.addSetupHandler(new SetupHandler() {
-
 			@Override
 			public void onSetup(SetupEvent event) {
-				logger.info("initTable().onSetup()");
-				Panel tp = event.getScaffolding().getToolPanel();
-				// Add two buttons
-				MaterialIcon dmi = new MaterialIcon(IconType.DELETE);
-				dmi.addClickHandler((e) -> {
-					getUiHandlers().delete(table.getSelectedRowModels(false));});
-				
-				MaterialIcon mmi = new MaterialIcon(IconType.MORE_VERT);
-				mmi.setActivates("dd-menu");
-				
-				MaterialDropDown mdd = new MaterialDropDown();
-				mdd.setActivator("dd-menu");
-				MaterialLink pdfLink = new MaterialLink();
-				pdfLink.setIconType(IconType.PICTURE_AS_PDF);
-				pdfLink.setText("PDF export");
-				mdd.add(pdfLink);
-				MaterialLink xlsLink = new MaterialLink();
-				xlsLink.setIconType(IconType.DOCK);
-				pdfLink.setText("XLS export");
-				mdd.add(xlsLink);
-				
-				tp.add(dmi);
-				tp.add(mmi);
-				tp.add(mdd);
-				
-				table.getStretchIcon().setVisible(false);
-				table.getColumnMenuIcon().setVisible(false);
+				setToolPanel(event.getScaffolding().getToolPanel());
 			}
-
 		});
 
 		// Load the categories from the server
@@ -187,7 +159,36 @@ public class HotelTableView extends ViewWithUiHandlers<HotelTableUiHandlers> imp
 //		Panel panel = table.getScaffolding().getToolPanel();
 
 		table.getView().refresh();
+	}
 
+	private void setToolPanel(Panel toolPanel) {
+		// Add two buttons
+		MaterialIcon deleteIcon = new MaterialIcon(IconType.DELETE);
+		deleteIcon.addClickHandler((e) -> {
+			getUiHandlers().delete(table.getSelectedRowModels(false));});
+		
+		MaterialIcon menuIcon = new MaterialIcon(IconType.MORE_VERT);
+		menuIcon.setActivates("dd-menu");
+		
+		MaterialDropDown menuDropDown = new MaterialDropDown();
+		menuDropDown.setActivator("dd-menu");
+		
+		MaterialLink pdfLink = new MaterialLink();
+		pdfLink.setIconType(IconType.PICTURE_AS_PDF);
+		pdfLink.setText("PDF export");
+		menuDropDown.add(pdfLink);
+
+		MaterialLink xlsLink = new MaterialLink();
+		xlsLink.setIconType(IconType.DOCK);
+		pdfLink.setText("XLS export");
+		menuDropDown.add(xlsLink);
+		
+		toolPanel.add(deleteIcon);
+		toolPanel.add(menuIcon);
+		toolPanel.add(menuDropDown);
+		
+		table.getStretchIcon().setVisible(false);
+		table.getColumnMenuIcon().setVisible(false);
 	}
 
 	@Override

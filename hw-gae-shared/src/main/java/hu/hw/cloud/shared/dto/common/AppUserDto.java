@@ -26,6 +26,11 @@ public class AppUserDto extends AccountChildDto {
 	private String name;
 
 	/**
+	 * Beosztás
+	 */
+	private String title;
+
+	/**
 	 * Fotó
 	 */
 	private String picture;
@@ -90,7 +95,14 @@ public class AppUserDto extends AccountChildDto {
 		this.name = name;
 		this.emailAddress = emailAddress;
 		this.picture = picture;
+	}
 
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String getName() {
@@ -101,12 +113,12 @@ public class AppUserDto extends AccountChildDto {
 		this.name = name;
 	}
 
-	public String getCode() {
-		return code;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getUsername() {

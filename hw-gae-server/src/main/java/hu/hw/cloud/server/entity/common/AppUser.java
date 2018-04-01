@@ -47,6 +47,11 @@ public class AppUser extends AccountChild {
 	private String name;
 
 	/**
+	 * Név
+	 */
+	private String title;
+
+	/**
 	 * Fotó
 	 */
 	private String picture;
@@ -153,6 +158,14 @@ public class AppUser extends AccountChild {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getPicture() {
@@ -296,6 +309,9 @@ public class AppUser extends AccountChild {
 		if (dto.getName() != null)
 			setName(dto.getName());
 
+		if (dto.getTitle() != null)
+			setTitle(dto.getTitle());
+
 		if (dto.getPicture() != null)
 			setPicture(dto.getPicture());
 
@@ -366,6 +382,9 @@ public class AppUser extends AccountChild {
 
 		if (this.getName() != null)
 			dto.setName(this.getName());
+
+		if (this.getTitle() != null)
+			dto.setTitle(this.getTitle());
 
 		if (this.getPicture() != null)
 			dto.setPicture(this.getPicture());

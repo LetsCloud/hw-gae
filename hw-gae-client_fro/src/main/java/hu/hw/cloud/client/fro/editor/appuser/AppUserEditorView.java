@@ -54,7 +54,7 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 	MaterialImage image;
 
 	@UiField
-	MaterialTextBox code, name, username, emailAddress;
+	MaterialTextBox code, name, title, username, emailAddress;
 
 	@UiField
 	MaterialCheckBox enabled, admin;

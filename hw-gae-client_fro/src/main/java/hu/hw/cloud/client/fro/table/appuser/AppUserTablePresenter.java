@@ -77,29 +77,33 @@ public class AppUserTablePresenter extends AbstractTablePresenter<AppUserDto, Ap
 	}
 
 	@Override
-	public void inviteItem(AppUserDto dto) {
-		resourceDelegate.withCallback(new ErrorHandlerAsyncCallback<AppUserDto>(this) {
-			@Override
-			public void onSuccess(AppUserDto userDto) {
-			}
+	public void inviteItem(List<AppUserDto> dtos) {
+		for (AppUserDto dto : dtos) {
+			resourceDelegate.withCallback(new ErrorHandlerAsyncCallback<AppUserDto>(this) {
+				@Override
+				public void onSuccess(AppUserDto userDto) {
+				}
 
-			@Override
-			public void onFailure(Throwable caught) {
-			}
-		}).invite(dto);
+				@Override
+				public void onFailure(Throwable caught) {
+				}
+			}).invite(dto);
+		}
 	}
 
 	@Override
-	public void clearFcmTokens(AppUserDto dto) {
-		dto.getFcmTokenDtos().clear();
-		resourceDelegate.withCallback(new ErrorHandlerAsyncCallback<AppUserDto>(this) {
-			@Override
-			public void onSuccess(AppUserDto userDto) {
-			}
+	public void clearFcmTokens(List<AppUserDto> dtos) {
+		for (AppUserDto dto : dtos) {
+			dto.getFcmTokenDtos().clear();
+			resourceDelegate.withCallback(new ErrorHandlerAsyncCallback<AppUserDto>(this) {
+				@Override
+				public void onSuccess(AppUserDto userDto) {
+				}
 
-			@Override
-			public void onFailure(Throwable caught) {
-			}
-		}).update(dto);
+				@Override
+				public void onFailure(Throwable caught) {
+				}
+			}).update(dto);
+		}
 	}
 }
