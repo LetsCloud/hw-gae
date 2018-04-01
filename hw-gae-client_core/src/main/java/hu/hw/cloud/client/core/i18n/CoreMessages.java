@@ -224,6 +224,7 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("Password")
 	String userEditorPassword();
 
+	
 	/*
 	 * USER_GROUP EDITOR
 	 */
@@ -236,6 +237,37 @@ public interface CoreMessages extends Messages {
 
 	@DefaultMessage("Name")
 	String userGroupEditorName();
+
+	
+	/*
+	 * HOTEL TABLE
+	 */
+	
+	@DefaultMessage("Hotels Data")
+	String hotelsTableTitle();
+	
+	@DefaultMessage("Code")
+	String hotelsTableCode();
+
+	@DefaultMessage("Name")
+	String hotelsTableName();
+
+	
+	/*
+	 * HOTEL EDITOR
+	 */
+
+	@DefaultMessage("Create a Hotel")
+	String hotelEditorCreateTitle();
+
+	@DefaultMessage("Modify Hotel Data")
+	String hotelEditorModifyTitle();
+
+	@DefaultMessage("Code")
+	String hotelEditorCode();
+
+	@DefaultMessage("Name")
+	String hotelEditorName();
 
 	
 	/*

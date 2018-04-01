@@ -59,6 +59,8 @@ public class SystemConfigPresenter extends Presenter<SystemConfigPresenter.MyVie
 		tableMap.put(1,
 				new TableStore(i18n.systemConfigUserGroup(), dtoTablePresenterFactory.createUserGroupTablePresenter()));
 		tableMap.put(2,
+				new TableStore(i18n.systemConfigHotel(), dtoTablePresenterFactory.createHotelTablePresenter()));
+		tableMap.put(3,
 				new TableStore(i18n.systemConfigAppUser(), dtoTablePresenterFactory.createAppUserTablePresenter()));
 
 		this.i18n = i18n;

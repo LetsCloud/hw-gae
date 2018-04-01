@@ -218,12 +218,16 @@ public class Hotel extends AccountChild {
 			dto.setBusinessDate(getBusinessDate());
 		if (getCityTaxes() != null)
 			dto.setCityTaxes(CityTax.createDtos(getCityTaxes()));
+		
 		if (getCode() != null)
 			dto.setCode(getCode());
+		
 		if (getConfig() != null)
 			dto.setConfig(HotelConfig.createDto(getConfig()));
+		
 		if (getName() != null)
 			dto.setName(getName());
+		
 		return dto;
 	}
 

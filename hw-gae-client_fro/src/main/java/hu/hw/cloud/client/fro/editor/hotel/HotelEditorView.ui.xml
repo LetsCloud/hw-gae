@@ -1,0 +1,43 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:m="urn:import:gwt.material.design.client.ui"
+	xmlns:combobox="urn:import:gwt.material.design.addins.client.combobox"
+	xmlns:ma="urn:import:gwt.material.design.addins.client">
+
+	<ui:with field="i18nCore"
+		type="hu.hw.cloud.client.core.i18n.CoreMessages" />
+
+	<ui:style>
+	.pp {
+		padding-top: 20px;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	</ui:style>
+
+	<g:HTMLPanel addStyleNames="{style.pp}">
+		<m:MaterialRow>
+			<m:MaterialColumn grid="s12 m6 l4">
+				<m:MaterialTextBox ui:field="code" type="TEXT"
+					label="{i18nCore.hotelEditorCode}" />
+
+				<m:MaterialTextBox ui:field="name" type="TEXT"
+					label="{i18nCore.hotelEditorName}" />
+			</m:MaterialColumn>
+		</m:MaterialRow>
+
+		<m:MaterialFAB ui:field="fab">
+			<m:MaterialAnchorButton type="FLOATING"
+				iconType="MORE_VERT" size="LARGE" backgroundColor="GREY" />
+			<m:MaterialFABList>
+				<m:MaterialAnchorButton ui:field="saveButton"
+					type="FLOATING" waves="LIGHT" backgroundColor="GREEN"
+					iconType="SAVE" />
+				<m:MaterialAnchorButton
+					ui:field="cancelButton" type="FLOATING" waves="LIGHT"
+					backgroundColor="RED" iconType="CANCEL" />
+			</m:MaterialFABList>
+		</m:MaterialFAB>
+	</g:HTMLPanel>
+</ui:UiBinder> 

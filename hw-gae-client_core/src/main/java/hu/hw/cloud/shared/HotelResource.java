@@ -30,7 +30,6 @@ import hu.hw.cloud.shared.dto.hotel.HotelDto;
 public interface HotelResource {
 
 	@GET
-	@Path("")
 	List<HotelDto> list();
 
 	@POST

@@ -58,6 +58,9 @@ public interface FroMessages extends Messages {
 	@DefaultMessage("User groups")
 	String systemConfigUserGroup();
 
+	@DefaultMessage("Hotels")
+	String systemConfigHotel();
+
 	@DefaultMessage("Users")
 	String systemConfigAppUser();
 

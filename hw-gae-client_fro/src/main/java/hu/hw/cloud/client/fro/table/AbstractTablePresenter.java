@@ -3,6 +3,7 @@
  */
 package hu.hw.cloud.client.fro.table;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.google.web.bindery.event.shared.EventBus;
@@ -75,8 +76,10 @@ public abstract class AbstractTablePresenter<T extends BaseDto, V extends View> 
 	}
 
 	@Override
-	public void delete(T dto) {
-		deleteData(dto.getWebSafeKey());
+	public void delete(List<T> dtos) {
+		for (T dto : dtos)
+			deleteData(dto.getWebSafeKey());
+		loadData();
 	}
 
 	protected abstract void deleteData(String webSafeKey);

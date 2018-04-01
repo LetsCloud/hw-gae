@@ -3,6 +3,7 @@
  */
 package hu.hw.cloud.client.fro.table.usergroup;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
@@ -132,7 +133,9 @@ public class UserGroupTableView extends ViewWithUiHandlers<UserGroupTableUiHandl
 				icon.addClickHandler(new ClickHandler() {
 					@Override
 					public void onClick(ClickEvent event) {
-						getUiHandlers().delete(object);
+						List<UserGroupDto> dtos = new ArrayList<UserGroupDto>();
+						dtos.add(object);
+						getUiHandlers().delete(dtos);
 					}
 				});
 

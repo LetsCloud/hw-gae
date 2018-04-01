@@ -11,6 +11,7 @@ import hu.hw.cloud.client.fro.configsystem.SystemConfigModule;
 import hu.hw.cloud.client.fro.dashboard.DashboardModule;
 import hu.hw.cloud.client.fro.edit.DtoEditorModule;
 import hu.hw.cloud.client.fro.editor.appuser.AppUserEditorModule;
+import hu.hw.cloud.client.fro.editor.hotel.HotelEditorModule;
 import hu.hw.cloud.client.fro.table.DtoTableModule;
 import hu.hw.cloud.client.core.gin.CoreModule;
 
@@ -33,6 +34,7 @@ public class ClientModule extends AbstractPresenterModule {
 		install(new DtoTableModule());
 		install(new DtoEditorModule());
 
+		install(new HotelEditorModule());
 		install(new AppUserEditorModule());
 
 	}

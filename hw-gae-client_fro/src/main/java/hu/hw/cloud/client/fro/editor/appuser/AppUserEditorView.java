@@ -44,6 +44,8 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 	interface Driver extends SimpleBeanEditorDriver<AppUserDto, AppUserEditorView> {
 	}
 
+	private final Driver driver;
+
 	@UiField
 	@Ignore
 	MaterialImage image;
@@ -67,8 +69,6 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 	
 	String picture;
 
-	private final Driver driver;
-
 	@Inject
 	AppUserEditorView(Binder uiBinder, Driver driver, EventBus eventBus) {
 		logger.info("AppUserEditorView()");
@@ -76,13 +76,10 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 		initWidget(uiBinder.createAndBindUi(this));
 
 		this.driver = driver;
+		driver.initialize(this);
 		
 		userGroupDtos.setMultiple(true);
 		userGroupDtos.setPlaceholder("Válassz csoportot");
-//		image.setWidth("100px");
-//		image.setHeight("100px");		
-		
-		driver.initialize(this);
 	}
 
 	@Override
