@@ -5,9 +5,6 @@
 	xmlns:combobox="urn:import:gwt.material.design.addins.client.combobox"
 	xmlns:ma="urn:import:gwt.material.design.addins.client">
 
-	<ui:with field="i18nCore"
-		type="hu.hw.cloud.client.core.i18n.CoreMessages" />
-
 	<ui:style>
 	.pp {
 		padding-top: 20px;
@@ -16,10 +13,14 @@
 	}
 	</ui:style>
 
+	<ui:with field="i18nCore"
+		type="hu.hw.cloud.client.core.i18n.CoreMessages" />
+
 	<g:HTMLPanel addStyleNames="{style.pp}">
 
 		<m:MaterialRow>
-			<m:MaterialNavBar ui:field="navBar" width="100%">
+			<m:MaterialNavBar ui:field="navBar" width="auto"
+				margin-left="10px" margin-right="10px">
 				<m:MaterialBreadcrumb text="Home" />
 				<m:MaterialBreadcrumb text="Users" />
 				<m:MaterialBreadcrumb text="Editor" />
@@ -29,7 +30,7 @@
 		<m:MaterialRow>
 			<m:MaterialColumn grid="s12 m6 l4">
 				<m:MaterialImage ui:field="image" caption="Photo"
-					activates="photoDrop" width="150px" height="150px"/>
+					activates="photoDrop" width="150px" height="150px" />
 				<!-- My Drop Down -->
 				<m:MaterialDropDown activator="photoDrop"
 					constrainWidth="true">
@@ -75,13 +76,15 @@
 				<m:MaterialCheckBox ui:field="admin" text="Admin" />
 
 				<combobox:MaterialComboBox
-					ui:field="hotelDtos" label="Elérhető hotelek" />
+					ui:field="availableHotelDtos" multiple="true"
+					label="Elérhető hotelek" />
 
 				<combobox:MaterialComboBox
-					ui:field="defHotelsDto" label="Alapértelmezett hotel" />
+					ui:field="defaultHotelDtox" multiple="false"
+					label="Alapértelmezett hotel" />
 
 				<combobox:MaterialComboBox
-					ui:field="userGroupDtos" label="Chat csoportok" />
+					ui:field="userGroupDtos" multiple="true" label="Chat csoportok" />
 			</m:MaterialColumn>
 
 			<m:MaterialColumn grid="s12 m12 l4">

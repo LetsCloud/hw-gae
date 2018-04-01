@@ -68,7 +68,7 @@ public class AppUserDto extends AccountChildDto {
 	/**
 	 * 
 	 */
-	private List<HotelDto> accessibleHotelDtos = new ArrayList<HotelDto>();
+	private List<HotelDto> availableHotelDtos = new ArrayList<HotelDto>();
 
 	/**
 	 * 
@@ -165,12 +165,12 @@ public class AppUserDto extends AccountChildDto {
 		this.defaultHotelDto = defaultHotelDto;
 	}
 
-	public List<HotelDto> getAccessibleHotelDtos() {
-		return accessibleHotelDtos;
+	public List<HotelDto> getAvailableHotelDtos() {
+		return availableHotelDtos;
 	}
 
-	public void setAccessibleHotelDtos(List<HotelDto> accessibleHotelDtos) {
-		this.accessibleHotelDtos = accessibleHotelDtos;
+	public void setAvailableHotelDtos(List<HotelDto> availableHotelDtos) {
+		this.availableHotelDtos = availableHotelDtos;
 	}
 
 	public String getPicture() {

@@ -123,7 +123,7 @@ public class DataBuilderServiceImpl extends DataContainer implements DataBuilder
 		List<AppUser> users = appUserRepository.getAll(account);
 		for (AppUser user : users) {
 			try {
-				user.setAccessibleHotels(hotels);
+				user.setAvailableHotels(hotels);
 				user.setDefaultHotel(this.getHotelA());
 				appUserRepository.save(user);
 			} catch (Throwable e) {

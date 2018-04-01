@@ -11,15 +11,19 @@ import javax.inject.Inject;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
+import com.google.gwt.editor.client.adapters.TakesValueEditor;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.TakesValue;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 import gwt.material.design.addins.client.combobox.MaterialComboBox;
+import gwt.material.design.addins.client.combobox.events.SelectItemEvent;
+import gwt.material.design.addins.client.combobox.events.SelectItemEvent.SelectComboHandler;
 import gwt.material.design.client.ui.MaterialCheckBox;
 import gwt.material.design.client.ui.MaterialFAB;
 import gwt.material.design.client.ui.MaterialImage;
@@ -29,6 +33,7 @@ import gwt.material.design.client.ui.MaterialTextBox;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
 import hu.hw.cloud.shared.dto.common.UserGroupDto;
+import hu.hw.cloud.shared.dto.hotel.HotelDto;
 
 /**
  * @author robi
@@ -53,33 +58,65 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 	@UiField
 	@Ignore
 	MaterialNavBar navBar;
-	
+
 	@UiField
 	MaterialTextBox code, name, username, emailAddress;
 
 	@UiField
 	MaterialCheckBox enabled, admin;
-	
+
 	@UiField
 	MaterialComboBox<UserGroupDto> userGroupDtos;
 
 	@UiField
+	MaterialComboBox<HotelDto> availableHotelDtos;
+
+	@UiField
+	@Ignore
+	MaterialComboBox<HotelDto> defaultHotelDtox;
+
+	TakesValueEditor<HotelDto> defaultHotelDto;
+
+	@UiField
 	@Ignore
 	MaterialFAB fab;
-	
+
 	String picture;
 
 	@Inject
 	AppUserEditorView(Binder uiBinder, Driver driver, EventBus eventBus) {
 		logger.info("AppUserEditorView()");
-		
+
 		initWidget(uiBinder.createAndBindUi(this));
+
+		defaultHotelDto = TakesValueEditor.of(new TakesValue<HotelDto>() {
+
+			@Override
+			public void setValue(HotelDto value) {
+				defaultHotelDtox.setSingleValue(value);
+			}
+
+			@Override
+			public HotelDto getValue() {
+				return defaultHotelDtox.getSingleValue();
+			}
+		});
 
 		this.driver = driver;
 		driver.initialize(this);
-		
-		userGroupDtos.setMultiple(true);
+
 		userGroupDtos.setPlaceholder("Válassz csoportot");
+
+		availableHotelDtos.setPlaceholder("Válassz a hotel(eke)t");
+		availableHotelDtos.addSelectionHandler(new SelectComboHandler<HotelDto>() {
+
+			@Override
+			public void onSelectItem(SelectItemEvent<HotelDto> event) {
+				setDefHotelCombo(event.getSelectedValues());
+			}
+		});
+
+		defaultHotelDtox.setPlaceholder("Válassz hotelt");
 	}
 
 	@Override
@@ -87,13 +124,15 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 		logger.info("AppUserEditorView().edit()->dto=" + dto);
 
 		if (dto.getPicture() != null) {
-			setImageUrl(dto.getPicture());			
+			setImageUrl(dto.getPicture());
 		} else {
-			setImageUrl(GWT.getHostPageBaseURL() + "image/user_plus.jpeg");			
+			setImageUrl(GWT.getHostPageBaseURL() + "image/user_plus.jpeg");
 		}
-		
+
+		setDefHotelCombo(dto.getAvailableHotelDtos());
+
 		driver.edit(dto);
-		
+
 		fab.open();
 	}
 
@@ -102,6 +141,21 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 		userGroupDtos.clear();
 		for (UserGroupDto dto : data) {
 			userGroupDtos.addItem(dto.getName(), dto);
+		}
+	}
+
+	@Override
+	public void setHotelData(List<HotelDto> data) {
+		availableHotelDtos.clear();
+		for (HotelDto dto : data) {
+			availableHotelDtos.addItem(dto.getName(), dto);
+		}
+	}
+
+	private void setDefHotelCombo(List<HotelDto> dtos) {
+		defaultHotelDtox.clear();
+		for (HotelDto hd : dtos) {
+			defaultHotelDtox.addItem(hd.getName(), hd);
 		}
 	}
 

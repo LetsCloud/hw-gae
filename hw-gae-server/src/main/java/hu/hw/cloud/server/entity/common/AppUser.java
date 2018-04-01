@@ -28,7 +28,7 @@ import hu.hw.cloud.server.security.RegistrationListener;
  */
 @Entity
 public class AppUser extends AccountChild {
-	private static final Logger LOGGER = Logger.getLogger(RegistrationListener.class.getName());
+	private static final Logger logger = Logger.getLogger(RegistrationListener.class.getName());
 
 	/**
 	 * 
@@ -96,7 +96,7 @@ public class AppUser extends AccountChild {
 	/**
 	 * Hotelek
 	 */
-	private List<Ref<Hotel>> accessibleHotels = new ArrayList<Ref<Hotel>>();
+	private List<Ref<Hotel>> availableHotels = new ArrayList<Ref<Hotel>>();
 
 	/**
 	 * Firebase Messaging Token
@@ -112,7 +112,7 @@ public class AppUser extends AccountChild {
 	 * Paraméter nélküli kontruktor Objectify-hoz
 	 */
 	public AppUser() {
-		LOGGER.info("AppUser()");
+		logger.info("AppUser()");
 		this.enabled = false;
 		this.admin = false;
 	}
@@ -227,20 +227,20 @@ public class AppUser extends AccountChild {
 		this.roles = list;
 	}
 
-	public List<Hotel> getAccessibleHotels() {
+	public List<Hotel> getAvailableHotels() {
 		List<Hotel> list = new ArrayList<Hotel>();
-		for (Ref<Hotel> ref : accessibleHotels) {
+		for (Ref<Hotel> ref : availableHotels) {
 			list.add(ref.get());
 		}
 		return list;
 	}
 
-	public void setAccessibleHotels(List<Hotel> accessibleHotels) {
+	public void setAvailableHotels(List<Hotel> accessibleHotels) {
 		ArrayList<Ref<Hotel>> list = new ArrayList<Ref<Hotel>>();
 		for (Hotel hotel : accessibleHotels) {
 			list.add(Ref.create(hotel));
 		}
-		this.accessibleHotels = list;
+		this.availableHotels = list;
 	}
 
 	public Hotel getDefaultHotel() {
@@ -304,7 +304,7 @@ public class AppUser extends AccountChild {
 
 		if (dto.getEmailAddress() != null) {
 			if (!dto.getEmailAddress().equals(getEmailAddress())) {
-				LOGGER.info("PROPERTY_EMAILADDRESS"+dto.getEmailAddress()+"/"+getEmailAddress());
+				logger.info("PROPERTY_EMAILADDRESS"+dto.getEmailAddress()+"/"+getEmailAddress());
 				setEmailAddress(dto.getEmailAddress());
 				addUniqueIndex(PROPERTY_EMAILADDRESS, dto.getEmailAddress());
 			}
@@ -315,7 +315,7 @@ public class AppUser extends AccountChild {
 
 		if (dto.getUsername() != null) {
 			if (!dto.getUsername().equals(getUsername())) {
-				LOGGER.info("PROPERTY_USERNAME->"+dto.getUsername()+"/"+getUsername());
+				logger.info("PROPERTY_USERNAME->"+dto.getUsername()+"/"+getUsername());
 				setUsername(dto.getUsername());
 				addUniqueIndex(PROPERTY_USERNAME, dto.getUsername());
 			}
@@ -327,8 +327,8 @@ public class AppUser extends AccountChild {
 		if (dto.getRoleDtos() != null)
 			setRoles(Role.createList(dto.getRoleDtos()));
 
-		if (dto.getAccessibleHotelDtos() != null)
-			setAccessibleHotels(Hotel.createList(dto.getAccessibleHotelDtos()));
+		if (dto.getAvailableHotelDtos() != null)
+			setAvailableHotels(Hotel.createList(dto.getAvailableHotelDtos()));
 
 		if (dto.getFcmTokenDtos() != null)
 			setFcmTokens(FcmToken.createList(dto.getFcmTokenDtos()));
@@ -391,10 +391,10 @@ public class AppUser extends AccountChild {
 			dto.setRoleDtos(new ArrayList<RoleDto>());
 		}
 
-		if (this.getAccessibleHotels() != null) {
-			dto.setAccessibleHotelDtos(Hotel.createDtos(this.getAccessibleHotels()));
+		if (this.getAvailableHotels() != null) {
+			dto.setAvailableHotelDtos(Hotel.createDtos(this.getAvailableHotels()));
 		} else {
-			dto.setAccessibleHotelDtos(new ArrayList<HotelDto>());
+			dto.setAvailableHotelDtos(new ArrayList<HotelDto>());
 		}
 
 		if (this.getFcmTokens() != null) {
