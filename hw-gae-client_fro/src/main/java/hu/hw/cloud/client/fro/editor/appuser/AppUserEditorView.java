@@ -25,9 +25,7 @@ import gwt.material.design.addins.client.combobox.MaterialComboBox;
 import gwt.material.design.addins.client.combobox.events.SelectItemEvent;
 import gwt.material.design.addins.client.combobox.events.SelectItemEvent.SelectComboHandler;
 import gwt.material.design.client.ui.MaterialCheckBox;
-import gwt.material.design.client.ui.MaterialFAB;
 import gwt.material.design.client.ui.MaterialImage;
-import gwt.material.design.client.ui.MaterialNavBar;
 import gwt.material.design.client.ui.MaterialTextBox;
 
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
@@ -50,14 +48,10 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 	}
 
 	private final Driver driver;
-
+	
 	@UiField
 	@Ignore
 	MaterialImage image;
-
-	@UiField
-	@Ignore
-	MaterialNavBar navBar;
 
 	@UiField
 	MaterialTextBox code, name, username, emailAddress;
@@ -76,10 +70,6 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 	MaterialComboBox<HotelDto> defaultHotelDtox;
 
 	TakesValueEditor<HotelDto> defaultHotelDto;
-
-	@UiField
-	@Ignore
-	MaterialFAB fab;
 
 	String picture;
 
@@ -105,9 +95,6 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 		this.driver = driver;
 		driver.initialize(this);
 
-		userGroupDtos.setPlaceholder("Válassz csoportot");
-
-		availableHotelDtos.setPlaceholder("Válassz a hotel(eke)t");
 		availableHotelDtos.addSelectionHandler(new SelectComboHandler<HotelDto>() {
 
 			@Override
@@ -115,8 +102,6 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 				setDefHotelCombo(event.getSelectedValues());
 			}
 		});
-
-		defaultHotelDtox.setPlaceholder("Válassz hotelt");
 	}
 
 	@Override
@@ -132,8 +117,6 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 		setDefHotelCombo(dto.getAvailableHotelDtos());
 
 		driver.edit(dto);
-
-		fab.open();
 	}
 
 	@Override
@@ -164,11 +147,6 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 		AppUserDto dto = driver.flush();
 		dto.setPicture(picture);
 		getUiHandlers().save(dto);
-	}
-
-	@UiHandler("cancelButton")
-	void onCancelClick(ClickEvent ignored) {
-		getUiHandlers().cancel();
 	}
 
 	@Override

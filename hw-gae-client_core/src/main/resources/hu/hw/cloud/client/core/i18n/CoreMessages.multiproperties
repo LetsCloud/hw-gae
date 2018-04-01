@@ -17,7 +17,7 @@
         <Column>
             <Name>hu_HU</Name>
             <Description></Description>
-            <Width>150</Width>
+            <Width>747</Width>
             <HandlerConfiguration>/hw-gae-client_core/src/main/resources/hu/hw/cloud/client/core/i18n/CoreMessages_hu_HU.properties|false|false|false|false</HandlerConfiguration>
         </Column>
     </Columns>
@@ -286,6 +286,30 @@
             <Value disabled="false">Kijelentkezés</Value>
         </Property>
         <Comment>
+            <Value>BREADCRUMBS</Value>
+        </Comment>
+        <Property>
+            <Name>breadcrumbsHome</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Home</Value>
+            <Value disabled="false">Kezdő oldal</Value>
+        </Property>
+        <Property>
+            <Name>breadcrumbsUsersTable</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Users</Value>
+            <Value disabled="false">Felhasználók</Value>
+        </Property>
+        <Property>
+            <Name>breadcrumbsUserEditor</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Editor</Value>
+            <Value disabled="false">Szerkesztő</Value>
+        </Property>
+        <Comment>
             <Value>DASHBOARD</Value>
         </Comment>
         <Property>
@@ -294,6 +318,107 @@
             <MultiLine>false</MultiLine>
             <Value disabled="false">Dashboard</Value>
             <Value disabled="false">Infopult</Value>
+        </Property>
+        <Comment>
+            <Value>APPUSREVIEW</Value>
+        </Comment>
+        <Property>
+            <Name>userEditorCreateTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Create User Profile</Value>
+            <Value disabled="false">Felhasználói profil létrehozása</Value>
+        </Property>
+        <Property>
+            <Name>userEditorModifyTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Edit User Profile</Value>
+            <Value disabled="false">Felhasználói profile szerkesztése</Value>
+        </Property>
+        <Property>
+            <Name>userEditorName</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Name</Value>
+            <Value disabled="false">Név</Value>
+        </Property>
+        <Property>
+            <Name>userEditorTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Title</Value>
+            <Value disabled="false">Beosztás</Value>
+        </Property>
+        <Property>
+            <Name>userEditorEmail</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Email</Value>
+            <Value disabled="false">Email</Value>
+        </Property>
+        <Property>
+            <Name>userEditorCode</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Code</Value>
+            <Value disabled="false">Kód</Value>
+        </Property>
+        <Property>
+            <Name>userEditorUsername</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Username</Value>
+            <Value disabled="false">Felhasználó</Value>
+        </Property>
+        <Property>
+            <Name>userEditorEnabled</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Enabled user</Value>
+            <Value disabled="false">Engedélyezett felhasználó</Value>
+        </Property>
+        <Property>
+            <Name>userEditorIsAdmin</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Administrator</Value>
+            <Value disabled="false">Rendszergazda</Value>
+        </Property>
+        <Property>
+            <Name>userEditorAvailableHotels</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Permitted hotels</Value>
+            <Value disabled="false">Engedélyezett hotelek</Value>
+        </Property>
+        <Property>
+            <Name>userEditorChooseHotel</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Choose a hotel</Value>
+            <Value disabled="false">Válassz hotelt</Value>
+        </Property>
+        <Property>
+            <Name>userEditorDefaultHotel</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Default hotel</Value>
+            <Value disabled="false">Alabértelmezett hotel</Value>
+        </Property>
+        <Property>
+            <Name>userEditorChatGroups</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Chat groups</Value>
+            <Value disabled="false">Chat csoportok</Value>
+        </Property>
+        <Property>
+            <Name>userEditorChooseGroup</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Choose a group</Value>
+            <Value disabled="false">Válassz csoportot</Value>
         </Property>
     </Records>
 </MultiProperties>

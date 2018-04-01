@@ -152,6 +152,7 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("Roles")
 	String mainMenuItemRoles();
 
+	
 	/*
 	 * SIDE PROFILE
 	 */
@@ -170,6 +171,21 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("Log Out")
 	String userMenuItemLogout();
 
+	
+	/*
+	 * BREADCRUMBS
+	 */
+	
+	@DefaultMessage("Home")
+	String breadcrumbsHome();
+	
+	@DefaultMessage("Users")
+	String breadcrumbsUsersTable();
+	
+	@DefaultMessage("Editor")
+	String breadcrumbsUserEditor();
+
+	
 	/*
 	 * DASHBOARD
 	 */
@@ -189,8 +205,58 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("Email")
 	String usersTableEmail();
 
+	
 	/*
-	 * USERS TABLE
+	 * USER EDITOR
+	 */
+
+	@DefaultMessage("Create User Profile")
+	String userEditorCreateTitle();
+
+	@DefaultMessage("Modify User Profile")
+	String userEditorModifyTitle();
+
+	@DefaultMessage("Name")
+	String userEditorName();
+
+	@DefaultMessage("Title")
+	String userEditorTitle();
+
+	@DefaultMessage("Email")
+	String userEditorEmail();
+
+	@DefaultMessage("Code")
+	String userEditorCode();
+
+	@DefaultMessage("Username")
+	String userEditorUsername();
+
+	@DefaultMessage("Enabled")
+	String userEditorEnabled();
+	
+	@DefaultMessage("Admin user")
+	String userEditorIsAdmin();
+	
+	@DefaultMessage("Permitted hotels")
+	String userEditorAvailableHotels();
+	
+	@DefaultMessage("Chhoose a hotel")
+	String userEditorChooseHotel();
+	
+	@DefaultMessage("Deafult hotel")
+	String userEditorDefaultHotel();
+	
+	@DefaultMessage("Chat groups")
+	String userEditorChatGroups();
+	
+	@DefaultMessage("Choose a group")
+	String userEditorChooseGroup();
+	
+	@DefaultMessage("Password")
+	String userEditorPassword();
+
+	/*
+	 * USER GROUPS TABLE
 	 */
 
 	@DefaultMessage("User Groups")
@@ -198,31 +264,6 @@ public interface CoreMessages extends Messages {
 
 	@DefaultMessage("Name")
 	String userGroupTableName();
-
-	/*
-	 * USER EDITOR
-	 */
-
-	@DefaultMessage("Create User")
-	String userEditorCreateTitle();
-
-	@DefaultMessage("Modify User")
-	String userEditorModifyTitle();
-
-	@DefaultMessage("Code")
-	String userEditorCode();
-
-	@DefaultMessage("Name")
-	String userEditorName();
-
-	@DefaultMessage("Email")
-	String userEditorEmail();
-
-	@DefaultMessage("Username")
-	String userEditorUsername();
-
-	@DefaultMessage("Password")
-	String userEditorPassword();
 
 	
 	/*

@@ -16,14 +16,22 @@
 	<ui:with field="i18nCore"
 		type="hu.hw.cloud.client.core.i18n.CoreMessages" />
 
+	<ui:with field="coreTokens"
+		type="hu.hw.cloud.client.core.CoreNameTokens" />
+
+	<ui:with field="froTokens"
+		type="hu.hw.cloud.client.fro.FroNameTokens" />
+
 	<g:HTMLPanel addStyleNames="{style.pp}">
 
 		<m:MaterialRow>
 			<m:MaterialNavBar ui:field="navBar" width="auto"
-				margin-left="10px" margin-right="10px">
-				<m:MaterialBreadcrumb text="Home" />
-				<m:MaterialBreadcrumb text="Users" />
-				<m:MaterialBreadcrumb text="Editor" />
+				marginLeft="10" marginRight="10">
+				<m:MaterialBreadcrumb iconType="HOME"
+					marginLeft="10" targetHistoryToken="{coreTokens.getHome}" />
+				<m:MaterialBreadcrumb iconType="GROUP"
+					targetHistoryToken="{froTokens.getSystemConfig}" />
+				<m:MaterialBreadcrumb iconType="BEENHERE" />
 			</m:MaterialNavBar>
 		</m:MaterialRow>
 
@@ -71,20 +79,25 @@
 					label="{i18nCore.userEditorUsername}" />
 
 				<m:MaterialCheckBox ui:field="enabled"
-					text="Enabled" />
+					text="{i18nCore.userEditorEnabled}" />
 
-				<m:MaterialCheckBox ui:field="admin" text="Admin" />
+				<m:MaterialCheckBox ui:field="admin"
+					text="{i18nCore.userEditorIsAdmin}" />
 
 				<combobox:MaterialComboBox
 					ui:field="availableHotelDtos" multiple="true"
-					label="Elérhető hotelek" />
+					label="{i18nCore.userEditorAvailableHotels}"
+					placeholder="{i18nCore.userEditorChooseHotel}" />
 
 				<combobox:MaterialComboBox
 					ui:field="defaultHotelDtox" multiple="false"
-					label="Alapértelmezett hotel" />
+					label="{i18nCore.userEditorDefaultHotel}"
+					placeholder="{i18nCore.userEditorChooseHotel}" />
 
 				<combobox:MaterialComboBox
-					ui:field="userGroupDtos" multiple="true" label="Chat csoportok" />
+					ui:field="userGroupDtos" multiple="true"
+					label="{i18nCore.userEditorChatGroups}"
+					placeholder="{i18nCore.userEditorChooseGroup}" />
 			</m:MaterialColumn>
 
 			<m:MaterialColumn grid="s12 m12 l4">
@@ -93,17 +106,10 @@
 			</m:MaterialColumn>
 		</m:MaterialRow>
 
-		<m:MaterialFAB ui:field="fab">
-			<m:MaterialAnchorButton type="FLOATING"
-				iconType="MORE_VERT" size="LARGE" backgroundColor="GREY" />
-			<m:MaterialFABList>
-				<m:MaterialAnchorButton ui:field="saveButton"
-					type="FLOATING" waves="LIGHT" backgroundColor="GREEN"
-					iconType="SAVE" />
-				<m:MaterialAnchorButton
-					ui:field="cancelButton" type="FLOATING" waves="LIGHT"
-					backgroundColor="RED" iconType="CANCEL" />
-			</m:MaterialFABList>
+
+		<m:MaterialFAB>
+			<m:MaterialButton ui:field="saveButton" type="FLOATING"
+				backgroundColor="GREEN" iconType="SAVE" size="LARGE" />
 		</m:MaterialFAB>
 	</g:HTMLPanel>
 </ui:UiBinder> 
