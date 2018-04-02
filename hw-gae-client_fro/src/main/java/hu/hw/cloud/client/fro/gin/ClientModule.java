@@ -6,8 +6,9 @@ package hu.hw.cloud.client.fro.gin;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
 import hu.hw.cloud.client.fro.app.FroAppModule;
+import hu.hw.cloud.client.fro.config.hotel.HotelConfigModule;
+import hu.hw.cloud.client.fro.config.system.SystemConfigModule;
 import hu.hw.cloud.client.fro.configcommon.CommonConfigModule;
-import hu.hw.cloud.client.fro.configsystem.SystemConfigModule;
 import hu.hw.cloud.client.fro.dashboard.DashboardModule;
 import hu.hw.cloud.client.fro.datasource.DataSourceModule;
 import hu.hw.cloud.client.fro.edit.DtoEditorModule;
@@ -31,6 +32,7 @@ public class ClientModule extends AbstractPresenterModule {
 		install(new FroAppModule());
 		install(new DashboardModule());
 		install(new SystemConfigModule());
+		install(new HotelConfigModule());
 		install(new CommonConfigModule());
 
 		install(new DataSourceModule());

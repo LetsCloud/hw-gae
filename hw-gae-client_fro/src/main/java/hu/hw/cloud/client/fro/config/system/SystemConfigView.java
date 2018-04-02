@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.fro.configsystem;
+package hu.hw.cloud.client.fro.config.system;
 
 import java.util.Map;
 import java.util.logging.Level;
@@ -28,6 +28,7 @@ import gwt.material.design.client.ui.MaterialDropDown;
 import gwt.material.design.client.ui.MaterialIcon;
 import gwt.material.design.client.ui.MaterialLabel;
 import gwt.material.design.client.ui.MaterialLink;
+import hu.hw.cloud.client.fro.config.TableStore;
 
 /**
  * @author CR

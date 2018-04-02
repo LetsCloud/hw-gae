@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.fro.configsystem;
+package hu.hw.cloud.client.fro.config;
 
 /**
  * @author robi

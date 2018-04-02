@@ -1,4 +1,4 @@
-package hu.hw.cloud.client.fro.configsystem;
+package hu.hw.cloud.client.fro.config.system;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +22,7 @@ import hu.hw.cloud.client.core.event.ContentPushEvent;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent;
 import hu.hw.cloud.client.core.security.LoggedInGatekeeper;
 import hu.hw.cloud.client.fro.FroNameTokens;
+import hu.hw.cloud.client.fro.config.TableStore;
 import hu.hw.cloud.client.fro.i18n.FroMessages;
 import hu.hw.cloud.client.fro.table.DtoTablePresenterFactory;
 import hu.hw.cloud.shared.cnst.MenuItemType;
@@ -58,9 +59,9 @@ public class SystemConfigPresenter extends Presenter<SystemConfigPresenter.MyVie
 
 		tableMap.put(1,
 				new TableStore(i18n.systemConfigUserGroup(), dtoTablePresenterFactory.createUserGroupTablePresenter()));
+//		tableMap.put(2,
+//				new TableStore(i18n.systemConfigHotel(), dtoTablePresenterFactory.createHotelTablePresenter()));
 		tableMap.put(2,
-				new TableStore(i18n.systemConfigHotel(), dtoTablePresenterFactory.createHotelTablePresenter()));
-		tableMap.put(3,
 				new TableStore(i18n.systemConfigAppUser(), dtoTablePresenterFactory.createAppUserTablePresenter()));
 
 		this.i18n = i18n;

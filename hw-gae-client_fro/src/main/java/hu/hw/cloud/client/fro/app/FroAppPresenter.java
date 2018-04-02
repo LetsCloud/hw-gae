@@ -137,7 +137,7 @@ public class FroAppPresenter extends AppPresenter<FroAppPresenter.MyProxy> {
 		configMenuItem3.setIndex(3);
 		configMenuItem3.setType(MenuItemType.MENU_ITEM);
 		configMenuItem3.setText(i18n.mainMenuItemHotelConfig());
-		configMenuItem3.setNameToken(FroNameTokens.COMMON_CONFIG);
+		configMenuItem3.setNameToken(FroNameTokens.HOTEL_CONFIG);
 		configSubMenu.addItem(configMenuItem3);
 
 		return menuItems;
