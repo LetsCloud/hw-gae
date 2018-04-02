@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.fro.datasource;
+package hu.hw.cloud.client.core.datasource;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -16,31 +16,31 @@ import gwt.material.design.client.data.loader.LoadConfig;
 import gwt.material.design.client.data.loader.LoadResult;
 
 import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
-import hu.hw.cloud.shared.HotelResource;
-import hu.hw.cloud.shared.dto.hotel.HotelDto;
+import hu.hw.cloud.shared.UserGroupResource;
+import hu.hw.cloud.shared.dto.common.UserGroupDto;
 
 /**
  * @author robi
  *
  */
-public class HotelDataSource implements DataSource<HotelDto> {
-	private static Logger logger = Logger.getLogger(HotelDataSource.class.getName());
+public class UserGroupDataSource implements DataSource<UserGroupDto> {
+	private static Logger logger = Logger.getLogger(AppUserDataSource.class.getName());
 
 	private Boolean isLoaded = false;
-
-	private final ResourceDelegate<HotelResource> resourceDelegate;
+	
+	private final ResourceDelegate<UserGroupResource> resourceDelegate;
 
 	@Inject
-	HotelDataSource(ResourceDelegate<HotelResource> resourceDelegate) {
-		logger.info("HotelDataSource()");
+	UserGroupDataSource(ResourceDelegate<UserGroupResource> resourceDelegate) {
+		logger.info("UserGroupDataSource()");
 		this.resourceDelegate = resourceDelegate;
 	}
-
+	
 	@Override
-	public void load(LoadConfig<HotelDto> loadConfig, LoadCallback<HotelDto> callback) {
-		resourceDelegate.withCallback(new AbstractAsyncCallback<List<HotelDto>>() {
+	public void load(LoadConfig<UserGroupDto> loadConfig, LoadCallback<UserGroupDto> callback) {
+		resourceDelegate.withCallback(new AbstractAsyncCallback<List<UserGroupDto>>() {
 			@Override
-			public void onSuccess(List<HotelDto> result) {
+			public void onSuccess(List<UserGroupDto> result) {
 				callback.onSuccess(new LoadResult<>(result, loadConfig.getOffset(), result.size()));
 				isLoaded = true;
 			}
@@ -59,5 +59,5 @@ public class HotelDataSource implements DataSource<HotelDto> {
 	public void setIsLoaded(Boolean isLoaded) {
 		this.isLoaded = isLoaded;
 	}
-
+	
 }

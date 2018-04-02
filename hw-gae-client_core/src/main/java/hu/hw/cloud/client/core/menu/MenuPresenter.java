@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
+import com.google.common.base.Strings;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -29,6 +30,7 @@ import hu.hw.cloud.client.core.security.HasPermissionsGatekeeper;
 import hu.hw.cloud.shared.AuthService;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.dto.core.MenuItemDto;
+import hu.hw.cloud.shared.dto.hotel.HotelDto;
 
 /**
  * @author CR
@@ -55,6 +57,8 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView>
 
 		void setHotelName(String hotelName);
 
+		void setPermittedHotels(List<HotelDto> hotels);
+
 		void setBusinessDate(Date businessDate);
 
 		void setMenuItems(List<MenuItemDto> menuItems);
@@ -74,7 +78,8 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView>
 
 	@Inject
 	MenuPresenter(EventBus eventBus, MyView view, PlaceManager placeManager, RestDispatch dispatcher,
-			AuthService authService, CurrentUser currentUser, AppData appData, HasPermissionsGatekeeper menItemGatekeeper) {
+			AuthService authService, CurrentUser currentUser, AppData appData,
+			HasPermissionsGatekeeper menItemGatekeeper) {
 		super(eventBus, view);
 		logger.info("MenuPresenter()");
 
@@ -167,8 +172,16 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView>
 	@Override
 	public void referesh() {
 		getView().setAccountName(currentUser.getAppUserDto().getAccountDto().getName());
-//		getView().setHotelName(currentUser.getCurrentHotelDto().getName());
+		if (!Strings.isNullOrEmpty(currentUser.getCurrentHotelDto().getName()))
+			getView().setHotelName(currentUser.getCurrentHotelDto().getName());
+		getView().setPermittedHotels(currentUser.getAppUserDto().getAvailableHotelDtos());
 		getView().setUserImageUrl(currentUser.getAppUserDto().getPicture());
 		getView().setUserName(currentUser.getAppUserDto().getName());
+	}
+
+	@Override
+	public void setCurrentHotel(HotelDto hotel) {
+		currentUser.setCurrentHotelDto(hotel);
+		getView().setHotelName(hotel.getName());
 	}
 }

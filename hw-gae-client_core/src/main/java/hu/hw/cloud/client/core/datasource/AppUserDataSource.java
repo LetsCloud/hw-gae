@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.fro.datasource;
+package hu.hw.cloud.client.core.datasource;
 
 import java.util.List;
 import java.util.logging.Logger;

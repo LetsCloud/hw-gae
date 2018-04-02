@@ -22,6 +22,7 @@ import com.gwtplatform.mvp.shared.proxy.RouteTokenFormatter;
 import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.activate.ActivateModule;
 import hu.hw.cloud.client.core.app.AppServiceWorkerManager;
+import hu.hw.cloud.client.core.datasource.DataSourceModule;
 import hu.hw.cloud.client.core.login.LoginModule;
 import hu.hw.cloud.client.core.menu.MenuModule;
 import hu.hw.cloud.client.core.register.RegisterModule;
@@ -57,6 +58,7 @@ public class CoreModule extends AbstractPresenterModule {
 
 		install(new UnauthorizedModule());
 		install(new ServiceModule());
+		install(new DataSourceModule());
 		install(new MenuModule());
 		install(new LoginModule());
 		install(new RegisterModule());
