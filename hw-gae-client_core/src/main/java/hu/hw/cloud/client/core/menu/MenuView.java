@@ -208,18 +208,17 @@ public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements Menu
 		switch (appCode) {
 		case SubSystem.INF:
 			sideProfile.setResource(res.orangeWallpaperImg());
-			brandPanel.add(new HTML("HostWare <span>Cloud</span> " + appCode));
+			brandPanel.add(new HTML("HostWare <span>Cloud</span> " + appCode + "<span>v8</span>"));
 			break;
 		case SubSystem.KIP:
 			sideProfile.setResource(res.blueWallpaperImg());
-			brandPanel.add(new HTML("HostWare <span>Cloud</span> " + appCode));
+			brandPanel.add(new HTML("HostWare <span>Cloud</span> " + appCode + "<span>v8</span>"));
 			break;
 		case SubSystem.FRO:
 			sideProfile.setResource(res.redWallpaperImg());
-			brandPanel.add(new HTML("HostWare <span>Cloud</span> " + appCode));
+			brandPanel.add(new HTML("HostWare <span>Cloud</span> " + appCode + "<span>v8</span>"));
 			break;
 		}
-
 	}
 
 	@Override
