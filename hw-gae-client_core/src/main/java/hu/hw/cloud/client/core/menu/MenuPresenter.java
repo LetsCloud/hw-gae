@@ -145,9 +145,9 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView>
 	public void adjustMenuItems(MenuItemType triggerItem) {
 
 		if (triggerItem.equals(MenuItemType.MENU_ITEM)) {
-			getView().closeCollapisbles();
-		} else {
 			getView().inactivateSingleLinks();
+		} else {
+			getView().closeCollapisbles();
 		}
 
 	}

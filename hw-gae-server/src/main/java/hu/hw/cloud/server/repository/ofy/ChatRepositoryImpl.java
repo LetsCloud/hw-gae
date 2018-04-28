@@ -8,6 +8,7 @@ import java.util.List;
 import com.googlecode.objectify.Key;
 
 import hu.hw.cloud.server.entity.chat.Chat;
+import hu.hw.cloud.server.entity.common.Account;
 import hu.hw.cloud.server.repository.ChatRepository;
 
 /**
@@ -34,6 +35,12 @@ public class ChatRepositoryImpl extends CrudRepositoryImpl<Chat> implements Chat
 	@Override
 	public List<Chat> getByAccount(Object account) {
 		return getChildren(account);
+	}
+
+	@Override
+	protected Object getParentKey(String parentWebSafeKey) {
+		Key<Account> key = Key.create(parentWebSafeKey);
+		return key;
 	}
 
 }

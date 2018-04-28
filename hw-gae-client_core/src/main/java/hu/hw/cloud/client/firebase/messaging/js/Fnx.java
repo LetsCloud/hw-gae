@@ -3,10 +3,8 @@
  */
 package hu.hw.cloud.client.firebase.messaging.js;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 import hu.hw.cloud.client.firebase.model.DataMessage;
-import hu.hw.cloud.client.firebase.model.NotificationMessage;
+
 import jsinterop.annotations.JsFunction;
 
 /**
@@ -14,7 +12,7 @@ import jsinterop.annotations.JsFunction;
  *
  */
 public class Fnx {
-
+	
 	@FunctionalInterface
 	@JsFunction
 	public interface Arg {

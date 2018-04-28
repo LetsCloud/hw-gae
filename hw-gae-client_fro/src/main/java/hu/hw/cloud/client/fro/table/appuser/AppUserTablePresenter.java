@@ -21,7 +21,7 @@ import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
 import hu.hw.cloud.client.core.util.ErrorHandlerAsyncCallback;
 import hu.hw.cloud.client.fro.table.AbstractTablePresenter;
-import hu.hw.cloud.shared.AppUserResource;
+import hu.hw.cloud.shared.api.AppUserResource;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
 
 /**
@@ -103,7 +103,7 @@ public class AppUserTablePresenter extends AbstractTablePresenter<AppUserDto, Ap
 				@Override
 				public void onFailure(Throwable caught) {
 				}
-			}).update(dto);
+			}).saveOrCreate(dto);
 		}
 	}
 }

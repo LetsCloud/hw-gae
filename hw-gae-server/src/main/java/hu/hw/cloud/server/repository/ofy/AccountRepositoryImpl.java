@@ -39,4 +39,9 @@ public class AccountRepositoryImpl extends CrudRepositoryImpl<Account> implement
 		Key<Account> key = Key.create(Account.class, id);
 		return key.getString();
 	}
+
+	@Override
+	protected Object getParentKey(String parentWebSafeKey) {
+		return null;
+	}
 }

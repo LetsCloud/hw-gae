@@ -1,9 +1,9 @@
 <beans:beans xmlns="http://www.springframework.org/schema/security"
 	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-		   http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		   http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
 		   http://www.springframework.org/schema/security
-		   http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+		   http://www.springframework.org/schema/security/spring-security-4.2.xsd">
 
 	<beans:bean id="accessDecisionManager"
 		class="org.springframework.security.access.vote.AffirmativeBased">
@@ -84,7 +84,7 @@
 	<http use-expressions="true" authentication-manager-ref="authenticationManager"
 		entry-point-ref="restApiEntryPoint" create-session="stateless"
 		pattern="/api/v1/**">
-		<!-- <csrf disabled="true" /> 4.01-ből -->
+		<csrf disabled="true" />
 		<intercept-url pattern="/api/v1/**" access="isAuthenticated()" />
 		<custom-filter position="BASIC_AUTH_FILTER" ref="digestAuthenticationFilter" />
 		<!-- <expression-handler ref="restApiEntryPoint" /> -->
@@ -100,10 +100,8 @@
 	<http authentication-manager-ref="authenticationManager"
 		entry-point-ref="restAuthEntryPoint" access-decision-manager-ref="accessDecisionManager"
 		use-expressions="true">
-		<!-- <csrf disabled="true" /> 4.01-ből -->
+		<csrf disabled="true" />
 		<!-- <expression-handler ref="restAuthEntryPoint" /> -->
-		<intercept-url pattern="/firebase-messaging-sw.js"
-			access="permitAll" />
 		<intercept-url pattern="/launcher-icons" access="permitAll" />
 		<intercept-url pattern="INF_manifest.json" access="permitAll" />
 		<intercept-url pattern="KIP_manifest.json" access="permitAll" />

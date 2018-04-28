@@ -15,7 +15,7 @@ public class FroNameTokens {
 		return COMMON_CONFIG;
 	}
 
-	public static String getHotelonfig() {
+	public static String getHotelConfig() {
 		return HOTEL_CONFIG;
 	}
 }

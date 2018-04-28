@@ -7,6 +7,7 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,7 @@ public abstract class CrudServiceImpl<T extends BaseEntity, D extends BaseDto, R
 		implements CrudService<T, D> {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CrudServiceImpl.class.getName());
 
-	private R repository;
+	protected R repository;
 
 	public CrudServiceImpl(R repository) {
 		this.repository = repository;
@@ -151,6 +152,16 @@ public abstract class CrudServiceImpl<T extends BaseEntity, D extends BaseDto, R
 		for (Object parent : parents) {
 			repository.deleteAll(parent);
 		}
+	}
+
+	@Override
+	public List<T> getChildren(String parentWebSafeKey) {
+		return repository.getChildren(parentWebSafeKey);
+	}
+
+	@Override
+	public List<T> getChildrenByFilters(String parentWebSafeKey, Map<String, Object> filters) {
+		return repository.getChildrenByFilters(parentWebSafeKey, filters);
 	}
 
 }

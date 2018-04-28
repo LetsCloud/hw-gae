@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import com.googlecode.objectify.Key;
 
+import hu.hw.cloud.server.entity.common.Account;
 import hu.hw.cloud.server.entity.common.Currency;
 import hu.hw.cloud.server.repository.CurrencyRepository;
 
@@ -16,9 +17,9 @@ import hu.hw.cloud.server.repository.CurrencyRepository;
  * @author CR
  *
  */
-//@Repository("currencyRepository")
+// @Repository("currencyRepository")
 public class CurrencyRepositoryImpl extends CrudRepositoryImpl<Currency> implements CurrencyRepository {
-	private static final Logger LOGGER = LoggerFactory.getLogger(CurrencyRepositoryImpl.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(CurrencyRepositoryImpl.class.getName());
 
 	public CurrencyRepositoryImpl() {
 		super(Currency.class);
@@ -26,7 +27,7 @@ public class CurrencyRepositoryImpl extends CrudRepositoryImpl<Currency> impleme
 
 	@Override
 	public String getAccountId(String id) {
-		LOGGER.info("getAccountId->id=" + id);
+		logger.info("getAccountId->id=" + id);
 		Key<Currency> key = getKey(id);
 		return key.getParent().getString();
 	}
@@ -34,5 +35,11 @@ public class CurrencyRepositoryImpl extends CrudRepositoryImpl<Currency> impleme
 	@Override
 	protected Object getParent(Currency entity) {
 		return entity.getAccount();
+	}
+
+	@Override
+	protected Object getParentKey(String parentWebSafeKey) {
+		Key<Account> key = Key.create(parentWebSafeKey);
+		return key;
 	}
 }

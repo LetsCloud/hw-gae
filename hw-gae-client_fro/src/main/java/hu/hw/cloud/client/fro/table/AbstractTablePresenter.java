@@ -21,10 +21,11 @@ import hu.hw.cloud.shared.dto.BaseDto;
  *
  */
 public abstract class AbstractTablePresenter<T extends BaseDto, V extends View> extends PresenterWidget<V>
-		implements DtoTableUiHandlers<T>, IsDtoTable, RefreshTableEvent.RefreshTableHandler {
+		implements DtoTableUiHandlers<T>, RefreshTableEvent.RefreshTableHandler {
 	private static Logger logger = Logger.getLogger(AbstractTablePresenter.class.getName());
 
 	private String caption;
+	
 	private final PlaceManager placeManager;
 
 	public AbstractTablePresenter(EventBus eventBus, V view, PlaceManager placeManager) {
@@ -53,8 +54,8 @@ public abstract class AbstractTablePresenter<T extends BaseDto, V extends View> 
 	protected abstract String getEditorNameToken();
 
 	@Override
-	public void create() {
-		logger.info("create()");
+	public void addNew() {
+		logger.info("addNew()");
 		PlaceRequest placeRequest = new Builder().nameToken(getEditorNameToken()).build();
 		placeManager.revealPlace(placeRequest);
 	}

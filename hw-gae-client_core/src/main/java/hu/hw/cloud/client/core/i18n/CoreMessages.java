@@ -312,6 +312,58 @@ public interface CoreMessages extends Messages {
 
 	
 	/*
+	 * ROOMTYPE TABLE
+	 */
+	
+	@DefaultMessage("Room Type Data")
+	String roomTypesTableTitle();
+	
+	@DefaultMessage("Choose a hotel")
+	String roomTypesTableHotelsPlaceholder();
+	
+	@DefaultMessage("Selected hotel")
+	String roomTypesTableHotelsLabel();
+	
+	@DefaultMessage("Only active types")
+	String roomTypesTableOnlyActive();
+	
+	@DefaultMessage("Code")
+	String roomTypesTableCode();
+
+	@DefaultMessage("Name")
+	String roomTypesTableName();
+
+	
+	/*
+	 * ROOMTYPE EDITOR
+	 */
+
+	@DefaultMessage("Create room type")
+	String roomTypeEditorCreateTitle();
+
+	@DefaultMessage("Modify room type")
+	String roomTypeEditorModifyTitle();
+
+	@DefaultMessage("Code")
+	String roomTypeEditorCode();
+
+	@DefaultMessage("Name")
+	String roomTypeEditorName();
+
+	@DefaultMessage("Description")
+	String roomTypeEditorDescription();
+
+	@DefaultMessage("Active")
+	String roomTypeEditorActive();
+
+	@DefaultMessage("Sales Type")
+	String roomTypeEditorSalesType();
+
+	@DefaultMessage("Choose sales type")
+	String roomTypeEditorChooseSalesType();
+
+	
+	/*
 	 * SEND MESSAGE
 	 */
 

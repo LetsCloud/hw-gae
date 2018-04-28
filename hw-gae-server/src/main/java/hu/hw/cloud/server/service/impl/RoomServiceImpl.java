@@ -36,15 +36,12 @@ import hu.hw.cloud.shared.dto.hotel.RoomDto;
 public class RoomServiceImpl extends CrudServiceImpl<Room, RoomDto, RoomRepository> implements RoomService {
 //	private static final Logger LOGGER = LoggerFactory.getLogger(RoomServiceImpl.class.getName());
 
-	private RoomRepository roomRepository;
-
 	private ReservationRepository reservationRepository;
 
 	//@Autowired
 	public RoomServiceImpl(RoomRepository repository, ReservationRepository reservationRepository) {
 		super(repository);
 //		LOGGER.info("RoomServiceImpl");
-		this.roomRepository = repository;
 		this.reservationRepository = reservationRepository;
 	}
 
@@ -79,7 +76,7 @@ public class RoomServiceImpl extends CrudServiceImpl<Room, RoomDto, RoomReposito
 
 	@Override
 	public List<Room> getAllRoomsByHotel(String hotelKey) {
-		List<Room> allRooms = roomRepository.getAllByHotel(hotelKey);
+		List<Room> allRooms = repository.getAllByHotel(hotelKey);
 		return allRooms;
 	}
 
@@ -165,12 +162,12 @@ public class RoomServiceImpl extends CrudServiceImpl<Room, RoomDto, RoomReposito
 			// Objectify tranzakció indul
 			Room th = ofy().transact(new Work<Room>() {
 				public Room run() {
-					Room entity = roomRepository.findByWebSafeKey(roomKey);
+					Room entity = repository.findByWebSafeKey(roomKey);
 					try {
 						// LOGGER.info("changeStatus()->roomStatus=" +
 						// roomStatus);
 						entity.setRoomStatus(roomStatus);
-						entity = roomRepository.save(entity);
+						entity = repository.save(entity);
 						return entity;
 					} catch (Throwable e) {
 						e.printStackTrace(System.out);

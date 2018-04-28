@@ -27,7 +27,7 @@ import hu.hw.cloud.client.core.util.ErrorHandlerAsyncCallback;
 import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.editor.AbstractEditorPresenter;
 import hu.hw.cloud.client.fro.editor.EditorView;
-import hu.hw.cloud.shared.HotelResource;
+import hu.hw.cloud.shared.api.HotelResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
@@ -73,10 +73,10 @@ public class HotelEditorPresenter
 	@Override
 	protected void loadData() {
 		if (isNew()) {
-			SetPageTitleEvent.fire(i18n.userEditorCreateTitle(), "", MenuItemType.MENU_ITEM, HotelEditorPresenter.this);
+			SetPageTitleEvent.fire(i18n.hotelEditorCreateTitle(), "", MenuItemType.MENU_ITEM, HotelEditorPresenter.this);
 			create();
 		} else {
-			SetPageTitleEvent.fire(i18n.userEditorModifyTitle(), "", MenuItemType.MENU_ITEM, HotelEditorPresenter.this);
+			SetPageTitleEvent.fire(i18n.hotelEditorModifyTitle(), "", MenuItemType.MENU_ITEM, HotelEditorPresenter.this);
 			edit(dtoWebSafeKey);
 		}
 	}
@@ -106,23 +106,7 @@ public class HotelEditorPresenter
 	}
 
 	@Override
-	protected void createEntity(HotelDto userDto) {
-		resourceDelegate.withCallback(new AsyncCallback<HotelDto>() {
-			@Override
-			public void onSuccess(HotelDto userDto) {
-				PlaceRequest placeRequest = new Builder().nameToken(FroNameTokens.SYSTEM_CONFIG).build();
-				placeManager.revealPlace(placeRequest);
-			}
-
-			@Override
-			public void onFailure(Throwable caught) {
-				getView().displayError(EntityPropertyCode.NONE, caught.getMessage());
-			}
-		}).create(userDto);
-	}
-
-	@Override
-	protected void updateEntity(HotelDto userDto) {
+	public void save(HotelDto userDto) {
 		resourceDelegate.withCallback(new ErrorHandlerAsyncCallback<HotelDto>(this) {
 			@Override
 			public void onSuccess(HotelDto userDto) {
@@ -134,7 +118,6 @@ public class HotelEditorPresenter
 			public void onFailure(Throwable caught) {
 				getView().displayError(EntityPropertyCode.NONE, caught.getMessage());
 			}
-		}).update(userDto);
+		}).saveOrCreate(userDto);
 	}
-
 }

@@ -7,6 +7,7 @@ package hu.hw.cloud.server.repository.ofy;
 
 import com.googlecode.objectify.Key;
 
+import hu.hw.cloud.server.entity.common.Account;
 import hu.hw.cloud.server.entity.profile.Guest;
 import hu.hw.cloud.server.repository.GuestRepository;
 
@@ -30,6 +31,12 @@ public class GuestRepositoryImpl extends CrudRepositoryImpl<Guest> implements Gu
 	public String getAccountId(String webSafeString) {
 		Key<Guest> key = getKey(webSafeString);
 		return key.getParent().getString();
+	}
+
+	@Override
+	protected Object getParentKey(String parentWebSafeKey) {
+		Key<Account> key = Key.create(parentWebSafeKey);
+		return key;
 	}
 
 }

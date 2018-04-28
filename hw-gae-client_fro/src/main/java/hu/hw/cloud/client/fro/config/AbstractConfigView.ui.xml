@@ -47,11 +47,5 @@
 
 			</m:MaterialColumn>
 		</m:MaterialRow>
-
-		<m:MaterialFAB depth="995">
-			<m:MaterialButton ui:field="addButton" type="FLOATING"
-				backgroundColor="RED" iconType="ADD" size="LARGE" />
-		</m:MaterialFAB>
-
 	</g:HTMLPanel>
 </ui:UiBinder> 

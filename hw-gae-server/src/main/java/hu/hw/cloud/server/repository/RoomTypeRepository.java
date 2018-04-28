@@ -9,6 +9,5 @@ import hu.hw.cloud.server.entity.hotel.RoomType;
  * @author CR
  *
  */
-public interface RoomTypeRepository extends CrudRepository<RoomType> {
-
+public interface RoomTypeRepository extends HotelChildRepository<RoomType> {
 }

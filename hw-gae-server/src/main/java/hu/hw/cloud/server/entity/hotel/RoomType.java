@@ -23,39 +23,12 @@ import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
  */
 @Entity
 public class RoomType extends HotelChild {
-	private static final Logger LOGGER = LoggerFactory.getLogger(RoomType.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(RoomType.class.getName());
 
 	/**
 	 * 
 	 */
-	private static final String PROPERTY_CODE = "code";
-
-	/**
-	 * 
-	 * @param entityRefs
-	 * @return
-	 */
-	public static List<String> createDtos(List<Ref<RoomType>> entityRefs) {
-		List<String> dtos = new ArrayList<String>();
-		for (Ref<RoomType> entityRef : entityRefs) {
-			dtos.add(entityRef.getKey().getString());
-		}
-		return dtos;
-	}
-
-	/**
-	 * 
-	 * @param dtos
-	 * @return
-	 */
-	public static List<Ref<RoomType>> createRefList(List<String> ids) {
-		List<Ref<RoomType>> entityRefs = new ArrayList<Ref<RoomType>>();
-		for (String id : ids) {
-			Key<RoomType> key = Key.create(id);
-			entityRefs.add(Ref.create(key));
-		}
-		return entityRefs;
-	}
+	private static final String ROOMTYPE_CODE = "code";
 
 	@Index
 	private String code;
@@ -64,13 +37,23 @@ public class RoomType extends HotelChild {
 
 	private String description;
 
+	private Integer floor;
+
+	private Integer beds;
+
+	private Integer xtrBeds;
+
+	private Float cleaningFactor;
+	
 	private SalesType salesType;
 
 	private List<Ref<RoomType>> components;
 
+	@Index
 	private Boolean active;
 
 	public RoomType() {
+		logger.info("RoomType()");
 	}
 
 	/**
@@ -130,6 +113,38 @@ public class RoomType extends HotelChild {
 		this.active = active;
 	}
 
+	public Integer getBeds() {
+		return beds;
+	}
+
+	public void setBeds(Integer beds) {
+		this.beds = beds;
+	}
+
+	public Integer getXtrBeds() {
+		return xtrBeds;
+	}
+
+	public void setXtrBeds(Integer xtrBeds) {
+		this.xtrBeds = xtrBeds;
+	}
+
+	public Float getCleaningFactor() {
+		return cleaningFactor;
+	}
+
+	public void setCleaningFactor(Float cleaningFactor) {
+		this.cleaningFactor = cleaningFactor;
+	}
+
+	public Integer getFloor() {
+		return floor;
+	}
+
+	public void setFloor(Integer floor) {
+		this.floor = floor;
+	}
+
 	/**
 	 * 
 	 * @param dto
@@ -147,7 +162,7 @@ public class RoomType extends HotelChild {
 		 */
 		if (dto.getCode() != null) {
 			this.code = dto.getCode();
-			addUniqueIndex(PROPERTY_CODE, dto.getCode());
+			addUniqueIndex(ROOMTYPE_CODE, dto.getCode());
 		}
 
 		if (dto.getName() != null)
@@ -165,6 +180,18 @@ public class RoomType extends HotelChild {
 		if (dto.getActive() != null)
 			this.active = dto.getActive();
 
+		if (dto.getBeds() != null)
+			this.beds = dto.getBeds();
+
+		if (dto.getXtrBeds() != null)
+			this.xtrBeds = dto.getXtrBeds();
+
+		if (dto.getCleaningFactor() != null)
+			this.cleaningFactor = dto.getCleaningFactor();
+
+		if (dto.getFloor() != null)
+			this.floor = dto.getFloor();
+
 //		LOGGER.info("update-END");
 	}
 
@@ -177,6 +204,33 @@ public class RoomType extends HotelChild {
 		RoomTypeDto dto = new RoomTypeDto();
 		dto = entity.updateDto(dto);
 		return dto;
+	}
+
+	/**
+	 * 
+	 * @param entityRefs
+	 * @return
+	 */
+	public static List<String> createDtos(List<Ref<RoomType>> entityRefs) {
+		List<String> dtos = new ArrayList<String>();
+		for (Ref<RoomType> entityRef : entityRefs) {
+			dtos.add(entityRef.getKey().getString());
+		}
+		return dtos;
+	}
+
+	/**
+	 * 
+	 * @param dtos
+	 * @return
+	 */
+	public static List<Ref<RoomType>> createRefList(List<String> ids) {
+		List<Ref<RoomType>> entityRefs = new ArrayList<Ref<RoomType>>();
+		for (String id : ids) {
+			Key<RoomType> key = Key.create(id);
+			entityRefs.add(Ref.create(key));
+		}
+		return entityRefs;
 	}
 
 	public RoomTypeDto updateDto(RoomTypeDto dto) {
@@ -198,6 +252,18 @@ public class RoomType extends HotelChild {
 
 		if (this.getSalesType() != null)
 			dto.setSalesType(this.getSalesType());
+
+		if (this.getBeds() != null)
+			dto.setBeds(this.getBeds());
+
+		if (this.getXtrBeds() != null)
+			dto.setXtrBeds(this.getXtrBeds());
+
+		if (this.getCleaningFactor() != null)
+			dto.setCleaningFactor(this.getCleaningFactor());
+
+		if (this.getFloor() != null)
+			dto.setFloor(this.getFloor());
 
 		return dto;
 	}

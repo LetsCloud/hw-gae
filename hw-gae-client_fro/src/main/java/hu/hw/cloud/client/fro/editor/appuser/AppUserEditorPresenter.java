@@ -34,7 +34,7 @@ import hu.hw.cloud.client.core.util.ErrorHandlerAsyncCallback;
 import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.editor.AbstractEditorPresenter;
 import hu.hw.cloud.client.fro.editor.EditorView;
-import hu.hw.cloud.shared.AppUserResource;
+import hu.hw.cloud.shared.api.AppUserResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
@@ -108,8 +108,8 @@ public class AppUserEditorPresenter
 			}
 		};
 
-		userGroupDataSource.load(new LoadConfig<UserGroupDto>(0,0, null, null), groupLC);
-	
+		userGroupDataSource.load(new LoadConfig<UserGroupDto>(0, 0, null, null), groupLC);
+
 		LoadCallback<HotelDto> hotelLoadCallback = new LoadCallback<HotelDto>() {
 
 			@Override
@@ -126,7 +126,7 @@ public class AppUserEditorPresenter
 			}
 		};
 
-		hotelDataSource.load(new LoadConfig<HotelDto>(0,0, null, null), hotelLoadCallback);
+		hotelDataSource.load(new LoadConfig<HotelDto>(0, 0, null, null), hotelLoadCallback);
 	}
 
 	private void start() {
@@ -144,10 +144,10 @@ public class AppUserEditorPresenter
 	private Boolean allLoaded() {
 		if (!userGroupDataSource.getIsLoaded())
 			return false;
-		
+
 		if (!hotelDataSource.getIsLoaded())
 			return false;
-		
+
 		return true;
 	}
 
@@ -177,26 +177,10 @@ public class AppUserEditorPresenter
 	}
 
 	@Override
-	protected void createEntity(AppUserDto userDto) {
-		resourceDelegate.withCallback(new AsyncCallback<AppUserDto>() {
-			@Override
-			public void onSuccess(AppUserDto userDto) {
-				PlaceRequest placeRequest = new Builder().nameToken(FroNameTokens.SYSTEM_CONFIG).build();
-				placeManager.revealPlace(placeRequest);
-			}
-
-			@Override
-			public void onFailure(Throwable caught) {
-				getView().displayError(EntityPropertyCode.NONE, caught.getMessage());
-			}
-		}).create(userDto);
-	}
-
-	@Override
-	protected void updateEntity(AppUserDto userDto) {
+	public void save(AppUserDto dto) {
 		resourceDelegate.withCallback(new ErrorHandlerAsyncCallback<AppUserDto>(this) {
 			@Override
-			public void onSuccess(AppUserDto userDto) {
+			public void onSuccess(AppUserDto dto) {
 				PlaceRequest placeRequest = new Builder().nameToken(FroNameTokens.SYSTEM_CONFIG).build();
 				placeManager.revealPlace(placeRequest);
 			}
@@ -205,7 +189,7 @@ public class AppUserEditorPresenter
 			public void onFailure(Throwable caught) {
 				getView().displayError(EntityPropertyCode.NONE, caught.getMessage());
 			}
-		}).update(userDto);
+		}).saveOrCreate(dto);
 	}
 
 }

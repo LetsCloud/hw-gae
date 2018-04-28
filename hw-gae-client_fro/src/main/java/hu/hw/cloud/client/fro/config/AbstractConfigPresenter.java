@@ -81,11 +81,6 @@ public abstract class AbstractConfigPresenter<V extends AbstractConfigPresenter.
 		setInSlot(SLOT_CONTENT, tableMap.get(index).getTable());
 	}
 
-	@Override
-	public void addItem() {
-		tableMap.get(activeTable).getTable().create();
-	}
-
 	public void addTable(Integer index, TableStore store) {
 		tableMap.put(index, store);
 	}

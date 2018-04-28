@@ -11,25 +11,19 @@ import javax.inject.Inject;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.Panel;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
+import gwt.material.design.client.constants.Color;
 import gwt.material.design.client.constants.IconType;
 import gwt.material.design.client.constants.TextAlign;
-import gwt.material.design.client.data.SortDir;
+import gwt.material.design.client.constants.WavesType;
 import gwt.material.design.client.data.component.RowComponent;
-import gwt.material.design.client.data.events.SetupEvent;
-import gwt.material.design.client.data.events.SetupHandler;
-import gwt.material.design.client.ui.MaterialDropDown;
 import gwt.material.design.client.ui.MaterialIcon;
-import gwt.material.design.client.ui.MaterialLink;
-import gwt.material.design.client.ui.table.MaterialDataTable;
 import gwt.material.design.client.ui.table.cell.TextColumn;
 import gwt.material.design.client.ui.table.cell.WidgetColumn;
+
 import hu.hw.cloud.client.core.i18n.CoreMessages;
+import hu.hw.cloud.client.fro.table.BaseTableView;
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
 
 /**
@@ -39,49 +33,33 @@ import hu.hw.cloud.shared.dto.hotel.HotelDto;
 public class HotelTableView extends ViewWithUiHandlers<HotelTableUiHandlers> implements HotelTablePresenter.MyView {
 	private static Logger logger = Logger.getLogger(HotelTableView.class.getName());
 
-	interface Binder extends UiBinder<HTMLPanel, HotelTableView> {
-	}
+	private final BaseTableView<HotelDto> table;
 
-	private final CoreMessages i18n;
-
-	@UiField
-	MaterialDataTable<HotelDto> table;
+	private final CoreMessages i18nCore;
 
 	/**
 	* 
 	*/
 	@Inject
-	HotelTableView(Binder uiBinder, CoreMessages i18n) {
+	HotelTableView(BaseTableView<HotelDto> table, CoreMessages i18nCore) {
 		logger.info("HotelTableView()");
 
-		initWidget(uiBinder.createAndBindUi(this));
+		initWidget(table);
 
-		this.i18n = i18n;
+		this.table = table;
+		this.i18nCore = i18nCore;
 
-		initTable();
-
+		init();
 	}
-	
-	private void initTable() {
 
-		table.getTableTitle().setText(i18n.hotelsTableTitle());
+	private void init() {
 
-		table.addSetupHandler(new SetupHandler() {
-			@Override
-			public void onSetup(SetupEvent event) {
-				setToolPanel(event.getScaffolding().getToolPanel());
-			}
-		});
-
-		// Load the categories from the server
-		// table.setLoadMask(true);
-
-		// Add the tables columns
+		table.setTitle(i18nCore.hotelsTableTitle());
 
 		/*
 		 * CODE
 		 */
-		table.addColumn(new TextColumn<HotelDto>() {
+		table.getTable().addColumn(new TextColumn<HotelDto>() {
 			@Override
 			public boolean isSortable() {
 				return true;
@@ -96,12 +74,12 @@ public class HotelTableView extends ViewWithUiHandlers<HotelTableUiHandlers> imp
 			public String getValue(HotelDto object) {
 				return object.getCode();
 			}
-		}, i18n.hotelsTableCode());
+		}, i18nCore.hotelsTableCode());
 
 		/*
 		 * NAME
 		 */
-		table.addColumn(new TextColumn<HotelDto>() {
+		table.getTable().addColumn(new TextColumn<HotelDto>() {
 			@Override
 			public boolean isSortable() {
 				return true;
@@ -116,15 +94,15 @@ public class HotelTableView extends ViewWithUiHandlers<HotelTableUiHandlers> imp
 			public String getValue(HotelDto object) {
 				return object.getName();
 			}
-		}, i18n.hotelsTableName());
+		}, i18nCore.hotelsTableName());
 
 		//
 		// EDIT ICON
 		//
-		table.addColumn(new WidgetColumn<HotelDto, MaterialIcon>() {
+		table.getTable().addColumn(new WidgetColumn<HotelDto, MaterialIcon>() {
 			@Override
 			public TextAlign textAlign() {
-				return TextAlign.CENTER;
+				return TextAlign.RIGHT;
 			}
 
 			@Override
@@ -137,65 +115,19 @@ public class HotelTableView extends ViewWithUiHandlers<HotelTableUiHandlers> imp
 					}
 				});
 
+				icon.setWaves(WavesType.DEFAULT);
 				icon.setIconType(IconType.EDIT);
+				icon.setBackgroundColor(Color.AMBER);
+				icon.setCircle(true);
+				icon.setTextColor(Color.WHITE);
 				return icon;
 			}
 		});
-
-		// table.addRowSelectHandler((e, model, elem, selected) -> {
-		// updateSelectedRows(table.getSelectedRowModels(false).size());
-		// return true;
-		// });
-
-		table.addColumnSortHandler(event -> {
-			table.getView().refresh();
-		});
-
-		// table.addSelectAllHandler((e, models, elems, selected) -> {
-		// updateSelectedRows(table.getSelectedRowModels(false).size());
-		// return true;
-		// });
-		// Adding / removing table toolpanel action buttons / icons
-//		Panel panel = table.getScaffolding().getToolPanel();
-
-		table.getView().refresh();
-	}
-
-	private void setToolPanel(Panel toolPanel) {
-		// Add two buttons
-		MaterialIcon deleteIcon = new MaterialIcon(IconType.DELETE);
-		deleteIcon.addClickHandler((e) -> {
-			getUiHandlers().delete(table.getSelectedRowModels(false));});
-		
-		MaterialIcon menuIcon = new MaterialIcon(IconType.MORE_VERT);
-		menuIcon.setActivates("dd-menu");
-		
-		MaterialDropDown menuDropDown = new MaterialDropDown();
-		menuDropDown.setActivator("dd-menu");
-		
-		MaterialLink pdfLink = new MaterialLink();
-		pdfLink.setIconType(IconType.PICTURE_AS_PDF);
-		pdfLink.setText("PDF export");
-		menuDropDown.add(pdfLink);
-
-		MaterialLink xlsLink = new MaterialLink();
-		xlsLink.setIconType(IconType.DOCK);
-		pdfLink.setText("XLS export");
-		menuDropDown.add(xlsLink);
-		
-		toolPanel.add(deleteIcon);
-		toolPanel.add(menuIcon);
-		toolPanel.add(menuDropDown);
-		
-		table.getStretchIcon().setVisible(false);
-		table.getColumnMenuIcon().setVisible(false);
 	}
 
 	@Override
 	public void setData(List<HotelDto> data) {
-
-		table.setVisibleRange(0, data.size());
-		table.setRowData(0, data);
-		table.sort(0, SortDir.ASC);
+		logger.info("RoomTypeTableView().setData()");
+		table.setData(data);
 	}
 }

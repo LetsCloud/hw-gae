@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 //import org.springframework.stereotype.Repository;
 
+import com.googlecode.objectify.Key;
+
 import hu.hw.cloud.server.entity.hk.HkAssignment;
 import hu.hw.cloud.server.entity.hotel.Hotel;
 import hu.hw.cloud.server.repository.HkAssignmentRepo;
@@ -65,5 +67,11 @@ public class HkAssignmentRepoImpl extends CrudRepositoryImpl<HkAssignment> imple
 	public List<HkAssignment> getByDateAndHotel(String hotelWebSafeKey, Date date) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	protected Object getParentKey(String parentWebSafeKey) {
+		Key<Hotel> key = Key.create(parentWebSafeKey);
+		return key;
 	}
 }

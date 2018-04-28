@@ -68,7 +68,6 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 	@UiField
 	@Ignore
 	MaterialComboBox<HotelDto> defaultHotelDtox;
-
 	TakesValueEditor<HotelDto> defaultHotelDto;
 
 	String picture;
@@ -149,10 +148,14 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 		getUiHandlers().save(dto);
 	}
 
+	@UiHandler("cancelButton")
+	void onCancelClick(ClickEvent event) {
+		getUiHandlers().cancel();
+	}
+
 	@Override
 	public void displayError(EntityPropertyCode code, String message) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@UiHandler("directorLink")

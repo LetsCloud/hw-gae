@@ -5,6 +5,7 @@ package hu.hw.cloud.client.fro.table;
 
 import hu.hw.cloud.client.fro.table.appuser.AppUserTablePresenter;
 import hu.hw.cloud.client.fro.table.hotel.HotelTablePresenter;
+import hu.hw.cloud.client.fro.table.roomtype.RoomTypeTablePresenter;
 import hu.hw.cloud.client.fro.table.usergroup.UserGroupTablePresenter;
 
 /**
@@ -16,6 +17,8 @@ public interface DtoTablePresenterFactory {
 	UserGroupTablePresenter createUserGroupTablePresenter();
 
 	HotelTablePresenter createHotelTablePresenter();
+
+	RoomTypeTablePresenter createRoomTypeTablePresenter();
 
 	AppUserTablePresenter createAppUserTablePresenter();
 

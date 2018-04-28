@@ -16,6 +16,4 @@ public interface ConfigUiHandlers  extends UiHandlers {
 	Map<Integer, TableStore> getTableMap();
 	
 	void showTable(Integer index);
-	
-	void addItem();
 }

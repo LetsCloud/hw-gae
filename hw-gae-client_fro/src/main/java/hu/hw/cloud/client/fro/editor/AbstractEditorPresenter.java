@@ -66,19 +66,6 @@ public abstract class AbstractEditorPresenter<T extends BaseDto, V extends Edito
 	protected abstract T createDto();
 
 	@Override
-	public void save(T dto) {
-		if (isNew()) {
-			createEntity(dto);
-		} else {
-			updateEntity(dto);
-		}
-	}
-
-	protected abstract void createEntity(T dto);
-
-	protected abstract void updateEntity(T dto);
-
-	@Override
 	public void cancel() {
 		placeManager.navigateBack();
 	}

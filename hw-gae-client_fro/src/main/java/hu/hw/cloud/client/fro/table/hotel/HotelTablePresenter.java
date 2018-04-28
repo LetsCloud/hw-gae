@@ -20,7 +20,7 @@ import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
 import hu.hw.cloud.client.fro.table.AbstractTablePresenter;
-import hu.hw.cloud.shared.HotelResource;
+import hu.hw.cloud.shared.api.HotelResource;
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
 
 /**

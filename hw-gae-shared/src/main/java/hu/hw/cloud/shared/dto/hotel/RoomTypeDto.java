@@ -20,6 +20,14 @@ public class RoomTypeDto extends HotelChildDto {
 
 	private String description;
 
+	private Integer floor;
+
+	private Integer beds;
+
+	private Integer xtrBeds;
+
+	private Float cleaningFactor;
+
 	private SalesType salesType;
 
 	private List<String> componentIds;
@@ -74,10 +82,42 @@ public class RoomTypeDto extends HotelChildDto {
 		this.active = active;
 	}
 
+	public Integer getBeds() {
+		return beds;
+	}
+
+	public void setBeds(Integer beds) {
+		this.beds = beds;
+	}
+
+	public Integer getXtrBeds() {
+		return xtrBeds;
+	}
+
+	public void setXtrBeds(Integer xtrBeds) {
+		this.xtrBeds = xtrBeds;
+	}
+
+	public Float getCleaningFactor() {
+		return cleaningFactor;
+	}
+
+	public void setCleaningFactor(Float cleaningFactor) {
+		this.cleaningFactor = cleaningFactor;
+	}
+
+	public Integer getFloor() {
+		return floor;
+	}
+
+	public void setFloor(Integer floor) {
+		this.floor = floor;
+	}
+
 	@Override
 	public String toString() {
 		String ret = "RoomTypeDto:{" + super.toString() + ", code=" + code + ", name=" + name + ", description="
-				+ description + "}";
+				+ description + "salesType=" + salesType +"}";
 		return ret;
 	}
 

@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.googlecode.objectify.Key;
 
+import hu.hw.cloud.server.entity.common.Account;
 import hu.hw.cloud.server.entity.hotel.Hotel;
 import hu.hw.cloud.server.entity.hotel.Room;
 import hu.hw.cloud.server.repository.RoomRepository;
@@ -53,5 +54,11 @@ public class RoomRepositoryImpl extends CrudRepositoryImpl<Room> implements Room
 //			LOGGER.info("getAllByHotel->room=" + room.getRoomAvailabilities());
 //		}
 		return result;
+	}
+
+	@Override
+	protected Object getParentKey(String parentWebSafeKey) {
+		Key<Hotel> key = Key.create(parentWebSafeKey);
+		return key;
 	}
 }

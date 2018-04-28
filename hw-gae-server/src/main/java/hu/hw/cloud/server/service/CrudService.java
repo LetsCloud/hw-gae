@@ -4,6 +4,7 @@
 package hu.hw.cloud.server.service;
 
 import java.util.List;
+import java.util.Map;
 
 import hu.hw.cloud.server.entity.BaseEntity;
 import hu.hw.cloud.shared.dto.BaseDto;
@@ -27,6 +28,10 @@ public interface CrudService<T extends BaseEntity, D extends BaseDto> {
 	List<T> getAll(Long accountId);
 
 	List<T> getAll(String accountWebSafeKey);
+
+	List<T> getChildren(String parentWebSafeKey);
+
+	List<T> getChildrenByFilters(String parentWebSafeKey, Map<String, Object> filters);
 
 	void deleteAll(Long accountId);
 }

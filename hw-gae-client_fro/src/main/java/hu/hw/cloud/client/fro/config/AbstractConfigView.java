@@ -8,17 +8,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 import gwt.material.design.client.constants.IconPosition;
 import gwt.material.design.client.constants.IconType;
 import gwt.material.design.client.constants.WavesType;
-import gwt.material.design.client.ui.MaterialButton;
 import gwt.material.design.client.ui.MaterialCollection;
 import gwt.material.design.client.ui.MaterialCollectionItem;
 import gwt.material.design.client.ui.MaterialCollectionSecondary;
@@ -49,9 +46,6 @@ public abstract class AbstractConfigView extends ViewWithUiHandlers<ConfigUiHand
 
 	@UiField
 	MaterialCollection desktopMenu;
-
-	@UiField
-	MaterialButton addButton;
 
 	public AbstractConfigView() {
 		logger.log(Level.INFO, "AbstractConfigView()");
@@ -106,11 +100,6 @@ public abstract class AbstractConfigView extends ViewWithUiHandlers<ConfigUiHand
 		item.add(sec);
 
 		return item;
-	}
-
-	@UiHandler("addButton")
-	public void onAddClick(ClickEvent event) {
-		getUiHandlers().addItem();
 	}
 
 	@Override

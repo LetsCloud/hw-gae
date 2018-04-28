@@ -6,6 +6,17 @@
 	xmlns:ma="urn:import:gwt.material.design.addins.client">
 
 	<ui:style>
+	
+	.bb {
+		margin-top: 8px;
+		padding-left: 10px;
+		border-left: 3px solid #e91e63;
+	}
+
+	.cc {
+		color: #e91e63;
+	}
+
 	.pp {
 		padding-top: 20px;
 		margin-left: 10px;
@@ -15,6 +26,10 @@
 	.cb {
 		margin-top: 15px;
 		margin-bottom: 25px;
+	}
+	
+	.saveButton {
+		margin-bottom: 18px;
 	}
 	</ui:style>
 
@@ -28,18 +43,6 @@
 		type="hu.hw.cloud.client.fro.FroNameTokens" />
 
 	<g:HTMLPanel addStyleNames="{style.pp}">
-
-		<m:MaterialRow>
-			<m:MaterialNavBar ui:field="navBar" width="auto"
-				marginLeft="10" marginRight="10">
-				<m:MaterialBreadcrumb iconType="HOME"
-					marginLeft="10" targetHistoryToken="{coreTokens.getHome}" />
-				<m:MaterialBreadcrumb iconType="GROUP"
-					targetHistoryToken="{froTokens.getSystemConfig}" />
-				<m:MaterialBreadcrumb iconType="BEENHERE" />
-			</m:MaterialNavBar>
-		</m:MaterialRow>
-
 		<m:MaterialRow>
 			<m:MaterialColumn grid="s12 m4">
 				<m:MaterialImage ui:field="image" caption="Photo"
@@ -80,21 +83,9 @@
 			</m:MaterialColumn>
 
 			<m:MaterialColumn grid="s12 m8">
-				<m:MaterialTab ui:field="tab" indicatorColor="YELLOW"
-					shadow="1">
-					<m:MaterialTabItem waves="YELLOW" grid="s4">
-						<m:MaterialLink text="Beállítások" href="#tab1"
-							textColor="WHITE" />
-					</m:MaterialTabItem>
-					<m:MaterialTabItem waves="YELLOW" grid="s4">
-						<m:MaterialLink text="Jogosultság" href="#tab2"
-							textColor="WHITE" />
-					</m:MaterialTabItem>
-				</m:MaterialTab>
-
 				<!-- BEÁLLÍTÁSOK -->
-				<m:MaterialColumn m:id="tab1" grid="s12"
-					paddingTop="10">
+				<g:HTMLPanel addStyleNames="{style.bb}">
+					<g:Label text="Beállítások" addStyleNames="{style.cc}" />
 					<m:MaterialCheckBox ui:field="enabled"
 						text="{i18nCore.userEditorEnabled}" addStyleNames="{style.cb}" />
 
@@ -105,11 +96,11 @@
 						ui:field="userGroupDtos" multiple="true"
 						label="{i18nCore.userEditorChatGroups}"
 						placeholder="{i18nCore.userEditorChooseGroup}" />
-				</m:MaterialColumn>
+				</g:HTMLPanel>
 
 				<!-- JOGOSULTSÁGOK -->
-				<m:MaterialColumn m:id="tab2" grid="s12"
-					paddingTop="10">
+				<g:HTMLPanel addStyleNames="{style.bb}">
+					<g:Label text="Jogosultság" addStyleNames="{style.cc}" />
 					<m:MaterialCheckBox ui:field="admin"
 						text="{i18nCore.userEditorIsAdmin}" addStyleNames="{style.cb}" />
 
@@ -122,14 +113,14 @@
 						ui:field="defaultHotelDtox" multiple="false"
 						label="{i18nCore.userEditorDefaultHotel}"
 						placeholder="{i18nCore.userEditorChooseHotel}" marginTop="25" />
-				</m:MaterialColumn>
+				</g:HTMLPanel>
 			</m:MaterialColumn>
 		</m:MaterialRow>
 
-
-		<m:MaterialFAB>
-			<m:MaterialButton ui:field="saveButton"
-				type="FLOATING" backgroundColor="GREEN" iconType="SAVE" size="LARGE" />
-		</m:MaterialFAB>
+		<m:MaterialButton ui:field="saveButton"
+			text="{i18nCore.comSave}" float="RIGHT"
+			addStyleNames="{style.saveButton}" />
+		<m:MaterialButton ui:field="cancelButton"
+			text="{i18nCore.comCancel}" type="FLAT" float="RIGHT" />
 	</g:HTMLPanel>
 </ui:UiBinder> 

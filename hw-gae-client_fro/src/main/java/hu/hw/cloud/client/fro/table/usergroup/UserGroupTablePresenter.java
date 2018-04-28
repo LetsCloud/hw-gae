@@ -69,7 +69,7 @@ public class UserGroupTablePresenter extends AbstractTablePresenter<UserGroupDto
 	}
 
 	@Override
-	public void create() {
+	public void addNew() {
 		editor.create();
 	}
 

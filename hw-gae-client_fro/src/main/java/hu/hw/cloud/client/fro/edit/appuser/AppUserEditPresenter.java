@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -19,8 +18,8 @@ import hu.hw.cloud.client.core.event.RefreshTableEvent;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
 import hu.hw.cloud.client.core.util.ErrorHandlerAsyncCallback;
-import hu.hw.cloud.shared.AppUserResource;
 import hu.hw.cloud.shared.UserGroupResource;
+import hu.hw.cloud.shared.api.AppUserResource;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
 import hu.hw.cloud.shared.dto.common.UserGroupDto;
@@ -100,29 +99,6 @@ public class AppUserEditPresenter extends PresenterWidget<AppUserEditPresenter.M
 
 	@Override
 	public void save(AppUserDto dto) {
-		if (isNew) {
-			createEntity(dto);
-		} else {
-			updateEntity(dto);
-		}
-	}
-
-	private void createEntity(AppUserDto userDto) {
-		resourceDelegate.withCallback(new AsyncCallback<AppUserDto>() {
-			@Override
-			public void onSuccess(AppUserDto userDto) {
-				RefreshTableEvent.fire(AppUserEditPresenter.this, RefreshTableEvent.TableType.APP_USER);
-				getView().close();
-			}
-
-			@Override
-			public void onFailure(Throwable caught) {
-				getView().displayError(EntityPropertyCode.NONE, caught.getMessage());
-			}
-		}).create(userDto);
-	}
-
-	private void updateEntity(AppUserDto userDto) {
 		resourceDelegate.withCallback(new ErrorHandlerAsyncCallback<AppUserDto>(this) {
 			@Override
 			public void onSuccess(AppUserDto userDto) {
@@ -134,7 +110,7 @@ public class AppUserEditPresenter extends PresenterWidget<AppUserEditPresenter.M
 			public void onFailure(Throwable caught) {
 				getView().displayError(EntityPropertyCode.NONE, caught.getMessage());
 			}
-		}).update(userDto);
+		}).saveOrCreate(dto);
 	}
 
 }

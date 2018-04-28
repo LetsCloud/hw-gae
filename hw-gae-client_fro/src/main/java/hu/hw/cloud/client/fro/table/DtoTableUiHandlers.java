@@ -15,6 +15,9 @@ import hu.hw.cloud.shared.dto.BaseDto;
  */
 public interface DtoTableUiHandlers<T extends BaseDto> extends UiHandlers {
 
+
+	void addNew();
+
 	void edit(T dto);
 
 	void delete(List<T> dtos);

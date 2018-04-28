@@ -1,9 +1,8 @@
-package hu.hw.cloud.shared;
+package hu.hw.cloud.shared.api;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 
 import static hu.hw.cloud.shared.api.ApiParameters.TOKEN;
 import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
@@ -31,15 +30,12 @@ public interface AppUserResource {
 	@GET
 	List<AppUserDto> list();
 
-	@POST
-	AppUserDto create(AppUserDto userDto);
-
 	@GET
 	@Path(PATH_WEBSAFEKEY)
 	AppUserDto read(@PathParam(WEBSAFEKEY) String webSafeKey);
 
-	@PUT
-	AppUserDto update(AppUserDto userDto);
+	@POST
+	AppUserDto saveOrCreate(AppUserDto userDto);
 
 	@DELETE
 	@Path(PATH_WEBSAFEKEY)

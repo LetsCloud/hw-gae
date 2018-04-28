@@ -14,6 +14,10 @@
 		margin-left: 10px;
 		margin-right: 10px;
 	}
+	
+	.saveButton {
+		margin-bottom: 18px;
+	}
 	</ui:style>
 
 	<g:HTMLPanel addStyleNames="{style.pp}">
@@ -27,17 +31,10 @@
 			</m:MaterialColumn>
 		</m:MaterialRow>
 
-		<m:MaterialFAB ui:field="fab">
-			<m:MaterialAnchorButton type="FLOATING"
-				iconType="MORE_VERT" size="LARGE" backgroundColor="GREY" />
-			<m:MaterialFABList>
-				<m:MaterialAnchorButton ui:field="saveButton"
-					type="FLOATING" waves="LIGHT" backgroundColor="GREEN"
-					iconType="SAVE" />
-				<m:MaterialAnchorButton
-					ui:field="cancelButton" type="FLOATING" waves="LIGHT"
-					backgroundColor="RED" iconType="CANCEL" />
-			</m:MaterialFABList>
-		</m:MaterialFAB>
+		<m:MaterialButton ui:field="saveButton"
+			text="{i18nCore.comSave}" float="RIGHT"
+			addStyleNames="{style.saveButton}" />
+		<m:MaterialButton ui:field="cancelButton"
+			text="{i18nCore.comCancel}" type="FLAT" float="RIGHT" />
 	</g:HTMLPanel>
 </ui:UiBinder> 

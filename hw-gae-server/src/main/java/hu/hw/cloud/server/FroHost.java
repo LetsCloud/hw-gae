@@ -25,7 +25,6 @@ public class FroHost extends HttpServlet {
 	static final String APP_NAME = "HostWare FRO";
 
 	static final String GWT_MODULE_NAME = "fro_module";
-
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

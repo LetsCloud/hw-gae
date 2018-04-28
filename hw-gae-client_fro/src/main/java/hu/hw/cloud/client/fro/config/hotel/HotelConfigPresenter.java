@@ -43,16 +43,13 @@ public class HotelConfigPresenter
 	HotelConfigPresenter(EventBus eventBus, MyView view, MyProxy proxy,
 			DtoTablePresenterFactory dtoTablePresenterFactory, FroMessages i18n) {
 		super(eventBus, view, proxy, AppPresenter.SLOT_MAIN);
-		logger.info("SystemConfigPresenter()");
+		logger.info("HotelConfigPresenter()");
 
 		setCaption(i18n.mainMenuItemHotelConfig());
 		
-//		addTable(1,
-//				new TableStore(i18n.systemConfigUserGroup(), dtoTablePresenterFactory.createUserGroupTablePresenter()));
-		addTable(1, new TableStore(i18n.systemConfigHotel(), dtoTablePresenterFactory.createHotelTablePresenter()));
-//		addTable(3, new TableStore(i18n.systemConfigAppUser(), dtoTablePresenterFactory.createAppUserTablePresenter()));
+		addTable(1, new TableStore(i18n.hotelConfigHotels(), dtoTablePresenterFactory.createHotelTablePresenter()));
+		addTable(2, new TableStore(i18n.hotelConfigRoomTypes(), dtoTablePresenterFactory.createRoomTypeTablePresenter()));
 
 		getView().setUiHandlers(this);
 	}
-
 }

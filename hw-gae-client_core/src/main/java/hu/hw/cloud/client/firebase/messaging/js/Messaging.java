@@ -3,13 +3,8 @@
  */
 package hu.hw.cloud.client.firebase.messaging.js;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 import gwt.material.design.client.pwa.serviceworker.js.ServiceWorkerRegistration;
-import hu.hw.cloud.client.core.promise.xgwt.Fn;
 import hu.hw.cloud.client.core.promise.xgwt.Promise;
-import jsinterop.annotations.JsFunction;
-import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 
 /**

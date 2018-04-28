@@ -16,7 +16,7 @@ import gwt.material.design.client.data.loader.LoadConfig;
 import gwt.material.design.client.data.loader.LoadResult;
 
 import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
-import hu.hw.cloud.shared.HotelResource;
+import hu.hw.cloud.shared.api.HotelResource;
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
 
 /**
@@ -41,6 +41,7 @@ public class HotelDataSource implements DataSource<HotelDto> {
 		resourceDelegate.withCallback(new AbstractAsyncCallback<List<HotelDto>>() {
 			@Override
 			public void onSuccess(List<HotelDto> result) {
+				result.sort((HotelDto h1, HotelDto h2) -> h1.getName().compareTo(h2.getName()));
 				callback.onSuccess(new LoadResult<>(result, loadConfig.getOffset(), result.size()));
 				isLoaded = true;
 			}

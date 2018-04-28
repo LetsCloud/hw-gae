@@ -31,4 +31,11 @@ public class HotelChildDto extends BaseDto {
 	public void setHotelDto(HotelDto hotelDto) {
 		this.hotelDto = hotelDto;
 	}
+
+	@Override
+	public String toString() {
+		String ret = "HotelChildDto:{" + super.toString() + ", hotelWebSafeKey=" + hotelWebSafeKey + ", hotelDto="
+				+ hotelDto + "}";
+		return ret;
+	}
 }

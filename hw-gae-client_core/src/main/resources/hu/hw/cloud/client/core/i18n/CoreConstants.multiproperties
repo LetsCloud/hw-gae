@@ -17,7 +17,7 @@
         <Column>
             <Name>hu_HU</Name>
             <Description></Description>
-            <Width>287</Width>
+            <Width>604</Width>
             <HandlerConfiguration>/hw-gae-client_core/src/main/resources/hu/hw/cloud/client/core/i18n/CoreConstants_hu_HU.properties|false|false|false|false</HandlerConfiguration>
         </Column>
     </Columns>
@@ -90,6 +90,37 @@
             <MultiLine>false</MultiLine>
             <Value disabled="false">Inspected</Value>
             <Value disabled="false">Rendben</Value>
+        </Property>
+        <Comment>
+            <Value>SALES TYPES</Value>
+        </Comment>
+        <Property>
+            <Name>salesTypeMap</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">NORMAL,ALTERNATIVE,VIRTUAL</Value>
+            <Value disabled="false">NORMAL,ALTERNATIVE,VIRTUAL</Value>
+        </Property>
+        <Property>
+            <Name>NORMAL</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Normal</Value>
+            <Value disabled="false">Normál</Value>
+        </Property>
+        <Property>
+            <Name>ALTERNATIVE</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Alternative</Value>
+            <Value disabled="false">Alternatív</Value>
+        </Property>
+        <Property>
+            <Name>VIRTUAL</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Virtual</Value>
+            <Value disabled="false">Virtuális</Value>
         </Property>
     </Records>
 </MultiProperties>

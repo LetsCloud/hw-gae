@@ -77,4 +77,10 @@ public class HotelRepositoryImpl extends CrudRepositoryImpl<Hotel> implements Ho
 		List<Key<Hotel>> keys = getChildrenKeysByProperty(parent, "code", code);
 		return keys;
 	}
+
+	@Override
+	protected Object getParentKey(String parentWebSafeKey) {
+		Key<Account> key = Key.create(parentWebSafeKey);
+		return key;
+	}
 }

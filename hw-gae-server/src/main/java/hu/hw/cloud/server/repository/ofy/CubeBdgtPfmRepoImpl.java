@@ -56,4 +56,10 @@ public class CubeBdgtPfmRepoImpl extends CrudRepositoryImpl<CubeBdgtPfm> impleme
 		return null;
 	}
 
+	@Override
+	protected Object getParentKey(String parentWebSafeKey) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

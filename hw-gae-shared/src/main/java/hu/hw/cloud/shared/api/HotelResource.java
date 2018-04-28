@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.shared;
+package hu.hw.cloud.shared.api;
 
 import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
 import static hu.hw.cloud.shared.api.ApiPaths.PATH_WEBSAFEKEY;
@@ -13,7 +13,6 @@ import java.util.List;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -32,15 +31,12 @@ public interface HotelResource {
 	@GET
 	List<HotelDto> list();
 
-	@POST
-	HotelDto create(HotelDto dto);
-
 	@GET
 	@Path(PATH_WEBSAFEKEY)
 	HotelDto read(@PathParam(WEBSAFEKEY) String webSafeKey);
 
-	@PUT
-	HotelDto update(HotelDto dto);
+	@POST
+	HotelDto saveOrCreate(HotelDto dto);
 
 	@DELETE
 	@Path(PATH_WEBSAFEKEY)
