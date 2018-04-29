@@ -27,6 +27,7 @@ import hu.hw.cloud.client.core.util.ErrorHandlerAsyncCallback;
 import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.editor.AbstractEditorPresenter;
 import hu.hw.cloud.client.fro.editor.EditorView;
+import hu.hw.cloud.client.fro.table.AbstractTablePresenter;
 import hu.hw.cloud.shared.api.HotelResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
@@ -60,7 +61,7 @@ public class HotelEditorPresenter
 	HotelEditorPresenter(EventBus eventBus, PlaceManager placeManager, MyView view, MyProxy proxy,
 			ResourceDelegate<HotelResource> resourceDelegate, CurrentUser currentUser, CoreMessages i18n) {
 		super(eventBus, placeManager, view, proxy, AppPresenter.SLOT_MAIN);
-		logger.info("AppUserEditorPresenter()");
+		logger.info("HotelEditorPresenter()");
 
 		this.placeManager = placeManager;
 		this.resourceDelegate = resourceDelegate;
@@ -77,20 +78,18 @@ public class HotelEditorPresenter
 			create();
 		} else {
 			SetPageTitleEvent.fire(i18n.hotelEditorModifyTitle(), "", MenuItemType.MENU_ITEM, HotelEditorPresenter.this);
-			edit(dtoWebSafeKey);
+			edit(filters.get(AbstractTablePresenter.PARAM_DTO_KEY));
 		}
 	}
 
 	@Override
 	protected HotelDto createDto() {
-		logger.info("AppUserEditorPresenter().createDto()");
 		HotelDto dto = new HotelDto();
 		dto.setAccountDto(currentUser.getAppUserDto().getAccountDto());
 		return dto;
 	}
 
 	private void edit(String webSafeKey) {
-		logger.info("AppUserEditorPresenter().edit()->webSafeKey=" + webSafeKey);
 		resourceDelegate.withCallback(new AsyncCallback<HotelDto>() {
 			@Override
 			public void onSuccess(HotelDto dto) {
@@ -110,7 +109,7 @@ public class HotelEditorPresenter
 		resourceDelegate.withCallback(new ErrorHandlerAsyncCallback<HotelDto>(this) {
 			@Override
 			public void onSuccess(HotelDto userDto) {
-				PlaceRequest placeRequest = new Builder().nameToken(FroNameTokens.SYSTEM_CONFIG).build();
+				PlaceRequest placeRequest = new Builder().nameToken(FroNameTokens.HOTEL_CONFIG).build();
 				placeManager.revealPlace(placeRequest);
 			}
 

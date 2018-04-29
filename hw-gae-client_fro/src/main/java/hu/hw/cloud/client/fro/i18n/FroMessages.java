@@ -77,4 +77,7 @@ public interface FroMessages extends Messages {
 
 	@DefaultMessage("Roomtypes")
 	String hotelConfigRoomTypes();
+
+	@DefaultMessage("Rooms")
+	String hotelConfigRooms();
 }

@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 
@@ -31,8 +34,7 @@ import hu.hw.cloud.shared.dto.hotel.RoomAvailabilityDto;
  */
 @Entity
 public class Room extends HotelChild {
-	// private static final Logger LOGGER =
-	// LoggerFactory.getLogger(Room.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(Room.class.getName());
 
 	private static final String ROOM_CODE = "code";
 
@@ -80,7 +82,7 @@ public class Room extends HotelChild {
 	private List<RoomAvailability> roomAvailabilities = new ArrayList<RoomAvailability>();
 
 	public Room() {
-		// LOGGER.info("Room()");
+		logger.info("Room()");
 	}
 
 	/**
@@ -91,12 +93,12 @@ public class Room extends HotelChild {
 	public Room(Room source) {
 		super(source);
 		this.code = source.code;
+		this.roomType = source.roomType;
 		this.floor = source.floor;
 		this.description = source.description;
 		this.roomStatus = source.roomStatus;
 		this.occupied = source.occupied;
 		this.foRoomStatus = source.foRoomStatus;
-		this.roomType = source.roomType;
 		for (RoomAvailability ra : roomAvailabilities) {
 			this.roomAvailabilities.add(new RoomAvailability(ra));
 		}
@@ -109,50 +111,6 @@ public class Room extends HotelChild {
 	 */
 	public Room(RoomDto dto) {
 		this.update(dto);
-	}
-
-	/**
-	 * 
-	 * @param dto
-	 * @return
-	 */
-	public Room update(RoomDto dto) {
-		super.update(dto);
-		if (dto.getCode() != null) {
-			this.setCode(dto.getCode());
-			addUniqueIndex(ROOM_CODE, dto.getCode());
-		}
-		if (dto.getFloor() != null)
-			this.setFloor(dto.getFloor());
-		if (dto.getDescription() != null)
-			this.setDescription(dto.getDescription());
-		if (dto.getRoomStatus() != null)
-			this.setRoomStatus(dto.getRoomStatus());
-		if (dto.getOccupied() != null)
-			this.setOccupied(dto.getOccupied());
-		if (dto.getFoRoomStatus() != null)
-			this.setFoRoomStatus(dto.getFoRoomStatus());
-		if (dto.getRoomAvailabilityDtos() != null)
-			this.setRoomAvailabilities(RoomAvailability.createList(dto.getRoomAvailabilityDtos()));
-		return this;
-	}
-
-	public Room update(Room entity) {
-		super.update(entity);
-		if (entity.getCode() != null)
-			this.setCode(entity.getCode());
-
-		if (entity.getFloor() != null)
-			this.setFloor(entity.getFloor());
-		if (entity.getDescription() != null)
-			this.setDescription(entity.getDescription());
-		if (entity.getRoomStatus() != null)
-			this.setRoomStatus(entity.getRoomStatus());
-		if (entity.getOccupied() != null)
-			this.setOccupied(entity.getOccupied());
-		if (entity.getRoomAvailabilities() != null)
-			this.setRoomAvailabilities(entity.getRoomAvailabilities());
-		return this;
 	}
 
 	public String getCode() {
@@ -180,11 +138,16 @@ public class Room extends HotelChild {
 	}
 
 	public RoomType getRoomType() {
+		if (roomType == null)
+			return null;
 		return roomType.get();
 	}
 
 	public void setRoomType(RoomType roomType) {
-		this.roomType = Ref.create(roomType);
+		if (roomType != null) {
+			logger.info("Room().setRoomType().getId()=" + roomType.getId());
+			this.roomType = Ref.create(roomType);
+		}
 	}
 
 	public RoomStatus getRoomStatus() {
@@ -219,6 +182,71 @@ public class Room extends HotelChild {
 		this.roomAvailabilities = roomAvailabilities;
 	}
 
+	/**
+	 * 
+	 * @param dto
+	 * @return
+	 */
+	public Room update(RoomDto dto) {
+		super.updEntityWithDto(dto);
+
+		if (dto.getCode() != null) {
+			setCode(dto.getCode());
+			if (dto.getCode().equals(getCode()))
+				addUniqueIndex(ROOM_CODE, dto.getCode());
+		}
+
+		if (dto.getRoomTypeDto() != null) {
+			setRoomType(new RoomType(dto.getRoomTypeDto()));
+		}
+
+		if (dto.getFloor() != null)
+			setFloor(dto.getFloor());
+
+		if (dto.getDescription() != null)
+			setDescription(dto.getDescription());
+
+		if (dto.getRoomStatus() != null)
+			setRoomStatus(dto.getRoomStatus());
+
+		if (dto.getOccupied() != null)
+			setOccupied(dto.getOccupied());
+
+		if (dto.getFoRoomStatus() != null)
+			setFoRoomStatus(dto.getFoRoomStatus());
+
+		if (dto.getRoomAvailabilityDtos() != null)
+			setRoomAvailabilities(RoomAvailability.createList(dto.getRoomAvailabilityDtos()));
+		return this;
+	}
+
+	public Room updEntityWithEntity(Room entity) {
+		super.updEntityWithEntity(entity);
+
+		if (entity.getCode() != null)
+			setCode(entity.getCode());
+
+		if (entity.getRoomType() != null)
+			setRoomType(entity.getRoomType());
+
+		if (entity.getFloor() != null)
+			setFloor(entity.getFloor());
+
+		if (entity.getDescription() != null)
+			setDescription(entity.getDescription());
+
+		if (entity.getRoomStatus() != null)
+			setRoomStatus(entity.getRoomStatus());
+
+		if (entity.getOccupied() != null)
+			setOccupied(entity.getOccupied());
+
+		if (entity.getRoomAvailabilities() != null)
+			setRoomAvailabilities(entity.getRoomAvailabilities());
+
+		return this;
+	}
+
 	@Override
 	public String toString() {
 		return "Room [" + super.toString() + ", code=" + this.code + ", floor=" + this.floor + ", description="
@@ -235,7 +263,7 @@ public class Room extends HotelChild {
 	 */
 	public static RoomDto createDto(Room entity) {
 		RoomDto dto = new RoomDto();
-		dto = entity.updateDto(dto);
+		dto = entity.updDtoWithEntity(dto);
 		return dto;
 	}
 
@@ -245,14 +273,21 @@ public class Room extends HotelChild {
 	 * @param dto
 	 * @return
 	 */
-	public RoomDto updateDto(RoomDto dto) {
-		dto = (RoomDto) super.updateDto(dto);
+	public RoomDto updDtoWithEntity(RoomDto dto) {
+		dto = (RoomDto) super.updDtoWithEntity(dto);
+
 		if (this.getCode() != null)
-			dto.setCode(this.getCode());
+			dto.setCode(getCode());
+
+		if (this.getRoomType() != null)
+			dto.setRoomTypeDto(RoomType.createDto(getRoomType()));
+
 		if (this.getFloor() != null)
-			dto.setFloor(this.getFloor());
+			dto.setFloor(getFloor());
+
 		if (this.getDescription() != null)
-			dto.setDescription(this.getDescription());
+			dto.setDescription(getDescription());
+
 		if (this.getRoomAvailabilities() != null) {
 			List<RoomAvailabilityDto> roomOpeningsDtos = new ArrayList<RoomAvailabilityDto>();
 			for (RoomAvailability roomOpening : this.getRoomAvailabilities()) {
@@ -260,14 +295,15 @@ public class Room extends HotelChild {
 			}
 			dto.setRoomAvailabilityDtos(roomOpeningsDtos);
 		}
+
 		if (this.getRoomStatus() != null)
-			dto.setRoomStatus(this.getRoomStatus());
+			dto.setRoomStatus(getRoomStatus());
+
 		if (this.getOccupied() != null)
-			dto.setOccupied(this.getOccupied());
+			dto.setOccupied(getOccupied());
+
 		if (this.getFoRoomStatus() != null)
-			dto.setFoRoomStatus(this.getFoRoomStatus());
-		if (this.getRoomType() != null)
-			dto.setRoomTypeDto(RoomType.createDto(this.getRoomType()));
+			dto.setFoRoomStatus(getFoRoomStatus());
 		return dto;
 	}
 

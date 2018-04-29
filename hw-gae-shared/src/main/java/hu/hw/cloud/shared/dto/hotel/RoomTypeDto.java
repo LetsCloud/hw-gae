@@ -117,7 +117,7 @@ public class RoomTypeDto extends HotelChildDto {
 	@Override
 	public String toString() {
 		String ret = "RoomTypeDto:{" + super.toString() + ", code=" + code + ", name=" + name + ", description="
-				+ description + "salesType=" + salesType +"}";
+				+ description + ", salesType=" + salesType +"}";
 		return ret;
 	}
 

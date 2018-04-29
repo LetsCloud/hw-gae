@@ -14,6 +14,7 @@ import gwt.material.design.client.data.DataSource;
 import gwt.material.design.client.data.loader.LoadCallback;
 import gwt.material.design.client.data.loader.LoadConfig;
 import gwt.material.design.client.data.loader.LoadResult;
+
 import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
 import hu.hw.cloud.shared.api.RoomTypeResource;
 import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
@@ -26,9 +27,9 @@ public class RoomTypeDataSource implements DataSource<RoomTypeDto> {
 	private static Logger logger = Logger.getLogger(RoomTypeDataSource.class.getName());
 
 	private Boolean isLoaded = false;
-	
+
 	private String hotelKey;
-	
+
 	private Boolean onlyActive = true;
 
 	private final ResourceDelegate<RoomTypeResource> resourceDelegate;
@@ -44,8 +45,9 @@ public class RoomTypeDataSource implements DataSource<RoomTypeDto> {
 		resourceDelegate.withCallback(new AbstractAsyncCallback<List<RoomTypeDto>>() {
 			@Override
 			public void onSuccess(List<RoomTypeDto> result) {
-				callback.onSuccess(new LoadResult<>(result, loadConfig.getOffset(), result.size()));
 				isLoaded = true;
+				result.sort((RoomTypeDto o1, RoomTypeDto o2) -> o1.getCode().compareTo(o2.getCode()));
+				callback.onSuccess(new LoadResult<>(result, loadConfig.getOffset(), result.size()));
 			}
 		}).getAll(hotelKey, onlyActive);
 	}

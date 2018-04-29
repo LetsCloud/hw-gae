@@ -61,7 +61,7 @@ public class AppUserDetailsService implements UserDetailsService {
 		AppUserDetails aud = new AppUserDetails(input, AppUser.createDto(appUser), grantedAuthorities,
 				accountNonLocked);
 		
-		LOGGER.info("loadUserByUsername()->out");
+		LOGGER.info("loadUserByUsername()->out" + aud.getAppUserDto().getAccountDto().getId());
 
 		return aud;
 	}

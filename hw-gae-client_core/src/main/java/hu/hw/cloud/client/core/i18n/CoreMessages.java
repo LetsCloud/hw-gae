@@ -364,6 +364,34 @@ public interface CoreMessages extends Messages {
 
 	
 	/*
+	 * ROOMS TABLE
+	 */
+	
+	@DefaultMessage("Rooms")
+	String roomsTableTitle();
+	
+	@DefaultMessage("Code")
+	String roomsTableCode();
+
+	@DefaultMessage("Type")
+	String roomsTableType();
+
+	
+	/*
+	 * ROOM EDITOR
+	 */
+
+	@DefaultMessage("Create room")
+	String roomEditorCreateTitle();
+
+	@DefaultMessage("Modify room")
+	String roomEditorModifyTitle();
+
+	@DefaultMessage("Code")
+	String roomEditorCode();
+
+	
+	/*
 	 * SEND MESSAGE
 	 */
 

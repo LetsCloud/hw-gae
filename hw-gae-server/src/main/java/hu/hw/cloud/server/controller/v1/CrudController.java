@@ -100,6 +100,21 @@ public abstract class CrudController<T extends BaseEntity, D extends BaseDto> ex
 		}
 	}
 
+	public ResponseEntity<List<D>> getChildren(String parentWebSafeKey) {
+		logger.info("CrudController().getChildren()->parentWebSafeKey=" + parentWebSafeKey);
+		List<D> dtos = new ArrayList<D>();
+		if (parentWebSafeKey == null)
+			return new ResponseEntity<List<D>>(dtos, HttpStatus.OK);
+
+		logger.info("CrudController().getChildren()-2");
+		for (T entity : service.getChildren(parentWebSafeKey)) {
+			logger.info("CrudController().getChildren().entity.getWebSafeKey()=" + entity.getWebSafeKey());
+			dtos.add(createDto(entity));
+		}
+		logger.info("CrudController().getChildren()-3");
+		return new ResponseEntity<List<D>>(dtos, HttpStatus.OK);
+	}
+
 	public ResponseEntity<List<D>> getChildrenByFilters(String parentWebSafeKey, Map<String, Object> filters) {
 		List<D> dtos = new ArrayList<D>();
 		if (parentWebSafeKey == null)

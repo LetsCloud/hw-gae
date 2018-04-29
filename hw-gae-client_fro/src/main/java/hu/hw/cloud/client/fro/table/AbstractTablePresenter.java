@@ -3,7 +3,9 @@
  */
 package hu.hw.cloud.client.fro.table;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import com.google.web.bindery.event.shared.EventBus;
@@ -24,8 +26,11 @@ public abstract class AbstractTablePresenter<T extends BaseDto, V extends View> 
 		implements DtoTableUiHandlers<T>, RefreshTableEvent.RefreshTableHandler {
 	private static Logger logger = Logger.getLogger(AbstractTablePresenter.class.getName());
 
+	public static final String PARAM_DTO_KEY = "id";
+	public static final String PARAM_HOTEL_KEY = "hotelKey";
+
 	private String caption;
-	
+	private Map<String, String> filters = new HashMap<String, String>();
 	private final PlaceManager placeManager;
 
 	public AbstractTablePresenter(EventBus eventBus, V view, PlaceManager placeManager) {
@@ -56,17 +61,22 @@ public abstract class AbstractTablePresenter<T extends BaseDto, V extends View> 
 	@Override
 	public void addNew() {
 		logger.info("addNew()");
-		PlaceRequest placeRequest = new Builder().nameToken(getEditorNameToken()).build();
-		placeManager.revealPlace(placeRequest);
+		Builder placeBuilder = new Builder().nameToken(getEditorNameToken());
+		placeManager.revealPlace(addFilters(placeBuilder));
 	}
 
 	@Override
 	public void edit(T dto) {
 		logger.info("editItem()->dto=" + dto);
-		PlaceRequest placeRequest = new Builder().nameToken(getEditorNameToken())
-				.with("id", String.valueOf(dto.getWebSafeKey())).build();
+		Builder placeBuilder = new Builder().nameToken(getEditorNameToken());
+		placeBuilder.with(PARAM_DTO_KEY, String.valueOf(dto.getWebSafeKey()));
+		placeManager.revealPlace(addFilters(placeBuilder));
+	}
 
-		placeManager.revealPlace(placeRequest);
+	private PlaceRequest addFilters(Builder placeBuilder) {
+		if(!filters.isEmpty())
+			placeBuilder.with(filters);
+		return placeBuilder.build();
 	}
 
 	protected abstract void loadData();
@@ -84,4 +94,8 @@ public abstract class AbstractTablePresenter<T extends BaseDto, V extends View> 
 	}
 
 	protected abstract void deleteData(String webSafeKey);
+	
+	protected void addFilter(String key, String value) {
+		filters.put(key, value);
+	}
 }

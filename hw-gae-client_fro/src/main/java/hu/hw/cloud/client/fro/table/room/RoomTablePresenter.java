@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.fro.table.roomtype;
+package hu.hw.cloud.client.fro.table.room;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -22,31 +22,32 @@ import hu.hw.cloud.client.fro.table.AbstractTablePresenter;
 import hu.hw.cloud.client.fro.table.DtoTablePresenterFactory;
 import hu.hw.cloud.client.fro.table.filter.FilterChangeEvent;
 import hu.hw.cloud.client.fro.table.filter.FilterWidgetPresenter;
-import hu.hw.cloud.shared.api.RoomTypeResource;
-import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
+import hu.hw.cloud.client.fro.table.roomtype.RoomTypeTablePresenter;
+import hu.hw.cloud.shared.api.RoomResource;
+import hu.hw.cloud.shared.dto.hotel.RoomDto;
 
 /**
  * @author robi
  *
  */
-public class RoomTypeTablePresenter extends AbstractTablePresenter<RoomTypeDto, RoomTypeTablePresenter.MyView>
-		implements RoomTypeTableUiHandlers, FilterChangeEvent.FilterChangeHandler {
+public class RoomTablePresenter extends AbstractTablePresenter<RoomDto, RoomTablePresenter.MyView>
+		implements RoomTableUiHandlers, FilterChangeEvent.FilterChangeHandler {
 	private static Logger logger = Logger.getLogger(RoomTypeTablePresenter.class.getName());
 
-	public interface MyView extends View, HasUiHandlers<RoomTypeTableUiHandlers> {
-		void setData(List<RoomTypeDto> data);
+	public interface MyView extends View, HasUiHandlers<RoomTableUiHandlers> {
+		void setData(List<RoomDto> data);
 	}
 
 	public static final SingleSlot<PresenterWidget<?>> SLOT_FILTER = new SingleSlot<>();
 
-	private final ResourceDelegate<RoomTypeResource> resourceDelegate;
+	private final ResourceDelegate<RoomResource> resourceDelegate;
 	private final FilterWidgetPresenter filter;
 
 	@Inject
-	RoomTypeTablePresenter(EventBus eventBus, PlaceManager placeManager, MyView view,
-			ResourceDelegate<RoomTypeResource> resourceDelegate, DtoTablePresenterFactory dtoTablePresenterFactory) {
+	RoomTablePresenter(EventBus eventBus, PlaceManager placeManager, MyView view,
+			ResourceDelegate<RoomResource> resourceDelegate, DtoTablePresenterFactory dtoTablePresenterFactory) {
 		super(eventBus, view, placeManager);
-		logger.info("RoomTypeTablePresenter()");
+		logger.info("RoomTablePresenter()");
 
 		this.resourceDelegate = resourceDelegate;
 		this.filter = dtoTablePresenterFactory.createFilterWidgetPresenter();
@@ -68,7 +69,7 @@ public class RoomTypeTablePresenter extends AbstractTablePresenter<RoomTypeDto, 
 
 	@Override
 	protected String getEditorNameToken() {
-		return CoreNameTokens.ROOMTYPE_EDITOR;
+		return CoreNameTokens.ROOM_EDITOR;
 	}
 
 	@Override
@@ -84,12 +85,14 @@ public class RoomTypeTablePresenter extends AbstractTablePresenter<RoomTypeDto, 
 	@Override
 	public void onFilterChange(FilterChangeEvent event) {
 		logger.info("RoomTypeTablePresenter().onFilterChange()");
-		resourceDelegate.withCallback(new AbstractAsyncCallback<List<RoomTypeDto>>() {
+		resourceDelegate.withCallback(new AbstractAsyncCallback<List<RoomDto>>() {
 			@Override
-			public void onSuccess(List<RoomTypeDto> result) {
+			public void onSuccess(List<RoomDto> result) {
 				logger.info("RoomTypeTablePresenter().loadData().onSuccess()");
 				getView().setData(result);
 			}
-		}).getAll(filter.getSelectedHotel().getWebSafeKey(), filter.isOnlyActive());
+		}).getByHotel(filter.getSelectedHotel().getWebSafeKey());
+		
+		addFilter(PARAM_HOTEL_KEY, filter.getSelectedHotel().getWebSafeKey());
 	}
 }

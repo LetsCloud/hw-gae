@@ -3,8 +3,8 @@
  */
 package hu.hw.cloud.server.entity.common;
 
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Parent;
@@ -17,7 +17,7 @@ import hu.hw.cloud.shared.dto.common.AccountChildDto;
  *
  */
 public class AccountChild extends BaseEntity {
-//	private static final Logger LOGGER = LoggerFactory.getLogger(AccountChild.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(AccountChild.class.getName());
 
 	@Parent
 	private Ref<Account> accountRef;
@@ -26,7 +26,7 @@ public class AccountChild extends BaseEntity {
 	 * Objectify miatt
 	 */
 	public AccountChild() {
-//		LOGGER.info("AccountChild()");
+		logger.info("AccountChild()");
 	}
 
 	public Account getAccount() {
@@ -38,12 +38,12 @@ public class AccountChild extends BaseEntity {
 	}
 
 	/**
-	 * Entitás módosítása DTO alapján
+	 * Entitás módosítása DTO adataival
 	 * 
 	 * @param dto
 	 */
-	public void update(AccountChildDto dto) {
-		super.update(dto);
+	public void updEntityWithDto(AccountChildDto dto) {
+		super.updEntityWithDto(dto);
 
 		if (dto.getAccountDto() != null)
 			setAccount(new Account(dto.getAccountDto()));
@@ -55,8 +55,8 @@ public class AccountChild extends BaseEntity {
 	 * @param dto
 	 * @return
 	 */
-	public AccountChildDto updateDto(AccountChildDto dto) {
-		dto = (AccountChildDto) super.updateDto(dto);
+	public AccountChildDto updDtoWithEntity(AccountChildDto dto) {
+		dto = (AccountChildDto) super.updDtoWithEntity(dto);
 		if (getAccount() != null)
 			dto.setAccountDto(Account.createDto(getAccount()));
 		return dto;

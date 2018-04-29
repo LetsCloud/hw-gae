@@ -94,7 +94,7 @@ public class Account extends BaseEntity {
 	 * @param dto
 	 */
 	public void update(AccountDto dto) {
-		super.update(dto);
+		super.updEntityWithDto(dto);
 
 		if (dto.getName() != null)
 			this.setName(dto.getName());
@@ -122,7 +122,7 @@ public class Account extends BaseEntity {
 	 * @return
 	 */
 	public AccountDto updateDto(AccountDto dto) {
-		dto = (AccountDto) super.updateDto(dto);
+		dto = (AccountDto) super.updDtoWithEntity(dto);
 		dto.setName(this.getName());
 		dto.setPostalAddressDto(PostalAddress.createDto(this.getPostalAddress()));
 		return dto;

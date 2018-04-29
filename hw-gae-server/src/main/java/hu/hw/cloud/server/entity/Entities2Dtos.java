@@ -19,7 +19,7 @@ public abstract class Entities2Dtos<E extends BaseEntity, D extends BaseDto> {
 		List<D> dtos = new ArrayList<D>();
 		for(E entity: entities) {
 			D dto = createDto();
-			dtos.add((D) entity.updateDto(dto));
+			dtos.add((D) entity.updDtoWithEntity(dto));
 		}
 		return dtos;
 	}

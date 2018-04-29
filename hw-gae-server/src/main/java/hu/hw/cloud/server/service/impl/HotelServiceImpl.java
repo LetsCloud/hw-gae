@@ -8,10 +8,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
 
-import hu.hw.cloud.server.entity.common.Account;
 import hu.hw.cloud.server.entity.hotel.Hotel;
 import hu.hw.cloud.server.repository.AccountRepository;
 import hu.hw.cloud.server.repository.HotelRepository;
@@ -22,19 +19,14 @@ import hu.hw.cloud.shared.dto.hotel.HotelDto;
  * @author CR
  *
  */
-//@Service
 public class HotelServiceImpl extends CrudServiceImpl<Hotel, HotelDto, HotelRepository> implements HotelService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(HotelServiceImpl.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(HotelServiceImpl.class.getName());
 
 	private final AccountRepository accountRepository;
 
-	private final HotelRepository hotelRepository;
-
-//	@Autowired
-	public HotelServiceImpl(AccountRepository accountRepository, HotelRepository hotelRepository) {
-		super(hotelRepository);
-		LOGGER.info("HotelServiceImpl");
-		this.hotelRepository = hotelRepository;
+	public HotelServiceImpl(HotelRepository repository, AccountRepository accountRepository) {
+		super(repository);
+		logger.info("HotelServiceImpl");
 		this.accountRepository = accountRepository;
 	}
 
@@ -45,7 +37,7 @@ public class HotelServiceImpl extends CrudServiceImpl<Hotel, HotelDto, HotelRepo
 
 	@Override
 	protected Hotel updateEntity(Hotel entity, HotelDto dto) {
-		entity.update(dto);
+		entity.updEntityWithDto(dto);
 		return entity;
 	}
 
@@ -57,14 +49,10 @@ public class HotelServiceImpl extends CrudServiceImpl<Hotel, HotelDto, HotelRepo
 	}
 
 	@Override
-	public List<Hotel> getAll(String accountWebSafeKey) {
-		Account account = accountRepository.findByWebSafeKey(accountWebSafeKey);
-
-		if (account == null)
-			return null;
-
-		// TODO Auto-generated method stub
-		return hotelRepository.getAll(account);
+	protected List<Object> getParents(String accountWebSafeKey) {
+		List<Object> parents = new ArrayList<Object>();
+		parents.add(accountRepository.findByWebSafeKey(accountWebSafeKey));
+		return parents;
 	}
 
 	@Override

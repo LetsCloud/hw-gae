@@ -152,6 +152,17 @@ public class HkAssignmentServiceImpl extends CrudServiceImpl<HkAssignment, HkAss
 	}
 
 	@Override
+	protected List<Object> getParents(String accountWebSafeKey) {
+		List<Object> parents = new ArrayList<Object>();
+
+		List<Hotel> hotels = hotelRepository.getAll(accountWebSafeKey);
+		for (Hotel hotel : hotels) {
+			parents.add(hotel);
+		}
+		return (List<Object>) parents;
+	}
+
+	@Override
 	public List<AssignmentSummaryDto> getAssignemntSummary(String hotelWebSafeKey, Date date) {
 		Hotel hotel = hotelRepository.findByWebSafeKey(hotelWebSafeKey);
 

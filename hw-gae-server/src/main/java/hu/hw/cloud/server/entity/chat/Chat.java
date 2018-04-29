@@ -118,7 +118,7 @@ public class Chat extends AccountChild {
 	public void updateEntity(ChatDto dto) {
 		clearUniqueIndexes();
 
-		super.update(dto);
+		super.updEntityWithDto(dto);
 
 		if (dto.getCreated() != null)
 			setCreated(dto.getCreated());
@@ -152,7 +152,7 @@ public class Chat extends AccountChild {
 	}
 
 	public ChatDto updateDto(ChatDto dto) {
-		dto = (ChatDto) super.updateDto(dto);
+		dto = (ChatDto) super.updDtoWithEntity(dto);
 
 		if (this.getCreated() != null)
 			dto.setCreated(this.getCreated());

@@ -138,7 +138,7 @@ public class Currency extends AccountChild {
 	public void update(CurrencyDto dto) {
 		clearUniqueIndexes();
 
-		super.update(dto);
+		super.updEntityWithDto(dto);
 
 		if (dto.getCode() != null)
 			this.setCode(dto.getCode());

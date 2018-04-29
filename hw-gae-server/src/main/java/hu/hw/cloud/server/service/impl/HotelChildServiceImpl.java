@@ -33,10 +33,18 @@ public abstract class HotelChildServiceImpl<T extends BaseEntity, D extends Base
 
 	@Override
 	protected List<Object> getParents(Long accountId) {
-		List<Object> parents = new ArrayList<Object>();
-
 		Account account = accountRepository.findById(accountId);
+		return getHotels(account);
+	}
 
+	@Override
+	protected List<Object> getParents(String accountWebSafeKey) {
+		Account account = accountRepository.findByWebSafeKey(accountWebSafeKey);
+		return getHotels(account);
+	}
+
+	private List<Object> getHotels(Account account) {
+		List<Object> parents = new ArrayList<Object>();
 		List<Hotel> hotels = hotelRepository.getAll(account);
 		for (Hotel hotel : hotels)
 			parents.add(hotel);

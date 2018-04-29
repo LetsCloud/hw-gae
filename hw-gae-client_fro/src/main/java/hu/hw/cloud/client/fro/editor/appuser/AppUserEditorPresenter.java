@@ -34,6 +34,7 @@ import hu.hw.cloud.client.core.util.ErrorHandlerAsyncCallback;
 import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.editor.AbstractEditorPresenter;
 import hu.hw.cloud.client.fro.editor.EditorView;
+import hu.hw.cloud.client.fro.table.AbstractTablePresenter;
 import hu.hw.cloud.shared.api.AppUserResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
@@ -93,39 +94,35 @@ public class AppUserEditorPresenter
 	@Override
 	protected void loadData() {
 		LoadCallback<UserGroupDto> groupLC = new LoadCallback<UserGroupDto>() {
-
 			@Override
 			public void onSuccess(LoadResult<UserGroupDto> loadResult) {
 				getView().setUserGroupData(loadResult.getData());
-				if (allLoaded())
+				if (areDataSourcesLoaded()) {
 					start();
+				}
 			}
 
 			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
-
 			}
 		};
-
 		userGroupDataSource.load(new LoadConfig<UserGroupDto>(0, 0, null, null), groupLC);
 
 		LoadCallback<HotelDto> hotelLoadCallback = new LoadCallback<HotelDto>() {
-
 			@Override
 			public void onSuccess(LoadResult<HotelDto> loadResult) {
 				getView().setHotelData(loadResult.getData());
-				if (allLoaded())
+				if (areDataSourcesLoaded()) {
 					start();
+				}
 			}
 
 			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
-
 			}
 		};
-
 		hotelDataSource.load(new LoadConfig<HotelDto>(0, 0, null, null), hotelLoadCallback);
 	}
 
@@ -137,17 +134,23 @@ public class AppUserEditorPresenter
 		} else {
 			SetPageTitleEvent.fire(i18n.userEditorModifyTitle(), "", MenuItemType.MENU_ITEM,
 					AppUserEditorPresenter.this);
-			edit(dtoWebSafeKey);
+			edit(filters.get(AbstractTablePresenter.PARAM_DTO_KEY));
 		}
 	}
 
-	private Boolean allLoaded() {
-		if (!userGroupDataSource.getIsLoaded())
+	private Boolean areDataSourcesLoaded() {
+		logger.info("AppUserEditorPresenter().areDataSourcesLoaded()-1");
+		if (!userGroupDataSource.getIsLoaded()) {
+			logger.info("AppUserEditorPresenter().areDataSourcesLoaded()-2");
 			return false;
+		}
 
-		if (!hotelDataSource.getIsLoaded())
+		if (!hotelDataSource.getIsLoaded()) {
+			logger.info("AppUserEditorPresenter().areDataSourcesLoaded()-3");
 			return false;
+		}
 
+		logger.info("AppUserEditorPresenter().areDataSourcesLoaded()-4");
 		return true;
 	}
 

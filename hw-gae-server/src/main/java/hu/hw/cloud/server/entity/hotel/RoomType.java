@@ -44,7 +44,7 @@ public class RoomType extends HotelChild {
 	private Integer xtrBeds;
 
 	private Float cleaningFactor;
-	
+
 	private SalesType salesType;
 
 	private List<Ref<RoomType>> components;
@@ -61,8 +61,8 @@ public class RoomType extends HotelChild {
 	 * @param dto
 	 */
 	public RoomType(RoomTypeDto dto) {
-		super();
-		update(dto);
+		this();
+		updEntityWithDto(dto);
 	}
 
 	public String getCode() {
@@ -150,16 +150,11 @@ public class RoomType extends HotelChild {
 	 * @param dto
 	 * @return
 	 */
-	public void update(RoomTypeDto dto) {
-//		LOGGER.info("update->dto=" + dto);
-
+	public void updEntityWithDto(RoomTypeDto dto) {
 		clearUniqueIndexes();
 
-		this.setHotel(new Hotel(dto.getHotelDto()));
-		/*
-		 * if (dto.getHotelWebSafeKey() != null)
-		 * this.setHotelWebSafeKey(dto.getHotelWebSafeKey());
-		 */
+		super.updEntityWithDto(dto);
+
 		if (dto.getCode() != null) {
 			this.code = dto.getCode();
 			addUniqueIndex(ROOMTYPE_CODE, dto.getCode());
@@ -191,50 +186,16 @@ public class RoomType extends HotelChild {
 
 		if (dto.getFloor() != null)
 			this.floor = dto.getFloor();
-
-//		LOGGER.info("update-END");
 	}
 
 	/**
 	 * 
-	 * @param entity
+	 * @param dto
 	 * @return
 	 */
-	public static RoomTypeDto createDto(RoomType entity) {
-		RoomTypeDto dto = new RoomTypeDto();
-		dto = entity.updateDto(dto);
-		return dto;
-	}
-
-	/**
-	 * 
-	 * @param entityRefs
-	 * @return
-	 */
-	public static List<String> createDtos(List<Ref<RoomType>> entityRefs) {
-		List<String> dtos = new ArrayList<String>();
-		for (Ref<RoomType> entityRef : entityRefs) {
-			dtos.add(entityRef.getKey().getString());
-		}
-		return dtos;
-	}
-
-	/**
-	 * 
-	 * @param dtos
-	 * @return
-	 */
-	public static List<Ref<RoomType>> createRefList(List<String> ids) {
-		List<Ref<RoomType>> entityRefs = new ArrayList<Ref<RoomType>>();
-		for (String id : ids) {
-			Key<RoomType> key = Key.create(id);
-			entityRefs.add(Ref.create(key));
-		}
-		return entityRefs;
-	}
-
-	public RoomTypeDto updateDto(RoomTypeDto dto) {
-		dto = (RoomTypeDto) super.updateDto(dto);
+	public RoomTypeDto updDtoWithEntity(RoomTypeDto dto) {
+		dto = (RoomTypeDto) super.updDtoWithEntity(dto);
+		
 		if (this.getActive() != null)
 			dto.setActive(this.getActive());
 
@@ -268,4 +229,41 @@ public class RoomType extends HotelChild {
 		return dto;
 	}
 
+	/**
+	 * 
+	 * @param entity
+	 * @return
+	 */
+	public static RoomTypeDto createDto(RoomType entity) {
+		RoomTypeDto dto = new RoomTypeDto();
+		dto = entity.updDtoWithEntity(dto);
+		return dto;
+	}
+
+	/**
+	 * 
+	 * @param entityRefs
+	 * @return
+	 */
+	public static List<String> createDtos(List<Ref<RoomType>> entityRefs) {
+		List<String> dtos = new ArrayList<String>();
+		for (Ref<RoomType> entityRef : entityRefs) {
+			dtos.add(entityRef.getKey().getString());
+		}
+		return dtos;
+	}
+
+	/**
+	 * 
+	 * @param dtos
+	 * @return
+	 */
+	public static List<Ref<RoomType>> createRefList(List<String> ids) {
+		List<Ref<RoomType>> entityRefs = new ArrayList<Ref<RoomType>>();
+		for (String id : ids) {
+			Key<RoomType> key = Key.create(id);
+			entityRefs.add(Ref.create(key));
+		}
+		return entityRefs;
+	}
 }

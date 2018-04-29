@@ -3,6 +3,9 @@
  */
 package hu.hw.cloud.client.fro.editor;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import com.google.common.base.Strings;
@@ -14,6 +17,7 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
+import hu.hw.cloud.client.fro.table.AbstractTablePresenter;
 import hu.hw.cloud.shared.dto.BaseDto;
 
 /**
@@ -24,7 +28,7 @@ public abstract class AbstractEditorPresenter<T extends BaseDto, V extends Edito
 		extends Presenter<V, P> implements EditorUiHandlers<T> {
 	private static Logger logger = Logger.getLogger(AbstractEditorPresenter.class.getName());
 
-	protected String dtoWebSafeKey;
+	protected Map<String, String> filters = new HashMap<String, String>();
 
 	private final PlaceManager placeManager;
 
@@ -33,7 +37,8 @@ public abstract class AbstractEditorPresenter<T extends BaseDto, V extends Edito
 		this.placeManager = placeManager;
 	}
 
-	public AbstractEditorPresenter(EventBus eventBus, PlaceManager placeManager, V view, P proxy, GwtEvent.Type<RevealContentHandler<?>> slot) {
+	public AbstractEditorPresenter(EventBus eventBus, PlaceManager placeManager, V view, P proxy,
+			GwtEvent.Type<RevealContentHandler<?>> slot) {
 		super(eventBus, view, proxy, null, slot);
 		this.placeManager = placeManager;
 	}
@@ -41,7 +46,11 @@ public abstract class AbstractEditorPresenter<T extends BaseDto, V extends Edito
 	@Override
 	public void prepareFromRequest(PlaceRequest request) {
 		logger.info("AppUserEditorPresenter().prepareFromRequest()");
-		dtoWebSafeKey = request.getParameter("id", null);
+		filters.clear();
+		Set<String> params = request.getParameterNames();
+		for (String param : params) {
+			filters.put(param, request.getParameter(param, null));
+		}
 	}
 
 	@Override
@@ -54,7 +63,7 @@ public abstract class AbstractEditorPresenter<T extends BaseDto, V extends Edito
 	protected abstract void loadData();
 
 	protected Boolean isNew() {
-		return Strings.isNullOrEmpty(dtoWebSafeKey);
+		return Strings.isNullOrEmpty(filters.get(AbstractTablePresenter.PARAM_DTO_KEY));
 	}
 
 	protected void create() {

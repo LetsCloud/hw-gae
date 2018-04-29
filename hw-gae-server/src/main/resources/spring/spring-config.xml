@@ -124,6 +124,8 @@
 	</bean>
 	<bean id="roomService" class="hu.hw.cloud.server.service.impl.RoomServiceImpl">
 		<constructor-arg ref="roomRepository" />
+		<constructor-arg ref="accountRepository" />
+		<constructor-arg ref="hotelRepository" />
 		<constructor-arg ref="reservationRepository" />
 	</bean>
 	<bean id="roomTypeService" class="hu.hw.cloud.server.service.impl.RoomTypeServiceImpl">

@@ -79,7 +79,7 @@ public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserDto, App
 
 	@Override
 	protected AppUser updateEntity(AppUser entity, AppUserDto dto) {
-		entity.update(dto);
+		entity.updEntityWithDto(dto);
 		return entity;
 	}
 
@@ -97,6 +97,13 @@ public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserDto, App
 	protected List<Object> getParents(Long accountId) {
 		List<Object> parents = new ArrayList<Object>();
 		parents.add(accountRepository.findById(accountId));
+		return parents;
+	}
+
+	@Override
+	protected List<Object> getParents(String accountWebSafeKey) {
+		List<Object> parents = new ArrayList<Object>();
+		parents.add(accountRepository.findByWebSafeKey(accountWebSafeKey));
 		return parents;
 	}
 

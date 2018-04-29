@@ -78,7 +78,7 @@ public class Profile extends AccountChild {
 	}
 
 	public ProfileDto updateDto(ProfileDto dto) {
-		dto = (ProfileDto) super.updateDto(dto);
+		dto = (ProfileDto) super.updDtoWithEntity(dto);
 
 		if (getEmailAddresses() != null)
 			dto.setEmailAddressDtos(EmailAddress.createDtos(getEmailAddresses()));

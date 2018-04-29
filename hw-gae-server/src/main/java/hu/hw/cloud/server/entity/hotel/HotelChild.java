@@ -36,7 +36,7 @@ public class HotelChild extends BaseEntity {
 	 */
 	public HotelChild(HotelChildDto dto) {
 		super(dto);
-		this.update(dto);
+		this.updEntityWithDto(dto);
 	}
 
 	/**
@@ -56,13 +56,23 @@ public class HotelChild extends BaseEntity {
 		this.hotelRef = Ref.create(hotel);
 	}
 
-	public void update(HotelChildDto dto) {
-		super.update(dto);
+	/**
+	 * 
+	 * @param dto
+	 */
+	public void updEntityWithDto(HotelChildDto dto) {
+		super.updEntityWithDto(dto);
+		
 		this.setHotel(new Hotel(dto.getHotelDto()));
 	}
 
-	public void update(HotelChild entity) {
-		super.update(entity);
+	/**
+	 * 
+	 * @param entity
+	 */
+	public void updEntityWithEntity(HotelChild entity) {
+		super.updEntityWithEntity(entity);
+		
 		this.setHotel(entity.getHotel());
 	}
 
@@ -71,13 +81,12 @@ public class HotelChild extends BaseEntity {
 	 * @param dto
 	 * @return
 	 */
-	public HotelChildDto updateDto(HotelChildDto dto) {
-		dto = (HotelChildDto) super.updateDto(dto);
-		logger.info("HotelChild()-updateDto-1");
-		if (this.getHotel() != null) {
-			logger.info("HotelChild()-updateDto-2");
+	public HotelChildDto updDtoWithEntity(HotelChildDto dto) {
+		dto = (HotelChildDto) super.updDtoWithEntity(dto);
+
+		if (this.getHotel() != null)
 			dto.setHotelDto(Hotel.createDto(this.getHotel()));
-		}
+
 		return dto;
 	}
 

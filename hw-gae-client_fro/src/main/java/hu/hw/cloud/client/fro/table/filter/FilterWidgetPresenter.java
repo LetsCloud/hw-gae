@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.fro.table.roomtype;
+package hu.hw.cloud.client.fro.table.filter;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -19,7 +19,7 @@ import gwt.material.design.client.data.loader.LoadResult;
 
 import hu.hw.cloud.client.core.datasource.HotelDataSource;
 import hu.hw.cloud.client.core.security.CurrentUser;
-import hu.hw.cloud.client.fro.table.roomtype.FilterChangeEvent.DataTable;
+import hu.hw.cloud.client.fro.table.filter.FilterChangeEvent.DataTable;
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
 
 /**

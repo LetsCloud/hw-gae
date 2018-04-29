@@ -26,7 +26,7 @@ public class CleanType extends HotelChild {
 
 	public CleanType(CleanTypeDto dto) {
 		super(dto);
-		this.update(dto);
+		this.updEntityWithDto(dto);
 	}
 
 	public String getCode() {
@@ -76,7 +76,7 @@ public class CleanType extends HotelChild {
 	 * @return
 	 */
 	public CleanTypeDto updateDto(CleanTypeDto dto) {
-		dto = (CleanTypeDto) super.updateDto(dto);
+		dto = (CleanTypeDto) super.updDtoWithEntity(dto);
 		dto.setCode(this.getCode());
 		dto.setDescription(this.getDescription());
 		dto.setTime(this.getTime());

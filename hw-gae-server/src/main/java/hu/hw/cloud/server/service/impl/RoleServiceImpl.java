@@ -112,4 +112,10 @@ public class RoleServiceImpl extends CrudServiceImpl<Role, RoleDto, RoleReposito
 		return null;
 	}
 
+	@Override
+	protected List<Object> getParents(String accountWebSafeKey) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

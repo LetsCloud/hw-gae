@@ -41,9 +41,9 @@ public class HotelDataSource implements DataSource<HotelDto> {
 		resourceDelegate.withCallback(new AbstractAsyncCallback<List<HotelDto>>() {
 			@Override
 			public void onSuccess(List<HotelDto> result) {
+				isLoaded = true;
 				result.sort((HotelDto h1, HotelDto h2) -> h1.getName().compareTo(h2.getName()));
 				callback.onSuccess(new LoadResult<>(result, loadConfig.getOffset(), result.size()));
-				isLoaded = true;
 			}
 		}).list();
 	}

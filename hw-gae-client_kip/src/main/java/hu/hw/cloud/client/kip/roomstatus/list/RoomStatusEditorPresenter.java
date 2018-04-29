@@ -17,7 +17,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 
 import hu.hw.cloud.client.core.util.ErrorHandlerAsyncCallback;
 import hu.hw.cloud.client.kip.roomstatus.event.RoomStatusRefreshEvent;
-import hu.hw.cloud.shared.RoomResource;
+import hu.hw.cloud.shared.api.RoomResource;
 import hu.hw.cloud.shared.cnst.RoomStatus;
 import hu.hw.cloud.shared.dto.hotel.RoomDto;
 

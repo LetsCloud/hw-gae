@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.fro.table.roomtype;
+package hu.hw.cloud.client.fro.table.filter;
 
 import java.util.List;
 import java.util.logging.Logger;

@@ -42,6 +42,8 @@ public abstract class CrudServiceImpl<T extends BaseEntity, D extends BaseDto, R
 
 	protected abstract List<Object> getParents(Long accountId);
 
+	protected abstract List<Object> getParents(String accountWebSafeKey);
+
 	@Override
 	public T create(final D dto) throws Throwable {
 		LOGGER.info("create");
@@ -138,11 +140,20 @@ public abstract class CrudServiceImpl<T extends BaseEntity, D extends BaseDto, R
 
 	@Override
 	public List<T> getAll(Long accountId) {
-		List<T> entities = new ArrayList<T>();
 		List<Object> parents = getParents(accountId);
-		for (Object parent : parents) {
+		return getChidren(parents);
+	}
+
+	@Override
+	public List<T> getAll(String accountWebSafeKey) {
+		List<Object> parents = getParents(accountWebSafeKey);
+		return getChidren(parents);
+	}
+
+	private List<T> getChidren(List<Object> parents) {
+		List<T> entities = new ArrayList<T>();
+		for (Object parent : parents)
 			entities.addAll(repository.getAll(parent));
-		}
 		return entities;
 	}
 

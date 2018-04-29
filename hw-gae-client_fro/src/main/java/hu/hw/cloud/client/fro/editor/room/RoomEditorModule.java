@@ -1,0 +1,19 @@
+/**
+ * 
+ */
+package hu.hw.cloud.client.fro.editor.room;
+
+import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
+
+/**
+ * @author robi
+ *
+ */
+public class RoomEditorModule extends AbstractPresenterModule {
+
+	@Override
+	protected void configure() {
+		bindPresenter(RoomEditorPresenter.class, RoomEditorPresenter.MyView.class, RoomEditorView.class,
+				RoomEditorPresenter.MyProxy.class);
+	}
+}

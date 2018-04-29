@@ -7,6 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 //import org.springframework.stereotype.Component;
 
 import hu.hw.cloud.server.entity.common.AppUser;
+import hu.hw.cloud.shared.dto.common.AppUserDto;
 
 /**
  * A Spring Security context-be bejelentkezett felhasználó lekérdezését szolgáló
@@ -36,7 +37,11 @@ public class LoggedInChecker {
 			if (principal instanceof AppUserDetails) {
 				LOGGER.info("principal instanceof AppUserDetails");
 				AppUserDetails userDetails = (AppUserDetails) principal;
-				appUser = new AppUser(userDetails.getAppUserDto());
+				AppUserDto dto = userDetails.getAppUserDto();
+				LOGGER.info("getLoggedInUser()->dto.getId()=" + dto.getId());
+				appUser = new AppUser(dto);
+				LOGGER.info("getLoggedInUser()-2");
+				LOGGER.info("getLoggedInUser()->appUser.getId()=" + appUser.getId());
 			}
 		}
 

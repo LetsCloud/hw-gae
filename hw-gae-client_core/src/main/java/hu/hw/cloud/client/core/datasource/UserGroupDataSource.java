@@ -41,8 +41,8 @@ public class UserGroupDataSource implements DataSource<UserGroupDto> {
 		resourceDelegate.withCallback(new AbstractAsyncCallback<List<UserGroupDto>>() {
 			@Override
 			public void onSuccess(List<UserGroupDto> result) {
-				callback.onSuccess(new LoadResult<>(result, loadConfig.getOffset(), result.size()));
 				isLoaded = true;
+				callback.onSuccess(new LoadResult<>(result, loadConfig.getOffset(), result.size()));
 			}
 		}).list();
 	}

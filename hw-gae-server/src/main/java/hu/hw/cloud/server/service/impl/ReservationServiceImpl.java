@@ -69,4 +69,10 @@ public class ReservationServiceImpl extends CrudServiceImpl<Reservation, Reserva
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	protected List<Object> getParents(String accountWebSafeKey) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

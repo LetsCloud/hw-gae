@@ -8,10 +8,12 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
 import hu.hw.cloud.client.fro.table.appuser.AppUserTablePresenter;
 import hu.hw.cloud.client.fro.table.appuser.AppUserTableView;
+import hu.hw.cloud.client.fro.table.filter.FilterWidgetPresenter;
+import hu.hw.cloud.client.fro.table.filter.FilterWidgetView;
 import hu.hw.cloud.client.fro.table.hotel.HotelTablePresenter;
 import hu.hw.cloud.client.fro.table.hotel.HotelTableView;
-import hu.hw.cloud.client.fro.table.roomtype.FilterWidgetPresenter;
-import hu.hw.cloud.client.fro.table.roomtype.FilterWidgetView;
+import hu.hw.cloud.client.fro.table.room.RoomTablePresenter;
+import hu.hw.cloud.client.fro.table.room.RoomTableView;
 import hu.hw.cloud.client.fro.table.roomtype.RoomTypeTablePresenter;
 import hu.hw.cloud.client.fro.table.roomtype.RoomTypeTableView;
 import hu.hw.cloud.client.fro.table.usergroup.UserGroupTablePresenter;
@@ -34,6 +36,8 @@ public class DtoTableModule extends AbstractPresenterModule {
 				RoomTypeTableView.class);
 		bindPresenterWidget(FilterWidgetPresenter.class, FilterWidgetPresenter.MyView.class,
 				FilterWidgetView.class);
+		bindPresenterWidget(RoomTablePresenter.class, RoomTablePresenter.MyView.class,
+				RoomTableView.class);
 
 		bind(BaseTableView.class);
 

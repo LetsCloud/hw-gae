@@ -46,9 +46,11 @@ public class HotelConfigPresenter
 		logger.info("HotelConfigPresenter()");
 
 		setCaption(i18n.mainMenuItemHotelConfig());
-		
+
 		addTable(1, new TableStore(i18n.hotelConfigHotels(), dtoTablePresenterFactory.createHotelTablePresenter()));
-		addTable(2, new TableStore(i18n.hotelConfigRoomTypes(), dtoTablePresenterFactory.createRoomTypeTablePresenter()));
+		addTable(2,
+				new TableStore(i18n.hotelConfigRoomTypes(), dtoTablePresenterFactory.createRoomTypeTablePresenter()));
+		addTable(3, new TableStore(i18n.hotelConfigRooms(), dtoTablePresenterFactory.createRoomTablePresenter()));
 
 		getView().setUiHandlers(this);
 	}

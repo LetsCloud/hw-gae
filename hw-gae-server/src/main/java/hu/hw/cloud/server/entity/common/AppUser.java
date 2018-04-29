@@ -129,7 +129,8 @@ public class AppUser extends AccountChild {
 	 */
 	public AppUser(AppUserDto dto) {
 		this();
-		update(dto);
+		logger.info("AppUser(AppUserDto dto)");
+		updEntityWithDto(dto);
 	}
 
 	/**
@@ -262,7 +263,6 @@ public class AppUser extends AccountChild {
 		} catch (NullPointerException e) {
 			return null;
 		}
-
 	}
 
 	public void setDefaultHotel(Hotel defaultHotel) {
@@ -294,14 +294,14 @@ public class AppUser extends AccountChild {
 	}
 
 	/**
-	 * Entitás módosítása DTO alapján
+	 * Entitás módosítása DTO adataival
 	 * 
 	 * @param dto
 	 */
-	public void update(AppUserDto dto) {
+	public void updEntityWithDto(AppUserDto dto) {
 		clearUniqueIndexes();
 
-		super.update(dto);
+		super.updEntityWithDto(dto);
 
 		if (dto.getCode() != null)
 			setCode(dto.getCode());
@@ -319,22 +319,18 @@ public class AppUser extends AccountChild {
 			setAdmin(dto.getAdmin());
 
 		if (dto.getEmailAddress() != null) {
-			if (!dto.getEmailAddress().equals(getEmailAddress())) {
-				logger.info("PROPERTY_EMAILADDRESS"+dto.getEmailAddress()+"/"+getEmailAddress());
-				setEmailAddress(dto.getEmailAddress());
+			setEmailAddress(dto.getEmailAddress());
+			if (!dto.getEmailAddress().equals(getEmailAddress()))
 				addUniqueIndex(PROPERTY_EMAILADDRESS, dto.getEmailAddress());
-			}
 		}
 
 		if (dto.getEnabled() != null)
 			setEnabled(dto.getEnabled());
 
 		if (dto.getUsername() != null) {
-			if (!dto.getUsername().equals(getUsername())) {
-				logger.info("PROPERTY_USERNAME->"+dto.getUsername()+"/"+getUsername());
-				setUsername(dto.getUsername());
+			setUsername(dto.getUsername());
+			if (!dto.getUsername().equals(getUsername()))
 				addUniqueIndex(PROPERTY_USERNAME, dto.getUsername());
-			}
 		}
 
 		if (dto.getPassword() != null)
@@ -364,18 +360,18 @@ public class AppUser extends AccountChild {
 	 */
 	public static AppUserDto createDto(AppUser entity) {
 		AppUserDto dto = new AppUserDto();
-		dto = entity.updateDto(dto);
+		dto = entity.updDtoWithEntity(dto);
 		return dto;
 	}
 
 	/**
-	 * DTO módosítása entitás attribútumokkal
+	 * DTO módosítása az entitás adataival
 	 * 
 	 * @param dto
 	 * @return
 	 */
-	public AppUserDto updateDto(AppUserDto dto) {
-		dto = (AppUserDto) super.updateDto(dto);
+	public AppUserDto updDtoWithEntity(AppUserDto dto) {
+		dto = (AppUserDto) super.updDtoWithEntity(dto);
 
 		if (this.getCode() != null)
 			dto.setCode(this.getCode());
