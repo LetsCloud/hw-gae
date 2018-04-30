@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import hu.hw.cloud.server.entity.hotel.RoomType;
 import hu.hw.cloud.server.service.RoomTypeService;
+import hu.hw.cloud.shared.cnst.InventoryType;
 import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
 import hu.hw.cloud.shared.exception.RestApiException;
 
@@ -32,6 +33,7 @@ import static hu.hw.cloud.shared.api.ApiPaths.PATH_WEBSAFEKEY;
 import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
 import static hu.hw.cloud.shared.api.ApiParameters.HOTEL_KEY;
 import static hu.hw.cloud.shared.api.ApiParameters.ONLY_ACTIVE;
+import static hu.hw.cloud.shared.api.ApiParameters.SEL_INV_TYPE;
 
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -58,11 +60,20 @@ public class RoomTypeController extends HotelChildController<RoomType, RoomTypeD
 	}
 
 	@RequestMapping(method = GET)
-	public ResponseEntity<List<RoomTypeDto>> getByHotelAndOnlyActive(@QueryParam(HOTEL_KEY) String hotelKey,
-			@QueryParam(ONLY_ACTIVE) Boolean onlyActive) {
+	public ResponseEntity<List<RoomTypeDto>> getByHotelWithFilters(@QueryParam(HOTEL_KEY) String hotelKey,
+			@QueryParam(ONLY_ACTIVE) Boolean onlyActive, @QueryParam(SEL_INV_TYPE) InventoryType inventoryType) {
 		Map<String, Object> filters = new HashMap<String, Object>();
-		if (onlyActive)
+		logger.info("RoomTypeController().getByHotelWithFilters()-1");
+		if (onlyActive) {
+			logger.info("RoomTypeController().getByHotelWithFilters()-2");
 			filters.put("active", onlyActive);
+		}
+
+		if (inventoryType != null) {
+			logger.info("RoomTypeController().getByHotelWithFilters()->inventoryType=" + inventoryType);
+			filters.put(SEL_INV_TYPE, inventoryType);
+		}
+
 		return getChildrenByFilters(hotelKey, filters);
 	}
 

@@ -29,7 +29,7 @@ import gwt.material.design.client.ui.MaterialIntegerBox;
 import gwt.material.design.client.ui.MaterialTextBox;
 
 import hu.hw.cloud.client.core.i18n.CoreConstants;
-import hu.hw.cloud.shared.cnst.SalesType;
+import hu.hw.cloud.shared.cnst.InventoryType;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
 import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
 
@@ -59,14 +59,14 @@ public class RoomTypeEditorView extends ViewWithUiHandlers<RoomTypeEditorUiHandl
 
 	@UiField
 	MaterialFloatBox cleaningFactor;
-	
+
 	@UiField
 	MaterialCheckBox active;
 
 	@UiField
 	@Ignore
-	MaterialComboBox<SalesType> salesTypeX;
-	TakesValueEditor<SalesType> salesType;
+	MaterialComboBox<InventoryType> inventoryTypeCombo;
+	TakesValueEditor<InventoryType> inventoryType;
 
 	@UiField
 	MaterialButton saveButton;
@@ -80,29 +80,30 @@ public class RoomTypeEditorView extends ViewWithUiHandlers<RoomTypeEditorUiHandl
 
 		initWidget(uiBinder.createAndBindUi(this));
 
-		salesType = TakesValueEditor.of(new TakesValue<SalesType>() {
+		inventoryType = TakesValueEditor.of(new TakesValue<InventoryType>() {
 
 			@Override
-			public void setValue(SalesType value) {
-				salesTypeX.setSingleValue(value);
+			public void setValue(InventoryType value) {
+				inventoryTypeCombo.setSingleValue(value);
 			}
 
 			@Override
-			public SalesType getValue() {
-				return salesTypeX.getSingleValue();
+			public InventoryType getValue() {
+				return inventoryTypeCombo.getSingleValue();
 			}
 		});
 
 		// saveButton.setBackgroundColor(Color.GREY);
 
-		initSalesTypeCombo(i18nCoreCnst.salesTypeMap());
+		initInventoryTypeCombo(i18nCoreCnst.inventoryTypeMap());
 
 		this.driver = driver;
 		driver.initialize(this);
 	}
 
-	private void initSalesTypeCombo(Map<String, String> i18nSalesTypes) {
-		Arrays.asList(SalesType.values()).forEach(st -> salesTypeX.addItem(i18nSalesTypes.get(st.toString()), st));
+	private void initInventoryTypeCombo(Map<String, String> i18nSalesTypes) {
+		Arrays.asList(InventoryType.values())
+				.forEach(st -> inventoryTypeCombo.addItem(i18nSalesTypes.get(st.toString()), st));
 	}
 
 	@Override

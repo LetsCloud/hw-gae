@@ -18,10 +18,10 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
+import hu.hw.cloud.client.fro.filter.FilterChangeEvent;
+import hu.hw.cloud.client.fro.filter.FilterPresenterFactory;
+import hu.hw.cloud.client.fro.filter.roomtype.RoomTypeFilterPresenter;
 import hu.hw.cloud.client.fro.table.AbstractTablePresenter;
-import hu.hw.cloud.client.fro.table.DtoTablePresenterFactory;
-import hu.hw.cloud.client.fro.table.filter.FilterChangeEvent;
-import hu.hw.cloud.client.fro.table.filter.FilterWidgetPresenter;
 import hu.hw.cloud.shared.api.RoomTypeResource;
 import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
 
@@ -40,16 +40,16 @@ public class RoomTypeTablePresenter extends AbstractTablePresenter<RoomTypeDto, 
 	public static final SingleSlot<PresenterWidget<?>> SLOT_FILTER = new SingleSlot<>();
 
 	private final ResourceDelegate<RoomTypeResource> resourceDelegate;
-	private final FilterWidgetPresenter filter;
+	private final RoomTypeFilterPresenter filter;
 
 	@Inject
 	RoomTypeTablePresenter(EventBus eventBus, PlaceManager placeManager, MyView view,
-			ResourceDelegate<RoomTypeResource> resourceDelegate, DtoTablePresenterFactory dtoTablePresenterFactory) {
+			ResourceDelegate<RoomTypeResource> resourceDelegate, FilterPresenterFactory filterPresenterFactory) {
 		super(eventBus, view, placeManager);
 		logger.info("RoomTypeTablePresenter()");
 
 		this.resourceDelegate = resourceDelegate;
-		this.filter = dtoTablePresenterFactory.createFilterWidgetPresenter();
+		this.filter = filterPresenterFactory.createRoomTypeFilterPresenter();
 
 		addVisibleHandler(FilterChangeEvent.TYPE, this);
 
@@ -60,6 +60,13 @@ public class RoomTypeTablePresenter extends AbstractTablePresenter<RoomTypeDto, 
 	protected void onBind() {
 		super.onBind();
 		setInSlot(SLOT_FILTER, filter);
+	}
+
+	@Override
+	protected void onReveal() {
+		super.onReveal();
+		logger.info("RoomTypeTablePresenter().onReveal()");
+//		filter.onReveal();
 	}
 
 	@Override
@@ -84,12 +91,13 @@ public class RoomTypeTablePresenter extends AbstractTablePresenter<RoomTypeDto, 
 	@Override
 	public void onFilterChange(FilterChangeEvent event) {
 		logger.info("RoomTypeTablePresenter().onFilterChange()");
+		logger.info("filter.isOnlyActive()" + filter.isOnlyActive());
+		logger.info("filter.getSelectedInventoryType()" + filter.getSelectedInventoryType());
 		resourceDelegate.withCallback(new AbstractAsyncCallback<List<RoomTypeDto>>() {
 			@Override
 			public void onSuccess(List<RoomTypeDto> result) {
-				logger.info("RoomTypeTablePresenter().loadData().onSuccess()");
 				getView().setData(result);
 			}
-		}).getAll(filter.getSelectedHotel().getWebSafeKey(), filter.isOnlyActive());
+		}).getAll(filter.getSelectedHotel().getWebSafeKey(), filter.isOnlyActive(), filter.getSelectedInventoryType());
 	}
 }

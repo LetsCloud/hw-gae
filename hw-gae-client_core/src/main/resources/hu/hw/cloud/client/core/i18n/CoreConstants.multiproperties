@@ -17,7 +17,7 @@
         <Column>
             <Name>hu_HU</Name>
             <Description></Description>
-            <Width>604</Width>
+            <Width>620</Width>
             <HandlerConfiguration>/hw-gae-client_core/src/main/resources/hu/hw/cloud/client/core/i18n/CoreConstants_hu_HU.properties|false|false|false|false</HandlerConfiguration>
         </Column>
     </Columns>
@@ -92,35 +92,35 @@
             <Value disabled="false">Rendben</Value>
         </Property>
         <Comment>
-            <Value>SALES TYPES</Value>
+            <Value>INVENTORY TYPES</Value>
         </Comment>
         <Property>
-            <Name>salesTypeMap</Name>
+            <Name>inventoryTypeMap</Name>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
-            <Value disabled="false">NORMAL,ALTERNATIVE,VIRTUAL</Value>
-            <Value disabled="false">NORMAL,ALTERNATIVE,VIRTUAL</Value>
+            <Value disabled="false">PHYS,GENE,COMP</Value>
+            <Value disabled="false">PHYS,GENE,COMP</Value>
         </Property>
         <Property>
-            <Name>NORMAL</Name>
+            <Name>PHYS</Name>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
-            <Value disabled="false">Normal</Value>
-            <Value disabled="false">Normál</Value>
+            <Value disabled="false">Phyisical</Value>
+            <Value disabled="false">Fizikai</Value>
         </Property>
         <Property>
-            <Name>ALTERNATIVE</Name>
+            <Name>GENE</Name>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
-            <Value disabled="false">Alternative</Value>
-            <Value disabled="false">Alternatív</Value>
+            <Value disabled="false">Generic</Value>
+            <Value disabled="false">Generikus</Value>
         </Property>
         <Property>
-            <Name>VIRTUAL</Name>
+            <Name>COMP</Name>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
-            <Value disabled="false">Virtual</Value>
-            <Value disabled="false">Virtuális</Value>
+            <Value disabled="false">Component</Value>
+            <Value disabled="false">Komponens</Value>
         </Property>
     </Records>
 </MultiProperties>

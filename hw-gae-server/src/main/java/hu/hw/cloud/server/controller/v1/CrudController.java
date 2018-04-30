@@ -121,6 +121,7 @@ public abstract class CrudController<T extends BaseEntity, D extends BaseDto> ex
 			return new ResponseEntity<List<D>>(dtos, HttpStatus.OK);
 
 		for (T entity : service.getChildrenByFilters(parentWebSafeKey, filters)) {
+			logger.info("CrudController().getChildrenByFilters()->entity.getId()=" + entity.getId());
 			dtos.add(createDto(entity));
 		}
 		return new ResponseEntity<List<D>>(dtos, HttpStatus.OK);

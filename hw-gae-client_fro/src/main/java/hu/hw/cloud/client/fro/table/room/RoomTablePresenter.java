@@ -18,9 +18,9 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
+import hu.hw.cloud.client.fro.filter.FilterChangeEvent;
+import hu.hw.cloud.client.fro.filter.FilterPresenterFactory;
 import hu.hw.cloud.client.fro.table.AbstractTablePresenter;
-import hu.hw.cloud.client.fro.table.DtoTablePresenterFactory;
-import hu.hw.cloud.client.fro.table.filter.FilterChangeEvent;
 import hu.hw.cloud.client.fro.table.filter.FilterWidgetPresenter;
 import hu.hw.cloud.client.fro.table.roomtype.RoomTypeTablePresenter;
 import hu.hw.cloud.shared.api.RoomResource;
@@ -45,12 +45,12 @@ public class RoomTablePresenter extends AbstractTablePresenter<RoomDto, RoomTabl
 
 	@Inject
 	RoomTablePresenter(EventBus eventBus, PlaceManager placeManager, MyView view,
-			ResourceDelegate<RoomResource> resourceDelegate, DtoTablePresenterFactory dtoTablePresenterFactory) {
+			ResourceDelegate<RoomResource> resourceDelegate, FilterPresenterFactory filterPresenterFactory) {
 		super(eventBus, view, placeManager);
 		logger.info("RoomTablePresenter()");
 
 		this.resourceDelegate = resourceDelegate;
-		this.filter = dtoTablePresenterFactory.createFilterWidgetPresenter();
+		this.filter = filterPresenterFactory.createFilterWidgetPresenter();
 
 		addVisibleHandler(FilterChangeEvent.TYPE, this);
 

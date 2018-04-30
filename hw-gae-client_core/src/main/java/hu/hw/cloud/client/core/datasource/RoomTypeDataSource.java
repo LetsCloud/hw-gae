@@ -17,6 +17,7 @@ import gwt.material.design.client.data.loader.LoadResult;
 
 import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
 import hu.hw.cloud.shared.api.RoomTypeResource;
+import hu.hw.cloud.shared.cnst.InventoryType;
 import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
 
 /**
@@ -31,6 +32,8 @@ public class RoomTypeDataSource implements DataSource<RoomTypeDto> {
 	private String hotelKey;
 
 	private Boolean onlyActive = true;
+
+	private InventoryType inventoryType = null;
 
 	private final ResourceDelegate<RoomTypeResource> resourceDelegate;
 
@@ -49,7 +52,7 @@ public class RoomTypeDataSource implements DataSource<RoomTypeDto> {
 				result.sort((RoomTypeDto o1, RoomTypeDto o2) -> o1.getCode().compareTo(o2.getCode()));
 				callback.onSuccess(new LoadResult<>(result, loadConfig.getOffset(), result.size()));
 			}
-		}).getAll(hotelKey, onlyActive);
+		}).getAll(hotelKey, onlyActive, inventoryType);
 	}
 
 	@Override
@@ -79,6 +82,14 @@ public class RoomTypeDataSource implements DataSource<RoomTypeDto> {
 
 	public void setOnlyActive(Boolean onlyActive) {
 		this.onlyActive = onlyActive;
+	}
+
+	public InventoryType getInventoryType() {
+		return inventoryType;
+	}
+
+	public void setInventoryType(InventoryType inventoryType) {
+		this.inventoryType = inventoryType;
 	}
 
 }

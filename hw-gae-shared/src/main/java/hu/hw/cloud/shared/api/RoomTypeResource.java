@@ -9,6 +9,7 @@ import static hu.hw.cloud.shared.api.ApiPaths.PATH_WEBSAFEKEY;
 import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
 import static hu.hw.cloud.shared.api.ApiParameters.HOTEL_KEY;
 import static hu.hw.cloud.shared.api.ApiParameters.ONLY_ACTIVE;
+import static hu.hw.cloud.shared.api.ApiParameters.SEL_INV_TYPE;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import hu.hw.cloud.shared.cnst.InventoryType;
 import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
 
 /**
@@ -32,7 +34,8 @@ import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
 public interface RoomTypeResource {
 
 	@GET
-	List<RoomTypeDto> getAll(@QueryParam(HOTEL_KEY) String hotelKey, @QueryParam(ONLY_ACTIVE) Boolean onlyActive);
+	List<RoomTypeDto> getAll(@QueryParam(HOTEL_KEY) String hotelKey, @QueryParam(ONLY_ACTIVE) Boolean onlyActive,
+			@QueryParam(SEL_INV_TYPE) InventoryType type);
 
 	@GET
 	@Path(PATH_WEBSAFEKEY)

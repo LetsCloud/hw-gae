@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.fro.table.filter;
+package hu.hw.cloud.client.fro.filter;
 
 import java.util.logging.Logger;
 

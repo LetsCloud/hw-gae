@@ -510,5 +510,54 @@
             <Value disabled="false">Description</Value>
             <Value disabled="false">Leírás</Value>
         </Property>
+        <Property>
+            <Name>roomTypeEditorChmGroup</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Channel Manager/Booking Engine</Value>
+            <Value disabled="false">Channel Manager/Foglalómotor</Value>
+        </Property>
+        <Property>
+            <Name>roomTypeEditorInventoryType</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Inventory Type</Value>
+            <Value disabled="false">Készlet típus</Value>
+        </Property>
+        <Property>
+            <Name>roomTypeEditorPlaceholderInventoryType</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Choose Inventory Type</Value>
+            <Value disabled="false">Válassz készlet típust</Value>
+        </Property>
+        <Property>
+            <Name>roomTypeEditorHkGroup</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Housekeeping</Value>
+            <Value disabled="false">Housekeeping</Value>
+        </Property>
+        <Property>
+            <Name>roomTypeEditorNumOfBeds</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Number of beds</Value>
+            <Value disabled="false">Ágyak száma</Value>
+        </Property>
+        <Property>
+            <Name>roomTypeEditorNumOfXtrBeds</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Number of extra beds</Value>
+            <Value disabled="false">Pótágyak száma</Value>
+        </Property>
+        <Property>
+            <Name>roomTypeEditorCleaningFactor</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Cleaning factor</Value>
+            <Value disabled="false">Takarítási tényező</Value>
+        </Property>
     </Records>
 </MultiProperties>

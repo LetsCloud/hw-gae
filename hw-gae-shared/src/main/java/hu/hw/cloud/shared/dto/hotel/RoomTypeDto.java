@@ -5,7 +5,7 @@ package hu.hw.cloud.shared.dto.hotel;
 
 import java.util.List;
 
-import hu.hw.cloud.shared.cnst.SalesType;
+import hu.hw.cloud.shared.cnst.InventoryType;
 
 /**
  * @author CR
@@ -28,11 +28,13 @@ public class RoomTypeDto extends HotelChildDto {
 
 	private Float cleaningFactor;
 
-	private SalesType salesType;
+	private InventoryType inventoryType;
 
 	private List<String> componentIds;
 
 	private Boolean active;
+
+	private Integer numberOfRooms = 0;
 
 	public String getCode() {
 		return code;
@@ -58,12 +60,12 @@ public class RoomTypeDto extends HotelChildDto {
 		this.description = description;
 	}
 
-	public SalesType getSalesType() {
-		return salesType;
+	public InventoryType getInventoryType() {
+		return inventoryType;
 	}
 
-	public void setSalesType(SalesType salesType) {
-		this.salesType = salesType;
+	public void setInventoryType(InventoryType inventoryType) {
+		this.inventoryType = inventoryType;
 	}
 
 	public List<String> getComponentIds() {
@@ -114,10 +116,18 @@ public class RoomTypeDto extends HotelChildDto {
 		this.floor = floor;
 	}
 
+	public Integer getNumberOfRooms() {
+		return numberOfRooms;
+	}
+
+	public void setNumberOfRooms(Integer numberOfRooms) {
+		this.numberOfRooms = numberOfRooms;
+	}
+
 	@Override
 	public String toString() {
 		String ret = "RoomTypeDto:{" + super.toString() + ", code=" + code + ", name=" + name + ", description="
-				+ description + ", salesType=" + salesType +"}";
+				+ description + ", salesType=" + inventoryType +"}";
 		return ret;
 	}
 

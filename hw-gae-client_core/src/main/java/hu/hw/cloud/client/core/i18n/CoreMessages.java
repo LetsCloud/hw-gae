@@ -333,6 +333,26 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("Name")
 	String roomTypesTableName();
 
+	@DefaultMessage("InventoryType")
+	String roomTypesTableInventoryType();
+
+	@DefaultMessage("Number Of Rooms")
+	String roomTypesTableNumberOfRooms();
+
+	@DefaultMessage("Akctive")
+	String roomTypesTableActive();
+
+	
+	/*
+	 * ROOMTYPE FILTER
+	 */
+	
+	@DefaultMessage("Choose inventory type")
+	String roomTypeFilterInventoryTypePlaceholder();
+	
+	@DefaultMessage("Selected inventory type")
+	String roomTypeFilterInventoryTypeLabel();
+
 	
 	/*
 	 * ROOMTYPE EDITOR
@@ -344,6 +364,9 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("Modify room type")
 	String roomTypeEditorModifyTitle();
 
+	@DefaultMessage("Active")
+	String roomTypeEditorActive();
+
 	@DefaultMessage("Code")
 	String roomTypeEditorCode();
 
@@ -353,15 +376,26 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("Description")
 	String roomTypeEditorDescription();
 
-	@DefaultMessage("Active")
-	String roomTypeEditorActive();
+	@DefaultMessage("Channel manager/Booking engine")
+	String roomTypeEditorChmGroup();
 
-	@DefaultMessage("Sales Type")
-	String roomTypeEditorSalesType();
+	@DefaultMessage("Inventory Type")
+	String roomTypeEditorInventoryType();
 
-	@DefaultMessage("Choose sales type")
-	String roomTypeEditorChooseSalesType();
+	@DefaultMessage("Choose inventory type")
+	String roomTypeEditorPlaceholderInventoryType();
 
+	@DefaultMessage("Housekeeping")
+	String roomTypeEditorHkGroup();
+
+	@DefaultMessage("Number of beds")
+	String roomTypeEditorNumOfBeds();
+
+	@DefaultMessage("Number of extra beds")
+	String roomTypeEditorNumOfXtrBeds();
+
+	@DefaultMessage("Cleaning factor")
+	String roomTypeEditorCleaningFactor();
 	
 	/*
 	 * ROOMS TABLE

@@ -24,6 +24,7 @@ import gwt.material.design.client.ui.MaterialDropDown;
 import gwt.material.design.client.ui.MaterialIcon;
 import gwt.material.design.client.ui.MaterialLabel;
 import gwt.material.design.client.ui.MaterialLink;
+import gwt.material.design.client.ui.MaterialPanel;
 
 /**
  * @author robi
@@ -37,6 +38,9 @@ public abstract class AbstractConfigView extends ViewWithUiHandlers<ConfigUiHand
 
 	interface Binder extends UiBinder<Widget, AbstractConfigView> {
 	}
+
+	@UiField
+	MaterialPanel mobilePanel, desktopPanel;
 
 	@UiField
 	MaterialColumn tablePanel;
@@ -106,4 +110,11 @@ public abstract class AbstractConfigView extends ViewWithUiHandlers<ConfigUiHand
 	public void setDesktopMenu(Integer index) {
 		desktopMenu.setActive(index, true);
 	}
+
+	@Override
+	public void setMobileView(Boolean show) {
+		mobilePanel.setVisible(show);
+		desktopPanel.setVisible(!show);
+	}
+
 }

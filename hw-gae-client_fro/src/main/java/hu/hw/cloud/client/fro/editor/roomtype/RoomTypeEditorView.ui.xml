@@ -13,13 +13,13 @@
 		margin-right: 10px;
 	}
 	
-	.bb {
+	.dataGroupBox {
 		margin-top: 8px;
 		padding-left: 10px;
 		border-left: 3px solid #e91e63;
 	}
 	
-	.cc {
+	.dataGroupTitle {
 		color: #e91e63;
 	}
 	
@@ -27,7 +27,7 @@
 		margin-bottom: 18px;
 	}
 	
-	.activeCb {
+	.activeCheckBox {
 		margin-bottom: 18px;
 	}
 	</ui:style>
@@ -46,7 +46,7 @@
 			<m:MaterialColumn grid="s12 m6">
 				<m:MaterialCheckBox ui:field="active"
 					text="{i18nCore.roomTypeEditorActive}" value="true"
-					addStyleNames="{style.activeCb}" />
+					addStyleNames="{style.activeCheckBox}" />
 
 				<m:MaterialTextBox ui:field="code" type="TEXT"
 					label="{i18nCore.roomTypeEditorCode}" />
@@ -58,25 +58,27 @@
 				<m:MaterialTextBox ui:field="description"
 					type="TEXT" label="{i18nCore.roomTypeEditorDescription}" />
 
-				<g:HTMLPanel addStyleNames="{style.bb}">
-					<g:Label text="Channel manager/Booking engine"
-						addStyleNames="{style.cc}" />
+				<g:HTMLPanel addStyleNames="{style.dataGroupBox}">
+					<g:Label text="{i18nCore.roomTypeEditorChmGroup}"
+						addStyleNames="{style.dataGroupTitle}" />
 					<combobox:MaterialComboBox
-						ui:field="salesTypeX" label="{i18nCore.roomTypeEditorSalesType}"
-						placeholder="{i18nCore.roomTypeEditorChooseSalesType}" />
+						ui:field="inventoryTypeCombo"
+						label="{i18nCore.roomTypeEditorInventoryType}"
+						placeholder="{i18nCore.roomTypeEditorPlaceholderInventoryType}" />
 				</g:HTMLPanel>
 
 			</m:MaterialColumn>
 
 			<m:MaterialColumn grid="s12 m6">
-				<g:HTMLPanel addStyleNames="{style.bb}">
-					<g:Label text="Housekeeping" addStyleNames="{style.cc}" />
+				<g:HTMLPanel addStyleNames="{style.dataGroupBox}">
+					<g:Label text="{i18nCore.roomTypeEditorHkGroup}"
+						addStyleNames="{style.dataGroupTitle}" />
 					<m:MaterialIntegerBox ui:field="beds"
-						label="Number of beds" />
+						label="{i18nCore.roomTypeEditorNumOfBeds}" />
 					<m:MaterialIntegerBox ui:field="xtrBeds"
-						label="Number of extra beds" />
+						label="{i18nCore.roomTypeEditorNumOfXtrBeds}" />
 					<m:MaterialFloatBox ui:field="cleaningFactor"
-						label="Cleaning factor" />
+						label="Cleaning factor{i18nCore.roomTypeEditorCleaningFactor}" />
 				</g:HTMLPanel>
 			</m:MaterialColumn>
 		</m:MaterialRow>

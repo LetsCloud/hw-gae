@@ -45,6 +45,7 @@ public abstract class AbstractTablePresenter<T extends BaseDto, V extends View> 
 	@Override
 	protected void onReveal() {
 		super.onReveal();
+		logger.info("AbstractTablePresenter().onReveal()");
 		loadData();
 	}
 
@@ -60,14 +61,12 @@ public abstract class AbstractTablePresenter<T extends BaseDto, V extends View> 
 
 	@Override
 	public void addNew() {
-		logger.info("addNew()");
 		Builder placeBuilder = new Builder().nameToken(getEditorNameToken());
 		placeManager.revealPlace(addFilters(placeBuilder));
 	}
 
 	@Override
 	public void edit(T dto) {
-		logger.info("editItem()->dto=" + dto);
 		Builder placeBuilder = new Builder().nameToken(getEditorNameToken());
 		placeBuilder.with(PARAM_DTO_KEY, String.valueOf(dto.getWebSafeKey()));
 		placeManager.revealPlace(addFilters(placeBuilder));

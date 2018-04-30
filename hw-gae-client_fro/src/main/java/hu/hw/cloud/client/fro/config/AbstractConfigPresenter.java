@@ -5,10 +5,10 @@ package hu.hw.cloud.client.fro.config;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.user.client.Window;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
@@ -19,6 +19,7 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 import hu.hw.cloud.client.core.event.ContentPushEvent;
+import hu.hw.cloud.client.core.event.ContentPushEvent.MenuState;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 
@@ -33,7 +34,7 @@ public abstract class AbstractConfigPresenter<V extends AbstractConfigPresenter.
 	public interface MyView extends View, HasUiHandlers<ConfigUiHandlers> {
 
 		void buildMenu();
-
+		void setMobileView(Boolean show);
 		void setDesktopMenu(Integer index);
 	}
 
@@ -66,7 +67,17 @@ public abstract class AbstractConfigPresenter<V extends AbstractConfigPresenter.
 
 	@Override
 	public void onContentPush(ContentPushEvent event) {
-		logger.log(Level.INFO, "SystemConfigPresenter.onContentPush()");
+		/*
+		if ((event.getMenuState().equals(MenuState.OPEN)) && (Window.getClientWidth() <= 1150)) {
+			getView().setMobileView(true);
+			return;
+		}
+		if ((event.getMenuState().equals(MenuState.CLOSE)) && (Window.getClientWidth() <= 995)) {
+			getView().setMobileView(true);
+			return;
+		}
+		getView().setMobileView(false);
+		*/
 	}
 
 	@Override

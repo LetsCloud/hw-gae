@@ -14,7 +14,7 @@ import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
 
-import hu.hw.cloud.shared.cnst.SalesType;
+import hu.hw.cloud.shared.cnst.InventoryType;
 import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
 
 /**
@@ -45,7 +45,8 @@ public class RoomType extends HotelChild {
 
 	private Float cleaningFactor;
 
-	private SalesType salesType;
+	@Index
+	private InventoryType inventoryType;
 
 	private List<Ref<RoomType>> components;
 
@@ -89,12 +90,12 @@ public class RoomType extends HotelChild {
 		this.description = description;
 	}
 
-	public SalesType getSalesType() {
-		return salesType;
+	public InventoryType getInventoryType() {
+		return inventoryType;
 	}
 
-	public void setSalesType(SalesType salesType) {
-		this.salesType = salesType;
+	public void setInventoryType(InventoryType inventoryType) {
+		this.inventoryType = inventoryType;
 	}
 
 	public List<Ref<RoomType>> getComponents() {
@@ -166,8 +167,8 @@ public class RoomType extends HotelChild {
 		if (dto.getDescription() != null)
 			this.description = dto.getDescription();
 
-		if (dto.getSalesType() != null)
-			this.salesType = dto.getSalesType();
+		if (dto.getInventoryType() != null)
+			this.inventoryType = dto.getInventoryType();
 
 		if (dto.getComponentIds() != null)
 			this.components = createRefList(dto.getComponentIds());
@@ -211,8 +212,8 @@ public class RoomType extends HotelChild {
 		if (this.getName() != null)
 			dto.setName(this.getName());
 
-		if (this.getSalesType() != null)
-			dto.setSalesType(this.getSalesType());
+		if (this.getInventoryType() != null)
+			dto.setInventoryType(this.getInventoryType());
 
 		if (this.getBeds() != null)
 			dto.setBeds(this.getBeds());

@@ -19,6 +19,7 @@ public class ApiParameters {
     public static final String HOTEL_KEY = "hotelKey";
     public static final String ROOM_KEY = "roomKey";
     public static final String ONLY_ACTIVE = "onlyActive";
+    public static final String SEL_INV_TYPE = "inventoryType";
     public static final String ROOM_STATUS = "roomStatus";
     public static final String STAY_DATE = "stayDate";
 

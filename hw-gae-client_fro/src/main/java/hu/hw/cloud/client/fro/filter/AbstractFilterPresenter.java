@@ -1,15 +1,12 @@
 /**
  * 
  */
-package hu.hw.cloud.client.fro.table.filter;
+package hu.hw.cloud.client.fro.filter;
 
 import java.util.List;
 import java.util.logging.Logger;
 
-import javax.inject.Inject;
-
 import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 
@@ -19,7 +16,6 @@ import gwt.material.design.client.data.loader.LoadResult;
 
 import hu.hw.cloud.client.core.datasource.HotelDataSource;
 import hu.hw.cloud.client.core.security.CurrentUser;
-import hu.hw.cloud.client.fro.filter.FilterChangeEvent;
 import hu.hw.cloud.client.fro.filter.FilterChangeEvent.DataTable;
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
 
@@ -27,48 +23,47 @@ import hu.hw.cloud.shared.dto.hotel.HotelDto;
  * @author robi
  *
  */
-public class FilterWidgetPresenter extends PresenterWidget<FilterWidgetPresenter.MyView>
-		implements FilterWidgetUiHandlers {
-	private static Logger logger = Logger.getLogger(FilterWidgetPresenter.class.getName());
+public abstract class AbstractFilterPresenter<V extends AbstractFilterPresenter.MyView> extends PresenterWidget<V>
+		implements AbstractFilterUiHandlers {
+	private static Logger logger = Logger.getLogger(AbstractFilterPresenter.class.getName());
 
-	public interface MyView extends View, HasUiHandlers<FilterWidgetUiHandlers> {
+	public interface MyView extends View {
+
+		void reset();
 
 		void setHotelData(List<HotelDto> hotelData);
 
 		void setSelectedHotel(HotelDto hotelDto);
 
 		HotelDto getSelectedHotel();
-		
-		Boolean isOnlyActive();
 	}
 
 	private final HotelDataSource hotelDataSource;
 
 	private final CurrentUser currentUser;
 
-	@Inject
-	FilterWidgetPresenter(EventBus eventBus, MyView view, HotelDataSource hotelDataSource, CurrentUser currentUser) {
+	public AbstractFilterPresenter(EventBus eventBus, V view, HotelDataSource hotelDataSource,
+			CurrentUser currentUser) {
 		super(eventBus, view);
-		logger.info("FilterWidgetPresenter()");
+		logger.info("AbstractFilterPresenter()");
 
 		this.hotelDataSource = hotelDataSource;
 		this.currentUser = currentUser;
-
-		getView().setUiHandlers(this);
 	}
 
 	@Override
 	public void onReveal() {
 		super.onReveal();
-		logger.info("FilterWidgetPresenter().loadData()");
+		logger.info("AbstractFilterPresenter().onReveal()");
 		LoadCallback<HotelDto> hotelLoadCallback = new LoadCallback<HotelDto>() {
 
 			@Override
 			public void onSuccess(LoadResult<HotelDto> loadResult) {
-				logger.info("FilterWidgetPresenter().loadData().onSuccess()");
+				logger.info("AbstractFilterPresenter().onReveal().onSuccess()");
 				getView().setHotelData(currentUser.getAppUserDto().getAvailableHotelDtos());
 				getView().setSelectedHotel(currentUser.getCurrentHotelDto());
-				FilterChangeEvent.fire(FilterWidgetPresenter.this, DataTable.ROOM_TYPE);
+				getView().reset();
+				FilterChangeEvent.fire(AbstractFilterPresenter.this, DataTable.ROOM_TYPE);
 			}
 
 			@Override
@@ -85,14 +80,10 @@ public class FilterWidgetPresenter extends PresenterWidget<FilterWidgetPresenter
 	@Override
 	public void filterChange() {
 		logger.info("FilterWidgetPresenter().filterChange()");
-		FilterChangeEvent.fire(FilterWidgetPresenter.this, DataTable.ROOM_TYPE);
+		FilterChangeEvent.fire(AbstractFilterPresenter.this, DataTable.ROOM_TYPE);
 	}
-	
+
 	public HotelDto getSelectedHotel() {
 		return getView().getSelectedHotel();
-	}
-	
-	public Boolean isOnlyActive() {
-		return getView().isOnlyActive();
 	}
 }
