@@ -5,6 +5,7 @@ package hu.hw.cloud.client.fro.editor.room;
 
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -35,6 +36,7 @@ import hu.hw.cloud.client.fro.editor.AbstractEditorPresenter;
 import hu.hw.cloud.client.fro.editor.EditorView;
 import hu.hw.cloud.client.fro.table.AbstractTablePresenter;
 import hu.hw.cloud.shared.api.RoomResource;
+import hu.hw.cloud.shared.cnst.InventoryType;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
 import hu.hw.cloud.shared.dto.hotel.RoomAvailabilityDto;
@@ -93,7 +95,10 @@ public class RoomEditorPresenter
 		LoadCallback<RoomTypeDto> roomTypeLoadCallback = new LoadCallback<RoomTypeDto>() {
 			@Override
 			public void onSuccess(LoadResult<RoomTypeDto> loadResult) {
-				getView().setRoomTypeData(loadResult.getData());
+				List<RoomTypeDto> filteredResult = loadResult.getData().stream()
+						.filter(roomType -> roomType.getInventoryType().equals(InventoryType.PHYS))
+						.collect(Collectors.toList());
+				getView().setRoomTypeData(filteredResult);
 				if (isNew()) {
 					SetPageTitleEvent.fire(i18n.roomEditorCreateTitle(), "Hotel", MenuItemType.MENU_ITEM,
 							RoomEditorPresenter.this);
