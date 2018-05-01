@@ -3,8 +3,8 @@
  */
 package hu.hw.cloud.server.api.v1;
 
-import java.util.logging.Logger;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ import hu.hw.cloud.shared.exception.UniqueIndexConflictException;
  *
  */
 public abstract class BaseController {
-	private static final Logger LOGGER = Logger.getLogger(BaseController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(BaseController.class);
 
 	@Autowired
 	AccountService accountService;
@@ -37,7 +37,7 @@ public abstract class BaseController {
 	 * @throws RestApiException
 	 */
 	public void accountIdValidation(WebRequest request, String accountId) throws RestApiException {
-		LOGGER.info("accountIdValidation->accountId=" + accountId);
+		logger.info("accountIdValidation->accountId=" + accountId);
 		if (!accountService.sameAccountIds(accountId, getAccountId(request)))
 			throw new RestApiException(new Exception(ExceptionType.MISMATCHED_ACCOUNT + " " + accountId));
 	}
@@ -49,7 +49,7 @@ public abstract class BaseController {
 	 */
 	@ExceptionHandler(RestApiException.class)
 	public ResponseEntity<ErrorResponseDto> exceptionHandler(RestApiException ex) {
-		LOGGER.info("exceptionHandler()");
+		logger.info("exceptionHandler()");
 		ErrorResponseDto error = new ErrorResponseDto();
 		error.setErrorCode(HttpStatus.PRECONDITION_FAILED.value());
 		error.setMessage(ExceptionType.UNKNOWN.toString() + "-" + ex.getMessage());
@@ -83,12 +83,12 @@ public abstract class BaseController {
 	 * @return
 	 */
 	public Long getAccountId(WebRequest request) {
-		LOGGER.info("getAccountId()");
+		logger.info("getAccountId()");
 		String username = request.getUserPrincipal().getName();
-		LOGGER.info("getAccountId()->username=" + username);
+		logger.info("getAccountId()->username=" + username);
 		String[] split = username.split(":");
 		Long generatedId = new Long(split[1]);
-		LOGGER.info("getAccountId()->generatedId=" + generatedId);
+		logger.info("getAccountId()->generatedId=" + generatedId);
 		return generatedId;
 	}
 }

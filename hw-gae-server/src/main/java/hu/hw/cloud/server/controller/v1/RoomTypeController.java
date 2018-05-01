@@ -75,6 +75,7 @@ public class RoomTypeController extends HotelChildController<RoomType, RoomTypeD
 	@Override
 	@RequestMapping(value = PATH_WEBSAFEKEY, method = GET)
 	public ResponseEntity<RoomTypeDto> get(@PathVariable String webSafeKey) throws RestApiException {
+		logger.info("RoomTypeController().get()");
 		return super.get(webSafeKey);
 	}
 

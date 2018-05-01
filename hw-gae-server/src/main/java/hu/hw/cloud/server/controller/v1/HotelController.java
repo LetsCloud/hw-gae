@@ -16,6 +16,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -67,6 +68,7 @@ public class HotelController extends CrudController<Hotel, HotelDto> {
 	@Override
 	@RequestMapping(value = PATH_WEBSAFEKEY, method = GET)
 	public ResponseEntity<HotelDto> get(@PathVariable String webSafeKey) throws RestApiException {
+		logger.info("HotelController().get()");
 		return super.get(webSafeKey);
 	}
 

@@ -145,8 +145,10 @@ public class RoomEditorPresenter
 				if (availabilities != null)
 					availabilities.sort(
 							(RoomAvailabilityDto o1, RoomAvailabilityDto o2) -> o1.getDate().compareTo(o2.getDate()));
+
 				SetPageTitleEvent.fire(i18nCore.roomEditorModifyTitle(), dto.getHotelDto().getName(),
 						MenuItemType.MENU_ITEM, RoomEditorPresenter.this);
+
 				getView().edit(false, dto);
 			}
 

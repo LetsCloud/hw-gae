@@ -90,14 +90,13 @@ public class RoomTypeTablePresenter extends AbstractTablePresenter<RoomTypeDto, 
 
 	@Override
 	public void onFilterChange(FilterChangeEvent event) {
-		logger.info("RoomTypeTablePresenter().onFilterChange()");
-		logger.info("filter.isOnlyActive()" + filter.isOnlyActive());
-		logger.info("filter.getSelectedInventoryType()" + filter.getSelectedInventoryType());
 		resourceDelegate.withCallback(new AbstractAsyncCallback<List<RoomTypeDto>>() {
 			@Override
 			public void onSuccess(List<RoomTypeDto> result) {
 				getView().setData(result);
 			}
 		}).getAll(filter.getSelectedHotel().getWebSafeKey(), filter.isOnlyActive(), filter.getSelectedInventoryType());
+
+		addFilter(PARAM_HOTEL_KEY, filter.getSelectedHotel().getWebSafeKey());
 	}
 }

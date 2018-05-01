@@ -64,9 +64,13 @@ public abstract class CrudController<T extends BaseEntity, D extends BaseDto> ex
 	}
 
 	public ResponseEntity<D> get(String webSafeKey) throws RestApiException {
+		logger.info("CrudController().get()-1");
 		try {
+			logger.info("CrudController().get()-2");
 			T entity = service.read(webSafeKey);
+			logger.info("CrudController().get()-3");
 			D dto = createDto(entity);
+			logger.info("CrudController().get()-4");
 			return new ResponseEntity<D>(dto, HttpStatus.OK);
 		} catch (Throwable e) {
 			throw new RestApiException(e);
