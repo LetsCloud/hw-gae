@@ -6,12 +6,13 @@ package hu.hw.cloud.server.entity.hotel;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Ignore;
 import com.googlecode.objectify.annotation.Index;
 
 import hu.hw.cloud.shared.cnst.InventoryType;
@@ -23,7 +24,7 @@ import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
  */
 @Entity
 public class RoomType extends HotelChild {
-	private static final Logger logger = LoggerFactory.getLogger(RoomType.class.getName());
+//	private static final Logger logger = LoggerFactory.getLogger(RoomType.class.getName());
 
 	/**
 	 * 
@@ -53,8 +54,11 @@ public class RoomType extends HotelChild {
 	@Index
 	private Boolean active;
 
+	@Ignore
+	private Integer numberOfRooms;
+	
 	public RoomType() {
-		logger.info("RoomType()");
+//		logger.info("RoomType()");
 	}
 
 	/**
@@ -146,6 +150,14 @@ public class RoomType extends HotelChild {
 		this.floor = floor;
 	}
 
+	public Integer getNumberOfRooms() {
+		return numberOfRooms;
+	}
+
+	public void setNumberOfRooms(Integer numberOfRooms) {
+		this.numberOfRooms = numberOfRooms;
+	}
+
 	/**
 	 * 
 	 * @param dto
@@ -226,6 +238,9 @@ public class RoomType extends HotelChild {
 
 		if (this.getFloor() != null)
 			dto.setFloor(this.getFloor());
+
+		if (this.getNumberOfRooms() != null)
+			dto.setNumberOfRooms(this.getNumberOfRooms());
 
 		return dto;
 	}

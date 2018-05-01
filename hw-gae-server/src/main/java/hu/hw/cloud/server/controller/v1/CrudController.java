@@ -49,20 +49,16 @@ public abstract class CrudController<T extends BaseEntity, D extends BaseDto> ex
 	public ResponseEntity<List<D>> getAll() {
 		List<D> dtos = new ArrayList<D>();
 
-		logger.info("CrudController().getAll()");
 		AppUser appUser = userService.getCurrentUser();
 		if (appUser == null)
 			return new ResponseEntity<List<D>>(dtos, OK);
 
 		String accountWebSafeKey = appUser.getAccount().getWebSafeKey();
-		logger.info("CrudController().getAll()-2");
 		if (accountWebSafeKey == null)
 			return new ResponseEntity<List<D>>(dtos, OK);
 
-		logger.info("CrudController().getAll()-3");
-		for (T entity : service.getChildren(accountWebSafeKey)) {
+		for (T entity : service.getChildren(accountWebSafeKey))
 			dtos.add(createDto(entity));
-		}
 
 		return new ResponseEntity<List<D>>(dtos, OK);
 	}
@@ -101,17 +97,13 @@ public abstract class CrudController<T extends BaseEntity, D extends BaseDto> ex
 	}
 
 	public ResponseEntity<List<D>> getChildren(String parentWebSafeKey) {
-		logger.info("CrudController().getChildren()->parentWebSafeKey=" + parentWebSafeKey);
 		List<D> dtos = new ArrayList<D>();
 		if (parentWebSafeKey == null)
 			return new ResponseEntity<List<D>>(dtos, HttpStatus.OK);
 
-		logger.info("CrudController().getChildren()-2");
-		for (T entity : service.getChildren(parentWebSafeKey)) {
-			logger.info("CrudController().getChildren().entity.getWebSafeKey()=" + entity.getWebSafeKey());
+		for (T entity : service.getChildren(parentWebSafeKey))
 			dtos.add(createDto(entity));
-		}
-		logger.info("CrudController().getChildren()-3");
+
 		return new ResponseEntity<List<D>>(dtos, HttpStatus.OK);
 	}
 
@@ -120,10 +112,9 @@ public abstract class CrudController<T extends BaseEntity, D extends BaseDto> ex
 		if (parentWebSafeKey == null)
 			return new ResponseEntity<List<D>>(dtos, HttpStatus.OK);
 
-		for (T entity : service.getChildrenByFilters(parentWebSafeKey, filters)) {
-			logger.info("CrudController().getChildrenByFilters()->entity.getId()=" + entity.getId());
+		for (T entity : service.getChildrenByFilters(parentWebSafeKey, filters))
 			dtos.add(createDto(entity));
-		}
+
 		return new ResponseEntity<List<D>>(dtos, HttpStatus.OK);
 	}
 

@@ -6,7 +6,9 @@ package hu.hw.cloud.server.entity.hotel;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
+
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Ref;
@@ -24,7 +26,7 @@ import hu.hw.cloud.shared.exception.ExceptionType;
  */
 @Entity
 public class Hotel extends AccountChild {
-	private static final Logger logger = Logger.getLogger(Hotel.class.getName());
+//	private static final Logger logger = LoggerFactory.getLogger(Hotel.class.getName());
 
 	// private static final String PROPERTY_ACCOUNTID = "accounId";
 	private static final String PROPERTY_CODE = "code";
@@ -60,7 +62,7 @@ public class Hotel extends AccountChild {
 	 * 
 	 */
 	public Hotel() {
-		logger.info("Hotel()");
+//		logger.info("Hotel()");
 	}
 
 	/**

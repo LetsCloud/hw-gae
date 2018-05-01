@@ -63,16 +63,11 @@ public class RoomTypeController extends HotelChildController<RoomType, RoomTypeD
 	public ResponseEntity<List<RoomTypeDto>> getByHotelWithFilters(@QueryParam(HOTEL_KEY) String hotelKey,
 			@QueryParam(ONLY_ACTIVE) Boolean onlyActive, @QueryParam(SEL_INV_TYPE) InventoryType inventoryType) {
 		Map<String, Object> filters = new HashMap<String, Object>();
-		logger.info("RoomTypeController().getByHotelWithFilters()-1");
-		if (onlyActive) {
-			logger.info("RoomTypeController().getByHotelWithFilters()-2");
+		if (onlyActive)
 			filters.put("active", onlyActive);
-		}
 
-		if (inventoryType != null) {
-			logger.info("RoomTypeController().getByHotelWithFilters()->inventoryType=" + inventoryType);
+		if (inventoryType != null)
 			filters.put(SEL_INV_TYPE, inventoryType);
-		}
 
 		return getChildrenByFilters(hotelKey, filters);
 	}

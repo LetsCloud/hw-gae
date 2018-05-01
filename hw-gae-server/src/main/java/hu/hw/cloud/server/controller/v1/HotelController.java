@@ -61,7 +61,6 @@ public class HotelController extends CrudController<Hotel, HotelDto> {
 	@Override
 	@RequestMapping(method = GET)
 	public @ResponseBody ResponseEntity<List<HotelDto>> getAll() {
-		logger.info("HotelController().getAll()");
 		return super.getAll();
 	}
 

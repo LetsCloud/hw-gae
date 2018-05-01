@@ -5,7 +5,9 @@ package hu.hw.cloud.server.entity.common;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
@@ -20,7 +22,6 @@ import hu.hw.cloud.shared.dto.hotel.HotelDto;
 import hu.hw.cloud.server.entity.VerificationToken;
 import hu.hw.cloud.server.entity.chat.FcmToken;
 import hu.hw.cloud.server.entity.hotel.Hotel;
-import hu.hw.cloud.server.security.RegistrationListener;
 
 /**
  * @author CR
@@ -28,7 +29,7 @@ import hu.hw.cloud.server.security.RegistrationListener;
  */
 @Entity
 public class AppUser extends AccountChild {
-	private static final Logger logger = Logger.getLogger(RegistrationListener.class.getName());
+//	private static final Logger logger = LoggerFactory.getLogger(AppUser.class.getName());
 
 	/**
 	 * 
@@ -117,7 +118,7 @@ public class AppUser extends AccountChild {
 	 * Paraméter nélküli kontruktor Objectify-hoz
 	 */
 	public AppUser() {
-		logger.info("AppUser()");
+//		logger.info("AppUser()");
 		this.enabled = false;
 		this.admin = false;
 	}
@@ -129,7 +130,6 @@ public class AppUser extends AccountChild {
 	 */
 	public AppUser(AppUserDto dto) {
 		this();
-		logger.info("AppUser(AppUserDto dto)");
 		updEntityWithDto(dto);
 	}
 

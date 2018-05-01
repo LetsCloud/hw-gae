@@ -2,12 +2,13 @@ package hu.hw.cloud.server.security;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,34 +19,29 @@ import hu.hw.cloud.server.entity.common.AppUser;
 import hu.hw.cloud.server.service.AppUserService;
 
 public class AppUserDetailsService implements UserDetailsService {
-	private static final Logger LOGGER = Logger.getLogger(AppUserDetailsService.class.getName());
+//	private static final Logger logger = LoggerFactory.getLogger(AppUserDetailsService.class);
 
 	private final AppUserService userService;
 
 	private LoginAttemptService loginAttemptService;
 
 	AppUserDetailsService(AppUserService userService, LoginAttemptService loginAttemptService) {
-		LOGGER.info("AppUserDetailsService()");
+//		logger.info("AppUserDetailsService()");
 		this.userService = userService;
 		this.loginAttemptService = loginAttemptService;
 	}
 
 	@Override
 	public UserDetails loadUserByUsername(String input) throws UsernameNotFoundException {
-		LOGGER.info("loadUserByUsername->input: " + input);
 		String ip = getRequestRemoteAddr();
-		LOGGER.info("loadUserByUsername->ip: " + ip);
 		boolean accountNonLocked = !loginAttemptService.isBlocked(ip);
 
 		String[] split = input.split(":");
-		if (split.length < 2) {
+		if (split.length < 2)
 			throw new UsernameNotFoundException("Must specify both username and corporate domain identifier");
-		}
+
 		String username = split[0];
 		String corporateId = split[1];
-
-		LOGGER.info("username: " + username);
-		LOGGER.info("corporateId: " + corporateId);
 
 		AppUser appUser = userService.getUserByUsername(username, new Long(corporateId));
 		if (appUser == null)
@@ -60,8 +56,6 @@ public class AppUserDetailsService implements UserDetailsService {
 		 */
 		AppUserDetails aud = new AppUserDetails(input, AppUser.createDto(appUser), grantedAuthorities,
 				accountNonLocked);
-		
-		LOGGER.info("loadUserByUsername()->out" + aud.getAppUserDto().getAccountDto().getId());
 
 		return aud;
 	}

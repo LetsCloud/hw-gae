@@ -3,8 +3,8 @@
  */
 package hu.hw.cloud.server.entity.hotel;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Parent;
@@ -17,7 +17,7 @@ import hu.hw.cloud.shared.dto.hotel.HotelChildDto;
  *
  */
 public class HotelChild extends BaseEntity {
-	private static final Logger logger = LoggerFactory.getLogger(HotelChild.class.getName());
+//	private static final Logger logger = LoggerFactory.getLogger(HotelChild.class.getName());
 
 	@Parent
 	private Ref<Hotel> hotelRef;
@@ -26,7 +26,7 @@ public class HotelChild extends BaseEntity {
 	 * Üres konstruktor az Objectify kedvéért.
 	 */
 	public HotelChild() {
-		logger.info("HotelChild()");
+//		logger.info("HotelChild()");
 	}
 
 	/**

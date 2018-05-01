@@ -132,6 +132,7 @@
 		<constructor-arg ref="roomTypeRepository" />
 		<constructor-arg ref="accountRepository" />
 		<constructor-arg ref="hotelRepository" />
+		<constructor-arg ref="roomRepository" />
 	</bean>
 
 	<!-- CONTROLLERS -->

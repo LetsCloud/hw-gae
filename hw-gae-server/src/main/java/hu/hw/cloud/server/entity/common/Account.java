@@ -14,8 +14,6 @@ import hu.hw.cloud.server.entity.profile.PostalAddress;
 import hu.hw.cloud.shared.cnst.PostalAddressLabel;
 import hu.hw.cloud.shared.dto.RegisterDto;
 import hu.hw.cloud.shared.dto.common.AccountDto;
-import hu.hw.cloud.shared.exception.EntityValidationException;
-import hu.hw.cloud.shared.exception.ExceptionType;
 
 /**
  * @author CR

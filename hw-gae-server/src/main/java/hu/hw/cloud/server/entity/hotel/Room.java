@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
@@ -34,7 +34,7 @@ import hu.hw.cloud.shared.dto.hotel.RoomAvailabilityDto;
  */
 @Entity
 public class Room extends HotelChild {
-	private static final Logger logger = LoggerFactory.getLogger(Room.class.getName());
+//	private static final Logger logger = LoggerFactory.getLogger(Room.class.getName());
 
 	private static final String ROOM_CODE = "code";
 
@@ -82,7 +82,7 @@ public class Room extends HotelChild {
 	private List<RoomAvailability> roomAvailabilities = new ArrayList<RoomAvailability>();
 
 	public Room() {
-		logger.info("Room()");
+//		logger.info("Room()");
 	}
 
 	/**
@@ -144,10 +144,8 @@ public class Room extends HotelChild {
 	}
 
 	public void setRoomType(RoomType roomType) {
-		if (roomType != null) {
-			logger.info("Room().setRoomType().getId()=" + roomType.getId());
+		if (roomType != null)
 			this.roomType = Ref.create(roomType);
-		}
 	}
 
 	public RoomStatus getRoomStatus() {

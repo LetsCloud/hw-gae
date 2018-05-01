@@ -1,7 +1,8 @@
 package hu.hw.cloud.server.security;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 //import org.springframework.stereotype.Component;
@@ -17,7 +18,7 @@ import hu.hw.cloud.shared.dto.common.AppUserDto;
  *
  */
 public class LoggedInChecker {
-	private static final Logger LOGGER = LoggerFactory.getLogger(LoggedInChecker.class);
+//	private static final Logger logger = LoggerFactory.getLogger(LoggedInChecker.class);
 
 	/**
 	 * Visszaadja a bejelentkezett felhasználó adatait AppUser entitás formájában
@@ -25,7 +26,7 @@ public class LoggedInChecker {
 	 * @return
 	 */
 	public AppUser getLoggedInUser() {
-		LOGGER.info("getLoggedInUser()");
+//		logger.info("getLoggedInUser()");
 
 		AppUser appUser = null;
 
@@ -35,16 +36,11 @@ public class LoggedInChecker {
 
 			// principal can be "anonymousUser" (String)
 			if (principal instanceof AppUserDetails) {
-				LOGGER.info("principal instanceof AppUserDetails");
 				AppUserDetails userDetails = (AppUserDetails) principal;
 				AppUserDto dto = userDetails.getAppUserDto();
-				LOGGER.info("getLoggedInUser()->dto.getId()=" + dto.getId());
 				appUser = new AppUser(dto);
-				LOGGER.info("getLoggedInUser()-2");
-				LOGGER.info("getLoggedInUser()->appUser.getId()=" + appUser.getId());
 			}
 		}
-
 		return appUser;
 	}
 }
