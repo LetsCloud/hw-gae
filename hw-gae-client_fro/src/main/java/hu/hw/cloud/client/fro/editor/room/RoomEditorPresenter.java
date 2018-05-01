@@ -39,6 +39,7 @@ import hu.hw.cloud.shared.api.RoomResource;
 import hu.hw.cloud.shared.cnst.InventoryType;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
+import hu.hw.cloud.shared.dto.hotel.HotelDto;
 import hu.hw.cloud.shared.dto.hotel.RoomAvailabilityDto;
 import hu.hw.cloud.shared.dto.hotel.RoomDto;
 import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
@@ -91,7 +92,8 @@ public class RoomEditorPresenter
 	protected void loadData() {
 		roomTypeDataSource.setOnlyActive(true);
 		roomTypeDataSource.setHotelKey(filters.get(AbstractTablePresenter.PARAM_HOTEL_KEY));
-
+		hotelDataSource.setWebSafeKey(filters.get(AbstractTablePresenter.PARAM_HOTEL_KEY));
+		
 		LoadCallback<RoomTypeDto> roomTypeLoadCallback = new LoadCallback<RoomTypeDto>() {
 			@Override
 			public void onSuccess(LoadResult<RoomTypeDto> loadResult) {
@@ -100,12 +102,22 @@ public class RoomEditorPresenter
 						.collect(Collectors.toList());
 				getView().setRoomTypeData(filteredResult);
 				if (isNew()) {
-					SetPageTitleEvent.fire(i18nCore.roomEditorCreateTitle(), "Hotel", MenuItemType.MENU_ITEM,
-							RoomEditorPresenter.this);
-					create();
+					LoadCallback<HotelDto> hotelLoadCallback = new LoadCallback<HotelDto>() {
+						@Override
+						public void onSuccess(LoadResult<HotelDto> loadResult) {
+							SetPageTitleEvent.fire(i18nCore.roomEditorCreateTitle(),
+									loadResult.getData().get(0).getName(), MenuItemType.MENU_ITEM,
+									RoomEditorPresenter.this);
+							create();
+						}
+
+						@Override
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+						}
+					};
+					hotelDataSource.get(new LoadConfig<HotelDto>(0, 0, null, null), hotelLoadCallback);
 				} else {
-					SetPageTitleEvent.fire(i18nCore.roomEditorModifyTitle(), "Hotel", MenuItemType.MENU_ITEM,
-							RoomEditorPresenter.this);
 					edit(filters.get(AbstractTablePresenter.PARAM_DTO_KEY));
 				}
 			}
@@ -133,6 +145,8 @@ public class RoomEditorPresenter
 				if (availabilities != null)
 					availabilities.sort(
 							(RoomAvailabilityDto o1, RoomAvailabilityDto o2) -> o1.getDate().compareTo(o2.getDate()));
+				SetPageTitleEvent.fire(i18nCore.roomEditorModifyTitle(), dto.getHotelDto().getName(),
+						MenuItemType.MENU_ITEM, RoomEditorPresenter.this);
 				getView().edit(false, dto);
 			}
 

@@ -3,6 +3,7 @@
  */
 package hu.hw.cloud.client.core.datasource;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -28,6 +29,8 @@ public class HotelDataSource implements DataSource<HotelDto> {
 
 	private Boolean isLoaded = false;
 
+	private String webSafeKey;
+
 	private final ResourceDelegate<HotelResource> resourceDelegate;
 
 	@Inject
@@ -38,14 +41,28 @@ public class HotelDataSource implements DataSource<HotelDto> {
 
 	@Override
 	public void load(LoadConfig<HotelDto> loadConfig, LoadCallback<HotelDto> callback) {
+		isLoaded = false;
 		resourceDelegate.withCallback(new AbstractAsyncCallback<List<HotelDto>>() {
 			@Override
 			public void onSuccess(List<HotelDto> result) {
 				isLoaded = true;
 				result.sort((HotelDto h1, HotelDto h2) -> h1.getName().compareTo(h2.getName()));
-				callback.onSuccess(new LoadResult<>(result, loadConfig.getOffset(), result.size()));
+				callback.onSuccess(new LoadResult<HotelDto>(result, loadConfig.getOffset(), result.size()));
 			}
 		}).list();
+	}
+
+	public void get(LoadConfig<HotelDto> loadConfig, LoadCallback<HotelDto> callback) {
+		isLoaded = false;
+		resourceDelegate.withCallback(new AbstractAsyncCallback<HotelDto>() {
+			@Override
+			public void onSuccess(HotelDto result) {
+				isLoaded = true;
+				List<HotelDto> list = new ArrayList<HotelDto>();
+				list.add(result);
+				callback.onSuccess(new LoadResult<HotelDto>(list, loadConfig.getOffset(), list.size()));
+			}
+		}).read(webSafeKey);
 	}
 
 	@Override
@@ -59,6 +76,14 @@ public class HotelDataSource implements DataSource<HotelDto> {
 
 	public void setIsLoaded(Boolean isLoaded) {
 		this.isLoaded = isLoaded;
+	}
+
+	public String getWebSafeKey() {
+		return webSafeKey;
+	}
+
+	public void setWebSafeKey(String webSafeKey) {
+		this.webSafeKey = webSafeKey;
 	}
 
 }
