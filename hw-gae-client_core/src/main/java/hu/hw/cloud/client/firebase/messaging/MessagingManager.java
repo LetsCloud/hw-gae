@@ -28,6 +28,7 @@ public class MessagingManager implements HasMessagingFeatures {
 		this.firebase = firebase;
 	}
 
+	
 	@Override
 	public Messaging getMessaging() {
 		if (firebase != null) {
