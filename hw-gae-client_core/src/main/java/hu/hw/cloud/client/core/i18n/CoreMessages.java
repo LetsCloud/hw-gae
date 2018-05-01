@@ -401,7 +401,7 @@ public interface CoreMessages extends Messages {
 	 * ROOMS TABLE
 	 */
 	
-	@DefaultMessage("Rooms")
+	@DefaultMessage("Rooms table")
 	String roomsTableTitle();
 	
 	@DefaultMessage("Code")

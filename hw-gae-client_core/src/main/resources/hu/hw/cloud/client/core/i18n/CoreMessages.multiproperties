@@ -559,5 +559,29 @@
             <Value disabled="false">Cleaning factor</Value>
             <Value disabled="false">Takarítási tényező</Value>
         </Property>
+        <Comment>
+            <Value>ROOMS TABLE</Value>
+        </Comment>
+        <Property>
+            <Name>roomsTableTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Rooms table</Value>
+            <Value disabled="false">Szobák táblázat</Value>
+        </Property>
+        <Property>
+            <Name>roomsTableCode</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Code</Value>
+            <Value disabled="false">Kód</Value>
+        </Property>
+        <Property>
+            <Name>roomsTableType</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Room type</Value>
+            <Value disabled="false">Szobatípus</Value>
+        </Property>
     </Records>
 </MultiProperties>

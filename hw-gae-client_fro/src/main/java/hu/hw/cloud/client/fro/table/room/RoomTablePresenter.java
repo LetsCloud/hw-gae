@@ -84,11 +84,9 @@ public class RoomTablePresenter extends AbstractTablePresenter<RoomDto, RoomTabl
 
 	@Override
 	public void onFilterChange(FilterChangeEvent event) {
-		logger.info("RoomTypeTablePresenter().onFilterChange()");
 		resourceDelegate.withCallback(new AbstractAsyncCallback<List<RoomDto>>() {
 			@Override
 			public void onSuccess(List<RoomDto> result) {
-				logger.info("RoomTypeTablePresenter().loadData().onSuccess()");
 				getView().setData(result);
 			}
 		}).getByHotel(filter.getSelectedHotel().getWebSafeKey());
