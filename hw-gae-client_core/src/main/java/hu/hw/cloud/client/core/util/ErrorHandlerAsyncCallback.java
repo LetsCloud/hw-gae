@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-import hu.hw.cloud.client.core.app.AppPresenter;
 import hu.hw.cloud.client.core.event.DisplayMessageEvent;
 import hu.hw.cloud.client.core.ui.message.Message;
 import hu.hw.cloud.client.core.ui.message.MessageStyle;
