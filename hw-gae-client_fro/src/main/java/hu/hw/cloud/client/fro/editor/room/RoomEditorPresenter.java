@@ -25,6 +25,7 @@ import gwt.material.design.client.data.loader.LoadResult;
 
 import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.app.AppPresenter;
+import hu.hw.cloud.client.core.datasource.HotelDataSource;
 import hu.hw.cloud.client.core.datasource.RoomTypeDataSource;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
@@ -36,6 +37,7 @@ import hu.hw.cloud.client.fro.table.AbstractTablePresenter;
 import hu.hw.cloud.shared.api.RoomResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
+import hu.hw.cloud.shared.dto.hotel.RoomAvailabilityDto;
 import hu.hw.cloud.shared.dto.hotel.RoomDto;
 import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
 
@@ -62,19 +64,21 @@ public class RoomEditorPresenter
 	private final PlaceManager placeManager;
 	private final ResourceDelegate<RoomResource> resourceDelegate;
 	private final RoomTypeDataSource roomTypeDataSource;
+	private final HotelDataSource hotelDataSource;
 	private final CurrentUser currentUser;
 	private final CoreMessages i18n;
 
 	@Inject
 	RoomEditorPresenter(EventBus eventBus, PlaceManager placeManager, MyView view, MyProxy proxy,
 			ResourceDelegate<RoomResource> resourceDelegate, RoomTypeDataSource roomTypeDataSource,
-			CurrentUser currentUser, CoreMessages i18n) {
+			HotelDataSource hotelDataSource, CurrentUser currentUser, CoreMessages i18n) {
 		super(eventBus, placeManager, view, proxy, AppPresenter.SLOT_MAIN);
 		logger.info("RoomTypeEditorPresenter()");
 
 		this.placeManager = placeManager;
 		this.resourceDelegate = resourceDelegate;
 		this.roomTypeDataSource = roomTypeDataSource;
+		this.hotelDataSource = hotelDataSource;
 		this.currentUser = currentUser;
 		this.i18n = i18n;
 
@@ -85,17 +89,17 @@ public class RoomEditorPresenter
 	protected void loadData() {
 		roomTypeDataSource.setOnlyActive(true);
 		roomTypeDataSource.setHotelKey(filters.get(AbstractTablePresenter.PARAM_HOTEL_KEY));
-		
+
 		LoadCallback<RoomTypeDto> roomTypeLoadCallback = new LoadCallback<RoomTypeDto>() {
 			@Override
 			public void onSuccess(LoadResult<RoomTypeDto> loadResult) {
 				getView().setRoomTypeData(loadResult.getData());
 				if (isNew()) {
-					SetPageTitleEvent.fire(i18n.roomEditorCreateTitle(), "", MenuItemType.MENU_ITEM,
+					SetPageTitleEvent.fire(i18n.roomEditorCreateTitle(), "Hotel", MenuItemType.MENU_ITEM,
 							RoomEditorPresenter.this);
 					create();
 				} else {
-					SetPageTitleEvent.fire(i18n.roomEditorModifyTitle(), "", MenuItemType.MENU_ITEM,
+					SetPageTitleEvent.fire(i18n.roomEditorModifyTitle(), "Hotel", MenuItemType.MENU_ITEM,
 							RoomEditorPresenter.this);
 					edit(filters.get(AbstractTablePresenter.PARAM_DTO_KEY));
 				}
@@ -121,7 +125,10 @@ public class RoomEditorPresenter
 		resourceDelegate.withCallback(new AsyncCallback<RoomDto>() {
 			@Override
 			public void onSuccess(RoomDto dto) {
-				logger.info("RoomTypeEditorPresenter().edit().onSuccess()->dto=" + dto);
+				List<RoomAvailabilityDto> availabilities = dto.getRoomAvailabilityDtos();
+				if (availabilities != null)
+					availabilities.sort(
+							(RoomAvailabilityDto o1, RoomAvailabilityDto o2) -> o1.getDate().compareTo(o2.getDate()));
 				getView().edit(false, dto);
 			}
 

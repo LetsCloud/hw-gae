@@ -15,5 +15,7 @@ public class RoomEditorModule extends AbstractPresenterModule {
 	protected void configure() {
 		bindPresenter(RoomEditorPresenter.class, RoomEditorPresenter.MyView.class, RoomEditorView.class,
 				RoomEditorPresenter.MyProxy.class);
+		bind(AvailabilityListEditor.class);
+		bind(AvailabilityEditor.class);
 	}
 }

@@ -50,11 +50,14 @@ public class RoomEditorView extends ViewWithUiHandlers<RoomEditorUiHandlers>
 	@UiField
 	MaterialTextBox code, description;
 
-	@UiField
 	@Ignore
+	@UiField
 	MaterialComboBox<RoomTypeDto> roomTypeCombo;
 	TakesValueEditor<RoomTypeDto> roomTypeDto;
 
+	@UiField(provided = true)
+	AvailabilityListEditor roomAvailabilityDtos;
+	
 	@UiField
 	MaterialButton saveButton;
 
@@ -62,9 +65,11 @@ public class RoomEditorView extends ViewWithUiHandlers<RoomEditorUiHandlers>
 	* 
 	*/
 	@Inject
-	RoomEditorView(Binder uiBinder, Driver driver, CoreConstants i18nCoreCnst) {
+	RoomEditorView(Binder uiBinder, Driver driver, CoreConstants i18nCoreCnst, AvailabilityListEditor roomAvailabilityDtos) {
 		logger.info("RoomTypeEditorView()");
-
+		
+		this.roomAvailabilityDtos = roomAvailabilityDtos;
+		
 		initWidget(uiBinder.createAndBindUi(this));
 
 		roomTypeDto = TakesValueEditor.of(new TakesValue<RoomTypeDto>() {
