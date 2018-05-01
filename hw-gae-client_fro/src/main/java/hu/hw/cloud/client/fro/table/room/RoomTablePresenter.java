@@ -6,6 +6,7 @@ package hu.hw.cloud.client.fro.table.room;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -89,6 +90,9 @@ public class RoomTablePresenter extends AbstractTablePresenter<RoomDto, RoomTabl
 			@Override
 			public void onSuccess(List<RoomDto> result) {
 				filter.setFloors(getFloors(result));
+				if ((filter.getSelectedFloor() != null) && (!filter.getSelectedFloor().isEmpty()))
+					result = result.stream().filter(room -> room.getFloor().equals(filter.getSelectedFloor()))
+							.collect(Collectors.toList());
 				getView().setData(result);
 			}
 		}).getByHotel(filter.getSelectedHotel().getWebSafeKey());
@@ -102,6 +106,8 @@ public class RoomTablePresenter extends AbstractTablePresenter<RoomDto, RoomTabl
 			if (!floors.contains(room.getFloor()))
 				floors.add(room.getFloor());
 		}
+		floors.sort((p1, p2) -> p1.compareTo(p2));
+		floors.add(0, "");
 		return floors;
 	}
 }

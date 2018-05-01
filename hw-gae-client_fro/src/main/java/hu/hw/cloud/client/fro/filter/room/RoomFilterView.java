@@ -22,6 +22,7 @@ import hu.hw.cloud.client.fro.filter.AbstractFilterView;
 public class RoomFilterView extends AbstractFilterView implements RoomFilterPresenter.MyView {
 	private static Logger logger = Logger.getLogger(RoomFilterView.class.getName());
 
+	private final CoreMessages i18nCore;
 	private MaterialChip floorChip;
 	private MaterialComboBox<String> floorCombo;
 
@@ -29,6 +30,8 @@ public class RoomFilterView extends AbstractFilterView implements RoomFilterPres
 	RoomFilterView(CoreMessages i18nCore, CoreConstants cnstCore) {
 		super(i18nCore);
 
+		this.i18nCore = i18nCore;
+		
 		initFloorFilter(i18nCore);
 	}
 
@@ -44,8 +47,8 @@ public class RoomFilterView extends AbstractFilterView implements RoomFilterPres
 		floorCombo.setAllowClear(true);
 		collapsibleBody.add(floorCombo);
 
-		floorCombo.setLabel(i18nCore.roomTypeFilterInventoryTypeLabel());
-		floorCombo.setPlaceholder(i18nCore.roomTypeFilterInventoryTypePlaceholder());
+		floorCombo.setLabel(i18nCore.roomFilterFloorLabel());
+		floorCombo.setPlaceholder(i18nCore.roomFilterFloorPlaceholder());
 
 		floorCombo.addSelectionHandler(e -> {
 			String floorText = null;
@@ -62,14 +65,14 @@ public class RoomFilterView extends AbstractFilterView implements RoomFilterPres
 
 	private void setFloorChip(String type) {
 		if (floorChip.isAttached()) {
-			if (type == null) {
+			if ((type == null) || (type.isEmpty())){
 				collapsibleHeader.remove(floorChip);
 				return;
 			}
-			floorChip.setText(type);
+			floorChip.setText(i18nCore.roomFilterFloor()+type);
 		} else {
-			if (type != null) {
-				floorChip.setText(type);
+			if ((type != null) && (!type.isEmpty())) {
+				floorChip.setText(i18nCore.roomFilterFloor()+type);
 				collapsibleHeader.add(floorChip);
 			}
 		}
@@ -78,7 +81,7 @@ public class RoomFilterView extends AbstractFilterView implements RoomFilterPres
 	@Override
 	public void reset() {
 		logger.info("RoomTypeFilterView().reset()");
-		setFloorChip(null);
+		setFloorChip("");
 	}
 
 	@Override

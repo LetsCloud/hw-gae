@@ -412,9 +412,26 @@ public interface CoreMessages extends Messages {
 	
 	@DefaultMessage("Code")
 	String roomsTableCode();
+	
+	@DefaultMessage("Floor")
+	String roomsTableFloor();
 
 	@DefaultMessage("Type")
 	String roomsTableType();
+
+	
+	/*
+	 * ROOM FILTER
+	 */
+	
+	@DefaultMessage("Choose floor")
+	String roomFilterFloorPlaceholder();
+	
+	@DefaultMessage("Selected floor")
+	String roomFilterFloorLabel();
+	
+	@DefaultMessage("Floor=")
+	String roomFilterFloor();
 
 	
 	/*
