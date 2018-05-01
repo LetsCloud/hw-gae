@@ -3,6 +3,7 @@
  */
 package hu.hw.cloud.client.fro.table.room;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -20,8 +21,8 @@ import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
 import hu.hw.cloud.client.fro.filter.FilterChangeEvent;
 import hu.hw.cloud.client.fro.filter.FilterPresenterFactory;
+import hu.hw.cloud.client.fro.filter.room.RoomFilterPresenter;
 import hu.hw.cloud.client.fro.table.AbstractTablePresenter;
-import hu.hw.cloud.client.fro.table.filter.FilterWidgetPresenter;
 import hu.hw.cloud.client.fro.table.roomtype.RoomTypeTablePresenter;
 import hu.hw.cloud.shared.api.RoomResource;
 import hu.hw.cloud.shared.dto.hotel.RoomDto;
@@ -41,7 +42,7 @@ public class RoomTablePresenter extends AbstractTablePresenter<RoomDto, RoomTabl
 	public static final SingleSlot<PresenterWidget<?>> SLOT_FILTER = new SingleSlot<>();
 
 	private final ResourceDelegate<RoomResource> resourceDelegate;
-	private final FilterWidgetPresenter filter;
+	private final RoomFilterPresenter filter;
 
 	@Inject
 	RoomTablePresenter(EventBus eventBus, PlaceManager placeManager, MyView view,
@@ -50,7 +51,7 @@ public class RoomTablePresenter extends AbstractTablePresenter<RoomDto, RoomTabl
 		logger.info("RoomTablePresenter()");
 
 		this.resourceDelegate = resourceDelegate;
-		this.filter = filterPresenterFactory.createFilterWidgetPresenter();
+		this.filter = filterPresenterFactory.createRoomFilterPresenter();
 
 		addVisibleHandler(FilterChangeEvent.TYPE, this);
 
@@ -87,10 +88,20 @@ public class RoomTablePresenter extends AbstractTablePresenter<RoomDto, RoomTabl
 		resourceDelegate.withCallback(new AbstractAsyncCallback<List<RoomDto>>() {
 			@Override
 			public void onSuccess(List<RoomDto> result) {
+//				filter.setFloors(getFloors(result));
 				getView().setData(result);
 			}
 		}).getByHotel(filter.getSelectedHotel().getWebSafeKey());
-		
+
 		addFilter(PARAM_HOTEL_KEY, filter.getSelectedHotel().getWebSafeKey());
+	}
+
+	private List<String> getFloors(List<RoomDto> rooms) {
+		List<String> floors = new ArrayList<String>();
+		for (RoomDto room : rooms) {
+			if (!floors.contains(room.getFloor()))
+				floors.add(room.getFloor());
+		}
+		return floors;
 	}
 }
