@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.googlecode.objectify.Key;
 
+import hu.hw.cloud.server.entity.common.Account;
 import hu.hw.cloud.server.entity.common.UserGroup;
 import hu.hw.cloud.server.repository.UserGroupRepository;
 
@@ -34,6 +35,12 @@ public class UserGroupRepositoryImpl extends CrudRepositoryImpl<UserGroup> imple
 	@Override
 	public List<UserGroup> getByAccount(Object account) {
 		return getChildren(account);
+	}
+
+	@Override
+	protected Object getParentKey(String parentWebSafeKey) {
+		Key<Account> key = Key.create(parentWebSafeKey);
+		return key;
 	}
 
 }

@@ -14,8 +14,6 @@ import hu.hw.cloud.server.entity.profile.PostalAddress;
 import hu.hw.cloud.shared.cnst.PostalAddressLabel;
 import hu.hw.cloud.shared.dto.RegisterDto;
 import hu.hw.cloud.shared.dto.common.AccountDto;
-import hu.hw.cloud.shared.exception.EntityValidationException;
-import hu.hw.cloud.shared.exception.ExceptionType;
 
 /**
  * @author CR
@@ -94,7 +92,7 @@ public class Account extends BaseEntity {
 	 * @param dto
 	 */
 	public void update(AccountDto dto) {
-		super.update(dto);
+		super.updEntityWithDto(dto);
 
 		if (dto.getName() != null)
 			this.setName(dto.getName());
@@ -122,7 +120,7 @@ public class Account extends BaseEntity {
 	 * @return
 	 */
 	public AccountDto updateDto(AccountDto dto) {
-		dto = (AccountDto) super.updateDto(dto);
+		dto = (AccountDto) super.updDtoWithEntity(dto);
 		dto.setName(this.getName());
 		dto.setPostalAddressDto(PostalAddress.createDto(this.getPostalAddress()));
 		return dto;

@@ -66,4 +66,18 @@ public interface FroMessages extends Messages {
 
 	@DefaultMessage("Roles")
 	String systemConfigRoles();
+	
+	
+	/*
+	 * HOTEL CONFIG 
+	 */
+
+	@DefaultMessage("Hotels")
+	String hotelConfigHotels();
+
+	@DefaultMessage("Roomtypes")
+	String hotelConfigRoomTypes();
+
+	@DefaultMessage("Rooms")
+	String hotelConfigRooms();
 }

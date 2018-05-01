@@ -10,8 +10,6 @@ import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.MESSAGE;
 import static hu.hw.cloud.shared.api.ApiParameters.IID_TOKEN;
 import static hu.hw.cloud.shared.api.ApiParameters.USER_AGENT;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 
 import java.io.IOException;
@@ -23,7 +21,6 @@ import org.apache.http.client.ClientProtocolException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +37,6 @@ import hu.hw.cloud.server.service.AppUserService;
 import hu.hw.cloud.server.service.impl.fcm.FcmService;
 import hu.hw.cloud.server.service.impl.fcm.Subscription;
 import hu.hw.cloud.shared.dto.NotificationDto;
-import hu.hw.cloud.shared.dto.common.AppUserDto;
 
 /**
  * @author CR

@@ -17,7 +17,7 @@
         <Column>
             <Name>hu_HU</Name>
             <Description></Description>
-            <Width>287</Width>
+            <Width>620</Width>
             <HandlerConfiguration>/hw-gae-client_core/src/main/resources/hu/hw/cloud/client/core/i18n/CoreConstants_hu_HU.properties|false|false|false|false</HandlerConfiguration>
         </Column>
     </Columns>
@@ -90,6 +90,37 @@
             <MultiLine>false</MultiLine>
             <Value disabled="false">Inspected</Value>
             <Value disabled="false">Rendben</Value>
+        </Property>
+        <Comment>
+            <Value>INVENTORY TYPES</Value>
+        </Comment>
+        <Property>
+            <Name>inventoryTypeMap</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">PHYS,GENE,COMP</Value>
+            <Value disabled="false">PHYS,GENE,COMP</Value>
+        </Property>
+        <Property>
+            <Name>PHYS</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Phyisical</Value>
+            <Value disabled="false">Fizikai</Value>
+        </Property>
+        <Property>
+            <Name>GENE</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Generic</Value>
+            <Value disabled="false">Generikus</Value>
+        </Property>
+        <Property>
+            <Name>COMP</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Component</Value>
+            <Value disabled="false">Komponens</Value>
         </Property>
     </Records>
 </MultiProperties>

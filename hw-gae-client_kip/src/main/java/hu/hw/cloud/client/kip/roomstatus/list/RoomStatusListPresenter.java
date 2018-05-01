@@ -33,7 +33,7 @@ import hu.hw.cloud.client.kip.roomstatus.event.RoomStatusFilterEvent;
 import hu.hw.cloud.client.kip.roomstatus.event.RoomStatusFilterEvent.RoomStatusFilterHandler;
 import hu.hw.cloud.client.kip.roomstatus.event.RoomStatusRefreshEvent;
 import hu.hw.cloud.client.kip.roomstatus.event.RoomStatusRefreshEvent.RoomStatusRefreshHandler;
-import hu.hw.cloud.shared.RoomResource;
+import hu.hw.cloud.shared.api.RoomResource;
 import hu.hw.cloud.shared.dto.filter.RoomStatusFilterDto;
 import hu.hw.cloud.shared.dto.hotel.RoomDto;
 

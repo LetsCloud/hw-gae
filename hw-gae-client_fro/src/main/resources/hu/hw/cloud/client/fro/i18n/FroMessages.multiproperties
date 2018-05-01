@@ -17,7 +17,7 @@
         <Column>
             <Name>hu_HU</Name>
             <Description></Description>
-            <Width>150</Width>
+            <Width>686</Width>
             <HandlerConfiguration>/hw-gae-client_fro/src/main/resources/hu/hw/cloud/client/fro/i18n/FroMessages_hu_HU.properties|false|false|false|false</HandlerConfiguration>
         </Column>
     </Columns>
@@ -59,6 +59,30 @@
             <MultiLine>false</MultiLine>
             <Value disabled="false">Hotel config</Value>
             <Value disabled="false">Hotel beállítások</Value>
+        </Property>
+        <Comment>
+            <Value>HOTEL CONFIG</Value>
+        </Comment>
+        <Property>
+            <Name>systemConfigMobileSelect</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Choose Data Type</Value>
+            <Value disabled="false">Válassz adat típust</Value>
+        </Property>
+        <Property>
+            <Name>hotelConfigHotels</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Hotels</Value>
+            <Value disabled="false">Hotelek</Value>
+        </Property>
+        <Property>
+            <Name>hotelConfigRoomTypes</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Room Types</Value>
+            <Value disabled="false">Szobatípusok</Value>
         </Property>
         <Comment>
             <Value>USER EDITOR</Value>

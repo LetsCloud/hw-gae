@@ -31,6 +31,7 @@ import hu.hw.cloud.client.core.menu.MenuPresenter;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.shared.AuthService;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
+import hu.hw.cloud.shared.dto.hotel.HotelDto;
 
 public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<MyView, Proxy_>
 		implements NavigationHandler, SetPageTitleHandler {
@@ -117,6 +118,8 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 					return;
 				}
 				currentUser.setAppUserDto(result);
+				currentUser.getAppUserDto().getAvailableHotelDtos()
+						.sort((HotelDto h1, HotelDto h2) -> h1.getName().compareTo(h2.getName()));
 				currentUser.setLoggedIn(true);
 
 				menuPresenter.referesh();

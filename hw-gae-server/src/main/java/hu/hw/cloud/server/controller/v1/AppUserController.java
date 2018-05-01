@@ -1,6 +1,7 @@
 package hu.hw.cloud.server.controller.v1;
 
 import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
+import static hu.hw.cloud.shared.api.ApiPaths.PATH_WEBSAFEKEY;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.ROOT;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.USER;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.INVITE;
@@ -9,11 +10,11 @@ import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,64 +22,56 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 
-import hu.hw.cloud.server.api.v1.BaseController;
 import hu.hw.cloud.server.entity.common.AppUser;
 import hu.hw.cloud.server.security.OnRegistrationCompleteEvent;
 import hu.hw.cloud.server.service.AppUserService;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
+import hu.hw.cloud.shared.exception.RestApiException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
 @RequestMapping(value = ROOT + USER, produces = MediaType.APPLICATION_JSON_VALUE)
-public class AppUserController extends BaseController {
+public class AppUserController extends CrudController<AppUser, AppUserDto> {
 	private static final Logger logger = Logger.getLogger(AppUserController.class.getName());
 
-	private final AppUserService userService;
+	private final AppUserService service;
 
 	private final ApplicationEventPublisher eventPublisher;
 
 	@Autowired
-	AppUserController(AppUserService userService, ApplicationEventPublisher eventPublisher) {
-		this.userService = userService;
+	AppUserController(AppUserService service, ApplicationEventPublisher eventPublisher) {
+		super(service);
+		logger.info("AppUserController()");
+		this.service = service;
 		this.eventPublisher = eventPublisher;
 	}
 
-	@RequestMapping(method = GET)
-	public @ResponseBody ResponseEntity<List<AppUserDto>> list() {
-		List<AppUserDto> userDtos = new ArrayList<AppUserDto>();
-
-		AppUser appUser = userService.getCurrentUser();
-		if (appUser == null)
-			return new ResponseEntity<List<AppUserDto>>(userDtos, OK);
-
-		String accountWebSafeKey = appUser.getAccount().getWebSafeKey();
-		if (accountWebSafeKey == null)
-			return new ResponseEntity<List<AppUserDto>>(userDtos, OK);
-
-		for (AppUser user : userService.getAll(accountWebSafeKey)) {
-			userDtos.add(AppUser.createDto(user));
-		}
-		return new ResponseEntity<List<AppUserDto>>(userDtos, OK);
+	@Override
+	protected AppUserDto createDto(AppUser entity) {
+		return AppUser.createDto(entity);
 	}
 
+	@Override
+	@RequestMapping(method = GET)
+	public @ResponseBody ResponseEntity<List<AppUserDto>> getAll() {
+		return super.getAll();
+	}
+
+	@Override
+	@RequestMapping(value = PATH_WEBSAFEKEY, method = GET)
+	public ResponseEntity<AppUserDto> get(@PathVariable String webSafeKey) throws RestApiException {
+		return super.get(webSafeKey);
+	}
+
+	@Override
 	@RequestMapping(method = POST)
-	public ResponseEntity<AppUserDto> create(@RequestBody AppUserDto userDto) {
-		try {
-			logger.info("create->try->userDto=" + userDto);
-			AppUser user = userService.create(userDto);
-			userDto = AppUser.createDto(user);
-			logger.info("create->try2->userDto=" + userDto);
-			return new ResponseEntity<AppUserDto>(userDto, OK);
-		} catch (Throwable e) {
-			logger.info("create->catch (Throwable e)->" +e.toString());
-			e.printStackTrace();
-			return new ResponseEntity<AppUserDto>(NOT_FOUND);
-		}
+	public ResponseEntity<AppUserDto> saveOrCreate(@RequestBody AppUserDto dto) throws RestApiException {
+		return super.saveOrCreate(dto);
 	}
 
 	@RequestMapping(value = INVITE, method = POST)
@@ -94,36 +87,18 @@ public class AppUserController extends BaseController {
 		}
 	}
 
-	@RequestMapping(value = WEBSAFEKEY, method = GET)
-	public ResponseEntity<AppUserDto> read(@PathVariable String id) throws Throwable {
-		AppUser user = userService.read(id);
-		AppUserDto userDto = AppUser.createDto(user);
-		return new ResponseEntity<AppUserDto>(userDto, OK);
-	}
-
-	@RequestMapping(method = PUT)
-	public ResponseEntity<AppUserDto> update(@RequestBody AppUserDto userDto) {
-		try {
-			AppUser user = userService.update(userDto);
-			userDto = AppUser.createDto(user);
-			return new ResponseEntity<AppUserDto>(userDto, OK);
-		} catch (Throwable e) {
-			e.printStackTrace();
-			return new ResponseEntity<AppUserDto>(NOT_FOUND);
-		}
-	}
-
-	@RequestMapping(method = DELETE, value = WEBSAFEKEY)
-	public void delete(@PathVariable String webSafeKey) {
-		// TODO Auto-generated method stub
-
+	@Override
+	@RequestMapping(value = PATH_WEBSAFEKEY, method = DELETE)
+	@ResponseStatus(HttpStatus.OK)
+	public void delete(@PathVariable(WEBSAFEKEY) String webSafeKey) throws RestApiException {
+		super.delete(webSafeKey);
 	}
 
 	@RequestMapping(value = "/activate/{token}", method = GET)
 	@ResponseBody
 	public Boolean activate(@PathVariable String token) {
 		try {
-			userService.activate(token);
+			service.activate(token);
 			return true;
 		} catch (Throwable e) {
 			e.printStackTrace();

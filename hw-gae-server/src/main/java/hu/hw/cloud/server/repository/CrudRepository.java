@@ -4,6 +4,7 @@
 package hu.hw.cloud.server.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import hu.hw.cloud.server.entity.BaseEntity;
 import hu.hw.cloud.shared.exception.EntityValidationException;
@@ -29,4 +30,7 @@ public interface CrudRepository<T extends BaseEntity> {
 
 	void deleteAll(Object parent);
 
+	List<T> getChildren(String parentWebSafeKey);
+
+	List<T> getChildrenByFilters(String parentWebSafeKey, Map<String, Object> filters);	
 }

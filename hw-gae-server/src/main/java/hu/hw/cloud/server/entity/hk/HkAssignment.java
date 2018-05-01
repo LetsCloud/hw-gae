@@ -56,7 +56,7 @@ public class HkAssignment extends HotelChild {
 	 * Az átadott DTO adataival módosítja az entitást.
 	 */
 	public HkAssignment update(HkAssignmentDto dto) {
-		super.update(dto);
+		super.updEntityWithDto(dto);
 		this.setAttendant(new AppUser(dto.getAttendantDto()));
 		this.setBusinessDate(dto.getBusinessDate());
 		this.setCleanType(new CleanType(dto.getCleanTypeDto()));
@@ -140,7 +140,7 @@ public class HkAssignment extends HotelChild {
 	 * @return
 	 */
 	public HkAssignmentDto updateDto(HkAssignmentDto dto) {
-		dto = (HkAssignmentDto) super.updateDto(dto);
+		dto = (HkAssignmentDto) super.updDtoWithEntity(dto);
 		if (this.getAttendant() != null)
 			dto.setAttendantDto(AppUser.createDto(this.getAttendant()));
 		dto.setBusinessDate(this.getBusinessDate());

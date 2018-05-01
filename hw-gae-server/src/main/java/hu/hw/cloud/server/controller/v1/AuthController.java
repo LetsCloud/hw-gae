@@ -34,7 +34,7 @@ import hu.hw.cloud.shared.dto.common.AppUserDto;
 @Controller
 @RequestMapping(value = ROOT + LOGIN, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthController extends BaseController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(AuthController.class);
+	private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
 	private final AppUserService userService;
 
@@ -46,14 +46,14 @@ public class AuthController extends BaseController {
 	@RequestMapping(method = GET, value = IS_LOGGED_IN)
 	@PermitAll
 	ResponseEntity<Boolean> isCurrentUserLoggedIn() {
-		LOGGER.info("isCurrentUserLoggedIn()");
+		logger.info("isCurrentUserLoggedIn()");
 		return new ResponseEntity<Boolean>(userService.isCurrentUserLoggedIn(), OK);
 	}
 
 	@RequestMapping(method = GET, value = CURRENTUSER)
 	ResponseEntity<AppUserDto> getCurrentUser() {
 		AppUserDto appUserDto = AppUser.createDto(userService.getCurrentUser());
-		LOGGER.info("getCurrentUser()->" + appUserDto);
+		logger.info("getCurrentUser()->" + appUserDto);
 		return new ResponseEntity<AppUserDto>(appUserDto, HttpStatus.OK);
 	}
 

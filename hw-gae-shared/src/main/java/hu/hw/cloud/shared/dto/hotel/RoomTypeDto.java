@@ -5,7 +5,7 @@ package hu.hw.cloud.shared.dto.hotel;
 
 import java.util.List;
 
-import hu.hw.cloud.shared.cnst.SalesType;
+import hu.hw.cloud.shared.cnst.InventoryType;
 
 /**
  * @author CR
@@ -20,11 +20,21 @@ public class RoomTypeDto extends HotelChildDto {
 
 	private String description;
 
-	private SalesType salesType;
+	private Integer floor;
+
+	private Integer beds;
+
+	private Integer xtrBeds;
+
+	private Float cleaningFactor;
+
+	private InventoryType inventoryType;
 
 	private List<String> componentIds;
 
 	private Boolean active;
+
+	private Integer numberOfRooms = 0;
 
 	public String getCode() {
 		return code;
@@ -50,12 +60,12 @@ public class RoomTypeDto extends HotelChildDto {
 		this.description = description;
 	}
 
-	public SalesType getSalesType() {
-		return salesType;
+	public InventoryType getInventoryType() {
+		return inventoryType;
 	}
 
-	public void setSalesType(SalesType salesType) {
-		this.salesType = salesType;
+	public void setInventoryType(InventoryType inventoryType) {
+		this.inventoryType = inventoryType;
 	}
 
 	public List<String> getComponentIds() {
@@ -74,10 +84,50 @@ public class RoomTypeDto extends HotelChildDto {
 		this.active = active;
 	}
 
+	public Integer getBeds() {
+		return beds;
+	}
+
+	public void setBeds(Integer beds) {
+		this.beds = beds;
+	}
+
+	public Integer getXtrBeds() {
+		return xtrBeds;
+	}
+
+	public void setXtrBeds(Integer xtrBeds) {
+		this.xtrBeds = xtrBeds;
+	}
+
+	public Float getCleaningFactor() {
+		return cleaningFactor;
+	}
+
+	public void setCleaningFactor(Float cleaningFactor) {
+		this.cleaningFactor = cleaningFactor;
+	}
+
+	public Integer getFloor() {
+		return floor;
+	}
+
+	public void setFloor(Integer floor) {
+		this.floor = floor;
+	}
+
+	public Integer getNumberOfRooms() {
+		return numberOfRooms;
+	}
+
+	public void setNumberOfRooms(Integer numberOfRooms) {
+		this.numberOfRooms = numberOfRooms;
+	}
+
 	@Override
 	public String toString() {
 		String ret = "RoomTypeDto:{" + super.toString() + ", code=" + code + ", name=" + name + ", description="
-				+ description + "}";
+				+ description + ", salesType=" + inventoryType +"}";
 		return ret;
 	}
 

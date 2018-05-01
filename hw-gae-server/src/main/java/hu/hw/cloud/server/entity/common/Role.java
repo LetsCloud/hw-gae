@@ -61,7 +61,7 @@ public class Role extends AccountChild {
 	public void update(RoleDto dto) {
 		clearUniqueIndexes();
 
-		super.update(dto);
+		super.updEntityWithDto(dto);
 
 		if (dto.getCode() != null) {
 			setCode(dto.getCode());
@@ -129,7 +129,7 @@ public class Role extends AccountChild {
 	 */
 	public RoleDto updateDto(RoleDto dto) {
 		LOGGER.info("updateDto()-1");
-		dto = (RoleDto) super.updateDto(dto);
+		dto = (RoleDto) super.updDtoWithEntity(dto);
 		LOGGER.info("updateDto()-2");
 
 		if (this.getCode() != null)

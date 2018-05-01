@@ -21,7 +21,7 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 import hu.hw.cloud.client.core.CoreNameTokens;
-import hu.hw.cloud.shared.AppUserResource;
+import hu.hw.cloud.shared.api.AppUserResource;
 
 /**
  * @author CR

@@ -125,18 +125,23 @@ public abstract class BaseEntity {
 	}
 
 	/**
-	 * Entitás módosítása DTO alapján
+	 * Entitás módosítása DTO adataival
 	 * 
 	 * @param dto
 	 */
-	public void update(BaseDto dto) {
+	public void updEntityWithDto(BaseDto dto) {
 		if (dto.getId() != null)
 			setId(dto.getId());
 		if (dto.getVersion() != null)
 			setVersion(dto.getVersion());
 	}
 
-	public void update(BaseEntity entity) {
+	/**
+	 * Entitás módosítása egy másik entitás adataival
+	 * 
+	 * @param entity
+	 */
+	public void updEntityWithEntity(BaseEntity entity) {
 		if (entity.getId() != null)
 			setId(entity.getId());
 		if (entity.getVersion() != null)
@@ -144,15 +149,18 @@ public abstract class BaseEntity {
 	}
 
 	/**
-	 * Az entitás saját adataival módosítja az átadott DTO-t
+	 * DTO módosítása zz entitás adataival
 	 * 
 	 * @param dto
 	 * @return
 	 */
-	public BaseDto updateDto(BaseDto dto) {
-		dto.setId(getId());
-		dto.setVersion(getVersion());
-		dto.setWebSafeKey(getWebSafeKey());
+	public BaseDto updDtoWithEntity(BaseDto dto) {
+		if (getId() != null)
+			dto.setId(getId());
+		if (getVersion() != null)
+			dto.setVersion(getVersion());
+		if (getWebSafeKey() != null)
+			dto.setWebSafeKey(getWebSafeKey());
 		return dto;
 	}
 }

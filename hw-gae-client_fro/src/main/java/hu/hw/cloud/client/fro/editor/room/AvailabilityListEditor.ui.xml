@@ -1,0 +1,13 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:m="urn:import:gwt.material.design.client.ui">
+
+	<g:HTMLPanel>
+		<g:FlowPanel ui:field="listPanel" />
+		<m:MaterialButton ui:field="addButton" text="Hozzáadás" waves="DEFAULT"
+			backgroundColor="WHITE" textColor="BLACK" />
+		<m:MaterialButton ui:field="deleteButton" text="Törlés" waves="DEFAULT"
+			backgroundColor="WHITE" textColor="BLACK" />
+	</g:HTMLPanel>
+</ui:UiBinder> 

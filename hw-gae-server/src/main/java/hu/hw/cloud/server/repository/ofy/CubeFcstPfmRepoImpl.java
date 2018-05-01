@@ -73,4 +73,10 @@ public class CubeFcstPfmRepoImpl extends CrudRepositoryImpl<CubeFcstPfm> impleme
 		return getChildrenByFilters(hotel, filters);
 	}
 
+	@Override
+	protected Object getParentKey(String parentWebSafeKey) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

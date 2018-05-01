@@ -10,10 +10,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.googlecode.objectify.Work;
 
@@ -21,6 +19,8 @@ import hu.hw.cloud.server.entity.hotel.Room;
 import hu.hw.cloud.server.entity.hotel.RoomAvailability;
 import hu.hw.cloud.server.entity.reservation.Reservation;
 import hu.hw.cloud.server.entity.reservation.RoomStay;
+import hu.hw.cloud.server.repository.AccountRepository;
+import hu.hw.cloud.server.repository.HotelRepository;
 import hu.hw.cloud.server.repository.ReservationRepository;
 import hu.hw.cloud.server.repository.RoomRepository;
 import hu.hw.cloud.server.service.RoomService;
@@ -32,26 +32,16 @@ import hu.hw.cloud.shared.dto.hotel.RoomDto;
  * @author CR
  *
  */
-//@Service
-public class RoomServiceImpl extends CrudServiceImpl<Room, RoomDto, RoomRepository> implements RoomService {
-//	private static final Logger LOGGER = LoggerFactory.getLogger(RoomServiceImpl.class.getName());
-
-	private RoomRepository roomRepository;
+public class RoomServiceImpl extends HotelChildServiceImpl<Room, RoomDto, RoomRepository> implements RoomService {
+	private static final Logger logger = LoggerFactory.getLogger(RoomServiceImpl.class.getName());
 
 	private ReservationRepository reservationRepository;
 
-	//@Autowired
-	public RoomServiceImpl(RoomRepository repository, ReservationRepository reservationRepository) {
-		super(repository);
-//		LOGGER.info("RoomServiceImpl");
-		this.roomRepository = repository;
+	public RoomServiceImpl(RoomRepository repository, AccountRepository accountRepository,
+			HotelRepository hotelRepository, ReservationRepository reservationRepository) {
+		super(repository, accountRepository, hotelRepository);
+		logger.info("RoomServiceImpl");
 		this.reservationRepository = reservationRepository;
-	}
-
-	@Override
-	public List<Room> getAll(String accountWebSafeKey) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -62,7 +52,7 @@ public class RoomServiceImpl extends CrudServiceImpl<Room, RoomDto, RoomReposito
 	@Override
 	protected Room updateEntity(Room entity, RoomDto dto) {
 		entity.update(dto);
-		return null;
+		return entity;
 	}
 
 	@Override
@@ -72,14 +62,8 @@ public class RoomServiceImpl extends CrudServiceImpl<Room, RoomDto, RoomReposito
 	}
 
 	@Override
-	protected List<Object> getParents(Long accountId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<Room> getAllRoomsByHotel(String hotelKey) {
-		List<Room> allRooms = roomRepository.getAllByHotel(hotelKey);
+		List<Room> allRooms = repository.getAllByHotel(hotelKey);
 		return allRooms;
 	}
 
@@ -165,12 +149,12 @@ public class RoomServiceImpl extends CrudServiceImpl<Room, RoomDto, RoomReposito
 			// Objectify tranzakció indul
 			Room th = ofy().transact(new Work<Room>() {
 				public Room run() {
-					Room entity = roomRepository.findByWebSafeKey(roomKey);
+					Room entity = repository.findByWebSafeKey(roomKey);
 					try {
 						// LOGGER.info("changeStatus()->roomStatus=" +
 						// roomStatus);
 						entity.setRoomStatus(roomStatus);
-						entity = roomRepository.save(entity);
+						entity = repository.save(entity);
 						return entity;
 					} catch (Throwable e) {
 						e.printStackTrace(System.out);
@@ -251,5 +235,11 @@ public class RoomServiceImpl extends CrudServiceImpl<Room, RoomDto, RoomReposito
 			}
 		}
 		return rooms;
+	}
+
+	@Override
+	protected List<Object> getParents(String accountWebSafeKey) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

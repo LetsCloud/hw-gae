@@ -70,7 +70,7 @@ public class ChatServiceImpl extends CrudServiceImpl<Chat, ChatDto, ChatReposito
 
 	@Override
 	protected Chat updateEntity(Chat entity, ChatDto dto) {
-		entity.update(dto);
+		entity.updEntityWithDto(dto);
 		entity.setUpdated(new Date());
 		return entity;
 	}
@@ -85,6 +85,13 @@ public class ChatServiceImpl extends CrudServiceImpl<Chat, ChatDto, ChatReposito
 	protected List<Object> getParents(Long accountId) {
 		List<Object> parents = new ArrayList<Object>();
 		parents.add(accountRepository.findById(accountId));
+		return parents;
+	}
+
+	@Override
+	protected List<Object> getParents(String accountWebSafeKey) {
+		List<Object> parents = new ArrayList<Object>();
+		parents.add(accountRepository.findByWebSafeKey(accountWebSafeKey));
 		return parents;
 	}
 

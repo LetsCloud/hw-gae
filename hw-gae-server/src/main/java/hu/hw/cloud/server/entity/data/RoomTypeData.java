@@ -6,7 +6,7 @@ package hu.hw.cloud.server.entity.data;
 import hu.hw.cloud.server.entity.hotel.RoomType;
 import hu.hw.cloud.server.repository.RoomTypeRepository;
 import hu.hw.cloud.server.service.DataBuilderService;
-import hu.hw.cloud.shared.cnst.SalesType;
+import hu.hw.cloud.shared.cnst.InventoryType;
 
 /**
  * @author CR
@@ -47,7 +47,7 @@ public class RoomTypeData extends BaseData<RoomType> {
 		roomTypeSingleA.setCode("SGL");
 		roomTypeSingleA.setName("Single room");
 		roomTypeSingleA.setDescription("A room which has single bed facility.");
-		roomTypeSingleA.setSalesType(SalesType.NORMAL);
+		roomTypeSingleA.setInventoryType(InventoryType.PHYS);
 		roomTypeSingleA.setActive(true);
 
 		roomTypeSingleA = save(roomTypeSingleA);
@@ -63,7 +63,7 @@ public class RoomTypeData extends BaseData<RoomType> {
 		roomTypeDoubleA.setCode("DBL");
 		roomTypeDoubleA.setName("Double room");
 		roomTypeDoubleA.setDescription("A room which has double bed facility.");
-		roomTypeDoubleA.setSalesType(SalesType.NORMAL);
+		roomTypeDoubleA.setInventoryType(InventoryType.PHYS);
 		roomTypeDoubleA.setActive(true);
 		roomTypeDoubleA = save(roomTypeDoubleA);
 		return roomTypeDoubleA;
@@ -78,7 +78,7 @@ public class RoomTypeData extends BaseData<RoomType> {
 		roomTypeDouble2xA.setCode("DBL2x");
 		roomTypeDouble2xA.setName("Double double room");
 		roomTypeDouble2xA.setDescription("Double double room");
-		roomTypeDouble2xA.setSalesType(SalesType.NORMAL);
+		roomTypeDouble2xA.setInventoryType(InventoryType.PHYS);
 		roomTypeDouble2xA.setActive(true);
 		roomTypeDouble2xA = save(roomTypeDouble2xA);
 		return roomTypeDouble2xA;
@@ -93,7 +93,7 @@ public class RoomTypeData extends BaseData<RoomType> {
 		roomTypeTwinA.setCode("TWN");
 		roomTypeTwinA.setName("Twin room");
 		roomTypeTwinA.setDescription("A room which has two single bed separated by a center table.");
-		roomTypeTwinA.setSalesType(SalesType.NORMAL);
+		roomTypeTwinA.setInventoryType(InventoryType.PHYS);
 		roomTypeTwinA.setActive(true);
 		roomTypeTwinA = save(roomTypeTwinA);
 		return roomTypeTwinA;
@@ -108,7 +108,7 @@ public class RoomTypeData extends BaseData<RoomType> {
 		roomTypeInterconnectingA.setCode("ICO");
 		roomTypeInterconnectingA.setName("Interconnecting rooms");
 		roomTypeInterconnectingA.setDescription("Two rooms which shares a common door, mostly used by families.");
-		roomTypeInterconnectingA.setSalesType(SalesType.VIRTUAL);
+		roomTypeInterconnectingA.setInventoryType(InventoryType.COMP);
 		roomTypeInterconnectingA.setActive(true);
 		roomTypeInterconnectingA = save(roomTypeInterconnectingA);
 		return roomTypeInterconnectingA;
@@ -123,7 +123,7 @@ public class RoomTypeData extends BaseData<RoomType> {
 		roomTypeSuiteA.setCode("SUITE");
 		roomTypeSuiteA.setName("Suite room");
 		roomTypeSuiteA.setDescription("A room comprises of two or more bedroom, a living room and a dining area.");
-		roomTypeSuiteA.setSalesType(SalesType.NORMAL);
+		roomTypeSuiteA.setInventoryType(InventoryType.PHYS);
 		roomTypeSuiteA.setActive(true);
 		roomTypeSuiteA = save(roomTypeSuiteA);
 		return roomTypeSuiteA;
@@ -138,7 +138,7 @@ public class RoomTypeData extends BaseData<RoomType> {
 		roomTypeKingA.setCode("KING");
 		roomTypeKingA.setName("King bedroom");
 		roomTypeKingA.setDescription("A room with a king sized bed.");
-		roomTypeKingA.setSalesType(SalesType.NORMAL);
+		roomTypeKingA.setInventoryType(InventoryType.PHYS);
 		roomTypeKingA.setActive(true);
 		roomTypeKingA = save(roomTypeKingA);
 		return roomTypeKingA;
@@ -153,7 +153,7 @@ public class RoomTypeData extends BaseData<RoomType> {
 		roomTypeQueenA.setCode("QUEEN");
 		roomTypeQueenA.setName("Queen bedroom");
 		roomTypeQueenA.setDescription("A room with a queen sized bed.");
-		roomTypeQueenA.setSalesType(SalesType.NORMAL);
+		roomTypeQueenA.setInventoryType(InventoryType.PHYS);
 		roomTypeQueenA.setActive(true);
 		roomTypeQueenA = save(roomTypeQueenA);
 		return roomTypeQueenA;

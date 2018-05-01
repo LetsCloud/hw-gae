@@ -5,7 +5,9 @@ package hu.hw.cloud.server.entity.common;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
@@ -20,7 +22,6 @@ import hu.hw.cloud.shared.dto.hotel.HotelDto;
 import hu.hw.cloud.server.entity.VerificationToken;
 import hu.hw.cloud.server.entity.chat.FcmToken;
 import hu.hw.cloud.server.entity.hotel.Hotel;
-import hu.hw.cloud.server.security.RegistrationListener;
 
 /**
  * @author CR
@@ -28,7 +29,7 @@ import hu.hw.cloud.server.security.RegistrationListener;
  */
 @Entity
 public class AppUser extends AccountChild {
-	private static final Logger LOGGER = Logger.getLogger(RegistrationListener.class.getName());
+//	private static final Logger logger = LoggerFactory.getLogger(AppUser.class.getName());
 
 	/**
 	 * 
@@ -45,6 +46,11 @@ public class AppUser extends AccountChild {
 	 * Név
 	 */
 	private String name;
+
+	/**
+	 * Név
+	 */
+	private String title;
 
 	/**
 	 * Fotó
@@ -96,7 +102,7 @@ public class AppUser extends AccountChild {
 	/**
 	 * Hotelek
 	 */
-	private List<Ref<Hotel>> accessibleHotels = new ArrayList<Ref<Hotel>>();
+	private List<Ref<Hotel>> availableHotels = new ArrayList<Ref<Hotel>>();
 
 	/**
 	 * Firebase Messaging Token
@@ -112,7 +118,7 @@ public class AppUser extends AccountChild {
 	 * Paraméter nélküli kontruktor Objectify-hoz
 	 */
 	public AppUser() {
-		LOGGER.info("AppUser()");
+//		logger.info("AppUser()");
 		this.enabled = false;
 		this.admin = false;
 	}
@@ -124,7 +130,7 @@ public class AppUser extends AccountChild {
 	 */
 	public AppUser(AppUserDto dto) {
 		this();
-		update(dto);
+		updEntityWithDto(dto);
 	}
 
 	/**
@@ -153,6 +159,14 @@ public class AppUser extends AccountChild {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getPicture() {
@@ -227,20 +241,20 @@ public class AppUser extends AccountChild {
 		this.roles = list;
 	}
 
-	public List<Hotel> getAccessibleHotels() {
+	public List<Hotel> getAvailableHotels() {
 		List<Hotel> list = new ArrayList<Hotel>();
-		for (Ref<Hotel> ref : accessibleHotels) {
+		for (Ref<Hotel> ref : availableHotels) {
 			list.add(ref.get());
 		}
 		return list;
 	}
 
-	public void setAccessibleHotels(List<Hotel> accessibleHotels) {
+	public void setAvailableHotels(List<Hotel> accessibleHotels) {
 		ArrayList<Ref<Hotel>> list = new ArrayList<Ref<Hotel>>();
 		for (Hotel hotel : accessibleHotels) {
 			list.add(Ref.create(hotel));
 		}
-		this.accessibleHotels = list;
+		this.availableHotels = list;
 	}
 
 	public Hotel getDefaultHotel() {
@@ -249,7 +263,6 @@ public class AppUser extends AccountChild {
 		} catch (NullPointerException e) {
 			return null;
 		}
-
 	}
 
 	public void setDefaultHotel(Hotel defaultHotel) {
@@ -281,20 +294,23 @@ public class AppUser extends AccountChild {
 	}
 
 	/**
-	 * Entitás módosítása DTO alapján
+	 * Entitás módosítása DTO adataival
 	 * 
 	 * @param dto
 	 */
-	public void update(AppUserDto dto) {
+	public void updEntityWithDto(AppUserDto dto) {
 		clearUniqueIndexes();
 
-		super.update(dto);
+		super.updEntityWithDto(dto);
 
 		if (dto.getCode() != null)
 			setCode(dto.getCode());
 
 		if (dto.getName() != null)
 			setName(dto.getName());
+
+		if (dto.getTitle() != null)
+			setTitle(dto.getTitle());
 
 		if (dto.getPicture() != null)
 			setPicture(dto.getPicture());
@@ -303,22 +319,18 @@ public class AppUser extends AccountChild {
 			setAdmin(dto.getAdmin());
 
 		if (dto.getEmailAddress() != null) {
-			if (!dto.getEmailAddress().equals(getEmailAddress())) {
-				LOGGER.info("PROPERTY_EMAILADDRESS"+dto.getEmailAddress()+"/"+getEmailAddress());
-				setEmailAddress(dto.getEmailAddress());
+			setEmailAddress(dto.getEmailAddress());
+			if (!dto.getEmailAddress().equals(getEmailAddress()))
 				addUniqueIndex(PROPERTY_EMAILADDRESS, dto.getEmailAddress());
-			}
 		}
 
 		if (dto.getEnabled() != null)
 			setEnabled(dto.getEnabled());
 
 		if (dto.getUsername() != null) {
-			if (!dto.getUsername().equals(getUsername())) {
-				LOGGER.info("PROPERTY_USERNAME->"+dto.getUsername()+"/"+getUsername());
-				setUsername(dto.getUsername());
+			setUsername(dto.getUsername());
+			if (!dto.getUsername().equals(getUsername()))
 				addUniqueIndex(PROPERTY_USERNAME, dto.getUsername());
-			}
 		}
 
 		if (dto.getPassword() != null)
@@ -327,8 +339,8 @@ public class AppUser extends AccountChild {
 		if (dto.getRoleDtos() != null)
 			setRoles(Role.createList(dto.getRoleDtos()));
 
-		if (dto.getAccessibleHotelDtos() != null)
-			setAccessibleHotels(Hotel.createList(dto.getAccessibleHotelDtos()));
+		if (dto.getAvailableHotelDtos() != null)
+			setAvailableHotels(Hotel.createList(dto.getAvailableHotelDtos()));
 
 		if (dto.getFcmTokenDtos() != null)
 			setFcmTokens(FcmToken.createList(dto.getFcmTokenDtos()));
@@ -348,24 +360,27 @@ public class AppUser extends AccountChild {
 	 */
 	public static AppUserDto createDto(AppUser entity) {
 		AppUserDto dto = new AppUserDto();
-		dto = entity.updateDto(dto);
+		dto = entity.updDtoWithEntity(dto);
 		return dto;
 	}
 
 	/**
-	 * DTO módosítása entitás attribútumokkal
+	 * DTO módosítása az entitás adataival
 	 * 
 	 * @param dto
 	 * @return
 	 */
-	public AppUserDto updateDto(AppUserDto dto) {
-		dto = (AppUserDto) super.updateDto(dto);
+	public AppUserDto updDtoWithEntity(AppUserDto dto) {
+		dto = (AppUserDto) super.updDtoWithEntity(dto);
 
 		if (this.getCode() != null)
 			dto.setCode(this.getCode());
 
 		if (this.getName() != null)
 			dto.setName(this.getName());
+
+		if (this.getTitle() != null)
+			dto.setTitle(this.getTitle());
 
 		if (this.getPicture() != null)
 			dto.setPicture(this.getPicture());
@@ -391,10 +406,10 @@ public class AppUser extends AccountChild {
 			dto.setRoleDtos(new ArrayList<RoleDto>());
 		}
 
-		if (this.getAccessibleHotels() != null) {
-			dto.setAccessibleHotelDtos(Hotel.createDtos(this.getAccessibleHotels()));
+		if (this.getAvailableHotels() != null) {
+			dto.setAvailableHotelDtos(Hotel.createDtos(this.getAvailableHotels()));
 		} else {
-			dto.setAccessibleHotelDtos(new ArrayList<HotelDto>());
+			dto.setAvailableHotelDtos(new ArrayList<HotelDto>());
 		}
 
 		if (this.getFcmTokens() != null) {

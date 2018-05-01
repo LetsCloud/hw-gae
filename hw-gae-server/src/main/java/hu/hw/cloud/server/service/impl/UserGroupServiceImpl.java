@@ -71,4 +71,10 @@ implements UserGroupService {
 		return parents;
 	}
 
+	@Override
+	protected List<Object> getParents(String accountWebSafeKey) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

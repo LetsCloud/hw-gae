@@ -26,6 +26,11 @@ public class AppUserDto extends AccountChildDto {
 	private String name;
 
 	/**
+	 * Beosztás
+	 */
+	private String title;
+
+	/**
 	 * Fotó
 	 */
 	private String picture;
@@ -68,7 +73,7 @@ public class AppUserDto extends AccountChildDto {
 	/**
 	 * 
 	 */
-	private List<HotelDto> accessibleHotelDtos = new ArrayList<HotelDto>();
+	private List<HotelDto> availableHotelDtos = new ArrayList<HotelDto>();
 
 	/**
 	 * 
@@ -90,7 +95,14 @@ public class AppUserDto extends AccountChildDto {
 		this.name = name;
 		this.emailAddress = emailAddress;
 		this.picture = picture;
+	}
 
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String getName() {
@@ -101,12 +113,12 @@ public class AppUserDto extends AccountChildDto {
 		this.name = name;
 	}
 
-	public String getCode() {
-		return code;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getUsername() {
@@ -165,12 +177,12 @@ public class AppUserDto extends AccountChildDto {
 		this.defaultHotelDto = defaultHotelDto;
 	}
 
-	public List<HotelDto> getAccessibleHotelDtos() {
-		return accessibleHotelDtos;
+	public List<HotelDto> getAvailableHotelDtos() {
+		return availableHotelDtos;
 	}
 
-	public void setAccessibleHotelDtos(List<HotelDto> accessibleHotelDtos) {
-		this.accessibleHotelDtos = accessibleHotelDtos;
+	public void setAvailableHotelDtos(List<HotelDto> availableHotelDtos) {
+		this.availableHotelDtos = availableHotelDtos;
 	}
 
 	public String getPicture() {
@@ -201,7 +213,7 @@ public class AppUserDto extends AccountChildDto {
 	public String toString() {
 		String ret = "AppUserDto:{" + super.toString() + ", name=" + name + ", username=" + username + ", password="
 				+ password + ", emailAddress=" + emailAddress + ", picture=" + picture + ", enabled=" + enabled
-				+ ", admin=" + admin + ", roleDtos=" + roleDtos + "}";
+				+ ", admin=" + admin + ", roleDtos=" + roleDtos + ", userGroupDtos=" + userGroupDtos +"}";
 		return ret;
 	}
 }

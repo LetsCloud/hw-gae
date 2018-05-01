@@ -2,9 +2,11 @@ package hu.hw.cloud.shared.api;
 
 public class ApiPaths {
     public static final String PATH_WEBSAFEKEY = "/{" + ApiParameters.WEBSAFEKEY + "}";
+    public static final String PATH_HOTEL_KEY = "/{" + ApiParameters.HOTEL_KEY + "}";
 	
 	public class SpaV1 {
 		public static final String ROOT = "/spa/v1";
+		public static final String FILTER = "/filter";
 
 		public static final String LOGIN = "/login";
 		public static final String CURRENTUSER = "/currentuser";

@@ -97,4 +97,10 @@ public class ReservationRepositoryImpl extends CrudRepositoryImpl<Reservation> i
 		List<Reservation> result = getChildrenByFilters(hotelKey, filters);
 		return result;
 	}
+
+	@Override
+	protected Object getParentKey(String parentWebSafeKey) {
+		Key<Hotel> key = Key.create(parentWebSafeKey);
+		return key;
+	}
 }

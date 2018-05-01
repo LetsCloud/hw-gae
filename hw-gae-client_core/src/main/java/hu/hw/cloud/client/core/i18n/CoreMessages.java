@@ -152,6 +152,7 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("Roles")
 	String mainMenuItemRoles();
 
+	
 	/*
 	 * SIDE PROFILE
 	 */
@@ -170,6 +171,21 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("Log Out")
 	String userMenuItemLogout();
 
+	
+	/*
+	 * BREADCRUMBS
+	 */
+	
+	@DefaultMessage("Home")
+	String breadcrumbsHome();
+	
+	@DefaultMessage("Users")
+	String breadcrumbsUsersTable();
+	
+	@DefaultMessage("Editor")
+	String breadcrumbsUserEditor();
+
+	
 	/*
 	 * DASHBOARD
 	 */
@@ -189,8 +205,58 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("Email")
 	String usersTableEmail();
 
+	
 	/*
-	 * USERS TABLE
+	 * USER EDITOR
+	 */
+
+	@DefaultMessage("Create User Profile")
+	String userEditorCreateTitle();
+
+	@DefaultMessage("Modify User Profile")
+	String userEditorModifyTitle();
+
+	@DefaultMessage("Name")
+	String userEditorName();
+
+	@DefaultMessage("Title")
+	String userEditorTitle();
+
+	@DefaultMessage("Email")
+	String userEditorEmail();
+
+	@DefaultMessage("Code")
+	String userEditorCode();
+
+	@DefaultMessage("Username")
+	String userEditorUsername();
+
+	@DefaultMessage("Enabled")
+	String userEditorEnabled();
+	
+	@DefaultMessage("Admin user")
+	String userEditorIsAdmin();
+	
+	@DefaultMessage("Permitted hotels")
+	String userEditorAvailableHotels();
+	
+	@DefaultMessage("Chhoose a hotel")
+	String userEditorChooseHotel();
+	
+	@DefaultMessage("Deafult hotel")
+	String userEditorDefaultHotel();
+	
+	@DefaultMessage("Chat groups")
+	String userEditorChatGroups();
+	
+	@DefaultMessage("Choose a group")
+	String userEditorChooseGroup();
+	
+	@DefaultMessage("Password")
+	String userEditorPassword();
+
+	/*
+	 * USER GROUPS TABLE
 	 */
 
 	@DefaultMessage("User Groups")
@@ -199,31 +265,7 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("Name")
 	String userGroupTableName();
 
-	/*
-	 * USER EDITOR
-	 */
-
-	@DefaultMessage("Create User")
-	String userEditorCreateTitle();
-
-	@DefaultMessage("Modify User")
-	String userEditorModifyTitle();
-
-	@DefaultMessage("Code")
-	String userEditorCode();
-
-	@DefaultMessage("Name")
-	String userEditorName();
-
-	@DefaultMessage("Email")
-	String userEditorEmail();
-
-	@DefaultMessage("Username")
-	String userEditorUsername();
-
-	@DefaultMessage("Password")
-	String userEditorPassword();
-
+	
 	/*
 	 * USER_GROUP EDITOR
 	 */
@@ -236,6 +278,151 @@ public interface CoreMessages extends Messages {
 
 	@DefaultMessage("Name")
 	String userGroupEditorName();
+
+	
+	/*
+	 * HOTEL TABLE
+	 */
+	
+	@DefaultMessage("Hotels Data")
+	String hotelsTableTitle();
+	
+	@DefaultMessage("Code")
+	String hotelsTableCode();
+
+	@DefaultMessage("Name")
+	String hotelsTableName();
+
+	
+	/*
+	 * HOTEL EDITOR
+	 */
+
+	@DefaultMessage("Create a Hotel")
+	String hotelEditorCreateTitle();
+
+	@DefaultMessage("Modify Hotel Data")
+	String hotelEditorModifyTitle();
+
+	@DefaultMessage("Code")
+	String hotelEditorCode();
+
+	@DefaultMessage("Name")
+	String hotelEditorName();
+
+	
+	/*
+	 * ROOMTYPE TABLE
+	 */
+	
+	@DefaultMessage("Room Type Data")
+	String roomTypesTableTitle();
+	
+	@DefaultMessage("Choose a hotel")
+	String roomTypesTableHotelsPlaceholder();
+	
+	@DefaultMessage("Selected hotel")
+	String roomTypesTableHotelsLabel();
+	
+	@DefaultMessage("Only active types")
+	String roomTypesTableOnlyActive();
+	
+	@DefaultMessage("Code")
+	String roomTypesTableCode();
+
+	@DefaultMessage("Name")
+	String roomTypesTableName();
+
+	@DefaultMessage("InventoryType")
+	String roomTypesTableInventoryType();
+
+	@DefaultMessage("Number Of Rooms")
+	String roomTypesTableNumberOfRooms();
+
+	@DefaultMessage("Akctive")
+	String roomTypesTableActive();
+
+	
+	/*
+	 * ROOMTYPE FILTER
+	 */
+	
+	@DefaultMessage("Choose inventory type")
+	String roomTypeFilterInventoryTypePlaceholder();
+	
+	@DefaultMessage("Selected inventory type")
+	String roomTypeFilterInventoryTypeLabel();
+
+	
+	/*
+	 * ROOMTYPE EDITOR
+	 */
+
+	@DefaultMessage("Create room type")
+	String roomTypeEditorCreateTitle();
+
+	@DefaultMessage("Modify room type")
+	String roomTypeEditorModifyTitle();
+
+	@DefaultMessage("Active")
+	String roomTypeEditorActive();
+
+	@DefaultMessage("Code")
+	String roomTypeEditorCode();
+
+	@DefaultMessage("Name")
+	String roomTypeEditorName();
+
+	@DefaultMessage("Description")
+	String roomTypeEditorDescription();
+
+	@DefaultMessage("Channel manager/Booking engine")
+	String roomTypeEditorChmGroup();
+
+	@DefaultMessage("Inventory Type")
+	String roomTypeEditorInventoryType();
+
+	@DefaultMessage("Choose inventory type")
+	String roomTypeEditorPlaceholderInventoryType();
+
+	@DefaultMessage("Housekeeping")
+	String roomTypeEditorHkGroup();
+
+	@DefaultMessage("Number of beds")
+	String roomTypeEditorNumOfBeds();
+
+	@DefaultMessage("Number of extra beds")
+	String roomTypeEditorNumOfXtrBeds();
+
+	@DefaultMessage("Cleaning factor")
+	String roomTypeEditorCleaningFactor();
+	
+	/*
+	 * ROOMS TABLE
+	 */
+	
+	@DefaultMessage("Rooms")
+	String roomsTableTitle();
+	
+	@DefaultMessage("Code")
+	String roomsTableCode();
+
+	@DefaultMessage("Type")
+	String roomsTableType();
+
+	
+	/*
+	 * ROOM EDITOR
+	 */
+
+	@DefaultMessage("Create room")
+	String roomEditorCreateTitle();
+
+	@DefaultMessage("Modify room")
+	String roomEditorModifyTitle();
+
+	@DefaultMessage("Code")
+	String roomEditorCode();
 
 	
 	/*

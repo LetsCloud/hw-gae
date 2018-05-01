@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import com.googlecode.objectify.Key;
 
+import hu.hw.cloud.server.entity.common.Account;
 import hu.hw.cloud.server.entity.common.Role;
 import hu.hw.cloud.server.repository.RoleRepository;
 
@@ -34,6 +35,12 @@ public class RoleRepositoryImpl extends CrudRepositoryImpl<Role> implements Role
 		LOGGER.info("getAccountId->id=" + webSafeString);
 		Key<Role> key = getKey(webSafeString);
 		return key.getParent().getString();
+	}
+
+	@Override
+	protected Object getParentKey(String parentWebSafeKey) {
+		Key<Account> key = Key.create(parentWebSafeKey);
+		return key;
 	}
 
 }

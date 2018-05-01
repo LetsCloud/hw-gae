@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -26,6 +27,7 @@ import gwt.material.design.addins.client.sideprofile.MaterialSideProfile;
 import gwt.material.design.client.constants.IconPosition;
 import gwt.material.design.client.constants.IconType;
 import gwt.material.design.client.ui.MaterialCollapsible;
+import gwt.material.design.client.ui.MaterialDropDown;
 import gwt.material.design.client.ui.MaterialHeader;
 import gwt.material.design.client.ui.MaterialImage;
 import gwt.material.design.client.ui.MaterialLink;
@@ -37,6 +39,7 @@ import hu.hw.cloud.client.core.resources.CoreResources;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.cnst.SubSystem;
 import hu.hw.cloud.shared.dto.core.MenuItemDto;
+import hu.hw.cloud.shared.dto.hotel.HotelDto;
 
 /**
  * @author CR
@@ -70,6 +73,9 @@ public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements Menu
 	MaterialLink accountLink, hotelLink, userLink, logoutLink;
 
 	@UiField
+	MaterialDropDown hotelDropDown;
+
+	@UiField
 	MaterialImage userImage;
 
 	private final CoreResources res;
@@ -83,6 +89,10 @@ public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements Menu
 		initWidget(uiBinder.createAndBindUi(this));
 
 		this.res = res;
+
+		accountLink.setFontSize(14, Unit.PX);
+		hotelLink.setFontSize(14, Unit.PX);
+		userLink.setFontSize(14, Unit.PX);
 
 		sideNav.addOpenedHandler(event -> getUiHandlers().setContentPush(MenuState.OPEN));
 		sideNav.addClosedHandler(event -> getUiHandlers().setContentPush(MenuState.CLOSE));
@@ -198,22 +208,37 @@ public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements Menu
 		switch (appCode) {
 		case SubSystem.INF:
 			sideProfile.setResource(res.orangeWallpaperImg());
-			brandPanel.add(new HTML("HostWare <span>Cloud</span> " + appCode));
+			brandPanel.add(new HTML("HostWare <span>Cloud</span> " + appCode + "<span>v8</span>"));
 			break;
 		case SubSystem.KIP:
 			sideProfile.setResource(res.blueWallpaperImg());
-			brandPanel.add(new HTML("HostWare <span>Cloud</span> " + appCode));
+			brandPanel.add(new HTML("HostWare <span>Cloud</span> " + appCode + "<span>v8</span>"));
 			break;
 		case SubSystem.FRO:
 			sideProfile.setResource(res.redWallpaperImg());
-			brandPanel.add(new HTML("HostWare <span>Cloud</span> " + appCode));
+			brandPanel.add(new HTML("HostWare <span>Cloud</span> " + appCode + "<span>v8</span>"));
 			break;
 		}
-
 	}
 
 	@Override
 	public void setUserImageUrl(String url) {
 		userImage.setUrl(url);
+	}
+
+	@Override
+	public void setPermittedHotels(List<HotelDto> hotels) {
+		hotelDropDown.clear();
+		for (HotelDto hotel : hotels) {
+			hotelDropDown.add(createHotelLink(hotel));
+		}
+	}
+
+	private MaterialLink createHotelLink(HotelDto dto) {
+		MaterialLink link = new MaterialLink(dto.getName());
+		link.addClickHandler(e -> {
+			getUiHandlers().setCurrentHotel(dto);
+		});
+		return link;
 	}
 }

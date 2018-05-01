@@ -10,5 +10,6 @@ import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
  * @author CR
  *
  */
-public interface RoomTypeService extends CrudService<RoomType, RoomTypeDto> {
+public interface RoomTypeService extends HotelChildService<RoomType, RoomTypeDto> {
+
 }

@@ -67,7 +67,7 @@ public class UserGroup extends AccountChild {
 	}
 
 	public UserGroupDto updateDto(UserGroupDto dto) {
-		dto = (UserGroupDto) super.updateDto(dto);
+		dto = (UserGroupDto) super.updDtoWithEntity(dto);
 
 		if (this.getName() != null)
 			dto.setName(this.getName());
@@ -87,7 +87,7 @@ public class UserGroup extends AccountChild {
 	 * @param dto
 	 */
 	public void update(UserGroupDto dto) {
-		super.update(dto);
+		super.updEntityWithDto(dto);
 
 		clearUniqueIndexes();
 

@@ -32,4 +32,10 @@ public class TestBookingRepositoryImpl extends CrudRepositoryImpl<TestBooking> i
 		return key.getParent().getParent().getString();
 	}
 
+	@Override
+	protected Object getParentKey(String parentWebSafeKey) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -63,4 +63,10 @@ public class AppUserRepositoryImpl extends CrudRepositoryImpl<AppUser> implement
 	public AppUser findByToken(String token) {
 		return getFirstByProperty("verificationTokens.token", token);
 	}
+
+	@Override
+	protected Object getParentKey(String parentWebSafeKey) {
+		Key<Account> key = Key.create(parentWebSafeKey);
+		return key;
+	}
 }

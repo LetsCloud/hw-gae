@@ -7,6 +7,7 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,11 +26,12 @@ import hu.hw.cloud.shared.exception.EntityVersionConflictException;
  */
 public abstract class CrudServiceImpl<T extends BaseEntity, D extends BaseDto, R extends CrudRepository<T>>
 		implements CrudService<T, D> {
-	private static final Logger LOGGER = LoggerFactory.getLogger(CrudServiceImpl.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(CrudServiceImpl.class.getName());
 
-	private R repository;
+	protected R repository;
 
 	public CrudServiceImpl(R repository) {
+		logger.info("CrudServiceImpl");
 		this.repository = repository;
 	}
 
@@ -41,16 +43,16 @@ public abstract class CrudServiceImpl<T extends BaseEntity, D extends BaseDto, R
 
 	protected abstract List<Object> getParents(Long accountId);
 
+	protected abstract List<Object> getParents(String accountWebSafeKey);
+
 	@Override
 	public T create(final D dto) throws Throwable {
-		LOGGER.info("create");
 		// A tranzakció végrehajtása folyamán jelentkező kivétel elfogása
 		// céljából...
 		try {
 			// Objectify tranzakció indul
 			T th = ofy().transact(new Work<T>() {
 				public T run() {
-					LOGGER.info("create->run");
 					// A DTO-ból létrehozzuk a Hotel entitást
 					T entity = createEntity(dto);
 					try {
@@ -78,15 +80,11 @@ public abstract class CrudServiceImpl<T extends BaseEntity, D extends BaseDto, R
 
 	@Override
 	public T update(final T entity) throws Throwable {
-		LOGGER.info("update-entity");
-
 		try {
 			T th = ofy().transact(new Work<T>() {
 				public T run() {
 					try {
-						LOGGER.info("update->before save");
 						T entity2 = repository.save(entity);
-						LOGGER.info("update->after save");
 						return entity2;
 					} catch (Throwable e) {
 						e.printStackTrace(System.out);
@@ -102,20 +100,17 @@ public abstract class CrudServiceImpl<T extends BaseEntity, D extends BaseDto, R
 
 	@Override
 	public T update(final D dto) throws Throwable {
-		LOGGER.info("update");
+		logger.info("update");
 
 		try {
 			T th = ofy().transact(new Work<T>() {
 				public T run() {
-					LOGGER.info("update->dto.getWebSafeKey()=" + dto.getWebSafeKey());
 					T entity = repository.findByWebSafeKey(dto.getWebSafeKey());
 					try {
 						if (entity.getVersion() > dto.getVersion())
 							throw new EntityVersionConflictException();
 						entity = updateEntity(entity, dto);
-						LOGGER.info("update->before save");
 						entity = repository.save(entity);
-						LOGGER.info("update->after save");
 						return entity;
 					} catch (Throwable e) {
 						e.printStackTrace(System.out);
@@ -137,20 +132,40 @@ public abstract class CrudServiceImpl<T extends BaseEntity, D extends BaseDto, R
 
 	@Override
 	public List<T> getAll(Long accountId) {
-		List<T> entities = new ArrayList<T>();
 		List<Object> parents = getParents(accountId);
-		for (Object parent : parents) {
+		return getAllChildren(parents);
+	}
+
+	@Override
+	public List<T> getAll(String accountWebSafeKey) {
+		List<Object> parents = getParents(accountWebSafeKey);
+		return getAllChildren(parents);
+	}
+
+	private List<T> getAllChildren(List<Object> parents) {
+		List<T> entities = new ArrayList<T>();
+		for (Object parent : parents)
 			entities.addAll(repository.getAll(parent));
-		}
 		return entities;
 	}
 
 	@Override
 	public void deleteAll(Long accountId) {
 		List<Object> parents = getParents(accountId);
-		for (Object parent : parents) {
+		for (Object parent : parents)
 			repository.deleteAll(parent);
-		}
+	}
+
+	@Override
+	public List<T> getChildren(String parentWebSafeKey) {
+		return repository.getChildren(parentWebSafeKey);
+	}
+
+	@Override
+	public List<T> getChildrenByFilters(String parentWebSafeKey, Map<String, Object> filters) {
+		if ((filters == null) || (filters.isEmpty()))
+			return repository.getChildren(parentWebSafeKey);
+		return repository.getChildrenByFilters(parentWebSafeKey, filters);
 	}
 
 }

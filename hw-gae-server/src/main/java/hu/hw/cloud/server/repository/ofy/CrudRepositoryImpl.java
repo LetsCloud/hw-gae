@@ -4,6 +4,7 @@
 package hu.hw.cloud.server.repository.ofy;
 
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 //import org.slf4j.Logger;
@@ -22,27 +23,23 @@ import hu.hw.cloud.shared.exception.UniqueIndexConflictException;
  */
 public abstract class CrudRepositoryImpl<T extends BaseEntity> extends ObjectifyBaseRepository<T>
 		implements CrudRepository<T> {
-	private static final Logger LOGGER = Logger.getLogger(CrudRepositoryImpl.class.getName());
+	private static final Logger logger = Logger.getLogger(CrudRepositoryImpl.class.getName());
 
 	protected CrudRepositoryImpl(Class<T> clazz) {
 		super(clazz);
-//		LOGGER.info("CrudRepositoryImpl");
+		logger.info("CrudRepositoryImpl");
 	}
 
 	protected abstract Object getParent(T entity);
+
+	protected abstract Object getParentKey(String parentWebSafeKey);
 
 	public abstract String getAccountId(String webSafeString);
 
 	@Override
 	public T save(T entity) throws EntityValidationException, UniqueIndexConflictException {
-		LOGGER.info("save");
-		
 		entity.validate();
-		LOGGER.info("validate");
-		
 		checkUniqueIndexConflict(getParent(entity), entity);
-		LOGGER.info("checkUniqueIndexConflict");
-
 		return putAndLoad(entity);
 	}
 
@@ -77,6 +74,16 @@ public abstract class CrudRepositoryImpl<T extends BaseEntity> extends Objectify
 				deleteByKeys(keys);
 			}
 		}
+	}
+
+	@Override
+	public List<T> getChildren(String parentWebSafeKey) {
+		return getChildren(getParentKey(parentWebSafeKey));
+	}
+
+	@Override
+	public List<T> getChildrenByFilters(String parentWebSafeKey, Map<String, Object> filters) {
+		return getChildrenByFilters(getParentKey(parentWebSafeKey), filters);
 	}
 
 }

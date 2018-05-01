@@ -12,7 +12,7 @@ import hu.hw.cloud.server.entity.hotel.Room;
  * @author CR
  *
  */
-public interface RoomRepository extends CrudRepository<Room> {
+public interface RoomRepository extends HotelChildRepository<Room> {
 	
 	List<Room> getByDateAndHotel(String hotelWebSafeKey, Date date);	
 

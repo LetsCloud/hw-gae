@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
-        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
 
 	<!-- bean definitions here -->
 
@@ -124,10 +124,15 @@
 	</bean>
 	<bean id="roomService" class="hu.hw.cloud.server.service.impl.RoomServiceImpl">
 		<constructor-arg ref="roomRepository" />
+		<constructor-arg ref="accountRepository" />
+		<constructor-arg ref="hotelRepository" />
 		<constructor-arg ref="reservationRepository" />
 	</bean>
 	<bean id="roomTypeService" class="hu.hw.cloud.server.service.impl.RoomTypeServiceImpl">
 		<constructor-arg ref="roomTypeRepository" />
+		<constructor-arg ref="accountRepository" />
+		<constructor-arg ref="hotelRepository" />
+		<constructor-arg ref="roomRepository" />
 	</bean>
 
 	<!-- CONTROLLERS -->
