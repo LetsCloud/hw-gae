@@ -13,6 +13,12 @@ public interface CoreMessages extends Messages {
 	/*
 	 * Common
 	 */
+	@DefaultMessage("Yes")
+	String comYes();
+
+	@DefaultMessage("No")
+	String comNo();
+
 	@DefaultMessage("OK")
 	String comOk();
 
@@ -423,7 +429,27 @@ public interface CoreMessages extends Messages {
 
 	@DefaultMessage("Code")
 	String roomEditorCode();
+	
+	@DefaultMessage("Choose Room Type")
+	String roomEditorChooseRoomtype();
 
+	@DefaultMessage("Room Type")
+	String roomEditorRoomtype();
+	
+	@DefaultMessage("Description")
+	String roomEditorDescription();
+	
+	@DefaultMessage("Availability")
+	String roomEditorAvailability();
+	
+	@DefaultMessage("From Date")
+	String roomEditorAvailabilityFromDate();
+	
+	@DefaultMessage("Add")
+	String roomEditorAvailabilityAdd();
+	
+	@DefaultMessage("Remove")
+	String roomEditorAvailabilityRemove();
 	
 	/*
 	 * SEND MESSAGE

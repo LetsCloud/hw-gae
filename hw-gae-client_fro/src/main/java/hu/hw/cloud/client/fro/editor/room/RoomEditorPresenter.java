@@ -68,12 +68,12 @@ public class RoomEditorPresenter
 	private final RoomTypeDataSource roomTypeDataSource;
 	private final HotelDataSource hotelDataSource;
 	private final CurrentUser currentUser;
-	private final CoreMessages i18n;
+	private final CoreMessages i18nCore;
 
 	@Inject
 	RoomEditorPresenter(EventBus eventBus, PlaceManager placeManager, MyView view, MyProxy proxy,
 			ResourceDelegate<RoomResource> resourceDelegate, RoomTypeDataSource roomTypeDataSource,
-			HotelDataSource hotelDataSource, CurrentUser currentUser, CoreMessages i18n) {
+			HotelDataSource hotelDataSource, CurrentUser currentUser, CoreMessages i18nCore) {
 		super(eventBus, placeManager, view, proxy, AppPresenter.SLOT_MAIN);
 		logger.info("RoomTypeEditorPresenter()");
 
@@ -82,7 +82,7 @@ public class RoomEditorPresenter
 		this.roomTypeDataSource = roomTypeDataSource;
 		this.hotelDataSource = hotelDataSource;
 		this.currentUser = currentUser;
-		this.i18n = i18n;
+		this.i18nCore = i18nCore;
 
 		getView().setUiHandlers(this);
 	}
@@ -100,11 +100,11 @@ public class RoomEditorPresenter
 						.collect(Collectors.toList());
 				getView().setRoomTypeData(filteredResult);
 				if (isNew()) {
-					SetPageTitleEvent.fire(i18n.roomEditorCreateTitle(), "Hotel", MenuItemType.MENU_ITEM,
+					SetPageTitleEvent.fire(i18nCore.roomEditorCreateTitle(), "Hotel", MenuItemType.MENU_ITEM,
 							RoomEditorPresenter.this);
 					create();
 				} else {
-					SetPageTitleEvent.fire(i18n.roomEditorModifyTitle(), "Hotel", MenuItemType.MENU_ITEM,
+					SetPageTitleEvent.fire(i18nCore.roomEditorModifyTitle(), "Hotel", MenuItemType.MENU_ITEM,
 							RoomEditorPresenter.this);
 					edit(filters.get(AbstractTablePresenter.PARAM_DTO_KEY));
 				}
@@ -126,7 +126,6 @@ public class RoomEditorPresenter
 	}
 
 	private void edit(String webSafeKey) {
-		logger.info("RoomTypeEditorPresenter().edit()->webSafeKey=" + webSafeKey);
 		resourceDelegate.withCallback(new AsyncCallback<RoomDto>() {
 			@Override
 			public void onSuccess(RoomDto dto) {

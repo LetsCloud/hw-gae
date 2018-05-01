@@ -123,7 +123,7 @@ public class RoomEditorView extends ViewWithUiHandlers<RoomEditorUiHandlers>
 	public void setRoomTypeData(List<RoomTypeDto> roomTypeData) {
 		roomTypeCombo.clear();
 		for (RoomTypeDto roomTypeDto : roomTypeData) {
-			roomTypeCombo.addItem(roomTypeDto.getCode() + "-" + roomTypeDto.getName(), roomTypeDto);
+			roomTypeCombo.addItem(roomTypeDto.getCode() + " - " + roomTypeDto.getName(), roomTypeDto);
 		}
 	}
 }

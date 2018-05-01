@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.Widget;
 import gwt.material.design.client.ui.MaterialDatePicker;
 import gwt.material.design.client.ui.MaterialSwitch;
 
+import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.fro.editor.room.DeleteEvent.DeleteEventHandler;
 import hu.hw.cloud.shared.dto.hotel.RoomAvailabilityDto;
 
@@ -36,16 +37,18 @@ public class AvailabilityEditor extends Composite implements Editor<RoomAvailabi
 	/**
 	 */
 	@Inject
-	AvailabilityEditor(Binder uiBinder) {
+	AvailabilityEditor(Binder uiBinder, CoreMessages i18nCore) {
 		initWidget(uiBinder.createAndBindUi(this));
-		available.setOffLabel("Nem"); ;
-		available.setOnLabel("Igen"); ;
+		available.setOffLabel(i18nCore.comNo());
+		;
+		available.setOnLabel(i18nCore.comYes());
+		;
 	}
-
+/*
 	private void fireDeleteEvent() {
 		fireEvent(new DeleteEvent());
 	}
-
+*/
 	public final HandlerRegistration addDeleteHandler(DeleteEventHandler handler) {
 		return addHandler(handler, DeleteEvent.TYPE);
 	}

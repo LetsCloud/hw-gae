@@ -22,6 +22,23 @@
         </Column>
     </Columns>
     <Records>
+        <Comment>
+            <Value>COMMON</Value>
+        </Comment>
+        <Property>
+            <Name>comYes</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Yes</Value>
+            <Value disabled="false">Igen</Value>
+        </Property>
+        <Property>
+            <Name>comNo</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">No</Value>
+            <Value disabled="false">Nem</Value>
+        </Property>
         <Property>
             <Name>comOk</Name>
             <Disabled>false</Disabled>
@@ -582,6 +599,79 @@
             <MultiLine>false</MultiLine>
             <Value disabled="false">Room type</Value>
             <Value disabled="false">Szobatípus</Value>
+        </Property>
+        <Comment>
+            <Value>ROOM EDITOR</Value>
+        </Comment>
+        <Property>
+            <Name>roomEditorCreateTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Create Room</Value>
+            <Value disabled="false">Szoba létrehozás</Value>
+        </Property>
+        <Property>
+            <Name>roomEditorModifyTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Modify Room</Value>
+            <Value disabled="false">Szoba módosítás</Value>
+        </Property>
+        <Property>
+            <Name>roomEditorCode</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Code</Value>
+            <Value disabled="false">Kód</Value>
+        </Property>
+        <Property>
+            <Name>roomEditorRoomtype</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Room Type</Value>
+            <Value disabled="false">Szobatípus</Value>
+        </Property>
+        <Property>
+            <Name>roomEditorChooseRoomtype</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Choose Room Type</Value>
+            <Value disabled="false">Válassz szobatípust</Value>
+        </Property>
+        <Property>
+            <Name>roomEditorDescription</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Description</Value>
+            <Value disabled="false">Leírás</Value>
+        </Property>
+        <Property>
+            <Name>roomEditorAvailability</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Availability</Value>
+            <Value disabled="false">Rendelkezésre állás</Value>
+        </Property>
+        <Property>
+            <Name>roomEditorAvailabilityFromDate</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">From Date</Value>
+            <Value disabled="false">Dátumtól</Value>
+        </Property>
+        <Property>
+            <Name>roomEditorAvailabilityAdd</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Add</Value>
+            <Value disabled="false">Hozzáad</Value>
+        </Property>
+        <Property>
+            <Name>roomEditorAvailabilityRemove</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Remove</Value>
+            <Value disabled="false">Eltávolít</Value>
         </Property>
     </Records>
 </MultiProperties>

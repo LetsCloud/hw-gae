@@ -44,19 +44,19 @@
 				<m:MaterialTextBox ui:field="code" type="TEXT"
 					label="{i18nCore.roomTypeEditorCode}" />
 
-				<m:MaterialTextBox ui:field="description"
-					type="TEXT" label="{i18nCore.roomTypeEditorDescription}" />
-
 				<combobox:MaterialComboBox
 					ui:field="roomTypeCombo" multiple="false"
-					label="{i18nCore.userEditorDefaultHotel}"
-					placeholder="{i18nCore.userEditorChooseHotel}" marginTop="25" />
+					label="{i18nCore.roomEditorRoomtype}"
+					placeholder="{i18nCore.roomEditorChooseRoomtype}" marginTop="25" />
+
+				<m:MaterialTextBox ui:field="description"
+					type="TEXT" label="{i18nCore.roomEditorDescription}" />
 
 			</m:MaterialColumn>
 
 			<m:MaterialColumn grid="s12 m6">
 				<g:HTMLPanel ui:field="availabilityPanel" addStyleNames="{style.dataGroupBox}">
-					<g:Label text="Rendelkezésre állás"
+					<g:Label text="{i18nCore.roomEditorAvailability}"
 						addStyleNames="{style.dataGroupTitle}" />
 						<roomeditor:AvailabilityListEditor ui:field="roomAvailabilityDtos"/>
 				</g:HTMLPanel>
