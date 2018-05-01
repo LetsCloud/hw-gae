@@ -44,5 +44,4 @@ public class MessagingRegistration implements HandlerRegistration {
 		}
 		return this;
 	}
-
 }
