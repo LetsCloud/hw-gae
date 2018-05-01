@@ -88,7 +88,7 @@ public class RoomTablePresenter extends AbstractTablePresenter<RoomDto, RoomTabl
 		resourceDelegate.withCallback(new AbstractAsyncCallback<List<RoomDto>>() {
 			@Override
 			public void onSuccess(List<RoomDto> result) {
-//				filter.setFloors(getFloors(result));
+				filter.setFloors(getFloors(result));
 				getView().setData(result);
 			}
 		}).getByHotel(filter.getSelectedHotel().getWebSafeKey());

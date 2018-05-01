@@ -429,6 +429,9 @@ public interface CoreMessages extends Messages {
 
 	@DefaultMessage("Code")
 	String roomEditorCode();
+
+	@DefaultMessage("Floor")
+	String roomTypeEditorFloor();
 	
 	@DefaultMessage("Choose Room Type")
 	String roomEditorChooseRoomtype();

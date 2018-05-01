@@ -625,6 +625,13 @@
             <Value disabled="false">Kód</Value>
         </Property>
         <Property>
+            <Name>roomTypeEditorFloor</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Floor</Value>
+            <Value disabled="false">Emelet</Value>
+        </Property>
+        <Property>
             <Name>roomEditorRoomtype</Name>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
