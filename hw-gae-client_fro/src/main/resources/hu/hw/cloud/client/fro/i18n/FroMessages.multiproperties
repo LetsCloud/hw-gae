@@ -84,6 +84,13 @@
             <Value disabled="false">Room Types</Value>
             <Value disabled="false">Szobatípusok</Value>
         </Property>
+        <Property>
+            <Name>hotelConfigRooms</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Rooms</Value>
+            <Value disabled="false">Szobák</Value>
+        </Property>
         <Comment>
             <Value>USER EDITOR</Value>
         </Comment>
