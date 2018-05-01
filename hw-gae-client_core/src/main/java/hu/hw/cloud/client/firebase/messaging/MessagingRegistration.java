@@ -21,6 +21,7 @@ public class MessagingRegistration implements HandlerRegistration {
 		this.fn = fn;
 	}
 
+	
 	public Messaging getMessaging() {
 		return messaging;
 	}
