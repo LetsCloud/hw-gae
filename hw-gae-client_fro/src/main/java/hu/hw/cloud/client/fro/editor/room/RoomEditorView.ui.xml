@@ -44,6 +44,9 @@
 				<m:MaterialTextBox ui:field="code" type="TEXT"
 					label="{i18nCore.roomTypeEditorCode}" />
 
+				<m:MaterialTextBox ui:field="floor" type="TEXT"
+					label="{i18nCore.roomTypeEditorFloor}" />
+
 				<combobox:MaterialComboBox
 					ui:field="roomTypeCombo" multiple="false"
 					label="{i18nCore.roomEditorRoomtype}"

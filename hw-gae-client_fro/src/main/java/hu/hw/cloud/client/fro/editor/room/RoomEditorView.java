@@ -48,7 +48,7 @@ public class RoomEditorView extends ViewWithUiHandlers<RoomEditorUiHandlers>
 	// private final CoreConstants i18nCoreCnst;
 
 	@UiField
-	MaterialTextBox code, description;
+	MaterialTextBox code, floor, description;
 
 	@Ignore
 	@UiField

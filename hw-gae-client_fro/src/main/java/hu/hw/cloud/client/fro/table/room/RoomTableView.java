@@ -56,6 +56,12 @@ public class RoomTableView extends ViewWithUiHandlers<RoomTableUiHandlers> imple
 						(o1, o2) -> o1.getData().getCode().compareToIgnoreCase(o2.getData().getCode())),
 				i18nCore.roomsTableCode());
 
+		// Floor Column
+		table.addColumn(
+				new DataColumn<RoomDto>((object) -> object.getFloor(),
+						(o1, o2) -> o1.getData().getFloor().compareToIgnoreCase(o2.getData().getFloor())),
+				i18nCore.roomsTableFloor());
+
 		// Type Column
 		table.addColumn(new DataColumn<RoomDto>((object) -> {
 			if (object.getRoomTypeDto() != null) {

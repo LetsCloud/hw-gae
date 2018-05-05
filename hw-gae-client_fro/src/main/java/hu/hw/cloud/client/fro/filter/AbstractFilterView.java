@@ -13,10 +13,10 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 import gwt.material.design.addins.client.combobox.MaterialComboBox;
+import gwt.material.design.client.ui.MaterialCheckBox;
 import gwt.material.design.client.ui.MaterialChip;
-import gwt.material.design.client.ui.MaterialCollapsibleBody;
 import gwt.material.design.client.ui.MaterialCollapsibleHeader;
-
+import gwt.material.design.client.ui.MaterialColumn;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
 
@@ -39,13 +39,20 @@ public abstract class AbstractFilterView extends ViewWithUiHandlers<AbstractFilt
 	protected MaterialCollapsibleHeader collapsibleHeader;
 
 	@UiField
+	protected MaterialColumn col1, col2;
+
+	@UiField
 	MaterialChip hotelChip;
 
 	@UiField
 	MaterialComboBox<HotelDto> hotelComboBox;
 
+//	@UiField
+//	protected MaterialCollapsibleBody collapsibleBody;
+
+	private MaterialChip onlyActiveChip;
 	@UiField
-	protected MaterialCollapsibleBody collapsibleBody;
+	MaterialCheckBox onlyActiveCheckBox;
 
 	public AbstractFilterView(CoreMessages i18nCore) {
 		logger.info("AbstractFilterView()");
@@ -58,6 +65,11 @@ public abstract class AbstractFilterView extends ViewWithUiHandlers<AbstractFilt
 	}
 
 	protected void initView() {
+		initHotelFilter();
+		initOnlyActiveFilter();
+	}
+
+	private void initHotelFilter() {
 		hotelComboBox.setLabel(i18nCore.roomTypesTableHotelsLabel());
 		hotelComboBox.setPlaceholder(i18nCore.roomTypesTableHotelsPlaceholder());
 
@@ -67,6 +79,10 @@ public abstract class AbstractFilterView extends ViewWithUiHandlers<AbstractFilt
 		});
 	}
 
+	private void setHotelChip(HotelDto hoteDto) {
+		hotelChip.setText(hoteDto.getName());
+	}
+	
 	@Override
 	public void setHotelData(List<HotelDto> hotelData) {
 		for (HotelDto hd : hotelData) {
@@ -81,20 +97,34 @@ public abstract class AbstractFilterView extends ViewWithUiHandlers<AbstractFilt
 		setHotelChip(hotelDto);
 	}
 
-	private void setHotelChip(HotelDto hoteDto) {
-		hotelChip.setText(hoteDto.getName());
-	}
-
 	@Override
 	public HotelDto getSelectedHotel() {
 		return hotelComboBox.getSelectedValue().get(0);
 	}
+	
+	private void initOnlyActiveFilter() {
+		onlyActiveChip = new MaterialChip();
+		onlyActiveChip.setText(i18nCore.roomTypesTableOnlyActive());
 
-	public void addWidget2Header(Widget widget) {
-		collapsibleHeader.add(widget);
+		onlyActiveCheckBox.setValue(true);
+		onlyActiveCheckBox.addValueChangeHandler(e -> {
+			setOnlyActiveChip(e.getValue());
+			getUiHandlers().filterChange();
+		});
+
+		setOnlyActiveChip(onlyActiveCheckBox.getValue());
 	}
 
-	public void addWidget2Body(Widget widget) {
-		collapsibleBody.add(widget);
+	private void setOnlyActiveChip(Boolean onlyActive) {
+		if (onlyActive) {
+			collapsibleHeader.add(onlyActiveChip);
+		} else {
+			collapsibleHeader.remove(onlyActiveChip);
+		}
+	}
+
+	@Override
+	public Boolean isOnlyActive() {
+		return onlyActiveCheckBox.getValue();
 	}
 }

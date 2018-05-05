@@ -2,10 +2,14 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
 	xmlns:m="urn:import:gwt.material.design.client.ui"
+	xmlns:m.html="urn:import:gwt.material.design.client.ui.html"
 	xmlns:combobox="urn:import:gwt.material.design.addins.client.combobox">
 
 	<ui:style>
-	/* Add CSS here. See the GWT docs on UI Binder for more details */
+	.onlyActiveCheckBox {
+		padding-bottom: 25px;
+		padding-top: 15px;
+	}
 	</ui:style>
 
 	<ui:with field="i18nCore"
@@ -22,10 +26,21 @@
 				<m:MaterialChip ui:field="hotelChip" />
 			</m:MaterialCollapsibleHeader>
 
-			<m:MaterialCollapsibleBody ui:field="collapsibleBody">
-				<combobox:MaterialComboBox
-					ui:field="hotelComboBox" />
-
+			<m:MaterialCollapsibleBody
+				ui:field="collapsibleBody" paddingTop="15" paddingBottom="0">
+				<m:MaterialRow>
+					<m:MaterialColumn ui:field="col1" grid="s12 m6">
+						<combobox:MaterialComboBox
+							ui:field="hotelComboBox" />
+					</m:MaterialColumn>
+					<m:MaterialColumn ui:field="col2" grid="s12 m6">
+						<m.html:Div addStyleNames="{style.onlyActiveCheckBox}">
+							<m:MaterialCheckBox
+								ui:field="onlyActiveCheckBox"
+								text="{i18nCore.roomTypesTableOnlyActive}" />
+						</m.html:Div>
+					</m:MaterialColumn>
+				</m:MaterialRow>
 			</m:MaterialCollapsibleBody>
 		</m:MaterialCollapsibleItem><!-- Other Collapsible items here -->
 	</m:MaterialCollapsible>

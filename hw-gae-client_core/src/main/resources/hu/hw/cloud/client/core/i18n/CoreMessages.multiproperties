@@ -465,8 +465,8 @@
             <Name>roomTypesTableOnlyActive</Name>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
-            <Value disabled="false">Only active types</Value>
-            <Value disabled="false">Csak aktív típusok</Value>
+            <Value disabled="false">Only active items</Value>
+            <Value disabled="false">Csak aktív elemek</Value>
         </Property>
         <Property>
             <Name>roomTypesTableCode</Name>
@@ -594,11 +594,56 @@
             <Value disabled="false">Kód</Value>
         </Property>
         <Property>
+            <Name>roomsTableFloor</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Floor</Value>
+            <Value disabled="false">Emelet</Value>
+        </Property>
+        <Property>
             <Name>roomsTableType</Name>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
             <Value disabled="false">Room type</Value>
             <Value disabled="false">Szobatípus</Value>
+        </Property>
+        <Comment>
+            <Value>ROOM FILTER</Value>
+        </Comment>
+        <Property>
+            <Name>roomFilterFloorPlaceholder</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Choose Floor</Value>
+            <Value disabled="false">Válassz emeletet</Value>
+        </Property>
+        <Property>
+            <Name>roomFilterFloorLabel</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Selected Floor</Value>
+            <Value disabled="false">Kiválasztott emelet</Value>
+        </Property>
+        <Property>
+            <Name>roomFilterFloor</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Floor=</Value>
+            <Value disabled="false">Emelet=</Value>
+        </Property>
+        <Property>
+            <Name>roomFilterRoomTypesLabel</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Selected Room Types</Value>
+            <Value disabled="false">Kiválasztott szobatípusok</Value>
+        </Property>
+        <Property>
+            <Name>roomFilterRoomTypesPlaceholder</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Choose Room Type</Value>
+            <Value disabled="false">Válassz szobatípust</Value>
         </Property>
         <Comment>
             <Value>ROOM EDITOR</Value>
@@ -623,6 +668,13 @@
             <MultiLine>false</MultiLine>
             <Value disabled="false">Code</Value>
             <Value disabled="false">Kód</Value>
+        </Property>
+        <Property>
+            <Name>roomTypeEditorFloor</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Floor</Value>
+            <Value disabled="false">Emelet</Value>
         </Property>
         <Property>
             <Name>roomEditorRoomtype</Name>

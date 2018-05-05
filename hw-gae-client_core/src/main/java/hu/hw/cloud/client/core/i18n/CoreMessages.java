@@ -412,9 +412,32 @@ public interface CoreMessages extends Messages {
 	
 	@DefaultMessage("Code")
 	String roomsTableCode();
+	
+	@DefaultMessage("Floor")
+	String roomsTableFloor();
 
 	@DefaultMessage("Type")
 	String roomsTableType();
+
+	
+	/*
+	 * ROOM FILTER
+	 */
+	
+	@DefaultMessage("Selected floor")
+	String roomFilterFloorLabel();
+	
+	@DefaultMessage("Choose floor")
+	String roomFilterFloorPlaceholder();
+	
+	@DefaultMessage("Floor=")
+	String roomFilterFloor();
+	
+	@DefaultMessage("Selected Room Types")
+	String roomFilterRoomTypesLabel();
+	
+	@DefaultMessage("Choose Room Type")
+	String roomFilterRoomTypesPlaceholder();
 
 	
 	/*
@@ -429,6 +452,9 @@ public interface CoreMessages extends Messages {
 
 	@DefaultMessage("Code")
 	String roomEditorCode();
+
+	@DefaultMessage("Floor")
+	String roomTypeEditorFloor();
 	
 	@DefaultMessage("Choose Room Type")
 	String roomEditorChooseRoomtype();

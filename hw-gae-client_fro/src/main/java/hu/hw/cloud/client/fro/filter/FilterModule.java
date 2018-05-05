@@ -6,6 +6,8 @@ package hu.hw.cloud.client.fro.filter;
 import com.google.gwt.inject.client.assistedinject.GinFactoryModuleBuilder;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
+import hu.hw.cloud.client.fro.filter.room.RoomFilterPresenter;
+import hu.hw.cloud.client.fro.filter.room.RoomFilterView;
 import hu.hw.cloud.client.fro.filter.roomtype.RoomTypeFilterPresenter;
 import hu.hw.cloud.client.fro.filter.roomtype.RoomTypeFilterView;
 import hu.hw.cloud.client.fro.table.filter.FilterWidgetPresenter;
@@ -23,6 +25,9 @@ public class FilterModule extends AbstractPresenterModule {
 
 		bindPresenterWidget(RoomTypeFilterPresenter.class, RoomTypeFilterPresenter.MyView.class,
 				RoomTypeFilterView.class);
+
+		bindPresenterWidget(RoomFilterPresenter.class, RoomFilterPresenter.MyView.class,
+				RoomFilterView.class);
 
 		install(new GinFactoryModuleBuilder().build(FilterPresenterFactory.class));
 	}
