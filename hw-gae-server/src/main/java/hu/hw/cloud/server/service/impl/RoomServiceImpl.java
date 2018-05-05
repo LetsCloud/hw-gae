@@ -7,8 +7,10 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,16 +64,39 @@ public class RoomServiceImpl extends HotelChildServiceImpl<Room, RoomDto, RoomRe
 	}
 
 	@Override
-	public List<Room> getAllRoomsByHotel(String hotelKey) {
-		List<Room> allRooms = repository.getAllByHotel(hotelKey);
-		return allRooms;
+	public List<Room> getActiveRoomsByHotel(String hotelKey) {
+		logger.info("RoomServiceImpl().getActiveRoomsByHotel()");
+		Date today = new Date();
+		logger.info("RoomServiceImpl().getActiveRoomsByHotel()->today=" + today);
+		List<Room> result = new ArrayList<Room>();
+		for (Room room : repository.getChildren(hotelKey)) {
+			logger.info("RoomServiceImpl().getActiveRoomsByHotel()->room.getCode()=" + room.getCode());
+			List<RoomAvailability> ral = room.getRoomAvailabilities();
+			Optional<RoomAvailability> open = ral.stream()
+					.filter(o -> ((o.getDate().compareTo(today) <= 0) && (o.isAvailable())))
+					.max(Comparator.comparing(RoomAvailability::getDate));
+			logger.info("RoomServiceImpl().getActiveRoomsByHotel()->open=" + open);
+			if (open.isPresent()) {
+				logger.info("RoomServiceImpl().getActiveRoomsByHotel()->open.isPresent()");
+				Optional<RoomAvailability> closed = ral.stream()
+						.filter(o -> ((o.getDate().compareTo(open.get().getDate()) > 0)
+								&& (o.getDate().compareTo(today) <= 0) && (!o.isAvailable())))
+						.max(Comparator.comparing(RoomAvailability::getDate));
+				logger.info("RoomServiceImpl().getActiveRoomsByHotel()->closed=" + closed);
+				if (!closed.isPresent()) {
+					logger.info("RoomServiceImpl().getActiveRoomsByHotel()->!closed.isPresent()");
+					result.add(room);
+				}
+			}
+		}
+		return result;
 	}
 
 	@Override
 	public List<Room> getAvailableRoomsByHotelOnDate(String hotelKey, Date date) {
 		// LOGGER.info("getAvailableRoomsByHotel()->date:" + date.toString());
 		// A szálloda összes szobája
-		List<Room> rooms = getAllRoomsByHotel(hotelKey);
+		List<Room> rooms = getActiveRoomsByHotel(hotelKey);
 		// Rendelkezésre nem álló szobák
 		List<Room> unavailableRooms = new ArrayList<Room>();
 		// Végigpásztázzuk az összes szobát, hogy megállapítsuk a rendelkezésre

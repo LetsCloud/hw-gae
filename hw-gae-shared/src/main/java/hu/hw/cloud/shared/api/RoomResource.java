@@ -9,6 +9,7 @@ import java.util.List;
 
 import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
 import static hu.hw.cloud.shared.api.ApiParameters.HOTEL_KEY;
+import static hu.hw.cloud.shared.api.ApiParameters.ONLY_ACTIVE;
 import static hu.hw.cloud.shared.api.ApiParameters.ROOM_KEY;
 import static hu.hw.cloud.shared.api.ApiParameters.ROOM_STATUS;
 import static hu.hw.cloud.shared.api.ApiPaths.PATH_WEBSAFEKEY;
@@ -38,7 +39,7 @@ import hu.hw.cloud.shared.dto.hotel.RoomDto;
 public interface RoomResource {
 
 	@GET
-	List<RoomDto> getByHotel(@QueryParam(HOTEL_KEY) String hotelKey);
+	List<RoomDto> getByHotel(@QueryParam(HOTEL_KEY) String hotelKey, @QueryParam(ONLY_ACTIVE) Boolean onlyActive);
 
 	@GET
 	@Path(PATH_WEBSAFEKEY)

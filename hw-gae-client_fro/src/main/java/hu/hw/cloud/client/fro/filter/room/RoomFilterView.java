@@ -48,8 +48,8 @@ public class RoomFilterView extends AbstractFilterView implements RoomFilterPres
 		floorChip = new MaterialChip();
 
 		floorCombo = new MaterialComboBox<String>();
+		floorCombo.setMarginTop(25);
 		floorCombo.setAllowClear(true);
-		collapsibleBody.add(floorCombo);
 
 		floorCombo.setLabel(i18nCore.roomFilterFloorLabel());
 		floorCombo.setPlaceholder(i18nCore.roomFilterFloorPlaceholder());
@@ -65,6 +65,8 @@ public class RoomFilterView extends AbstractFilterView implements RoomFilterPres
 			setFloorChip(null);
 			getUiHandlers().filterChange();
 		});
+
+		col1.add(floorCombo);
 	}
 
 	private void setFloorChip(String type) {
@@ -101,11 +103,9 @@ public class RoomFilterView extends AbstractFilterView implements RoomFilterPres
 		roomTypeCombo.setAllowClear(true);
 		roomTypeCombo.setAllowBlank(true);
 		roomTypeCombo.setCloseOnSelect(false);
-		collapsibleBody.add(roomTypeCombo);
-
+		roomTypeCombo.setMarginTop(25);
 		roomTypeCombo.setLabel(i18nCore.roomFilterRoomTypesLabel());
 		roomTypeCombo.setPlaceholder(i18nCore.roomFilterRoomTypesPlaceholder());
-
 		roomTypeCombo.addSelectionHandler(e -> {
 			String roomTypesText = null;
 			for (RoomTypeDto roomType : e.getSelectedValues()) {
@@ -122,6 +122,7 @@ public class RoomFilterView extends AbstractFilterView implements RoomFilterPres
 			setRoomTypesChip(null);
 			getUiHandlers().filterChange();
 		});
+		col2.add(roomTypeCombo);
 	}
 
 	private void setRoomTypesChip(String roomTypes) {

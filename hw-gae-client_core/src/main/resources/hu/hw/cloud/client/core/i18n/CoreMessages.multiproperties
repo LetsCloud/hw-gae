@@ -465,8 +465,8 @@
             <Name>roomTypesTableOnlyActive</Name>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
-            <Value disabled="false">Only active types</Value>
-            <Value disabled="false">Csak aktív típusok</Value>
+            <Value disabled="false">Only active items</Value>
+            <Value disabled="false">Csak aktív elemek</Value>
         </Property>
         <Property>
             <Name>roomTypesTableCode</Name>

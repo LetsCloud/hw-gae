@@ -99,7 +99,7 @@ public class RoomTablePresenter extends AbstractTablePresenter<RoomDto, RoomTabl
 							.collect(Collectors.toList());
 				getView().setData(result);
 			}
-		}).getByHotel(filter.getSelectedHotel().getWebSafeKey());
+		}).getByHotel(filter.getSelectedHotel().getWebSafeKey(), filter.isOnlyActive());
 
 		addFilter(PARAM_HOTEL_KEY, filter.getSelectedHotel().getWebSafeKey());
 	}

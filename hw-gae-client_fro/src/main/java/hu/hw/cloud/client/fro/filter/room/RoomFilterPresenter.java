@@ -40,8 +40,6 @@ public class RoomFilterPresenter extends AbstractFilterPresenter<RoomFilterPrese
 	private final RoomTypeDataSource roomTypeDataSource;
 	private final CurrentUser currentUser;
 
-	private Boolean isRoomTypeReady;
-
 	@Inject
 	RoomFilterPresenter(EventBus eventBus, MyView view, HotelDataSource hotelDataSource,
 			RoomTypeDataSource roomTypeDataSource, CurrentUser currentUser) {
@@ -57,14 +55,12 @@ public class RoomFilterPresenter extends AbstractFilterPresenter<RoomFilterPrese
 	@Override
 	public void onReveal() {
 		super.onReveal();
-		isRoomTypeReady = false;
 		logger.info("RoomFilterPresenter().onReveal()");
 		LoadCallback<RoomTypeDto> roomTypeLoadCallback = new LoadCallback<RoomTypeDto>() {
 
 			@Override
 			public void onSuccess(LoadResult<RoomTypeDto> loadResult) {
 				getView().setRoomTypeData(loadResult.getData());
-				isRoomTypeReady = true;
 			}
 
 			@Override
@@ -93,14 +89,5 @@ public class RoomFilterPresenter extends AbstractFilterPresenter<RoomFilterPrese
 
 	public List<String> getSelectedRoomTypeKeys() {
 		return getView().getSelectedRoomTypeKeys();
-	}
-
-	@Override
-	protected Boolean isReady() {
-		if (!super.isReady())
-			return false;
-		if (!isRoomTypeReady)
-			return false;
-		return true;
 	}
 }

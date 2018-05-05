@@ -99,7 +99,9 @@ public class AvailabilityListEditor extends Composite
 
 	@UiHandler("addButton")
 	void onAddClick(ClickEvent event) {
-		Boolean lastAvailable = editor.getList().get(editor.getList().size() - 1).getAvailable();
+		Boolean lastAvailable = false;
+		if (!editor.getList().isEmpty())
+			lastAvailable = editor.getList().get(editor.getList().size() - 1).getAvailable();
 		RoomAvailabilityDto e = new RoomAvailabilityDto();
 		if (lastAvailable == null)
 			lastAvailable = false;

@@ -36,13 +36,13 @@ public abstract class AbstractFilterPresenter<V extends AbstractFilterPresenter.
 		void setSelectedHotel(HotelDto hotelDto);
 
 		HotelDto getSelectedHotel();
+		
+		Boolean isOnlyActive();
 	}
 
 	private final HotelDataSource hotelDataSource;
 
 	private final CurrentUser currentUser;
-
-	private Boolean isHotelReady;
 	
 	public AbstractFilterPresenter(EventBus eventBus, V view, HotelDataSource hotelDataSource,
 			CurrentUser currentUser) {
@@ -56,7 +56,6 @@ public abstract class AbstractFilterPresenter<V extends AbstractFilterPresenter.
 	@Override
 	public void onReveal() {
 		super.onReveal();
-		isHotelReady = false;
 		logger.info("AbstractFilterPresenter().onReveal()");
 		LoadCallback<HotelDto> hotelLoadCallback = new LoadCallback<HotelDto>() {
 
@@ -65,7 +64,6 @@ public abstract class AbstractFilterPresenter<V extends AbstractFilterPresenter.
 				logger.info("AbstractFilterPresenter().onReveal().onSuccess()");
 				getView().setHotelData(currentUser.getAppUserDto().getAvailableHotelDtos());
 				getView().setSelectedHotel(currentUser.getCurrentHotelDto());
-				isHotelReady = true;
 				FilterChangeEvent.fire(AbstractFilterPresenter.this, DataTable.ROOM_TYPE);
 			}
 
@@ -88,8 +86,8 @@ public abstract class AbstractFilterPresenter<V extends AbstractFilterPresenter.
 	public HotelDto getSelectedHotel() {
 		return getView().getSelectedHotel();
 	}
-	
-	protected Boolean isReady() {
-		return isHotelReady;
+
+	public Boolean isOnlyActive() {
+		return getView().isOnlyActive();
 	}
 }

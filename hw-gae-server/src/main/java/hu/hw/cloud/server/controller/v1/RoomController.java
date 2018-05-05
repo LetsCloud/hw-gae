@@ -5,11 +5,13 @@ package hu.hw.cloud.server.controller.v1;
 
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.ROOT;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.QueryParam;
 
 import static hu.hw.cloud.shared.api.ApiParameters.HOTEL_KEY;
+import static hu.hw.cloud.shared.api.ApiParameters.ONLY_ACTIVE;
 import static hu.hw.cloud.shared.api.ApiParameters.ROOM_KEY;
 import static hu.hw.cloud.shared.api.ApiParameters.ROOM_STATUS;
 import static hu.hw.cloud.shared.api.ApiPaths.PATH_WEBSAFEKEY;
@@ -66,8 +68,20 @@ public class RoomController extends HotelChildController<Room, RoomDto> {
 	}
 
 	@RequestMapping(method = GET)
-	public ResponseEntity<List<RoomDto>> getByHotel(@QueryParam(HOTEL_KEY) String hotelKey) {
-		return getChildren(hotelKey);
+	public ResponseEntity<List<RoomDto>> getByHotel(@QueryParam(HOTEL_KEY) String hotelKey,
+			@QueryParam(ONLY_ACTIVE) Boolean onlyActive) {
+		logger.info("RoomController().getByHotel()");
+		if (onlyActive) {
+			logger.info("RoomController().getByHotel()->onlyActive");
+			List<RoomDto> result = new ArrayList<RoomDto>();
+			for (Room room : roomService.getActiveRoomsByHotel(hotelKey)) {
+				logger.info("RoomController().getByHotel()->onlyActive->room.getCode()=" + room.getCode());
+				result.add(Room.createDto(room));
+			}
+			return new ResponseEntity<List<RoomDto>>(result, OK);
+		} else {
+			return getChildren(hotelKey);
+		}
 	}
 
 	@Override
