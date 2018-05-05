@@ -93,6 +93,10 @@ public class RoomTablePresenter extends AbstractTablePresenter<RoomDto, RoomTabl
 				if ((filter.getSelectedFloor() != null) && (!filter.getSelectedFloor().isEmpty()))
 					result = result.stream().filter(room -> room.getFloor().equals(filter.getSelectedFloor()))
 							.collect(Collectors.toList());
+				if (!filter.getSelectedRoomTypeKeys().isEmpty())
+					result = result.stream().filter(
+							room -> filter.getSelectedRoomTypeKeys().contains(room.getRoomTypeDto().getWebSafeKey()))
+							.collect(Collectors.toList());
 				getView().setData(result);
 			}
 		}).getByHotel(filter.getSelectedHotel().getWebSafeKey());

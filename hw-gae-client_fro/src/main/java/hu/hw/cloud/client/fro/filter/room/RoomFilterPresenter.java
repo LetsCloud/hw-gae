@@ -31,30 +31,40 @@ public class RoomFilterPresenter extends AbstractFilterPresenter<RoomFilterPrese
 		void setFloors(List<String> floors);
 
 		String getSelectedFloor();
+
+		void setRoomTypeData(List<RoomTypeDto> roomTypeData);
+
+		List<String> getSelectedRoomTypeKeys();
 	}
 
-	private RoomTypeDataSource roomTypeDataSource;
+	private final RoomTypeDataSource roomTypeDataSource;
+	private final CurrentUser currentUser;
+
+	private Boolean isRoomTypeReady;
 
 	@Inject
 	RoomFilterPresenter(EventBus eventBus, MyView view, HotelDataSource hotelDataSource,
 			RoomTypeDataSource roomTypeDataSource, CurrentUser currentUser) {
 		super(eventBus, view, hotelDataSource, currentUser);
 		logger.info("RoomFilterPresenter()");
-		
+
 		this.roomTypeDataSource = roomTypeDataSource;
-		
+		this.currentUser = currentUser;
+
 		getView().setUiHandlers(this);
 	}
 
 	@Override
 	public void onReveal() {
 		super.onReveal();
+		isRoomTypeReady = false;
 		logger.info("RoomFilterPresenter().onReveal()");
 		LoadCallback<RoomTypeDto> roomTypeLoadCallback = new LoadCallback<RoomTypeDto>() {
 
 			@Override
 			public void onSuccess(LoadResult<RoomTypeDto> loadResult) {
-//				FilterChangeEvent.fire(RoomFilterPresenter.this, DataTable.ROOM_TYPE);
+				getView().setRoomTypeData(loadResult.getData());
+				isRoomTypeReady = true;
 			}
 
 			@Override
@@ -63,8 +73,14 @@ public class RoomFilterPresenter extends AbstractFilterPresenter<RoomFilterPrese
 
 			}
 		};
+		logger.info("RoomFilterPresenter().onReveal()-2");
 
+		roomTypeDataSource.setHotelKey(currentUser.getCurrentHotelDto().getWebSafeKey());
+		logger.info("RoomFilterPresenter().onReveal()-3");
+		roomTypeDataSource.setOnlyActive(true);
+		logger.info("RoomFilterPresenter().onReveal()-4");
 		roomTypeDataSource.load(new LoadConfig<RoomTypeDto>(0, 0, null, null), roomTypeLoadCallback);
+		logger.info("RoomFilterPresenter().onReveal()-5");
 	}
 
 	public void setFloors(List<String> floors) {
@@ -73,5 +89,18 @@ public class RoomFilterPresenter extends AbstractFilterPresenter<RoomFilterPrese
 
 	public String getSelectedFloor() {
 		return getView().getSelectedFloor();
+	}
+
+	public List<String> getSelectedRoomTypeKeys() {
+		return getView().getSelectedRoomTypeKeys();
+	}
+
+	@Override
+	protected Boolean isReady() {
+		if (!super.isReady())
+			return false;
+		if (!isRoomTypeReady)
+			return false;
+		return true;
 	}
 }

@@ -424,14 +424,20 @@ public interface CoreMessages extends Messages {
 	 * ROOM FILTER
 	 */
 	
-	@DefaultMessage("Choose floor")
-	String roomFilterFloorPlaceholder();
-	
 	@DefaultMessage("Selected floor")
 	String roomFilterFloorLabel();
 	
+	@DefaultMessage("Choose floor")
+	String roomFilterFloorPlaceholder();
+	
 	@DefaultMessage("Floor=")
 	String roomFilterFloor();
+	
+	@DefaultMessage("Selected Room Types")
+	String roomFilterRoomTypesLabel();
+	
+	@DefaultMessage("Choose Room Type")
+	String roomFilterRoomTypesPlaceholder();
 
 	
 	/*
