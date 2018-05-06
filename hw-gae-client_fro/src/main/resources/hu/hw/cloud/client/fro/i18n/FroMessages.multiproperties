@@ -17,7 +17,7 @@
         <Column>
             <Name>hu_HU</Name>
             <Description></Description>
-            <Width>686</Width>
+            <Width>747</Width>
             <HandlerConfiguration>/hw-gae-client_fro/src/main/resources/hu/hw/cloud/client/fro/i18n/FroMessages_hu_HU.properties|false|false|false|false</HandlerConfiguration>
         </Column>
     </Columns>
@@ -29,8 +29,22 @@
             <Name>mainMenuItemDashboard</Name>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
-            <Value disabled="false">Dashboard</Value>
-            <Value disabled="false">Infopult</Value>
+            <Value disabled="false">Reservation</Value>
+            <Value disabled="false">Rezerváció</Value>
+        </Property>
+        <Property>
+            <Name>mainMenuGroupReception</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Front Desk</Value>
+            <Value disabled="false">Recepció</Value>
+        </Property>
+        <Property>
+            <Name>mainMenuGroupCashier</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Cashier</Value>
+            <Value disabled="false">Kassza</Value>
         </Property>
         <Property>
             <Name>mainMenuGroupConfiguration</Name>
