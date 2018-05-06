@@ -7,8 +7,7 @@ import hu.hw.cloud.client.core.app.AppView;
 public class FroAppModule extends AbstractPresenterModule {
 	@Override
 	protected void configure() {
-		bind(FroAppPresenter.class).asEagerSingleton();
-		bind(FroAppPresenter.MyProxy.class).asEagerSingleton();
-		bind(FroAppPresenter.MyView.class).to(AppView.class);
+		bindPresenter(FroAppPresenter.class, FroAppPresenter.MyView.class, AppView.class,
+				FroAppPresenter.MyProxy.class);
 	}
 }

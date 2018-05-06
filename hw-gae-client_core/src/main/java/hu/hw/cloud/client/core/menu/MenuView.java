@@ -89,6 +89,11 @@ public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements Menu
 		initWidget(uiBinder.createAndBindUi(this));
 
 		this.res = res;
+	}
+
+	@Override
+    protected void onAttach() {
+        super.onAttach();
 
 		accountLink.setFontSize(14, Unit.PX);
 		hotelLink.setFontSize(14, Unit.PX);

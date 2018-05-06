@@ -7,8 +7,7 @@ import hu.hw.cloud.client.core.app.AppView;
 public class InfAppModule extends AbstractPresenterModule {
 	@Override
 	protected void configure() {
-		bind(InfAppPresenter.class).asEagerSingleton();
-		bind(InfAppPresenter.MyProxy.class).asEagerSingleton();
-		bind(InfAppPresenter.MyView.class).to(AppView.class);
+		bindPresenter(InfAppPresenter.class, InfAppPresenter.MyView.class, AppView.class,
+				InfAppPresenter.MyProxy.class);
 	}
 }

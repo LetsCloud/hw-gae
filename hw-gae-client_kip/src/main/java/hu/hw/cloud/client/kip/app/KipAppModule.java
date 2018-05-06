@@ -7,8 +7,7 @@ import hu.hw.cloud.client.core.app.AppView;
 public class KipAppModule extends AbstractPresenterModule {
 	@Override
 	protected void configure() {
-		bind(KipAppPresenter.class).asEagerSingleton();
-		bind(KipAppPresenter.MyProxy.class).asEagerSingleton();
-		bind(KipAppPresenter.MyView.class).to(AppView.class);
+		bindPresenter(KipAppPresenter.class, KipAppPresenter.MyView.class, AppView.class,
+				KipAppPresenter.MyProxy.class);
 	}
 }
