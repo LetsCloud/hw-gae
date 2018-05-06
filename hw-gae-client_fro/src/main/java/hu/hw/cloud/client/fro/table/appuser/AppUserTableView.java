@@ -66,7 +66,7 @@ public class AppUserTableView extends ViewWithUiHandlers<AppUserTableUiHandlers>
 		table.addColumn(
 				new DataColumn<AppUserDto>((object) -> object.getName(),
 						(o1, o2) -> o1.getData().getName().compareToIgnoreCase(o2.getData().getName())),
-				i18n.userEditorUsername());
+				i18n.userEditorName());
 
 		// Title Column
 		table.addColumn(new DataColumn<AppUserDto>((object) -> object.getTitle()), i18n.userEditorTitle());
