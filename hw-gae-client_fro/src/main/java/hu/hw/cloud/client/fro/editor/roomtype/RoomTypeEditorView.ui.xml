@@ -78,7 +78,7 @@
 					<m:MaterialIntegerBox ui:field="xtrBeds"
 						label="{i18nCore.roomTypeEditorNumOfXtrBeds}" />
 					<m:MaterialFloatBox ui:field="cleaningFactor"
-						label="Cleaning factor{i18nCore.roomTypeEditorCleaningFactor}" />
+						label="{i18nCore.roomTypeEditorCleaningFactor}" />
 				</g:HTMLPanel>
 			</m:MaterialColumn>
 		</m:MaterialRow>
