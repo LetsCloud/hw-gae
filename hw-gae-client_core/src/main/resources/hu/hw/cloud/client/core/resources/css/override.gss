@@ -117,17 +117,24 @@ nav {
 	color: C_PRIMARY
 }
 /* Akt�v elem k�zvetlen div-�nek k�zvetlen linkje (almen� fejl�ce) */
-.side-nav li.active>div>a {
+.side-nav li.active>div>a>i {
 	color: C_PRIMARY
+}
+
+.side-nav li.active>div>a {
+	color: #fafafa
+}
+
+.side-nav div.collapsible-body>ul>li.active {
+	border-left: 5px solid C_PRIMARY
+}
+
+.side-nav div.collapsible-body>ul>li.active>a {
+	color: #fafafa
 }
 
 .side-nav .collapsible-body {
 	background-color: C_SECONDARY_LIGHT
-}
-
-.side-nav .collapsible-body li.active a, .side-nav.fixed .collapsible-body li.active a
-	{
-	color: C_PRIMARY
 }
 
 .side-nav a {
