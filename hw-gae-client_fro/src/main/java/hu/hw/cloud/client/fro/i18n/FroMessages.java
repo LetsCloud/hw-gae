@@ -15,11 +15,11 @@ public interface FroMessages extends Messages {
 	 * MAIN MENU
 	 */
 
-	@DefaultMessage("Dashboard")
+	@DefaultMessage("Reservation")
 	String mainMenuItemDashboard();
 
 	
-	@DefaultMessage("Reception")
+	@DefaultMessage("Front Desk")
 	String mainMenuGroupReception();
 
 	@DefaultMessage("Reservation")
