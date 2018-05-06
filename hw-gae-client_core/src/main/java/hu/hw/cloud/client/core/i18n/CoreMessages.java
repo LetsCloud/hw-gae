@@ -318,7 +318,7 @@ public interface CoreMessages extends Messages {
 
 	
 	/*
-	 * ROOMTYPE TABLE
+	 * ROOMTYPES TABLE
 	 */
 	
 	@DefaultMessage("Room Type Data")
@@ -345,8 +345,11 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("Number Of Rooms")
 	String roomTypesTableNumberOfRooms();
 
-	@DefaultMessage("Akctive")
+	@DefaultMessage("Active")
 	String roomTypesTableActive();
+
+	@DefaultMessage("Inactive")
+	String roomTypesTableInactive();
 
 	
 	/*

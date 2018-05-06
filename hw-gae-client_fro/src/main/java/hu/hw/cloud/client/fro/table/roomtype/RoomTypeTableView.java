@@ -83,16 +83,16 @@ public class RoomTypeTableView extends ViewWithUiHandlers<RoomTypeTableUiHandler
 
 		// NumberOfRooms Column
 		table.addColumn(new DataColumn<RoomTypeDto>((object) -> object.getNumberOfRooms().toString()),
-				i18nCore.roomTypesTableCode());
+				i18nCore.roomTypesTableNumberOfRooms());
 
 		// Active Column
 		table.addColumn(new DataColumn<RoomTypeDto>((object) -> {
 			if (object.getActive()) {
-				return "Aktív";
+				return i18nCore.roomTypesTableActive();
 			} else {
-				return "Inaktív";
+				return i18nCore.roomTypesTableInactive();
 			}
-		}), i18nCore.roomTypesTableCode());
+		}), i18nCore.roomTypesTableActive());
 
 		// Edit Column
 		table.addColumn(new EditColumn<RoomTypeDto>((object) -> getUiHandlers().edit(object)));

@@ -445,7 +445,7 @@
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
             <Value disabled="false">Room Types</Value>
-            <Value disabled="false">Szobatípusok</Value>
+            <Value disabled="false">Szobatípusok táblázat</Value>
         </Property>
         <Property>
             <Name>roomTypesTableHotelsPlaceholder</Name>
@@ -481,6 +481,34 @@
             <MultiLine>false</MultiLine>
             <Value disabled="false">Description</Value>
             <Value disabled="false">Megnevezés</Value>
+        </Property>
+        <Property>
+            <Name>roomTypesTableInventoryType</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Inventory Type</Value>
+            <Value disabled="false">Készlet típus</Value>
+        </Property>
+        <Property>
+            <Name>roomTypesTableNumberOfRooms</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Num.of Rooms</Value>
+            <Value disabled="false">Szobák száma</Value>
+        </Property>
+        <Property>
+            <Name>roomTypesTableActive</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Active</Value>
+            <Value disabled="false">Aktív</Value>
+        </Property>
+        <Property>
+            <Name>roomTypesTableInactive</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Inactive</Value>
+            <Value disabled="false">Inaktív</Value>
         </Property>
         <Comment>
             <Value>ROOM TYPE EDITOR</Value>
