@@ -337,6 +337,64 @@
             <Value disabled="false">Infopult</Value>
         </Property>
         <Comment>
+            <Value>USER GROUP TABLE</Value>
+        </Comment>
+        <Property>
+            <Name>userGroupTableTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">User Groups</Value>
+            <Value disabled="false">Felhasználó csoportok</Value>
+        </Property>
+        <Property>
+            <Name>userGroupTableName</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Description</Value>
+            <Value disabled="false">Megnevezés</Value>
+        </Property>
+        <Comment>
+            <Value>USER GROUP EDITOR</Value>
+        </Comment>
+        <Property>
+            <Name>userGroupEditorCreateTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Create User Group</Value>
+            <Value disabled="false">Felhasználó csoport létrehozása</Value>
+        </Property>
+        <Property>
+            <Name>userGroupEditorModifyTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Edit User Group</Value>
+            <Value disabled="false">Felhasználó csoport módosítás</Value>
+        </Property>
+        <Property>
+            <Name>userGroupEditorName</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Description</Value>
+            <Value disabled="false">Megnevezés</Value>
+        </Property>
+        <Comment>
+            <Value>USERS TABLE</Value>
+        </Comment>
+        <Property>
+            <Name>usersTableTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Users</Value>
+            <Value disabled="false">Felhasználók</Value>
+        </Property>
+        <Property>
+            <Name>userEditorCode</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Code</Value>
+            <Value disabled="false">Kód</Value>
+        </Property>
+        <Comment>
             <Value>APPUSREVIEW</Value>
         </Comment>
         <Property>

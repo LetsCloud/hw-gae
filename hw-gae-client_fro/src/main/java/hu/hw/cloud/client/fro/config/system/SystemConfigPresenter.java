@@ -38,7 +38,7 @@ extends AbstractConfigPresenter<SystemConfigPresenter.MyView, SystemConfigPresen
 		super(eventBus, view, proxy, AppPresenter.SLOT_MAIN);
 		logger.info("SystemConfigPresenter()");
 
-		setCaption(i18n.mainMenuItemCommonConfig());
+		setCaption(i18n.mainMenuItemSystemConfig());
 
 		addTable(1,
 				new TableStore(i18n.systemConfigUserGroup(), dtoTablePresenterFactory.createUserGroupTablePresenter()));

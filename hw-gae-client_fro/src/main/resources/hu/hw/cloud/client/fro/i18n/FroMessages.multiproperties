@@ -75,6 +75,23 @@
             <Value disabled="false">Hotel beállítások</Value>
         </Property>
         <Comment>
+            <Value>SYSTEM CONFIG</Value>
+        </Comment>
+        <Property>
+            <Name>systemConfigUserGroup</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">User Groups</Value>
+            <Value disabled="false">Felhasználó csoportok</Value>
+        </Property>
+        <Property>
+            <Name>systemConfigAppUser</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Users</Value>
+            <Value disabled="false">Felhasználók</Value>
+        </Property>
+        <Comment>
             <Value>HOTEL CONFIG</Value>
         </Comment>
         <Property>
