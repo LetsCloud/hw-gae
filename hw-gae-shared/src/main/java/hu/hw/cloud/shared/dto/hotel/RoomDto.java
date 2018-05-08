@@ -123,6 +123,10 @@ public class RoomDto extends HotelChildDto {
 		this.roomAvailabilityDtos = roomAvailabilityDtos;
 	}
 
+	public void addRoomAvailabilityDto(RoomAvailabilityDto roomAvailabilityDto) {
+		this.roomAvailabilityDtos.add(roomAvailabilityDto);
+	}
+
 	@Override
 	public String toString() {
 		return "RoomDto [" + super.toString() + ", code=" + this.code + ", floor=" + this.floor + ", description="
