@@ -100,6 +100,8 @@ public class BaseTableView<T extends BaseDto> extends Composite {
 
 		MaterialDropDown menuDropDown = new MaterialDropDown();
 		menuDropDown.setActivator("dd-menu");
+		menuDropDown.setConstrainWidth(false);
+		menuDropDown.setWidth("180px");
 
 		MaterialLink pdfLink = new MaterialLink();
 		pdfLink.setIconType(IconType.PICTURE_AS_PDF);
