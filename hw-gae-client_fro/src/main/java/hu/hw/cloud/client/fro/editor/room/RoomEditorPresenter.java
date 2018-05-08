@@ -3,6 +3,7 @@
  */
 package hu.hw.cloud.client.fro.editor.room;
 
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -134,6 +135,8 @@ public class RoomEditorPresenter
 	protected RoomDto createDto() {
 		RoomDto dto = new RoomDto();
 		dto.setHotelDto(currentUser.getAppUserDto().getDefaultHotelDto());
+		RoomAvailabilityDto ra = new RoomAvailabilityDto(true, new Date());
+		dto.addRoomAvailabilityDto(ra);
 		return dto;
 	}
 

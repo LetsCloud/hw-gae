@@ -18,6 +18,14 @@ public class RoomAvailabilityDto implements Dto {
 
 	private Date date;
 
+	public RoomAvailabilityDto() {}
+
+	public RoomAvailabilityDto(Boolean available, Date date) {
+		this();
+		this.available = available;
+		this.date = date;
+	}
+	
 	public Boolean getAvailable() {
 		return available;
 	}
