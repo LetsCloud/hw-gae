@@ -28,7 +28,7 @@ import gwt.material.design.client.ui.MaterialDatePicker;
 import gwt.material.design.client.ui.MaterialDropDown;
 import gwt.material.design.client.ui.MaterialLink;
 import gwt.material.design.client.ui.MaterialListBox;
-import gwt.material.design.client.ui.MaterialModal;
+import gwt.material.design.client.ui.MaterialDialog;
 import gwt.material.design.client.ui.MaterialToast;
 import gwt.material.design.client.ui.html.Option;
 import hu.hw.cloud.client.inf.i18n.InfConstants;
@@ -46,7 +46,7 @@ public class GpsConfigView extends ViewWithUiHandlers<GpsConfigUiHandlers> imple
 	}
 
 	@UiField
-	MaterialModal modal;
+	MaterialDialog modal;
 
 	@UiField
 	MaterialDropDown actualDropDown, baseDropDown;

@@ -17,7 +17,7 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 
-import gwt.material.design.client.ui.MaterialModal;
+import gwt.material.design.client.ui.MaterialDialog;
 
 /**
  * @author CR
@@ -30,7 +30,7 @@ public class AssignmentEditorView extends ViewWithUiHandlers<AssignmentEditorUiH
 	}
 
 	@UiField
-	MaterialModal materialModal;
+	MaterialDialog materialModal;
 
 	@Inject
 	AssignmentEditorView(Binder binder) {

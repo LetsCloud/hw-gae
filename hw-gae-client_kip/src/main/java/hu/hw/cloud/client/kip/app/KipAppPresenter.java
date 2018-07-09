@@ -73,6 +73,15 @@ public class KipAppPresenter extends AppPresenter<KipAppPresenter.MyProxy> {
 		List<MenuItemDto> menuItems = new ArrayList<MenuItemDto>();
 
 		// Assignemnts
+		MenuItemDto taskMngrItem = new MenuItemDto();
+		taskMngrItem.setIndex(1);
+		taskMngrItem.setType(MenuItemType.MENU_ITEM);
+		taskMngrItem.setIcon(IconType.ACCESSIBILITY.name());
+		taskMngrItem.setText("Task Manager");
+		taskMngrItem.setNameToken(KipNameTokens.TASK_MNGR);
+		menuItems.add(taskMngrItem);
+
+		// Assignemnts
 		MenuItemDto chatRoomItem = new MenuItemDto();
 		chatRoomItem.setIndex(1);
 		chatRoomItem.setType(MenuItemType.MENU_ITEM);

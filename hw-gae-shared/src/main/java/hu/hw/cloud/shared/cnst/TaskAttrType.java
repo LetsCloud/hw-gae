@@ -8,5 +8,5 @@ package hu.hw.cloud.shared.cnst;
  *
  */
 public enum TaskAttrType {
-	RESV, R_TYPE, ROOM;
+	REPORTER, INSPECTOR, RESV, R_TYPE, ROOM, MX_CAT, MX_TYPE, CLNG_TYPE, GUEST_RQ_TYPE;
 }

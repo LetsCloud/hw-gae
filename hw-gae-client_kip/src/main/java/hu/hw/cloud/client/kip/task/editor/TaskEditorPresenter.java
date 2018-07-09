@@ -1,9 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.fro.edit.usergroup;
-
-import java.util.logging.Logger;
+package hu.hw.cloud.client.kip.task.editor;
 
 import javax.inject.Inject;
 
@@ -17,35 +15,32 @@ import com.gwtplatform.mvp.client.View;
 import hu.hw.cloud.client.core.event.RefreshTableEvent;
 import hu.hw.cloud.client.core.gin.CustomActionException;
 import hu.hw.cloud.client.core.security.CurrentUser;
-import hu.hw.cloud.client.fro.edit.appuser.AppUserEditPresenter;
-import hu.hw.cloud.shared.UserGroupResource;
+import hu.hw.cloud.shared.api.TaskResource;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
-import hu.hw.cloud.shared.dto.common.UserGroupDto;
+import hu.hw.cloud.shared.dto.task.TaskDto;
 
 /**
  * @author robi
  *
  */
-public class UserGroupEditorPresenter extends PresenterWidget<UserGroupEditorPresenter.MyView>
-		implements UserGroupEditorUiHandlers {
-	private static Logger logger = Logger.getLogger(UserGroupEditorPresenter.class.getName());
+public class TaskEditorPresenter extends PresenterWidget<TaskEditorPresenter.MyView> implements TaskEditorUiHandlers {
 
-	public interface MyView extends View, HasUiHandlers<UserGroupEditorUiHandlers> {
-		void open(Boolean isNew, UserGroupDto dto);
+	public interface MyView extends View, HasUiHandlers<TaskEditorUiHandlers> {
+		void open(Boolean isNew, TaskDto dto);
 
 		void displayError(EntityPropertyCode code, String message);
 
 		void close();
 	}
 
-	private final ResourceDelegate<UserGroupResource> resourceDelegate;
+	private final ResourceDelegate<TaskResource> resourceDelegate;
 
 	private final CurrentUser currentUser;
 
 	private Boolean isNew;
 
 	@Inject
-	UserGroupEditorPresenter(EventBus eventBus, MyView view, ResourceDelegate<UserGroupResource> resourceDelegate,
+	TaskEditorPresenter(EventBus eventBus, MyView view, ResourceDelegate<TaskResource> resourceDelegate,
 			CurrentUser currentUser) {
 		super(eventBus, view);
 
@@ -57,23 +52,22 @@ public class UserGroupEditorPresenter extends PresenterWidget<UserGroupEditorPre
 
 	@Override
 	public void create() {
-		logger.info("create()");
 		isNew = true;
 
-		UserGroupDto dto = new UserGroupDto();
+		TaskDto dto = new TaskDto();
 		dto.setAccountDto(currentUser.getAppUserDto().getAccountDto());
 
 		getView().open(isNew, dto);
 	}
 
 	@Override
-	public void edit(UserGroupDto dto) {
+	public void edit(TaskDto dto) {
 		isNew = false;
 		getView().open(isNew, dto);
 	}
 
 	@Override
-	public void save(UserGroupDto dto) {
+	public void save(TaskDto dto) {
 		if (isNew) {
 			createEntity(dto);
 		} else {
@@ -81,11 +75,11 @@ public class UserGroupEditorPresenter extends PresenterWidget<UserGroupEditorPre
 		}
 	}
 
-	private void createEntity(UserGroupDto dto) {
-		resourceDelegate.withCallback(new AsyncCallback<UserGroupDto>() {
+	private void createEntity(TaskDto dto) {
+		resourceDelegate.withCallback(new AsyncCallback<TaskDto>() {
 			@Override
-			public void onSuccess(UserGroupDto dto) {
-				RefreshTableEvent.fire(UserGroupEditorPresenter.this, RefreshTableEvent.TableType.USER_GROUP);
+			public void onSuccess(TaskDto dto) {
+				RefreshTableEvent.fire(TaskEditorPresenter.this, RefreshTableEvent.TableType.USER_GROUP);
 				getView().close();
 			}
 
@@ -97,14 +91,14 @@ public class UserGroupEditorPresenter extends PresenterWidget<UserGroupEditorPre
 				}
 				getView().displayError(EntityPropertyCode.USER_GROUP_NAME, caught.getMessage());
 			}
-		}).create(dto);
+		}).saveOrCreate(dto);
 	}
 
-	private void updateEntity(UserGroupDto dto) {
-		resourceDelegate.withCallback(new AsyncCallback<UserGroupDto>() {
+	private void updateEntity(TaskDto dto) {
+		resourceDelegate.withCallback(new AsyncCallback<TaskDto>() {
 			@Override
-			public void onSuccess(UserGroupDto dto) {
-				RefreshTableEvent.fire(UserGroupEditorPresenter.this,RefreshTableEvent.TableType.USER_GROUP);
+			public void onSuccess(TaskDto dto) {
+				RefreshTableEvent.fire(TaskEditorPresenter.this, RefreshTableEvent.TableType.USER_GROUP);
 				getView().close();
 			}
 
@@ -116,7 +110,7 @@ public class UserGroupEditorPresenter extends PresenterWidget<UserGroupEditorPre
 				}
 				getView().displayError(EntityPropertyCode.USER_GROUP_NAME, caught.getMessage());
 			}
-		}).update(dto);
+		}).saveOrCreate(dto);
 	}
 
 	private void customMessage(CustomActionException e) {

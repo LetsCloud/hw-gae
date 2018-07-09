@@ -56,6 +56,10 @@ public class HotelTableView extends ViewWithUiHandlers<HotelTableUiHandlers> imp
 
 		table.setTitle(i18nCore.hotelsTableTitle());
 
+		table.getAddButton().addClickHandler(e -> {
+			getUiHandlers().addNew();
+		});
+
 		/*
 		 * CODE
 		 */

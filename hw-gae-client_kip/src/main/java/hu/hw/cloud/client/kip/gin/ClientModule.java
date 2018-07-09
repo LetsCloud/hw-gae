@@ -16,6 +16,7 @@ import hu.hw.cloud.client.kip.gfilter.display.GfilterDisplayModule;
 import hu.hw.cloud.client.kip.roomstatus.DesktopRoomStatusModule;
 import hu.hw.cloud.client.kip.roomstatus.filter.RoomStatusFilterModule;
 import hu.hw.cloud.client.kip.roomstatus.list.RoomStatusListModule;
+import hu.hw.cloud.client.kip.task.TaskMngrModule;
 import hu.hw.cloud.client.core.gin.CoreModule;
 
 /**
@@ -41,6 +42,7 @@ public class ClientModule extends AbstractPresenterModule {
 		install(new ChatListModule());
 		install(new ChatCreatorModule());
 		install(new ChatEditorModule());
+		install(new TaskMngrModule());
 		/*
 		 * install(new UserListModule()); install(new RoleListModule()); install(new
 		 * HotelListModule());

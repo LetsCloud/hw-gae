@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import hu.hw.cloud.shared.cnst.TaskStatus;
 import hu.hw.cloud.shared.cnst.TaskType;
 import hu.hw.cloud.shared.dto.common.AccountChildDto;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
@@ -19,10 +20,16 @@ import hu.hw.cloud.shared.dto.common.AppUserDto;
 public class TaskDto extends AccountChildDto {
 
 	private TaskType type;
+	
+	private TaskStatus status;
 
 	private String title;
 
 	private AppUserDto reporter;
+
+	private AppUserDto assignee;
+
+	private AppUserDto inspector;
 
 	private List<AppUserDto> assignies = new ArrayList<AppUserDto>();
 
@@ -32,9 +39,15 @@ public class TaskDto extends AccountChildDto {
 
 	private List<TaskAttrDto> attributes = new ArrayList<TaskAttrDto>();
 
+	private List<TaskNoteDto> notes = new ArrayList<TaskNoteDto>();
+
 	private String description;
 
 	public TaskDto() {
+	}
+
+	public TaskDto(TaskType type, String title, Date created, Date updated, List<TaskAttrDto> attributes,
+			String description) {
 	}
 
 	public TaskType getType() {
@@ -99,6 +112,38 @@ public class TaskDto extends AccountChildDto {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public AppUserDto getAssignee() {
+		return assignee;
+	}
+
+	public void setAssignee(AppUserDto assignee) {
+		this.assignee = assignee;
+	}
+
+	public AppUserDto getInspector() {
+		return inspector;
+	}
+
+	public void setInspector(AppUserDto inspector) {
+		this.inspector = inspector;
+	}
+
+	public List<TaskNoteDto> getNotes() {
+		return notes;
+	}
+
+	public void setNotes(List<TaskNoteDto> notes) {
+		this.notes = notes;
+	}
+
+	public TaskStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(TaskStatus status) {
+		this.status = status;
 	}
 
 }

@@ -14,8 +14,9 @@ import hu.hw.cloud.client.kip.resources.KipGssResources;
  */
 public class ResourceLoader {
 	@Inject
-	ResourceLoader(HwBlueResources resources, KipGssResources gssResources) {
+	ResourceLoader(HwBlueResources resources, KipGssResources kipGssRes) {
         resources.override().ensureInjected();
-		gssResources.common().ensureInjected();
+		kipGssRes.chatStyle().ensureInjected();
+		kipGssRes.taskStyle().ensureInjected();
     }
 }

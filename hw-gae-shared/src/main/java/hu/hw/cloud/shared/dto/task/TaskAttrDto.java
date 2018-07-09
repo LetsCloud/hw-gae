@@ -13,10 +13,18 @@ import hu.hw.cloud.shared.dto.Dto;
 @SuppressWarnings("serial")
 public class TaskAttrDto implements Dto {
 	
-	TaskAttrType type;
+	private TaskAttrType type;
 	
-	String value;
+	private String value;
 
+	public TaskAttrDto() {}
+
+	public TaskAttrDto(TaskAttrType type, String value) {
+		this();
+		this.type = type;
+		this.value = value;
+	}
+	
 	public TaskAttrType getType() {
 		return type;
 	}

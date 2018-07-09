@@ -25,7 +25,7 @@ import hu.hw.cloud.shared.dto.common.AppUserDto;
 import hu.hw.cloud.shared.dto.common.UserGroupDto;
 import gwt.material.design.addins.client.combobox.MaterialComboBox;
 import gwt.material.design.client.ui.MaterialImage;
-import gwt.material.design.client.ui.MaterialModal;
+import gwt.material.design.client.ui.MaterialDialog;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialTitle;
 
@@ -44,7 +44,7 @@ public class AppUserEditView extends ViewWithUiHandlers<AppUserEditUiHandlers>
 	}
 
 	@UiField
-	MaterialModal modal;
+	MaterialDialog modal;
 
 	@UiField
 	@Ignore

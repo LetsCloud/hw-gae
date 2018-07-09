@@ -48,6 +48,10 @@ public class UserGroupTableView extends ViewWithUiHandlers<UserGroupTableUiHandl
 
 		table.setTitle(i18nCore.userGroupTableTitle());
 
+		table.getAddButton().addClickHandler(e -> {
+			getUiHandlers().addNew();
+		});
+
 		// Name Column
 		table.addColumn(
 				new DataColumn<UserGroupDto>((object) -> object.getName(),

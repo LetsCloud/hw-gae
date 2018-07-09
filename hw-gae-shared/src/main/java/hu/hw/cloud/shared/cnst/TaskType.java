@@ -8,6 +8,6 @@ package hu.hw.cloud.shared.cnst;
  *
  */
 public enum TaskType {
-	COM, CLNG, MAINT;
+	COMMON, CLNG, MAINT, GUEST_RQ;
 
 }

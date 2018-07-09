@@ -3,6 +3,8 @@
  */
 package hu.hw.cloud.client.fro.edit.usergroup;
 
+import java.util.logging.Logger;
+
 import javax.inject.Inject;
 
 import com.google.gwt.editor.client.Editor;
@@ -15,7 +17,7 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
-import gwt.material.design.client.ui.MaterialModal;
+import gwt.material.design.client.ui.MaterialDialog;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialTitle;
 import gwt.material.design.client.ui.MaterialToast;
@@ -29,6 +31,7 @@ import hu.hw.cloud.shared.dto.common.UserGroupDto;
  */
 public class UserGroupEditorView extends ViewWithUiHandlers<UserGroupEditorUiHandlers>
 		implements UserGroupEditorPresenter.MyView, Editor<UserGroupDto> {
+	private static Logger logger = Logger.getLogger(UserGroupEditorView.class.getName());
 
 	interface Binder extends UiBinder<Widget, UserGroupEditorView> {
 	}
@@ -37,7 +40,7 @@ public class UserGroupEditorView extends ViewWithUiHandlers<UserGroupEditorUiHan
 	}
 
 	@UiField
-	MaterialModal modal;
+	MaterialDialog modal;
 
 	@UiField
 	@Ignore
@@ -61,6 +64,7 @@ public class UserGroupEditorView extends ViewWithUiHandlers<UserGroupEditorUiHan
 
 	@Override
 	public void open(Boolean isNew, UserGroupDto dto) {
+		logger.info("open()");
 		if (isNew) {
 			title.setTitle(i18n.userGroupEditorCreateTitle());
 		} else {
