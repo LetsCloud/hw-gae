@@ -17,7 +17,6 @@ import hu.hw.cloud.client.core.security.LoggedInGatekeeper;
 import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.config.AbstractConfigPresenter;
 import hu.hw.cloud.client.fro.config.TableStore;
-import hu.hw.cloud.client.fro.config.system.SystemConfigPresenter;
 import hu.hw.cloud.client.fro.i18n.FroMessages;
 import hu.hw.cloud.client.fro.table.DtoTablePresenterFactory;
 
@@ -28,7 +27,7 @@ import hu.hw.cloud.client.fro.table.DtoTablePresenterFactory;
 public class HotelConfigPresenter
 		extends AbstractConfigPresenter<HotelConfigPresenter.MyView, HotelConfigPresenter.MyProxy>
 		implements HotelConfigUiHandlers {
-	private static Logger logger = Logger.getLogger(SystemConfigPresenter.class.getName());
+	private static Logger logger = Logger.getLogger(HotelConfigPresenter.class.getName());
 
 	interface MyView extends AbstractConfigPresenter.MyView {
 	}
@@ -51,6 +50,8 @@ public class HotelConfigPresenter
 		addTable(2,
 				new TableStore(i18n.hotelConfigRoomTypes(), dtoTablePresenterFactory.createRoomTypeTablePresenter()));
 		addTable(3, new TableStore(i18n.hotelConfigRooms(), dtoTablePresenterFactory.createRoomTablePresenter()));
+		addTable(4, new TableStore(i18n.hotelConfigMarketGroups(),
+				dtoTablePresenterFactory.createMarketGroupTablePresenter()));
 
 		getView().setUiHandlers(this);
 	}

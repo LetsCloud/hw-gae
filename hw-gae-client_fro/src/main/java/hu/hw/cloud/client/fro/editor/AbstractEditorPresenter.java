@@ -76,6 +76,7 @@ public abstract class AbstractEditorPresenter<T extends BaseDto, V extends Edito
 
 	@Override
 	public void cancel() {
+		getView().close();
 		placeManager.navigateBack();
 	}
 }

@@ -4,7 +4,7 @@
 package hu.hw.cloud.shared.dto.common;
 
 import hu.hw.cloud.shared.dto.BaseDto;
-import hu.hw.cloud.shared.dto.pf.PostalAddressDto;
+import hu.hw.cloud.shared.dto.profile.PostalAddressDto;
 
 /**
  * @author CR

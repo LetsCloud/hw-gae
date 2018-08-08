@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import hu.hw.cloud.shared.dto.Dto;
-import hu.hw.cloud.shared.dto.pf.GuestDto;
+import hu.hw.cloud.shared.dto.profile.GuestDto;
 
 /**
  * @author CR

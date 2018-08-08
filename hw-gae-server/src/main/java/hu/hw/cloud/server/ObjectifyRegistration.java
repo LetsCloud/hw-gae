@@ -18,6 +18,7 @@ import hu.hw.cloud.server.entity.cube.CubeActlCap;
 import hu.hw.cloud.server.entity.cube.CubeBdgtCap;
 import hu.hw.cloud.server.entity.cube.CubeFcstCap;
 import hu.hw.cloud.server.entity.hotel.Hotel;
+import hu.hw.cloud.server.entity.hotel.MarketGroup;
 import hu.hw.cloud.server.entity.hotel.Room;
 import hu.hw.cloud.server.entity.hotel.RoomType;
 import hu.hw.cloud.server.entity.hotel.Service;
@@ -44,6 +45,7 @@ public class ObjectifyRegistration {
 		ObjectifyService.register(Hotel.class);
 		ObjectifyService.register(RoomType.class);
 		ObjectifyService.register(Room.class);
+		ObjectifyService.register(MarketGroup.class);
 		ObjectifyService.register(Chat.class);
 		ObjectifyService.register(Task.class);
 		ObjectifyService.register(Reservation.class);

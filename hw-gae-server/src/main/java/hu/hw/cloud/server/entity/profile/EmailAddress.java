@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hu.hw.cloud.shared.cnst.EmailAddressLabel;
-import hu.hw.cloud.shared.dto.pf.EmailAddressDto;
+import hu.hw.cloud.shared.dto.profile.EmailAddressDto;
 
 /**
  * Email cím entitás.

@@ -9,6 +9,7 @@ import java.util.List;
 import hu.hw.cloud.shared.cnst.ReservationStatus;
 import hu.hw.cloud.shared.dto.common.CurrencyDto;
 import hu.hw.cloud.shared.dto.hotel.HotelChildDto;
+import hu.hw.cloud.shared.dto.hotel.MarketCodeDto;
 
 /**
  * @author CR
@@ -22,6 +23,8 @@ public class ReservationDto extends HotelChildDto {
 	 */
 	private ReservationStatus status;
 
+	private MarketCodeDto market;
+	
 	/**
 	 * Valutanem.
 	 */

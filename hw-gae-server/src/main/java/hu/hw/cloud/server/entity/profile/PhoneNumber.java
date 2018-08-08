@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hu.hw.cloud.shared.cnst.PhoneNumberLabel;
-import hu.hw.cloud.shared.dto.pf.PhoneNumberDto;
+import hu.hw.cloud.shared.dto.profile.PhoneNumberDto;
 
 /**
  * Telefonszám entitás.

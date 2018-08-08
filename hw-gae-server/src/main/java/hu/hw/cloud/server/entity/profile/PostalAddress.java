@@ -10,7 +10,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.Predicate;
 
 import hu.hw.cloud.shared.cnst.PostalAddressLabel;
-import hu.hw.cloud.shared.dto.pf.PostalAddressDto;
+import hu.hw.cloud.shared.dto.profile.PostalAddressDto;
 
 /**
  * Postacím.

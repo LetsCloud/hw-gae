@@ -2,6 +2,10 @@ package hu.hw.cloud.client.fro;
 
 public class FroNameTokens {
 
+	// Reservation
+	public static final String CREATE_RESERVATION = "/createReservation";
+	public static final String RESERVATION = "/reservation";
+
 	// Configuration
 	public static final String SYSTEM_CONFIG = "/systemConfig";
 	public static final String COMMON_CONFIG = "/commonConfig";

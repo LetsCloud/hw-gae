@@ -15,4 +15,6 @@ public interface EditorView<T extends BaseDto> extends View {
 
 	void edit(Boolean isNew, T dto);
 
+	void close();
+
 }

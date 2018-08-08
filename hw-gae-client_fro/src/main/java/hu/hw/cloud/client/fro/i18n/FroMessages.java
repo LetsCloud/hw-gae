@@ -80,4 +80,7 @@ public interface FroMessages extends Messages {
 
 	@DefaultMessage("Rooms")
 	String hotelConfigRooms();
+
+	@DefaultMessage("Market Groups")
+	String hotelConfigMarketGroups();
 }

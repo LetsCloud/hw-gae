@@ -126,4 +126,10 @@ public class RoomEditorView extends ViewWithUiHandlers<RoomEditorUiHandlers>
 			roomTypeCombo.addItem(roomTypeDto.getCode() + " - " + roomTypeDto.getName(), roomTypeDto);
 		}
 	}
+
+	@Override
+	public void close() {
+		// TODO Auto-generated method stub
+		
+	}
 }

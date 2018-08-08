@@ -1,6 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:m="urn:import:gwt.material.design.client.ui" xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	xmlns:m="urn:import:gwt.material.design.client.ui"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
 	<ui:style>
 	.base {
@@ -32,16 +33,17 @@
 		<g:HTMLPanel ui:field="menu" />
 
 		<m:MaterialContainer>
-			<m:MaterialPanel addStyleNames="titleBar" marginTop="56"
-				padding="56" shadow="1">
+			<m:MaterialPanel addStyleNames="titleBar"
+				marginTop="56" padding="56" shadow="1">
 				<m:MaterialPanel ui:field="panel">
-					<m:MaterialLabel ui:field="title" fontSize="2.3em" />
+					<m:MaterialLabel ui:field="title" fontSize="2.3em"/>
 					<m:MaterialLabel ui:field="description" />
 				</m:MaterialPanel>
 			</m:MaterialPanel>
 
 			<g:HTMLPanel addStyleNames="{style.panel} panel">
-				<m:MaterialRow ui:field="main" addStyleNames="main-sheet" />
+				<m:MaterialRow ui:field="main"
+					addStyleNames="main-sheet" />
 			</g:HTMLPanel>
 		</m:MaterialContainer>
 

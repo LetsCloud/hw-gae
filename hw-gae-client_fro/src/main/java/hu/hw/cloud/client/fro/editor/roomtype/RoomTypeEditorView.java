@@ -136,4 +136,10 @@ public class RoomTypeEditorView extends ViewWithUiHandlers<RoomTypeEditorUiHandl
 	void onCancelClick(ClickEvent event) {
 		getUiHandlers().cancel();
 	}
+
+	@Override
+	public void close() {
+		// TODO Auto-generated method stub
+		
+	}
 }

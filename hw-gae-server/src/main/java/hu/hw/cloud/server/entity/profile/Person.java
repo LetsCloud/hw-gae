@@ -8,7 +8,7 @@ import java.util.Date;
 import com.googlecode.objectify.annotation.Subclass;
 
 import hu.hw.cloud.shared.cnst.Gender;
-import hu.hw.cloud.shared.dto.pf.StructuredName;
+import hu.hw.cloud.shared.dto.profile.StructuredName;
 
 /**
  * @author CR

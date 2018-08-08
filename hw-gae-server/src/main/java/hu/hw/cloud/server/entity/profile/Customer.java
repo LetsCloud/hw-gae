@@ -6,8 +6,8 @@ package hu.hw.cloud.server.entity.profile;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Subclass;
 
-import hu.hw.cloud.shared.dto.pf.CustomerDto;
-import hu.hw.cloud.shared.dto.pf.ProfileDto;
+import hu.hw.cloud.shared.dto.profile.CustomerDto;
+import hu.hw.cloud.shared.dto.profile.ProfileDto;
 
 /**
  * @author CR

@@ -30,15 +30,6 @@ public class DtoTableModule extends AbstractPresenterModule {
 
 		bindPresenterWidget(AppUserTablePresenter.class, AppUserTablePresenter.MyView.class, AppUserTableView.class);
 
-		bindPresenterWidget(HotelTablePresenter.class, HotelTablePresenter.MyView.class,
-				HotelTableView.class);
-		
-		bindPresenterWidget(RoomTypeTablePresenter.class, RoomTypeTablePresenter.MyView.class,
-				RoomTypeTableView.class);
-		
-		bindPresenterWidget(RoomTablePresenter.class, RoomTablePresenter.MyView.class,
-				RoomTableView.class);
-
 		bind(BaseTableView.class);
 
 		install(new GinFactoryModuleBuilder().build(DtoTablePresenterFactory.class));

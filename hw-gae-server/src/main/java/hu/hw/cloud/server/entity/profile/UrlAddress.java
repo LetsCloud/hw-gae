@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hu.hw.cloud.shared.cnst.UrlAddressLabel;
-import hu.hw.cloud.shared.dto.pf.UrlAddressDto;
+import hu.hw.cloud.shared.dto.profile.UrlAddressDto;
 
 /**
  * @author CR
