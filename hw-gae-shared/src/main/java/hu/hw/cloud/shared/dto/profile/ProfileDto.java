@@ -17,6 +17,8 @@ public class ProfileDto extends AccountChildDto {
 
 	private String name;
 
+	private List<CommunicationDto> communicationDtos = new ArrayList<CommunicationDto>();
+
 	private List<PhoneNumberDto> phoneNumberDtos = new ArrayList<PhoneNumberDto>();
 
 	private List<EmailAddressDto> emailAddressDtos = new ArrayList<EmailAddressDto>();
@@ -24,6 +26,9 @@ public class ProfileDto extends AccountChildDto {
 	private List<PostalAddressDto> postalAddressDtos = new ArrayList<PostalAddressDto>();
 
 	private List<UrlAddressDto> urlAddressDtos = new ArrayList<UrlAddressDto>();
+
+	public ProfileDto() {
+	}
 
 	public String getName() {
 		return name;
@@ -64,4 +69,13 @@ public class ProfileDto extends AccountChildDto {
 	public void setUrlAddressDtos(List<UrlAddressDto> urlAddressDtos) {
 		this.urlAddressDtos = urlAddressDtos;
 	}
+
+	public List<CommunicationDto> getCommunicationDtos() {
+		return communicationDtos;
+	}
+
+	public void setCommunicationDtos(List<CommunicationDto> communicationDtos) {
+		this.communicationDtos = communicationDtos;
+	}
+	
 }

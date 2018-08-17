@@ -12,9 +12,9 @@ import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 import hu.hw.cloud.client.core.i18n.CoreMessages;
-import hu.hw.cloud.client.fro.table.BaseTableView;
-import hu.hw.cloud.client.fro.table.DataColumn;
-import hu.hw.cloud.client.fro.table.EditColumn;
+import hu.hw.cloud.client.fro.browser.BrowserView;
+import hu.hw.cloud.client.fro.browser.DataColumn;
+import hu.hw.cloud.client.fro.browser.EditColumn;
 import hu.hw.cloud.shared.api.AppUserResource;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
 
@@ -26,7 +26,7 @@ public class AppUserTableView extends ViewWithUiHandlers<AppUserTableUiHandlers>
 		implements AppUserTablePresenter.MyView {
 	private static Logger logger = Logger.getLogger(AppUserTableView.class.getName());
 
-	private final BaseTableView<AppUserDto> table;
+	private final BrowserView<AppUserDto> table;
 
 	private final CoreMessages i18n;
 
@@ -34,7 +34,7 @@ public class AppUserTableView extends ViewWithUiHandlers<AppUserTableUiHandlers>
 	 * 
 	 */
 	@Inject
-	AppUserTableView(BaseTableView<AppUserDto> table, ResourceDelegate<AppUserResource> usersDelegate,
+	AppUserTableView(BrowserView<AppUserDto> table, ResourceDelegate<AppUserResource> usersDelegate,
 			CoreMessages i18n) {
 		logger.info("AppUserTableView()");
 		initWidget(table);

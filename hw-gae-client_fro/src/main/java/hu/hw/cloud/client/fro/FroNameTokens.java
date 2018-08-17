@@ -7,6 +7,7 @@ public class FroNameTokens {
 	public static final String RESERVATION = "/reservation";
 
 	// Configuration
+	public static final String CUSTOMER_CONFIG = "/customerConfig";
 	public static final String SYSTEM_CONFIG = "/systemConfig";
 	public static final String COMMON_CONFIG = "/commonConfig";
 	public static final String HOTEL_CONFIG = "/hotelConfig";

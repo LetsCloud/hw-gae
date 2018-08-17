@@ -287,6 +287,57 @@ public interface CoreMessages extends Messages {
 
 	
 	/*
+	 * CUSTOMER EDITOR
+	 */
+
+	@DefaultMessage("Communication")
+	String customerEditorCommunication();
+	
+	@DefaultMessage("Addresses")
+	String customerEditorAdresses();
+	
+	/*
+	 * COMMUNICATION EDITOR
+	 */
+
+	@DefaultMessage("Communication Mode")
+	String communicationEditorLabel();
+
+	@DefaultMessage("Primary")
+	String communicationEditorPrimary();
+	
+	/*
+	 * ADDRESS EDITOR
+	 */
+
+	@DefaultMessage("Address Type")
+	String addressEditorLabel();
+
+	@DefaultMessage("Choose an Address Type")
+	String addressEditorLabelPlaceholder();
+
+	@DefaultMessage("Primary")
+	String addressEditorPrimary();
+	
+	@DefaultMessage("Street and number")
+	String addressEditorStreet();
+	
+	@DefaultMessage("Country")
+	String addressEditorCountry();
+	
+	@DefaultMessage("Choose a Coountry")
+	String addressEditorCountryPlaceholder();
+	
+	@DefaultMessage("Postal code")
+	String addressEditorPostcode();
+	
+	@DefaultMessage("Choose an Postal code")
+	String addressEditorPostcodePlaceholder();
+	
+	@DefaultMessage("City")
+	String addressEditorCity();
+	
+	/*
 	 * HOTEL TABLE
 	 */
 	

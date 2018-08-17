@@ -33,9 +33,9 @@ import hu.hw.cloud.client.core.event.SetPageTitleEvent;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.fro.FroNameTokens;
+import hu.hw.cloud.client.fro.browser.AbstractBrowserPresenter;
 import hu.hw.cloud.client.fro.editor.AbstractEditorPresenter;
 import hu.hw.cloud.client.fro.editor.EditorView;
-import hu.hw.cloud.client.fro.table.AbstractTablePresenter;
 import hu.hw.cloud.shared.api.RoomResource;
 import hu.hw.cloud.shared.cnst.InventoryType;
 import hu.hw.cloud.shared.cnst.MenuItemType;
@@ -92,8 +92,8 @@ public class RoomEditorPresenter
 	@Override
 	protected void loadData() {
 		roomTypeDataSource.setOnlyActive(true);
-		roomTypeDataSource.setHotelKey(filters.get(AbstractTablePresenter.PARAM_HOTEL_KEY));
-		hotelDataSource.setWebSafeKey(filters.get(AbstractTablePresenter.PARAM_HOTEL_KEY));
+		roomTypeDataSource.setHotelKey(filters.get(AbstractBrowserPresenter.PARAM_HOTEL_KEY));
+		hotelDataSource.setWebSafeKey(filters.get(AbstractBrowserPresenter.PARAM_HOTEL_KEY));
 		
 		LoadCallback<RoomTypeDto> roomTypeLoadCallback = new LoadCallback<RoomTypeDto>() {
 			@Override
@@ -119,7 +119,7 @@ public class RoomEditorPresenter
 					};
 					hotelDataSource.get(new LoadConfig<HotelDto>(0, 0, null, null), hotelLoadCallback);
 				} else {
-					edit(filters.get(AbstractTablePresenter.PARAM_DTO_KEY));
+					edit(filters.get(AbstractBrowserPresenter.PARAM_DTO_KEY));
 				}
 			}
 

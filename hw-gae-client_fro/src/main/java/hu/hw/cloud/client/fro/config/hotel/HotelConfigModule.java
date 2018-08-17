@@ -5,16 +5,16 @@ package hu.hw.cloud.client.fro.config.hotel;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
+import hu.hw.cloud.client.fro.browser.hotel.HotelTablePresenter;
+import hu.hw.cloud.client.fro.browser.hotel.HotelTableView;
+import hu.hw.cloud.client.fro.browser.marketgroup.MarketGroupTableModule;
+import hu.hw.cloud.client.fro.browser.room.RoomTablePresenter;
+import hu.hw.cloud.client.fro.browser.room.RoomTableView;
+import hu.hw.cloud.client.fro.browser.roomtype.RoomTypeTablePresenter;
+import hu.hw.cloud.client.fro.browser.roomtype.RoomTypeTableView;
 import hu.hw.cloud.client.fro.editor.hotel.HotelEditorModule;
 import hu.hw.cloud.client.fro.editor.room.RoomEditorModule;
 import hu.hw.cloud.client.fro.editor.roomtype.RoomTypeEditorModule;
-import hu.hw.cloud.client.fro.table.hotel.HotelTablePresenter;
-import hu.hw.cloud.client.fro.table.hotel.HotelTableView;
-import hu.hw.cloud.client.fro.table.marketgroup.MarketGroupTableModule;
-import hu.hw.cloud.client.fro.table.room.RoomTablePresenter;
-import hu.hw.cloud.client.fro.table.room.RoomTableView;
-import hu.hw.cloud.client.fro.table.roomtype.RoomTypeTablePresenter;
-import hu.hw.cloud.client.fro.table.roomtype.RoomTypeTableView;
 
 /**
  * @author robi

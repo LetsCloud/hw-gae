@@ -16,6 +16,9 @@ public class CustomerDto extends ProfileDto {
 
 	private String euTaxNumber;
 
+	public CustomerDto() {
+	}
+
 	public String getCode() {
 		return code;
 	}

@@ -13,7 +13,7 @@ import com.gwtplatform.mvp.client.UiHandlers;
  */
 public interface ConfigUiHandlers  extends UiHandlers {
 
-	Map<Integer, TableStore> getTableMap();
+	Map<Integer, PresenterWidgetStore> getTableMap();
 	
 	void showTable(Integer index);
 }

@@ -48,7 +48,7 @@ public class PostalAddressDto implements Dto {
 	/**
 	 * Formázott cím.
 	 */
-	private String formattedAddress;
+	private String fullAddress;
 
 	public PostalAddressLabel getLabel() {
 		return label;
@@ -106,11 +106,11 @@ public class PostalAddressDto implements Dto {
 		this.country = country;
 	}
 
-	public String getFormattedAddress() {
-		return formattedAddress;
+	public String getFullAddress() {
+		return fullAddress;
 	}
 
-	public void setFormattedAddress(String formattedAddress) {
-		this.formattedAddress = formattedAddress;
+	public void setFullAddress(String fullAddress) {
+		this.fullAddress = fullAddress;
 	}
 }

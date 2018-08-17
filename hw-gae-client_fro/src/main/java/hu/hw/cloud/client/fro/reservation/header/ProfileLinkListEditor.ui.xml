@@ -9,11 +9,11 @@
 	<g:HTMLPanel>
 		<g:FlowPanel ui:field="listPanel" />
 		
-		<m:MaterialButton ui:field="addButton"
+		<m:MaterialButton ui:field="addAgent"
 			text="{i18nCore.roomEditorAvailabilityAdd}" waves="DEFAULT"
 			backgroundColor="WHITE" textColor="BLACK" />
 
-		<m:MaterialButton ui:field="deleteButton"
+		<m:MaterialButton ui:field="addOther"
 			text="{i18nCore.roomEditorAvailabilityRemove}" waves="DEFAULT"
 			backgroundColor="WHITE" textColor="BLACK" />
 	</g:HTMLPanel>

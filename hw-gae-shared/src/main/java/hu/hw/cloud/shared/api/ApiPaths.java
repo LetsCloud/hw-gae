@@ -29,6 +29,8 @@ public class ApiPaths {
 
 		public static final String TASK = "/task";
 
+		public static final String CUSTOMER = "/customer";
+
 		public static final String HOTEL = "/hotel";
 		public static final String ROOMTYPE = "/roomtype";
 		public static final String ROOM = "/room";
