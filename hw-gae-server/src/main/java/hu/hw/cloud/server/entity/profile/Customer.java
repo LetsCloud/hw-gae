@@ -6,8 +6,7 @@ package hu.hw.cloud.server.entity.profile;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Subclass;
 
-import hu.hw.cloud.shared.dto.pf.CustomerDto;
-import hu.hw.cloud.shared.dto.pf.ProfileDto;
+import hu.hw.cloud.shared.dto.profile.CustomerDto;
 
 /**
  * @author CR
@@ -15,17 +14,6 @@ import hu.hw.cloud.shared.dto.pf.ProfileDto;
  */
 @Subclass(index = true)
 public class Customer extends Profile {
-
-	public static CustomerDto createDto(Customer entity) {
-		CustomerDto dto = new CustomerDto();
-		dto.setCode(entity.getCode());
-		
-		dto.setEmailAddressDtos(EmailAddress.createDtos(entity.getEmailAddresses()));
-		dto.setName(entity.getName());
-		dto.setPhoneNumberDtos(PhoneNumber.createDtos(entity.getPhoneNumbers()));
-		
-		return dto;
-	}
 
 	@Index
 	private String code;
@@ -56,6 +44,17 @@ public class Customer extends Profile {
 
 	public void setEuTaxNumber(String euTaxNumber) {
 		this.euTaxNumber = euTaxNumber;
+	}
+
+	public static CustomerDto createDto(Customer entity) {
+		CustomerDto dto = new CustomerDto();
+		dto.setCode(entity.getCode());
+		
+		dto.setEmailAddressDtos(EmailAddress.createDtos(entity.getEmailAddresses()));
+		dto.setName(entity.getName());
+		dto.setPhoneNumberDtos(PhoneNumber.createDtos(entity.getPhoneNumbers()));
+		
+		return dto;
 	}
 
 }

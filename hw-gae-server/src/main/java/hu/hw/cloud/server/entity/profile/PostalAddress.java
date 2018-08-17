@@ -10,7 +10,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.Predicate;
 
 import hu.hw.cloud.shared.cnst.PostalAddressLabel;
-import hu.hw.cloud.shared.dto.pf.PostalAddressDto;
+import hu.hw.cloud.shared.dto.profile.PostalAddressDto;
 
 /**
  * Postacím.
@@ -72,8 +72,8 @@ public class PostalAddress {
 		if (dto.getCountry() != null)
 			this.setCountry(dto.getCountry());
 
-		if (dto.getFormattedAddress() != null)
-			this.setFormattedAddress(dto.getFormattedAddress());
+		if (dto.getFullAddress() != null)
+			this.setFormattedAddress(dto.getFullAddress());
 
 		if (dto.getLabel() != null)
 			this.setLabel(dto.getLabel());
@@ -176,7 +176,7 @@ public class PostalAddress {
 	public PostalAddressDto updateDto(PostalAddressDto dto) {
 		dto.setCity(getCity());
 		dto.setCountry(getCountry());
-		dto.setFormattedAddress(getFormattedAddress());
+		dto.setFullAddress(getFormattedAddress());
 		dto.setLabel(getLabel());
 		dto.setPostcode(getPostcode());
 		dto.setPrimary(getPrimary());

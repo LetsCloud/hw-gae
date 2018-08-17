@@ -11,7 +11,7 @@
 	<m:MaterialRow marginBottom="0">
 
 		<m:MaterialColumn ui:field="leftColumn" grid="s12 m6"
-			addStyleNames="{res.common.chat_list_view_col_left}">
+			addStyleNames="{res.chatStyle.chat_list_view_col_left}">
 			<m:MaterialCard grid="s12" marginBottom="10">
 				<m:MaterialCardContent padding="10">
 					<m:MaterialCardTitle text="Open Chats List"
@@ -19,7 +19,7 @@
 
 
 					<m:MaterialCollection ui:field="materialCollection"
-						addStyleNames="{res.common.chat_list_view_collection}">
+						addStyleNames="{res.chatStyle.chat_list_view_collection}">
 
 					</m:MaterialCollection>
 				</m:MaterialCardContent>
@@ -45,7 +45,7 @@
 		</m:MaterialColumn>
 
 		<m:MaterialColumn ui:field="rightColumn" grid="s12 m6"
-			addStyleNames="{res.common.chat_list_view_col_right}">
+			addStyleNames="{res.chatStyle.chat_list_view_col_right}">
 			<g:SimplePanel ui:field="editorPanel" />
 		</m:MaterialColumn>
 	</m:MaterialRow>

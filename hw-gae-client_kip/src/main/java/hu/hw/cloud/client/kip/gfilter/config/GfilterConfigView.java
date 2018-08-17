@@ -18,7 +18,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import gwt.material.design.client.ui.MaterialDatePicker;
 import gwt.material.design.client.ui.MaterialDropDown;
 import gwt.material.design.client.ui.MaterialListBox;
-import gwt.material.design.client.ui.MaterialModal;
+import gwt.material.design.client.ui.MaterialDialog;
 
 /**
  * @author CR
@@ -31,7 +31,7 @@ public class GfilterConfigView extends ViewWithUiHandlers<GfilterConfigUiHandler
 	}
 
 	@UiField
-	MaterialModal modal;
+	MaterialDialog modal;
 
 	@Inject
 	GfilterConfigView(Binder binder) {

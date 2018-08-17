@@ -40,9 +40,7 @@ public class AvailabilityEditor extends Composite implements Editor<RoomAvailabi
 	AvailabilityEditor(Binder uiBinder, CoreMessages i18nCore) {
 		initWidget(uiBinder.createAndBindUi(this));
 		available.setOffLabel(i18nCore.comNo());
-		;
 		available.setOnLabel(i18nCore.comYes());
-		;
 	}
 /*
 	private void fireDeleteEvent() {

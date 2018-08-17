@@ -12,9 +12,8 @@ import com.google.gwt.resources.client.CssResource;
  *
  */
 public interface KipGssResources extends ClientBundle {
-	public static final KipGssResources INSTANCE = GWT.create(KipGssResources.class);
 
-	interface Style extends CssResource {
+	interface ChatStyle extends CssResource {
 		String chat_list_view_col_left();
 		String chat_list_view_col_right();
 		String chat_list_view_collection();
@@ -27,5 +26,14 @@ public interface KipGssResources extends ClientBundle {
 	}
 
 	@Source({"hu/hw/cloud/client/kip/resources/css/kip.gss" })
-	Style common();
+	ChatStyle chatStyle();
+
+	interface TaskStyle extends CssResource {
+		String task_collapsible();
+		String task_collapsible_header();
+		String task_collapsible_body();
+	}
+
+	@Source({"hu/hw/cloud/client/kip/resources/css/taskcollapsible.gss" })
+	TaskStyle taskStyle();
 }

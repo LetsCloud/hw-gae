@@ -32,9 +32,9 @@ import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.core.util.ErrorHandlerAsyncCallback;
 import hu.hw.cloud.client.fro.FroNameTokens;
+import hu.hw.cloud.client.fro.browser.AbstractBrowserPresenter;
 import hu.hw.cloud.client.fro.editor.AbstractEditorPresenter;
 import hu.hw.cloud.client.fro.editor.EditorView;
-import hu.hw.cloud.client.fro.table.AbstractTablePresenter;
 import hu.hw.cloud.shared.api.AppUserResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
@@ -134,7 +134,7 @@ public class AppUserEditorPresenter
 		} else {
 			SetPageTitleEvent.fire(i18n.userEditorModifyTitle(), "", MenuItemType.MENU_ITEM,
 					AppUserEditorPresenter.this);
-			edit(filters.get(AbstractTablePresenter.PARAM_DTO_KEY));
+			edit(filters.get(AbstractBrowserPresenter.PARAM_DTO_KEY));
 		}
 	}
 

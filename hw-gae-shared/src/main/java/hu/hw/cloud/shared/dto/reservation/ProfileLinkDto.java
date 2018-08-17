@@ -5,7 +5,7 @@ package hu.hw.cloud.shared.dto.reservation;
 
 import hu.hw.cloud.shared.cnst.ProfileType;
 import hu.hw.cloud.shared.dto.Dto;
-import hu.hw.cloud.shared.dto.pf.CustomerDto;
+import hu.hw.cloud.shared.dto.profile.CustomerDto;
 
 /**
  * @author CR

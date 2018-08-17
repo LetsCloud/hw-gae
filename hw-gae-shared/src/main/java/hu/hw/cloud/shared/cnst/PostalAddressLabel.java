@@ -11,25 +11,33 @@ package hu.hw.cloud.shared.cnst;
  */
 public enum PostalAddressLabel {
 	/**
-	 * Számlázási cím.
+	 * Székhely.
 	 */
-	INVOICE,
+	HEADQUARTER,
 	/**
-	 * Postázási cím
+	 * Telephely.
 	 */
-	POSTAL,
+	SERVICE,
 	/**
-	 * Szállítási cím
+	 * Munkahelyi cím
 	 */
-	SHIP,
+	WORK,
 	/**
 	 * Otthoni cím
 	 */
 	HOME,
 	/**
-	 * Munkahelyi cím
+	 * Számlázási cím.
 	 */
-	WORK,
+	BILLING,
+	/**
+	 * Postázási cím
+	 */
+	MAILING,
+	/**
+	 * Szállítási cím
+	 */
+	SHIPPING,
 	/**
 	 * Egyéb cím
 	 */

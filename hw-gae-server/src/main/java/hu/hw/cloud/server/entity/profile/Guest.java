@@ -3,7 +3,11 @@
  */
 package hu.hw.cloud.server.entity.profile;
 
+import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Subclass;
+
+import hu.hw.cloud.server.entity.hotel.RoomType;
+import hu.hw.cloud.server.entity.hotel.VipLevel;
 
 /**
  * @author CR
@@ -14,6 +18,11 @@ public class Guest extends Person {
 
 	private String nationality;
 
+	/**
+	 * Szoba hivatkozás.
+	 */
+	private Ref<VipLevel> vipLevelRef;
+
 	public Guest() {}
 	
 	public String getNationality() {
@@ -22,6 +31,14 @@ public class Guest extends Person {
 
 	public void setNationality(String nationality) {
 		this.nationality = nationality;
+	}
+
+	public Ref<VipLevel> getVipLevelRef() {
+		return vipLevelRef;
+	}
+
+	public void setVipLevelRef(Ref<VipLevel> vipLevelRef) {
+		this.vipLevelRef = vipLevelRef;
 	}
 
 	/**

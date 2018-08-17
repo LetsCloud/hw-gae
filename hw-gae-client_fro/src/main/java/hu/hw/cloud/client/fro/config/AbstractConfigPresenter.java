@@ -41,7 +41,7 @@ public abstract class AbstractConfigPresenter<V extends AbstractConfigPresenter.
 	private Integer activeTable;
 
 	private String caption;
-	private Map<Integer, TableStore> tableMap = new HashMap<Integer, TableStore>();
+	private Map<Integer, PresenterWidgetStore> tableMap = new HashMap<Integer, PresenterWidgetStore>();
 
 	public static final SingleSlot<PresenterWidget<?>> SLOT_CONTENT = new SingleSlot<>();
 
@@ -81,7 +81,7 @@ public abstract class AbstractConfigPresenter<V extends AbstractConfigPresenter.
 	}
 
 	@Override
-	public Map<Integer, TableStore> getTableMap() {
+	public Map<Integer, PresenterWidgetStore> getTableMap() {
 		return tableMap;
 	}
 
@@ -92,7 +92,7 @@ public abstract class AbstractConfigPresenter<V extends AbstractConfigPresenter.
 		setInSlot(SLOT_CONTENT, tableMap.get(index).getTable());
 	}
 
-	public void addTable(Integer index, TableStore store) {
+	public void addTable(Integer index, PresenterWidgetStore store) {
 		tableMap.put(index, store);
 	}
 

@@ -61,6 +61,9 @@ public interface FroMessages extends Messages {
 	@DefaultMessage("Users")
 	String systemConfigAppUser();
 
+	@DefaultMessage("Customers")
+	String systemConfigCustomer();
+
 	@DefaultMessage("Choose data type")
 	String systemConfigMobileSelect();
 
@@ -80,4 +83,7 @@ public interface FroMessages extends Messages {
 
 	@DefaultMessage("Rooms")
 	String hotelConfigRooms();
+
+	@DefaultMessage("Market Groups")
+	String hotelConfigMarketGroups();
 }

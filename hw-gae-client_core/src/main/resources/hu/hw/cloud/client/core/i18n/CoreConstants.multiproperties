@@ -61,6 +61,152 @@
             <Value disabled="false">Túl sok bejelentkezési próbálkozás! Kérem próbálpzzon 15 perc múlva</Value>
         </Property>
         <Comment>
+            <Value>COMMUNICATION MODE</Value>
+        </Comment>
+        <Property>
+            <Name>communicationModeMap</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">MOBILE,WORK_PHONE,WORK_FAX,HOME_PHONE,HOME_FAX,OTHER_PHONE,WORK_EMAIL,HOME_EMAIL,OTHER_EMAIL, SKYPE</Value>
+            <Value disabled="false">MOBILE,WORK_PHONE,WORK_FAX,HOME_PHONE,HOME_FAX,OTHER_PHONE,WORK_EMAIL,HOME_EMAIL,OTHER_EMAIL, SKYPE</Value>
+        </Property>
+        <Property>
+            <Name>MOBILE</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Mobile</Value>
+            <Value disabled="false">Mobil</Value>
+        </Property>
+        <Property>
+            <Name>WORK_PHONE</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Work Phone</Value>
+            <Value disabled="false">Munkahelyi telefon</Value>
+        </Property>
+        <Property>
+            <Name>WORK_FAX</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Work Fax</Value>
+            <Value disabled="false">Munkahelyi fax</Value>
+        </Property>
+        <Property>
+            <Name>HOME_PHONE</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Home Phone</Value>
+            <Value disabled="false">Otthoni telefon</Value>
+        </Property>
+        <Property>
+            <Name>HOME_FAX</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Home Fax</Value>
+            <Value disabled="false">Otthoni fax</Value>
+        </Property>
+        <Property>
+            <Name>OTHER_PHONE</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Other Phone</Value>
+            <Value disabled="false">Egyéb telefon</Value>
+        </Property>
+        <Property>
+            <Name>WORK_EMAIL</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Work Email</Value>
+            <Value disabled="false">Munkahely emal</Value>
+        </Property>
+        <Property>
+            <Name>HOME_EMAIL</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Home Email</Value>
+            <Value disabled="false">Otthoni email</Value>
+        </Property>
+        <Property>
+            <Name>OTHER_EMAIL</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Other Email</Value>
+            <Value disabled="false">Egyéb email</Value>
+        </Property>
+        <Property>
+            <Name>SKYPE</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Skype</Value>
+            <Value disabled="false">Skype</Value>
+        </Property>
+        <Comment>
+            <Value>ADDRESS TYPES</Value>
+        </Comment>
+        <Property>
+            <Name>addressTypeMap</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">HEADQUARTER,SERVICE,WORK,HOME,BILLING,MAILING,SHIPPING,OTHER</Value>
+            <Value disabled="false">HEADQUARTER,SERVICE,WORK,HOME,BILLING,MAILING,SHIPPING,OTHER</Value>
+        </Property>
+        <Property>
+            <Name>HEADQUARTER</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Headquarter</Value>
+            <Value disabled="false">Székhely</Value>
+        </Property>
+        <Property>
+            <Name>SERVICE</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Service</Value>
+            <Value disabled="false">Telephely</Value>
+        </Property>
+        <Property>
+            <Name>WORK</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Work</Value>
+            <Value disabled="false">Munkahely</Value>
+        </Property>
+        <Property>
+            <Name>HOME</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Home</Value>
+            <Value disabled="false">Otthon</Value>
+        </Property>
+        <Property>
+            <Name>BILLING</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Billing</Value>
+            <Value disabled="false">Számlázási</Value>
+        </Property>
+        <Property>
+            <Name>MAILING</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Mailing</Value>
+            <Value disabled="false">Levelezés</Value>
+        </Property>
+        <Property>
+            <Name>SHIPPING</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Shipping</Value>
+            <Value disabled="false">Szállítási</Value>
+        </Property>
+        <Property>
+            <Name>OTHER</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Other</Value>
+            <Value disabled="false">Egyéb</Value>
+        </Property>
+        <Comment>
             <Value>ROOM STATUSIES</Value>
         </Comment>
         <Property>

@@ -15,11 +15,10 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import hu.hw.cloud.client.core.app.AppPresenter;
 import hu.hw.cloud.client.core.security.LoggedInGatekeeper;
 import hu.hw.cloud.client.fro.FroNameTokens;
+import hu.hw.cloud.client.fro.browser.BrowserPresenterFactory;
 import hu.hw.cloud.client.fro.config.AbstractConfigPresenter;
-import hu.hw.cloud.client.fro.config.TableStore;
-import hu.hw.cloud.client.fro.config.system.SystemConfigPresenter;
+import hu.hw.cloud.client.fro.config.PresenterWidgetStore;
 import hu.hw.cloud.client.fro.i18n.FroMessages;
-import hu.hw.cloud.client.fro.table.DtoTablePresenterFactory;
 
 /**
  * @author robi
@@ -28,7 +27,7 @@ import hu.hw.cloud.client.fro.table.DtoTablePresenterFactory;
 public class HotelConfigPresenter
 		extends AbstractConfigPresenter<HotelConfigPresenter.MyView, HotelConfigPresenter.MyProxy>
 		implements HotelConfigUiHandlers {
-	private static Logger logger = Logger.getLogger(SystemConfigPresenter.class.getName());
+	private static Logger logger = Logger.getLogger(HotelConfigPresenter.class.getName());
 
 	interface MyView extends AbstractConfigPresenter.MyView {
 	}
@@ -41,16 +40,18 @@ public class HotelConfigPresenter
 
 	@Inject
 	HotelConfigPresenter(EventBus eventBus, MyView view, MyProxy proxy,
-			DtoTablePresenterFactory dtoTablePresenterFactory, FroMessages i18n) {
+			BrowserPresenterFactory dtoTablePresenterFactory, FroMessages i18n) {
 		super(eventBus, view, proxy, AppPresenter.SLOT_MAIN);
 		logger.info("HotelConfigPresenter()");
 
 		setCaption(i18n.mainMenuItemHotelConfig());
 
-		addTable(1, new TableStore(i18n.hotelConfigHotels(), dtoTablePresenterFactory.createHotelTablePresenter()));
+		addTable(1, new PresenterWidgetStore(i18n.hotelConfigHotels(), dtoTablePresenterFactory.createHotelTablePresenter()));
 		addTable(2,
-				new TableStore(i18n.hotelConfigRoomTypes(), dtoTablePresenterFactory.createRoomTypeTablePresenter()));
-		addTable(3, new TableStore(i18n.hotelConfigRooms(), dtoTablePresenterFactory.createRoomTablePresenter()));
+				new PresenterWidgetStore(i18n.hotelConfigRoomTypes(), dtoTablePresenterFactory.createRoomTypeTablePresenter()));
+		addTable(3, new PresenterWidgetStore(i18n.hotelConfigRooms(), dtoTablePresenterFactory.createRoomTablePresenter()));
+		addTable(4, new PresenterWidgetStore(i18n.hotelConfigMarketGroups(),
+				dtoTablePresenterFactory.createMarketGroupTablePresenter()));
 
 		getView().setUiHandlers(this);
 	}

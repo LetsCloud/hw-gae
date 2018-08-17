@@ -27,9 +27,9 @@
 	<ui:with field="i18n" type="hu.hw.cloud.client.inf.i18n.InfMessages" />
 
 	<g:HTMLPanel>
-		<m:MaterialModal ui:field="modal" type="DEFAULT"
+		<m:MaterialDialog ui:field="modal" type="DEFAULT"
 			inDuration="500" outDuration="500">
-			<m:MaterialModalContent>
+			<m:MaterialDialogContent>
 				<m:MaterialTitle title="{i18n.gpsTitle}"
 					addStyleNames="{style.title}" />
 
@@ -76,15 +76,15 @@
 							placeholder="{i18n.gpsTimeScale}" />
 					</m:MaterialColumn>
 				</m:MaterialRow>
-			</m:MaterialModalContent>
+			</m:MaterialDialogContent>
 
-			<m:MaterialModalFooter>
+			<m:MaterialDialogFooter>
 				<m:MaterialButton ui:field="okButton" text="{i18n0.comOk}"
 					type="FLAT" waves="DEFAULT" addStyleNames="{style.actionButton} {style.okButton}" />
 
 				<m:MaterialButton ui:field="cancelButton" text="{i18n0.comCancel}"
 					type="FLAT" waves="DEFAULT" addStyleNames="{style.actionButton}" />
-			</m:MaterialModalFooter>
-		</m:MaterialModal>
+			</m:MaterialDialogFooter>
+		</m:MaterialDialog>
 	</g:HTMLPanel>
 </ui:UiBinder> 

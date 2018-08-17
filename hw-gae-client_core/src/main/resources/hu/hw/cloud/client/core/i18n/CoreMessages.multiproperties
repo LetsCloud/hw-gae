@@ -496,6 +496,23 @@
             <Value disabled="false">Válassz csoportot</Value>
         </Property>
         <Comment>
+            <Value>CUSTOMER EDITOR</Value>
+        </Comment>
+        <Property>
+            <Name>customerEditorCommunication</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Communication</Value>
+            <Value disabled="false">Kommunikácó</Value>
+        </Property>
+        <Property>
+            <Name>customerEditorAdresses</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Addresses</Value>
+            <Value disabled="false">Címek</Value>
+        </Property>
+        <Comment>
             <Value>ROOM TYPE TABLE</Value>
         </Comment>
         <Property>

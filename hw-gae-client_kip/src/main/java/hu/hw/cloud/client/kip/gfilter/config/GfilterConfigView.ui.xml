@@ -17,9 +17,9 @@
 	<ui:with field="i18n0" type="hu.hw.cloud.client.core.i18n.CoreMessages" />
 
 	<g:HTMLPanel>
-		<m:MaterialModal ui:field="modal" type="DEFAULT"
+		<m:MaterialDialog ui:field="modal" type="DEFAULT"
 			inDuration="500" outDuration="500">
-			<m:MaterialModalContent>
+			<m:MaterialDialogContent>
 				<m:MaterialTitle title="Globális szűrő"
 					addStyleNames="{style.title}" />
 
@@ -59,16 +59,16 @@
 
 				</m:MaterialRow>
 
-			</m:MaterialModalContent>
+			</m:MaterialDialogContent>
 
-			<m:MaterialModalFooter>
+			<m:MaterialDialogFooter>
 				<m:MaterialButton ui:field="okButton" text="{i18n0.comOk}"
 					type="FLAT" waves="DEFAULT" textColor="WHITE" backgroundColor="LIGHT_BLUE"
 					addStyleNames="{style.actionButton}" />
 
 				<m:MaterialButton ui:field="cancelButton" text="{i18n0.comCancel}"
 					type="FLAT" waves="DEFAULT" addStyleNames="{style.actionButton}" />
-			</m:MaterialModalFooter>
-		</m:MaterialModal>
+			</m:MaterialDialogFooter>
+		</m:MaterialDialog>
 	</g:HTMLPanel>
 </ui:UiBinder> 

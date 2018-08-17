@@ -17,7 +17,7 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
-import hu.hw.cloud.client.fro.table.AbstractTablePresenter;
+import hu.hw.cloud.client.fro.browser.AbstractBrowserPresenter;
 import hu.hw.cloud.shared.dto.BaseDto;
 
 /**
@@ -63,7 +63,7 @@ public abstract class AbstractEditorPresenter<T extends BaseDto, V extends Edito
 	protected abstract void loadData();
 
 	protected Boolean isNew() {
-		return Strings.isNullOrEmpty(filters.get(AbstractTablePresenter.PARAM_DTO_KEY));
+		return Strings.isNullOrEmpty(filters.get(AbstractBrowserPresenter.PARAM_DTO_KEY));
 	}
 
 	protected void create() {
@@ -76,6 +76,7 @@ public abstract class AbstractEditorPresenter<T extends BaseDto, V extends Edito
 
 	@Override
 	public void cancel() {
+		getView().close();
 		placeManager.navigateBack();
 	}
 }

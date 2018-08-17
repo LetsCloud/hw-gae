@@ -18,6 +18,7 @@ import hu.hw.cloud.server.entity.cube.CubeActlCap;
 import hu.hw.cloud.server.entity.cube.CubeBdgtCap;
 import hu.hw.cloud.server.entity.cube.CubeFcstCap;
 import hu.hw.cloud.server.entity.hotel.Hotel;
+import hu.hw.cloud.server.entity.hotel.MarketGroup;
 import hu.hw.cloud.server.entity.hotel.Room;
 import hu.hw.cloud.server.entity.hotel.RoomType;
 import hu.hw.cloud.server.entity.hotel.Service;
@@ -25,6 +26,7 @@ import hu.hw.cloud.server.entity.profile.Guest;
 import hu.hw.cloud.server.entity.profile.Person;
 import hu.hw.cloud.server.entity.profile.Profile;
 import hu.hw.cloud.server.entity.reservation.Reservation;
+import hu.hw.cloud.server.entity.task.Task;
 
 public class ObjectifyRegistration {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ObjectifyRegistration.class);
@@ -43,7 +45,9 @@ public class ObjectifyRegistration {
 		ObjectifyService.register(Hotel.class);
 		ObjectifyService.register(RoomType.class);
 		ObjectifyService.register(Room.class);
+		ObjectifyService.register(MarketGroup.class);
 		ObjectifyService.register(Chat.class);
+		ObjectifyService.register(Task.class);
 		ObjectifyService.register(Reservation.class);
 		ObjectifyService.register(CubeBdgtCap.class);
 		ObjectifyService.register(CubeBdgtPfm.class);

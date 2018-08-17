@@ -56,6 +56,8 @@
 	<bean id="roomRepository" class="hu.hw.cloud.server.repository.ofy.RoomRepositoryImpl" />
 	<bean id="roomTypeRepository"
 		class="hu.hw.cloud.server.repository.ofy.RoomTypeRepositoryImpl" />
+	<bean id="marketGroupRepository"
+		class="hu.hw.cloud.server.repository.ofy.MarketGroupRepositoryImpl" />
 	<bean id="testBookingRepository"
 		class="hu.hw.cloud.server.repository.ofy.TestBookingRepositoryImpl" />
 
@@ -133,6 +135,11 @@
 		<constructor-arg ref="accountRepository" />
 		<constructor-arg ref="hotelRepository" />
 		<constructor-arg ref="roomRepository" />
+	</bean>
+	<bean id="marketGroupService" class="hu.hw.cloud.server.service.impl.MarketGroupServiceImpl">
+		<constructor-arg ref="marketGroupRepository" />
+		<constructor-arg ref="accountRepository" />
+		<constructor-arg ref="hotelRepository" />
 	</bean>
 
 	<!-- CONTROLLERS -->

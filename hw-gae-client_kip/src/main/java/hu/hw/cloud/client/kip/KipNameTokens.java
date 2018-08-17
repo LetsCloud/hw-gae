@@ -14,6 +14,8 @@ public class KipNameTokens {
 	public static final String HK_ASSIGNMENTS = "/hkAssignments";
 	public static final String MINIBAR_CONSUMPTION = "/minibarConsumption";
 
+	public static final String TASK_MNGR = "/taskMngr";
+
 	// Profiles
 	public static final String CONTACTS = "!contacts";
 	public static final String ORGANIZATIONS = "!organizations";

@@ -63,7 +63,7 @@ public abstract class AbstractConfigView extends ViewWithUiHandlers<ConfigUiHand
 		mobileDropDown.clear();
 		desktopMenu.clear();
 
-		for (Map.Entry<Integer, TableStore> entry : getUiHandlers().getTableMap().entrySet()) {
+		for (Map.Entry<Integer, PresenterWidgetStore> entry : getUiHandlers().getTableMap().entrySet()) {
 			addMobileMenuItem(entry.getKey(), entry.getValue().getCaption());
 			addDesktopMenuItem(entry.getKey(), entry.getValue().getCaption());
 		}

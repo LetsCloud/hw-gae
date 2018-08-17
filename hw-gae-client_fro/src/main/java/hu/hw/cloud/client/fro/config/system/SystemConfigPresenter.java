@@ -13,13 +13,13 @@ import hu.hw.cloud.client.core.app.AppPresenter;
 import hu.hw.cloud.client.core.event.ContentPushEvent;
 import hu.hw.cloud.client.core.security.LoggedInGatekeeper;
 import hu.hw.cloud.client.fro.FroNameTokens;
+import hu.hw.cloud.client.fro.browser.BrowserPresenterFactory;
 import hu.hw.cloud.client.fro.config.AbstractConfigPresenter;
-import hu.hw.cloud.client.fro.config.TableStore;
+import hu.hw.cloud.client.fro.config.PresenterWidgetStore;
 import hu.hw.cloud.client.fro.i18n.FroMessages;
-import hu.hw.cloud.client.fro.table.DtoTablePresenterFactory;
 
-public class SystemConfigPresenter 
-extends AbstractConfigPresenter<SystemConfigPresenter.MyView, SystemConfigPresenter.MyProxy>
+public class SystemConfigPresenter
+		extends AbstractConfigPresenter<SystemConfigPresenter.MyView, SystemConfigPresenter.MyProxy>
 		implements SystemConfigUiHandlers, ContentPushEvent.ContentPushHandler {
 	private static Logger logger = Logger.getLogger(SystemConfigPresenter.class.getName());
 
@@ -34,16 +34,17 @@ extends AbstractConfigPresenter<SystemConfigPresenter.MyView, SystemConfigPresen
 
 	@Inject
 	SystemConfigPresenter(EventBus eventBus, MyView view, MyProxy proxy,
-			DtoTablePresenterFactory dtoTablePresenterFactory, FroMessages i18n) {
+			BrowserPresenterFactory dtoTablePresenterFactory, FroMessages i18n) {
 		super(eventBus, view, proxy, AppPresenter.SLOT_MAIN);
 		logger.info("SystemConfigPresenter()");
 
 		setCaption(i18n.mainMenuItemSystemConfig());
 
 		addTable(1,
-				new TableStore(i18n.systemConfigUserGroup(), dtoTablePresenterFactory.createUserGroupTablePresenter()));
-		addTable(2,
-				new TableStore(i18n.systemConfigAppUser(), dtoTablePresenterFactory.createAppUserTablePresenter()));
+				new PresenterWidgetStore(i18n.systemConfigUserGroup(), dtoTablePresenterFactory.createUserGroupTablePresenter()));
+		addTable(2, new PresenterWidgetStore(i18n.systemConfigAppUser(), dtoTablePresenterFactory.createAppUserTablePresenter()));
+		addTable(3,
+				new PresenterWidgetStore(i18n.systemConfigCustomer(), dtoTablePresenterFactory.createCustomerTablePresenter()));
 
 		getView().setUiHandlers(this);
 	}

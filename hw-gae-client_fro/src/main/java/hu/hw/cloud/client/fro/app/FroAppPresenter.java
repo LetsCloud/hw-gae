@@ -68,6 +68,14 @@ public class FroAppPresenter extends AppPresenter<FroAppPresenter.MyProxy> {
 		atendantsItem.setNameToken(CoreNameTokens.HOME);
 		menuItems.add(atendantsItem);
 
+		MenuItemDto reservationItem = new MenuItemDto();
+		reservationItem.setIndex(2);
+		reservationItem.setType(MenuItemType.MENU_ITEM);
+		reservationItem.setIcon(IconType.HOTEL.name());
+		reservationItem.setText("Reservation");
+		reservationItem.setNameToken(FroNameTokens.RESERVATION);
+		menuItems.add(reservationItem);
+
 		// Reservation
 
 		MenuItemDto resSubMenu = new MenuItemDto();

@@ -84,4 +84,10 @@ public class HotelEditorView extends ViewWithUiHandlers<HotelEditorUiHandlers>
 		getUiHandlers().cancel();
 	}
 
+	@Override
+	public void close() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

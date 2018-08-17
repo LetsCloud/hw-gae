@@ -5,9 +5,9 @@
 
 	<ui:with field="i18nCore" type="hu.hw.cloud.client.core.i18n.CoreMessages" />
 
-	<m:MaterialModal ui:field="modal" type="DEFAULT"
+	<m:MaterialDialog ui:field="modal" type="DEFAULT"
 		inDuration="500" outDuration="500">
-		<m:MaterialModalContent>
+		<m:MaterialDialogContent>
 			<m:MaterialTitle ui:field="title" />
 			<m:MaterialRow>
 				<m:MaterialColumn grid="s12 m6">
@@ -44,13 +44,13 @@
 				label="{i18nCore.userEditorEmail}" />
 			<combobox:MaterialComboBox ui:field="userGroupDtos"
 				label="{i18nCore.userEditorEmail}" />
-		</m:MaterialModalContent>
+		</m:MaterialDialogContent>
 
-		<m:MaterialModalFooter>
+		<m:MaterialDialogFooter>
 			<m:MaterialButton ui:field="saveButton" text="{i18nCore.comSave}"
 				iconType="SAVE" iconPosition="LEFT" />
 			<m:MaterialButton ui:field="cancelButton" text="{i18nCore.comCancel}"
 				type="FLAT" />
-		</m:MaterialModalFooter>
-	</m:MaterialModal>
+		</m:MaterialDialogFooter>
+	</m:MaterialDialog>
 </ui:UiBinder>

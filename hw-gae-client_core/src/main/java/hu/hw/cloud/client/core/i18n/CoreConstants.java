@@ -13,6 +13,10 @@ import com.google.gwt.i18n.client.Constants;
  */
 public interface CoreConstants extends Constants {
 
+	Map<String, String> communicationModeMap();
+
+	Map<String, String> addressTypeMap();
+
 	Map<String, String> inventoryTypeMap();
 
 	Map<String, String> roomStatusMap();

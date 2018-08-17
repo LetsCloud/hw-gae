@@ -9,7 +9,7 @@ import java.util.List;
 import com.googlecode.objectify.annotation.Entity;
 
 import hu.hw.cloud.server.entity.common.AccountChild;
-import hu.hw.cloud.shared.dto.pf.ProfileDto;
+import hu.hw.cloud.shared.dto.profile.ProfileDto;
 
 /**
  * @author CR

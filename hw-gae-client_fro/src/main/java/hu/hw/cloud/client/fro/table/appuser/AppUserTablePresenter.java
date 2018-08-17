@@ -20,7 +20,7 @@ import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
 import hu.hw.cloud.client.core.util.ErrorHandlerAsyncCallback;
-import hu.hw.cloud.client.fro.table.AbstractTablePresenter;
+import hu.hw.cloud.client.fro.browser.AbstractBrowserPresenter;
 import hu.hw.cloud.shared.api.AppUserResource;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
 
@@ -28,7 +28,7 @@ import hu.hw.cloud.shared.dto.common.AppUserDto;
  * @author robi
  *
  */
-public class AppUserTablePresenter extends AbstractTablePresenter<AppUserDto, AppUserTablePresenter.MyView>
+public class AppUserTablePresenter extends AbstractBrowserPresenter<AppUserDto, AppUserTablePresenter.MyView>
 		implements AppUserTableUiHandlers {
 	private static Logger logger = Logger.getLogger(AppUserTablePresenter.class.getName());
 

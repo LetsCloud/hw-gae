@@ -212,4 +212,10 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 		picture = url;
 		image.setUrl(url);
 	}
+
+	@Override
+	public void close() {
+		// TODO Auto-generated method stub
+		
+	}
 }
