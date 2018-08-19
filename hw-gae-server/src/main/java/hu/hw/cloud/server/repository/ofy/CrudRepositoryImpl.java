@@ -34,7 +34,7 @@ public abstract class CrudRepositoryImpl<T extends BaseEntity> extends Objectify
 
 	protected abstract Object getParentKey(String parentWebSafeKey);
 
-	public abstract String getAccountId(String webSafeString);
+	public abstract String getAccountId(String webSafeKey);
 
 	@Override
 	public T save(T entity) throws EntityValidationException, UniqueIndexConflictException {

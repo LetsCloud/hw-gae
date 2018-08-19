@@ -19,16 +19,37 @@ import hu.hw.cloud.client.core.event.RefreshTableEvent;
 import hu.hw.cloud.shared.dto.BaseDto;
 
 /**
+ * Az <b>AbstractBrowserPresenter</b> egy <b>PresenterWidget</b> utód, amely
+ * leszármaztatásakor paraméterként meg kell adni a megjelenítendő adat
+ * <b>BasBaseDto</b> utodú típusát és a <b>View</b> utódú megjelenítő nézetet.
+ * <p>
+ * Az osztály a megjelenítő widget megjelenítésekor (onReveal) a
+ * {@link #loadData()} metódus segítségével betölti a megjelenítendő adatokat az
+ * utódban kifejtett módon.
+ * <p>
+ * Az osztály meghívja a nézeten keresztül a felhasználó által kezdeményezet
+ * alábbi CRUD funkciókat:
+ * <ul>
+ * <li>Új adat létrehozása.
+ * <li>A kiválasztott adat módosítása.
+ * <li>A kiválasztott adat törlése.
+ * </ul>
+ * 
  * @author robi
  *
  */
 public abstract class AbstractBrowserPresenter<T extends BaseDto, V extends View> extends PresenterWidget<V>
-		implements BrowserUiHandlers<T>, RefreshTableEvent.RefreshTableHandler {
+		implements AbstractBrowserUiHandlers<T>, RefreshTableEvent.RefreshTableHandler {
 	private static Logger logger = Logger.getLogger(AbstractBrowserPresenter.class.getName());
 
+	/**
+	 * 
+	 */
 	public static final String PARAM_DTO_KEY = "id";
 	public static final String PARAM_HOTEL_KEY = "hotelKey";
-
+	/**
+	 * A megjelenítő komponens felirat.
+	 */
 	private String caption;
 	private Map<String, String> filters = new HashMap<String, String>();
 	private final PlaceManager placeManager;
@@ -45,23 +66,52 @@ public abstract class AbstractBrowserPresenter<T extends BaseDto, V extends View
 	@Override
 	protected void onReveal() {
 		super.onReveal();
-		logger.info("AbstractTablePresenter().onReveal()");
 		loadData();
 	}
 
+	/**
+	 * A widget mejelenítésekor végrehajtandó adatbetöltés, ami az utóban fejtendő
+	 * ki.
+	 */
+	protected abstract void loadData();
+
+	/**
+	 * A törzsadatmegjelenítő feliratának kiolvasása.
+	 * 
+	 * @return A törzsadatmegjelenítő felirata.
+	 */
 	public String getCaption() {
 		return caption;
 	}
 
+	/**
+	 * A törzsadatmegjelenítő feliratának megadása.
+	 * 
+	 * @param caption A törzsadatmegjelenítő felirata.
+	 */
 	public void setCaption(String caption) {
 		this.caption = caption;
 	}
 
+	/**
+	 * Az utódban kifejtendő eljárás, amely a törzsadat létrehozó oldal névjelzőjét
+	 * adja vissza.
+	 * 
+	 * @return A törzsadatszerkeztő oldal névjelzője.
+	 */
+	protected abstract String getCreatorNameToken();
+
+	/**
+	 * Az utódban kifejtendő eljárás, amely a törzsadatszerkesztő oldal névjelzőjét
+	 * adja vissza.
+	 * 
+	 * @return A törzsadatszerkeztő oldal névjelzője.
+	 */
 	protected abstract String getEditorNameToken();
 
 	@Override
 	public void addNew() {
-		Builder placeBuilder = new Builder().nameToken(getEditorNameToken());
+		Builder placeBuilder = new Builder().nameToken(getCreatorNameToken());
 		placeManager.revealPlace(addFilters(placeBuilder));
 	}
 
@@ -73,12 +123,10 @@ public abstract class AbstractBrowserPresenter<T extends BaseDto, V extends View
 	}
 
 	private PlaceRequest addFilters(Builder placeBuilder) {
-		if(!filters.isEmpty())
+		if (!filters.isEmpty())
 			placeBuilder.with(filters);
 		return placeBuilder.build();
 	}
-
-	protected abstract void loadData();
 
 	@Override
 	public void onRefresh(RefreshTableEvent event) {
@@ -93,7 +141,7 @@ public abstract class AbstractBrowserPresenter<T extends BaseDto, V extends View
 	}
 
 	protected abstract void deleteData(String webSafeKey);
-	
+
 	protected void addFilter(String key, String value) {
 		filters.put(key, value);
 	}

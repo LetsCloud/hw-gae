@@ -11,21 +11,16 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
-import com.gwtplatform.mvp.client.annotations.NameToken;
-import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 
-import hu.hw.cloud.client.core.CoreNameTokens;
-import hu.hw.cloud.client.core.app.AppPresenter;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.browser.AbstractBrowserPresenter;
-import hu.hw.cloud.client.fro.editor.AbstractEditorPresenter;
+import hu.hw.cloud.client.fro.editor.AbstractEditorPresenterWidget;
 import hu.hw.cloud.client.fro.editor.EditorView;
 import hu.hw.cloud.shared.api.CustomerResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
@@ -38,17 +33,12 @@ import hu.hw.cloud.shared.dto.profile.PostalAddressDto;
  *
  */
 public final class CustomerEditorPresenter
-		extends AbstractEditorPresenter<CustomerDto, CustomerEditorPresenter.MyView, CustomerEditorPresenter.MyProxy>
+		extends AbstractEditorPresenterWidget<CustomerDto, CustomerEditorPresenter.MyView>
 		implements CustomerEditorUiHandlers {
 	private static Logger logger = Logger.getLogger(CustomerEditorPresenter.class.getName());
 
 	interface MyView extends EditorView<CustomerDto>, HasUiHandlers<CustomerEditorUiHandlers> {
 		void displayError(EntityPropertyCode code, String message);
-	}
-
-	@ProxyCodeSplit
-	@NameToken(CoreNameTokens.CUSTOMER_EDITOR)
-	interface MyProxy extends ProxyPlace<CustomerEditorPresenter> {
 	}
 
 	private final PlaceManager placeManager;
@@ -57,9 +47,9 @@ public final class CustomerEditorPresenter
 	private final CoreMessages i18nCore;
 
 	@Inject
-	CustomerEditorPresenter(EventBus eventBus, PlaceManager placeManager, MyView view, MyProxy proxy,
+	CustomerEditorPresenter(EventBus eventBus, PlaceManager placeManager, MyView view,
 			ResourceDelegate<CustomerResource> resourceDelegate, CurrentUser currentUser, CoreMessages i18nCore) {
-		super(eventBus, placeManager, view, proxy, AppPresenter.SLOT_MAIN);
+		super(eventBus, placeManager, view);
 		logger.info("RoomTypeEditorPresenter()");
 
 		this.placeManager = placeManager;
@@ -119,5 +109,11 @@ public final class CustomerEditorPresenter
 				getView().displayError(EntityPropertyCode.NONE, caught.getMessage());
 			}
 		}).saveOrCreate(dto);
+	}
+
+	@Override
+	public void show(String dataId) {
+		// TODO Auto-generated method stub
+		
 	}
 }

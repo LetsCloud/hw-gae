@@ -18,7 +18,7 @@ public interface RoomService extends HotelChildService<Room, RoomDto> {
 
 	/**
 	 * 
-	 * @param hotel
+	 * @param hotelKey
 	 * @return
 	 */
 	List<Room> getActiveRoomsByHotel(String hotelKey);
@@ -26,7 +26,8 @@ public interface RoomService extends HotelChildService<Room, RoomDto> {
 	/**
 	 * Visszaadja a megadott szálloda adott adott nappon rendelkezésre álló szobáit
 	 * 
-	 * @param hotel
+	 * @param hotelKey
+	 * @param date
 	 * @return
 	 */
 	List<Room> getAvailableRoomsByHotelOnDate(String hotelKey, Date date);

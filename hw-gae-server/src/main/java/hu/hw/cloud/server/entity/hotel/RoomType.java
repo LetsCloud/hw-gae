@@ -161,7 +161,6 @@ public class RoomType extends HotelChild {
 	/**
 	 * 
 	 * @param dto
-	 * @return
 	 */
 	public void updEntityWithDto(RoomTypeDto dto) {
 		clearUniqueIndexes();
@@ -269,11 +268,6 @@ public class RoomType extends HotelChild {
 		return dtos;
 	}
 
-	/**
-	 * 
-	 * @param dtos
-	 * @return
-	 */
 	public static List<Ref<RoomType>> createRefList(List<String> ids) {
 		List<Ref<RoomType>> entityRefs = new ArrayList<Ref<RoomType>>();
 		for (String id : ids) {

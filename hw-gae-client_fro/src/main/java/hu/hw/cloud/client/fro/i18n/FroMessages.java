@@ -45,8 +45,18 @@ public interface FroMessages extends Messages {
 	@DefaultMessage("Common config")
 	String mainMenuItemCommonConfig();
 
+	@DefaultMessage("Profile config")
+	String mainMenuItemProfileConfig();
+
 	@DefaultMessage("Hotel config")
 	String mainMenuItemHotelConfig();
+	
+	/*
+	 * SYSTEM CONFIG 
+	 */
+
+	@DefaultMessage("Create a Customer")
+	String customerCreateCaption();
 	
 	/*
 	 * SYSTEM CONFIG 

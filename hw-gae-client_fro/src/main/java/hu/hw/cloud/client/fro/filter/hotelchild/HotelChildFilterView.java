@@ -9,24 +9,17 @@ import javax.inject.Inject;
 
 import hu.hw.cloud.client.core.i18n.CoreConstants;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
-import hu.hw.cloud.client.fro.filter.AbstractFilterView;
 
 /**
  * @author robi
  *
  */
-public class HotelChildFilterView extends AbstractFilterView implements HotelChildFilterPresenter.MyView {
+public class HotelChildFilterView extends AbstractHotelChildFilterView implements HotelChildFilterPresenter.MyView {
 	private static Logger logger = Logger.getLogger(HotelChildFilterView.class.getName());
 
 	@Inject
 	HotelChildFilterView(CoreMessages i18nCore, CoreConstants cnstCore) {
-		super(i18nCore);
+		super(i18nCore, cnstCore);
 		logger.info("HotelChildFilterView()");
-	}
-
-	@Override
-	public void reset() {
-		// TODO Auto-generated method stub
-		
 	}
 }

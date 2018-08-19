@@ -22,7 +22,7 @@ import gwt.material.design.client.ui.MaterialIcon;
 import gwt.material.design.client.ui.table.cell.TextColumn;
 import gwt.material.design.client.ui.table.cell.WidgetColumn;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
-import hu.hw.cloud.client.fro.browser.BrowserView;
+import hu.hw.cloud.client.fro.browser.AbstractBrowserView;
 import hu.hw.cloud.shared.dto.profile.CustomerDto;
 
 /**
@@ -33,7 +33,7 @@ public class CustomerBrowserView extends ViewWithUiHandlers<CustomerBrowserUiHan
 		implements CustomerBrowserPresenter.MyView {
 	private static Logger logger = Logger.getLogger(CustomerBrowserView.class.getName());
 
-	private final BrowserView<CustomerDto> table;
+	private final AbstractBrowserView<CustomerDto> table;
 
 	private final CoreMessages i18nCore;
 
@@ -41,8 +41,8 @@ public class CustomerBrowserView extends ViewWithUiHandlers<CustomerBrowserUiHan
 	* 
 	*/
 	@Inject
-	CustomerBrowserView(BrowserView<CustomerDto> table, CoreMessages i18nCore) {
-		logger.info("CustomerTableView()");
+	CustomerBrowserView(AbstractBrowserView<CustomerDto> table, CoreMessages i18nCore) {
+		logger.info("CustomerBrowserView()");
 
 		initWidget(table);
 

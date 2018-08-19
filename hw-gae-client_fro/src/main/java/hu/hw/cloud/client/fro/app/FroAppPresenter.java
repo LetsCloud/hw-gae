@@ -76,6 +76,14 @@ public class FroAppPresenter extends AppPresenter<FroAppPresenter.MyProxy> {
 		reservationItem.setNameToken(FroNameTokens.RESERVATION);
 		menuItems.add(reservationItem);
 
+		MenuItemDto customerCreateItem = new MenuItemDto();
+		customerCreateItem.setIndex(2);
+		customerCreateItem.setType(MenuItemType.MENU_ITEM);
+		customerCreateItem.setIcon(IconType.HOTEL.name());
+		customerCreateItem.setText("Create Customer");
+		customerCreateItem.setNameToken(CoreNameTokens.CUSTOMER_CREATOR);
+		menuItems.add(customerCreateItem);
+
 		// Reservation
 
 		MenuItemDto resSubMenu = new MenuItemDto();
@@ -117,7 +125,7 @@ public class FroAppPresenter extends AppPresenter<FroAppPresenter.MyProxy> {
 		cashMenuItem1.setNameToken(FroNameTokens.COMMON_CONFIG);
 		cashSubMenu.addItem(cashMenuItem1);
 
-		// Configuration
+		// Configuration menu
 
 		MenuItemDto configSubMenu = new MenuItemDto();
 		configSubMenu.setIndex(4);
@@ -133,14 +141,14 @@ public class FroAppPresenter extends AppPresenter<FroAppPresenter.MyProxy> {
 		configMenuItem1.setText(i18n.mainMenuItemSystemConfig());
 		configMenuItem1.setNameToken(FroNameTokens.SYSTEM_CONFIG);
 		configSubMenu.addItem(configMenuItem1);
-/*
+
 		MenuItemDto configMenuItem2 = new MenuItemDto();
 		configMenuItem2.setIndex(2);
 		configMenuItem2.setType(MenuItemType.MENU_ITEM);
-		configMenuItem2.setText(i18n.mainMenuItemCommonConfig());
-		configMenuItem2.setNameToken(FroNameTokens.COMMON_CONFIG);
+		configMenuItem2.setText(i18n.mainMenuItemProfileConfig());
+		configMenuItem2.setNameToken(FroNameTokens.PROFILE_CONFIG);
 		configSubMenu.addItem(configMenuItem2);
-*/
+
 		MenuItemDto configMenuItem3 = new MenuItemDto();
 		configMenuItem3.setIndex(3);
 		configMenuItem3.setType(MenuItemType.MENU_ITEM);

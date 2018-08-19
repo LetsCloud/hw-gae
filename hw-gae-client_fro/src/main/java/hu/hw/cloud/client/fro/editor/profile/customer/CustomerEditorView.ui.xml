@@ -47,11 +47,12 @@
 	<g:HTMLPanel addStyleNames="{style.pp}">
 		<m:MaterialRow>
 			<m:MaterialColumn grid="s12 m6">
-				<m:MaterialTextBox ui:field="code" type="TEXT"
-					label="{i18nCore.roomTypeEditorCode}" />
 
 				<m:MaterialTextBox ui:field="name" type="TEXT"
 					label="{i18nCore.roomTypeEditorFloor}" />
+
+				<m:MaterialTextBox ui:field="code" type="TEXT"
+					label="{i18nCore.roomTypeEditorCode}" />
 
 				<!-- KOMMUNIKÁCIÓ -->
 				<g:HTMLPanel ui:field="communicationPanel"

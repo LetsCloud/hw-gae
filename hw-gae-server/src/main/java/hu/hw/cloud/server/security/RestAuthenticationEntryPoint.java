@@ -23,7 +23,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
  * <p>
  * A Spring Security az Entry Point koncepcióval oldja meg az utentikációs
  * folyamat automatikus kiváltását, amely kötelező része a konfigurációnak és
- * <http> elem entry-point-ref atribútumával állítható be. Mivel ezen funkciónak
+ * http elem entry-point-ref atribútumával állítható be. Mivel ezen funkciónak
  * nincs értelme a REST web szolgáltatás esetében, egy új saját entry point
  * definiálására van szükség, amely 401-es kódot ad vissza amikor meghívásra
  * kerül.

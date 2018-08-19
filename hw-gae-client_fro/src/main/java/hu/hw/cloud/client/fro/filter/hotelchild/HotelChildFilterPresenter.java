@@ -12,33 +12,24 @@ import com.gwtplatform.mvp.client.HasUiHandlers;
 
 import hu.hw.cloud.client.core.datasource.HotelDataSource;
 import hu.hw.cloud.client.core.security.CurrentUser;
-import hu.hw.cloud.client.fro.filter.AbstractFilterPresenter;
 import hu.hw.cloud.client.fro.filter.AbstractFilterUiHandlers;
 
 /**
  * @author robi
  *
  */
-public class HotelChildFilterPresenter extends AbstractFilterPresenter<HotelChildFilterPresenter.MyView> {
+public class HotelChildFilterPresenter extends AbstractHotelChildFilterPresenter<HotelChildFilterPresenter.MyView> {
 	private static Logger logger = Logger.getLogger(HotelChildFilterPresenter.class.getName());
 
-	public interface MyView extends AbstractFilterPresenter.MyView, HasUiHandlers<AbstractFilterUiHandlers> {
-		Boolean isOnlyActive();
+	public interface MyView extends AbstractHotelChildFilterPresenter.MyView, HasUiHandlers<AbstractFilterUiHandlers> {
 	}
 
 	@Inject
-	HotelChildFilterPresenter(EventBus eventBus, MyView view, HotelDataSource hotelDataSource, CurrentUser currentUser) {
-		super(eventBus, view, hotelDataSource, currentUser);
+	HotelChildFilterPresenter(EventBus eventBus, MyView view, CurrentUser currentUser,
+			HotelDataSource hotelDataSource) {
+		super(eventBus, view, currentUser, hotelDataSource);
 		logger.info("HotelChildFilterPresenter()");
+
 		getView().setUiHandlers(this);
-	}
-
-	@Override
-	public void onReveal() {
-		super.onReveal();
-	}
-
-	public Boolean isOnlyActive() {
-		return getView().isOnlyActive();
 	}
 }

@@ -15,18 +15,18 @@ import gwt.material.design.client.data.loader.LoadResult;
 import hu.hw.cloud.client.core.datasource.HotelDataSource;
 import hu.hw.cloud.client.core.datasource.RoomTypeDataSource;
 import hu.hw.cloud.client.core.security.CurrentUser;
-import hu.hw.cloud.client.fro.filter.AbstractFilterPresenter;
 import hu.hw.cloud.client.fro.filter.AbstractFilterUiHandlers;
+import hu.hw.cloud.client.fro.filter.hotelchild.AbstractHotelChildFilterPresenter;
 import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
 
 /**
  * @author robi
  *
  */
-public class RoomFilterPresenter extends AbstractFilterPresenter<RoomFilterPresenter.MyView> {
+public class RoomFilterPresenter extends AbstractHotelChildFilterPresenter<RoomFilterPresenter.MyView> {
 	private static Logger logger = Logger.getLogger(RoomFilterPresenter.class.getName());
 
-	public interface MyView extends AbstractFilterPresenter.MyView, HasUiHandlers<AbstractFilterUiHandlers> {
+	public interface MyView extends AbstractHotelChildFilterPresenter.MyView, HasUiHandlers<AbstractFilterUiHandlers> {
 
 		void setFloors(List<String> floors);
 
@@ -41,9 +41,9 @@ public class RoomFilterPresenter extends AbstractFilterPresenter<RoomFilterPrese
 	private final CurrentUser currentUser;
 
 	@Inject
-	RoomFilterPresenter(EventBus eventBus, MyView view, HotelDataSource hotelDataSource,
-			RoomTypeDataSource roomTypeDataSource, CurrentUser currentUser) {
-		super(eventBus, view, hotelDataSource, currentUser);
+	RoomFilterPresenter(EventBus eventBus, MyView view, CurrentUser currentUser, HotelDataSource hotelDataSource,
+			RoomTypeDataSource roomTypeDataSource) {
+		super(eventBus, view, currentUser, hotelDataSource);
 		logger.info("RoomFilterPresenter()");
 
 		this.roomTypeDataSource = roomTypeDataSource;

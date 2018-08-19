@@ -97,7 +97,6 @@ public class VipLevel extends HotelChild {
 	/**
 	 * 
 	 * @param dto
-	 * @return
 	 */
 	public void updEntityWithDto(VipLevelDto dto) {
 		clearUniqueIndexes();
@@ -162,7 +161,7 @@ public class VipLevel extends HotelChild {
 
 	/**
 	 * 
-	 * @param dtos
+	 * @param ids
 	 * @return
 	 */
 	public static List<Ref<RoomType>> createRefList(List<String> ids) {

@@ -10,6 +10,7 @@ public class CoreNameTokens {
 	public static final String UNAUTHORIZED = "/unauthorized";
 
 	// Configuration
+	public static final String CUSTOMER_CREATOR = "/customerCreator";
 	public static final String CUSTOMER_EDITOR = "/customerEditor";
 	public static final String HOTEL_EDITOR = "/hotelEditor";
 	public static final String ROOMTYPE_EDITOR = "/roomTypeEditor";

@@ -14,14 +14,14 @@ import gwt.material.design.client.ui.MaterialChip;
 
 import hu.hw.cloud.client.core.i18n.CoreConstants;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
-import hu.hw.cloud.client.fro.filter.AbstractFilterView;
+import hu.hw.cloud.client.fro.filter.hotelchild.AbstractHotelChildFilterView;
 import hu.hw.cloud.shared.cnst.InventoryType;
 
 /**
  * @author robi
  *
  */
-public class RoomTypeFilterView extends AbstractFilterView implements RoomTypeFilterPresenter.MyView {
+public class RoomTypeFilterView extends AbstractHotelChildFilterView implements RoomTypeFilterPresenter.MyView {
 	private static Logger logger = Logger.getLogger(RoomTypeFilterView.class.getName());
 
 	private MaterialChip inventoryTypeChip;
@@ -29,15 +29,16 @@ public class RoomTypeFilterView extends AbstractFilterView implements RoomTypeFi
 
 	@Inject
 	RoomTypeFilterView(CoreMessages i18nCore, CoreConstants cnstCore) {
-		super(i18nCore);
+		super(i18nCore, cnstCore);
+		
 		initInventoryTypeFilter(cnstCore.inventoryTypeMap(), i18nCore);
 	}
 
 	@Override
-	protected void initView() {
-		super.initView();
+	protected void initView(CoreMessages i18nCore) {
+		super.initView(i18nCore);
 	}
-	
+
 	private void initInventoryTypeFilter(Map<String, String> i18nSalesTypes, CoreMessages i18nCore) {
 		inventoryTypeChip = new MaterialChip();
 

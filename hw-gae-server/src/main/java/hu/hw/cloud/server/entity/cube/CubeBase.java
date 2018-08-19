@@ -153,7 +153,7 @@ public abstract class CubeBase extends HotelChild {
 	/**
 	 * Visszaadja a dimenzió mező értékét
 	 * 
-	 * @param dim
+	 * @param dimName
 	 * @return
 	 */
 	public String getDimValue(Dimension dimName) {

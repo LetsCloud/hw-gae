@@ -100,7 +100,7 @@ public class CubeFcstCap extends CubeActlCap {
 	/**
 	 * Visszaadja a dimenzió mező értékét
 	 * 
-	 * @param dim
+	 * @param dimName
 	 * @return
 	 */
 	@Override

@@ -287,6 +287,54 @@ public interface CoreMessages extends Messages {
 
 	
 	/*
+	 * PROFILE GROUP BROWSER
+	 */
+
+	@DefaultMessage("Profile Groups")
+	String profileGroupBrowserTitle();
+
+	@DefaultMessage("Code")
+	String profileGroupBrowserCode();
+
+	@DefaultMessage("Description")
+	String profileGroupBrowserDescription();
+
+	@DefaultMessage("Active")
+	String profileGroupBrowserActive();
+
+	
+	/*
+	 * PROFILE GROUP EDITOR
+	 */
+
+	@DefaultMessage("Create Profile Group")
+	String profileGroupCreateTitle();
+
+	@DefaultMessage("Edit Profile Group")
+	String profileGroupEditTitle();
+
+	@DefaultMessage("Code")
+	String profileGroupCode();
+
+	@DefaultMessage("Description")
+	String profileGroupDescription();
+
+	@DefaultMessage("Profile Type")
+	String profileGroupType();
+
+	@DefaultMessage("Active")
+	String profileGroupActive();
+
+	
+	/*
+	 * CUSTOMER BROWSER
+	 */
+
+	@DefaultMessage("Customers")
+	String customerBrowserTitle();
+
+	
+	/*
 	 * CUSTOMER EDITOR
 	 */
 

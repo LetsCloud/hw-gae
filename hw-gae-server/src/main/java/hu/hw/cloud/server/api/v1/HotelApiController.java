@@ -49,7 +49,6 @@ public class HotelApiController extends BaseController {
 	 * 
 	 * @param hotelDto
 	 * @return
-	 * @throws RestApiException
 	 */
 	@RequestMapping(value = HOTEL+"2", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody HotelDto createHotel2(@RequestBody HotelDto hotelDto) {

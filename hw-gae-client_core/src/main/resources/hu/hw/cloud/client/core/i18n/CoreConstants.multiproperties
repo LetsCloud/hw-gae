@@ -61,6 +61,37 @@
             <Value disabled="false">Túl sok bejelentkezési próbálkozás! Kérem próbálpzzon 15 perc múlva</Value>
         </Property>
         <Comment>
+            <Value>PROFILE TYPES</Value>
+        </Comment>
+        <Property>
+            <Name>profileTypeMap</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">PT_COMPANY,PT_CONTACT,PT_GUEST</Value>
+            <Value disabled="false">PT_COMPANY,PT_CONTACT,PT_GUEST</Value>
+        </Property>
+        <Property>
+            <Name>PT_COMPANY</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Company</Value>
+            <Value disabled="false">Cég</Value>
+        </Property>
+        <Property>
+            <Name>PT_CONTACT</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Contact</Value>
+            <Value disabled="false">Kapcsolat</Value>
+        </Property>
+        <Property>
+            <Name>PT_GUEST</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Guest</Value>
+            <Value disabled="false">Vendég</Value>
+        </Property>
+        <Comment>
             <Value>COMMUNICATION MODE</Value>
         </Comment>
         <Property>

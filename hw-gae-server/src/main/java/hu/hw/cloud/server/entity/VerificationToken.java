@@ -34,9 +34,8 @@ public class VerificationToken {
 
 	/**
 	 * 
-	 * @param vatRates
-	 * @param code
-	 * @param date
+	 * @param tokens
+	 * @param token
 	 * @return
 	 */
 	public static VerificationToken getValidVatRate(List<VerificationToken> tokens, final String token) {

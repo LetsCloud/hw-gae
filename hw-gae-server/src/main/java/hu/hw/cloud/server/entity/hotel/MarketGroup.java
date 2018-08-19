@@ -73,7 +73,6 @@ public class MarketGroup extends HotelChild {
 	/**
 	 * 
 	 * @param dto
-	 * @return
 	 */
 	public void updEntityWithDto(MarketGroupDto dto) {
 		clearUniqueIndexes();
@@ -136,11 +135,6 @@ public class MarketGroup extends HotelChild {
 		return dtos;
 	}
 
-	/**
-	 * 
-	 * @param dtos
-	 * @return
-	 */
 	public static List<Ref<MarketGroup>> createRefList(List<String> ids) {
 		List<Ref<MarketGroup>> entityRefs = new ArrayList<Ref<MarketGroup>>();
 		for (String id : ids) {

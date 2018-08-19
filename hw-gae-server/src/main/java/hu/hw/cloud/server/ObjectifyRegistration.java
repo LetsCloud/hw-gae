@@ -25,6 +25,7 @@ import hu.hw.cloud.server.entity.hotel.Service;
 import hu.hw.cloud.server.entity.profile.Guest;
 import hu.hw.cloud.server.entity.profile.Person;
 import hu.hw.cloud.server.entity.profile.Profile;
+import hu.hw.cloud.server.entity.profile.ProfileGroup;
 import hu.hw.cloud.server.entity.reservation.Reservation;
 import hu.hw.cloud.server.entity.task.Task;
 
@@ -46,6 +47,7 @@ public class ObjectifyRegistration {
 		ObjectifyService.register(RoomType.class);
 		ObjectifyService.register(Room.class);
 		ObjectifyService.register(MarketGroup.class);
+		ObjectifyService.register(ProfileGroup.class);
 		ObjectifyService.register(Chat.class);
 		ObjectifyService.register(Task.class);
 		ObjectifyService.register(Reservation.class);

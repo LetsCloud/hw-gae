@@ -27,6 +27,10 @@
 	</bean>
 	<bean id="logoutSuccessHandler" class="hu.hw.cloud.server.security.HttpLogoutSuccessHandler" />
 
+
+
+
+
 	<!-- REPOSITORIES -->
 	<bean id="accountRepository" class="hu.hw.cloud.server.repository.ofy.AccountRepositoryImpl" />
 	<bean id="appUserRepository" class="hu.hw.cloud.server.repository.ofy.AppUserRepositoryImpl" />
@@ -58,8 +62,14 @@
 		class="hu.hw.cloud.server.repository.ofy.RoomTypeRepositoryImpl" />
 	<bean id="marketGroupRepository"
 		class="hu.hw.cloud.server.repository.ofy.MarketGroupRepositoryImpl" />
+	<bean id="profileGroupRepository"
+		class="hu.hw.cloud.server.repository.ofy.ProfileGroupRepositoryImpl" />
+
 	<bean id="testBookingRepository"
 		class="hu.hw.cloud.server.repository.ofy.TestBookingRepositoryImpl" />
+
+
+
 
 	<!-- SERVICES -->
 	<bean id="accountService" class="hu.hw.cloud.server.service.impl.AccountServiceImpl">
@@ -140,6 +150,10 @@
 		<constructor-arg ref="marketGroupRepository" />
 		<constructor-arg ref="accountRepository" />
 		<constructor-arg ref="hotelRepository" />
+	</bean>
+	<bean id="profileGroupService" class="hu.hw.cloud.server.service.impl.ProfileGroupServiceImpl">
+		<constructor-arg ref="profileGroupRepository" />
+		<constructor-arg ref="accountRepository" />
 	</bean>
 
 	<!-- CONTROLLERS -->

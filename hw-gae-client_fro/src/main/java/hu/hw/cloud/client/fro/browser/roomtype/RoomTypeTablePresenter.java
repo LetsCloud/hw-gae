@@ -74,6 +74,11 @@ public class RoomTypeTablePresenter extends AbstractBrowserPresenter<RoomTypeDto
 	}
 
 	@Override
+	protected String getCreatorNameToken() {
+		return CoreNameTokens.ROOMTYPE_EDITOR;
+	}
+
+	@Override
 	protected String getEditorNameToken() {
 		return CoreNameTokens.ROOMTYPE_EDITOR;
 	}

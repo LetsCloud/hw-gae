@@ -15,9 +15,5 @@ import hu.hw.cloud.shared.dto.cube.query.CubeQueryParamDto;
  */
 public interface DashboardUiHandlers extends UiHandlers {
 
-	/**
-	 * 
-	 * @param gueryParams
-	 */
 	void loadWidgetValues(Map<String, CubeQueryParamDto> queryParams);
 }

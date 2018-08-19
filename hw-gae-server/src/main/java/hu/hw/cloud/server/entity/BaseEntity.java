@@ -139,7 +139,8 @@ public abstract class BaseEntity {
 	/**
 	 * Entitás módosítása egy másik entitás adataival
 	 * 
-	 * @param entity
+	 * @param entity Az entitás amellyel felülírjuk a meglévőt.
+	 *
 	 */
 	public void updEntityWithEntity(BaseEntity entity) {
 		if (entity.getId() != null)

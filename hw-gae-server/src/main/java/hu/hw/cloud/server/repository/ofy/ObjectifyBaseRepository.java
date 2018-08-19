@@ -105,7 +105,7 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 
 	/**
 	 * 
-	 * @param id
+	 * @param webSafeKey
 	 * @return
 	 */
 	public T get(String webSafeKey) {
@@ -134,7 +134,7 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 	/**
 	 * Visszaadja az entitás kulcsát a generált Id alapján
 	 * 
-	 * @param entity
+	 * @param webSafeString
 	 * @return
 	 */
 	public Key<T> getKey(String webSafeString) {
@@ -208,7 +208,7 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 	/**
 	 * Entitás törlés
 	 * 
-	 * @param object
+	 * @param entity
 	 */
 	public void delete(T entity) {
 		ofy().delete().entity(entity);
@@ -217,7 +217,7 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 	/**
 	 * Entitás törlés kulcs segítségével
 	 * 
-	 * @param id
+	 * @param key
 	 */
 	public void delete(Key<T> key) {
 		ofy().delete().entity(key);
@@ -226,7 +226,7 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 	/**
 	 * Entitások törlése
 	 * 
-	 * @param objects
+	 * @param entities
 	 */
 	public void delete(List<T> entities) {
 		ofy().delete().entities(entities);
@@ -235,7 +235,7 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 	/**
 	 * Entitások törlése
 	 * 
-	 * @param objects
+	 * @param keys
 	 */
 	public void deleteByKeys(List<Key<T>> keys) {
 		ofy().delete().entities(keys);
@@ -432,7 +432,6 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 	/**
 	 * 
 	 * @param parent
-	 * @param filters
 	 * @return
 	 */
 	public List<Key<T>> getChildrenKeys(Object parent) {
@@ -442,7 +441,8 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 	/**
 	 * 
 	 * @param parent
-	 * @param filters
+	 * @param propName
+	 * @param propValue
 	 * @return
 	 */
 	public Key<T> getChildKeyByProperty(Object parent, String propName, Object propValue) {

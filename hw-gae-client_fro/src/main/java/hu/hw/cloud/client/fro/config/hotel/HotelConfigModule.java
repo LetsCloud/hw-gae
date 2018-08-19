@@ -5,16 +5,10 @@ package hu.hw.cloud.client.fro.config.hotel;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
-import hu.hw.cloud.client.fro.browser.hotel.HotelTablePresenter;
-import hu.hw.cloud.client.fro.browser.hotel.HotelTableView;
-import hu.hw.cloud.client.fro.browser.marketgroup.MarketGroupTableModule;
-import hu.hw.cloud.client.fro.browser.room.RoomTablePresenter;
-import hu.hw.cloud.client.fro.browser.room.RoomTableView;
-import hu.hw.cloud.client.fro.browser.roomtype.RoomTypeTablePresenter;
-import hu.hw.cloud.client.fro.browser.roomtype.RoomTypeTableView;
-import hu.hw.cloud.client.fro.editor.hotel.HotelEditorModule;
-import hu.hw.cloud.client.fro.editor.room.RoomEditorModule;
-import hu.hw.cloud.client.fro.editor.roomtype.RoomTypeEditorModule;
+import hu.hw.cloud.client.fro.browser.hotel.HotelBrowserModule;
+import hu.hw.cloud.client.fro.browser.marketgroup.MarketGroupBrowserModule;
+import hu.hw.cloud.client.fro.browser.room.RoomBrowserModule;
+import hu.hw.cloud.client.fro.browser.roomtype.RoomTypeBrowserModule;
 
 /**
  * @author robi
@@ -23,21 +17,12 @@ import hu.hw.cloud.client.fro.editor.roomtype.RoomTypeEditorModule;
 public class HotelConfigModule extends AbstractPresenterModule {
 	@Override
 	protected void configure() {
-		install(new MarketGroupTableModule());
 
-		install(new HotelEditorModule());
-		install(new RoomTypeEditorModule());
-		install(new RoomEditorModule());
+		install(new HotelBrowserModule());
+		install(new RoomTypeBrowserModule());
+		install(new RoomBrowserModule());
+		install(new MarketGroupBrowserModule());
 
-		bindPresenterWidget(HotelTablePresenter.class, HotelTablePresenter.MyView.class,
-				HotelTableView.class);
-		
-		bindPresenterWidget(RoomTypeTablePresenter.class, RoomTypeTablePresenter.MyView.class,
-				RoomTypeTableView.class);
-		
-		bindPresenterWidget(RoomTablePresenter.class, RoomTablePresenter.MyView.class,
-				RoomTableView.class);
-		
 		bindPresenter(HotelConfigPresenter.class, HotelConfigPresenter.MyView.class, HotelConfigView.class,
 				HotelConfigPresenter.MyProxy.class);
 	}

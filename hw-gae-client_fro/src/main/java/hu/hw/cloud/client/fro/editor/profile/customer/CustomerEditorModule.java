@@ -3,6 +3,7 @@
  */
 package hu.hw.cloud.client.fro.editor.profile.customer;
 
+import com.google.gwt.inject.client.assistedinject.GinFactoryModuleBuilder;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
 /**
@@ -12,8 +13,10 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 public class CustomerEditorModule extends AbstractPresenterModule {
 
 	@Override
-	protected void configure() {	
-		bindPresenter(CustomerEditorPresenter.class, CustomerEditorPresenter.MyView.class, CustomerEditorView.class,
-				CustomerEditorPresenter.MyProxy.class);
+	protected void configure() {
+		bindPresenterWidget(CustomerEditorPresenter.class, CustomerEditorPresenter.MyView.class,
+				CustomerEditorView.class);
+
+		install(new GinFactoryModuleBuilder().build(CustomerEditorFactory.class));
 	}
 }

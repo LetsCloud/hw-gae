@@ -14,14 +14,14 @@ import gwt.material.design.client.ui.MaterialChip;
 
 import hu.hw.cloud.client.core.i18n.CoreConstants;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
-import hu.hw.cloud.client.fro.filter.AbstractFilterView;
+import hu.hw.cloud.client.fro.filter.hotelchild.AbstractHotelChildFilterView;
 import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
 
 /**
  * @author robi
  *
  */
-public class RoomFilterView extends AbstractFilterView implements RoomFilterPresenter.MyView {
+public class RoomFilterView extends AbstractHotelChildFilterView implements RoomFilterPresenter.MyView {
 	private static Logger logger = Logger.getLogger(RoomFilterView.class.getName());
 
 	private final CoreMessages i18nCore;
@@ -31,17 +31,18 @@ public class RoomFilterView extends AbstractFilterView implements RoomFilterPres
 
 	@Inject
 	RoomFilterView(CoreMessages i18nCore, CoreConstants cnstCore) {
-		super(i18nCore);
+		super(i18nCore, cnstCore);
+		logger.info("RoomFilterView()");
 
 		this.i18nCore = i18nCore;
-
-		initFloorFilter(i18nCore);
-		initRoomTypeFilter(i18nCore);
 	}
 
 	@Override
-	protected void initView() {
-		super.initView();
+	protected void initView(CoreMessages i18nCore) {
+		super.initView(i18nCore);
+
+		initFloorFilter(i18nCore);
+		initRoomTypeFilter(i18nCore);
 	}
 
 	private void initFloorFilter(CoreMessages i18nCore) {

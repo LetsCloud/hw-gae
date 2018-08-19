@@ -13,9 +13,9 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import gwt.material.design.client.constants.HideOn;
 import hu.hw.cloud.client.core.i18n.CoreConstants;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
-import hu.hw.cloud.client.fro.browser.BrowserView;
+import hu.hw.cloud.client.fro.browser.AbstractBrowserView;
 import hu.hw.cloud.client.fro.browser.DataColumn;
-import hu.hw.cloud.client.fro.browser.EditColumn;
+import hu.hw.cloud.client.fro.browser.ActionColumn;
 import hu.hw.cloud.shared.cnst.InventoryType;
 import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
 
@@ -27,7 +27,7 @@ public class RoomTypeTableView extends ViewWithUiHandlers<RoomTypeTableUiHandler
 		implements RoomTypeTablePresenter.MyView {
 	private static Logger logger = Logger.getLogger(RoomTypeTableView.class.getName());
 
-	private final BrowserView<RoomTypeDto> table;
+	private final AbstractBrowserView<RoomTypeDto> table;
 
 	private final CoreMessages i18nCore;
 	private final CoreConstants cnstCore;
@@ -36,7 +36,7 @@ public class RoomTypeTableView extends ViewWithUiHandlers<RoomTypeTableUiHandler
 	* 
 	*/
 	@Inject
-	RoomTypeTableView(BrowserView<RoomTypeDto> table, CoreMessages i18nCore, CoreConstants cnstCore) {
+	RoomTypeTableView(AbstractBrowserView<RoomTypeDto> table, CoreMessages i18nCore, CoreConstants cnstCore) {
 		logger.info("RoomTypeTableView()");
 		initWidget(table);
 
@@ -95,7 +95,7 @@ public class RoomTypeTableView extends ViewWithUiHandlers<RoomTypeTableUiHandler
 		}), i18nCore.roomTypesTableActive());
 
 		// Edit Column
-		table.addColumn(new EditColumn<RoomTypeDto>((object) -> getUiHandlers().edit(object)));
+		table.addColumn(new ActionColumn<RoomTypeDto>((object) -> getUiHandlers().edit(object)));
 	}
 
 	private String getInventoryTypeText(InventoryType type) {

@@ -89,7 +89,8 @@ public class CustomResponseDeserializer implements ResponseDeserializer {
 	 * @param contentType
 	 *            the contentType of <code>data</code>.
 	 * @param data
-	 *            the data to deserialize. @return The deserialized object.
+	 *            the data to deserialize. 
+	 * @return The deserialized object.
 	 */
 	protected <R> R deserializeValue(Serialization serialization, String resultClass, ContentType contentType,
 			String data) throws ActionException {

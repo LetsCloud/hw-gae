@@ -13,9 +13,10 @@ import hu.hw.cloud.client.core.app.AppPresenter;
 import hu.hw.cloud.client.core.event.ContentPushEvent;
 import hu.hw.cloud.client.core.security.LoggedInGatekeeper;
 import hu.hw.cloud.client.fro.FroNameTokens;
-import hu.hw.cloud.client.fro.browser.BrowserPresenterFactory;
+import hu.hw.cloud.client.fro.browser.appuser.AppUserBrowserFactory;
+import hu.hw.cloud.client.fro.browser.customer.CustomerBrowserFactory;
+import hu.hw.cloud.client.fro.browser.usergroup.UserGroupBrowserFactory;
 import hu.hw.cloud.client.fro.config.AbstractConfigPresenter;
-import hu.hw.cloud.client.fro.config.PresenterWidgetStore;
 import hu.hw.cloud.client.fro.i18n.FroMessages;
 
 public class SystemConfigPresenter
@@ -34,17 +35,15 @@ public class SystemConfigPresenter
 
 	@Inject
 	SystemConfigPresenter(EventBus eventBus, MyView view, MyProxy proxy,
-			BrowserPresenterFactory dtoTablePresenterFactory, FroMessages i18n) {
+			UserGroupBrowserFactory userGroupBrowserFactory, AppUserBrowserFactory appUserBrowserFactory,
+			FroMessages i18n) {
 		super(eventBus, view, proxy, AppPresenter.SLOT_MAIN);
 		logger.info("SystemConfigPresenter()");
 
 		setCaption(i18n.mainMenuItemSystemConfig());
 
-		addTable(1,
-				new PresenterWidgetStore(i18n.systemConfigUserGroup(), dtoTablePresenterFactory.createUserGroupTablePresenter()));
-		addTable(2, new PresenterWidgetStore(i18n.systemConfigAppUser(), dtoTablePresenterFactory.createAppUserTablePresenter()));
-		addTable(3,
-				new PresenterWidgetStore(i18n.systemConfigCustomer(), dtoTablePresenterFactory.createCustomerTablePresenter()));
+		addContent(i18n.systemConfigUserGroup(), userGroupBrowserFactory.createUserGroupTablePresenter());
+		addContent(i18n.systemConfigAppUser(), appUserBrowserFactory.createAppUserTablePresenter());
 
 		getView().setUiHandlers(this);
 	}

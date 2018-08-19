@@ -61,6 +61,11 @@ public class CustomerBrowserPresenter extends AbstractBrowserPresenter<CustomerD
 	}
 
 	@Override
+	protected String getCreatorNameToken() {
+		return CoreNameTokens.CUSTOMER_CREATOR;
+	}
+
+	@Override
 	protected String getEditorNameToken() {
 		return CoreNameTokens.CUSTOMER_EDITOR;
 	}

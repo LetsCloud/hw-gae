@@ -97,7 +97,7 @@ public class RoomTypeApiController extends BaseController {
 
 	/**
 	 * 
-	 * @param hotelDto
+	 * @param dto
 	 * @param request
 	 * @return
 	 * @throws Throwable

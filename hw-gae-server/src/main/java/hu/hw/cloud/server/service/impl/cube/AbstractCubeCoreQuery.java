@@ -23,7 +23,7 @@ import hu.hw.cloud.shared.dto.cube.CubeResultDto;
 
 /**
  * Az AbstractCubeCoreQuery leszármazottja megadott Core adatforrás (Cap vagy
- * Pfm) adatait felgyűjti és betölti egy <String, ModelD3M6Dto> leképezésbe,
+ * Pfm) adatait felgyűjti és betölti egy String, ModelD3M6Dto leképezésbe,
  * valamint szükség esetén foglaltságok leképezuésbe is betölti.
  * 
  * @author CR
@@ -68,7 +68,7 @@ public abstract class AbstractCubeCoreQuery<T extends CubeBase> implements CubeC
 	 * Az átadot core entitás megadott mutatóit beösszesíti az eredmény
 	 * gyüjtőbe.
 	 * 
-	 * @param data
+	 * @param coreData
 	 * @param dimValues
 	 * @param measures
 	 */
