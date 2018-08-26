@@ -17,6 +17,11 @@ import hu.hw.cloud.server.repository.UserGroupRepository;
  */
 public class UserGroupRepositoryImpl extends CrudRepositoryImpl<UserGroup> implements UserGroupRepository {
 
+	/**
+	 * 
+	 */
+	private static final String PROPERTY_NAME = "name";
+
 	protected UserGroupRepositoryImpl() {
 		super(UserGroup.class);
 	}
@@ -41,6 +46,12 @@ public class UserGroupRepositoryImpl extends CrudRepositoryImpl<UserGroup> imple
 	protected Object getParentKey(String parentWebSafeKey) {
 		Key<Account> key = Key.create(parentWebSafeKey);
 		return key;
+	}
+
+	@Override
+	protected void loadUniqueIndexMap(UserGroup entiy) {
+		if ((entiy.getName() != null) && (!entiy.getName().isEmpty()))
+			entiy.addUniqueIndex(PROPERTY_NAME, entiy.getName());
 	}
 
 }

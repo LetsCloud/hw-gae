@@ -32,17 +32,6 @@ public class ProfileGroupServiceImpl extends CrudServiceImpl<ProfileGroup, Profi
 	}
 
 	@Override
-	protected ProfileGroup createEntity(ProfileGroupDto dto) {
-		return new ProfileGroup(dto);
-	}
-
-	@Override
-	protected ProfileGroup updateEntity(ProfileGroup entity, ProfileGroupDto dto) {
-		entity.updEntityWithDto(dto);
-		return entity;
-	}
-
-	@Override
 	protected List<Object> getParents(Long accountId) {
 		List<Object> parents = new ArrayList<Object>();
 		parents.add(accountRepository.findById(accountId));
@@ -54,11 +43,5 @@ public class ProfileGroupServiceImpl extends CrudServiceImpl<ProfileGroup, Profi
 		List<Object> parents = new ArrayList<Object>();
 		parents.add(accountRepository.findByWebSafeKey(accountWebSafeKey));
 		return parents;
-	}
-
-	@Override
-	protected ProfileGroup updateEntity(ProfileGroup oldEntity, ProfileGroup newEntity) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

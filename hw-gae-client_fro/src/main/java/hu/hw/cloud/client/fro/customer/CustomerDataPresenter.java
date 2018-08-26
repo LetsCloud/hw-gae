@@ -21,22 +21,22 @@ import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.browser.AbstractBrowserPresenter;
 import hu.hw.cloud.client.fro.editor.AbstractEditorPresenterWidget;
-import hu.hw.cloud.client.fro.editor.EditorView;
+import hu.hw.cloud.client.fro.editor.AbstractEditorView;
 import hu.hw.cloud.shared.api.CustomerResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
-import hu.hw.cloud.shared.dto.profile.CustomerDto;
-import hu.hw.cloud.shared.dto.profile.PostalAddressDto;
+import hu.hw.cloud.shared.dto.profile.OrganizationDto;
+import hu.hw.cloud.shared.dto.profile.AddressDto;
 
 /**
  * @author robi
  *
  */
-public class CustomerDataPresenter extends AbstractEditorPresenterWidget<CustomerDto, CustomerDataPresenter.MyView>
+public class CustomerDataPresenter extends AbstractEditorPresenterWidget<OrganizationDto, CustomerDataPresenter.MyView>
 		implements CustomerDataUiHandlers {
 	private static Logger logger = Logger.getLogger(CustomerDataPresenter.class.getName());
 
-	public interface MyView extends EditorView<CustomerDto>, HasUiHandlers<CustomerDataUiHandlers> {
+	public interface MyView extends AbstractEditorView<OrganizationDto>, HasUiHandlers<CustomerDataUiHandlers> {
 		void displayError(EntityPropertyCode code, String message);
 	}
 
@@ -65,10 +65,10 @@ public class CustomerDataPresenter extends AbstractEditorPresenterWidget<Custome
 	}
 
 	@Override
-	public void save(CustomerDto dto) {
-		resourceDelegate.withCallback(new AsyncCallback<CustomerDto>() {
+	public void save(OrganizationDto dto) {
+		resourceDelegate.withCallback(new AsyncCallback<OrganizationDto>() {
 			@Override
-			public void onSuccess(CustomerDto dto) {
+			public void onSuccess(OrganizationDto dto) {
 				PlaceRequest placeRequest = new Builder().nameToken(FroNameTokens.HOTEL_CONFIG).build();
 				placeManager.revealPlace(placeRequest);
 			}
@@ -90,9 +90,9 @@ public class CustomerDataPresenter extends AbstractEditorPresenterWidget<Custome
 	}
 
 	private void edit(String webSafeKey) {
-		resourceDelegate.withCallback(new AsyncCallback<CustomerDto>() {
+		resourceDelegate.withCallback(new AsyncCallback<OrganizationDto>() {
 			@Override
-			public void onSuccess(CustomerDto dto) {
+			public void onSuccess(OrganizationDto dto) {
 				SetPageTitleEvent.fire(i18nCore.roomEditorModifyTitle(), dto.getName(), MenuItemType.MENU_ITEM,
 						CustomerDataPresenter.this);
 
@@ -107,11 +107,11 @@ public class CustomerDataPresenter extends AbstractEditorPresenterWidget<Custome
 	}
 
 	@Override
-	protected CustomerDto createDto() {
-		CustomerDto dto = new CustomerDto();
-		dto.setAccountDto(currentUser.getAppUserDto().getAccountDto());
+	protected OrganizationDto createDto() {
+		OrganizationDto dto = new OrganizationDto();
+		dto.setAccount(currentUser.getAppUserDto().getAccount());
 //		dto.setPostalAddressDtos(new ArrayList<PostalAddressDto>());
-		dto.getPostalAddressDtos().add(new PostalAddressDto());
+		dto.getAddresses().add(new AddressDto());
 		return dto;
 	}
 

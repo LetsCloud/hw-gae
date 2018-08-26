@@ -64,8 +64,8 @@ public class RoomBrowserView extends ViewWithUiHandlers<RoomBrowserUiHandlers> i
 
 		// Type Column
 		table.addColumn(new DataColumn<RoomDto>((object) -> {
-			if (object.getRoomTypeDto() != null) {
-				return object.getRoomTypeDto().getCode();
+			if (object.getRoomType() != null) {
+				return object.getRoomType().getCode();
 			} else {
 				return null;
 			}

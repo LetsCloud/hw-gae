@@ -96,8 +96,8 @@ public class ChatCreatorView extends ViewWithUiHandlers<ChatCreatorUiHandlers> i
 		for (Widget w : receiverCollection) {
 			ReceiverItem ri = (ReceiverItem)w;
 			if (ri.isSelected()) {
-				for (AppUserDto receiver : ri.getValue().getMemberDtos()) {
-					receiver.getUserGroupDtos().clear();
+				for (AppUserDto receiver : ri.getValue().getMembers()) {
+					receiver.getUserGroups().clear();
 					receivers.add(receiver);
 				}
 			}

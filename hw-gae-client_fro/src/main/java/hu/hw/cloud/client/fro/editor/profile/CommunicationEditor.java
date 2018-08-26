@@ -37,6 +37,7 @@ import gwt.material.design.client.ui.MaterialTextBox;
 import hu.hw.cloud.client.core.i18n.CoreConstants;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.i18n.CountryConstants;
+import hu.hw.cloud.client.fro.editor.HasEditorSwitch;
 import hu.hw.cloud.shared.cnst.CommMode;
 import hu.hw.cloud.shared.dto.profile.CommunicationDto;
 
@@ -44,7 +45,7 @@ import hu.hw.cloud.shared.dto.profile.CommunicationDto;
  * @author robi
  *
  */
-public class CommunicationEditor extends Composite implements Editor<CommunicationDto> {
+public class CommunicationEditor extends Composite implements Editor<CommunicationDto>, HasEditorSwitch {
 	private static Logger logger = Logger.getLogger(CommunicationEditor.class.getName());
 
 	interface MyStyle extends CssResource {
@@ -241,5 +242,17 @@ public class CommunicationEditor extends Composite implements Editor<Communicati
 
 	public void setBackgeoundColor() {
 		panel.getElement().getStyle().setBackgroundColor("#f5f5f5");
+	}
+
+	@Override
+	public void toEditable() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void toReadOnly() {
+		// TODO Auto-generated method stub
+		
 	}
 }

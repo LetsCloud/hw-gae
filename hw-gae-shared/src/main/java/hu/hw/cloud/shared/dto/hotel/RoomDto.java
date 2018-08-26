@@ -52,12 +52,12 @@ public class RoomDto extends HotelChildDto {
 	/**
 	 * Szobatípus hivatkozás
 	 */
-	private RoomTypeDto roomTypeDto;
+	private RoomTypeDto roomType;
 
 	/**
 	 * Szoba nyitások és zárások
 	 */
-	private List<RoomAvailabilityDto> roomAvailabilityDtos = new ArrayList<RoomAvailabilityDto>();
+	private List<RoomAvailabilityDto> roomAvailabilities = new ArrayList<RoomAvailabilityDto>();
 
 	public String getCode() {
 		return code;
@@ -107,32 +107,33 @@ public class RoomDto extends HotelChildDto {
 		this.foRoomStatus = foRoomStatus;
 	}
 
-	public RoomTypeDto getRoomTypeDto() {
-		return roomTypeDto;
+	public RoomTypeDto getRoomType() {
+		return roomType;
 	}
 
-	public void setRoomTypeDto(RoomTypeDto roomTypeDto) {
-		this.roomTypeDto = roomTypeDto;
+	public void setRoomType(RoomTypeDto roomType) {
+		this.roomType = roomType;
 	}
 
-	public List<RoomAvailabilityDto> getRoomAvailabilityDtos() {
-		return roomAvailabilityDtos;
+	public List<RoomAvailabilityDto> getRoomAvailabilities() {
+		return roomAvailabilities;
 	}
 
-	public void setRoomAvailabilityDtos(List<RoomAvailabilityDto> roomAvailabilityDtos) {
-		this.roomAvailabilityDtos = roomAvailabilityDtos;
+	public void setRoomAvailabilities(List<RoomAvailabilityDto> roomAvailabilities) {
+
+		this.roomAvailabilities = roomAvailabilities;
 	}
 
-	public void addRoomAvailabilityDto(RoomAvailabilityDto roomAvailabilityDto) {
-		this.roomAvailabilityDtos.add(roomAvailabilityDto);
+	public void addRoomAvailability(RoomAvailabilityDto roomAvailability) {
+		this.roomAvailabilities.add(roomAvailability);
 	}
 
 	@Override
 	public String toString() {
 		return "RoomDto [" + super.toString() + ", code=" + this.code + ", floor=" + this.floor + ", description="
-				+ this.description + ", roomType=" + this.roomTypeDto + ", roomStatus=" + this.roomStatus
-				+ ", occupied=" + this.occupied + ", foRoomStatus=" + this.foRoomStatus + ", roomAvailabilies="
-				+ this.roomAvailabilityDtos + "]";
+				+ this.description + ", roomType=" + this.roomType + ", roomStatus=" + this.roomStatus + ", occupied="
+				+ this.occupied + ", foRoomStatus=" + this.foRoomStatus + ", roomAvailabilies="
+				+ this.roomAvailabilities + "]";
 	}
 
 	@JsonIgnore

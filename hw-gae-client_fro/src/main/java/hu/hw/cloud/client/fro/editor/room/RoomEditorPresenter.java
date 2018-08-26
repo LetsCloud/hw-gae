@@ -35,7 +35,7 @@ import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.browser.AbstractBrowserPresenter;
 import hu.hw.cloud.client.fro.editor.AbstractEditorPresenter;
-import hu.hw.cloud.client.fro.editor.EditorView;
+import hu.hw.cloud.client.fro.editor.AbstractEditorView;
 import hu.hw.cloud.shared.api.RoomResource;
 import hu.hw.cloud.shared.cnst.InventoryType;
 import hu.hw.cloud.shared.cnst.MenuItemType;
@@ -54,7 +54,7 @@ public class RoomEditorPresenter
 		implements RoomEditorUiHandlers {
 	private static Logger logger = Logger.getLogger(RoomEditorPresenter.class.getName());
 
-	public interface MyView extends EditorView<RoomDto>, HasUiHandlers<RoomEditorUiHandlers> {
+	public interface MyView extends AbstractEditorView<RoomDto>, HasUiHandlers<RoomEditorUiHandlers> {
 		void setRoomTypeData(List<RoomTypeDto> roomTypeData);
 
 		void displayError(EntityPropertyCode code, String message);
@@ -134,9 +134,9 @@ public class RoomEditorPresenter
 	@Override
 	protected RoomDto createDto() {
 		RoomDto dto = new RoomDto();
-		dto.setHotelDto(currentUser.getAppUserDto().getDefaultHotelDto());
+		dto.setHotel(currentUser.getAppUserDto().getDefaultHotel());
 		RoomAvailabilityDto ra = new RoomAvailabilityDto(true, new Date());
-		dto.addRoomAvailabilityDto(ra);
+		dto.addRoomAvailability(ra);
 		return dto;
 	}
 
@@ -144,12 +144,12 @@ public class RoomEditorPresenter
 		resourceDelegate.withCallback(new AsyncCallback<RoomDto>() {
 			@Override
 			public void onSuccess(RoomDto dto) {
-				List<RoomAvailabilityDto> availabilities = dto.getRoomAvailabilityDtos();
+				List<RoomAvailabilityDto> availabilities = dto.getRoomAvailabilities();
 				if (availabilities != null)
 					availabilities.sort(
 							(RoomAvailabilityDto o1, RoomAvailabilityDto o2) -> o1.getDate().compareTo(o2.getDate()));
 
-				SetPageTitleEvent.fire(i18nCore.roomEditorModifyTitle(), dto.getHotelDto().getName(),
+				SetPageTitleEvent.fire(i18nCore.roomEditorModifyTitle(), dto.getHotel().getName(),
 						MenuItemType.MENU_ITEM, RoomEditorPresenter.this);
 
 				getView().edit(false, dto);

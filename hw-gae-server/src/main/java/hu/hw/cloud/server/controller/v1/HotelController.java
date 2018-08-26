@@ -14,6 +14,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,15 +43,19 @@ import hu.hw.cloud.shared.exception.RestApiException;
 public class HotelController extends CrudController<Hotel, HotelDto> {
 	private static final Logger logger = LoggerFactory.getLogger(HotelController.class);
 
+	private final ModelMapper modelMapper;
+
 	@Autowired
-	HotelController(HotelService service) {
-		super(service);
+	HotelController(HotelService service, ModelMapper modelMapper) {
+		super(Hotel.class, service, modelMapper);
 		logger.info("HotelController()");
+		this.modelMapper = modelMapper;
 	}
 
 	@Override
 	protected HotelDto createDto(Hotel entity) {
-		return Hotel.createDto(entity);
+		HotelDto dto = modelMapper.map(entity, HotelDto.class);
+		return dto;
 	}
 
 	/**

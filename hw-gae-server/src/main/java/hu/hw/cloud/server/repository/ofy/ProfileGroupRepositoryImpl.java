@@ -40,4 +40,12 @@ public class ProfileGroupRepositoryImpl extends CrudRepositoryImpl<ProfileGroup>
 		Key<ProfileGroup> key = getKey(webSafeKey);
 		return key.getParent().getString();
 	}
+
+	@Override
+	protected void loadUniqueIndexMap(ProfileGroup entiy) {
+
+		if (entiy.getCode() != null) {
+			entiy.addUniqueIndex(ProfileGroup.PROFILEGROUP_CODE, entiy.getCode());
+		}
+	}
 }

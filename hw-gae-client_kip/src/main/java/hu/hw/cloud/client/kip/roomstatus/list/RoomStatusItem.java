@@ -83,7 +83,7 @@ public class RoomStatusItem extends Composite implements HasRoomStatusEditHandle
 
 		// code.setText(roomDto.getRoomStatus().name() + "/&#9786;");
 		floor.setText(roomDto.getFloor());
-		roomTypeCode.setText(roomDto.getRoomTypeDto().getCode());
+		roomTypeCode.setText(roomDto.getRoomType().getCode());
 
 		switch (roomDto.getRoomStatus()) {
 		case DIRTY:

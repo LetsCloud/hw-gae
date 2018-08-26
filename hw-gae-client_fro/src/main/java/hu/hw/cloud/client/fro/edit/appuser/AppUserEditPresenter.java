@@ -85,7 +85,7 @@ public class AppUserEditPresenter extends PresenterWidget<AppUserEditPresenter.M
 
 		AppUserDto userDto = new AppUserDto();
 		// userDto.setAccountWebSafeKey(currentUser.getAppUserDto().getAccountDto().getWebSafeKey());
-		userDto.setAccountDto(currentUser.getAppUserDto().getAccountDto());
+		userDto.setAccount(currentUser.getAppUserDto().getAccount());
 		userDto.setPassword(FIRST_PASSWORD);
 
 		getView().open(isNew, userDto);

@@ -9,10 +9,10 @@ import java.util.List;
 
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.OnSave;
 
 import hu.hw.cloud.server.entity.common.AccountChild;
 import hu.hw.cloud.server.entity.common.AppUser;
-import hu.hw.cloud.shared.dto.chat.ChatDto;
 
 /**
  * @author robi
@@ -34,16 +34,24 @@ public class Chat extends AccountChild {
 	private Date closed;
 
 	private List<ChatPost> posts = new ArrayList<ChatPost>();
-	
+
 	private String url;
 
 	public Chat() {
 
 	}
 
-	public Chat(ChatDto dto) {
-		this();
-		updateEntity(dto);
+	/**
+	 * Az entitás verziiószámát növelő trigger, amely az entitás mentése előtt fut
+	 * le.
+	 */
+	@OnSave
+	private void onSave() {
+		if (getId() == null) {
+			created = new Date();
+		} else {
+			updated = new Date();
+		}
 	}
 
 	public AppUser getSender() {
@@ -109,76 +117,4 @@ public class Chat extends AccountChild {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-
-	/**
-	 * Entitás módosítása DTO alapján
-	 * 
-	 * @param dto
-	 */
-	public void updateEntity(ChatDto dto) {
-		clearUniqueIndexes();
-
-		super.updEntityWithDto(dto);
-
-		if (dto.getCreated() != null)
-			setCreated(dto.getCreated());
-
-		if (dto.getUpdated() != null)
-			setUpdated(dto.getUpdated());
-
-		if (dto.getSender() != null)
-			setSender(new AppUser(dto.getSender()));
-
-		if (dto.getReceivers() != null)
-			setReceivers(AppUser.createList(dto.getReceivers()));
-
-		if (dto.getMessage() != null)
-			setMessage(dto.getMessage());
-
-		if (dto.getClosed() != null)
-			setClosed(dto.getClosed());
-
-		if (dto.getPosts() != null)
-			setPosts(ChatPost.createList(dto.getPosts()));
-
-		if (dto.getUrl() != null)
-			setUrl(dto.getUrl());
-	}
-
-	public static ChatDto createDto(Chat entity) {
-		ChatDto dto = new ChatDto();
-		dto = entity.updateDto(dto);
-		return dto;
-	}
-
-	public ChatDto updateDto(ChatDto dto) {
-		dto = (ChatDto) super.updDtoWithEntity(dto);
-
-		if (this.getCreated() != null)
-			dto.setCreated(this.getCreated());
-
-		if (this.getUpdated() != null)
-			dto.setUpdated(this.getUpdated());
-
-		if (this.getSender() != null)
-			dto.setSender(AppUser.createDto(this.getSender()));
-
-		if (this.getReceivers() != null)
-			dto.setReceivers(AppUser.createDtos(this.getReceivers()));
-
-		if (this.getMessage() != null)
-			dto.setMessage(this.getMessage());
-
-		if (this.getClosed() != null)
-			dto.setClosed(this.getClosed());
-
-		if (this.getPosts() != null)
-			dto.setPosts(ChatPost.createDtos(this.getPosts()));
-
-		if (this.getUrl() != null)
-			dto.setUrl(this.getUrl());
-
-		return dto;
-	}
-
 }

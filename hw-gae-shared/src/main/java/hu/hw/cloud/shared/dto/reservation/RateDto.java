@@ -33,7 +33,7 @@ public class RateDto implements Dto {
 	/**
 	 * Árkód.
 	 */
-	private RatePlanDto ratePlanDto;
+	private RatePlanDto ratePlan;
 
 	/**
 	 * Ár.
@@ -43,7 +43,7 @@ public class RateDto implements Dto {
 	/**
 	 * Valutanem.
 	 */
-	private CurrencyDto currencyDto;
+	private CurrencyDto currency;
 
 	/**
 	 * IFA kalkulálás módja.
@@ -53,7 +53,7 @@ public class RateDto implements Dto {
 	/**
 	 * Árkód összetevők.
 	 */
-	private List<RateElementDto> rateElementDtos = new ArrayList<RateElementDto>();
+	private List<RateElementDto> rateElements = new ArrayList<RateElementDto>();
 
 	public Date getFromDate() {
 		return fromDate;
@@ -71,12 +71,12 @@ public class RateDto implements Dto {
 		this.toDate = toDate;
 	}
 
-	public RatePlanDto getRatePlanDto() {
-		return ratePlanDto;
+	public RatePlanDto getRatePlan() {
+		return ratePlan;
 	}
 
-	public void setRatePlanDto(RatePlanDto ratePlanDto) {
-		this.ratePlanDto = ratePlanDto;
+	public void setRatePlan(RatePlanDto ratePlan) {
+		this.ratePlan = ratePlan;
 	}
 
 	public Double getRate() {
@@ -87,12 +87,12 @@ public class RateDto implements Dto {
 		this.rate = rate;
 	}
 
-	public CurrencyDto getCurrencyDto() {
-		return currencyDto;
+	public CurrencyDto getCurrency() {
+		return currency;
 	}
 
-	public void setCurrencyDto(CurrencyDto currencyDto) {
-		this.currencyDto = currencyDto;
+	public void setCurrency(CurrencyDto currency) {
+		this.currency = currency;
 	}
 
 	public CityTaxMethod getCityTaxMethod() {
@@ -103,12 +103,12 @@ public class RateDto implements Dto {
 		this.cityTaxMethod = cityTaxMethod;
 	}
 
-	public List<RateElementDto> getRateElementDtos() {
-		return rateElementDtos;
+	public List<RateElementDto> getRateElements() {
+		return rateElements;
 	}
 
-	public void setRateElementDtos(List<RateElementDto> rateElementDtos) {
-		this.rateElementDtos = rateElementDtos;
+	public void setRateElements(List<RateElementDto> rateElements) {
+		this.rateElements = rateElements;
 	}
 
 }

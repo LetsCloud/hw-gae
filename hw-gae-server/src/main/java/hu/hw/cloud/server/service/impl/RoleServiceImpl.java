@@ -83,17 +83,6 @@ public class RoleServiceImpl extends CrudServiceImpl<Role, RoleDto, RoleReposito
 	}
 
 	@Override
-	protected Role createEntity(RoleDto dto) {
-		return new Role(dto);
-	}
-
-	@Override
-	protected Role updateEntity(Role entity, RoleDto dto) {
-		entity.update(dto);
-		return entity;
-	}
-
-	@Override
 	protected List<Object> getParents(Long accountId) {
 		List<Object> parents = new ArrayList<Object>();
 		parents.add(accountRepository.findById(accountId));
@@ -102,12 +91,6 @@ public class RoleServiceImpl extends CrudServiceImpl<Role, RoleDto, RoleReposito
 
 	@Override
 	public List<Role> getAll(String accountWebSafeKey) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Role updateEntity(Role oldEntity, Role newEntity) {
 		// TODO Auto-generated method stub
 		return null;
 	}

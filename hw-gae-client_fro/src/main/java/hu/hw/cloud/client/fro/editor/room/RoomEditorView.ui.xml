@@ -61,7 +61,7 @@
 				<g:HTMLPanel ui:field="availabilityPanel" addStyleNames="{style.dataGroupBox}">
 					<g:Label text="{i18nCore.roomEditorAvailability}"
 						addStyleNames="{style.dataGroupTitle}" />
-						<roomeditor:AvailabilityListEditor ui:field="roomAvailabilityDtos"/>
+						<roomeditor:AvailabilityListEditor ui:field="roomAvailabilities"/>
 				</g:HTMLPanel>
 			</m:MaterialColumn>
 		</m:MaterialRow>

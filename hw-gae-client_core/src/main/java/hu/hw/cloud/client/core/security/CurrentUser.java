@@ -17,7 +17,7 @@ public class CurrentUser {
 
 	public void setAppUserDto(AppUserDto userDto) {
 		this.appUserDto = userDto;
-		this.currentHotelDto = userDto.getDefaultHotelDto();
+		this.currentHotelDto = userDto.getDefaultHotel();
 	}
 
 	public HotelDto getCurrentHotelDto() {

@@ -55,7 +55,7 @@ public abstract class AbstractHotelChildFilterPresenter<V extends AbstractHotelC
 			@Override
 			public void onSuccess(LoadResult<HotelDto> loadResult) {
 				logger.info("AbstractFilterPresenter().onReveal().onSuccess()");
-				getView().setHotelData(currentUser.getAppUserDto().getAvailableHotelDtos());
+				getView().setHotelData(currentUser.getAppUserDto().getAvailableHotels());
 				getView().setSelectedHotel(currentUser.getCurrentHotelDto());
 				FilterChangeEvent.fire(AbstractHotelChildFilterPresenter.this, DataTable.ROOM_TYPE);
 			}

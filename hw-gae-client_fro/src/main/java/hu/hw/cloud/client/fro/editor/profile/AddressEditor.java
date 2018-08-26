@@ -35,12 +35,13 @@ import gwt.material.design.client.ui.MaterialTextBox;
 import hu.hw.cloud.client.core.i18n.CoreConstants;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.i18n.CountryConstants;
+import hu.hw.cloud.client.fro.editor.HasEditorSwitch;
 import hu.hw.cloud.client.fro.editor.profile.AddressActionEvent.AddressActiEventHandler;
 import hu.hw.cloud.client.fro.ui.MaterialTextAreaAdd;
 import hu.hw.cloud.shared.cnst.PostalAddressLabel;
-import hu.hw.cloud.shared.dto.profile.PostalAddressDto;
+import hu.hw.cloud.shared.dto.profile.AddressDto;
 
-public class AddressEditor extends Composite implements Editor<PostalAddressDto> {
+public class AddressEditor extends Composite implements Editor<AddressDto>, HasEditorSwitch {
 	private static Logger logger = Logger.getLogger(AddressEditor.class.getName());
 
 	interface MyStyle extends CssResource {
@@ -294,5 +295,17 @@ public class AddressEditor extends Composite implements Editor<PostalAddressDto>
 	private void createFullAddress() {
 		fullAddress.setValue(
 				country.getValue() + ", " + postcode.getValue() + " " + city.getValue() + ", " + street.getValue());
+	}
+
+	@Override
+	public void toEditable() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void toReadOnly() {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -4,7 +4,7 @@
 package hu.hw.cloud.shared.dto.common;
 
 import hu.hw.cloud.shared.dto.BaseDto;
-import hu.hw.cloud.shared.dto.profile.PostalAddressDto;
+import hu.hw.cloud.shared.dto.profile.AddressDto;
 
 /**
  * @author CR
@@ -21,7 +21,7 @@ public class AccountDto extends BaseDto {
 	/**
 	 * Cím
 	 */
-	private PostalAddressDto postalAddress = new PostalAddressDto();
+	private AddressDto address = new AddressDto();
 
 	public String getName() {
 		return name;
@@ -31,12 +31,12 @@ public class AccountDto extends BaseDto {
 		this.name = name;
 	}
 
-	public PostalAddressDto getPostalAddressDto() {
-		return postalAddress;
+	public AddressDto getAddress() {
+		return address;
 	}
 
-	public void setPostalAddressDto(PostalAddressDto postalAddress) {
-		this.postalAddress = postalAddress;
+	public void setAddress(AddressDto address) {
+		this.address = address;
 	}
 
 	@Override

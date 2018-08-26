@@ -100,7 +100,7 @@ public class RoomBrowserPresenter extends AbstractBrowserPresenter<RoomDto, Room
 							.collect(Collectors.toList());
 				if (!filter.getSelectedRoomTypeKeys().isEmpty())
 					result = result.stream().filter(
-							room -> filter.getSelectedRoomTypeKeys().contains(room.getRoomTypeDto().getWebSafeKey()))
+							room -> filter.getSelectedRoomTypeKeys().contains(room.getRoomType().getWebSafeKey()))
 							.collect(Collectors.toList());
 				getView().setData(result);
 			}

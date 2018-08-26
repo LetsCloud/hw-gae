@@ -5,7 +5,7 @@ package hu.hw.cloud.shared.dto.reservation;
 
 import hu.hw.cloud.shared.cnst.ProfileType;
 import hu.hw.cloud.shared.dto.Dto;
-import hu.hw.cloud.shared.dto.profile.CustomerDto;
+import hu.hw.cloud.shared.dto.profile.OrganizationDto;
 
 /**
  * @author CR
@@ -16,7 +16,7 @@ public class ProfileLinkDto implements Dto {
 
 	private ProfileType type;
 
-	private CustomerDto customerDto;
+	private OrganizationDto organization;
 
 	public ProfileType getType() {
 		return type;
@@ -26,11 +26,11 @@ public class ProfileLinkDto implements Dto {
 		this.type = type;
 	}
 
-	public CustomerDto getCustomerDto() {
-		return customerDto;
+	public OrganizationDto getOrganization() {
+		return organization;
 	}
 
-	public void setCustomerDto(CustomerDto customerDto) {
-		this.customerDto = customerDto;
+	public void setOrganization(OrganizationDto organization) {
+		this.organization = organization;
 	}
 }

@@ -118,7 +118,7 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 					return;
 				}
 				currentUser.setAppUserDto(result);
-				currentUser.getAppUserDto().getAvailableHotelDtos()
+				currentUser.getAppUserDto().getAvailableHotels()
 						.sort((HotelDto h1, HotelDto h2) -> h1.getName().compareTo(h2.getName()));
 				currentUser.setLoggedIn(true);
 

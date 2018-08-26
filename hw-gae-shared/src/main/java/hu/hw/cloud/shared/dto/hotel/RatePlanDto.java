@@ -60,7 +60,7 @@ public class RatePlanDto extends HotelChildDto {
 	/**
 	 * Árkód összetevők.
 	 */
-	private List<RateElementDto> rateElementDtos = new ArrayList<RateElementDto>();
+	private List<RateElementDto> rateElements = new ArrayList<RateElementDto>();
 
 	public String getCode() {
 		return code;
@@ -126,11 +126,11 @@ public class RatePlanDto extends HotelChildDto {
 		this.rateValidities = rateValidities;
 	}
 
-	public List<RateElementDto> getRateElementDtos() {
-		return rateElementDtos;
+	public List<RateElementDto> getRateElements() {
+		return rateElements;
 	}
 
-	public void setRateElementDtos(List<RateElementDto> rateElementDtos) {
-		this.rateElementDtos = rateElementDtos;
+	public void setRateElements(List<RateElementDto> rateElements) {
+		this.rateElements = rateElements;
 	}
 }

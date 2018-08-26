@@ -6,21 +6,28 @@ package hu.hw.cloud.server.entity;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Ignore;
 import com.googlecode.objectify.annotation.OnLoad;
 import com.googlecode.objectify.annotation.OnSave;
 
-import hu.hw.cloud.shared.dto.BaseDto;
 import hu.hw.cloud.shared.exception.EntityValidationException;
 
 /**
+ * Minden entitás őse.
+ * <p>
+ * Tartalmazza az entitás fajtán belőli egyedi azonosítót (id), az entitás
+ * adatbázison belüli egyedi kulcsát (webSafeKey) és az entitás verziószámát.
+ * 
  * @author CR
  *
  */
 public abstract class BaseEntity {
+	private static final Logger logger = LoggerFactory.getLogger(BaseEntity.class.getName());
 
 	/**
 	 * Generált ID amit az Objectify használ az entitás példány entitás típuson
@@ -30,7 +37,7 @@ public abstract class BaseEntity {
 	private Long id;
 
 	/**
-	 * Az entitás kulcsából képzett egyedi adzonosító
+	 * Az entitás adatbázison belüli egyedi kulcsa. Tranzitív.
 	 */
 	@Ignore
 	private String webSafeKey;
@@ -40,11 +47,17 @@ public abstract class BaseEntity {
 	 */
 	private Long version = 0L;
 
+	/**
+	 * Egyedi indexek ellenőrzését szolgáló leképezés.
+	 * <p>
+	 * A leképezés kulcsa a mező neve, értéke pedig a mező értéke.
+	 */
 	@Ignore
 	private Map<String, Object> uniqueIndexes = new HashMap<String, Object>();
 
 	/**
-	 * Auto-increment version # whenever persisted
+	 * Az entitás verziiószámát növelő trigger, amely az entitás mentése előtt fut
+	 * le.
 	 */
 	@OnSave
 	private void onSave() {
@@ -52,8 +65,8 @@ public abstract class BaseEntity {
 	}
 
 	/**
-	 * Az entitás betöltésekor az id tul egyedi azonosítására szolgáló kulcsdd
-	 * értéket az ID mezőnek.
+	 * Az entitás betöltésekor lefutő trigger metódus, amely letrehozza az entitás
+	 * egyedi kulcsát.
 	 */
 	@OnLoad
 	private void onLoad() {
@@ -61,29 +74,38 @@ public abstract class BaseEntity {
 		this.webSafeKey = key.getString();
 	}
 
+	/**
+	 * Objectify miatt szükséges.
+	 */
 	public BaseEntity() {
+		logger.info("BaseEntity()");
 	}
 
-	public BaseEntity(BaseDto dto) {
-		this();
-		this.setId(dto.getId());
-		this.setVersion(dto.getVersion());
-	}
-
-	public BaseEntity(BaseEntity source) {
-		this();
-		this.id = source.id;
-		this.version = source.version;
-	}
-
+	/**
+	 * Entitás fajtán belüli egyedi azonosító visszaadása.
+	 * 
+	 * @return Egyedi azonosíító.
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * Entitás fajtán belüli egyedi azonosító beállítása, amire entitás másolásakor
+	 * ven szükséd.
+	 * 
+	 * @param id Egyedi azonosíító.
+	 */
 	public void setId(Long id) {
+		logger.info("setId()->" + id);
 		this.id = id;
 	}
 
+	/**
+	 * Adatbázison belüli egyedi kulcs létrehozása.
+	 * 
+	 * @return Egyedi kulcs.
+	 */
 	public String getWebSafeKey() {
 		if (id != null) {
 			Key<BaseEntity> key = Key.create(this);
@@ -92,76 +114,75 @@ public abstract class BaseEntity {
 		return webSafeKey;
 	}
 
+	/**
+	 * Egyedi kulcs beállítása, amelyre entitás másolás esetén van szükség.
+	 * 
+	 * @param webSafeKey A beállítandó egyedi kulcs.
+	 */
 	public void setWebSafeKey(String webSafeKey) {
+		logger.info("setWebSafeKey()->" + webSafeKey);
 		this.webSafeKey = webSafeKey;
 	}
 
+	/**
+	 * Entitás verziószám visszaadása.
+	 * 
+	 * @return Verziószám.
+	 */
 	public Long getVersion() {
 		return version;
 	}
 
+	/**
+	 * Entitás verziószám beállítása, amelyre entitás másaolása esetén van szükség.
+	 * 
+	 * @param version Beállítandó verziószám.
+	 */
 	public void setVersion(Long version) {
+		logger.info("setVersion()->" + version);
 		this.version = version;
 	}
 
-	public Map<String, Object> getUniqueIndexes() {
-		return uniqueIndexes;
-	}
-
-	@JsonIgnore
-	public boolean isSaved() {
-		return webSafeKey != null;
-	}
-
+	/**
+	 * Az egyedi indexek ellenőrzéséhez szükséges értékek tárolójának kiűrítése.
+	 */
 	public void clearUniqueIndexes() {
 		uniqueIndexes.clear();
 	}
 
+	/**
+	 * Az egyedi indexek ellenőrzéséhez szükséges mező név és mező érték pár
+	 * megadása.
+	 * 
+	 * @param property Mező név.
+	 * @param value    Mező érték.
+	 */
 	public void addUniqueIndex(String property, Object value) {
 		uniqueIndexes.put(property, value);
 	}
 
+	/**
+	 * Az egyedi indexek ellenőrzéséhez szükséges mező név és mező érték párok
+	 * visszaadása.
+	 * 
+	 * @return Mező nevek és értékek leképezése.
+	 */
+	public Map<String, Object> getUniqueIndexes() {
+		return uniqueIndexes;
+	}
+
+	/**
+	 * Validációs metódus, amelyet a
+	 * {@link hu.hw.cloud.server.repository.ofy.CrudRepositoryImpl} osztály
+	 * {@link hu.hw.cloud.server.repository.ofy.CrudRepositoryImpl#save(BaseEntity)}
+	 * save metódusa hívja meg még az egyedi kulcsok értékesítés és az entitás
+	 * mentése előtt.
+	 * <p>
+	 * Validációs hiba esetén EntityValidationException kivételt dob.
+	 * 
+	 * @throws EntityValidationException
+	 */
 	public void validate() throws EntityValidationException {
 	}
 
-	/**
-	 * Entitás módosítása DTO adataival
-	 * 
-	 * @param dto
-	 */
-	public void updEntityWithDto(BaseDto dto) {
-		if (dto.getId() != null)
-			setId(dto.getId());
-		if (dto.getVersion() != null)
-			setVersion(dto.getVersion());
-	}
-
-	/**
-	 * Entitás módosítása egy másik entitás adataival
-	 * 
-	 * @param entity Az entitás amellyel felülírjuk a meglévőt.
-	 *
-	 */
-	public void updEntityWithEntity(BaseEntity entity) {
-		if (entity.getId() != null)
-			setId(entity.getId());
-		if (entity.getVersion() != null)
-			setVersion(entity.getVersion());
-	}
-
-	/**
-	 * DTO módosítása zz entitás adataival
-	 * 
-	 * @param dto
-	 * @return
-	 */
-	public BaseDto updDtoWithEntity(BaseDto dto) {
-		if (getId() != null)
-			dto.setId(getId());
-		if (getVersion() != null)
-			dto.setVersion(getVersion());
-		if (getWebSafeKey() != null)
-			dto.setWebSafeKey(getWebSafeKey());
-		return dto;
-	}
 }

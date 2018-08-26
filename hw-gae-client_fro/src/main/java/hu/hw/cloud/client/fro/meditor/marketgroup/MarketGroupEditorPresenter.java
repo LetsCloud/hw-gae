@@ -65,7 +65,7 @@ public class MarketGroupEditorPresenter
 	@Override
 	protected MarketGroupDto createDto() {
 		MarketGroupDto dto = new MarketGroupDto();
-		dto.setHotelDto(currentUser.getAppUserDto().getDefaultHotelDto());
+		dto.setHotel(currentUser.getAppUserDto().getDefaultHotel());
 		return dto;
 	}
 

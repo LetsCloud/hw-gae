@@ -99,7 +99,7 @@ public class AppUserBrowserPresenter extends AbstractBrowserPresenter<AppUserDto
 	@Override
 	public void clearFcmTokens(List<AppUserDto> dtos) {
 		for (AppUserDto dto : dtos) {
-			dto.getFcmTokenDtos().clear();
+			dto.getFcmTokens().clear();
 			resourceDelegate.withCallback(new ErrorHandlerAsyncCallback<AppUserDto>(this) {
 				@Override
 				public void onSuccess(AppUserDto userDto) {

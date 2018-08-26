@@ -42,31 +42,6 @@ public class HkAssignment extends HotelChild {
 	public HkAssignment() {
 	}
 
-	/**
-	 * Az átadott DTO-ból létrhozza az entitást.
-	 * 
-	 * @param dto
-	 */
-	public HkAssignment(HkAssignmentDto dto) {
-		this();
-		update(dto);
-	}
-
-	/**
-	 * Az átadott DTO adataival módosítja az entitást.
-	 */
-	public HkAssignment update(HkAssignmentDto dto) {
-		super.updEntityWithDto(dto);
-		this.setAttendant(new AppUser(dto.getAttendantDto()));
-		this.setBusinessDate(dto.getBusinessDate());
-		this.setCleanType(new CleanType(dto.getCleanTypeDto()));
-		this.setInspector(new AppUser(dto.getInspectorDto()));
-		this.setNotice(dto.getNotice());
-		this.setRoom(new Room(dto.getRoomDto()));
-		this.setStatus(dto.getStatus());
-		return this;
-	}
-
 	public Date getBusinessDate() {
 		return businessDate;
 	}
@@ -131,27 +106,6 @@ public class HkAssignment extends HotelChild {
 	 */
 	public static HkAssignmentDto createDto(HkAssignment entity) {
 		HkAssignmentDto dto = new HkAssignmentDto();
-		return dto;
-	}
-
-	/**
-	 * 
-	 * @param dto
-	 * @return
-	 */
-	public HkAssignmentDto updateDto(HkAssignmentDto dto) {
-		dto = (HkAssignmentDto) super.updDtoWithEntity(dto);
-		if (this.getAttendant() != null)
-			dto.setAttendantDto(AppUser.createDto(this.getAttendant()));
-		dto.setBusinessDate(this.getBusinessDate());
-		if (this.getCleanType() != null)
-			dto.setCleanTypeDto(CleanType.createDto(this.getCleanType()));
-		if (this.getInspector() != null)
-			dto.setInspectorDto(AppUser.createDto(this.getInspector()));
-		dto.setNotice(this.getNotice());
-		if (this.getRoom() != null)
-			dto.setRoomDto(Room.createDto(this.getRoom()));
-		dto.setStatus(this.getStatus());
 		return dto;
 	}
 

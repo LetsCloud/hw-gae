@@ -36,24 +36,7 @@ public class ReservationServiceImpl extends CrudServiceImpl<Reservation, Reserva
 	}
 
 	@Override
-	protected Reservation createEntity(ReservationDto dto) {
-		return new Reservation(dto);
-	}
-
-	@Override
-	protected Reservation updateEntity(Reservation entity, ReservationDto dto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	protected List<Object> getParents(Long accountId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Reservation updateEntity(Reservation oldEntity, Reservation newEntity) {
 		// TODO Auto-generated method stub
 		return null;
 	}

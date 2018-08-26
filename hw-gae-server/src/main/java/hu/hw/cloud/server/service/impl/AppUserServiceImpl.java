@@ -53,7 +53,7 @@ public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserDto, App
 
 	@Override
 	public AppUser getCurrentUser() {
-		// LOGGER.info("getCurrentUser()");
+		logger.info("getCurrentUser()");
 		return loggedInChecker.getLoggedInUser();
 	}
 
@@ -70,17 +70,6 @@ public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserDto, App
 		tokens.add(myToken);
 		user.setVerificationTokens(tokens);
 		appUserRepository.save(user);
-	}
-
-	@Override
-	protected AppUser createEntity(AppUserDto dto) {
-		return new AppUser(dto);
-	}
-
-	@Override
-	protected AppUser updateEntity(AppUser entity, AppUserDto dto) {
-		entity.updEntityWithDto(dto);
-		return entity;
 	}
 
 	@Override
@@ -121,12 +110,6 @@ public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserDto, App
 		appUser = appUserRepository.save(appUser);
 		// LOGGER.info("createAdminUser->after appUserRepository.save()");
 		return appUser;
-	}
-
-	@Override
-	protected AppUser updateEntity(AppUser oldEntity, AppUser newEntity) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

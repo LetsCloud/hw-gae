@@ -79,4 +79,10 @@ public class CubeFcstPfmRepoImpl extends CrudRepositoryImpl<CubeFcstPfm> impleme
 		return null;
 	}
 
+	@Override
+	protected void loadUniqueIndexMap(CubeFcstPfm entiy) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

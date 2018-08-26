@@ -66,7 +66,7 @@ public class FilterWidgetPresenter extends PresenterWidget<FilterWidgetPresenter
 			@Override
 			public void onSuccess(LoadResult<HotelDto> loadResult) {
 				logger.info("FilterWidgetPresenter().loadData().onSuccess()");
-				getView().setHotelData(currentUser.getAppUserDto().getAvailableHotelDtos());
+				getView().setHotelData(currentUser.getAppUserDto().getAvailableHotels());
 				getView().setSelectedHotel(currentUser.getCurrentHotelDto());
 				FilterChangeEvent.fire(FilterWidgetPresenter.this, DataTable.ROOM_TYPE);
 			}

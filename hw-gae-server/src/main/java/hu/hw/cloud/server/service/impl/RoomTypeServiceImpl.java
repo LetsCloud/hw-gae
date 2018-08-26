@@ -36,23 +36,6 @@ public class RoomTypeServiceImpl extends HotelChildServiceImpl<RoomType, RoomTyp
 	}
 
 	@Override
-	protected RoomType createEntity(RoomTypeDto dto) {
-		return new RoomType(dto);
-	}
-
-	@Override
-	protected RoomType updateEntity(RoomType entity, RoomTypeDto dto) {
-		entity.updEntityWithDto(dto);
-		return entity;
-	}
-
-	@Override
-	protected RoomType updateEntity(RoomType oldEntity, RoomType newEntity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<RoomType> getChildren(String parentWebSafeKey) {
 		List<Room> rooms = roomRepository.getChildren(parentWebSafeKey);
 		List<RoomType> roomTypes = repository.getChildren(parentWebSafeKey);

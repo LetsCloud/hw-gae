@@ -19,6 +19,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 
+import hu.hw.cloud.client.fro.editor.HasEditorSwitch;
 import hu.hw.cloud.shared.dto.profile.CommunicationDto;
 
 /**
@@ -26,7 +27,7 @@ import hu.hw.cloud.shared.dto.profile.CommunicationDto;
  *
  */
 public class CommunicationListEditor extends Composite
-		implements IsEditor<ListEditor<CommunicationDto, CommunicationEditor>> {
+		implements IsEditor<ListEditor<CommunicationDto, CommunicationEditor>>, HasEditorSwitch {
 	private static Logger logger = Logger.getLogger(CommunicationListEditor.class.getName());
 
 	interface Binder extends UiBinder<Widget, CommunicationListEditor> {
@@ -119,6 +120,18 @@ public class CommunicationListEditor extends Composite
 
 	private void remove(final int index) {
 		editor.getList().remove(index);
+	}
+
+	@Override
+	public void toEditable() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void toReadOnly() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

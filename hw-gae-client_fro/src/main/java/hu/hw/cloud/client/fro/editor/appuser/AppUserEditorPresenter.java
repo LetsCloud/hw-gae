@@ -34,7 +34,7 @@ import hu.hw.cloud.client.core.util.ErrorHandlerAsyncCallback;
 import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.browser.AbstractBrowserPresenter;
 import hu.hw.cloud.client.fro.editor.AbstractEditorPresenter;
-import hu.hw.cloud.client.fro.editor.EditorView;
+import hu.hw.cloud.client.fro.editor.AbstractEditorView;
 import hu.hw.cloud.shared.api.AppUserResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
@@ -53,7 +53,7 @@ public class AppUserEditorPresenter
 
 	private static final String FIRST_PASSWORD = "*";
 
-	public interface MyView extends EditorView<AppUserDto>, HasUiHandlers<AppUserEditorUiHandlers> {
+	public interface MyView extends AbstractEditorView<AppUserDto>, HasUiHandlers<AppUserEditorUiHandlers> {
 
 		void setUserGroupData(List<UserGroupDto> data);
 
@@ -158,7 +158,7 @@ public class AppUserEditorPresenter
 	protected AppUserDto createDto() {
 		logger.info("AppUserEditorPresenter().createDto()");
 		AppUserDto dto = new AppUserDto();
-		dto.setAccountDto(currentUser.getAppUserDto().getAccountDto());
+		dto.setAccount(currentUser.getAppUserDto().getAccount());
 		dto.setPassword(FIRST_PASSWORD);
 		return dto;
 	}

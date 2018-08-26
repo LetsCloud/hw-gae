@@ -21,18 +21,18 @@ import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
 import hu.hw.cloud.client.fro.browser.AbstractBrowserPresenter;
 import hu.hw.cloud.shared.api.CustomerResource;
-import hu.hw.cloud.shared.dto.profile.CustomerDto;
+import hu.hw.cloud.shared.dto.profile.OrganizationDto;
 
 /**
  * @author robi
  *
  */
-public class CustomerBrowserPresenter extends AbstractBrowserPresenter<CustomerDto, CustomerBrowserPresenter.MyView>
+public class CustomerBrowserPresenter extends AbstractBrowserPresenter<OrganizationDto, CustomerBrowserPresenter.MyView>
 		implements CustomerBrowserUiHandlers {
 	private static Logger logger = Logger.getLogger(CustomerBrowserPresenter.class.getName());
 
 	public interface MyView extends View, HasUiHandlers<CustomerBrowserUiHandlers> {
-		void setData(List<CustomerDto> data);
+		void setData(List<OrganizationDto> data);
 	}
 
 	public static final SingleSlot<PresenterWidget<?>> SLOT_EDITOR = new SingleSlot<>();
@@ -52,9 +52,9 @@ public class CustomerBrowserPresenter extends AbstractBrowserPresenter<CustomerD
 
 	@Override
 	protected void loadData() {
-		resourceDelegate.withCallback(new AbstractAsyncCallback<List<CustomerDto>>() {
+		resourceDelegate.withCallback(new AbstractAsyncCallback<List<OrganizationDto>>() {
 			@Override
-			public void onSuccess(List<CustomerDto> result) {
+			public void onSuccess(List<OrganizationDto> result) {
 				getView().setData(result);
 			}
 		}).list();

@@ -7,15 +7,16 @@ import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.ROOT;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.USER_GROUP;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,10 +49,13 @@ public class UserGroupController extends BaseController {
 
 	private final AppUserService appUserService;
 
+	private final ModelMapper modelMapper;
+
 	@Autowired
-	UserGroupController(UserGroupService userGroupService, AppUserService appUserService) {
+	UserGroupController(UserGroupService userGroupService, AppUserService appUserService, ModelMapper modelMapper) {
 		this.userGroupService = userGroupService;
 		this.appUserService = appUserService;
+		this.modelMapper = modelMapper;
 	}
 
 	@RequestMapping(method = GET)
@@ -66,9 +70,9 @@ public class UserGroupController extends BaseController {
 		if (accountWebSafeKey == null)
 			return new ResponseEntity<List<UserGroupDto>>(userGroupDtos, OK);
 
-		for (UserGroup userGroup : userGroupService.getAll(accountWebSafeKey)) {
-			userGroupDtos.add(UserGroup.createDto(userGroup));
-		}
+		for (UserGroup userGroup : userGroupService.getAll(accountWebSafeKey))
+			userGroupDtos.add(modelMapper.map(userGroup, UserGroupDto.class));
+
 		return new ResponseEntity<List<UserGroupDto>>(userGroupDtos, OK);
 	}
 
@@ -76,8 +80,8 @@ public class UserGroupController extends BaseController {
 	public ResponseEntity<UserGroupDto> create(@RequestBody UserGroupDto dto) throws RestApiException {
 		logger.info("create()-dto.name=" + dto.getName());
 		try {
-			UserGroup entity = userGroupService.create(dto);
-			dto = UserGroup.createDto(entity);
+			UserGroup entity = userGroupService.create(modelMapper.map(dto, UserGroup.class));
+			dto = modelMapper.map(entity, UserGroupDto.class);
 			return new ResponseEntity<UserGroupDto>(dto, OK);
 		} catch (Throwable e) {
 			throw new RestApiException(e);
@@ -87,15 +91,15 @@ public class UserGroupController extends BaseController {
 	@RequestMapping(value = WEBSAFEKEY, method = GET)
 	public ResponseEntity<UserGroupDto> read(@PathVariable String id) throws Throwable {
 		UserGroup user = userGroupService.read(id);
-		UserGroupDto userDto = UserGroup.createDto(user);
+		UserGroupDto userDto = modelMapper.map(user, UserGroupDto.class);
 		return new ResponseEntity<UserGroupDto>(userDto, OK);
 	}
 
 	@RequestMapping(method = PUT)
 	public ResponseEntity<UserGroupDto> update(@RequestBody UserGroupDto userDto) throws RestApiException {
 		try {
-			UserGroup user = userGroupService.update(userDto);
-			userDto = UserGroup.createDto(user);
+			UserGroup user = userGroupService.update(modelMapper.map(userDto, UserGroup.class));
+			userDto = modelMapper.map(user, UserGroupDto.class);
 			return new ResponseEntity<UserGroupDto>(userDto, OK);
 		} catch (Throwable e) {
 			// e.printStackTrace();

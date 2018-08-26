@@ -18,11 +18,13 @@ import hu.hw.cloud.shared.dto.BaseDto;
  * @author robi
  *
  */
-public abstract class AbstractEditorPresenterWidget<T extends BaseDto, V extends EditorView<T>>
-		extends DataPresenterWidget<V> implements EditorUiHandlers<T> {
+public abstract class AbstractEditorPresenterWidget<T extends BaseDto, V extends AbstractEditorView<T>>
+		extends DataPresenterWidget<V> implements AbstractEditorUiHandlers<T> {
 	private static Logger logger = Logger.getLogger(AbstractEditorPresenterWidget.class.getName());
 
 	protected Map<String, String> filters = new HashMap<String, String>();
+
+	private Boolean createOnly = false;
 
 	private final PlaceManager placeManager;
 
@@ -56,5 +58,13 @@ public abstract class AbstractEditorPresenterWidget<T extends BaseDto, V extends
 	public void cancel() {
 		getView().close();
 		placeManager.navigateBack();
+	}
+
+	public Boolean getCreateOnly() {
+		return createOnly;
+	}
+
+	public void setCreateOnly(Boolean createOnly) {
+		this.createOnly = createOnly;
 	}
 }

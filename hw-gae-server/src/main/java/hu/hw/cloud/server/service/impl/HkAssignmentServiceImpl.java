@@ -97,8 +97,8 @@ public class HkAssignmentServiceImpl extends CrudServiceImpl<HkAssignment, HkAss
 				if (assignmentDto == null) {
 					assignmentDto = new HkAssignmentDto();
 					assignmentDto.setBusinessDate(date);
-					assignmentDto.setHotelDto(Hotel.createDto(room.getHotel()));
-					assignmentDto.setRoomDto(Room.createDto(room));
+// cr					assignmentDto.setHotelDto(Hotel.createDto(room.getHotel()));
+					// cr					assignmentDto.setRoomDto(Room.createDto(room));
 				}
 				// A beosztáshoz hozzáadjuk az érkező és a lakó foglalásokat
 				for (Reservation reservation : reservations) {
@@ -114,7 +114,7 @@ public class HkAssignmentServiceImpl extends CrudServiceImpl<HkAssignment, HkAss
 					});
 					// Érkezik
 					if (reservation.getStatus().equals(ReservationStatus.DEFINITIVE)) {
-						assignmentDto.addReservationDto(reservation.createDto());
+						// cr assignmentDto.addReservationDto(reservation.createDto());
 					}
 					// Lakó foglalás
 					if (reservation.getStatus().equals(ReservationStatus.CHECKED_IN)) {
@@ -128,16 +128,6 @@ public class HkAssignmentServiceImpl extends CrudServiceImpl<HkAssignment, HkAss
 			}
 		}
 		return null;
-	}
-
-	@Override
-	protected HkAssignment createEntity(HkAssignmentDto dto) {
-		return new HkAssignment(dto);
-	}
-
-	@Override
-	protected HkAssignment updateEntity(HkAssignment entity, HkAssignmentDto dto) {
-		return entity.update(dto);
 	}
 
 	@Override
@@ -174,15 +164,16 @@ public class HkAssignmentServiceImpl extends CrudServiceImpl<HkAssignment, HkAss
 		for (HkAssignment assignment : assignments) {
 			if (rooms.contains(assignment.getRoom()))
 				rooms.remove(assignment.getRoom());
-
-			AppUserDto attendantDto = AppUser.createDto(assignment.getAttendant());
-			AssignmentSummaryDto asd = Utils.findByAttendant(result, attendantDto);
+/*
+						AppUserDto attendantDto = AppUser.createDto(assignment.getAttendant());
+						AssignmentSummaryDto asd = Utils.findByAttendant(result, attendantDto);
 
 			if (asd != null) {
 				asd.addRoom(assignment.getRoom().getRoomStatus());
 			} else {
 				result.add(new AssignmentSummaryDto(attendantDto, assignment.getRoom().getRoomStatus(), 1));
 			}
+*/
 		}
 
 		if (rooms.size() > 0)
@@ -196,11 +187,5 @@ public class HkAssignmentServiceImpl extends CrudServiceImpl<HkAssignment, HkAss
 		for (Room room : rooms)
 			result.addRoom(room.getRoomStatus());
 		return result;
-	}
-
-	@Override
-	protected HkAssignment updateEntity(HkAssignment oldEntity, HkAssignment newEntity) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

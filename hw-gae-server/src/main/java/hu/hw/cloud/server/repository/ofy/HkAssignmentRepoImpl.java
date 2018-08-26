@@ -74,4 +74,10 @@ public class HkAssignmentRepoImpl extends CrudRepositoryImpl<HkAssignment> imple
 		Key<Hotel> key = Key.create(parentWebSafeKey);
 		return key;
 	}
+
+	@Override
+	protected void loadUniqueIndexMap(HkAssignment entiy) {
+		// TODO Auto-generated method stub
+		
+	}
 }

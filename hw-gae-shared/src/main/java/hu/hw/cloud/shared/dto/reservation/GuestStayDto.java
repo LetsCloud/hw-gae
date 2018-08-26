@@ -39,12 +39,12 @@ public class GuestStayDto implements Dto {
 	/**
 	 * Vendég profil kapcsolat.
 	 */
-	private GuestDto guestDto;
+	private GuestDto guest;
 
 	/**
 	 * A vendégtartózkodáshoz rendelet árkód.
 	 */
-	private List<RateDto> rateDtos;
+	private List<RateDto> rates;
 
 	/**
 	 * Átköltözött másik szobából.
@@ -83,12 +83,12 @@ public class GuestStayDto implements Dto {
 		this.movedOut = movedOut;
 	}
 
-	public GuestDto getGuestDto() {
-		return guestDto;
+	public GuestDto getGuest() {
+		return guest;
 	}
 
-	public void setGuestDto(GuestDto guestDto) {
-		this.guestDto = guestDto;
+	public void setGuest(GuestDto guest) {
+		this.guest = guest;
 	}
 
 	public Boolean getChekedIn() {
@@ -99,12 +99,12 @@ public class GuestStayDto implements Dto {
 		this.chekedIn = chekedIn;
 	}
 
-	public List<RateDto> getRateDtos() {
-		return rateDtos;
+	public List<RateDto> getRates() {
+		return rates;
 	}
 
-	public void setRateDtos(List<RateDto> rateDtos) {
-		this.rateDtos = rateDtos;
+	public void setRates(List<RateDto> rates) {
+		this.rates = rates;
 	}
 
 }

@@ -48,23 +48,6 @@ implements UserGroupService {
 	}
 
 	@Override
-	protected UserGroup createEntity(UserGroupDto dto) {
-		logger.info("createEntity()");
-		return new UserGroup(dto);
-	}
-
-	@Override
-	protected UserGroup updateEntity(UserGroup entity, UserGroupDto dto) {
-		entity.update(dto);
-		return entity;
-	}
-
-	@Override
-	protected UserGroup updateEntity(UserGroup oldEntity, UserGroup newEntity) {
-		return null;
-	}
-
-	@Override
 	protected List<Object> getParents(Long accountId) {
 		List<Object> parents = new ArrayList<Object>();
 		parents.add(accountRepository.findById(accountId));

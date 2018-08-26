@@ -338,6 +338,15 @@ public interface CoreMessages extends Messages {
 	 * CUSTOMER EDITOR
 	 */
 
+	@DefaultMessage("Company name")
+	String customerEditorName();
+
+	@DefaultMessage("Code")
+	String customerEditorCode();
+
+	@DefaultMessage("Profile Group")
+	String customerEditorProfileGroup();
+
 	@DefaultMessage("Communication")
 	String customerEditorCommunication();
 	

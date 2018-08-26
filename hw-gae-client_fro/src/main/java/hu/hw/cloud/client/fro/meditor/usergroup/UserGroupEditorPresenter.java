@@ -61,7 +61,7 @@ public class UserGroupEditorPresenter extends PresenterWidget<UserGroupEditorPre
 		isNew = true;
 
 		UserGroupDto dto = new UserGroupDto();
-		dto.setAccountDto(currentUser.getAppUserDto().getAccountDto());
+		dto.setAccount(currentUser.getAppUserDto().getAccount());
 
 		getView().open(isNew, dto);
 	}

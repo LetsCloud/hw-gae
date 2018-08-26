@@ -31,7 +31,7 @@ import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.browser.AbstractBrowserPresenter;
 import hu.hw.cloud.client.fro.editor.AbstractEditorPresenter;
-import hu.hw.cloud.client.fro.editor.EditorView;
+import hu.hw.cloud.client.fro.editor.AbstractEditorView;
 import hu.hw.cloud.shared.api.RoomTypeResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
@@ -47,7 +47,7 @@ public class RoomTypeEditorPresenter
 		implements RoomTypeEditorUiHandlers {
 	private static Logger logger = Logger.getLogger(RoomTypeEditorPresenter.class.getName());
 
-	public interface MyView extends EditorView<RoomTypeDto>, HasUiHandlers<RoomTypeEditorUiHandlers> {
+	public interface MyView extends AbstractEditorView<RoomTypeDto>, HasUiHandlers<RoomTypeEditorUiHandlers> {
 
 		void displayError(EntityPropertyCode code, String message);
 	}
@@ -105,7 +105,7 @@ public class RoomTypeEditorPresenter
 	protected RoomTypeDto createDto() {
 		logger.info("RoomTypeEditorPresenter().createDto()");
 		RoomTypeDto dto = new RoomTypeDto();
-		dto.setHotelDto(currentUser.getAppUserDto().getDefaultHotelDto());
+		dto.setHotel(currentUser.getAppUserDto().getDefaultHotel());
 		logger.info("RoomTypeEditorPresenter().createDto()->dto=" + dto);
 		return dto;
 	}
@@ -115,7 +115,7 @@ public class RoomTypeEditorPresenter
 		resourceDelegate.withCallback(new AsyncCallback<RoomTypeDto>() {
 			@Override
 			public void onSuccess(RoomTypeDto dto) {
-				SetPageTitleEvent.fire(i18n.roomTypeEditorModifyTitle(), dto.getHotelDto().getName(),
+				SetPageTitleEvent.fire(i18n.roomTypeEditorModifyTitle(), dto.getHotel().getName(),
 						MenuItemType.MENU_ITEM, RoomTypeEditorPresenter.this);
 
 				getView().edit(false, dto);

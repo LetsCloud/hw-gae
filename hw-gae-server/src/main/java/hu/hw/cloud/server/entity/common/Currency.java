@@ -11,8 +11,6 @@ import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
 
-import hu.hw.cloud.shared.dto.common.CurrencyDto;
-
 /**
  * @author CR
  *
@@ -28,26 +26,6 @@ public class Currency extends AccountChild {
 	public String createWebSafeKey(Ref<Currency> ref) {
 		Key<Currency> key = ref.getKey();
 		return key.getString();
-	}
-
-	/**
-	 * 
-	 * @param entity
-	 * @return
-	 */
-	public static CurrencyDto createDto(Currency entity) {
-		CurrencyDto dto = new CurrencyDto();
-		dto.setAccountDto(Account.createDto(entity.getAccount()));
-		dto.setCode(entity.getCode());
-		dto.setDescription(entity.getDescription());
-		dto.setDisplayedDecimals(entity.getDisplayedDecimals());
-		dto.setExchangeRateDtos(ExchangeRate.createDtos(entity.getExchangeRates()));
-		dto.setId(entity.getId());
-		dto.setWebSafeKey(entity.getWebSafeKey());
-		dto.setRateMultiplier(entity.getRateMultiplier());
-		dto.setRoundingPrecision(entity.getRoundingPrecision());
-		dto.setVersion(entity.getVersion());
-		return dto;
 	}
 
 	/**
@@ -76,15 +54,6 @@ public class Currency extends AccountChild {
 	private List<ExchangeRate> exchangeRates = new ArrayList<ExchangeRate>();
 
 	public Currency() {
-	}
-
-	public Currency(CurrencyDto dto) {
-		this();
-		this.setAccount(new Account(dto.getAccountDto()));
-		this.setCode(dto.getCode());
-		this.setDescription(dto.getDescription());
-		this.setDisplayedDecimals(dto.getDisplayedDecimals());
-		this.setExchangeRates(ExchangeRate.createList(dto.getExchangeRateDtos()));
 	}
 
 	public String getCode() {
@@ -133,30 +102,6 @@ public class Currency extends AccountChild {
 
 	public void setExchangeRates(List<ExchangeRate> exchangeRates) {
 		this.exchangeRates = exchangeRates;
-	}
-
-	public void update(CurrencyDto dto) {
-		clearUniqueIndexes();
-
-		super.updEntityWithDto(dto);
-
-		if (dto.getCode() != null)
-			this.setCode(dto.getCode());
-
-		if (dto.getDescription() != null)
-			this.setDescription((dto.getDescription()));
-
-		if (dto.getDisplayedDecimals() != null)
-			this.setDisplayedDecimals((dto.getDisplayedDecimals()));
-
-		if (dto.getExchangeRateDtos() != null)
-			this.setExchangeRates(ExchangeRate.createList(dto.getExchangeRateDtos()));
-
-		if (dto.getRateMultiplier() != null)
-			this.setRateMultiplier((dto.getRateMultiplier()));
-
-		if (dto.getRoundingPrecision() != null)
-			this.setRoundingPrecision((dto.getRoundingPrecision()));
 	}
 
 	/**

@@ -43,7 +43,7 @@ public class HasPermissionsGatekeeper implements GatekeeperWithParams {
 
 		LOGGER.log(Level.INFO, "canReveal()-2");
 
-		List<RoleDto> roleDtos = currentUser.getAppUserDto().getRoleDtos();
+		List<RoleDto> roleDtos = currentUser.getAppUserDto().getRoles();
 		if (roleDtos == null)
 			return false;
 

@@ -11,8 +11,8 @@ import hu.hw.cloud.shared.dto.BaseDto;
  * @author robi
  *
  */
-public interface EditorView<T extends BaseDto> extends View {
-
+public interface AbstractEditorView<T extends BaseDto> extends View {
+	
 	void edit(Boolean isNew, T dto);
 
 	void close();

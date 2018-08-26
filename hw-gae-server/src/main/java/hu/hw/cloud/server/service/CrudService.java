@@ -7,21 +7,18 @@ import java.util.List;
 import java.util.Map;
 
 import hu.hw.cloud.server.entity.BaseEntity;
-import hu.hw.cloud.shared.dto.BaseDto;
 
 /**
  * @author CR
  *
  */
-public interface CrudService<T extends BaseEntity, D extends BaseDto> {
+public interface CrudService<T extends BaseEntity> {
 
-	T create(D dto) throws Throwable;
+	T create(T entity) throws Throwable;
 
 	T read(String webSafeKey) throws Throwable;
 
 	T update(T entity) throws Throwable;
-
-	T update(D dto) throws Throwable;
 
 	Boolean delete(String id) throws Throwable;
 

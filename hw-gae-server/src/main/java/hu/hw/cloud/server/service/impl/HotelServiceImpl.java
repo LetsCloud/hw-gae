@@ -31,17 +31,6 @@ public class HotelServiceImpl extends CrudServiceImpl<Hotel, HotelDto, HotelRepo
 	}
 
 	@Override
-	protected Hotel createEntity(HotelDto dto) {
-		return new Hotel(dto);
-	}
-
-	@Override
-	protected Hotel updateEntity(Hotel entity, HotelDto dto) {
-		entity.updEntityWithDto(dto);
-		return entity;
-	}
-
-	@Override
 	protected List<Object> getParents(Long accountId) {
 		List<Object> parents = new ArrayList<Object>();
 		parents.add(accountRepository.findById(accountId));
@@ -53,11 +42,5 @@ public class HotelServiceImpl extends CrudServiceImpl<Hotel, HotelDto, HotelRepo
 		List<Object> parents = new ArrayList<Object>();
 		parents.add(accountRepository.findByWebSafeKey(accountWebSafeKey));
 		return parents;
-	}
-
-	@Override
-	protected Hotel updateEntity(Hotel oldEntity, Hotel newEntity) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

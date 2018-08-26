@@ -62,4 +62,10 @@ public class CubeBdgtPfmRepoImpl extends CrudRepositoryImpl<CubeBdgtPfm> impleme
 		return null;
 	}
 
+	@Override
+	protected void loadUniqueIndexMap(CubeBdgtPfm entiy) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

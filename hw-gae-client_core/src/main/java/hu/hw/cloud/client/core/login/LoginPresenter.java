@@ -163,10 +163,11 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
 			@Override
 			public void onSuccess(AppUserDto result) {
-				Cookies.setCookie(ACCOUNT_ID, result.getAccountDto().getId().toString());
+				logger.info("LoginPresenter().onSuccessLogin()->AppUserDto="+result);
+				Cookies.setCookie(ACCOUNT_ID, result.getAccount().getId().toString());
 				currentUser.setLoggedIn(true);
 				currentUser.setAppUserDto(result);
-				currentUser.setCurrentHotelDto(result.getDefaultHotelDto());
+				currentUser.setCurrentHotelDto(result.getDefaultHotel());
 
 				if (Strings.isNullOrEmpty(placeToGo)) {
 					goToPlace(CoreNameTokens.HOME);

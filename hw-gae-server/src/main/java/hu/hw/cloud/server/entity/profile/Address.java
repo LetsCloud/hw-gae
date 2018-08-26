@@ -1,17 +1,25 @@
 /**
  * 
  */
-package hu.hw.cloud.shared.dto.profile;
+package hu.hw.cloud.server.entity.profile;
+
+import java.util.List;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.Predicate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import hu.hw.cloud.shared.cnst.PostalAddressLabel;
-import hu.hw.cloud.shared.dto.Dto;
 
 /**
+ * Postacím.
+ * 
  * @author CR
  *
  */
-@SuppressWarnings("serial")
-public class PostalAddressDto implements Dto {
+public class Address {
+	private static final Logger logger = LoggerFactory.getLogger(Address.class.getName());
 
 	private PostalAddressLabel label;
 
@@ -48,7 +56,11 @@ public class PostalAddressDto implements Dto {
 	/**
 	 * Formázott cím.
 	 */
-	private String fullAddress;
+	private String formattedAddress;
+
+	public Address() {
+		logger.info("Address()");
+	}
 
 	public PostalAddressLabel getLabel() {
 		return label;
@@ -63,6 +75,7 @@ public class PostalAddressDto implements Dto {
 	}
 
 	public void setPrimary(Boolean primary) {
+		logger.info("setPrimary()->" + primary);
 		this.primary = primary;
 	}
 
@@ -106,11 +119,31 @@ public class PostalAddressDto implements Dto {
 		this.country = country;
 	}
 
-	public String getFullAddress() {
-		return fullAddress;
+	public String getFormattedAddress() {
+		return formattedAddress;
 	}
 
-	public void setFullAddress(String fullAddress) {
-		this.fullAddress = fullAddress;
+	public void setFormattedAddress(String formattedAddress) {
+		this.formattedAddress = formattedAddress;
+	}
+
+	/**
+	 * 
+	 * @param list
+	 * @param label
+	 * @return
+	 */
+	public static Address findPostalAddressByLabel(List<Address> list, final PostalAddressLabel label) {
+		Predicate<Address> condition = new Predicate<Address>() {
+			public boolean evaluate(Address object) {
+				return (object.getLabel().equals(label));
+			}
+		};
+		List<Address> result = (List<Address>) CollectionUtils.select(list, condition);
+
+		if (result.isEmpty())
+			return null;
+
+		return result.get(0);
 	}
 }

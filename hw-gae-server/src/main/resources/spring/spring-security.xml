@@ -1,5 +1,7 @@
-<beans:beans xmlns="http://www.springframework.org/schema/security"
-	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans:beans
+	xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 		   http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
 		   http://www.springframework.org/schema/security
@@ -11,7 +13,8 @@
 			<beans:list>
 				<beans:bean
 					class="org.springframework.security.access.vote.AuthenticatedVoter" />
-				<beans:bean class="org.springframework.security.access.vote.RoleVoter" />
+				<beans:bean
+					class="org.springframework.security.access.vote.RoleVoter" />
 				<beans:bean
 					class="org.springframework.security.web.access.expression.WebExpressionVoter" />
 			</beans:list>
@@ -21,10 +24,16 @@
 	<beans:bean id="loginAttemptService"
 		class="hu.hw.cloud.server.security.LoginAttemptService" />
 
+	<beans:bean id="loggedInChecker"
+		class="hu.hw.cloud.server.security.LoggedInChecker">
+		<beans:constructor-arg ref="myMapper" />
+	</beans:bean>
+
 	<beans:bean id="appUserDetailsService"
 		class="hu.hw.cloud.server.security.AppUserDetailsService">
 		<beans:constructor-arg ref="appUserService" />
 		<beans:constructor-arg ref="loginAttemptService" />
+		<beans:constructor-arg ref="modelMapper" />
 	</beans:bean>
 
 	<beans:bean id="restAuthEntryPoint"
@@ -46,17 +55,21 @@
 
 	<beans:bean id="restAuthenticationProvider"
 		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
-		<beans:property name="userDetailsService" ref="appUserDetailsService" />
+		<beans:property name="userDetailsService"
+			ref="appUserDetailsService" />
 	</beans:bean>
 
 	<beans:bean id="appAuthenticationProvider"
 		class="hu.hw.cloud.server.security.AppAuthenticationProvider">
 		<beans:constructor-arg ref="appUserService" />
 		<beans:constructor-arg ref="loginAttemptService" />
+		<beans:constructor-arg ref="modelMapper" />
 	</beans:bean>
 
-	<authentication-manager id="authenticationManager">
-		<authentication-provider ref="restAuthenticationProvider" />
+	<authentication-manager
+		id="authenticationManager">
+		<authentication-provider
+			ref="restAuthenticationProvider" />
 	</authentication-manager>
 
 
@@ -74,21 +87,27 @@
 
 	<beans:bean id="digestAuthenticationFilter"
 		class="org.springframework.security.web.authentication.www.DigestAuthenticationFilter">
-		<beans:property name="authenticationEntryPoint" ref="restApiEntryPoint" />
-		<beans:property name="userDetailsService" ref="appUserDetailsService" />
+		<beans:property name="authenticationEntryPoint"
+			ref="restApiEntryPoint" />
+		<beans:property name="userDetailsService"
+			ref="appUserDetailsService" />
 	</beans:bean>
 
 	<!-- ======================== -->
 	<!-- REST API SECURITY CONFIG -->
 	<!-- ======================== -->
-	<http use-expressions="true" authentication-manager-ref="authenticationManager"
+	<http use-expressions="true"
+		authentication-manager-ref="authenticationManager"
 		entry-point-ref="restApiEntryPoint" create-session="stateless"
 		pattern="/api/v1/**">
 		<csrf disabled="true" />
-		<intercept-url pattern="/api/v1/**" access="isAuthenticated()" />
-		<custom-filter position="BASIC_AUTH_FILTER" ref="digestAuthenticationFilter" />
+		<intercept-url pattern="/api/v1/**"
+			access="isAuthenticated()" />
+		<custom-filter position="BASIC_AUTH_FILTER"
+			ref="digestAuthenticationFilter" />
 		<!-- <expression-handler ref="restApiEntryPoint" /> -->
-		<form-login authentication-failure-handler-ref="authFailureHandler"
+		<form-login
+			authentication-failure-handler-ref="authFailureHandler"
 			authentication-success-handler-ref="restAuthSuccessHandler"
 			login-processing-url="" password-parameter="" username-parameter="" />
 		<logout success-handler-ref="logoutSuccessHandler" />
@@ -98,23 +117,30 @@
 	<!-- APP SECURITY CONFIG -->
 	<!-- =================== -->
 	<http authentication-manager-ref="authenticationManager"
-		entry-point-ref="restAuthEntryPoint" access-decision-manager-ref="accessDecisionManager"
+		entry-point-ref="restAuthEntryPoint"
+		access-decision-manager-ref="accessDecisionManager"
 		use-expressions="true">
 		<csrf disabled="true" />
 		<!-- <expression-handler ref="restAuthEntryPoint" /> -->
-		<intercept-url pattern="/launcher-icons" access="permitAll" />
-		<intercept-url pattern="INF_manifest.json" access="permitAll" />
-		<intercept-url pattern="KIP_manifest.json" access="permitAll" />
-		<intercept-url pattern="FRO_manifest.json" access="permitAll" />
+		<intercept-url pattern="/launcher-icons"
+			access="permitAll" />
+		<intercept-url pattern="INF_manifest.json"
+			access="permitAll" />
+		<intercept-url pattern="KIP_manifest.json"
+			access="permitAll" />
+		<intercept-url pattern="FRO_manifest.json"
+			access="permitAll" />
 		<intercept-url pattern="/fro" access="permitAll" />
 		<intercept-url pattern="/inf" access="permitAll" />
 		<intercept-url pattern="/kip" access="permitAll" />
 		<intercept-url pattern="/_ah/**" access="permitAll" />
-		<form-login authentication-failure-handler-ref="authFailureHandler"
+		<form-login
+			authentication-failure-handler-ref="authFailureHandler"
 			authentication-success-handler-ref="restAuthSuccessHandler"
 			login-processing-url="/spa/v1/login" password-parameter="password"
 			username-parameter="username" />
-		<logout logout-url="/spa/v1/logout" success-handler-ref="logoutSuccessHandler" />
+		<logout logout-url="/spa/v1/logout"
+			success-handler-ref="logoutSuccessHandler" />
 		<remember-me token-validity-seconds="1209600"
 			remember-me-parameter="remember-me" />
 		<session-management>

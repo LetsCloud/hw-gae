@@ -24,8 +24,8 @@ import hu.hw.cloud.shared.dto.BaseDto;
  * @author robi
  *
  */
-public abstract class AbstractEditorPresenter<T extends BaseDto, V extends EditorView<T>, P extends Proxy<?>>
-		extends Presenter<V, P> implements EditorUiHandlers<T> {
+public abstract class AbstractEditorPresenter<T extends BaseDto, V extends AbstractEditorView<T>, P extends Proxy<?>>
+		extends Presenter<V, P> implements AbstractEditorUiHandlers<T> {
 	private static Logger logger = Logger.getLogger(AbstractEditorPresenter.class.getName());
 
 	protected Map<String, String> filters = new HashMap<String, String>();

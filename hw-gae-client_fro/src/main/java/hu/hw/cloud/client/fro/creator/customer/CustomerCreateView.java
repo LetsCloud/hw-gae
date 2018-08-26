@@ -14,14 +14,14 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
-import hu.hw.cloud.shared.dto.profile.CustomerDto;
+import hu.hw.cloud.shared.dto.profile.OrganizationDto;
 
 /**
  * @author robi
  *
  */
 public class CustomerCreateView extends ViewWithUiHandlers<CustomerCreateUiHandlers>
-		implements CustomerCreatePresenter.MyView, Editor<CustomerDto> {
+		implements CustomerCreatePresenter.MyView, Editor<OrganizationDto> {
 	private static Logger logger = Logger.getLogger(CustomerCreateView.class.getName());
 
 	interface Binder extends UiBinder<Widget, CustomerCreateView> {

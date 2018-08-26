@@ -11,7 +11,7 @@ import hu.hw.cloud.shared.dto.Dto;
  *
  */
 @SuppressWarnings("serial")
-public class UrlAddressDto implements Dto {
+public class WebPresenceDto implements Dto {
 
 	/**
 	 * Email cím típusa: Munkahelyi, Otthoni, Egyéb

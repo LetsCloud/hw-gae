@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hu.hw.cloud.shared.cnst.UrlAddressLabel;
-import hu.hw.cloud.shared.dto.profile.UrlAddressDto;
+import hu.hw.cloud.shared.dto.profile.WebPresenceDto;
 
 /**
  * @author CR
  *
  */
-public class UrlAddress {
+public class WebPresence {
 
 	/**
 	 * Email cím típusa: Munkahelyi, Otthoni, Egyéb
@@ -41,21 +41,21 @@ public class UrlAddress {
 		this.address = address;
 	}
 
-	public UrlAddressDto createDto() {
-		UrlAddressDto dto = new UrlAddressDto();
+	public WebPresenceDto createDto() {
+		WebPresenceDto dto = new WebPresenceDto();
 		dto = updateDto(dto);
 		return dto;
 	}
 
-	public UrlAddressDto updateDto(UrlAddressDto dto) {
+	public WebPresenceDto updateDto(WebPresenceDto dto) {
 		dto.setAddress(getAddress());
 		dto.setLabel(getLabel());
 		return dto;
 	}
 
-	public static List<UrlAddressDto> createDtos(List<UrlAddress> enities) {
-		List<UrlAddressDto> dtos = new ArrayList<UrlAddressDto>();
-		for (UrlAddress entity : enities) {
+	public static List<WebPresenceDto> createDtos(List<WebPresence> enities) {
+		List<WebPresenceDto> dtos = new ArrayList<WebPresenceDto>();
+		for (WebPresence entity : enities) {
 			dtos.add(entity.createDto());
 		}
 		return dtos;

@@ -12,30 +12,19 @@ import hu.hw.cloud.shared.dto.BaseDto;
 @SuppressWarnings("serial")
 public class HotelChildDto extends BaseDto {
 
-	private String hotelWebSafeKey;
+	private HotelDto hotel;
 
-	private HotelDto hotelDto;
-
-	public String getHotelWebSafeKey() {
-		return hotelWebSafeKey;
+	public HotelDto getHotel() {
+		return hotel;
 	}
 
-	public void setHotelWebSafeKey(String hotelWebSafeKey) {
-		this.hotelWebSafeKey = hotelWebSafeKey;
-	}
-
-	public HotelDto getHotelDto() {
-		return hotelDto;
-	}
-
-	public void setHotelDto(HotelDto hotelDto) {
-		this.hotelDto = hotelDto;
+	public void setHotel(HotelDto hotel) {
+		this.hotel = hotel;
 	}
 
 	@Override
 	public String toString() {
-		String ret = "HotelChildDto:{" + super.toString() + ", hotelWebSafeKey=" + hotelWebSafeKey + ", hotelDto="
-				+ hotelDto + "}";
+		String ret = "HotelChildDto:{" + super.toString() + ", hotel=" + hotel + "}";
 		return ret;
 	}
 }

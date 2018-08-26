@@ -47,15 +47,20 @@
 	<g:HTMLPanel addStyleNames="{style.pp}">
 		<m:MaterialRow>
 			<m:MaterialColumn grid="s12 m6">
+				<m:MaterialRow>
+					<m:MaterialTextBox ui:field="name" grid="s12"
+						type="TEXT" label="{i18nCore.customerEditorName}" />
 
-				<m:MaterialTextBox ui:field="name" type="TEXT"
-					label="{i18nCore.roomTypeEditorFloor}" />
+					<m:MaterialTextBox ui:field="code" grid="s6"
+						type="TEXT" label="{i18nCore.customerEditorCode}" />
 
-				<m:MaterialTextBox ui:field="code" type="TEXT"
-					label="{i18nCore.roomTypeEditorCode}" />
+					<combobox:MaterialComboBox
+						ui:field="profileGroupCombo" grid="s6" multiple="false"
+						label="{i18nCore.customerEditorProfileGroup}" marginTop="25" />
+				</m:MaterialRow>
 
 				<!-- KOMMUNIKÁCIÓ -->
-				<g:HTMLPanel ui:field="communicationPanel"
+				<m:MaterialRow ui:field="communicationPanel"
 					addStyleNames="{style.dataGroupBox}">
 					<g:Label text="{i18nCore.customerEditorCommunication}"
 						addStyleNames="{style.dataGroupTitle}" />
@@ -63,8 +68,8 @@
 						iconType="ADD_BOX" waves="DEFAULT" backgroundColor="WHITE"
 						textColor="BLACK" float="RIGHT" />
 					<profile:CommunicationListEditor
-						ui:field="communicationDtos" addStyleNames="{style.clearBothx}" />
-				</g:HTMLPanel>
+						ui:field="communications" addStyleNames="{style.clearBothx}" />
+				</m:MaterialRow>
 			</m:MaterialColumn>
 
 			<m:MaterialColumn grid="s12 m6">
@@ -77,15 +82,32 @@
 						iconType="ADD_BOX" waves="DEFAULT" backgroundColor="WHITE"
 						textColor="BLACK" float="RIGHT" />
 					<profile:AddressListEditor
-						ui:field="postalAddressDtos" addStyleNames="{style.clearBothx}" />
+						ui:field="addresses" addStyleNames="{style.clearBothx}" />
 				</g:HTMLPanel>
 			</m:MaterialColumn>
 		</m:MaterialRow>
 
-		<m:MaterialButton ui:field="saveButton"
-			text="{i18nCore.comSave}" float="RIGHT"
-			addStyleNames="{style.saveButton}" />
-		<m:MaterialButton ui:field="cancelButton"
-			text="{i18nCore.comCancel}" type="FLAT" float="RIGHT" />
+		<m:MaterialFAB>
+			<m:MaterialTooltip text="Rezervációs műveletek"
+				position="LEFT">
+				<m:MaterialAnchorButton type="FLOATING"
+					iconType="MORE_VERT" size="LARGE" />
+			</m:MaterialTooltip>
+			<m:MaterialFABList>
+				<m:MaterialTooltip text="{i18nCore.comSave}"
+					position="LEFT">
+					<m:MaterialAnchorButton
+						ui:field="saveButton" type="FLOATING" waves="LIGHT"
+						backgroundColor="GREEN" iconType="EDIT" />
+				</m:MaterialTooltip>
+				<m:MaterialTooltip text="{i18nCore.comCancel}"
+					position="LEFT">
+					<m:MaterialAnchorButton
+						ui:field="cancelButton" type="FLOATING" waves="LIGHT"
+						backgroundColor="RED" iconType="CANCEL" />
+				</m:MaterialTooltip>
+			</m:MaterialFABList>
+		</m:MaterialFAB>
+
 	</g:HTMLPanel>
 </ui:UiBinder> 

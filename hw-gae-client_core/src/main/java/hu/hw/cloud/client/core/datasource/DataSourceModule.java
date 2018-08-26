@@ -15,5 +15,6 @@ public class DataSourceModule extends AbstractPresenterModule {
 		bind(HotelDataSource.class);
 		bind(UserGroupDataSource.class);
 		bind(AppUserDataSource.class);
+		bind(ProfileGroupDataSource.class);
 	}
 }

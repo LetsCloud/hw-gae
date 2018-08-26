@@ -27,7 +27,7 @@ import hu.hw.cloud.client.core.util.ErrorHandlerAsyncCallback;
 import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.browser.AbstractBrowserPresenter;
 import hu.hw.cloud.client.fro.editor.AbstractEditorPresenter;
-import hu.hw.cloud.client.fro.editor.EditorView;
+import hu.hw.cloud.client.fro.editor.AbstractEditorView;
 import hu.hw.cloud.shared.api.HotelResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
@@ -42,7 +42,7 @@ public class HotelEditorPresenter
 		implements HotelEditorUiHandlers {
 	private static Logger logger = Logger.getLogger(HotelEditorPresenter.class.getName());
 
-	public interface MyView extends EditorView<HotelDto>, HasUiHandlers<HotelEditorUiHandlers> {
+	public interface MyView extends AbstractEditorView<HotelDto>, HasUiHandlers<HotelEditorUiHandlers> {
 
 		void displayError(EntityPropertyCode code, String message);
 	}
@@ -85,7 +85,7 @@ public class HotelEditorPresenter
 	@Override
 	protected HotelDto createDto() {
 		HotelDto dto = new HotelDto();
-		dto.setAccountDto(currentUser.getAppUserDto().getAccountDto());
+		dto.setAccount(currentUser.getAppUserDto().getAccount());
 		return dto;
 	}
 

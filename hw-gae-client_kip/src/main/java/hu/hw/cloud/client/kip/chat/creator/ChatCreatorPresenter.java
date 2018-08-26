@@ -89,15 +89,15 @@ public class ChatCreatorPresenter extends PresenterWidget<ChatCreatorPresenter.M
 				List<UserGroupDto> appUsers = new ArrayList<UserGroupDto>();
 				
 				for (AppUserDto appUser : users) {
-					for (UserGroupDto userGroup : appUser.getUserGroupDtos())
+					for (UserGroupDto userGroup : appUser.getUserGroups())
 						if (!userGroups.contains(userGroup))
 							userGroups.add(userGroup);
 
 					for (UserGroupDto receiver : userGroups) {
-						for (UserGroupDto userGroup2 : appUser.getUserGroupDtos())
+						for (UserGroupDto userGroup2 : appUser.getUserGroups())
 							if (receiver.equals(userGroup2)) {
-								if (!receiver.getMemberDtos().contains(appUser))
-									receiver.getMemberDtos().add(appUser);
+								if (!receiver.getMembers().contains(appUser))
+									receiver.getMembers().add(appUser);
 							}
 					}
 
@@ -114,7 +114,7 @@ public class ChatCreatorPresenter extends PresenterWidget<ChatCreatorPresenter.M
 	public void saveChat(List<AppUserDto> receivers, String message) {
 
 		ChatDto dto = new ChatDto();
-		dto.setAccountDto(currentUser.getAppUserDto().getAccountDto());
+		dto.setAccount(currentUser.getAppUserDto().getAccount());
 		dto.setSender(currentUser.getAppUserDto());
 		dto.setReceivers(receivers);
 		dto.setMessage(message);

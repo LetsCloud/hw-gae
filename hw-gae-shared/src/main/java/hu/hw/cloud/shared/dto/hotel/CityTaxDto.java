@@ -29,7 +29,7 @@ public class CityTaxDto implements Dto {
 	/**
 	 * Szolgáltatgáskódja.
 	 */
-	private ServiceDto serviceRef;
+	private ServiceDto service;
 
 	/**
 	 * Mértéke, a számítás alapjától függően százalék vagy fiy összeg.
@@ -52,12 +52,12 @@ public class CityTaxDto implements Dto {
 		this.based = based;
 	}
 
-	public ServiceDto getServiceRef() {
-		return serviceRef;
+	public ServiceDto getService() {
+		return service;
 	}
 
-	public void setServiceRef(ServiceDto serviceRef) {
-		this.serviceRef = serviceRef;
+	public void setService(ServiceDto service) {
+		this.service = service;
 	}
 
 	public Float getValue() {

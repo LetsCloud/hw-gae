@@ -83,4 +83,10 @@ public class HotelRepositoryImpl extends CrudRepositoryImpl<Hotel> implements Ho
 		Key<Account> key = Key.create(parentWebSafeKey);
 		return key;
 	}
+
+	@Override
+	protected void loadUniqueIndexMap(Hotel entiy) {
+		// TODO Auto-generated method stub
+		
+	}
 }

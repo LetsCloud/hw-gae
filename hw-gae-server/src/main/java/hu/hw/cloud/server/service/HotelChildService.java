@@ -10,5 +10,5 @@ import hu.hw.cloud.shared.dto.BaseDto;
  * @author robi
  *
  */
-public interface HotelChildService<T extends BaseEntity, D extends BaseDto> extends CrudService<T, D> {
+public interface HotelChildService<T extends BaseEntity, D extends BaseDto> extends CrudService<T> {
 }

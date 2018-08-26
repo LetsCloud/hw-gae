@@ -47,23 +47,6 @@ public class RoomServiceImpl extends HotelChildServiceImpl<Room, RoomDto, RoomRe
 	}
 
 	@Override
-	protected Room createEntity(RoomDto dto) {
-		return new Room(dto);
-	}
-
-	@Override
-	protected Room updateEntity(Room entity, RoomDto dto) {
-		entity.update(dto);
-		return entity;
-	}
-
-	@Override
-	protected Room updateEntity(Room oldEntity, Room newEntity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<Room> getActiveRoomsByHotel(String hotelKey) {
 		logger.info("RoomServiceImpl().getActiveRoomsByHotel()");
 		Date today = new Date();

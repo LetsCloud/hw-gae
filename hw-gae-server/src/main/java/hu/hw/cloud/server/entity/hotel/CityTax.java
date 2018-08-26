@@ -3,7 +3,6 @@
  */
 package hu.hw.cloud.server.entity.hotel;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -15,7 +14,6 @@ import org.apache.commons.collections4.Predicate;
 import com.googlecode.objectify.Ref;
 
 import hu.hw.cloud.shared.cnst.CityTaxBase;
-import hu.hw.cloud.shared.dto.hotel.CityTaxDto;
 
 /**
  * IFA mérték.
@@ -49,28 +47,6 @@ public class CityTax {
 	 * Objectify miatt
 	 */
 	public CityTax() {
-	}
-
-	/**
-	 * Entitás létrehozása DTO-ból
-	 * 
-	 * @param dto
-	 */
-	public CityTax(CityTaxDto dto) {
-		this();
-		update(dto);
-	}
-
-	/**
-	 * Entitás módosítása DTO alapján
-	 * 
-	 * @param dto
-	 */
-	public void update(CityTaxDto dto) {
-		this.setBased(dto.getBased());
-		this.setService(new Service(dto.getServiceRef()));
-		this.setValidFrom(dto.getValidFrom());
-		this.setValue(dto.getValue());
 	}
 
 	public Date getValidFrom() {
@@ -111,56 +87,6 @@ public class CityTax {
 
 	public void setValue(Float value) {
 		this.value = value;
-	}
-
-	/**
-	 * DTO létrehozása entitás alapján
-	 * 
-	 * @param entity
-	 * @return
-	 */
-	public static CityTaxDto createDto(CityTax entity) {
-		CityTaxDto dto = new CityTaxDto();
-		dto = entity.updateDto(dto);
-		return dto;
-	}
-
-	/**
-	 * DTO módosítása entitás alapján
-	 * 
-	 * @param dto
-	 * @return
-	 */
-	public CityTaxDto updateDto(CityTaxDto dto) {
-		dto.setBased(this.getBased());
-		dto.setServiceRef(Service.createDto(this.getService()));
-		dto.setValidFrom(this.getValidFrom());
-		dto.setValue(this.getValue());
-		return dto;
-	}
-
-	/**
-	 * 
-	 * @param entities
-	 * @return
-	 */
-	public static List<CityTaxDto> createDtos(List<CityTax> entities) {
-		List<CityTaxDto> dtos = new ArrayList<CityTaxDto>();
-		for (CityTax entity : entities)
-			dtos.add(createDto(entity));
-		return dtos;
-	}
-
-	/**
-	 * 
-	 * @param dtos
-	 * @return
-	 */
-	public static List<CityTax> createList(List<CityTaxDto> dtos) {
-		List<CityTax> entities = new ArrayList<CityTax>();
-		for (CityTaxDto dto : dtos)
-			entities.add(new CityTax(dto));
-		return entities;
 	}
 
 	/**

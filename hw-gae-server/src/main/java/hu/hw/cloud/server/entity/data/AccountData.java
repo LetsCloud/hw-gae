@@ -4,7 +4,7 @@
 package hu.hw.cloud.server.entity.data;
 
 import hu.hw.cloud.server.entity.common.Account;
-import hu.hw.cloud.server.entity.profile.PostalAddress;
+import hu.hw.cloud.server.entity.profile.Address;
 import hu.hw.cloud.server.repository.AccountRepository;
 import hu.hw.cloud.server.service.DataBuilderService;
 import hu.hw.cloud.shared.cnst.PostalAddressLabel;
@@ -31,9 +31,9 @@ public class AccountData extends BaseData<Account> {
 
 		account1 = new Account();
 		account1.setName("Test Hotel Chain 1");
-		PostalAddress postalAddress = new PostalAddress(true, PostalAddressLabel.WORK, "Street", "City", "PostCode",
-				"Region", "Country");
-		account1.setPostalAddress(postalAddress);
+//		Address postalAddress = new Address(true, PostalAddressLabel.WORK, "Street", "City", "PostCode",
+//				"Region", "Country");
+//		account1.setAddress(postalAddress);
 		
 		account1 = save(account1);
 

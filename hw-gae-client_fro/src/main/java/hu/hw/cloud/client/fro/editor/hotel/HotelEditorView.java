@@ -89,5 +89,4 @@ public class HotelEditorView extends ViewWithUiHandlers<HotelEditorUiHandlers>
 		// TODO Auto-generated method stub
 		
 	}
-
 }

@@ -21,20 +21,20 @@ import gwt.material.design.client.ui.MaterialTextBox;
 import hu.hw.cloud.client.fro.editor.profile.AddressListEditor;
 import hu.hw.cloud.client.fro.editor.profile.CommunicationListEditor;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
-import hu.hw.cloud.shared.dto.profile.CustomerDto;
+import hu.hw.cloud.shared.dto.profile.OrganizationDto;
 
 /**
  * @author robi
  *
  */
 public class CustomerDataView extends ViewWithUiHandlers<CustomerDataUiHandlers>
-		implements CustomerDataPresenter.MyView, Editor<CustomerDto> {
+		implements CustomerDataPresenter.MyView, Editor<OrganizationDto> {
 	private static Logger logger = Logger.getLogger(CustomerDataView.class.getName());
 
 	interface Binder extends UiBinder<Widget, CustomerDataView> {
 	}
 
-	interface Driver extends SimpleBeanEditorDriver<CustomerDto, CustomerDataView> {
+	interface Driver extends SimpleBeanEditorDriver<OrganizationDto, CustomerDataView> {
 	}
 
 	private final Driver driver;
@@ -67,7 +67,7 @@ public class CustomerDataView extends ViewWithUiHandlers<CustomerDataUiHandlers>
 	}
 
 	@Override
-	public void edit(Boolean isNew, CustomerDto dto) {
+	public void edit(Boolean isNew, OrganizationDto dto) {
 		driver.edit(dto);
 
 		Timer t = new Timer() {
@@ -81,7 +81,7 @@ public class CustomerDataView extends ViewWithUiHandlers<CustomerDataUiHandlers>
 
 	@UiHandler("saveButton")
 	void onSaveClick(ClickEvent event) {
-		CustomerDto dto = driver.flush();
+		OrganizationDto dto = driver.flush();
 		getUiHandlers().save(dto);
 	}
 

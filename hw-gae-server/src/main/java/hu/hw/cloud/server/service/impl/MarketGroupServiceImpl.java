@@ -26,21 +26,4 @@ public class MarketGroupServiceImpl extends HotelChildServiceImpl<MarketGroup, M
 		super(roomTypeRepository, accountRepository, hotelRepository);
 		logger.info("RoomTypeServiceImpl");
 	}
-
-	@Override
-	protected MarketGroup createEntity(MarketGroupDto dto) {
-		return new MarketGroup(dto);
-	}
-
-	@Override
-	protected MarketGroup updateEntity(MarketGroup entity, MarketGroupDto dto) {
-		entity.updEntityWithDto(dto);
-		return entity;
-	}
-
-	@Override
-	protected MarketGroup updateEntity(MarketGroup oldEntity, MarketGroup newEntity) {
-// TODO Auto-generated method stub
-		return null;
-	}
 }

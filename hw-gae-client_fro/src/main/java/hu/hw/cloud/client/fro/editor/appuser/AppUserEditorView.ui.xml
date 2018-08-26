@@ -93,7 +93,7 @@
 						type="TEXT" label="{i18nCore.userEditorUsername}" />
 
 					<combobox:MaterialComboBox
-						ui:field="userGroupDtos" multiple="true"
+						ui:field="userGroups" multiple="true"
 						label="{i18nCore.userEditorChatGroups}"
 						placeholder="{i18nCore.userEditorChooseGroup}" />
 				</g:HTMLPanel>
@@ -105,12 +105,12 @@
 						text="{i18nCore.userEditorIsAdmin}" addStyleNames="{style.cb}" />
 
 					<combobox:MaterialComboBox
-						ui:field="availableHotelDtos" multiple="true"
+						ui:field="availableHotels" multiple="true"
 						label="{i18nCore.userEditorAvailableHotels}"
 						placeholder="{i18nCore.userEditorChooseHotel}" marginTop="30" />
 
 					<combobox:MaterialComboBox
-						ui:field="defaultHotelDtox" multiple="false"
+						ui:field="defaultHotelCombo" multiple="false"
 						label="{i18nCore.userEditorDefaultHotel}"
 						placeholder="{i18nCore.userEditorChooseHotel}" marginTop="25" />
 				</g:HTMLPanel>

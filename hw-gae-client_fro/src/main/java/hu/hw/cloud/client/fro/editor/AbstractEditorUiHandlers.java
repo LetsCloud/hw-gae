@@ -11,7 +11,7 @@ import hu.hw.cloud.shared.dto.BaseDto;
  * @author robi
  *
  */
-public interface EditorUiHandlers<T extends BaseDto> extends UiHandlers {
+public interface AbstractEditorUiHandlers<T extends BaseDto> extends UiHandlers {
 
 	void save(T dto);
 	

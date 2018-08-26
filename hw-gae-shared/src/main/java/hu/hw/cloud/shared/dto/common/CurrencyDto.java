@@ -35,7 +35,7 @@ public class CurrencyDto extends AccountChildDto {
 
 	private Float rateMultiplier;
 
-	private List<ExchangeRateDto> exchangeRateDtos = new ArrayList<ExchangeRateDto>();
+	private List<ExchangeRateDto> exchangeRates = new ArrayList<ExchangeRateDto>();
 
 	public String getCode() {
 		return code;
@@ -77,12 +77,12 @@ public class CurrencyDto extends AccountChildDto {
 		this.rateMultiplier = rateMultiplier;
 	}
 
-	public List<ExchangeRateDto> getExchangeRateDtos() {
-		return exchangeRateDtos;
+	public List<ExchangeRateDto> getExchangeRates() {
+		return exchangeRates;
 	}
 
-	public void setExchangeRateDtos(List<ExchangeRateDto> exchangeRates) {
-		this.exchangeRateDtos = exchangeRates;
+	public void setExchangeRates(List<ExchangeRateDto> exchangeRates) {
+		this.exchangeRates = exchangeRates;
 	}
 
 }

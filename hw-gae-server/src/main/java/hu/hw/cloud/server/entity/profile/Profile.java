@@ -6,27 +6,35 @@ package hu.hw.cloud.server.entity.profile;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
 
 import hu.hw.cloud.server.entity.common.AccountChild;
-import hu.hw.cloud.shared.dto.profile.ProfileDto;
 
 /**
+ * A Profil entitás a Customer, Contact és Guest entitások őse.
+ * 
  * @author CR
  *
  */
 @Entity
 public class Profile extends AccountChild {
 
+	/**
+	 * A Profil neve.
+	 */
 	private String name;
 
-	private List<PhoneNumber> phoneNumbers = new ArrayList<PhoneNumber>();
+	/**
+	 * A Profil csoportja.
+	 */
+	private Ref<ProfileGroup> profileGroup;
 
-	private List<EmailAddress> emailAddresses = new ArrayList<EmailAddress>();
+	private List<Communication> communications = new ArrayList<Communication>();
 
-	private List<PostalAddress> postalAddresses = new ArrayList<PostalAddress>();
+	private List<Address> addresses = new ArrayList<Address>();
 
-	private List<UrlAddress> urlAddresses = new ArrayList<UrlAddress>();
+	private List<WebPresence> webPresences = new ArrayList<WebPresence>();
 
 	public Profile() {
 	}
@@ -39,58 +47,39 @@ public class Profile extends AccountChild {
 		this.name = name;
 	}
 
-	public List<PhoneNumber> getPhoneNumbers() {
-		return phoneNumbers;
+	public ProfileGroup getProfileGroup() {
+		if (profileGroup == null)
+			return null;
+		return profileGroup.get();
 	}
 
-	public void setPhoneNumbers(List<PhoneNumber> phoneNumbers) {
-		this.phoneNumbers = phoneNumbers;
+	public void setProfileGroup(ProfileGroup profileGroup) {
+		if (profileGroup != null)
+			this.profileGroup = Ref.create(profileGroup);
 	}
 
-	public List<EmailAddress> getEmailAddresses() {
-		return emailAddresses;
+	public List<Communication> getCommunications() {
+		return communications;
 	}
 
-	public void setEmailAddresses(List<EmailAddress> emailAddresses) {
-		this.emailAddresses = emailAddresses;
+	public void setCommunications(List<Communication> communications) {
+		this.communications = communications;
 	}
 
-	public List<PostalAddress> getPostalAddresses() {
-		return postalAddresses;
+	public List<Address> getAddresses() {
+		return addresses;
 	}
 
-	public void setPostalAddresses(List<PostalAddress> postalAddresses) {
-		this.postalAddresses = postalAddresses;
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
 	}
 
-	public List<UrlAddress> getUrlAddresses() {
-		return urlAddresses;
+	public List<WebPresence> getWebPresences() {
+		return webPresences;
 	}
 
-	public void setUrlAddresses(List<UrlAddress> urlAddresses) {
-		this.urlAddresses = urlAddresses;
-	}
-
-	public ProfileDto createDto() {
-		ProfileDto dto = new ProfileDto();
-		dto = updateDto(dto);
-		return dto;
-	}
-
-	public ProfileDto updateDto(ProfileDto dto) {
-		dto = (ProfileDto) super.updDtoWithEntity(dto);
-
-		if (getEmailAddresses() != null)
-			dto.setEmailAddressDtos(EmailAddress.createDtos(getEmailAddresses()));
-		dto.setName(getName());
-		if (getPhoneNumbers() != null)
-			dto.setPhoneNumberDtos(PhoneNumber.createDtos(getPhoneNumbers()));
-		if (getPostalAddresses() != null)
-			dto.setPostalAddressDtos(PostalAddress.createDtos(getPostalAddresses()));
-		if (getUrlAddresses() != null)
-			dto.setUrlAddressDtos(UrlAddress.createDtos(getUrlAddresses()));
-
-		return dto;
+	public void setWebPresences(List<WebPresence> webPresences) {
+		this.webPresences = webPresences;
 	}
 
 	/**
@@ -102,13 +91,13 @@ public class Profile extends AccountChild {
 
 		private String name;
 
-		private List<PhoneNumber> phoneNumbers = new ArrayList<PhoneNumber>();
+		private List<Communication> phoneNumbers = new ArrayList<Communication>();
 
 		private List<EmailAddress> emailAddresses = new ArrayList<EmailAddress>();
 
-		private List<PostalAddress> postalAddresses = new ArrayList<PostalAddress>();
+		private List<Address> postalAddresses = new ArrayList<Address>();
 
-		private List<UrlAddress> urlAddresses = new ArrayList<UrlAddress>();
+		private List<WebPresence> urlAddresses = new ArrayList<WebPresence>();
 
 		public Builder() {
 		}
@@ -118,12 +107,12 @@ public class Profile extends AccountChild {
 			return this;
 		}
 
-		public Builder phoneNumbers(List<PhoneNumber> phoneNumbers) {
+		public Builder phoneNumbers(List<Communication> phoneNumbers) {
 			this.phoneNumbers = phoneNumbers;
 			return this;
 		}
 
-		public Builder addPhoneNumber(PhoneNumber phoneNumber) {
+		public Builder addPhoneNumber(Communication phoneNumber) {
 			this.phoneNumbers.add(phoneNumber);
 			return this;
 		}
@@ -138,22 +127,22 @@ public class Profile extends AccountChild {
 			return this;
 		}
 
-		public Builder postalAddresses(List<PostalAddress> postalAddresses) {
+		public Builder postalAddresses(List<Address> postalAddresses) {
 			this.postalAddresses = postalAddresses;
 			return this;
 		}
 
-		public Builder addPostalAddress(PostalAddress postalAddress) {
+		public Builder addPostalAddress(Address postalAddress) {
 			this.postalAddresses.add(postalAddress);
 			return this;
 		}
 
-		public Builder urlAddresses(List<UrlAddress> urlAddresses) {
+		public Builder urlAddresses(List<WebPresence> urlAddresses) {
 			this.urlAddresses = urlAddresses;
 			return this;
 		}
 
-		public Builder addUrlAddress(UrlAddress urlAddresses) {
+		public Builder addUrlAddress(WebPresence urlAddresses) {
 			this.urlAddresses.add(urlAddresses);
 			return this;
 		}
@@ -166,9 +155,6 @@ public class Profile extends AccountChild {
 	protected Profile(Builder builder) {
 		super(builder);
 		this.setName(builder.name);
-		this.setPhoneNumbers(builder.phoneNumbers);
-		this.setEmailAddresses(builder.emailAddresses);
-		this.setPostalAddresses(builder.postalAddresses);
-		this.setUrlAddresses(builder.urlAddresses);
+		this.setWebPresences(builder.urlAddresses);
 	}
 }

@@ -6,7 +6,7 @@ package hu.hw.cloud.server.entity.data;
 import hu.hw.cloud.server.entity.common.Account;
 import hu.hw.cloud.server.entity.profile.EmailAddress;
 import hu.hw.cloud.server.entity.profile.Guest;
-import hu.hw.cloud.server.entity.profile.PostalAddress;
+import hu.hw.cloud.server.entity.profile.Address;
 import hu.hw.cloud.server.repository.GuestRepository;
 import hu.hw.cloud.server.service.DataBuilderService;
 import hu.hw.cloud.server.utils.DateUtils;
@@ -63,8 +63,8 @@ public class GuestData extends BaseData<Guest> {
 				.salutation("Miss")
 				.account(account)
 				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "selenagomez@selenagomez.com"))
-				.addPostalAddress(
-						new PostalAddress(true, PostalAddressLabel.WORK, "300 Clarice St.", "Grand Prairie", "Texas", "75051", "USA"))
+//				.addPostalAddress(
+//						new Address(true, PostalAddressLabel.WORK, "300 Clarice St.", "Grand Prairie", "Texas", "75051", "USA"))
 				.name("Selena Marie Gomez")
 				.build();
 		// @formatter:on
@@ -87,8 +87,8 @@ public class GuestData extends BaseData<Guest> {
 				.salutation("Mr.")
 				.account(account)
 				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "selenagomez@selenagomez.com"))
-				.addPostalAddress(
-						new PostalAddress(true, PostalAddressLabel.WORK, "1105 Wellington Rd", "London", "ON", "N6E 1V4", "Canada"))
+//				.addPostalAddress(
+//						new Address(true, PostalAddressLabel.WORK, "1105 Wellington Rd", "London", "ON", "N6E 1V4", "Canada"))
 				.name("Justin Bieber")
 				.build();
 		// @formatter:on
@@ -111,8 +111,8 @@ public class GuestData extends BaseData<Guest> {
 				.salutation("Mr")
 				.account(account)
 				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "harrison.ford@gmail.com"))
-				.addPostalAddress(
-						new PostalAddress(true, PostalAddressLabel.WORK, "300 Clarice St.", "Grand Prairie", "Texas", "75051", "USA"))
+//				.addPostalAddress(
+//						new Address(true, PostalAddressLabel.WORK, "300 Clarice St.", "Grand Prairie", "Texas", "75051", "USA"))
 				.name("Harrison Ford")
 				.build();
 		// @formatter:on
@@ -135,8 +135,8 @@ public class GuestData extends BaseData<Guest> {
 				.salutation("Ms.")
 				.account(account)
 				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "Calista.Flockhart@gmail.com"))
-				.addPostalAddress(
-						new PostalAddress(true, PostalAddressLabel.WORK, "1105 Wellington Rd", "London", "ON", "N6E 1V4", "Canada"))
+//				.addPostalAddress(
+//						new Address(true, PostalAddressLabel.WORK, "1105 Wellington Rd", "London", "ON", "N6E 1V4", "Canada"))
 				.name("Calista Flockhart")
 				.build();
 		// @formatter:on
@@ -159,8 +159,8 @@ public class GuestData extends BaseData<Guest> {
 				.salutation("Mr")
 				.account(account)
 				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "Brad.Pitt@gmail.com"))
-				.addPostalAddress(
-						new PostalAddress(true, PostalAddressLabel.WORK, "300 Clarice St.", "Grand Prairie", "Texas", "75051", "USA"))
+//				.addPostalAddress(
+//						new Address(true, PostalAddressLabel.WORK, "300 Clarice St.", "Grand Prairie", "Texas", "75051", "USA"))
 				.name("Brad Pitt")
 				.build();
 		// @formatter:on
@@ -183,8 +183,8 @@ public class GuestData extends BaseData<Guest> {
 				.salutation("Ms.")
 				.account(account)
 				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "Angelina.Jolie@gmail.com"))
-				.addPostalAddress(
-						new PostalAddress(true, PostalAddressLabel.WORK, "1105 Wellington Rd", "London", "ON", "N6E 1V4", "Canada"))
+//				.addPostalAddress(
+//						new Address(true, PostalAddressLabel.WORK, "1105 Wellington Rd", "London", "ON", "N6E 1V4", "Canada"))
 				.name("Angelina Jolie")
 				.build();
 		// @formatter:on
@@ -207,8 +207,8 @@ public class GuestData extends BaseData<Guest> {
 				.salutation("Mr")
 				.account(account)
 				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "Jose.Cura@gmail.com"))
-				.addPostalAddress(
-						new PostalAddress(true, PostalAddressLabel.WORK, "300 Clarice St.", "Grand Prairie", "Texas", "75051", "USA"))
+//				.addPostalAddress(
+//						new Address(true, PostalAddressLabel.WORK, "300 Clarice St.", "Grand Prairie", "Texas", "75051", "USA"))
 				.name("José Cura")
 				.build();
 		// @formatter:on
@@ -231,8 +231,8 @@ public class GuestData extends BaseData<Guest> {
 				.salutation("Ms.")
 				.account(account)
 				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "Silvia.Ibarra@gmail.com"))
-				.addPostalAddress(
-						new PostalAddress(true, PostalAddressLabel.WORK, "1105 Wellington Rd", "London", "ON", "N6E 1V4", "Canada"))
+//				.addPostalAddress(
+//						new Address(true, PostalAddressLabel.WORK, "1105 Wellington Rd", "London", "ON", "N6E 1V4", "Canada"))
 				.name("Silvia Ibarra")
 				.build();
 		// @formatter:on

@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.ws.rs.QueryParam;
 
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,15 +44,19 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class ProfileGroupController extends CrudController<ProfileGroup, ProfileGroupDto> {
 	private static final Logger logger = LoggerFactory.getLogger(ProfileGroupController.class);
 
+	private final ModelMapper modelMapper;
+
 	@Autowired
-	ProfileGroupController(ProfileGroupService service) {
-		super(service);
+	ProfileGroupController(ProfileGroupService service, ModelMapper modelMapper) {
+		super(ProfileGroup.class, service, modelMapper);
 		logger.info("ProfileGroupController()");
+		this.modelMapper = modelMapper;
 	}
 
 	@Override
 	protected ProfileGroupDto createDto(ProfileGroup entity) {
-		return ProfileGroup.createDto(entity);
+		ProfileGroupDto dto = modelMapper.map(entity, ProfileGroupDto.class);
+		return dto;
 	}
 
 	@RequestMapping(method = GET)

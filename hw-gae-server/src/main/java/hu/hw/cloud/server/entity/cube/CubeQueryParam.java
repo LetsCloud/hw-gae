@@ -50,7 +50,7 @@ public class CubeQueryParam {
 	public CubeQueryParam(CubeQueryParamDto dto) {
 		LOGGER.info("CubeQueryParam");
 
-		hotel = new Hotel(dto.getHotelDto());
+//		hotel = new Hotel(dto.getHotelDto());
 		LOGGER.info("CubeQueryParam->hotel=" + hotel);
 
 		fromDate = dto.getFromDate();

@@ -1,22 +1,26 @@
 /**
  * 
  */
-package hu.hw.cloud.shared.dto.profile;
+package hu.hw.cloud.server.entity.profile;
+
+import com.googlecode.objectify.annotation.Index;
+import com.googlecode.objectify.annotation.Subclass;
 
 /**
  * @author CR
  *
  */
-@SuppressWarnings("serial")
-public class CustomerDto extends ProfileDto {
+@Subclass(index = true)
+public class Organization extends Profile {
 
+	@Index
 	private String code;
 
 	private String taxNumber;
 
 	private String euTaxNumber;
 
-	public CustomerDto() {
+	public Organization() {
 	}
 
 	public String getCode() {
@@ -42,4 +46,5 @@ public class CustomerDto extends ProfileDto {
 	public void setEuTaxNumber(String euTaxNumber) {
 		this.euTaxNumber = euTaxNumber;
 	}
+
 }

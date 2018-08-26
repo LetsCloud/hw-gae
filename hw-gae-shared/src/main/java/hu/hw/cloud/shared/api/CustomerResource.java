@@ -18,7 +18,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import hu.hw.cloud.shared.dto.profile.CustomerDto;
+import hu.hw.cloud.shared.dto.profile.OrganizationDto;
 
 /**
  * @author robi
@@ -29,14 +29,14 @@ import hu.hw.cloud.shared.dto.profile.CustomerDto;
 public interface CustomerResource {
 
 	@GET
-	List<CustomerDto> list();
+	List<OrganizationDto> list();
 
 	@GET
 	@Path(PATH_WEBSAFEKEY)
-	CustomerDto read(@PathParam(WEBSAFEKEY) String webSafeKey);
+	OrganizationDto read(@PathParam(WEBSAFEKEY) String webSafeKey);
 
 	@POST
-	CustomerDto saveOrCreate(CustomerDto dto);
+	OrganizationDto saveOrCreate(OrganizationDto dto);
 
 	@DELETE
 	@Path(PATH_WEBSAFEKEY)
