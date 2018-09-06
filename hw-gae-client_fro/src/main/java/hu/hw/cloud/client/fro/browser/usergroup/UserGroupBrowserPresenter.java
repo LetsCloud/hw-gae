@@ -21,7 +21,7 @@ import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
 import hu.hw.cloud.client.fro.browser.AbstractBrowserPresenter;
 import hu.hw.cloud.client.fro.meditor.usergroup.UserGroupEditorFactory;
 import hu.hw.cloud.client.fro.meditor.usergroup.UserGroupEditorPresenter;
-import hu.hw.cloud.shared.UserGroupResource;
+import hu.hw.cloud.shared.api.UserGroupResource;
 import hu.hw.cloud.shared.dto.common.UserGroupDto;
 
 /**

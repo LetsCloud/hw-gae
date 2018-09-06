@@ -24,7 +24,7 @@ import hu.hw.cloud.client.core.gin.CustomActionException;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.security.AppData;
 import hu.hw.cloud.client.core.security.CurrentUser;
-import hu.hw.cloud.shared.AuthService;
+import hu.hw.cloud.shared.api.AuthResource;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
 
@@ -50,7 +50,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
 	private final PlaceManager placeManager;
 	private final RestDispatch dispatcher;
-	private final AuthService authService;
+	private final AuthResource authService;
 	private final AppData appData;
 	private final CurrentUser currentUser;
 	private final CoreMessages i18n;
@@ -59,7 +59,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
 	@Inject
 	LoginPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager, RestDispatch dispatcher,
-			AuthService authService, AppData appData, CurrentUser currentUser, CoreMessages i18n) {
+			AuthResource authService, AppData appData, CurrentUser currentUser, CoreMessages i18n) {
 		super(eventBus, view, proxy, RevealType.Root);
 		logger.info("LoginPresenter()");
 

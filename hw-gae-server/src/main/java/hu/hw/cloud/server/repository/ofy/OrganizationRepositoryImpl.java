@@ -21,7 +21,7 @@ public class OrganizationRepositoryImpl extends CrudRepositoryImpl<Organization>
 
 	public OrganizationRepositoryImpl() {
 		super(Organization.class);
-		logger.info("CustomerRepositoryImpl()");
+		logger.info("OrganizationRepositoryImpl()");
 	}
 
 	@Override

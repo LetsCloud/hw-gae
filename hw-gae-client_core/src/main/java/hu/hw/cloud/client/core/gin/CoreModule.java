@@ -33,7 +33,7 @@ import hu.hw.cloud.client.core.unauthorized.UnauthorizedModule;
 import hu.hw.cloud.client.firebase.Config;
 import hu.hw.cloud.client.firebase.Firebase;
 import hu.hw.cloud.client.firebase.messaging.MessagingManager;
-import hu.hw.cloud.shared.FcmService;
+import hu.hw.cloud.shared.api.FcmResource;
 
 /**
  * @author CR
@@ -88,7 +88,7 @@ public class CoreModule extends AbstractPresenterModule {
 	@Provides
 	@Singleton
 	AppServiceWorkerManager provideAppServiceWorkerManager(EventBus eventBus, MessagingManager fcmManager,
-			RestDispatch dispatch, FcmService fcmService) {
+			RestDispatch dispatch, FcmResource fcmService) {
 
 		AppServiceWorkerManager serviceWorkerManager = new AppServiceWorkerManager("service-worker.js", eventBus,
 				fcmManager, dispatch, fcmService);

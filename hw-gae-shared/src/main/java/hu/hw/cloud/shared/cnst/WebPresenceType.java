@@ -13,32 +13,38 @@ public enum WebPresenceType {
 	 */
 	WEB_URL,
 	/**
-	 * Facebook.
-	 */
-	FACEBOOK,
-	/**
-	 * LinkedIn.
-	 */
-	LINKEDIN,
-	/**
-	 * Twitter.
-	 */
-	TWITTER,
-	/**
 	 * Blog
 	 */
 	BLOG,
+	/**
+	 * Facebook.
+	 */
+	FACEBOOK,
+	FLICKR,
 	/**
 	 * Instagram
 	 */
 	INSTAGRAM,
 	/**
+	 * LinkedIn.
+	 */
+	LINKEDIN,
+	/**
 	 * Pinterest
 	 */
 	PINTEREST,
+	REDDIT,
 	/**
 	 * TripAdvisor
 	 */
-	TRIPADVISOR
+	TRIPADVISOR,
+	/**
+	 * Twitter.
+	 */
+	TWITTER,
+	/**
+	 * Youtube
+	 */
+	YOUTUBE
 
 }

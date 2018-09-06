@@ -28,6 +28,8 @@ import hu.hw.cloud.client.fro.filter.room.RoomFilterPresenter;
 import hu.hw.cloud.shared.api.RoomResource;
 import hu.hw.cloud.shared.dto.hotel.RoomDto;
 
+import static hu.hw.cloud.shared.api.ApiParameters.HOTEL_KEY;;
+
 /**
  * @author robi
  *
@@ -106,7 +108,7 @@ public class RoomBrowserPresenter extends AbstractBrowserPresenter<RoomDto, Room
 			}
 		}).getByHotel(filter.getSelectedHotel().getWebSafeKey(), filter.isOnlyActive());
 
-		addFilter(PARAM_HOTEL_KEY, filter.getSelectedHotel().getWebSafeKey());
+		addFilter(HOTEL_KEY, filter.getSelectedHotel().getWebSafeKey());
 	}
 
 	private List<String> getFloors(List<RoomDto> rooms) {

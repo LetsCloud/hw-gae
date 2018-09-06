@@ -3,11 +3,14 @@
  */
 package hu.hw.cloud.server.entity.profile;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
 
 import hu.hw.cloud.server.entity.common.AccountChild;
-import hu.hw.cloud.shared.dto.profile.ProfileGroupDto.ProfileType;
+import hu.hw.cloud.shared.cnst.ProfileType;
 import hu.hw.cloud.shared.exception.EntityValidationException;
 import hu.hw.cloud.shared.exception.ExceptionType;
 
@@ -17,6 +20,7 @@ import hu.hw.cloud.shared.exception.ExceptionType;
  */
 @Entity
 public class ProfileGroup extends AccountChild {
+	private static final Logger logger = LoggerFactory.getLogger(ProfileGroup.class);
 
 	public static final String PROFILEGROUP_CODE = "code";
 	private static final String PROFILEGROUP_DESCRIPTION = "description";
@@ -46,7 +50,7 @@ public class ProfileGroup extends AccountChild {
 	 * 
 	 */
 	public ProfileGroup() {
-//		logger.info("Hotel()");
+		logger.info("ProfileGroup()");
 	}
 
 	public String getCode() {
@@ -83,7 +87,8 @@ public class ProfileGroup extends AccountChild {
 
 	@Override
 	public String toString() {
-		return "ProfileGroup [ generatedId=" + this.getId() + ", code=" + code + ", name=" + description + "]";
+		return "ProfileGroup:[code=" + code + ", description=" + description + ", type=" + type + ", active=" + active
+				+ "]>>" + super.toString();
 	}
 
 	@Override

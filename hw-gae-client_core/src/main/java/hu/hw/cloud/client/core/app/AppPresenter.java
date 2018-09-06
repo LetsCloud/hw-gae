@@ -29,7 +29,7 @@ import hu.hw.cloud.client.core.event.SetPageTitleEvent;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent.SetPageTitleHandler;
 import hu.hw.cloud.client.core.menu.MenuPresenter;
 import hu.hw.cloud.client.core.security.CurrentUser;
-import hu.hw.cloud.shared.AuthService;
+import hu.hw.cloud.shared.api.AuthResource;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
 
@@ -49,14 +49,14 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 
 	private final PlaceManager placeManager;
 	private final RestDispatch dispatch;
-	private final AuthService authService;
+	private final AuthResource authService;
 	private final CurrentUser currentUser;
 	private final MenuPresenter menuPresenter;
 	private final AppServiceWorkerManager swManager;
 	private final String appCode;
 
 	protected AppPresenter(EventBus eventBus, MyView view, Proxy_ proxy, PlaceManager placeManager,
-			RestDispatch dispatch, AuthService authService, MenuPresenter menuPresenter, CurrentUser currentUser,
+			RestDispatch dispatch, AuthResource authService, MenuPresenter menuPresenter, CurrentUser currentUser,
 			String appCode, AppServiceWorkerManager swManager) {
 		super(eventBus, view, proxy, RevealType.Root);
 		logger.info("AppPresenter()");

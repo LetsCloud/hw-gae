@@ -47,4 +47,10 @@ public class Organization extends Profile {
 		this.euTaxNumber = euTaxNumber;
 	}
 
+	@Override
+	public String toString() {
+		return "Organization:[code=" + code + ", taxNumber=" + taxNumber + ", euTaxNumber=" + euTaxNumber + "]>>"
+				+ super.toString();
+	}
+
 }

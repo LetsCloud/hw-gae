@@ -81,7 +81,7 @@ public abstract class CrudServiceImpl<T extends BaseEntity, D extends BaseDto, R
 					try {
 						if (entity2.getVersion() > entity1.getVersion())
 							throw new EntityVersionConflictException();
-						entity2 = repository.save(entity2);
+						entity2 = repository.save(entity1);
 						return entity2;
 					} catch (Throwable e) {
 						e.printStackTrace(System.out);

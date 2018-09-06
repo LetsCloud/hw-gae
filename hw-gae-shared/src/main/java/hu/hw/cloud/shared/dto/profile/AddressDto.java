@@ -107,6 +107,7 @@ public class AddressDto implements Dto {
 	}
 
 	public String getFullAddress() {
+		fullAddress = country + ", " + region + ", " + postcode + " " + city + ", " + street;
 		return fullAddress;
 	}
 

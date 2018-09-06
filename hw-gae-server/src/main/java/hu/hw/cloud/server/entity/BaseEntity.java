@@ -185,4 +185,9 @@ public abstract class BaseEntity {
 	public void validate() throws EntityValidationException {
 	}
 
+	@Override
+	public String toString() {
+		return "BaseEntity:[id=" + id + ", webSafeKey=" + webSafeKey + ", version=" + version + "]";
+	}
+
 }

@@ -238,6 +238,93 @@
             <Value disabled="false">Egyéb</Value>
         </Property>
         <Comment>
+            <Value>WEBPRESENCE TYPES</Value>
+        </Comment>
+        <Property>
+            <Name>webPresenceTypeMap</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">WEB_URL,BLOG,FACEBOOK,FLICKR,INSTAGRAM,LINKEDIN,PINTEREST,REDDIT,TRIPADVISOR,TWITTER,YOUTUBE</Value>
+            <Value disabled="false">WEB_URL,BLOG,FACEBOOK,FLICKR,INSTAGRAM,LINKEDIN,PINTEREST,REDDIT,TRIPADVISOR,TWITTER,YOUTUBE</Value>
+        </Property>
+        <Property>
+            <Name>WEB_URL</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Website</Value>
+            <Value disabled="false">Honlap</Value>
+        </Property>
+        <Property>
+            <Name>BLOG</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Blog</Value>
+            <Value disabled="false">Blog</Value>
+        </Property>
+        <Property>
+            <Name>FACEBOOK</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Facebook</Value>
+            <Value disabled="false">Facebook</Value>
+        </Property>
+        <Property>
+            <Name>FLICKR</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Flickr</Value>
+            <Value disabled="false">Flickr</Value>
+        </Property>
+        <Property>
+            <Name>INSTAGRAM</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Instagram</Value>
+            <Value disabled="false">Instagram</Value>
+        </Property>
+        <Property>
+            <Name>LINKEDIN</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Linkedin</Value>
+            <Value disabled="false">Linkedin</Value>
+        </Property>
+        <Property>
+            <Name>PINTEREST</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Pinterest</Value>
+            <Value disabled="false">Pinterest</Value>
+        </Property>
+        <Property>
+            <Name>REDDIT</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Reddit</Value>
+            <Value disabled="false">Reddit</Value>
+        </Property>
+        <Property>
+            <Name>TRIPADVISOR</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Tripadvisor</Value>
+            <Value disabled="false">Tripadvisor</Value>
+        </Property>
+        <Property>
+            <Name>TWITTER</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Twitter</Value>
+            <Value disabled="false">Twitter</Value>
+        </Property>
+        <Property>
+            <Name>YOUTUBE</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Youtube</Value>
+            <Value disabled="false">Youtube</Value>
+        </Property>
+        <Comment>
             <Value>ROOM STATUSIES</Value>
         </Comment>
         <Property>

@@ -13,7 +13,9 @@ import hu.hw.cloud.shared.dto.BaseDto;
  */
 public interface AbstractEditorView<T extends BaseDto> extends View {
 	
-	void edit(Boolean isNew, T dto);
+	void show(T dto);
+	
+	void edit(T dto);
 
 	void close();
 

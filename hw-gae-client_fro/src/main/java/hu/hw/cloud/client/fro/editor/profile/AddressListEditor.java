@@ -27,7 +27,8 @@ import hu.hw.cloud.shared.dto.profile.AddressDto;
  * @author robi
  *
  */
-public class AddressListEditor extends Composite implements IsEditor<ListEditor<AddressDto, AddressEditor>>, HasEditorSwitch {
+public class AddressListEditor extends Composite
+		implements IsEditor<ListEditor<AddressDto, AddressEditor>>, HasEditorSwitch {
 	private static Logger logger = Logger.getLogger(AddressListEditor.class.getName());
 
 	interface Binder extends UiBinder<Widget, AddressListEditor> {
@@ -59,8 +60,7 @@ public class AddressListEditor extends Composite implements IsEditor<ListEditor<
 			if (index % 2 == 0)
 				subEditor.setBackgeoundColor();
 			subEditor.setIndex(index);
-			eventBus.fireEvent(new AddressActionEvent(AddressActionEvent.Action.OPEN, index));
-//			subEditor.openDetails(true);
+			subEditor.setReadOnly(readOnly);
 
 			listPanel.insert(subEditor, index);
 			return subEditor;
@@ -86,14 +86,13 @@ public class AddressListEditor extends Composite implements IsEditor<ListEditor<
 
 	private ListEditor<AddressDto, AddressEditor> editor = ListEditor.of(new AddressEditorSource());
 
-	private final EventBus eventBus;
+	private Boolean readOnly = false;
 
 	/**
 	 */
 	@Inject
 	AddressListEditor(Binder uiBinder, EventBus eventBus) {
 		logger.info("AddressListEditor()");
-		this.eventBus = eventBus;
 		initWidget(uiBinder.createAndBindUi(this));
 
 		eventBus.addHandler(AddressActionEvent.TYPE, new AddressActiEventHandler() {
@@ -124,13 +123,17 @@ public class AddressListEditor extends Composite implements IsEditor<ListEditor<
 	@Override
 	public void toEditable() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void toReadOnly() {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	public void setReadOnly(Boolean readOnly) {
+		this.readOnly = readOnly;
 	}
 
 }

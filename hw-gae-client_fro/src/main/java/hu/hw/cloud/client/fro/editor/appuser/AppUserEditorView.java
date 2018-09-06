@@ -104,7 +104,13 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 	}
 
 	@Override
-	public void edit(Boolean isNew, AppUserDto dto) {
+	public void show(AppUserDto dto) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void edit(AppUserDto dto) {
 		logger.info("AppUserEditorView().edit()->dto=" + dto);
 
 		if (dto.getPicture() != null) {

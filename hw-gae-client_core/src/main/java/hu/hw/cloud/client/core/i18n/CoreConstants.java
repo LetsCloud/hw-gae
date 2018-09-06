@@ -19,6 +19,8 @@ public interface CoreConstants extends Constants {
 
 	Map<String, String> addressTypeMap();
 
+	Map<String, String> webPresenceTypeMap();
+
 	Map<String, String> inventoryTypeMap();
 
 	Map<String, String> roomStatusMap();

@@ -26,10 +26,10 @@ import hu.hw.cloud.shared.cnst.MenuItemType;
  *
  */
 public abstract class AbstractConfigPresenter<V extends AbstractConfigPresenter.MyView, P extends Proxy<?>>
-		extends Presenter<V, P> implements ConfigUiHandlers, ContentPushEvent.ContentPushHandler {
+		extends Presenter<V, P> implements AbstractConfigUiHandlers, ContentPushEvent.ContentPushHandler {
 	private static Logger logger = Logger.getLogger(AbstractConfigPresenter.class.getName());
 
-	public interface MyView extends View, HasUiHandlers<ConfigUiHandlers> {
+	public interface MyView extends View, HasUiHandlers<AbstractConfigUiHandlers> {
 
 		void buildMenu(List<String> captions);
 
@@ -40,6 +40,8 @@ public abstract class AbstractConfigPresenter<V extends AbstractConfigPresenter.
 
 	private String caption;
 
+	protected Boolean firstReveal = true;
+	
 	private List<String> captions = new ArrayList<String>();
 
 	private List<PresenterWidget<?>> browsers = new ArrayList<PresenterWidget<?>>();
@@ -57,13 +59,16 @@ public abstract class AbstractConfigPresenter<V extends AbstractConfigPresenter.
 	protected void onBind() {
 		super.onBind();
 		getView().buildMenu(captions);
-		showContent(0);
 	}
 
 	@Override
 	protected void onReveal() {
 		super.onReveal();
 		SetPageTitleEvent.fire(caption, "", MenuItemType.MENU_ITEM, this);
+		if (firstReveal) {
+			showContent(0);
+			firstReveal = false;
+		}
 	}
 
 	@Override

@@ -35,7 +35,7 @@ import hu.hw.cloud.client.core.event.ContentPushEvent.MenuState;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
 import hu.hw.cloud.client.inf.InfNameTokens;
-import hu.hw.cloud.shared.CubeResource;
+import hu.hw.cloud.shared.api.CubeResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.cnst.cube.AnalyticsType;
 import hu.hw.cloud.shared.cnst.cube.DataSource;

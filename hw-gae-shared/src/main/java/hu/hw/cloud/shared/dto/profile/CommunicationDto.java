@@ -28,6 +28,15 @@ public class CommunicationDto implements Dto {
 	 */
 	private String parameter;
 
+	public CommunicationDto() {
+	}
+
+	public CommunicationDto(Boolean primary, CommMode mode) {
+		this();
+		this.primary = primary;
+		this.mode = mode;
+	}
+
 	public Boolean getPrimary() {
 		return primary;
 	}
@@ -50,6 +59,16 @@ public class CommunicationDto implements Dto {
 
 	public void setParameter(String parameter) {
 		this.parameter = parameter;
+	}
+
+	/*
+	 * toString
+	 */
+	@Override
+	public String toString() {
+		String ret = "CommunicationDto:{" + super.toString() + ", primary=" + primary + ", mode=" + mode
+				+ ", parameter=" + parameter;
+		return ret;
 	}
 
 }

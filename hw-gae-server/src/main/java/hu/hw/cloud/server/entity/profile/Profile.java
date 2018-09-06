@@ -6,6 +6,9 @@ package hu.hw.cloud.server.entity.profile;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
 
@@ -19,6 +22,7 @@ import hu.hw.cloud.server.entity.common.AccountChild;
  */
 @Entity
 public class Profile extends AccountChild {
+	private static final Logger logger = LoggerFactory.getLogger(Profile.class);
 
 	/**
 	 * A Profil neve.
@@ -37,6 +41,7 @@ public class Profile extends AccountChild {
 	private List<WebPresence> webPresences = new ArrayList<WebPresence>();
 
 	public Profile() {
+		logger.info("Profile()");
 	}
 
 	public String getName() {
@@ -54,8 +59,11 @@ public class Profile extends AccountChild {
 	}
 
 	public void setProfileGroup(ProfileGroup profileGroup) {
-		if (profileGroup != null)
+		logger.info("Profile().setProfileGroup(" + profileGroup + ")");
+		if (profileGroup.getId() != null) {
+			logger.info("Profile().setProfileGroup()->(profileGroup.getId() != null)");
 			this.profileGroup = Ref.create(profileGroup);
+		}
 	}
 
 	public List<Communication> getCommunications() {
@@ -82,6 +90,11 @@ public class Profile extends AccountChild {
 		this.webPresences = webPresences;
 	}
 
+	@Override
+	public String toString() {
+		return "Profile:[name=" + name + ", profileGroup=" + getProfileGroup() + "]>>" + super.toString();
+	}
+
 	/**
 	 * 
 	 * @author CR
@@ -91,13 +104,13 @@ public class Profile extends AccountChild {
 
 		private String name;
 
-		private List<Communication> phoneNumbers = new ArrayList<Communication>();
+		private Ref<ProfileGroup> profileGroup;
 
-		private List<EmailAddress> emailAddresses = new ArrayList<EmailAddress>();
+		private List<Communication> communications = new ArrayList<Communication>();
 
-		private List<Address> postalAddresses = new ArrayList<Address>();
+		private List<Address> addresses = new ArrayList<Address>();
 
-		private List<WebPresence> urlAddresses = new ArrayList<WebPresence>();
+		private List<WebPresence> webPresences = new ArrayList<WebPresence>();
 
 		public Builder() {
 		}
@@ -107,43 +120,39 @@ public class Profile extends AccountChild {
 			return this;
 		}
 
-		public Builder phoneNumbers(List<Communication> phoneNumbers) {
-			this.phoneNumbers = phoneNumbers;
+		public Builder profileGroup(ProfileGroup profileGroup) {
+			if (profileGroup.getId() != null)
+				this.profileGroup = Ref.create(profileGroup);
 			return this;
 		}
 
-		public Builder addPhoneNumber(Communication phoneNumber) {
-			this.phoneNumbers.add(phoneNumber);
+		public Builder communications(List<Communication> communications) {
+			this.communications = communications;
 			return this;
 		}
 
-		public Builder emailAddresses(List<EmailAddress> emailAddresses) {
-			this.emailAddresses = emailAddresses;
+		public Builder addcommunication(Communication communication) {
+			this.communications.add(communication);
 			return this;
 		}
 
-		public Builder addEmailAddress(EmailAddress emailAddress) {
-			this.emailAddresses.add(emailAddress);
+		public Builder addresses(List<Address> addresses) {
+			this.addresses = addresses;
 			return this;
 		}
 
-		public Builder postalAddresses(List<Address> postalAddresses) {
-			this.postalAddresses = postalAddresses;
+		public Builder addAddress(Address address) {
+			this.addresses.add(address);
 			return this;
 		}
 
-		public Builder addPostalAddress(Address postalAddress) {
-			this.postalAddresses.add(postalAddress);
+		public Builder webPresences(List<WebPresence> webPresences) {
+			this.webPresences = webPresences;
 			return this;
 		}
 
-		public Builder urlAddresses(List<WebPresence> urlAddresses) {
-			this.urlAddresses = urlAddresses;
-			return this;
-		}
-
-		public Builder addUrlAddress(WebPresence urlAddresses) {
-			this.urlAddresses.add(urlAddresses);
+		public Builder addWebPresence(WebPresence webPresence) {
+			this.webPresences.add(webPresence);
 			return this;
 		}
 
@@ -155,6 +164,5 @@ public class Profile extends AccountChild {
 	protected Profile(Builder builder) {
 		super(builder);
 		this.setName(builder.name);
-		this.setWebPresences(builder.urlAddresses);
 	}
 }

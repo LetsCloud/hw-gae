@@ -46,6 +46,10 @@
 		class="hu.hw.cloud.server.repository.ofy.UserGroupRepositoryImpl" />
 	<bean id="currencyRepository"
 		class="hu.hw.cloud.server.repository.ofy.CurrencyRepositoryImpl" />
+	<bean id="profileGroupRepository"
+		class="hu.hw.cloud.server.repository.ofy.ProfileGroupRepositoryImpl" />
+	<bean id="organizationRepository"
+		class="hu.hw.cloud.server.repository.ofy.OrganizationRepositoryImpl" />
 
 	<bean id="chatRepository"
 		class="hu.hw.cloud.server.repository.ofy.ChatRepositoryImpl" />
@@ -82,8 +86,6 @@
 		class="hu.hw.cloud.server.repository.ofy.RoomTypeRepositoryImpl" />
 	<bean id="marketGroupRepository"
 		class="hu.hw.cloud.server.repository.ofy.MarketGroupRepositoryImpl" />
-	<bean id="profileGroupRepository"
-		class="hu.hw.cloud.server.repository.ofy.ProfileGroupRepositoryImpl" />
 
 	<bean id="testBookingRepository"
 		class="hu.hw.cloud.server.repository.ofy.TestBookingRepositoryImpl" />
@@ -188,6 +190,11 @@
 	<bean id="profileGroupService"
 		class="hu.hw.cloud.server.service.impl.ProfileGroupServiceImpl">
 		<constructor-arg ref="profileGroupRepository" />
+		<constructor-arg ref="accountRepository" />
+	</bean>
+	<bean id="organizationService"
+		class="hu.hw.cloud.server.service.impl.OrganizationServiceImpl">
+		<constructor-arg ref="organizationRepository" />
 		<constructor-arg ref="accountRepository" />
 	</bean>
 

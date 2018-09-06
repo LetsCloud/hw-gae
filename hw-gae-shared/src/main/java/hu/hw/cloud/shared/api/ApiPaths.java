@@ -29,7 +29,8 @@ public class ApiPaths {
 
 		public static final String TASK = "/task";
 
-		public static final String CUSTOMER = "/customer";
+		public static final String PROFILE_GROUP = "/profileGroup";
+		public static final String ORGANIZATION = "/organization";
 
 		public static final String HOTEL = "/hotel";
 		public static final String ROOMTYPE = "/roomtype";
@@ -37,7 +38,6 @@ public class ApiPaths {
 		public static final String AVAILABLE_ON_DATE = "/availableOnDate";
 		public static final String STATUS_CHANGE = "/statusChange";
 		public static final String MARKET_GROUP = "/marketGroup";
-		public static final String PROFILE_GROUP = "/profileGroup";
 
 		public static final String DATACUBE = "/dataCube";
 		public static final String PERF1_QUERY = "/perf1Query";

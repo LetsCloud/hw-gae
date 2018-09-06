@@ -12,6 +12,8 @@ public class FroNameTokens {
 	public static final String COMMON_CONFIG = "/commonConfig";
 	public static final String HOTEL_CONFIG = "/hotelConfig";
 
+	public static final String ORGANIZATION_DISPLAY = "/organizationDisplay";
+
 	public static String getProfileConfig() {
 		return PROFILE_CONFIG;
 	}

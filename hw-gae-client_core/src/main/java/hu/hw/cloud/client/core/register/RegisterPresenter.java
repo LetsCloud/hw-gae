@@ -23,7 +23,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.success.SuccessPresenter;
-import hu.hw.cloud.shared.AccountResource;
+import hu.hw.cloud.shared.api.AccountResource;
 import hu.hw.cloud.shared.dto.RegisterDto;
 
 /**

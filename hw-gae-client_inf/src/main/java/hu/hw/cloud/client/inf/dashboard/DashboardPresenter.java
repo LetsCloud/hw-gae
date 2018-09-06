@@ -38,7 +38,7 @@ import hu.hw.cloud.client.inf.dashboard.widget.DataWidgetFactory;
 import hu.hw.cloud.client.inf.dashboard.widget.DataWidgetPresenter;
 import hu.hw.cloud.client.inf.dashboard.widget.DataWidgetViewFactory;
 import hu.hw.cloud.client.inf.gps.GpsState;
-import hu.hw.cloud.shared.CubeResource;
+import hu.hw.cloud.shared.api.CubeResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.cnst.cube.Aggregation;
 import hu.hw.cloud.shared.cnst.cube.QueryPeriodType;

@@ -3,7 +3,7 @@
  */
 package hu.hw.cloud.shared.dto.profile;
 
-import hu.hw.cloud.shared.cnst.UrlAddressLabel;
+import hu.hw.cloud.shared.cnst.WebPresenceType;
 import hu.hw.cloud.shared.dto.Dto;
 
 /**
@@ -16,27 +16,27 @@ public class WebPresenceDto implements Dto {
 	/**
 	 * Email cím típusa: Munkahelyi, Otthoni, Egyéb
 	 */
-	private UrlAddressLabel label;
+	private WebPresenceType label;
 
 	/**
 	 * Email cím
 	 */
-	private String address;
+	private String url;
 
-	public UrlAddressLabel getLabel() {
+	public WebPresenceType getLabel() {
 		return label;
 	}
 
-	public void setLabel(UrlAddressLabel label) {
+	public void setLabel(WebPresenceType label) {
 		this.label = label;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }

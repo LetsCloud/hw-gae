@@ -16,7 +16,7 @@ import gwt.material.design.client.data.loader.LoadConfig;
 import gwt.material.design.client.data.loader.LoadResult;
 
 import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
-import hu.hw.cloud.shared.UserGroupResource;
+import hu.hw.cloud.shared.api.UserGroupResource;
 import hu.hw.cloud.shared.dto.common.UserGroupDto;
 
 /**

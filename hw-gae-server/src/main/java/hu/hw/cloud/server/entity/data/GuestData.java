@@ -62,7 +62,7 @@ public class GuestData extends BaseData<Guest> {
 				.language("en")
 				.salutation("Miss")
 				.account(account)
-				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "selenagomez@selenagomez.com"))
+//				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "selenagomez@selenagomez.com"))
 //				.addPostalAddress(
 //						new Address(true, PostalAddressLabel.WORK, "300 Clarice St.", "Grand Prairie", "Texas", "75051", "USA"))
 				.name("Selena Marie Gomez")
@@ -86,7 +86,7 @@ public class GuestData extends BaseData<Guest> {
 				.language("en")
 				.salutation("Mr.")
 				.account(account)
-				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "selenagomez@selenagomez.com"))
+//				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "selenagomez@selenagomez.com"))
 //				.addPostalAddress(
 //						new Address(true, PostalAddressLabel.WORK, "1105 Wellington Rd", "London", "ON", "N6E 1V4", "Canada"))
 				.name("Justin Bieber")
@@ -110,7 +110,7 @@ public class GuestData extends BaseData<Guest> {
 				.language("en")
 				.salutation("Mr")
 				.account(account)
-				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "harrison.ford@gmail.com"))
+//				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "harrison.ford@gmail.com"))
 //				.addPostalAddress(
 //						new Address(true, PostalAddressLabel.WORK, "300 Clarice St.", "Grand Prairie", "Texas", "75051", "USA"))
 				.name("Harrison Ford")
@@ -134,7 +134,7 @@ public class GuestData extends BaseData<Guest> {
 				.language("en")
 				.salutation("Ms.")
 				.account(account)
-				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "Calista.Flockhart@gmail.com"))
+//				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "Calista.Flockhart@gmail.com"))
 //				.addPostalAddress(
 //						new Address(true, PostalAddressLabel.WORK, "1105 Wellington Rd", "London", "ON", "N6E 1V4", "Canada"))
 				.name("Calista Flockhart")
@@ -158,7 +158,7 @@ public class GuestData extends BaseData<Guest> {
 				.language("en")
 				.salutation("Mr")
 				.account(account)
-				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "Brad.Pitt@gmail.com"))
+//				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "Brad.Pitt@gmail.com"))
 //				.addPostalAddress(
 //						new Address(true, PostalAddressLabel.WORK, "300 Clarice St.", "Grand Prairie", "Texas", "75051", "USA"))
 				.name("Brad Pitt")
@@ -182,7 +182,7 @@ public class GuestData extends BaseData<Guest> {
 				.language("en")
 				.salutation("Ms.")
 				.account(account)
-				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "Angelina.Jolie@gmail.com"))
+//				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "Angelina.Jolie@gmail.com"))
 //				.addPostalAddress(
 //						new Address(true, PostalAddressLabel.WORK, "1105 Wellington Rd", "London", "ON", "N6E 1V4", "Canada"))
 				.name("Angelina Jolie")
@@ -206,7 +206,7 @@ public class GuestData extends BaseData<Guest> {
 				.language("es")
 				.salutation("Mr")
 				.account(account)
-				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "Jose.Cura@gmail.com"))
+//				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "Jose.Cura@gmail.com"))
 //				.addPostalAddress(
 //						new Address(true, PostalAddressLabel.WORK, "300 Clarice St.", "Grand Prairie", "Texas", "75051", "USA"))
 				.name("José Cura")
@@ -230,7 +230,7 @@ public class GuestData extends BaseData<Guest> {
 				.language("es")
 				.salutation("Ms.")
 				.account(account)
-				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "Silvia.Ibarra@gmail.com"))
+//				.addEmailAddress(new EmailAddress(true, EmailAddressLabel.WORK, "Silvia.Ibarra@gmail.com"))
 //				.addPostalAddress(
 //						new Address(true, PostalAddressLabel.WORK, "1105 Wellington Rd", "London", "ON", "N6E 1V4", "Canada"))
 				.name("Silvia Ibarra")

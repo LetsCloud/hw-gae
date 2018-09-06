@@ -68,4 +68,29 @@ public class ProfileDto extends AccountChildDto {
 		this.webPresences = webPresences;
 	}
 
+	/*
+	 * toString
+	 */
+	@Override
+	public String toString() {
+		String ret = "ProfileDto:{" + super.toString() + ", name=" + name + ", profileGroup=" + profileGroup
+				+ ", communications=";
+
+		for (CommunicationDto communication : communications)
+			ret = ret + communication;
+
+		ret = ret + ", addresses=";
+
+		for (AddressDto address : addresses)
+			ret = ret + address;
+
+		ret = ret + ", webPresences=";
+
+		for (WebPresenceDto webPresence : webPresences)
+			ret = ret + webPresence;
+
+		ret = ret + "}";
+		return ret;
+	}
+
 }

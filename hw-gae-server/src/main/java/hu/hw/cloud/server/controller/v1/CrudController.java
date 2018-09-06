@@ -18,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 
 import hu.hw.cloud.server.api.v1.BaseController;
 import hu.hw.cloud.server.entity.BaseEntity;
-import hu.hw.cloud.server.entity.MyMapper;
 import hu.hw.cloud.server.entity.common.AppUser;
 import hu.hw.cloud.server.service.AppUserService;
 import hu.hw.cloud.server.service.CrudService;
@@ -88,11 +87,12 @@ public abstract class CrudController<T extends BaseEntity, D extends BaseDto> ex
 	public ResponseEntity<D> saveOrCreate(D dto) throws RestApiException {
 		logger.info("saveOrCreate->source=" + dto);
 		try {
-			T entity;
+			T entity = modelMapper.map(dto, clazz);
+			logger.info("saveOrCreate->mapped=" + entity);
 			if (dto.getId() == null) {
-				entity = service.create(modelMapper.map(dto, clazz));
+				entity = service.create(entity);
 			} else {
-				entity = service.update(modelMapper.map(dto, clazz));
+				entity = service.update(entity);
 			}
 			logger.info("saveOrCreate->saved=" + entity);
 			dto = createDto(entity);

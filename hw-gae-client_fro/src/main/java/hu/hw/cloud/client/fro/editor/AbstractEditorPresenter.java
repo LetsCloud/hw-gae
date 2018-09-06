@@ -17,8 +17,9 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
-import hu.hw.cloud.client.fro.browser.AbstractBrowserPresenter;
 import hu.hw.cloud.shared.dto.BaseDto;
+
+import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
 
 /**
  * @author robi
@@ -63,13 +64,13 @@ public abstract class AbstractEditorPresenter<T extends BaseDto, V extends Abstr
 	protected abstract void loadData();
 
 	protected Boolean isNew() {
-		return Strings.isNullOrEmpty(filters.get(AbstractBrowserPresenter.PARAM_DTO_KEY));
+		return Strings.isNullOrEmpty(filters.get(WEBSAFEKEY));
 	}
 
 	protected void create() {
 		logger.info("AbstractEditorPresenter().create()");
 		T dto = createDto();
-		getView().edit(true, dto);
+		getView().edit(dto);
 	}
 
 	protected abstract T createDto();

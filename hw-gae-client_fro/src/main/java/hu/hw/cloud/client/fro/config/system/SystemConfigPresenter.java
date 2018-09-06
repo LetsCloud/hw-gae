@@ -14,7 +14,7 @@ import hu.hw.cloud.client.core.event.ContentPushEvent;
 import hu.hw.cloud.client.core.security.LoggedInGatekeeper;
 import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.browser.appuser.AppUserBrowserFactory;
-import hu.hw.cloud.client.fro.browser.customer.CustomerBrowserFactory;
+import hu.hw.cloud.client.fro.browser.organization.OrganizationBrowserFactory;
 import hu.hw.cloud.client.fro.browser.usergroup.UserGroupBrowserFactory;
 import hu.hw.cloud.client.fro.config.AbstractConfigPresenter;
 import hu.hw.cloud.client.fro.i18n.FroMessages;

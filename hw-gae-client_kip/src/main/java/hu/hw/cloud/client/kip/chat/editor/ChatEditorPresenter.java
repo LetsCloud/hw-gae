@@ -18,7 +18,7 @@ import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 
 import hu.hw.cloud.client.core.security.CurrentUser;
-import hu.hw.cloud.shared.ChatResource;
+import hu.hw.cloud.shared.api.ChatResource;
 import hu.hw.cloud.shared.dto.chat.AddPostDto;
 import hu.hw.cloud.shared.dto.chat.ChatDto;
 import hu.hw.cloud.shared.dto.chat.ChatPostDto;

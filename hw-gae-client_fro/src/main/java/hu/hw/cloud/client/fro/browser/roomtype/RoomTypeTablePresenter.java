@@ -25,6 +25,8 @@ import hu.hw.cloud.client.fro.filter.roomtype.RoomTypeFilterPresenter;
 import hu.hw.cloud.shared.api.RoomTypeResource;
 import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
 
+import static hu.hw.cloud.shared.api.ApiParameters.HOTEL_KEY;
+
 /**
  * @author robi
  *
@@ -102,6 +104,6 @@ public class RoomTypeTablePresenter extends AbstractBrowserPresenter<RoomTypeDto
 			}
 		}).getAll(filter.getSelectedHotel().getWebSafeKey(), filter.isOnlyActive(), filter.getSelectedInventoryType());
 
-		addFilter(PARAM_HOTEL_KEY, filter.getSelectedHotel().getWebSafeKey());
+		addFilter(HOTEL_KEY, filter.getSelectedHotel().getWebSafeKey());
 	}
 }

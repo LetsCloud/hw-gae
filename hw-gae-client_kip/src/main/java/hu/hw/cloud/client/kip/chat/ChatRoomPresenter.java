@@ -33,7 +33,7 @@ import hu.hw.cloud.client.kip.chat.creator.ChatCreatorPresenter;
 import hu.hw.cloud.client.kip.chat.list.ChatListFactory;
 import hu.hw.cloud.client.kip.chat.list.ChatListPresenter;
 import hu.hw.cloud.client.kip.i18n.KipMessages;
-import hu.hw.cloud.shared.FcmService;
+import hu.hw.cloud.shared.api.FcmResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 
 /**
@@ -55,7 +55,7 @@ public class ChatRoomPresenter extends Presenter<ChatRoomPresenter.MyView, ChatR
 	private final ChatListPresenter chatListPresenter;
 	private final ChatCreatorPresenter chatCreatorPresenter;
 	private final RestDispatch dispatcher;
-	private final FcmService fcmService;
+	private final FcmResource fcmService;
 	private final MessagingManager messagingManager;
 	private final KipMessages i18n;
 
@@ -67,7 +67,7 @@ public class ChatRoomPresenter extends Presenter<ChatRoomPresenter.MyView, ChatR
 	@Inject
 	ChatRoomPresenter(EventBus eventBus, MyView view, MyProxy proxy,
 			ChatListFactory chatListFactory, ChatCreatorFactory chatCreatorFactory, RestDispatch dispatcher,
-			FcmService fcmService, MessagingManager messagingManager, KipMessages i18n) {
+			FcmResource fcmService, MessagingManager messagingManager, KipMessages i18n) {
 		super(eventBus, view, proxy, KipAppPresenter.SLOT_MAIN);
 		logger.info("ChatRoomPresenter()");
 

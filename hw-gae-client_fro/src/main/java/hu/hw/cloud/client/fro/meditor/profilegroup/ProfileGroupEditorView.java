@@ -27,9 +27,9 @@ import gwt.material.design.client.ui.MaterialTitle;
 
 import hu.hw.cloud.client.core.i18n.CoreConstants;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
+import hu.hw.cloud.shared.cnst.ProfileType;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
 import hu.hw.cloud.shared.dto.profile.ProfileGroupDto;
-import hu.hw.cloud.shared.dto.profile.ProfileGroupDto.ProfileType;
 
 public class ProfileGroupEditorView extends ViewWithUiHandlers<ProfileGroupEditorUiHandlers>
 		implements ProfileGroupEditorPresenter.MyView, Editor<ProfileGroupDto> {

@@ -34,6 +34,8 @@ public class AccountChild extends BaseEntity {
 	}
 
 	public Account getAccount() {
+		if (account == null)
+			return null;
 		return account.get();
 	}
 
@@ -41,6 +43,11 @@ public class AccountChild extends BaseEntity {
 		logger.info("setAccount()->" + account);
 		if (account.getId() != null)
 			this.account = Ref.create(account);
+	}
+
+	@Override
+	public String toString() {
+		return "AccountChild:[account=" + getAccount() + "]>>" + super.toString();
 	}
 
 	/**

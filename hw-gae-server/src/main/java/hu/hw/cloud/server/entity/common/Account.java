@@ -75,4 +75,9 @@ public class Account extends BaseEntity {
 		logger.info("setAddress()->" + address);
 		this.address = address;
 	}
+
+	@Override
+	public String toString() {
+		return "Account:[name=" + name + "]>>" + super.toString();
+	}
 }

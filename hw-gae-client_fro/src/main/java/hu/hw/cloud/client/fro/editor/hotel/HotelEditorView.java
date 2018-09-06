@@ -55,7 +55,13 @@ public class HotelEditorView extends ViewWithUiHandlers<HotelEditorUiHandlers>
 	}
 
 	@Override
-	public void edit(Boolean isNew, HotelDto dto) {
+	public void show(HotelDto dto) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void edit(HotelDto dto) {
 		driver.edit(dto);
 
 		Timer t = new Timer() {

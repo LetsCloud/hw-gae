@@ -5,7 +5,7 @@ package hu.hw.cloud.client.fro.editor.profile;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
-import hu.hw.cloud.client.fro.editor.profile.customer.CustomerEditorModule;
+import hu.hw.cloud.client.fro.editor.profile.organization.OrganizationEditorModule;
 
 /**
  * @author robi
@@ -21,6 +21,6 @@ public class ProfileEditorModule extends AbstractPresenterModule {
 		bind(AddressEditor.class);		
 		bind(AddressListEditor.class);
 
-		install(new CustomerEditorModule());
+		install(new OrganizationEditorModule());
 	}
 }

@@ -43,4 +43,6 @@ public interface CoreResources extends ClientBundle {
 	@Source("css/core.css")
 	TextResource coreCss();
 
+//	@Source("js/select2-tab-fix.min.js")
+ //   TextResource select2TabFix();
 }

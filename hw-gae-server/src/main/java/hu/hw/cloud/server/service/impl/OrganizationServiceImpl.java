@@ -9,14 +9,10 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import hu.hw.cloud.server.entity.hotel.Hotel;
 import hu.hw.cloud.server.entity.profile.Organization;
 import hu.hw.cloud.server.repository.AccountRepository;
 import hu.hw.cloud.server.repository.OrganizationRepository;
-import hu.hw.cloud.server.repository.HotelRepository;
 import hu.hw.cloud.server.service.OrganizationService;
-import hu.hw.cloud.server.service.HotelService;
-import hu.hw.cloud.shared.dto.hotel.HotelDto;
 import hu.hw.cloud.shared.dto.profile.OrganizationDto;
 
 /**
@@ -31,7 +27,7 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Organ
 
 	public OrganizationServiceImpl(OrganizationRepository repository, AccountRepository accountRepository) {
 		super(repository);
-		logger.info("CustomerServiceImpl()");
+		logger.info("OrganizationServiceImpl()");
 		this.accountRepository = accountRepository;
 	}
 

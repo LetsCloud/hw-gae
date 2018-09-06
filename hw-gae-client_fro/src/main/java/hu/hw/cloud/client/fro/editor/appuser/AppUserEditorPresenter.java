@@ -32,7 +32,6 @@ import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.core.util.ErrorHandlerAsyncCallback;
 import hu.hw.cloud.client.fro.FroNameTokens;
-import hu.hw.cloud.client.fro.browser.AbstractBrowserPresenter;
 import hu.hw.cloud.client.fro.editor.AbstractEditorPresenter;
 import hu.hw.cloud.client.fro.editor.AbstractEditorView;
 import hu.hw.cloud.shared.api.AppUserResource;
@@ -41,6 +40,8 @@ import hu.hw.cloud.shared.dto.EntityPropertyCode;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
 import hu.hw.cloud.shared.dto.common.UserGroupDto;
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
+
+import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
 
 /**
  * @author robi
@@ -134,7 +135,7 @@ public class AppUserEditorPresenter
 		} else {
 			SetPageTitleEvent.fire(i18n.userEditorModifyTitle(), "", MenuItemType.MENU_ITEM,
 					AppUserEditorPresenter.this);
-			edit(filters.get(AbstractBrowserPresenter.PARAM_DTO_KEY));
+			edit(filters.get(WEBSAFEKEY));
 		}
 	}
 
@@ -169,7 +170,7 @@ public class AppUserEditorPresenter
 			@Override
 			public void onSuccess(AppUserDto dto) {
 				logger.info("AppUserEditorPresenter().edit().onSuccess()->dto=" + dto);
-				getView().edit(false, dto);
+				getView().edit(dto);
 			}
 
 			@Override

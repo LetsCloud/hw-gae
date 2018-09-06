@@ -18,6 +18,8 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 import hu.hw.cloud.client.core.event.RefreshTableEvent;
 import hu.hw.cloud.shared.dto.BaseDto;
 
+import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
+
 /**
  * Az <b>AbstractBrowserPresenter</b> egy <b>PresenterWidget</b> utód, amely
  * leszármaztatásakor paraméterként meg kell adni a megjelenítendő adat
@@ -43,11 +45,6 @@ public abstract class AbstractBrowserPresenter<T extends BaseDto, V extends View
 	private static Logger logger = Logger.getLogger(AbstractBrowserPresenter.class.getName());
 
 	/**
-	 * 
-	 */
-	public static final String PARAM_DTO_KEY = "id";
-	public static final String PARAM_HOTEL_KEY = "hotelKey";
-	/**
 	 * A megjelenítő komponens felirat.
 	 */
 	private String caption;
@@ -56,7 +53,7 @@ public abstract class AbstractBrowserPresenter<T extends BaseDto, V extends View
 
 	public AbstractBrowserPresenter(EventBus eventBus, V view, PlaceManager placeManager) {
 		super(eventBus, view);
-		logger.info("AbstractTablePresenter()");
+		logger.info("AbstractBrowserPresenter()");
 
 		this.placeManager = placeManager;
 
@@ -117,8 +114,9 @@ public abstract class AbstractBrowserPresenter<T extends BaseDto, V extends View
 
 	@Override
 	public void edit(T dto) {
+		logger.info("AbstractBrowserPresenter().edit(" + dto + ")");
 		Builder placeBuilder = new Builder().nameToken(getEditorNameToken());
-		placeBuilder.with(PARAM_DTO_KEY, String.valueOf(dto.getWebSafeKey()));
+		placeBuilder.with(WEBSAFEKEY, String.valueOf(dto.getWebSafeKey()));
 		placeManager.revealPlace(addFilters(placeBuilder));
 	}
 

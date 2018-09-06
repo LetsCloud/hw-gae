@@ -3,6 +3,7 @@
  */
 package hu.hw.cloud.shared.dto.profile;
 
+import hu.hw.cloud.shared.cnst.ProfileType;
 import hu.hw.cloud.shared.dto.common.AccountChildDto;
 
 /**
@@ -11,10 +12,6 @@ import hu.hw.cloud.shared.dto.common.AccountChildDto;
  */
 @SuppressWarnings("serial")
 public class ProfileGroupDto extends AccountChildDto {
-
-	public enum ProfileType {
-		PT_COMPANY, PT_CONTACT, PT_GUEST
-	}
 
 	/**
 	 * Egyedi azonosító

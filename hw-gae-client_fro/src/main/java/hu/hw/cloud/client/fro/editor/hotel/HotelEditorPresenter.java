@@ -25,13 +25,14 @@ import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.core.util.ErrorHandlerAsyncCallback;
 import hu.hw.cloud.client.fro.FroNameTokens;
-import hu.hw.cloud.client.fro.browser.AbstractBrowserPresenter;
 import hu.hw.cloud.client.fro.editor.AbstractEditorPresenter;
 import hu.hw.cloud.client.fro.editor.AbstractEditorView;
 import hu.hw.cloud.shared.api.HotelResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
+
+import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
 
 /**
  * @author robi
@@ -78,7 +79,7 @@ public class HotelEditorPresenter
 			create();
 		} else {
 			SetPageTitleEvent.fire(i18n.hotelEditorModifyTitle(), "", MenuItemType.MENU_ITEM, HotelEditorPresenter.this);
-			edit(filters.get(AbstractBrowserPresenter.PARAM_DTO_KEY));
+			edit(filters.get(WEBSAFEKEY));
 		}
 	}
 
@@ -94,7 +95,7 @@ public class HotelEditorPresenter
 			@Override
 			public void onSuccess(HotelDto dto) {
 				logger.info("AppUserEditorPresenter().edit().onSuccess()->dto=" + dto);
-				getView().edit(false, dto);
+				getView().edit(dto);
 			}
 
 			@Override
