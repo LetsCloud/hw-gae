@@ -49,12 +49,15 @@
 		class="hu.hw.cloud.server.repository.ofy.AppUserRepositoryImpl" />
 	<bean id="currencyRepository"
 		class="hu.hw.cloud.server.repository.ofy.CurrencyRepositoryImpl" />
-	<bean id="profileGroupRepository"
-		class="hu.hw.cloud.server.repository.ofy.ProfileGroupRepositoryImpl" />
+
 	<bean id="organizationRepository"
 		class="hu.hw.cloud.server.repository.ofy.OrganizationRepositoryImpl" />
 	<bean id="contactRepository"
 		class="hu.hw.cloud.server.repository.ofy.ContactRepositoryImpl" />
+	<bean id="profileGroupRepository"
+		class="hu.hw.cloud.server.repository.ofy.ProfileGroupRepositoryImpl" />
+	<bean id="relationshipRepository"
+		class="hu.hw.cloud.server.repository.ofy.RelationshipRepositoryImpl" />
 
 	<bean id="chatRepository"
 		class="hu.hw.cloud.server.repository.ofy.ChatRepositoryImpl" />
@@ -121,11 +124,7 @@
 		<constructor-arg ref="accountRepository" />
 		<constructor-arg ref="appUserRepository" />
 	</bean>
-	<bean id="profileGroupService"
-		class="hu.hw.cloud.server.service.impl.ProfileGroupServiceImpl">
-		<constructor-arg ref="profileGroupRepository" />
-		<constructor-arg ref="accountRepository" />
-	</bean>
+	
 	<bean id="organizationService"
 		class="hu.hw.cloud.server.service.impl.OrganizationServiceImpl">
 		<constructor-arg ref="organizationRepository" />
@@ -134,6 +133,16 @@
 	<bean id="contactService"
 		class="hu.hw.cloud.server.service.impl.ContactServiceImpl">
 		<constructor-arg ref="contactRepository" />
+		<constructor-arg ref="accountRepository" />
+	</bean>
+	<bean id="profileGroupService"
+		class="hu.hw.cloud.server.service.impl.ProfileGroupServiceImpl">
+		<constructor-arg ref="profileGroupRepository" />
+		<constructor-arg ref="accountRepository" />
+	</bean>
+	<bean id="relationshipService"
+		class="hu.hw.cloud.server.service.impl.RelationshipServiceImpl">
+		<constructor-arg ref="relationshipRepository" />
 		<constructor-arg ref="accountRepository" />
 	</bean>
 

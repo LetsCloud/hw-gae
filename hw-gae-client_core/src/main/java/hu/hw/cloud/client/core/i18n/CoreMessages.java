@@ -28,6 +28,12 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("Cancel")
 	String comCancel();
 
+	@DefaultMessage("Active")
+	String comActive();
+
+	@DefaultMessage("Inactive")
+	String comInactive();
+
 	@DefaultMessage("Required field")
 	String comRequiredField();
 
@@ -314,6 +320,39 @@ public interface CoreMessages extends Messages {
 
 	@DefaultMessage("Manage your organization's profile or contact information")
 	String profileConfigDescription();
+
+	
+	/*
+	 * RELATIONSHIP BROWSER
+	 */
+	@DefaultMessage("Relationships")
+	String relationshipBrowserTitle();
+
+	@DefaultMessage("Forward")
+	String relationshipBrowserColForward();
+
+	@DefaultMessage("Reverse")
+	String relationshipBrowserColReverse();
+
+	@DefaultMessage("Active")
+	String relationshipBrowserColActive();
+
+	
+	/*
+	 * RELATIONSHIPP EDITOR
+	 */
+
+	@DefaultMessage("Create Relationship Group")
+	String relationshipCreateTitle();
+
+	@DefaultMessage("Edit Relationship Group")
+	String relationshipEditTitle();
+
+	@DefaultMessage("Forward")
+	String relationshipFldForward();
+
+	@DefaultMessage("Reverse")
+	String relationshipFldReverse();
 
 	
 	/*

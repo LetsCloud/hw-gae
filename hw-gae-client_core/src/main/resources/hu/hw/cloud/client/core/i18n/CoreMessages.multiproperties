@@ -531,6 +531,68 @@
             <Value disabled="false">Hatékony ügyfélkezelés</Value>
         </Property>
         <Comment>
+            <Value>RELATIONSHIP BROWSER</Value>
+        </Comment>
+        <Property>
+            <Name>relationshipBrowserTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Relationships</Value>
+            <Value disabled="false">Kapcsolat típusok</Value>
+        </Property>
+        <Property>
+            <Name>relationshipBrowserColForward</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Forward</Value>
+            <Value disabled="false">Kapcsolat típus</Value>
+        </Property>
+        <Property>
+            <Name>relationshipBrowserColReverse</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Reverse</Value>
+            <Value disabled="false">Fordított</Value>
+        </Property>
+        <Property>
+            <Name>relationshipBrowserColActive</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Active</Value>
+            <Value disabled="false">Aktív</Value>
+        </Property>
+        <Comment>
+            <Value>RELATIONSHIP EDITOR</Value>
+        </Comment>
+        <Property>
+            <Name>relationshipCreateTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Create Relationshop</Value>
+            <Value disabled="false">Kapcsolat típus létrehozása</Value>
+        </Property>
+        <Property>
+            <Name>relationshipEditTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Edit Relationship</Value>
+            <Value disabled="false">Kapcsolat típus szerkesztése</Value>
+        </Property>
+        <Property>
+            <Name>relationshipFldForward</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Forward</Value>
+            <Value disabled="false">Kapcsolat típus</Value>
+        </Property>
+        <Property>
+            <Name>relationshipFldReverse</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Reverse</Value>
+            <Value disabled="false">Fordítva</Value>
+        </Property>
+        <Comment>
             <Value>PROFILE GROUP BROWSER</Value>
         </Comment>
         <Property>

@@ -3,9 +3,10 @@
  */
 package hu.hw.cloud.shared.api;
 
+import static hu.hw.cloud.shared.api.ApiParameters.ONLY_ACTIVE;
 import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
 import static hu.hw.cloud.shared.api.ApiPaths.PATH_WEBSAFEKEY;
-import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.TASK;
+import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.RELATIONSHIP;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.ROOT;
 
 import java.util.List;
@@ -16,27 +17,28 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import hu.hw.cloud.shared.dto.task.TaskDto;
+import hu.hw.cloud.shared.dto.profile.RelationshipDto;
 
 /**
  * @author robi
  *
  */
-@Path(ROOT + TASK)
+@Path(ROOT + RELATIONSHIP)
 @Produces(MediaType.APPLICATION_JSON)
-public interface TaskResource {
+public interface RelationshipResource {
 
 	@GET
-	List<TaskDto> list();
+	List<RelationshipDto> getAll(@QueryParam(ONLY_ACTIVE) Boolean onlyActive);
 
 	@GET
 	@Path(PATH_WEBSAFEKEY)
-	TaskDto read(@PathParam(WEBSAFEKEY) String webSafeKey);
+	RelationshipDto get(@PathParam(WEBSAFEKEY) String webSafeKey);
 
 	@POST
-	TaskDto saveOrCreate(TaskDto dto);
+	RelationshipDto saveOrCreate(RelationshipDto dto);
 
 	@DELETE
 	@Path(PATH_WEBSAFEKEY)
