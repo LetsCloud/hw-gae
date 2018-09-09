@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.hw.cloud.client.fro.meditor.profilegroup;
+package hu.hw.cloud.client.fro.meditor.relationship;
 
 import java.util.logging.Logger;
 
@@ -19,33 +19,33 @@ import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.fro.meditor.AbstractMeditorPresenter;
 import hu.hw.cloud.client.fro.meditor.MeditorView;
-import hu.hw.cloud.shared.api.ProfileGroupResource;
+import hu.hw.cloud.shared.api.RelationshipResource;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
-import hu.hw.cloud.shared.dto.profile.ProfileGroupDto;
+import hu.hw.cloud.shared.dto.profile.RelationshipDto;
 
 /**
  * @author robi
  *
  */
-public class ProfileGroupEditorPresenter
-		extends AbstractMeditorPresenter<ProfileGroupDto, ProfileGroupEditorPresenter.MyView>
-		implements ProfileGroupEditorUiHandlers {
-	private static Logger logger = Logger.getLogger(ProfileGroupEditorPresenter.class.getName());
+public class RelationshipEditorPresenter
+		extends AbstractMeditorPresenter<RelationshipDto, RelationshipEditorPresenter.MyView>
+		implements RelationshipEditorUiHandlers {
+	private static Logger logger = Logger.getLogger(RelationshipEditorPresenter.class.getName());
 
-	public interface MyView extends MeditorView<ProfileGroupDto>, HasUiHandlers<ProfileGroupEditorUiHandlers> {
+	public interface MyView extends MeditorView<RelationshipDto>, HasUiHandlers<RelationshipEditorUiHandlers> {
 
 		void displayError(EntityPropertyCode code, String message);
 	}
 
 	private final PlaceManager placeManager;
-	private final ResourceDelegate<ProfileGroupResource> resourceDelegate;
+	private final ResourceDelegate<RelationshipResource> resourceDelegate;
 	private final CurrentUser currentUser;
 
 	@Inject
-	ProfileGroupEditorPresenter(EventBus eventBus, PlaceManager placeManager, MyView view,
-			ResourceDelegate<ProfileGroupResource> resourceDelegate, CurrentUser currentUser) {
+	RelationshipEditorPresenter(EventBus eventBus, PlaceManager placeManager, MyView view,
+			ResourceDelegate<RelationshipResource> resourceDelegate, CurrentUser currentUser) {
 		super(eventBus, view);
-		logger.info("ProfileGroupEditorPresenter()");
+		logger.info("RelationshipEditorPresenter()");
 
 		this.placeManager = placeManager;
 		this.resourceDelegate = resourceDelegate;
@@ -55,18 +55,17 @@ public class ProfileGroupEditorPresenter
 	}
 
 	@Override
-	protected ProfileGroupDto createDto() {
-		logger.info("ProfileGroupEditorPresenter().createDto");
-		ProfileGroupDto dto = new ProfileGroupDto();
+	protected RelationshipDto createDto() {
+		RelationshipDto dto = new RelationshipDto();
 		dto.setAccount(currentUser.getAppUserDto().getAccount());
 		return dto;
 	}
 
 	@Override
-	public void saveDto(ProfileGroupDto dto) {
-		resourceDelegate.withCallback(new AsyncCallback<ProfileGroupDto>() {
+	public void saveDto(RelationshipDto dto) {
+		resourceDelegate.withCallback(new AsyncCallback<RelationshipDto>() {
 			@Override
-			public void onSuccess(ProfileGroupDto dto) {
+			public void onSuccess(RelationshipDto dto) {
 				getView().close();
 				PlaceRequest placeRequest = new Builder().nameToken(CoreNameTokens.PROFILE_CONFIG).build();
 				placeManager.revealPlace(placeRequest);

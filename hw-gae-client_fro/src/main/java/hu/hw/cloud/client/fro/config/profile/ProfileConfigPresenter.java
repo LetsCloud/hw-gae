@@ -20,6 +20,7 @@ import hu.hw.cloud.client.core.security.LoggedInGatekeeper;
 import hu.hw.cloud.client.fro.browser.contact.ContactBrowserFactory;
 import hu.hw.cloud.client.fro.browser.organization.OrganizationBrowserFactory;
 import hu.hw.cloud.client.fro.browser.profilegroup.ProfileGroupBrowserFactory;
+import hu.hw.cloud.client.fro.browser.relationship.RelationshipBrowserFactory;
 import hu.hw.cloud.client.fro.config.AbstractConfigPresenter;
 import hu.hw.cloud.client.fro.i18n.FroMessages;
 
@@ -44,16 +45,17 @@ public class ProfileConfigPresenter
 	@Inject
 	ProfileConfigPresenter(EventBus eventBus, MyView view, MyProxy proxy,
 			ProfileGroupBrowserFactory profileGroupFactory, OrganizationBrowserFactory organizationFactory,
-			ContactBrowserFactory contactFactory, FroMessages i18n, CoreMessages i18nCore) {
+			ContactBrowserFactory contactFactory, RelationshipBrowserFactory relationshipFactory, FroMessages i18n, CoreMessages i18nCore) {
 		super(eventBus, view, proxy, AppPresenter.SLOT_MAIN);
 		logger.info("ProfileConfigPresenter()");
 
 		setCaption(i18nCore.profileConfigTitle());
 		setDescription(i18nCore.profileConfigDescription());
 
-		addContent(i18nCore.profileGroupBrowserTitle(), profileGroupFactory.createProfileGroupBrowser());
 		addContent(i18nCore.organizationBrowserTitle(), organizationFactory.createOrganisationBrowser());
 		addContent(i18nCore.contactBrowserTitle(), contactFactory.createContactBrowser());
+		addContent(i18nCore.profileGroupBrowserTitle(), profileGroupFactory.createProfileGroupBrowser());
+		addContent(i18nCore.relationshipBrowserTitle(), relationshipFactory.createRelationshipBrowser());
 
 		getView().setUiHandlers(this);
 	}

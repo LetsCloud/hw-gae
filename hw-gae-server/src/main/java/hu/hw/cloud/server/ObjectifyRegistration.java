@@ -28,6 +28,7 @@ import hu.hw.cloud.server.entity.profile.Organization;
 import hu.hw.cloud.server.entity.profile.Person;
 import hu.hw.cloud.server.entity.profile.Profile;
 import hu.hw.cloud.server.entity.profile.ProfileGroup;
+import hu.hw.cloud.server.entity.profile.Relationship;
 import hu.hw.cloud.server.entity.reservation.Reservation;
 import hu.hw.cloud.server.entity.task.Task;
 
@@ -43,6 +44,7 @@ public class ObjectifyRegistration {
 		ObjectifyService.register(Currency.class);
 		ObjectifyService.register(Service.class);
 		ObjectifyService.register(ProfileGroup.class);
+		ObjectifyService.register(Relationship.class);
 		ObjectifyService.register(Profile.class);
 		ObjectifyService.register(Organization.class);
 		ObjectifyService.register(Person.class);
