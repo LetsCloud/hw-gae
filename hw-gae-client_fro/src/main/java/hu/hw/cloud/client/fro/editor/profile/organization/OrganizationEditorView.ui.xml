@@ -42,9 +42,6 @@
 	<ui:with field="coreTokens"
 		type="hu.hw.cloud.client.core.CoreNameTokens" />
 
-	<ui:with field="froTokens"
-		type="hu.hw.cloud.client.fro.FroNameTokens" />
-
 	<g:HTMLPanel addStyleNames="{style.pp}">
 		<m:MaterialRow>
 			<m:MaterialColumn grid="s12 m6">

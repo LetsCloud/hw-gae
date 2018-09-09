@@ -17,10 +17,10 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
+import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.app.AppPresenter;
 import hu.hw.cloud.client.core.event.ContentPushEvent;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent;
-import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 
 /**
@@ -35,7 +35,7 @@ public class ResNewPresenter extends Presenter<ResNewPresenter.MyView, ResNewPre
 	}
 
 	@ProxyCodeSplit
-	@NameToken(FroNameTokens.CREATE_RESERVATION)
+	@NameToken(CoreNameTokens.CREATE_RESERVATION)
 	// @UseGatekeeper(LoggedInGatekeeper.class)
 	interface MyProxy extends ProxyPlace<ResNewPresenter> {
 	}

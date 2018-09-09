@@ -40,16 +40,21 @@
 	<!-- REPOSITORIES -->
 	<bean id="accountRepository"
 		class="hu.hw.cloud.server.repository.ofy.AccountRepositoryImpl" />
-	<bean id="appUserRepository"
-		class="hu.hw.cloud.server.repository.ofy.AppUserRepositoryImpl" />
+
 	<bean id="userGroupRepository"
 		class="hu.hw.cloud.server.repository.ofy.UserGroupRepositoryImpl" />
+	<bean id="roleRepository"
+		class="hu.hw.cloud.server.repository.ofy.RoleRepositoryImpl" />
+	<bean id="appUserRepository"
+		class="hu.hw.cloud.server.repository.ofy.AppUserRepositoryImpl" />
 	<bean id="currencyRepository"
 		class="hu.hw.cloud.server.repository.ofy.CurrencyRepositoryImpl" />
 	<bean id="profileGroupRepository"
 		class="hu.hw.cloud.server.repository.ofy.ProfileGroupRepositoryImpl" />
 	<bean id="organizationRepository"
 		class="hu.hw.cloud.server.repository.ofy.OrganizationRepositoryImpl" />
+	<bean id="contactRepository"
+		class="hu.hw.cloud.server.repository.ofy.ContactRepositoryImpl" />
 
 	<bean id="chatRepository"
 		class="hu.hw.cloud.server.repository.ofy.ChatRepositoryImpl" />
@@ -78,8 +83,6 @@
 	<bean id="cubeFcstPfmRepo"
 		class="hu.hw.cloud.server.repository.ofy.CubeFcstPfmRepoImpl" />
 
-	<bean id="roleRepository"
-		class="hu.hw.cloud.server.repository.ofy.RoleRepositoryImpl" />
 	<bean id="roomRepository"
 		class="hu.hw.cloud.server.repository.ofy.RoomRepositoryImpl" />
 	<bean id="roomTypeRepository"
@@ -101,71 +104,49 @@
 		<property name="roleService" ref="roleService" />
 		<property name="dataBuilderService" ref="dataBuilderService" />
 	</bean>
+	<bean id="userGroupService"
+		class="hu.hw.cloud.server.service.impl.UserGroupServiceImpl">
+		<constructor-arg ref="userGroupRepository" />
+		<constructor-arg ref="accountRepository" />
+	</bean>
+	<bean id="roleService"
+		class="hu.hw.cloud.server.service.impl.RoleServiceImpl">
+		<constructor-arg ref="accountRepository" />
+		<constructor-arg ref="roleRepository" />
+		<constructor-arg ref="messageSourceHandler" />
+	</bean>
 	<bean id="appUserService"
 		class="hu.hw.cloud.server.service.impl.AppUserServiceImpl">
 		<constructor-arg ref="loggedInChecker" />
 		<constructor-arg ref="accountRepository" />
 		<constructor-arg ref="appUserRepository" />
 	</bean>
-	<bean id="userGroupService"
-		class="hu.hw.cloud.server.service.impl.UserGroupServiceImpl">
-		<constructor-arg ref="userGroupRepository" />
+	<bean id="profileGroupService"
+		class="hu.hw.cloud.server.service.impl.ProfileGroupServiceImpl">
+		<constructor-arg ref="profileGroupRepository" />
 		<constructor-arg ref="accountRepository" />
 	</bean>
+	<bean id="organizationService"
+		class="hu.hw.cloud.server.service.impl.OrganizationServiceImpl">
+		<constructor-arg ref="organizationRepository" />
+		<constructor-arg ref="accountRepository" />
+	</bean>
+	<bean id="contactService"
+		class="hu.hw.cloud.server.service.impl.ContactServiceImpl">
+		<constructor-arg ref="contactRepository" />
+		<constructor-arg ref="accountRepository" />
+	</bean>
+
 	<bean id="chatService"
 		class="hu.hw.cloud.server.service.impl.ChatServiceImpl">
 		<constructor-arg ref="chatRepository" />
 		<constructor-arg ref="accountRepository" />
 	</bean>
-	<bean id="dataBuilderService"
-		class="hu.hw.cloud.server.service.impl.DataBuilderServiceImpl">
-		<property name="accountRepository" ref="accountRepository" />
-		<property name="appUserRepository" ref="appUserRepository" />
-		<property name="currencyRepository" ref="currencyRepository" />
-		<property name="guestRepository" ref="guestRepository" />
-		<property name="hotelRepository" ref="hotelRepository" />
-		<property name="roomTypeRepository" ref="roomTypeRepository" />
-		<property name="roomRepository" ref="roomRepository" />
-		<property name="reservationRepository"
-			ref="reservationRepository" />
-	</bean>
-	<bean id="hkAssignmentService"
-		class="hu.hw.cloud.server.service.impl.HkAssignmentServiceImpl">
-		<constructor-arg ref="hkAssignmentRepo" />
-		<constructor-arg ref="hotelRepository" />
-		<constructor-arg ref="roomRepository" />
-		<constructor-arg ref="reservationRepository" />
-	</bean>
+
 	<bean id="hotelService"
 		class="hu.hw.cloud.server.service.impl.HotelServiceImpl">
 		<constructor-arg ref="accountRepository" />
 		<constructor-arg ref="hotelRepository" />
-	</bean>
-	<bean id="messageSourceHandler"
-		class="hu.hw.cloud.server.service.impl.MessageSourceHandlerImpl">
-		<property name="messageSource" ref="messageSource" />
-	</bean>
-	<bean id="reservationService"
-		class="hu.hw.cloud.server.service.impl.ReservationServiceImpl">
-		<constructor-arg ref="reservationRepository" />
-	</bean>
-
-	<bean id="cubeService"
-		class="hu.hw.cloud.server.service.impl.CubeServiceImpl">
-		<property name="hotelRepository" ref="hotelRepository" />
-		<property name="cubeBdgtCapRepo" ref="cubeBdgtCapRepo" />
-		<property name="cubeBdgtPfmRepo" ref="cubeBdgtPfmRepo" />
-		<property name="cubeActlCapRepo" ref="cubeActlCapRepo" />
-		<property name="cubeActlPfmRepo" ref="cubeActlPfmRepo" />
-		<property name="cubeFcstCapRepo" ref="cubeFcstCapRepo" />
-		<property name="cubeFcstPfmRepo" ref="cubeFcstPfmRepo" />
-	</bean>
-
-	<bean id="roleService"
-		class="hu.hw.cloud.server.service.impl.RoleServiceImpl">
-		<constructor-arg ref="accountRepository" />
-		<constructor-arg ref="roleRepository" />
-		<constructor-arg ref="messageSourceHandler" />
 	</bean>
 	<bean id="roomService"
 		class="hu.hw.cloud.server.service.impl.RoomServiceImpl">
@@ -187,16 +168,47 @@
 		<constructor-arg ref="accountRepository" />
 		<constructor-arg ref="hotelRepository" />
 	</bean>
-	<bean id="profileGroupService"
-		class="hu.hw.cloud.server.service.impl.ProfileGroupServiceImpl">
-		<constructor-arg ref="profileGroupRepository" />
-		<constructor-arg ref="accountRepository" />
+
+	<bean id="dataBuilderService"
+		class="hu.hw.cloud.server.service.impl.DataBuilderServiceImpl">
+		<property name="accountRepository" ref="accountRepository" />
+		<property name="appUserRepository" ref="appUserRepository" />
+		<property name="currencyRepository" ref="currencyRepository" />
+		<property name="guestRepository" ref="guestRepository" />
+		<property name="hotelRepository" ref="hotelRepository" />
+		<property name="roomTypeRepository" ref="roomTypeRepository" />
+		<property name="roomRepository" ref="roomRepository" />
+		<property name="reservationRepository"
+			ref="reservationRepository" />
 	</bean>
-	<bean id="organizationService"
-		class="hu.hw.cloud.server.service.impl.OrganizationServiceImpl">
-		<constructor-arg ref="organizationRepository" />
-		<constructor-arg ref="accountRepository" />
+	<bean id="hkAssignmentService"
+		class="hu.hw.cloud.server.service.impl.HkAssignmentServiceImpl">
+		<constructor-arg ref="hkAssignmentRepo" />
+		<constructor-arg ref="hotelRepository" />
+		<constructor-arg ref="roomRepository" />
+		<constructor-arg ref="reservationRepository" />
 	</bean>
+	<bean id="messageSourceHandler"
+		class="hu.hw.cloud.server.service.impl.MessageSourceHandlerImpl">
+		<property name="messageSource" ref="messageSource" />
+	</bean>
+	<bean id="reservationService"
+		class="hu.hw.cloud.server.service.impl.ReservationServiceImpl">
+		<constructor-arg ref="reservationRepository" />
+	</bean>
+
+	<bean id="cubeService"
+		class="hu.hw.cloud.server.service.impl.CubeServiceImpl">
+		<property name="hotelRepository" ref="hotelRepository" />
+		<property name="cubeBdgtCapRepo" ref="cubeBdgtCapRepo" />
+		<property name="cubeBdgtPfmRepo" ref="cubeBdgtPfmRepo" />
+		<property name="cubeActlCapRepo" ref="cubeActlCapRepo" />
+		<property name="cubeActlPfmRepo" ref="cubeActlPfmRepo" />
+		<property name="cubeFcstCapRepo" ref="cubeFcstCapRepo" />
+		<property name="cubeFcstPfmRepo" ref="cubeFcstPfmRepo" />
+	</bean>
+
+
 
 	<!-- CONTROLLERS -->
 

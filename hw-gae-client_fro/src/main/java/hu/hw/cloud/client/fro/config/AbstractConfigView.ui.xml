@@ -31,11 +31,10 @@
 			hideOn="HIDE_ON_LARGE" showOn="SHOW_ON_MED_DOWN"
 			addStyleNames="{style.mobileSelectPanel}">
 			<m:MaterialButton ui:field="mobileMenuButton"
-				text="{i18n.systemConfigMobileSelect}" iconType="ARROW_DROP_DOWN"
-				iconPosition="RIGHT" textColor="WHITE" width="100%" />
-			<!-- My Drop Down 
-			<m:MaterialDropDown ui:field="mobileDropDown"
-				activator="dp-2" constrainWidth="true" /> activates="dp-2" -->
+				iconType="ARROW_DROP_DOWN" iconPosition="RIGHT" textColor="WHITE"
+				width="100%" />
+			<!-- My Drop Down <m:MaterialDropDown ui:field="mobileDropDown" activator="dp-2" 
+				constrainWidth="true" /> activates="dp-2" -->
 			<m:MaterialCollection ui:field="mobileMenu"
 				addStyleNames="{style.collection}" visible="false" />
 		</m:MaterialPanel>

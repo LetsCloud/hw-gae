@@ -23,6 +23,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 import gwt.material.design.client.data.loader.LoadCallback;
 import gwt.material.design.client.data.loader.LoadConfig;
 import gwt.material.design.client.data.loader.LoadResult;
+
 import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.app.AppPresenter;
 import hu.hw.cloud.client.core.datasource.HotelDataSource;
@@ -31,7 +32,6 @@ import hu.hw.cloud.client.core.event.SetPageTitleEvent;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.core.util.ErrorHandlerAsyncCallback;
-import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.editor.AbstractEditorPresenter;
 import hu.hw.cloud.client.fro.editor.AbstractEditorView;
 import hu.hw.cloud.shared.api.AppUserResource;
@@ -133,31 +133,22 @@ public class AppUserEditorPresenter
 					AppUserEditorPresenter.this);
 			create();
 		} else {
-			SetPageTitleEvent.fire(i18n.userEditorModifyTitle(), "", MenuItemType.MENU_ITEM,
-					AppUserEditorPresenter.this);
 			edit(filters.get(WEBSAFEKEY));
 		}
 	}
 
 	private Boolean areDataSourcesLoaded() {
-		logger.info("AppUserEditorPresenter().areDataSourcesLoaded()-1");
-		if (!userGroupDataSource.getIsLoaded()) {
-			logger.info("AppUserEditorPresenter().areDataSourcesLoaded()-2");
+		if (!userGroupDataSource.getIsLoaded())
 			return false;
-		}
 
-		if (!hotelDataSource.getIsLoaded()) {
-			logger.info("AppUserEditorPresenter().areDataSourcesLoaded()-3");
+		if (!hotelDataSource.getIsLoaded())
 			return false;
-		}
 
-		logger.info("AppUserEditorPresenter().areDataSourcesLoaded()-4");
 		return true;
 	}
 
 	@Override
 	protected AppUserDto createDto() {
-		logger.info("AppUserEditorPresenter().createDto()");
 		AppUserDto dto = new AppUserDto();
 		dto.setAccount(currentUser.getAppUserDto().getAccount());
 		dto.setPassword(FIRST_PASSWORD);
@@ -165,11 +156,11 @@ public class AppUserEditorPresenter
 	}
 
 	private void edit(String webSafeKey) {
-		logger.info("AppUserEditorPresenter().edit()->webSafeKey=" + webSafeKey);
 		resourceDelegate.withCallback(new AsyncCallback<AppUserDto>() {
 			@Override
 			public void onSuccess(AppUserDto dto) {
-				logger.info("AppUserEditorPresenter().edit().onSuccess()->dto=" + dto);
+				SetPageTitleEvent.fire(dto.getName(), i18n.userEditorModifyTitle(), MenuItemType.MENU_ITEM,
+						AppUserEditorPresenter.this);
 				getView().edit(dto);
 			}
 
@@ -185,7 +176,7 @@ public class AppUserEditorPresenter
 		resourceDelegate.withCallback(new ErrorHandlerAsyncCallback<AppUserDto>(this) {
 			@Override
 			public void onSuccess(AppUserDto dto) {
-				PlaceRequest placeRequest = new Builder().nameToken(FroNameTokens.SYSTEM_CONFIG).build();
+				PlaceRequest placeRequest = new Builder().nameToken(CoreNameTokens.SYSTEM_CONFIG).build();
 				placeManager.revealPlace(placeRequest);
 			}
 

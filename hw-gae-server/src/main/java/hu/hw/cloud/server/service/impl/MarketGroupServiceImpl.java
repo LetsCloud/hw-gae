@@ -11,13 +11,12 @@ import hu.hw.cloud.server.repository.AccountRepository;
 import hu.hw.cloud.server.repository.HotelRepository;
 import hu.hw.cloud.server.repository.MarketGroupRepository;
 import hu.hw.cloud.server.service.MarketGroupService;
-import hu.hw.cloud.shared.dto.hotel.MarketGroupDto;
 
 /**
  * @author robi
  *
  */
-public class MarketGroupServiceImpl extends HotelChildServiceImpl<MarketGroup, MarketGroupDto, MarketGroupRepository>
+public class MarketGroupServiceImpl extends HotelChildServiceImpl<MarketGroup, MarketGroupRepository>
 		implements MarketGroupService {
 	private static final Logger logger = LoggerFactory.getLogger(MarketGroupServiceImpl.class.getName());
 

@@ -16,13 +16,12 @@ import hu.hw.cloud.server.repository.HotelRepository;
 import hu.hw.cloud.server.repository.RoomRepository;
 import hu.hw.cloud.server.repository.RoomTypeRepository;
 import hu.hw.cloud.server.service.RoomTypeService;
-import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
 
 /**
  * @author CR
  *
  */
-public class RoomTypeServiceImpl extends HotelChildServiceImpl<RoomType, RoomTypeDto, RoomTypeRepository>
+public class RoomTypeServiceImpl extends HotelChildServiceImpl<RoomType, RoomTypeRepository>
 		implements RoomTypeService {
 	private static final Logger logger = LoggerFactory.getLogger(RoomTypeServiceImpl.class.getName());
 

@@ -13,14 +13,13 @@ import hu.hw.cloud.server.repository.AccountRepository;
 import hu.hw.cloud.server.repository.HotelChildRepository;
 import hu.hw.cloud.server.repository.HotelRepository;
 import hu.hw.cloud.server.service.HotelChildService;
-import hu.hw.cloud.shared.dto.BaseDto;
 
 /**
  * @author robi
  *
  */
-public abstract class HotelChildServiceImpl<T extends BaseEntity, D extends BaseDto, R extends HotelChildRepository<T>>
-		extends CrudServiceImpl<T, D, R> implements HotelChildService<T, D> {
+public abstract class HotelChildServiceImpl<T extends BaseEntity, R extends HotelChildRepository<T>>
+		extends CrudServiceImpl<T, R> implements HotelChildService<T> {
 
 	private final AccountRepository accountRepository;
 	private final HotelRepository hotelRepository;

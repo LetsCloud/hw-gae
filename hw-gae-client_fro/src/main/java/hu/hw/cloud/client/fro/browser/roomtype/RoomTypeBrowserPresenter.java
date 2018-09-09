@@ -31,11 +31,11 @@ import static hu.hw.cloud.shared.api.ApiParameters.HOTEL_KEY;
  * @author robi
  *
  */
-public class RoomTypeTablePresenter extends AbstractBrowserPresenter<RoomTypeDto, RoomTypeTablePresenter.MyView>
-		implements RoomTypeTableUiHandlers, FilterChangeEvent.FilterChangeHandler {
-	private static Logger logger = Logger.getLogger(RoomTypeTablePresenter.class.getName());
+public class RoomTypeBrowserPresenter extends AbstractBrowserPresenter<RoomTypeDto, RoomTypeBrowserPresenter.MyView>
+		implements RoomTypeBrowserUiHandlers, FilterChangeEvent.FilterChangeHandler {
+	private static Logger logger = Logger.getLogger(RoomTypeBrowserPresenter.class.getName());
 
-	public interface MyView extends View, HasUiHandlers<RoomTypeTableUiHandlers> {
+	public interface MyView extends View, HasUiHandlers<RoomTypeBrowserUiHandlers> {
 		void setData(List<RoomTypeDto> data);
 	}
 
@@ -45,7 +45,7 @@ public class RoomTypeTablePresenter extends AbstractBrowserPresenter<RoomTypeDto
 	private final RoomTypeFilterPresenter filter;
 
 	@Inject
-	RoomTypeTablePresenter(EventBus eventBus, PlaceManager placeManager, MyView view,
+	RoomTypeBrowserPresenter(EventBus eventBus, PlaceManager placeManager, MyView view,
 			ResourceDelegate<RoomTypeResource> resourceDelegate, FilterPresenterFactory filterPresenterFactory) {
 		super(eventBus, view, placeManager);
 		logger.info("RoomTypeTablePresenter()");
@@ -67,7 +67,6 @@ public class RoomTypeTablePresenter extends AbstractBrowserPresenter<RoomTypeDto
 	@Override
 	protected void onReveal() {
 		super.onReveal();
-		logger.info("RoomTypeTablePresenter().onReveal()");
 //		filter.onReveal();
 	}
 

@@ -17,14 +17,13 @@ import com.googlecode.objectify.Work;
 import hu.hw.cloud.server.entity.BaseEntity;
 import hu.hw.cloud.server.repository.CrudRepository;
 import hu.hw.cloud.server.service.CrudService;
-import hu.hw.cloud.shared.dto.BaseDto;
 import hu.hw.cloud.shared.exception.EntityVersionConflictException;
 
 /**
  * @author CR
  *
  */
-public abstract class CrudServiceImpl<T extends BaseEntity, D extends BaseDto, R extends CrudRepository<T>>
+public abstract class CrudServiceImpl<T extends BaseEntity, R extends CrudRepository<T>>
 		implements CrudService<T> {
 	private static final Logger logger = LoggerFactory.getLogger(CrudServiceImpl.class.getName());
 

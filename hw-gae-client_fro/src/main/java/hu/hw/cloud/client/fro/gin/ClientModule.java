@@ -6,11 +6,13 @@ package hu.hw.cloud.client.fro.gin;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
 import hu.hw.cloud.client.fro.app.FroAppModule;
+import hu.hw.cloud.client.fro.config.contact.ContactConfigModule;
 import hu.hw.cloud.client.fro.config.hotel.HotelConfigModule;
 import hu.hw.cloud.client.fro.config.organization.OrganizationConfigModule;
 import hu.hw.cloud.client.fro.config.profile.ProfileConfigModule;
 import hu.hw.cloud.client.fro.config.system.SystemConfigModule;
-import hu.hw.cloud.client.fro.creator.organization.CustomerCreateModule;
+import hu.hw.cloud.client.fro.creator.contact.ContactCreateModule;
+import hu.hw.cloud.client.fro.creator.organization.OrganizationCreateModule;
 import hu.hw.cloud.client.fro.dashboard.DashboardModule;
 import hu.hw.cloud.client.fro.filter.FilterModule;
 import hu.hw.cloud.client.fro.reservation.ReservationModule;
@@ -40,8 +42,10 @@ public class ClientModule extends AbstractPresenterModule {
 		install(new HotelConfigModule());
 
 		install(new OrganizationConfigModule());
+		install(new ContactConfigModule());
 
-		install(new CustomerCreateModule());
+		install(new OrganizationCreateModule());
+		install(new ContactCreateModule());
 		
 		install(new FilterModule());
 

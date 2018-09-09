@@ -18,7 +18,6 @@ import hu.hw.cloud.server.repository.ChatRepository;
 import hu.hw.cloud.server.service.ChatService;
 import hu.hw.cloud.server.service.impl.fcm.FcmService2;
 import hu.hw.cloud.shared.dto.NotificationDto;
-import hu.hw.cloud.shared.dto.chat.ChatDto;
 import hu.hw.cloud.shared.exception.EntityValidationException;
 import hu.hw.cloud.shared.exception.UniqueIndexConflictException;
 
@@ -26,7 +25,7 @@ import hu.hw.cloud.shared.exception.UniqueIndexConflictException;
  * @author robi
  *
  */
-public class ChatServiceImpl extends CrudServiceImpl<Chat, ChatDto, ChatRepository> implements ChatService {
+public class ChatServiceImpl extends CrudServiceImpl<Chat, ChatRepository> implements ChatService {
 	private static final Logger logger = Logger.getLogger(ChatServiceImpl.class.getName());
 
 	private final ChatRepository repository;

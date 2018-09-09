@@ -14,8 +14,6 @@ public class OrganizationBrowserModule extends AbstractPresenterModule {
 	@Override
 	protected void configure() {
 
-//		install(new ProfileGroupEditorModule());
-
 		bindPresenterWidget(OrganizationBrowserPresenter.class, OrganizationBrowserPresenter.MyView.class,
 				OrganizationBrowserView.class);
 

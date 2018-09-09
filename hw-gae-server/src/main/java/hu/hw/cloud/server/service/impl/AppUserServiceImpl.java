@@ -13,11 +13,10 @@ import hu.hw.cloud.server.repository.AppUserRepository;
 import hu.hw.cloud.server.security.LoggedInChecker;
 import hu.hw.cloud.server.service.AppUserService;
 import hu.hw.cloud.shared.dto.RegisterDto;
-import hu.hw.cloud.shared.dto.common.AppUserDto;
 import hu.hw.cloud.shared.exception.EntityValidationException;
 import hu.hw.cloud.shared.exception.UniqueIndexConflictException;
 
-public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserDto, AppUserRepository>
+public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserRepository>
 		implements AppUserService {
 	private static final Logger logger = Logger.getLogger(AppUserServiceImpl.class.getName());
 

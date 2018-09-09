@@ -3,7 +3,6 @@
  */
 package hu.hw.cloud.shared.api;
 
-import static hu.hw.cloud.shared.api.ApiParameters.HOTEL_KEY;
 import static hu.hw.cloud.shared.api.ApiParameters.ONLY_ACTIVE;
 import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
 import static hu.hw.cloud.shared.api.ApiPaths.PATH_WEBSAFEKEY;

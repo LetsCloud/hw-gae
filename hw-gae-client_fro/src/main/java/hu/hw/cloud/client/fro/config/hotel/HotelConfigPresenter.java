@@ -12,9 +12,10 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
+import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.app.AppPresenter;
+import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.security.LoggedInGatekeeper;
-import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.browser.hotel.HotelBrowserFactory;
 import hu.hw.cloud.client.fro.browser.marketgroup.MarketGroupBrowserFactory;
 import hu.hw.cloud.client.fro.browser.room.RoomBrowserFactory;
@@ -35,7 +36,7 @@ public class HotelConfigPresenter
 	}
 
 	@ProxyCodeSplit
-	@NameToken(FroNameTokens.HOTEL_CONFIG)
+	@NameToken(CoreNameTokens.HOTEL_CONFIG)
 	@UseGatekeeper(LoggedInGatekeeper.class)
 	interface MyProxy extends ProxyPlace<HotelConfigPresenter> {
 	}
@@ -43,16 +44,17 @@ public class HotelConfigPresenter
 	@Inject
 	HotelConfigPresenter(EventBus eventBus, MyView view, MyProxy proxy, HotelBrowserFactory hotelBrowserFactory,
 			RoomTypeBrowserFactory roomTypeBrowserFactory, RoomBrowserFactory roomBrowserFactory,
-			MarketGroupBrowserFactory marketGroupBrowserFactory, FroMessages i18n) {
+			MarketGroupBrowserFactory marketGroupBrowserFactory, CoreMessages i18n) {
 		super(eventBus, view, proxy, AppPresenter.SLOT_MAIN);
 		logger.info("HotelConfigPresenter()");
 
-		setCaption(i18n.mainMenuItemHotelConfig());
+		setCaption(i18n.hotelConfigTitle());
+		setDescription(i18n.hotelConfigDescription());
 
-		addContent(i18n.hotelConfigHotels(), hotelBrowserFactory.createHotelTablePresenter());
-		addContent(i18n.hotelConfigRoomTypes(), roomTypeBrowserFactory.createRoomTypeTablePresenter());
-		addContent(i18n.hotelConfigRooms(), roomBrowserFactory.createRoomTablePresenter());
-		addContent(i18n.hotelConfigMarketGroups(), marketGroupBrowserFactory.createMarketGroupBrowser());
+		addContent(i18n.hotelBrowserTitle(), hotelBrowserFactory.createHotelTablePresenter());
+		addContent(i18n.roomTypeBrowserTitle(), roomTypeBrowserFactory.createRoomTypeTablePresenter());
+		addContent(i18n.roomBrowserTitle(), roomBrowserFactory.createRoomTablePresenter());
+		addContent(i18n.marketGroupBrowserTitle(), marketGroupBrowserFactory.createMarketGroupBrowser());
 
 		getView().setUiHandlers(this);
 	}

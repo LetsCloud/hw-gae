@@ -15,7 +15,7 @@ import hu.hw.cloud.shared.dto.BaseDto;
  */
 public abstract class HotelChildController<T extends BaseEntity, D extends BaseDto> extends CrudController<T, D> {
 
-	public HotelChildController(Class<T> clazz, HotelChildService<T, D> service, ModelMapper modelMapper) {
+	public HotelChildController(Class<T> clazz, HotelChildService<T> service, ModelMapper modelMapper) {
 		super(clazz, service, modelMapper);
 	}
 

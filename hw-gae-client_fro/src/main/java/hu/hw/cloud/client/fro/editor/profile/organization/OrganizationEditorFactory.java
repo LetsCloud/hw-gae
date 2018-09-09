@@ -9,6 +9,6 @@ package hu.hw.cloud.client.fro.editor.profile.organization;
  */
 public interface OrganizationEditorFactory {
 
-	OrganizationEditorPresenter createCustomerEditor();
+	OrganizationEditorPresenter createOrganizationEditor();
 
 }

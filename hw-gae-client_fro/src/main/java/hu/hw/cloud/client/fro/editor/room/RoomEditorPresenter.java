@@ -32,7 +32,6 @@ import hu.hw.cloud.client.core.datasource.RoomTypeDataSource;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.security.CurrentUser;
-import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.editor.AbstractEditorPresenter;
 import hu.hw.cloud.client.fro.editor.AbstractEditorView;
 import hu.hw.cloud.shared.api.RoomResource;
@@ -169,7 +168,7 @@ public class RoomEditorPresenter
 		resourceDelegate.withCallback(new AsyncCallback<RoomDto>() {
 			@Override
 			public void onSuccess(RoomDto dto) {
-				PlaceRequest placeRequest = new Builder().nameToken(FroNameTokens.HOTEL_CONFIG).build();
+				PlaceRequest placeRequest = new Builder().nameToken(CoreNameTokens.HOTEL_CONFIG).build();
 				placeManager.revealPlace(placeRequest);
 			}
 

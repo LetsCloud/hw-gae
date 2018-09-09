@@ -54,7 +54,7 @@ public class OrganizationBrowserView extends ViewWithUiHandlers<OrganizationBrow
 
 	private void init() {
 
-		table.setTitle(i18nCore.hotelsTableTitle());
+		table.setTableTitle(i18nCore.organizationBrowserTitle());
 
 		table.getAddButton().addClickHandler(e -> {
 			getUiHandlers().addNew();
@@ -78,7 +78,7 @@ public class OrganizationBrowserView extends ViewWithUiHandlers<OrganizationBrow
 			public String getValue(OrganizationDto object) {
 				return object.getCode();
 			}
-		}, i18nCore.hotelsTableCode());
+		}, i18nCore.organizationBrowserColCode());
 
 		/*
 		 * NAME
@@ -98,7 +98,7 @@ public class OrganizationBrowserView extends ViewWithUiHandlers<OrganizationBrow
 			public String getValue(OrganizationDto object) {
 				return object.getName();
 			}
-		}, i18nCore.hotelsTableName());
+		}, i18nCore.organizationBrowserColName());
 
 		//
 		// EDIT ICON

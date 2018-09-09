@@ -5,6 +5,7 @@ package hu.hw.cloud.client.fro.editor.profile;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
+import hu.hw.cloud.client.fro.editor.profile.contact.ContactEditorModule;
 import hu.hw.cloud.client.fro.editor.profile.organization.OrganizationEditorModule;
 
 /**
@@ -22,5 +23,6 @@ public class ProfileEditorModule extends AbstractPresenterModule {
 		bind(AddressListEditor.class);
 
 		install(new OrganizationEditorModule());
+		install(new ContactEditorModule());
 	}
 }

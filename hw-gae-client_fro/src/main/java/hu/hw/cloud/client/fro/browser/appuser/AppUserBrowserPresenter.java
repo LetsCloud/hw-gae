@@ -44,7 +44,7 @@ public class AppUserBrowserPresenter extends AbstractBrowserPresenter<AppUserDto
 	AppUserBrowserPresenter(EventBus eventBus, PlaceManager placeManager, MyView view,
 			ResourceDelegate<AppUserResource> resourceDelegate, CurrentUser currentUser) {
 		super(eventBus, view, placeManager);
-		logger.info("AppUserTablePresenter()");
+		logger.info("AppUserBrowserPresenter()");
 
 		this.resourceDelegate = resourceDelegate;
 

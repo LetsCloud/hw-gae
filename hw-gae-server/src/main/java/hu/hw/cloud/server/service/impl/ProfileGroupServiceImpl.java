@@ -13,13 +13,12 @@ import hu.hw.cloud.server.entity.profile.ProfileGroup;
 import hu.hw.cloud.server.repository.AccountRepository;
 import hu.hw.cloud.server.repository.ProfileGroupRepository;
 import hu.hw.cloud.server.service.ProfileGroupService;
-import hu.hw.cloud.shared.dto.profile.ProfileGroupDto;
 
 /**
  * @author robi
  *
  */
-public class ProfileGroupServiceImpl extends CrudServiceImpl<ProfileGroup, ProfileGroupDto, ProfileGroupRepository>
+public class ProfileGroupServiceImpl extends CrudServiceImpl<ProfileGroup, ProfileGroupRepository>
 		implements ProfileGroupService {
 	private static final Logger logger = LoggerFactory.getLogger(ProfileGroupServiceImpl.class.getName());
 

@@ -13,13 +13,12 @@ import org.slf4j.LoggerFactory;
 import hu.hw.cloud.server.entity.reservation.Reservation;
 import hu.hw.cloud.server.repository.ReservationRepository;
 import hu.hw.cloud.server.service.ReservationService;
-import hu.hw.cloud.shared.dto.reservation.ReservationDto;
 
 /**
  * @author CR
  *
  */
-public class ReservationServiceImpl extends CrudServiceImpl<Reservation, ReservationDto, ReservationRepository>
+public class ReservationServiceImpl extends CrudServiceImpl<Reservation, ReservationRepository>
 		implements ReservationService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ReservationServiceImpl.class.getName());
 	

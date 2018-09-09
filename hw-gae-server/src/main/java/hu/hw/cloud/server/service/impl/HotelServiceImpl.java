@@ -13,13 +13,12 @@ import hu.hw.cloud.server.entity.hotel.Hotel;
 import hu.hw.cloud.server.repository.AccountRepository;
 import hu.hw.cloud.server.repository.HotelRepository;
 import hu.hw.cloud.server.service.HotelService;
-import hu.hw.cloud.shared.dto.hotel.HotelDto;
 
 /**
  * @author CR
  *
  */
-public class HotelServiceImpl extends CrudServiceImpl<Hotel, HotelDto, HotelRepository> implements HotelService {
+public class HotelServiceImpl extends CrudServiceImpl<Hotel, HotelRepository> implements HotelService {
 	private static final Logger logger = LoggerFactory.getLogger(HotelServiceImpl.class.getName());
 
 	private final AccountRepository accountRepository;

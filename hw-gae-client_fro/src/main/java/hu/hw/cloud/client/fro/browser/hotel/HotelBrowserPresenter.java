@@ -43,7 +43,7 @@ public class HotelBrowserPresenter extends AbstractBrowserPresenter<HotelDto, Ho
 	HotelBrowserPresenter(EventBus eventBus, PlaceManager placeManager, MyView view,
 			ResourceDelegate<HotelResource> resourceDelegate, CurrentUser currentUser) {
 		super(eventBus, view, placeManager);
-		logger.info("HotelTablePresenter()");
+		logger.info("HotelBrowserPresenter()");
 
 		this.resourceDelegate = resourceDelegate;
 

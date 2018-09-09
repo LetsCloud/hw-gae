@@ -19,7 +19,6 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
-import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.browser.AbstractBrowserPresenter;
 import hu.hw.cloud.shared.api.OrganizationResource;
 import hu.hw.cloud.shared.dto.profile.OrganizationDto;
@@ -63,12 +62,12 @@ public class OrganizationBrowserPresenter extends AbstractBrowserPresenter<Organ
 
 	@Override
 	protected String getCreatorNameToken() {
-		return CoreNameTokens.CUSTOMER_CREATOR;
+		return CoreNameTokens.ORGANIZATION_CREATOR;
 	}
 
 	@Override
 	protected String getEditorNameToken() {
-		return FroNameTokens.ORGANIZATION_DISPLAY;
+		return CoreNameTokens.ORGANIZATION_DISPLAY;
 	}
 
 	@Override

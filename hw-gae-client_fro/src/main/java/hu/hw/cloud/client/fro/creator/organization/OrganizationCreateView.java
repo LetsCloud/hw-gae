@@ -20,11 +20,11 @@ import hu.hw.cloud.shared.dto.profile.OrganizationDto;
  * @author robi
  *
  */
-public class CustomerCreateView extends ViewWithUiHandlers<CustomerCreateUiHandlers>
-		implements CustomerCreatePresenter.MyView, Editor<OrganizationDto> {
-	private static Logger logger = Logger.getLogger(CustomerCreateView.class.getName());
+public class OrganizationCreateView extends ViewWithUiHandlers<OrganizationCreateUiHandlers>
+		implements OrganizationCreatePresenter.MyView, Editor<OrganizationDto> {
+	private static Logger logger = Logger.getLogger(OrganizationCreateView.class.getName());
 
-	interface Binder extends UiBinder<Widget, CustomerCreateView> {
+	interface Binder extends UiBinder<Widget, OrganizationCreateView> {
 	}
 
 	@UiField
@@ -34,12 +34,12 @@ public class CustomerCreateView extends ViewWithUiHandlers<CustomerCreateUiHandl
 	* 
 	*/
 	@Inject
-	CustomerCreateView(Binder uiBinder) {
-		logger.info("CustomerCreateView()");
+	OrganizationCreateView(Binder uiBinder) {
+		logger.info("OrganizationCreateView()");
 
 		initWidget(uiBinder.createAndBindUi(this));
 		
-		bindSlot(CustomerCreatePresenter.SLOT_CONTENT, contentPanel);
+		bindSlot(OrganizationCreatePresenter.SLOT_CONTENT, contentPanel);
 		
 	}
 }

@@ -13,13 +13,12 @@ import hu.hw.cloud.server.entity.profile.Organization;
 import hu.hw.cloud.server.repository.AccountRepository;
 import hu.hw.cloud.server.repository.OrganizationRepository;
 import hu.hw.cloud.server.service.OrganizationService;
-import hu.hw.cloud.shared.dto.profile.OrganizationDto;
 
 /**
  * @author robi
  *
  */
-public class OrganizationServiceImpl extends CrudServiceImpl<Organization, OrganizationDto, OrganizationRepository>
+public class OrganizationServiceImpl extends CrudServiceImpl<Organization, OrganizationRepository>
 		implements OrganizationService {
 	private static final Logger logger = LoggerFactory.getLogger(OrganizationServiceImpl.class.getName());
 

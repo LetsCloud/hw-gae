@@ -34,7 +34,7 @@
 				<m:MaterialCollapsibleItem>
 					<m:MaterialCollapsibleHeader>
 						<m:MaterialLink
-							text="{i18n.systemConfigMobileSelect}" iconType="ARROW_DROP_DOWN"
+							text="Válassz" iconType="ARROW_DROP_DOWN"
 							iconPosition="RIGHT" textColor="WHITE" />
 					</m:MaterialCollapsibleHeader>
 					<m:MaterialCollapsibleBody>

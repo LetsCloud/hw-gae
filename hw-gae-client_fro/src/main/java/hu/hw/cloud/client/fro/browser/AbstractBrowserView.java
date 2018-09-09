@@ -203,4 +203,8 @@ public class AbstractBrowserView<T extends BaseDto> extends Composite {
 	public SimplePanel getEditorPanel() {
 		return editorPanel;
 	}
+	
+	public void setTableTitle(String title) {
+		table.getTableTitle().setText(title);
+	}
 }

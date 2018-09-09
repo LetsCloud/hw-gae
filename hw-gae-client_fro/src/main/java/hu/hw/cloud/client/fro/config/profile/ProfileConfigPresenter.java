@@ -12,11 +12,12 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
+import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.app.AppPresenter;
 import hu.hw.cloud.client.core.event.ContentPushEvent;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.security.LoggedInGatekeeper;
-import hu.hw.cloud.client.fro.FroNameTokens;
+import hu.hw.cloud.client.fro.browser.contact.ContactBrowserFactory;
 import hu.hw.cloud.client.fro.browser.organization.OrganizationBrowserFactory;
 import hu.hw.cloud.client.fro.browser.profilegroup.ProfileGroupBrowserFactory;
 import hu.hw.cloud.client.fro.config.AbstractConfigPresenter;
@@ -35,22 +36,24 @@ public class ProfileConfigPresenter
 	}
 
 	@ProxyCodeSplit
-	@NameToken(FroNameTokens.PROFILE_CONFIG)
+	@NameToken(CoreNameTokens.PROFILE_CONFIG)
 	@UseGatekeeper(LoggedInGatekeeper.class)
 	interface MyProxy extends ProxyPlace<ProfileConfigPresenter> {
 	}
 
 	@Inject
 	ProfileConfigPresenter(EventBus eventBus, MyView view, MyProxy proxy,
-			ProfileGroupBrowserFactory profileGroupFactory, OrganizationBrowserFactory customerFactory, FroMessages i18n,
-			CoreMessages i18nCore) {
+			ProfileGroupBrowserFactory profileGroupFactory, OrganizationBrowserFactory organizationFactory,
+			ContactBrowserFactory contactFactory, FroMessages i18n, CoreMessages i18nCore) {
 		super(eventBus, view, proxy, AppPresenter.SLOT_MAIN);
 		logger.info("ProfileConfigPresenter()");
 
-		setCaption(i18n.mainMenuItemProfileConfig());
+		setCaption(i18nCore.profileConfigTitle());
+		setDescription(i18nCore.profileConfigDescription());
 
 		addContent(i18nCore.profileGroupBrowserTitle(), profileGroupFactory.createProfileGroupBrowser());
-		addContent(i18nCore.customerBrowserTitle(), customerFactory.createCustomerBrowser());
+		addContent(i18nCore.organizationBrowserTitle(), organizationFactory.createOrganisationBrowser());
+		addContent(i18nCore.contactBrowserTitle(), contactFactory.createContactBrowser());
 
 		getView().setUiHandlers(this);
 	}

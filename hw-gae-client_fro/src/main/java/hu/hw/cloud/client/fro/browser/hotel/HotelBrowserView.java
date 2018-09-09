@@ -54,7 +54,7 @@ public class HotelBrowserView extends ViewWithUiHandlers<HotelBrowserUiHandlers>
 
 	private void init() {
 
-		table.setTitle(i18nCore.hotelsTableTitle());
+		table.setTableTitle(i18nCore.hotelBrowserTitle());
 
 		table.getAddButton().addClickHandler(e -> {
 			getUiHandlers().addNew();

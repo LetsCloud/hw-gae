@@ -50,7 +50,7 @@ public class MarketGroupBrowserView extends ViewWithUiHandlers<MarketGroupBrowse
 
 	private void initTable() {
 
-		table.setTitle(i18nCore.roomTypesTableTitle());
+		table.setTableTitle(i18nCore.marketGroupBrowserTitle());
 
 		table.getAddButton().addClickHandler(e -> {
 			getUiHandlers().addNew();

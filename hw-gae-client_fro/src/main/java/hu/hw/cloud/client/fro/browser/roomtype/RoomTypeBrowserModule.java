@@ -18,8 +18,8 @@ public class RoomTypeBrowserModule extends AbstractPresenterModule {
 
 		install(new RoomTypeEditorModule());
 		
-		bindPresenterWidget(RoomTypeTablePresenter.class, RoomTypeTablePresenter.MyView.class,
-				RoomTypeTableView.class);
+		bindPresenterWidget(RoomTypeBrowserPresenter.class, RoomTypeBrowserPresenter.MyView.class,
+				RoomTypeBrowserView.class);
 
 		install(new GinFactoryModuleBuilder().build(RoomTypeBrowserFactory.class));
 	}

@@ -23,9 +23,9 @@ import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
  * @author robi
  *
  */
-public class RoomTypeTableView extends ViewWithUiHandlers<RoomTypeTableUiHandlers>
-		implements RoomTypeTablePresenter.MyView {
-	private static Logger logger = Logger.getLogger(RoomTypeTableView.class.getName());
+public class RoomTypeBrowserView extends ViewWithUiHandlers<RoomTypeBrowserUiHandlers>
+		implements RoomTypeBrowserPresenter.MyView {
+	private static Logger logger = Logger.getLogger(RoomTypeBrowserView.class.getName());
 
 	private final AbstractBrowserView<RoomTypeDto> table;
 
@@ -36,7 +36,7 @@ public class RoomTypeTableView extends ViewWithUiHandlers<RoomTypeTableUiHandler
 	* 
 	*/
 	@Inject
-	RoomTypeTableView(AbstractBrowserView<RoomTypeDto> table, CoreMessages i18nCore, CoreConstants cnstCore) {
+	RoomTypeBrowserView(AbstractBrowserView<RoomTypeDto> table, CoreMessages i18nCore, CoreConstants cnstCore) {
 		logger.info("RoomTypeTableView()");
 		initWidget(table);
 
@@ -44,14 +44,14 @@ public class RoomTypeTableView extends ViewWithUiHandlers<RoomTypeTableUiHandler
 		this.i18nCore = i18nCore;
 		this.cnstCore = cnstCore;
 
-		bindSlot(RoomTypeTablePresenter.SLOT_FILTER, table.getFilterPanel());
+		bindSlot(RoomTypeBrowserPresenter.SLOT_FILTER, table.getFilterPanel());
 
 		initTable();
 	}
 
 	private void initTable() {
 
-		table.setTitle(i18nCore.roomTypesTableTitle());
+		table.setTableTitle(i18nCore.roomTypeBrowserTitle());
 
 		table.getAddButton().addClickHandler(e -> {
 			getUiHandlers().addNew();

@@ -11,7 +11,7 @@ import hu.hw.cloud.shared.dto.profile.OrganizationDto;
  * @author robi
  *
  */
-public interface CustomerCreateUiHandlers extends UiHandlers {
+public interface OrganizationCreateUiHandlers extends UiHandlers {
 
 	void save(OrganizationDto dto);
 	

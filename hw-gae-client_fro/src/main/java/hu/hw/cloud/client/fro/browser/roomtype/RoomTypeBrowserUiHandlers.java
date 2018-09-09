@@ -10,6 +10,6 @@ import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
  * @author robi
  *
  */
-public interface RoomTypeTableUiHandlers extends AbstractBrowserUiHandlers<RoomTypeDto> {
+public interface RoomTypeBrowserUiHandlers extends AbstractBrowserUiHandlers<RoomTypeDto> {
 
 }

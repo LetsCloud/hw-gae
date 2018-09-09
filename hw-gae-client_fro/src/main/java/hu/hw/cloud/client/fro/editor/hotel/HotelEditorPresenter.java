@@ -24,7 +24,6 @@ import hu.hw.cloud.client.core.event.SetPageTitleEvent;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.core.util.ErrorHandlerAsyncCallback;
-import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.editor.AbstractEditorPresenter;
 import hu.hw.cloud.client.fro.editor.AbstractEditorView;
 import hu.hw.cloud.shared.api.HotelResource;
@@ -110,7 +109,7 @@ public class HotelEditorPresenter
 		resourceDelegate.withCallback(new ErrorHandlerAsyncCallback<HotelDto>(this) {
 			@Override
 			public void onSuccess(HotelDto userDto) {
-				PlaceRequest placeRequest = new Builder().nameToken(FroNameTokens.HOTEL_CONFIG).build();
+				PlaceRequest placeRequest = new Builder().nameToken(CoreNameTokens.HOTEL_CONFIG).build();
 				placeManager.revealPlace(placeRequest);
 			}
 

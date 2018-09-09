@@ -46,7 +46,7 @@ public class AppUserBrowserView extends ViewWithUiHandlers<AppUserBrowserUiHandl
 	}
 
 	private void initTable() {
-		table.setTitle(i18n.usersTableTitle());
+		table.setTableTitle(i18n.userBrowserTitle());
 
 		table.getAddButton().addClickHandler(e -> {
 			getUiHandlers().addNew();

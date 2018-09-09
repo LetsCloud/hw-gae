@@ -13,8 +13,6 @@ public class OrganizationConfigModule extends AbstractPresenterModule {
 	@Override
 	protected void configure() {
 
-//		install(new HotelBrowserModule());
-
 		bindPresenter(OrganizationConfigPresenter.class, OrganizationConfigPresenter.MyView.class,
 				OrganizationConfigView.class, OrganizationConfigPresenter.MyProxy.class);
 	}

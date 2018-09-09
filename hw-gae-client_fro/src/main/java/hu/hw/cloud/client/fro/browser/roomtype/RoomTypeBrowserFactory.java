@@ -9,6 +9,6 @@ package hu.hw.cloud.client.fro.browser.roomtype;
  */
 public interface RoomTypeBrowserFactory {
 
-	RoomTypeTablePresenter createRoomTypeTablePresenter();
+	RoomTypeBrowserPresenter createRoomTypeTablePresenter();
 
 }

@@ -21,14 +21,13 @@ import hu.hw.cloud.server.repository.RoleRepository;
 import hu.hw.cloud.server.service.MessageSourceHandler;
 import hu.hw.cloud.server.service.RoleService;
 import hu.hw.cloud.shared.cnst.Permissions;
-import hu.hw.cloud.shared.dto.common.RoleDto;
 
 /**
  * @author CR
  *
  */
 //@Service
-public class RoleServiceImpl extends CrudServiceImpl<Role, RoleDto, RoleRepository> implements RoleService {
+public class RoleServiceImpl extends CrudServiceImpl<Role, RoleRepository> implements RoleService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AppUserServiceImpl.class);
 
 	private static final String CODE = "Code";

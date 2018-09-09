@@ -36,10 +36,14 @@ public abstract class AbstractConfigPresenter<V extends AbstractConfigPresenter.
 		void setMobileView(Boolean show);
 
 		void setDesktopMenu(Integer index);
+
+		void setMobileButtonText(String text);
 	}
 
 	private String caption;
 
+	private String description;
+	
 	protected Boolean firstReveal = true;
 	
 	private List<String> captions = new ArrayList<String>();
@@ -64,7 +68,7 @@ public abstract class AbstractConfigPresenter<V extends AbstractConfigPresenter.
 	@Override
 	protected void onReveal() {
 		super.onReveal();
-		SetPageTitleEvent.fire(caption, "", MenuItemType.MENU_ITEM, this);
+		SetPageTitleEvent.fire(caption, description, MenuItemType.MENU_ITEM, this);
 		if (firstReveal) {
 			showContent(0);
 			firstReveal = false;
@@ -90,6 +94,7 @@ public abstract class AbstractConfigPresenter<V extends AbstractConfigPresenter.
 	public void showContent(Integer index) {
 		logger.info("AbstractConfigPresenter().showTable(" + index + ")");
 		getView().setDesktopMenu(index);
+		getView().setMobileButtonText(captions.get(index));
 		setInSlot(SLOT_CONTENT, beforeShowContent(browsers.get(index)));
 	}
 
@@ -104,6 +109,10 @@ public abstract class AbstractConfigPresenter<V extends AbstractConfigPresenter.
 
 	public void setCaption(String caption) {
 		this.caption = caption;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

@@ -17,7 +17,7 @@
         <Column>
             <Name>hu_HU</Name>
             <Description></Description>
-            <Width>747</Width>
+            <Width>928</Width>
             <HandlerConfiguration>/hw-gae-client_core/src/main/resources/hu/hw/cloud/client/core/i18n/CoreMessages_hu_HU.properties|false|false|false|false</HandlerConfiguration>
         </Column>
     </Columns>
@@ -337,17 +337,35 @@
             <Value disabled="false">Infopult</Value>
         </Property>
         <Comment>
-            <Value>USER GROUP TABLE</Value>
+            <Value>SYSTEM CONFIG</Value>
         </Comment>
         <Property>
-            <Name>userGroupTableTitle</Name>
+            <Name>systemConfigTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <DefaultValue></DefaultValue>
+            <Value disabled="false">System configuration</Value>
+            <Value disabled="false">Rendszer beállítások</Value>
+        </Property>
+        <Property>
+            <Name>systemConfigDescription</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Basic settings that determine the operation of the system</Value>
+            <Value disabled="false">A rendszer működését meghatározó alapvető beállítások</Value>
+        </Property>
+        <Comment>
+            <Value>USER GROUP BROWSER</Value>
+        </Comment>
+        <Property>
+            <Name>userGroupBrowserTitle</Name>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
             <Value disabled="false">User Groups</Value>
             <Value disabled="false">Felhasználó csoportok</Value>
         </Property>
         <Property>
-            <Name>userGroupTableName</Name>
+            <Name>userGroupBrowserName</Name>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
             <Value disabled="false">Description</Value>
@@ -378,10 +396,10 @@
             <Value disabled="false">Megnevezés</Value>
         </Property>
         <Comment>
-            <Value>USERS TABLE</Value>
+            <Value>USER BROWSER</Value>
         </Comment>
         <Property>
-            <Name>usersTableTitle</Name>
+            <Name>userBrowserTitle</Name>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
             <Value disabled="false">Users</Value>
@@ -395,7 +413,7 @@
             <Value disabled="false">Kód</Value>
         </Property>
         <Comment>
-            <Value>APPUSREVIEW</Value>
+            <Value>APPUSER EDITOR</Value>
         </Comment>
         <Property>
             <Name>userEditorCreateTitle</Name>
@@ -409,7 +427,7 @@
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
             <Value disabled="false">Edit User Profile</Value>
-            <Value disabled="false">Felhasználói profil szerkesztés</Value>
+            <Value disabled="false">Felhasználói profil szerkesztése</Value>
         </Property>
         <Property>
             <Name>userEditorName</Name>
@@ -496,7 +514,113 @@
             <Value disabled="false">Válassz csoportot</Value>
         </Property>
         <Comment>
-            <Value>CUSTOMER EDITOR</Value>
+            <Value>PROFILE CONFIG</Value>
+        </Comment>
+        <Property>
+            <Name>profileConfigTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Profile configurations</Value>
+            <Value disabled="false">Profil beállítások</Value>
+        </Property>
+        <Property>
+            <Name>profileConfigDescription</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Manage your organization's profile or contact information</Value>
+            <Value disabled="false">Hatékony ügyfélkezelés</Value>
+        </Property>
+        <Comment>
+            <Value>PROFILE GROUP BROWSER</Value>
+        </Comment>
+        <Property>
+            <Name>profileGroupBrowserTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Profile Groups</Value>
+            <Value disabled="false">Profil csoportok</Value>
+        </Property>
+        <Property>
+            <Name>profileGroupBrowserCode</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Code</Value>
+            <Value disabled="false">Kód</Value>
+        </Property>
+        <Property>
+            <Name>profileGroupBrowserDescription</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Description</Value>
+            <Value disabled="false">Megnevezés</Value>
+        </Property>
+        <Property>
+            <Name>profileGroupBrowserActive</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Active</Value>
+            <Value disabled="false">Aktív</Value>
+        </Property>
+        <Comment>
+            <Value>ORGANIZATION BROWSER </Value>
+        </Comment>
+        <Property>
+            <Name>organizationBrowserTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Organizations</Value>
+            <Value disabled="false">Szervezetek</Value>
+        </Property>
+        <Property>
+            <Name>organizationBrowserColCode</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Code</Value>
+            <Value disabled="false">Kód</Value>
+        </Property>
+        <Property>
+            <Name>organizationBrowserColName</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Name</Value>
+            <Value disabled="false">Név</Value>
+        </Property>
+        <Comment>
+            <Value>ORGANIZATION CREATOR</Value>
+        </Comment>
+        <Property>
+            <Name>organizationCreatorTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Create Organization</Value>
+            <Value disabled="false">Szervezet létrehozása</Value>
+        </Property>
+        <Property>
+            <Name>organizationCreatorDescription</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">General Data</Value>
+            <Value disabled="false">Általános adatok</Value>
+        </Property>
+        <Comment>
+            <Value>ORGANIZATION CONFIG</Value>
+        </Comment>
+        <Property>
+            <Name>organizationConfigTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Organization data</Value>
+            <Value disabled="false">Szervezet adatai</Value>
+        </Property>
+        <Property>
+            <Name>organizationConfigDescription</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Organization data ...</Value>
+            <Value disabled="false">Szervezet adatai ...</Value>
+        </Property>
+        <Comment>
+            <Value>ORGANIZATION EDITOR</Value>
         </Comment>
         <Property>
             <Name>customerEditorCommunication</Name>
@@ -513,14 +637,165 @@
             <Value disabled="false">Címek</Value>
         </Property>
         <Comment>
-            <Value>ROOM TYPE TABLE</Value>
+            <Value>CONTACT BROWSER</Value>
         </Comment>
         <Property>
-            <Name>roomTypesTableTitle</Name>
+            <Name>contactBrowserTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Contacts</Value>
+            <Value disabled="false">Kapcsolatok</Value>
+        </Property>
+        <Property>
+            <Name>contactBrowserColName</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Name</Value>
+            <Value disabled="false">Név</Value>
+        </Property>
+        <Comment>
+            <Value>CONTACT CREATOR</Value>
+        </Comment>
+        <Property>
+            <Name>contactCreatorTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Createct Contact</Value>
+            <Value disabled="false">Kapcsolat létrehozása</Value>
+        </Property>
+        <Property>
+            <Name>contactCreatorDescription</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">General Data</Value>
+            <Value disabled="false">Általános adatok</Value>
+        </Property>
+        <Comment>
+            <Value>CONTACT DISPLAY</Value>
+        </Comment>
+        <Property>
+            <Name>contactDisplayTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Contact Profile View</Value>
+            <Value disabled="false">Kapcsolat profil megtekintése</Value>
+        </Property>
+        <Property>
+            <Name>contactDisplayDescription</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Contact information ...</Value>
+            <Value disabled="false">Kapcsoalati adatok ...</Value>
+        </Property>
+        <Comment>
+            <Value>COMTACT EDITOR</Value>
+        </Comment>
+        <Property>
+            <Name>contactEditorTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Edit Contact Profile</Value>
+            <Value disabled="false">Kapcsolat profil szerkesztése</Value>
+        </Property>
+        <Property>
+            <Name>contactEditorDescription</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">General Data</Value>
+            <Value disabled="false">Általános adatok</Value>
+        </Property>
+        <Property>
+            <Name>contactEditorName</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Contact Name</Value>
+            <Value disabled="false">A kapcsolat neve</Value>
+        </Property>
+        <Property>
+            <Name>contactEditorProfileGroup</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Profil Group</Value>
+            <Value disabled="false">Profil csoport</Value>
+        </Property>
+        <Property>
+            <Name>contactEditorLink</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Links</Value>
+            <Value disabled="false">Kapcsolatok</Value>
+        </Property>
+        <Property>
+            <Name>contactEditorCommunication</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Communication</Value>
+            <Value disabled="false">Kommunikáció</Value>
+        </Property>
+        <Property>
+            <Name>contactEditorAdresses</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Adresses</Value>
+            <Value disabled="false">Címek</Value>
+        </Property>
+        <Property>
+            <Name>contactEditorWebPresence</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Web Presence</Value>
+            <Value disabled="false">Online jelenlét</Value>
+        </Property>
+        <Property>
+            <Name>contactDisplayFAB</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Profile Operations</Value>
+            <Value disabled="false">Profil műveletek</Value>
+        </Property>
+        <Property>
+            <Name>contactDisplayDelete</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Delete Profile</Value>
+            <Value disabled="false">Profil törlése</Value>
+        </Property>
+        <Comment>
+            <Value>HOTEL CONFIG</Value>
+        </Comment>
+        <Property>
+            <Name>hotelConfigTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Hotel Configuration</Value>
+            <Value disabled="false">Hotel beállítások</Value>
+        </Property>
+        <Property>
+            <Name>hotelConfigDescription</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Hotel Confiuration ....</Value>
+            <Value disabled="false">Hotel beállítások...</Value>
+        </Property>
+        <Comment>
+            <Value>HOTEL BROWSER</Value>
+        </Comment>
+        <Property>
+            <Name>hotelBrowserTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Hotels</Value>
+            <Value disabled="false">Hotelek</Value>
+        </Property>
+        <Comment>
+            <Value>ROOM TYPE BROWSER</Value>
+        </Comment>
+        <Property>
+            <Name>roomTypeBrowserTitle</Name>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
             <Value disabled="false">Room Types</Value>
-            <Value disabled="false">Szobatípusok táblázat</Value>
+            <Value disabled="false">Szobatípusok</Value>
         </Property>
         <Property>
             <Name>roomTypesTableHotelsPlaceholder</Name>
@@ -680,14 +955,14 @@
             <Value disabled="false">Takarítási tényező</Value>
         </Property>
         <Comment>
-            <Value>ROOMS TABLE</Value>
+            <Value>ROOM BROWSER</Value>
         </Comment>
         <Property>
-            <Name>roomsTableTitle</Name>
+            <Name>roomBrowserTitle</Name>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
-            <Value disabled="false">Rooms table</Value>
-            <Value disabled="false">Szobák táblázat</Value>
+            <Value disabled="false">Rooms</Value>
+            <Value disabled="false">Szobák</Value>
         </Property>
         <Property>
             <Name>roomsTableCode</Name>
@@ -827,6 +1102,16 @@
             <MultiLine>false</MultiLine>
             <Value disabled="false">Remove</Value>
             <Value disabled="false">Eltávolít</Value>
+        </Property>
+        <Comment>
+            <Value>MARKET GROUP BROWSER</Value>
+        </Comment>
+        <Property>
+            <Name>marketGroupBrowserTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Market Groups</Value>
+            <Value disabled="false">Piaci szegmens csoportok</Value>
         </Property>
     </Records>
 </MultiProperties>

@@ -15,9 +15,9 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 
+import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.security.CurrentUser;
-import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.meditor.AbstractMeditorPresenter;
 import hu.hw.cloud.client.fro.meditor.MeditorView;
 import hu.hw.cloud.shared.api.ProfileGroupResource;
@@ -71,7 +71,7 @@ public class ProfileGroupEditorPresenter
 			@Override
 			public void onSuccess(ProfileGroupDto dto) {
 				getView().close();
-				PlaceRequest placeRequest = new Builder().nameToken(FroNameTokens.PROFILE_CONFIG).build();
+				PlaceRequest placeRequest = new Builder().nameToken(CoreNameTokens.PROFILE_CONFIG).build();
 				placeManager.revealPlace(placeRequest);
 			}
 

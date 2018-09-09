@@ -14,11 +14,11 @@ import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
+import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.app.AppPresenter;
 import hu.hw.cloud.client.core.event.ContentPushEvent;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.security.LoggedInGatekeeper;
-import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.browser.organization.OrganizationBrowserFactory;
 import hu.hw.cloud.client.fro.config.AbstractConfigPresenter;
 import hu.hw.cloud.client.fro.editor.AbstractDisplayPresenterWidget;
@@ -40,7 +40,7 @@ public class OrganizationConfigPresenter
 	}
 
 	@ProxyCodeSplit
-	@NameToken(FroNameTokens.ORGANIZATION_DISPLAY)
+	@NameToken(CoreNameTokens.ORGANIZATION_DISPLAY)
 	@UseGatekeeper(LoggedInGatekeeper.class)
 	interface MyProxy extends ProxyPlace<OrganizationConfigPresenter> {
 	}
@@ -54,9 +54,10 @@ public class OrganizationConfigPresenter
 		super(eventBus, view, proxy, AppPresenter.SLOT_MAIN);
 		logger.info("OrganizationConfigPresenter()");
 
-		setCaption(i18n.mainMenuItemProfileConfig());
+		setCaption(i18nCore.organizationConfigTitle());
+		setDescription(i18nCore.organizationConfigDescription());
 
-		addContent("Base Data", organizationEditorFactory.createCustomerEditor());
+		addContent("Base Data", organizationEditorFactory.createOrganizationEditor());
 //		addContent(i18nCore.customerBrowserTitle(), customerFactory.createCustomerBrowser());
 
 		getView().setUiHandlers(this);

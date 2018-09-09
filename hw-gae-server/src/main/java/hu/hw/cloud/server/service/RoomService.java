@@ -8,13 +8,12 @@ import java.util.List;
 
 import hu.hw.cloud.server.entity.hotel.Room;
 import hu.hw.cloud.shared.cnst.RoomStatus;
-import hu.hw.cloud.shared.dto.hotel.RoomDto;
 
 /**
  * @author CR
  *
  */
-public interface RoomService extends HotelChildService<Room, RoomDto> {
+public interface RoomService extends HotelChildService<Room> {
 
 	/**
 	 * 

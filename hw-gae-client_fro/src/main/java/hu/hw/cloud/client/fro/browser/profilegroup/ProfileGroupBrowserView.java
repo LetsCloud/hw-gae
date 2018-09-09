@@ -47,7 +47,7 @@ public class ProfileGroupBrowserView extends ViewWithUiHandlers<ProfileGroupBrow
 
 	private void initTable() {
 
-		table.setTitle(i18nCore.profileGroupBrowserTitle());
+		table.setTableTitle(i18nCore.profileGroupBrowserTitle());
 
 		table.getAddButton().addClickHandler(e -> {
 			getUiHandlers().addNew();

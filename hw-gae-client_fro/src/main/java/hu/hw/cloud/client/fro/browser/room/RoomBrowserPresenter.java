@@ -21,7 +21,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
 import hu.hw.cloud.client.fro.browser.AbstractBrowserPresenter;
-import hu.hw.cloud.client.fro.browser.roomtype.RoomTypeTablePresenter;
+import hu.hw.cloud.client.fro.browser.roomtype.RoomTypeBrowserPresenter;
 import hu.hw.cloud.client.fro.filter.FilterChangeEvent;
 import hu.hw.cloud.client.fro.filter.FilterPresenterFactory;
 import hu.hw.cloud.client.fro.filter.room.RoomFilterPresenter;
@@ -36,7 +36,7 @@ import static hu.hw.cloud.shared.api.ApiParameters.HOTEL_KEY;;
  */
 public class RoomBrowserPresenter extends AbstractBrowserPresenter<RoomDto, RoomBrowserPresenter.MyView>
 		implements RoomBrowserUiHandlers, FilterChangeEvent.FilterChangeHandler {
-	private static Logger logger = Logger.getLogger(RoomTypeTablePresenter.class.getName());
+	private static Logger logger = Logger.getLogger(RoomTypeBrowserPresenter.class.getName());
 
 	public interface MyView extends View, HasUiHandlers<RoomBrowserUiHandlers> {
 		void setData(List<RoomDto> data);

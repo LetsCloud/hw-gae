@@ -32,7 +32,7 @@ public class RoomBrowserView extends ViewWithUiHandlers<RoomBrowserUiHandlers> i
 	*/
 	@Inject
 	RoomBrowserView(AbstractBrowserView<RoomDto> table, CoreMessages i18nCore) {
-		logger.info("RoomTypeTableView()");
+		logger.info("RoomBrowserView()");
 		initWidget(table);
 
 		this.table = table;
@@ -45,7 +45,7 @@ public class RoomBrowserView extends ViewWithUiHandlers<RoomBrowserUiHandlers> i
 
 	private void initTable() {
 
-		table.setTitle(i18nCore.roomsTableTitle());
+		table.setTableTitle(i18nCore.roomBrowserTitle());
 
 		table.getAddButton().addClickHandler(e -> getUiHandlers().addNew());
 		table.getDeleteIcon().addClickHandler(e -> getUiHandlers().delete(table.getSelected()));

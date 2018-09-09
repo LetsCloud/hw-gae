@@ -19,10 +19,10 @@ import gwt.material.design.client.constants.IconType;
 import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.app.AppPresenter;
 import hu.hw.cloud.client.core.app.AppServiceWorkerManager;
+import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.menu.MenuPresenter;
 import hu.hw.cloud.client.core.security.AppData;
 import hu.hw.cloud.client.core.security.CurrentUser;
-import hu.hw.cloud.client.fro.FroNameTokens;
 import hu.hw.cloud.client.fro.i18n.FroMessages;
 import hu.hw.cloud.shared.api.AuthResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
@@ -37,6 +37,8 @@ public class FroAppPresenter extends AppPresenter<FroAppPresenter.MyProxy> {
 
 	private final FroMessages i18n;
 
+	private final CoreMessages i18nCore;
+
 	@ProxyStandard
 	interface MyProxy extends Proxy<FroAppPresenter> {
 	}
@@ -44,11 +46,12 @@ public class FroAppPresenter extends AppPresenter<FroAppPresenter.MyProxy> {
 	@Inject
 	FroAppPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager, FroMessages i18n,
 			RestDispatch dispatch, AuthResource authenticationService, CurrentUser currentUser,
-			MenuPresenter menuPresenter, AppData appData, AppServiceWorkerManager messagingManager) {
+			MenuPresenter menuPresenter, AppData appData, AppServiceWorkerManager messagingManager,CoreMessages i18nCore) {
 		super(eventBus, view, proxy, placeManager, dispatch, authenticationService, menuPresenter, currentUser,
 				SubSystem.FRO, messagingManager);
 
 		this.i18n = i18n;
+		this.i18nCore = i18nCore;
 	}
 
 	@Override
@@ -73,7 +76,7 @@ public class FroAppPresenter extends AppPresenter<FroAppPresenter.MyProxy> {
 		reservationItem.setType(MenuItemType.MENU_ITEM);
 		reservationItem.setIcon(IconType.HOTEL.name());
 		reservationItem.setText("Reservation");
-		reservationItem.setNameToken(FroNameTokens.RESERVATION);
+		reservationItem.setNameToken(CoreNameTokens.RESERVATION);
 		menuItems.add(reservationItem);
 
 		MenuItemDto customerCreateItem = new MenuItemDto();
@@ -81,7 +84,7 @@ public class FroAppPresenter extends AppPresenter<FroAppPresenter.MyProxy> {
 		customerCreateItem.setType(MenuItemType.MENU_ITEM);
 		customerCreateItem.setIcon(IconType.HOTEL.name());
 		customerCreateItem.setText("Create Customer");
-		customerCreateItem.setNameToken(CoreNameTokens.CUSTOMER_CREATOR);
+		customerCreateItem.setNameToken(CoreNameTokens.ORGANIZATION_CREATOR);
 		menuItems.add(customerCreateItem);
 
 		// Reservation
@@ -98,14 +101,14 @@ public class FroAppPresenter extends AppPresenter<FroAppPresenter.MyProxy> {
 		resMenuItem1.setIndex(1);
 		resMenuItem1.setType(MenuItemType.MENU_ITEM);
 		resMenuItem1.setText(i18n.mainMenuItemReservation());
-		resMenuItem1.setNameToken(FroNameTokens.COMMON_CONFIG);
+		resMenuItem1.setNameToken(CoreNameTokens.COMMON_CONFIG);
 		resSubMenu.addItem(resMenuItem1);
 
 		MenuItemDto resMenuItem2 = new MenuItemDto();
 		resMenuItem2.setIndex(2);
 		resMenuItem2.setType(MenuItemType.MENU_ITEM);
 		resMenuItem2.setText(i18n.mainMenuItemRoomplan());
-		resMenuItem2.setNameToken(FroNameTokens.COMMON_CONFIG);
+		resMenuItem2.setNameToken(CoreNameTokens.COMMON_CONFIG);
 		resSubMenu.addItem(resMenuItem2);
 
 		// Cashier
@@ -122,7 +125,7 @@ public class FroAppPresenter extends AppPresenter<FroAppPresenter.MyProxy> {
 		cashMenuItem1.setIndex(1);
 		cashMenuItem1.setType(MenuItemType.MENU_ITEM);
 		cashMenuItem1.setText(i18n.mainMenuItemBilling());
-		cashMenuItem1.setNameToken(FroNameTokens.COMMON_CONFIG);
+		cashMenuItem1.setNameToken(CoreNameTokens.COMMON_CONFIG);
 		cashSubMenu.addItem(cashMenuItem1);
 
 		// Configuration menu
@@ -138,22 +141,22 @@ public class FroAppPresenter extends AppPresenter<FroAppPresenter.MyProxy> {
 		MenuItemDto configMenuItem1 = new MenuItemDto();
 		configMenuItem1.setIndex(1);
 		configMenuItem1.setType(MenuItemType.MENU_ITEM);
-		configMenuItem1.setText(i18n.mainMenuItemSystemConfig());
-		configMenuItem1.setNameToken(FroNameTokens.SYSTEM_CONFIG);
+		configMenuItem1.setText(i18nCore.systemConfigTitle());
+		configMenuItem1.setNameToken(CoreNameTokens.SYSTEM_CONFIG);
 		configSubMenu.addItem(configMenuItem1);
 
 		MenuItemDto configMenuItem2 = new MenuItemDto();
 		configMenuItem2.setIndex(2);
 		configMenuItem2.setType(MenuItemType.MENU_ITEM);
-		configMenuItem2.setText(i18n.mainMenuItemProfileConfig());
-		configMenuItem2.setNameToken(FroNameTokens.PROFILE_CONFIG);
+		configMenuItem2.setText(i18nCore.profileConfigTitle());
+		configMenuItem2.setNameToken(CoreNameTokens.PROFILE_CONFIG);
 		configSubMenu.addItem(configMenuItem2);
 
 		MenuItemDto configMenuItem3 = new MenuItemDto();
 		configMenuItem3.setIndex(3);
 		configMenuItem3.setType(MenuItemType.MENU_ITEM);
-		configMenuItem3.setText(i18n.mainMenuItemHotelConfig());
-		configMenuItem3.setNameToken(FroNameTokens.HOTEL_CONFIG);
+		configMenuItem3.setText(i18nCore.hotelConfigTitle());
+		configMenuItem3.setNameToken(CoreNameTokens.HOTEL_CONFIG);
 		configSubMenu.addItem(configMenuItem3);
 
 		return menuItems;

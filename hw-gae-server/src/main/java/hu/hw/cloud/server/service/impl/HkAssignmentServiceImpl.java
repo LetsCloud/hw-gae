@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.collections4.Predicate;
 //import org.apache.commons.collections.CollectionUtils;
@@ -17,8 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 //import org.springframework.beans.factory.annotation.Autowired;
 
-import hu.hw.cloud.server.entity.Utils;
-import hu.hw.cloud.server.entity.common.AppUser;
 import hu.hw.cloud.server.entity.hk.HkAssignment;
 import hu.hw.cloud.server.entity.hotel.Hotel;
 import hu.hw.cloud.server.entity.hotel.Room;
@@ -31,7 +28,6 @@ import hu.hw.cloud.server.repository.RoomRepository;
 import hu.hw.cloud.server.service.HkAssignmentService;
 import hu.hw.cloud.shared.cnst.ReservationStatus;
 import hu.hw.cloud.shared.cnst.RoomStatus;
-import hu.hw.cloud.shared.dto.common.AppUserDto;
 import hu.hw.cloud.shared.dto.hk.HkAssignmentDto;
 import hu.hw.cloud.shared.dto.hk.AssignmentSummaryDto;
 
@@ -39,7 +35,7 @@ import hu.hw.cloud.shared.dto.hk.AssignmentSummaryDto;
  * @author CR
  *
  */
-public class HkAssignmentServiceImpl extends CrudServiceImpl<HkAssignment, HkAssignmentDto, HkAssignmentRepo>
+public class HkAssignmentServiceImpl extends CrudServiceImpl<HkAssignment, HkAssignmentRepo>
 		implements HkAssignmentService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(HkAssignmentServiceImpl.class.getName());
 

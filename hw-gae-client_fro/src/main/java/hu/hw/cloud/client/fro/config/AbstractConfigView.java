@@ -21,9 +21,7 @@ import gwt.material.design.client.ui.MaterialCollection;
 import gwt.material.design.client.ui.MaterialCollectionItem;
 import gwt.material.design.client.ui.MaterialCollectionSecondary;
 import gwt.material.design.client.ui.MaterialColumn;
-import gwt.material.design.client.ui.MaterialDropDown;
 import gwt.material.design.client.ui.MaterialLabel;
-import gwt.material.design.client.ui.MaterialLink;
 import gwt.material.design.client.ui.MaterialPanel;
 
 /**
@@ -47,7 +45,6 @@ public abstract class AbstractConfigView extends ViewWithUiHandlers<AbstractConf
 
 	@UiField
 	MaterialButton mobileMenuButton;
-//	MaterialDropDown mobileDropDown;
 
 	@UiField
 	MaterialCollection mobileMenu, desktopMenu;
@@ -66,7 +63,6 @@ public abstract class AbstractConfigView extends ViewWithUiHandlers<AbstractConf
 
 	@Override
 	public void buildMenu(List<String> captions) {
-//		mobileDropDown.clear();
 		mobileMenu.clear();
 		desktopMenu.clear();
 
@@ -78,16 +74,11 @@ public abstract class AbstractConfigView extends ViewWithUiHandlers<AbstractConf
 	}
 
 	private void addMobileMenuItem(Integer index, String caption) {
-		/*
-		 * MaterialLink link = new MaterialLink(caption); link.addClickHandler(handler
-		 * -> { getUiHandlers().showContent(index); }); mobileDropDown.add(link);
-		 */
-
 		MaterialCollectionItem item = createDesktopItem(caption);
 		item.addClickHandler(handler -> {
 			mobileMenuButton.setText(caption);
 			mobileMenu.setVisible(false);
-			
+
 			mobileMenu.getChildren().forEach(w -> w.setVisible(true));
 			item.setVisible(false);
 			getUiHandlers().showContent(index);
@@ -96,11 +87,11 @@ public abstract class AbstractConfigView extends ViewWithUiHandlers<AbstractConf
 	}
 
 	private void addDesktopMenuItem(Integer index, String caption) {
-
 		MaterialCollectionItem item = createDesktopItem(caption);
 		item.addClickHandler(handler -> {
 			getUiHandlers().showContent(index);
 		});
+
 		desktopMenu.add(item);
 	}
 
@@ -108,12 +99,8 @@ public abstract class AbstractConfigView extends ViewWithUiHandlers<AbstractConf
 		MaterialLabel label = new MaterialLabel(caption);
 		label.setPaddingTop(5);
 
-//		MaterialIcon icon = new MaterialIcon(IconType.KEYBOARD_ARROW_RIGHT);
-//		icon.setIconPosition(IconPosition.RIGHT);
-
 		MaterialCollectionSecondary sec = new MaterialCollectionSecondary();
 		sec.setPaddingBottom(10);
-//		sec.add(icon);
 
 		MaterialCollectionItem item = new MaterialCollectionItem();
 		item.setWaves(WavesType.DEFAULT);
@@ -133,6 +120,11 @@ public abstract class AbstractConfigView extends ViewWithUiHandlers<AbstractConf
 	public void setMobileView(Boolean show) {
 		mobilePanel.setVisible(show);
 		desktopPanel.setVisible(!show);
+	}
+
+	@Override
+	public void setMobileButtonText(String text) {
+		mobileMenuButton.setText(text);
 	}
 
 }

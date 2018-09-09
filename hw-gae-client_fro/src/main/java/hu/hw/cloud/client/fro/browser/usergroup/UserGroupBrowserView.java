@@ -46,7 +46,7 @@ public class UserGroupBrowserView extends ViewWithUiHandlers<UserGroupBrowserUiH
 
 	private void initTable() {
 
-		table.setTitle(i18nCore.userGroupTableTitle());
+		table.setTableTitle(i18nCore.userGroupBrowserTitle());
 
 		table.getAddButton().addClickHandler(e -> {
 			getUiHandlers().addNew();
@@ -56,7 +56,7 @@ public class UserGroupBrowserView extends ViewWithUiHandlers<UserGroupBrowserUiH
 		table.addColumn(
 				new DataColumn<UserGroupDto>((object) -> object.getName(),
 						(o1, o2) -> o1.getData().getName().compareToIgnoreCase(o2.getData().getName())),
-				i18nCore.userGroupTableName());
+				i18nCore.userGroupBrowserName());
 
 		// Edit Column
 		table.addColumn(new ActionColumn<UserGroupDto>((object) -> getUiHandlers().edit(object)));
