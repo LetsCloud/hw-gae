@@ -35,9 +35,6 @@
 	<ui:with field="coreTokens"
 		type="hu.hw.cloud.client.core.CoreNameTokens" />
 
-	<ui:with field="froTokens"
-		type="hu.hw.cloud.client.fro.FroNameTokens" />
-
 	<g:HTMLPanel addStyleNames="{style.pp}">
 		<m:MaterialRow>
 			<m:MaterialColumn grid="s12 m6">
@@ -61,7 +58,7 @@
 				<g:HTMLPanel ui:field="availabilityPanel" addStyleNames="{style.dataGroupBox}">
 					<g:Label text="{i18nCore.roomEditorAvailability}"
 						addStyleNames="{style.dataGroupTitle}" />
-						<roomeditor:AvailabilityListEditor ui:field="roomAvailabilityDtos"/>
+						<roomeditor:AvailabilityListEditor ui:field="roomAvailabilities"/>
 				</g:HTMLPanel>
 			</m:MaterialColumn>
 		</m:MaterialRow>

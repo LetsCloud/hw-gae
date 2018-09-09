@@ -555,7 +555,7 @@ public abstract class CubeAcstPfm extends CubeBasePfm {
 	/**
 	 * Visszaadja a dimenzió mező értékét
 	 * 
-	 * @param dim
+	 * @param dimName
 	 * @return
 	 */
 	@Override
@@ -571,7 +571,8 @@ public abstract class CubeAcstPfm extends CubeBasePfm {
 	/**
 	 * Visszaadja az entitás measure paraméterrel jelölt mezőjének értékét.
 	 * 
-	 * @param measure
+	 * @param measure1
+	 * @param measure2
 	 * @return
 	 */
 	@Override

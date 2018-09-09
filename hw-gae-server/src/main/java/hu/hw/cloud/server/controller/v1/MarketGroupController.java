@@ -11,16 +11,17 @@ import static hu.hw.cloud.shared.api.ApiPaths.PATH_WEBSAFEKEY;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.MARKET_GROUP;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.ROOT;
 
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.QueryParam;
 
-import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,15 +49,19 @@ import hu.hw.cloud.shared.exception.RestApiException;
 public class MarketGroupController extends HotelChildController<MarketGroup, MarketGroupDto> {
 	private static final Logger logger = LoggerFactory.getLogger(RoomTypeController.class);
 
+	private final ModelMapper modelMapper;
+
 	@Autowired
-	MarketGroupController(MarketGroupService service) {
-		super(service);
+	MarketGroupController(MarketGroupService service, ModelMapper modelMapper) {
+		super(MarketGroup.class, service, modelMapper);
 		logger.info("RoomTypeController()");
+		this.modelMapper = modelMapper;
 	}
 
 	@Override
 	protected MarketGroupDto createDto(MarketGroup entity) {
-		return MarketGroup.createDto(entity);
+		MarketGroupDto dto = modelMapper.map(entity, MarketGroupDto.class);
+		return dto;
 	}
 
 	@RequestMapping(method = GET)

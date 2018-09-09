@@ -17,15 +17,13 @@ public class ProfileDto extends AccountChildDto {
 
 	private String name;
 
-	private List<CommunicationDto> communicationDtos = new ArrayList<CommunicationDto>();
+	private ProfileGroupDto profileGroup;
 
-	private List<PhoneNumberDto> phoneNumberDtos = new ArrayList<PhoneNumberDto>();
+	private List<CommunicationDto> communications = new ArrayList<CommunicationDto>();
 
-	private List<EmailAddressDto> emailAddressDtos = new ArrayList<EmailAddressDto>();
+	private List<AddressDto> addresses = new ArrayList<AddressDto>();
 
-	private List<PostalAddressDto> postalAddressDtos = new ArrayList<PostalAddressDto>();
-
-	private List<UrlAddressDto> urlAddressDtos = new ArrayList<UrlAddressDto>();
+	private List<WebPresenceDto> webPresences = new ArrayList<WebPresenceDto>();
 
 	public ProfileDto() {
 	}
@@ -38,44 +36,61 @@ public class ProfileDto extends AccountChildDto {
 		this.name = name;
 	}
 
-	public List<PhoneNumberDto> getPhoneNumberDtos() {
-		return phoneNumberDtos;
+	public ProfileGroupDto getProfileGroup() {
+		return profileGroup;
 	}
 
-	public void setPhoneNumberDtos(List<PhoneNumberDto> phoneNumberDtos) {
-		this.phoneNumberDtos = phoneNumberDtos;
+	public void setProfileGroup(ProfileGroupDto profileGroup) {
+		this.profileGroup = profileGroup;
 	}
 
-	public List<EmailAddressDto> getEmailAddressDtos() {
-		return emailAddressDtos;
+	public List<CommunicationDto> getCommunications() {
+		return communications;
 	}
 
-	public void setEmailAddressDtos(List<EmailAddressDto> emailAddressDtos) {
-		this.emailAddressDtos = emailAddressDtos;
+	public void setCommunications(List<CommunicationDto> communications) {
+		this.communications = communications;
 	}
 
-	public List<PostalAddressDto> getPostalAddressDtos() {
-		return postalAddressDtos;
+	public List<AddressDto> getAddresses() {
+		return addresses;
 	}
 
-	public void setPostalAddressDtos(List<PostalAddressDto> postalAddressDtos) {
-		this.postalAddressDtos = postalAddressDtos;
+	public void setAddresses(List<AddressDto> addresses) {
+		this.addresses = addresses;
 	}
 
-	public List<UrlAddressDto> getUrlAddressDtos() {
-		return urlAddressDtos;
+	public List<WebPresenceDto> getWebPresences() {
+		return webPresences;
 	}
 
-	public void setUrlAddressDtos(List<UrlAddressDto> urlAddressDtos) {
-		this.urlAddressDtos = urlAddressDtos;
+	public void setWebPresences(List<WebPresenceDto> webPresences) {
+		this.webPresences = webPresences;
 	}
 
-	public List<CommunicationDto> getCommunicationDtos() {
-		return communicationDtos;
+	/*
+	 * toString
+	 */
+	@Override
+	public String toString() {
+		String ret = "ProfileDto:{" + super.toString() + ", name=" + name + ", profileGroup=" + profileGroup
+				+ ", communications=";
+
+		for (CommunicationDto communication : communications)
+			ret = ret + communication;
+
+		ret = ret + ", addresses=";
+
+		for (AddressDto address : addresses)
+			ret = ret + address;
+
+		ret = ret + ", webPresences=";
+
+		for (WebPresenceDto webPresence : webPresences)
+			ret = ret + webPresence;
+
+		ret = ret + "}";
+		return ret;
 	}
 
-	public void setCommunicationDtos(List<CommunicationDto> communicationDtos) {
-		this.communicationDtos = communicationDtos;
-	}
-	
 }

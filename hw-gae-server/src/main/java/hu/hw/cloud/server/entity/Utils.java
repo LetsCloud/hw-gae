@@ -18,10 +18,12 @@ import hu.hw.cloud.shared.dto.hk.AssignmentSummaryDto;
 public class Utils {
 
 	/**
+	 * Hello Bello
 	 * 
-	 * @param dtos
-	 * @param attendant
-	 * @return
+	 * @param dtos HK beosztások listája.
+	 * @param attendant Takarító kódja.
+	 * 
+	 * @return A takarítő beosztásainak összesítője.
 	 */
 	public static AssignmentSummaryDto findByAttendant(List<AssignmentSummaryDto> dtos, final AppUserDto attendant) {
 		Predicate<AssignmentSummaryDto> condition = new Predicate<AssignmentSummaryDto>() {

@@ -23,7 +23,7 @@ import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
 import hu.hw.cloud.client.kip.chat.editor.ChatEditorFactory;
 import hu.hw.cloud.client.kip.chat.editor.ChatEditorPresenter;
-import hu.hw.cloud.shared.ChatResource;
+import hu.hw.cloud.shared.api.ChatResource;
 import hu.hw.cloud.shared.dto.chat.ChatDto;
 
 /**

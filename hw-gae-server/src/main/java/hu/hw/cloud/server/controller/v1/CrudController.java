@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,14 +34,20 @@ public abstract class CrudController<T extends BaseEntity, D extends BaseDto> ex
 	@Autowired
 	private AppUserService userService;
 
-	private final CrudService<T, D> service;
+	private final CrudService<T> service;
 
-	public CrudController(CrudService<T, D> service) {
+	private final ModelMapper modelMapper;
+
+	private final Class<T> clazz;
+
+	public CrudController(Class<T> clazz, CrudService<T> service, ModelMapper modelMapper) {
 		logger.info("CrudController()");
 		this.service = service;
+		this.modelMapper = modelMapper;
+		this.clazz = clazz;
 	}
 
-	public CrudService<T, D> getService() {
+	public CrudService<T> getService() {
 		return service;
 	}
 
@@ -78,16 +85,21 @@ public abstract class CrudController<T extends BaseEntity, D extends BaseDto> ex
 	}
 
 	public ResponseEntity<D> saveOrCreate(D dto) throws RestApiException {
+		logger.info("saveOrCreate->source=" + dto);
 		try {
-			T entity;
+			T entity = modelMapper.map(dto, clazz);
+			logger.info("saveOrCreate->mapped=" + entity);
 			if (dto.getId() == null) {
-				entity = service.create(dto);
+				entity = service.create(entity);
 			} else {
-				entity = service.update(dto);
+				entity = service.update(entity);
 			}
+			logger.info("saveOrCreate->saved=" + entity);
 			dto = createDto(entity);
+			logger.info("saveOrCreate->saved2=" + dto);
 			return new ResponseEntity<D>(dto, HttpStatus.OK);
 		} catch (Throwable e) {
+			e.printStackTrace();
 			throw new RestApiException(e);
 		}
 	}

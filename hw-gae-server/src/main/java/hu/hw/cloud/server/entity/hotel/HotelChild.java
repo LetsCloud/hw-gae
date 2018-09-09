@@ -10,7 +10,6 @@ import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Parent;
 
 import hu.hw.cloud.server.entity.BaseEntity;
-import hu.hw.cloud.shared.dto.hotel.HotelChildDto;
 
 /**
  * @author CR
@@ -29,65 +28,13 @@ public class HotelChild extends BaseEntity {
 //		logger.info("HotelChild()");
 	}
 
-	/**
-	 * Konstruktor DTO-ból.
-	 * 
-	 * @param dto
-	 */
-	public HotelChild(HotelChildDto dto) {
-		super(dto);
-		this.updEntityWithDto(dto);
-	}
-
-	/**
-	 * 
-	 * @param source
-	 */
-	public HotelChild(HotelChild source) {
-		super(source);
-		this.setHotel(source.getHotel());
-	}
-
 	public Hotel getHotel() {
 		return hotelRef.get();
 	}
 
 	public void setHotel(Hotel hotel) {
-		this.hotelRef = Ref.create(hotel);
-	}
-
-	/**
-	 * 
-	 * @param dto
-	 */
-	public void updEntityWithDto(HotelChildDto dto) {
-		super.updEntityWithDto(dto);
-		
-		this.setHotel(new Hotel(dto.getHotelDto()));
-	}
-
-	/**
-	 * 
-	 * @param entity
-	 */
-	public void updEntityWithEntity(HotelChild entity) {
-		super.updEntityWithEntity(entity);
-		
-		this.setHotel(entity.getHotel());
-	}
-
-	/**
-	 * 
-	 * @param dto
-	 * @return
-	 */
-	public HotelChildDto updDtoWithEntity(HotelChildDto dto) {
-		dto = (HotelChildDto) super.updDtoWithEntity(dto);
-
-		if (this.getHotel() != null)
-			dto.setHotelDto(Hotel.createDto(this.getHotel()));
-
-		return dto;
+		if (hotel.getId() != null)
+			this.hotelRef = Ref.create(hotel);
 	}
 
 	/**

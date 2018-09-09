@@ -28,27 +28,27 @@ public class ReservationDto extends HotelChildDto {
 	/**
 	 * Valutanem.
 	 */
-	private CurrencyDto currencyDto;
+	private CurrencyDto currency;
 
 	/**
 	 * Szobafoglalások listája.
 	 */
-	private List<RoomStayDto> roomStayDtos = new ArrayList<RoomStayDto>();
+	private List<RoomStayDto> roomStays = new ArrayList<RoomStayDto>();
 
 	/**
 	 * Terhelés előjegyzések listája.
 	 */
-	private List<FixedChargeDto> fixedChargeDtos = new ArrayList<FixedChargeDto>();
+	private List<FixedChargeDto> fixedCharges = new ArrayList<FixedChargeDto>();
 
 	/**
 	 * Profil kapcsolatok.
 	 */
-	private List<ProfileLinkDto> profileLinkDtos = new ArrayList<ProfileLinkDto>();
+	private List<ProfileLinkDto> profileLinks = new ArrayList<ProfileLinkDto>();
 
 	/**
 	 * Csoport foglalás esetén a kapcsolódó szobafoglalások.
 	 */
-	private List<ReservationDto> reservationDtos = new ArrayList<ReservationDto>();
+	private List<ReservationDto> reservations = new ArrayList<ReservationDto>();
 
 	public ReservationStatus getStatus() {
 		return status;
@@ -58,44 +58,44 @@ public class ReservationDto extends HotelChildDto {
 		this.status = status;
 	}
 
-	public CurrencyDto getCurrencyDto() {
-		return currencyDto;
+	public CurrencyDto getCurrency() {
+		return currency;
 	}
 
-	public void setCurrencyDto(CurrencyDto currencyDto) {
-		this.currencyDto = currencyDto;
+	public void setCurrency(CurrencyDto currencyDto) {
+		this.currency = currencyDto;
 	}
 
-	public List<RoomStayDto> getRoomStayDtos() {
-		return roomStayDtos;
+	public List<RoomStayDto> getRoomStays() {
+		return roomStays;
 	}
 
-	public void setRoomStayDtos(List<RoomStayDto> roomStayDtos) {
-		this.roomStayDtos = roomStayDtos;
+	public void setRoomStays(List<RoomStayDto> roomStayDtos) {
+		this.roomStays = roomStayDtos;
 	}
 
-	public List<FixedChargeDto> getFixedChargeDtos() {
-		return fixedChargeDtos;
+	public List<FixedChargeDto> getFixedCharges() {
+		return fixedCharges;
 	}
 
-	public void setFixedChargeDtos(List<FixedChargeDto> fixedChargeDtos) {
-		this.fixedChargeDtos = fixedChargeDtos;
+	public void setFixedCharges(List<FixedChargeDto> fixedChargeDtos) {
+		this.fixedCharges = fixedChargeDtos;
 	}
 
-	public List<ReservationDto> getReservationDtos() {
-		return reservationDtos;
+	public List<ReservationDto> getReservations() {
+		return reservations;
 	}
 
-	public void setReservationRefs(List<ReservationDto> reservationDtos) {
-		this.reservationDtos = reservationDtos;
+	public void setReservations(List<ReservationDto> reservationDtos) {
+		this.reservations = reservationDtos;
 	}
 
-	public List<ProfileLinkDto> getProfileLinkDtos() {
-		return profileLinkDtos;
+	public List<ProfileLinkDto> getProfileLinks() {
+		return profileLinks;
 	}
 
-	public void setProfileLinkDtos(List<ProfileLinkDto> profileLinkDtos) {
-		this.profileLinkDtos = profileLinkDtos;
+	public void setProfileLinks(List<ProfileLinkDto> profileLinkDtos) {
+		this.profileLinks = profileLinkDtos;
 	}
 
 }

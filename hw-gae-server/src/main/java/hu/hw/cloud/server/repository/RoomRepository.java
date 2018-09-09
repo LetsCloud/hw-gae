@@ -19,7 +19,7 @@ public interface RoomRepository extends HotelChildRepository<Room> {
 	/**
 	 * Visszaadja a megadott szálloda szobáit
 	 * 
-	 * @param hotel
+	 * @param hotelKey
 	 * @return
 	 */
 	List<Room> getAllByHotel(String hotelKey);

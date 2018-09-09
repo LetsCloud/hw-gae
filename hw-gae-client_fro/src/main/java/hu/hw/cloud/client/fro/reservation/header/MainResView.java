@@ -20,12 +20,12 @@ import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
-import gwt.material.design.client.constants.IconType;
+import gwt.material.design.addext.client.ui.MaterialAutoCompleteAdd;
+import gwt.material.design.addext.client.ui.MaterialComboBoxAdd;
+import gwt.material.design.addext.client.ui.constants.AwesomeIconType;
 import gwt.material.design.client.ui.MaterialIcon;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialToast;
-import hu.hw.cloud.client.fro.ui.MaterialAutoCompleteAdd;
-import hu.hw.cloud.client.fro.ui.MaterialComboBoxAdd;
 
 /**
  * @author robi
@@ -57,7 +57,7 @@ public class MainResView extends ViewWithUiHandlers<MainResUiHandlers> implement
 
 		customerIcon.addClickHandler(e -> MaterialToast.fireToast("I Love Material Design"));
 
-		agent.setIconType(IconType.ADD_BOX);
+		agent.setIconType(AwesomeIconType.PLUS_SQUARE);
 
 		UserOracle oracle = new UserOracle();
 		oracle.addContacts(getAllUsers());

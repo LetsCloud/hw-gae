@@ -18,6 +18,15 @@ public interface CrudRepository<T extends BaseEntity> {
 
 	String getAccountId(String id);
 
+	/**
+	 * Az entitás mentését végző metódus definiciója.
+	 * 
+	 * @param entity A mnetésre váró entitás.
+	 * @return Az elmentett entitás.
+	 * @throws EntityValidationException    Validációs hiba esetén dobandó kivétel.
+	 * @throws UniqueIndexConflictException Egyedi kulcs ütközés esetén dobandó
+	 *                                      kivétel.
+	 */
 	T save(T entity) throws EntityValidationException, UniqueIndexConflictException;
 
 	T findByWebSafeKey(String webSafeKey);
@@ -32,5 +41,5 @@ public interface CrudRepository<T extends BaseEntity> {
 
 	List<T> getChildren(String parentWebSafeKey);
 
-	List<T> getChildrenByFilters(String parentWebSafeKey, Map<String, Object> filters);	
+	List<T> getChildrenByFilters(String parentWebSafeKey, Map<String, Object> filters);
 }

@@ -44,4 +44,10 @@ public class AccountRepositoryImpl extends CrudRepositoryImpl<Account> implement
 	protected Object getParentKey(String parentWebSafeKey) {
 		return null;
 	}
+
+	@Override
+	protected void loadUniqueIndexMap(Account entiy) {
+		// TODO Auto-generated method stub
+		
+	}
 }

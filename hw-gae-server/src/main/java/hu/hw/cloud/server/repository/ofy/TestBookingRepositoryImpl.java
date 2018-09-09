@@ -38,4 +38,10 @@ public class TestBookingRepositoryImpl extends CrudRepositoryImpl<TestBooking> i
 		return null;
 	}
 
+	@Override
+	protected void loadUniqueIndexMap(TestBooking entiy) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

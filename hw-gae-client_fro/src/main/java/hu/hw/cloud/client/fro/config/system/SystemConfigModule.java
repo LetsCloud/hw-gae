@@ -5,7 +5,8 @@ package hu.hw.cloud.client.fro.config.system;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
-import hu.hw.cloud.client.fro.editor.profile.ProfileEditorModule;
+import hu.hw.cloud.client.fro.browser.appuser.AppUserBrowserModule;
+import hu.hw.cloud.client.fro.browser.usergroup.UserGroupBrowserModule;
 
 /**
  * @author CR
@@ -14,7 +15,8 @@ import hu.hw.cloud.client.fro.editor.profile.ProfileEditorModule;
 public class SystemConfigModule extends AbstractPresenterModule {
 	@Override
 	protected void configure() {
-		install(new ProfileEditorModule());
+		install(new UserGroupBrowserModule());
+		install(new AppUserBrowserModule());
 
 		bindPresenter(SystemConfigPresenter.class, SystemConfigPresenter.MyView.class, SystemConfigView.class,
 				SystemConfigPresenter.MyProxy.class);

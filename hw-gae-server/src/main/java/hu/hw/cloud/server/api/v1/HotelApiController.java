@@ -10,6 +10,7 @@ import static org.springframework.http.HttpStatus.OK;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,14 +45,16 @@ public class HotelApiController extends BaseController {
 	@Autowired
 	private HotelRepository hotelRepository;
 
+	@Autowired
+	private ModelMapper modelMapper;
+
 	/**
 	 * Új hotel rögzítése
 	 * 
 	 * @param hotelDto
 	 * @return
-	 * @throws RestApiException
 	 */
-	@RequestMapping(value = HOTEL+"2", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = HOTEL + "2", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody HotelDto createHotel2(@RequestBody HotelDto hotelDto) {
 		LOGGER.info("createHotel2()");
 		return hotelDto;
@@ -64,12 +67,12 @@ public class HotelApiController extends BaseController {
 
 		// Ha nem egyezik a HotelDto előfizetői azonosító és az autentikációban
 		// található előfizetői azonosítóval, akkor gáz van.
-		accountIdValidation(request, hotelDto.getAccountWebSafeKey());
+		accountIdValidation(request, hotelDto.getAccount().getWebSafeKey());
 
 		try {
-			Hotel hotel = hotelService.create(hotelDto);
-			hotelDto = Hotel.createDto(hotel);
-			return new ResponseEntity<HotelDto>(hotelDto, OK);
+			Hotel hotel = hotelService.create(modelMapper.map(hotelDto, Hotel.class));
+			HotelDto dto = modelMapper.map(hotel, HotelDto.class);
+			return new ResponseEntity<HotelDto>(dto, OK);
 		} catch (Throwable e) {
 			throw new RestApiException(e);
 		}
@@ -82,7 +85,8 @@ public class HotelApiController extends BaseController {
 			List<HotelDto> dtos = new ArrayList<HotelDto>();
 			List<Hotel> hotels = hotelService.getAll(getAccountId(request));
 			for (Hotel hotel : hotels) {
-				dtos.add(Hotel.createDto(hotel));
+				HotelDto dto = modelMapper.map(hotel, HotelDto.class);
+				dtos.add(dto);
 			}
 			return new ResponseEntity<List<HotelDto>>(dtos, OK);
 		} catch (Throwable e) {
@@ -104,7 +108,7 @@ public class HotelApiController extends BaseController {
 
 		try {
 			Hotel hotel = hotelService.read(hotelId);
-			HotelDto hotelDto = Hotel.createDto(hotel);
+			HotelDto hotelDto = modelMapper.map(hotel, HotelDto.class);
 			return new ResponseEntity<HotelDto>(hotelDto, OK);
 		} catch (Throwable e) {
 			throw new RestApiException(e);
@@ -127,8 +131,8 @@ public class HotelApiController extends BaseController {
 		accountIdValidation(request, accountId);
 
 		try {
-			Hotel hotel = hotelService.update(hotelDto);
-			hotelDto = Hotel.createDto(hotel);
+			Hotel hotel = hotelService.update(modelMapper.map(hotelDto, Hotel.class));
+			hotelDto = modelMapper.map(hotel, HotelDto.class);
 			return new ResponseEntity<HotelDto>(hotelDto, OK);
 		} catch (Throwable e) {
 			throw new RestApiException(e);

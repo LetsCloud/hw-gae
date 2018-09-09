@@ -158,7 +158,7 @@ public class ExchangeRate {
 	/**
 	 * DTO létrehozása entitás alapján
 	 * 
-	 * @param dtos
+	 * @param entity
 	 * @return
 	 */
 	public static ExchangeRateDto createDto(ExchangeRate entity) {
@@ -184,7 +184,7 @@ public class ExchangeRate {
 	/**
 	 * DTO lista létrehozása entitás listából
 	 * 
-	 * @param dtos
+	 * @param entities
 	 * @return
 	 */
 	public static List<ExchangeRateDto> createDtos(List<ExchangeRate> entities) {

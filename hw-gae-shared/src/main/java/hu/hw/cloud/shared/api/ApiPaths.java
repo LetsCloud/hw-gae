@@ -29,7 +29,9 @@ public class ApiPaths {
 
 		public static final String TASK = "/task";
 
-		public static final String CUSTOMER = "/customer";
+		public static final String PROFILE_GROUP = "/profileGroup";
+		public static final String ORGANIZATION = "/organization";
+		public static final String CONTACT = "/contact";
 
 		public static final String HOTEL = "/hotel";
 		public static final String ROOMTYPE = "/roomtype";

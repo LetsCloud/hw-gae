@@ -18,8 +18,8 @@ import hu.hw.cloud.client.core.event.RefreshTableEvent;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.core.util.AbstractAsyncCallback;
 import hu.hw.cloud.client.core.util.ErrorHandlerAsyncCallback;
-import hu.hw.cloud.shared.UserGroupResource;
 import hu.hw.cloud.shared.api.AppUserResource;
+import hu.hw.cloud.shared.api.UserGroupResource;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
 import hu.hw.cloud.shared.dto.common.UserGroupDto;
@@ -85,7 +85,7 @@ public class AppUserEditPresenter extends PresenterWidget<AppUserEditPresenter.M
 
 		AppUserDto userDto = new AppUserDto();
 		// userDto.setAccountWebSafeKey(currentUser.getAppUserDto().getAccountDto().getWebSafeKey());
-		userDto.setAccountDto(currentUser.getAppUserDto().getAccountDto());
+		userDto.setAccount(currentUser.getAppUserDto().getAccount());
 		userDto.setPassword(FIRST_PASSWORD);
 
 		getView().open(isNew, userDto);

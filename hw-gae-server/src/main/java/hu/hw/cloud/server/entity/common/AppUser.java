@@ -6,19 +6,14 @@ package hu.hw.cloud.server.entity.common;
 import java.util.ArrayList;
 import java.util.List;
 
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
 
 import hu.hw.cloud.shared.dto.RegisterDto;
-import hu.hw.cloud.shared.dto.common.AppUserDto;
-import hu.hw.cloud.shared.dto.common.FcmTokenDto;
-import hu.hw.cloud.shared.dto.common.RoleDto;
-import hu.hw.cloud.shared.dto.common.UserGroupDto;
-import hu.hw.cloud.shared.dto.hotel.HotelDto;
 import hu.hw.cloud.server.entity.VerificationToken;
 import hu.hw.cloud.server.entity.chat.FcmToken;
 import hu.hw.cloud.server.entity.hotel.Hotel;
@@ -29,13 +24,7 @@ import hu.hw.cloud.server.entity.hotel.Hotel;
  */
 @Entity
 public class AppUser extends AccountChild {
-//	private static final Logger logger = LoggerFactory.getLogger(AppUser.class.getName());
-
-	/**
-	 * 
-	 */
-	private static final String PROPERTY_USERNAME = "username";
-	private static final String PROPERTY_EMAILADDRESS = "emailAddress";
+	private static final Logger logger = LoggerFactory.getLogger(AppUser.class.getName());
 
 	/**
 	 * Kód
@@ -48,7 +37,7 @@ public class AppUser extends AccountChild {
 	private String name;
 
 	/**
-	 * Név
+	 * Beosztás
 	 */
 	private String title;
 
@@ -75,19 +64,19 @@ public class AppUser extends AccountChild {
 	private String emailAddress;
 
 	/**
-	 * Verifikációs tóken
-	 */
-	private List<VerificationToken> verificationTokens;
-
-	/**
 	 * Engedélyezett
 	 */
 	private Boolean enabled;
 
 	/**
-	 * Rendszergazda kapcsoló
+	 * Rendszergazda
 	 */
 	private Boolean admin;
+
+	/**
+	 * Felhasználói csoportok
+	 */
+	private List<Ref<UserGroup>> userGroups = new ArrayList<Ref<UserGroup>>();
 
 	/**
 	 * Szerepkörök
@@ -100,7 +89,7 @@ public class AppUser extends AccountChild {
 	private Ref<Hotel> defaultHotel;
 
 	/**
-	 * Hotelek
+	 * Engedélyezett hotelek
 	 */
 	private List<Ref<Hotel>> availableHotels = new ArrayList<Ref<Hotel>>();
 
@@ -110,27 +99,17 @@ public class AppUser extends AccountChild {
 	private List<FcmToken> fcmTokens = new ArrayList<FcmToken>();
 
 	/**
-	 * Firebase Messaging Token
+	 * Verifikációs tóken
 	 */
-	private List<Ref<UserGroup>> userGroups = new ArrayList<Ref<UserGroup>>();
+	private List<VerificationToken> verificationTokens;
 
 	/**
 	 * Paraméter nélküli kontruktor Objectify-hoz
 	 */
 	public AppUser() {
-//		logger.info("AppUser()");
+		logger.info("AppUser()");
 		this.enabled = false;
 		this.admin = false;
-	}
-
-	/**
-	 * Konstruktor DTO-ból
-	 * 
-	 * @param dto
-	 */
-	public AppUser(AppUserDto dto) {
-		this();
-		updEntityWithDto(dto);
 	}
 
 	/**
@@ -150,6 +129,7 @@ public class AppUser extends AccountChild {
 	}
 
 	public void setCode(String code) {
+		logger.info("setCode()");
 		this.code = code;
 	}
 
@@ -158,6 +138,7 @@ public class AppUser extends AccountChild {
 	}
 
 	public void setName(String name) {
+		logger.info("setName()");
 		this.name = name;
 	}
 
@@ -166,6 +147,7 @@ public class AppUser extends AccountChild {
 	}
 
 	public void setTitle(String title) {
+		logger.info("setTitle()");
 		this.title = title;
 	}
 
@@ -174,6 +156,7 @@ public class AppUser extends AccountChild {
 	}
 
 	public void setPicture(String picture) {
+		logger.info("setPicture()");
 		this.picture = picture;
 	}
 
@@ -182,6 +165,7 @@ public class AppUser extends AccountChild {
 	}
 
 	public void setUsername(String username) {
+		logger.info("setUsername()");
 		this.username = username;
 	}
 
@@ -190,6 +174,7 @@ public class AppUser extends AccountChild {
 	}
 
 	public void setPassword(String hashedPassword) {
+		logger.info("setPassword()");
 		this.password = hashedPassword;
 	}
 
@@ -198,6 +183,7 @@ public class AppUser extends AccountChild {
 	}
 
 	public void setEmailAddress(String emailAddress) {
+		logger.info("setEmailAddress()");
 		this.emailAddress = emailAddress;
 	}
 
@@ -206,6 +192,7 @@ public class AppUser extends AccountChild {
 	}
 
 	public void setVerificationTokens(List<VerificationToken> verificationTokens) {
+		logger.info("setVerificationTokens()");
 		this.verificationTokens = verificationTokens;
 	}
 
@@ -214,6 +201,7 @@ public class AppUser extends AccountChild {
 	}
 
 	public void setEnabled(Boolean enabled) {
+		logger.info("setEnabled()");
 		this.enabled = enabled;
 	}
 
@@ -222,6 +210,7 @@ public class AppUser extends AccountChild {
 	}
 
 	public void setAdmin(Boolean admin) {
+		logger.info("setAdmin()");
 		this.admin = admin;
 	}
 
@@ -234,6 +223,7 @@ public class AppUser extends AccountChild {
 	}
 
 	public void setRoles(List<Role> roles) {
+		logger.info("setRoles()");
 		ArrayList<Ref<Role>> list = new ArrayList<Ref<Role>>();
 		for (Role role : roles) {
 			list.add(Ref.create(role));
@@ -250,6 +240,7 @@ public class AppUser extends AccountChild {
 	}
 
 	public void setAvailableHotels(List<Hotel> accessibleHotels) {
+		logger.info("setAvailableHotels()");
 		ArrayList<Ref<Hotel>> list = new ArrayList<Ref<Hotel>>();
 		for (Hotel hotel : accessibleHotels) {
 			list.add(Ref.create(hotel));
@@ -266,6 +257,7 @@ public class AppUser extends AccountChild {
 	}
 
 	public void setDefaultHotel(Hotel defaultHotel) {
+		logger.info("setDefaultHotel()");
 		this.defaultHotel = Ref.create(defaultHotel);
 	}
 
@@ -274,6 +266,7 @@ public class AppUser extends AccountChild {
 	}
 
 	public void setFcmTokens(List<FcmToken> fcmTokens) {
+		logger.info("setFcmTokens()");
 		this.fcmTokens = fcmTokens;
 	}
 
@@ -286,169 +279,12 @@ public class AppUser extends AccountChild {
 	}
 
 	public void setUserGroups(List<UserGroup> userGroups) {
+		logger.info("setUserGroups()");
 		ArrayList<Ref<UserGroup>> list = new ArrayList<Ref<UserGroup>>();
 		for (UserGroup userGroup : userGroups) {
 			list.add(Ref.create(userGroup));
 		}
 		this.userGroups = list;
-	}
-
-	/**
-	 * Entitás módosítása DTO adataival
-	 * 
-	 * @param dto
-	 */
-	public void updEntityWithDto(AppUserDto dto) {
-		clearUniqueIndexes();
-
-		super.updEntityWithDto(dto);
-
-		if (dto.getCode() != null)
-			setCode(dto.getCode());
-
-		if (dto.getName() != null)
-			setName(dto.getName());
-
-		if (dto.getTitle() != null)
-			setTitle(dto.getTitle());
-
-		if (dto.getPicture() != null)
-			setPicture(dto.getPicture());
-
-		if (dto.getAdmin() != null)
-			setAdmin(dto.getAdmin());
-
-		if (dto.getEmailAddress() != null) {
-			setEmailAddress(dto.getEmailAddress());
-			if (!dto.getEmailAddress().equals(getEmailAddress()))
-				addUniqueIndex(PROPERTY_EMAILADDRESS, dto.getEmailAddress());
-		}
-
-		if (dto.getEnabled() != null)
-			setEnabled(dto.getEnabled());
-
-		if (dto.getUsername() != null) {
-			setUsername(dto.getUsername());
-			if (!dto.getUsername().equals(getUsername()))
-				addUniqueIndex(PROPERTY_USERNAME, dto.getUsername());
-		}
-
-		if (dto.getPassword() != null)
-			setPassword(dto.getPassword());
-
-		if (dto.getRoleDtos() != null)
-			setRoles(Role.createList(dto.getRoleDtos()));
-
-		if (dto.getAvailableHotelDtos() != null)
-			setAvailableHotels(Hotel.createList(dto.getAvailableHotelDtos()));
-
-		if (dto.getFcmTokenDtos() != null)
-			setFcmTokens(FcmToken.createList(dto.getFcmTokenDtos()));
-
-		if (dto.getDefaultHotelDto() != null)
-			setDefaultHotel(new Hotel(dto.getDefaultHotelDto()));
-
-		if (dto.getUserGroupDtos() != null)
-			setUserGroups(UserGroup.createList(dto.getUserGroupDtos()));
-	}
-
-	/**
-	 * DTO létrehozása entitásból
-	 * 
-	 * @param entity
-	 * @return
-	 */
-	public static AppUserDto createDto(AppUser entity) {
-		AppUserDto dto = new AppUserDto();
-		dto = entity.updDtoWithEntity(dto);
-		return dto;
-	}
-
-	/**
-	 * DTO módosítása az entitás adataival
-	 * 
-	 * @param dto
-	 * @return
-	 */
-	public AppUserDto updDtoWithEntity(AppUserDto dto) {
-		dto = (AppUserDto) super.updDtoWithEntity(dto);
-
-		if (this.getCode() != null)
-			dto.setCode(this.getCode());
-
-		if (this.getName() != null)
-			dto.setName(this.getName());
-
-		if (this.getTitle() != null)
-			dto.setTitle(this.getTitle());
-
-		if (this.getPicture() != null)
-			dto.setPicture(this.getPicture());
-
-		if (this.getUsername() != null)
-			dto.setUsername(this.getUsername());
-
-		if (this.getPassword() != null)
-			dto.setPassword(this.getPassword());
-
-		if (this.getEmailAddress() != null)
-			dto.setEmailAddress(this.getEmailAddress());
-
-		if (this.getEnabled() != null)
-			dto.setEnabled(this.getEnabled());
-
-		if (this.getAdmin() != null)
-			dto.setAdmin(this.getAdmin());
-
-		if (this.getRoles() != null) {
-			dto.setRoleDtos(Role.createDtos(this.getRoles()));
-		} else {
-			dto.setRoleDtos(new ArrayList<RoleDto>());
-		}
-
-		if (this.getAvailableHotels() != null) {
-			dto.setAvailableHotelDtos(Hotel.createDtos(this.getAvailableHotels()));
-		} else {
-			dto.setAvailableHotelDtos(new ArrayList<HotelDto>());
-		}
-
-		if (this.getFcmTokens() != null) {
-			dto.setFcmTokenDtos(FcmToken.createDtos(this.getFcmTokens()));
-		} else {
-			dto.setFcmTokenDtos(new ArrayList<FcmTokenDto>());
-		}
-
-		if (this.getDefaultHotel() != null)
-			dto.setDefaultHotelDto(Hotel.createDto(this.getDefaultHotel()));
-
-		if (this.getUserGroups() != null) {
-			dto.setUserGroupDtos(UserGroup.createDtos(this.getUserGroups()));
-		} else {
-			dto.setUserGroupDtos(new ArrayList<UserGroupDto>());
-		}
-
-		return dto;
-	}
-
-	public static List<AppUserDto> createDtos(List<AppUser> entities) {
-		List<AppUserDto> dtos = new ArrayList<AppUserDto>();
-		for (AppUser entity : entities) {
-			dtos.add(AppUser.createDto(entity));
-		}
-		return dtos;
-	}
-
-	/**
-	 * 
-	 * @param dtos
-	 * @return
-	 */
-	public static List<AppUser> createList(List<AppUserDto> dtos) {
-		List<AppUser> result = new ArrayList<AppUser>();
-		for (AppUserDto dto : dtos) {
-			result.add(new AppUser(dto));
-		}
-		return result;
 	}
 
 	@Override

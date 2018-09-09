@@ -65,7 +65,7 @@ public class Promise {
 
 	/**
 	 * The then() method returns a Promise. It takes up to two arguments: callback
-	 * functions for the success and failure cases of the Promise. <br />
+	 * functions for the success and failure cases of the Promise.
 	 * Note: If both arguments are omitted, or are provided non-functions, a new
 	 * Promise is created with no additional handlers, simply adopting the final
 	 * state of the Promise that then is called on. If the first argument is omitted
@@ -79,9 +79,9 @@ public class Promise {
 	 *            A Function called when the Promise is fulfilled. This function has
 	 *            one argument, the fulfillment value.
 	 * @return A Promise which rejects or resolves with the value returned by the
-	 *         input function onFulfilled or onRejected. <br />
+	 *         input function onFulfilled or onRejected.
 	 *         It returns a rejected Promise if the input function throws an error,
-	 *         or the input function returns a rejected Promise. <br />
+	 *         or the input function returns a rejected Promise.
 	 *         A resolved Promise is returned if the input function returns a value,
 	 *         or the input function returns a resolved Promise.
 	 *
@@ -90,7 +90,7 @@ public class Promise {
 
 	/**
 	 * The then() method returns a Promise. It takes up to two arguments: callback
-	 * functions for the success and failure cases of the Promise. <br />
+	 * functions for the success and failure cases of the Promise.
 	 * Note: If both arguments are omitted, or are provided non-functions, a new
 	 * Promise is created with no additional handlers, simply adopting the final
 	 * state of the Promise that then is called on. If the first argument is omitted
@@ -107,9 +107,9 @@ public class Promise {
 	 *            A Function called when the Promise is rejected. This function has
 	 *            one argument, the rejection reason.
 	 * @return A Promise which rejects or resolves with the value returned by the
-	 *         input function onFulfilled or onRejected. <br />
+	 *         input function onFulfilled or onRejected.
 	 *         It returns a rejected Promise if the input function throws an error,
-	 *         or the input function returns a rejected Promise. <br />
+	 *         or the input function returns a rejected Promise.
 	 *         A resolved Promise is returned if the input function returns a value,
 	 *         or the input function returns a resolved Promise.
 	 */
@@ -118,7 +118,7 @@ public class Promise {
 	/**
 	 * The catch() method returns a Promise and deals with rejected cases only. It
 	 * behaves the same as calling Promise.prototype.then(undefined, onRejected).
-	 * <br />
+	 * 
 	 * The Promise returned by catch() is rejected if onRejected throws an error or
 	 * returns a Promise which is itself rejected; otherwise, it is resolved.
 	 *

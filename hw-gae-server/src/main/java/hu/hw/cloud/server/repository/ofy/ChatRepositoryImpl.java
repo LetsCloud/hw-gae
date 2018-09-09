@@ -43,4 +43,10 @@ public class ChatRepositoryImpl extends CrudRepositoryImpl<Chat> implements Chat
 		return key;
 	}
 
+	@Override
+	protected void loadUniqueIndexMap(Chat entiy) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

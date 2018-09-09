@@ -14,13 +14,12 @@ import hu.hw.cloud.server.entity.common.UserGroup;
 import hu.hw.cloud.server.repository.AccountRepository;
 import hu.hw.cloud.server.repository.UserGroupRepository;
 import hu.hw.cloud.server.service.UserGroupService;
-import hu.hw.cloud.shared.dto.common.UserGroupDto;
 
 /**
  * @author robi
  *
  */
-public class UserGroupServiceImpl extends CrudServiceImpl<UserGroup, UserGroupDto, UserGroupRepository>
+public class UserGroupServiceImpl extends CrudServiceImpl<UserGroup, UserGroupRepository>
 implements UserGroupService {
 	private static final Logger logger = LoggerFactory.getLogger(UserGroupServiceImpl.class.getName());
 
@@ -45,23 +44,6 @@ implements UserGroupService {
 			group.getMembers();
 		}
 		return result;
-	}
-
-	@Override
-	protected UserGroup createEntity(UserGroupDto dto) {
-		logger.info("createEntity()");
-		return new UserGroup(dto);
-	}
-
-	@Override
-	protected UserGroup updateEntity(UserGroup entity, UserGroupDto dto) {
-		entity.update(dto);
-		return entity;
-	}
-
-	@Override
-	protected UserGroup updateEntity(UserGroup oldEntity, UserGroup newEntity) {
-		return null;
 	}
 
 	@Override

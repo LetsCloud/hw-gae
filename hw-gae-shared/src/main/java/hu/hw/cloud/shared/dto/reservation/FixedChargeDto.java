@@ -29,7 +29,7 @@ public class FixedChargeDto implements Dto {
 	/**
 	 * Szolgáltatáskód hivatkozás.
 	 */
-	private ServiceDto serviceDto;
+	private ServiceDto service;
 
 	/**
 	 * Egységár.
@@ -39,7 +39,7 @@ public class FixedChargeDto implements Dto {
 	/**
 	 * Egységár valutaneme (hivatkozás).
 	 */
-	private CurrencyDto currencyDto;
+	private CurrencyDto currency;
 
 	/**
 	 * Terhelendő mennyiség.
@@ -62,12 +62,12 @@ public class FixedChargeDto implements Dto {
 		this.toDate = toDate;
 	}
 
-	public ServiceDto getServiceDto() {
-		return serviceDto;
+	public ServiceDto getService() {
+		return service;
 	}
 
-	public void setServiceDto(ServiceDto serviceDto) {
-		this.serviceDto = serviceDto;
+	public void setService(ServiceDto service) {
+		this.service = service;
 	}
 
 	public Double getPrice() {
@@ -78,12 +78,12 @@ public class FixedChargeDto implements Dto {
 		this.price = price;
 	}
 
-	public CurrencyDto getCurrencyDto() {
-		return currencyDto;
+	public CurrencyDto getCurrency() {
+		return currency;
 	}
 
-	public void setCurrencyDto(CurrencyDto currencyDto) {
-		this.currencyDto = currencyDto;
+	public void setCurrency(CurrencyDto currency) {
+		this.currency = currency;
 	}
 
 	public Integer getQty() {

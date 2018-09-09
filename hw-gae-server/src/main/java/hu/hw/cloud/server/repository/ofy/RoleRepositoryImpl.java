@@ -21,6 +21,8 @@ import hu.hw.cloud.server.repository.RoleRepository;
 public class RoleRepositoryImpl extends CrudRepositoryImpl<Role> implements RoleRepository {
 	private static final Logger LOGGER = Logger.getLogger(RoleRepositoryImpl.class.getName());
 
+	private static final String PROPERTY_CODE = "code";
+
 	protected RoleRepositoryImpl() {
 		super(Role.class);
 	}
@@ -41,6 +43,12 @@ public class RoleRepositoryImpl extends CrudRepositoryImpl<Role> implements Role
 	protected Object getParentKey(String parentWebSafeKey) {
 		Key<Account> key = Key.create(parentWebSafeKey);
 		return key;
+	}
+
+	@Override
+	protected void loadUniqueIndexMap(Role entiy) {
+		if ((entiy.getCode() != null) && (!entiy.getCode().isEmpty()))
+			entiy.addUniqueIndex(PROPERTY_CODE, entiy.getCode());
 	}
 
 }

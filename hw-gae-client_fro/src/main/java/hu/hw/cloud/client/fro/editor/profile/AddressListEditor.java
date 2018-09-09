@@ -19,14 +19,16 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 
+import hu.hw.cloud.client.fro.editor.HasEditorSwitch;
 import hu.hw.cloud.client.fro.editor.profile.AddressActionEvent.AddressActiEventHandler;
-import hu.hw.cloud.shared.dto.profile.PostalAddressDto;
+import hu.hw.cloud.shared.dto.profile.AddressDto;
 
 /**
  * @author robi
  *
  */
-public class AddressListEditor extends Composite implements IsEditor<ListEditor<PostalAddressDto, AddressEditor>> {
+public class AddressListEditor extends Composite
+		implements IsEditor<ListEditor<AddressDto, AddressEditor>>, HasEditorSwitch {
 	private static Logger logger = Logger.getLogger(AddressListEditor.class.getName());
 
 	interface Binder extends UiBinder<Widget, AddressListEditor> {
@@ -58,8 +60,7 @@ public class AddressListEditor extends Composite implements IsEditor<ListEditor<
 			if (index % 2 == 0)
 				subEditor.setBackgeoundColor();
 			subEditor.setIndex(index);
-			eventBus.fireEvent(new AddressActionEvent(AddressActionEvent.Action.OPEN, index));
-//			subEditor.openDetails(true);
+			subEditor.setReadOnly(readOnly);
 
 			listPanel.insert(subEditor, index);
 			return subEditor;
@@ -83,16 +84,15 @@ public class AddressListEditor extends Composite implements IsEditor<ListEditor<
 		}
 	}
 
-	private ListEditor<PostalAddressDto, AddressEditor> editor = ListEditor.of(new AddressEditorSource());
+	private ListEditor<AddressDto, AddressEditor> editor = ListEditor.of(new AddressEditorSource());
 
-	private final EventBus eventBus;
+	private Boolean readOnly = false;
 
 	/**
 	 */
 	@Inject
 	AddressListEditor(Binder uiBinder, EventBus eventBus) {
 		logger.info("AddressListEditor()");
-		this.eventBus = eventBus;
 		initWidget(uiBinder.createAndBindUi(this));
 
 		eventBus.addHandler(AddressActionEvent.TYPE, new AddressActiEventHandler() {
@@ -107,17 +107,33 @@ public class AddressListEditor extends Composite implements IsEditor<ListEditor<
 	}
 
 	@Override
-	public ListEditor<PostalAddressDto, AddressEditor> asEditor() {
+	public ListEditor<AddressDto, AddressEditor> asEditor() {
 		return editor;
 	}
 
 	public void addItem() {
-		PostalAddressDto e = new PostalAddressDto();
+		AddressDto e = new AddressDto();
 		editor.getList().add(e);
 	}
 
 	private void remove(final int index) {
 		editor.getList().remove(index);
+	}
+
+	@Override
+	public void toEditable() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void toReadOnly() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void setReadOnly(Boolean readOnly) {
+		this.readOnly = readOnly;
 	}
 
 }

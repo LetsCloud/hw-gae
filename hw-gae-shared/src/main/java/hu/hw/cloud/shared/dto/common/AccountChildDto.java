@@ -12,41 +12,30 @@ import hu.hw.cloud.shared.dto.BaseDto;
 @SuppressWarnings("serial")
 public class AccountChildDto extends BaseDto {
 
-	private AccountDto accountDto;
+	private AccountDto account;
 
-	private String accountWebSafeKey;
-
-	public AccountChildDto() {}
+	public AccountChildDto() {
+	}
 
 	public AccountChildDto(AccountChildDto dto) {
 		super(dto);
-		this.accountDto = dto.getAccountDto();
-		this.accountWebSafeKey = dto.getAccountWebSafeKey();
-	}
-	
-	public AccountDto getAccountDto() {
-		return accountDto;
+		this.account = dto.getAccount();
 	}
 
-	public void setAccountDto(AccountDto accountDto) {
-		this.accountDto = accountDto;
+	public AccountDto getAccount() {
+		return account;
 	}
 
-	public String getAccountWebSafeKey() {
-		return accountWebSafeKey;
-	}
-
-	public void setAccountWebSafeKey(String accountWebSafeKey) {
-		this.accountWebSafeKey = accountWebSafeKey;
+	public void setAccount(AccountDto account) {
+		this.account = account;
 	}
 
 	/*
-	 * toString 
+	 * toString
 	 */
 	@Override
 	public String toString() {
-		String ret = "AccountChildDto:{" + super.toString() + ", accountDto=" + accountDto + ", accountWebSafeKey="
-				+ accountWebSafeKey + "}";
+		String ret = "AccountChildDto:{" + super.toString() + ", account=" + account + "}";
 		return ret;
 	}
 

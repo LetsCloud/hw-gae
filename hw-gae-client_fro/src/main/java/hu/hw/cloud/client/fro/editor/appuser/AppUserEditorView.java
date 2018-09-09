@@ -60,15 +60,15 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 	MaterialCheckBox enabled, admin;
 
 	@UiField
-	MaterialComboBox<UserGroupDto> userGroupDtos;
+	MaterialComboBox<UserGroupDto> userGroups;
 
 	@UiField
-	MaterialComboBox<HotelDto> availableHotelDtos;
+	MaterialComboBox<HotelDto> availableHotels;
 
 	@UiField
 	@Ignore
-	MaterialComboBox<HotelDto> defaultHotelDtox;
-	TakesValueEditor<HotelDto> defaultHotelDto;
+	MaterialComboBox<HotelDto> defaultHotelCombo;
+	TakesValueEditor<HotelDto> defaultHotel;
 
 	String picture;
 	
@@ -78,23 +78,23 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 
 		initWidget(uiBinder.createAndBindUi(this));
 
-		defaultHotelDto = TakesValueEditor.of(new TakesValue<HotelDto>() {
+		defaultHotel = TakesValueEditor.of(new TakesValue<HotelDto>() {
 
 			@Override
 			public void setValue(HotelDto value) {
-				defaultHotelDtox.setSingleValue(value);
+				defaultHotelCombo.setSingleValue(value);
 			}
 
 			@Override
 			public HotelDto getValue() {
-				return defaultHotelDtox.getSingleValue();
+				return defaultHotelCombo.getSingleValue();
 			}
 		});
 
 		this.driver = driver;
 		driver.initialize(this);
 
-		availableHotelDtos.addSelectionHandler(new SelectComboHandler<HotelDto>() {
+		availableHotels.addSelectionHandler(new SelectComboHandler<HotelDto>() {
 
 			@Override
 			public void onSelectItem(SelectItemEvent<HotelDto> event) {
@@ -104,7 +104,13 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 	}
 
 	@Override
-	public void edit(Boolean isNew, AppUserDto dto) {
+	public void show(AppUserDto dto) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void edit(AppUserDto dto) {
 		logger.info("AppUserEditorView().edit()->dto=" + dto);
 
 		if (dto.getPicture() != null) {
@@ -113,31 +119,31 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 			setImageUrl(GWT.getHostPageBaseURL() + "image/user_plus.jpeg");
 		}
 
-		setDefHotelCombo(dto.getAvailableHotelDtos());
+		setDefHotelCombo(dto.getAvailableHotels());
 
 		driver.edit(dto);
 	}
 
 	@Override
 	public void setUserGroupData(List<UserGroupDto> data) {
-		userGroupDtos.clear();
+		userGroups.clear();
 		for (UserGroupDto dto : data) {
-			userGroupDtos.addItem(dto.getName(), dto);
+			userGroups.addItem(dto.getName(), dto);
 		}
 	}
 
 	@Override
 	public void setHotelData(List<HotelDto> data) {
-		availableHotelDtos.clear();
+		availableHotels.clear();
 		for (HotelDto dto : data) {
-			availableHotelDtos.addItem(dto.getName(), dto);
+			availableHotels.addItem(dto.getName(), dto);
 		}
 	}
 
 	private void setDefHotelCombo(List<HotelDto> dtos) {
-		defaultHotelDtox.clear();
+		defaultHotelCombo.clear();
 		for (HotelDto hd : dtos) {
-			defaultHotelDtox.addItem(hd.getName(), hd);
+			defaultHotelCombo.addItem(hd.getName(), hd);
 		}
 	}
 

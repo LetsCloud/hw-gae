@@ -19,6 +19,8 @@ import hu.hw.cloud.server.repository.RoomRepository;
 public class RoomRepositoryImpl extends HotelChildRepositoryImpl<Room> implements RoomRepository {
 	private static final Logger logger = LoggerFactory.getLogger(RoomRepositoryImpl.class.getName());
 
+	private static final String ROOM_CODE = "code";
+
 	public RoomRepositoryImpl() {
 		super(Room.class);
 		logger.info("RoomRepositoryImpl");
@@ -34,5 +36,11 @@ public class RoomRepositoryImpl extends HotelChildRepositoryImpl<Room> implement
 	public List<Room> getAllByHotel(String hotelKey) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	protected void loadUniqueIndexMap(Room entiy) {
+		if (entiy.getCode() != null)
+			entiy.addUniqueIndex(ROOM_CODE, entiy.getCode());
 	}
 }

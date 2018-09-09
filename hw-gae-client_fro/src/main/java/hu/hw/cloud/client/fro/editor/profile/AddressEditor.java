@@ -25,8 +25,8 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 
+import gwt.material.design.addext.client.ui.MaterialTextAreaAdd;
 import gwt.material.design.addins.client.combobox.MaterialComboBox;
-import gwt.material.design.client.constants.Display;
 import gwt.material.design.client.ui.MaterialCheckBox;
 import gwt.material.design.client.ui.MaterialIcon;
 import gwt.material.design.client.ui.MaterialRow;
@@ -35,12 +35,12 @@ import gwt.material.design.client.ui.MaterialTextBox;
 import hu.hw.cloud.client.core.i18n.CoreConstants;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.i18n.CountryConstants;
+import hu.hw.cloud.client.fro.editor.HasEditorSwitch;
 import hu.hw.cloud.client.fro.editor.profile.AddressActionEvent.AddressActiEventHandler;
-import hu.hw.cloud.client.fro.ui.MaterialTextAreaAdd;
 import hu.hw.cloud.shared.cnst.PostalAddressLabel;
-import hu.hw.cloud.shared.dto.profile.PostalAddressDto;
+import hu.hw.cloud.shared.dto.profile.AddressDto;
 
-public class AddressEditor extends Composite implements Editor<PostalAddressDto> {
+public class AddressEditor extends Composite implements Editor<AddressDto>, HasEditorSwitch {
 	private static Logger logger = Logger.getLogger(AddressEditor.class.getName());
 
 	interface MyStyle extends CssResource {
@@ -82,11 +82,11 @@ public class AddressEditor extends Composite implements Editor<PostalAddressDto>
 
 	@Ignore
 	@UiField
-	MaterialIcon detailsIcon, closeDetails, placeIcon, deleteIcon1, deleteIcon;
+	MaterialIcon deleteIcon;
 
 	private int index;
-
 	private final EventBus eventBus;
+	private final CoreConstants i18nCoreCnst;
 
 	@Inject
 	AddressEditor(Binder uiBinder, EventBus eventBus, CoreMessages i18nCore, CoreConstants i18nCoreCnst,
@@ -96,21 +96,14 @@ public class AddressEditor extends Composite implements Editor<PostalAddressDto>
 
 		primary.getElement().getStyle().setMarginTop(20, Unit.PX);
 
-		deleteIcon1.setDisplay(Display.NONE);
-
 		this.eventBus = eventBus;
+		this.i18nCoreCnst = i18nCoreCnst;
 
 		initPlaceIcon();
-		
-		initFullAddress();
-
-		initDetailsIcon();
 
 		initLabelCombo(i18nCoreCnst.addressTypeMap());
 
 		initCountryCombo(i18nCountry.countryMap());
-
-		initCloseDetails();
 
 		initDeleteIcon();
 
@@ -133,36 +126,13 @@ public class AddressEditor extends Composite implements Editor<PostalAddressDto>
 
 	}
 
-	private void initFullAddress() {
-	}
-
-	private void initDetailsIcon() {
-//		MaterialIcon detailsIcon = fullAddress.getRightIcon();
-		detailsIcon.getElement().getStyle().setMarginTop(10, Unit.PX);
-		detailsIcon.getElement().getStyle().setPadding(0, Unit.PX);
-
-		detailsIcon.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				logger.info("AddressEditor()->detailsIcon.onClick()");
-				eventBus.fireEvent(
-						new AddressActionEvent(AddressActionEvent.Action.OPEN, AddressEditor.this.getIndex()));
-			}
-		});
-	}
-
 	private void initPlaceIcon() {
-
-//		placeIcon.setDisplay(Display.NONE);
-		placeIcon.getElement().getStyle().setMarginTop(10, Unit.PX);
-		placeIcon.getElement().getStyle().setPadding(0, Unit.PX);
-
-		placeIcon.addClickHandler(new ClickHandler() {
+		fullAddress.getRightIcon().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
 				com.google.gwt.user.client.Window.open(
-						"https://www.google.com/maps/search/?api=1&query=" + URL.decode(fullAddress.getValue()), "Hello",
-						"menubar=no,location=false,resizable=yes,scrollbars=yes,status=no,dependent=true");
+						"https://www.google.com/maps/search/?api=1&query=" + URL.decode(fullAddress.getValue()),
+						"Hello", "menubar=no,location=false,resizable=yes,scrollbars=yes,status=no,dependent=true");
 			}
 		});
 	}
@@ -179,12 +149,13 @@ public class AddressEditor extends Composite implements Editor<PostalAddressDto>
 					fullAddress.setLabel(i18nAddressTypes.get(values.get(0).toString()));
 			}
 		});
-		labelCombo.setTabIndex(1);
+
 		label = TakesValueEditor.of(new TakesValue<PostalAddressLabel>() {
 
 			@Override
 			public void setValue(PostalAddressLabel value) {
 				labelCombo.setSingleValue(value);
+				setFullAddressLabel(value);
 			}
 
 			@Override
@@ -192,6 +163,11 @@ public class AddressEditor extends Composite implements Editor<PostalAddressDto>
 				return labelCombo.getSingleValue();
 			}
 		});
+	}
+
+	private void setFullAddressLabel(PostalAddressLabel label) {
+		if (label != null)
+			fullAddress.setLabel(i18nCoreCnst.addressTypeMap().get(label.toString()));
 	}
 
 	private void initCountryCombo(Map<String, String> i18nCountryMap) {
@@ -213,33 +189,7 @@ public class AddressEditor extends Composite implements Editor<PostalAddressDto>
 		});
 	}
 
-	private void initCloseDetails() {
-		closeDetails.getElement().getStyle().setMarginTop(20, Unit.PX);
-		closeDetails.getElement().getStyle().setPadding(0, Unit.PX);
-
-		closeDetails.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				logger.info("AddressEditor()->detailsIcon.onClick()");
-				eventBus.fireEvent(
-						new AddressActionEvent(AddressActionEvent.Action.CLOSE, AddressEditor.this.getIndex()));
-			}
-		});
-	}
-
 	private void initDeleteIcon() {
-		deleteIcon1.getElement().getStyle().setMarginTop(20, Unit.PX);
-		deleteIcon1.getElement().getStyle().setPadding(0, Unit.PX);
-
-		deleteIcon1.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				logger.info("AddressEditor()->deleteIcon.onClick()");
-				eventBus.fireEvent(
-						new AddressActionEvent(AddressActionEvent.Action.DELETE, AddressEditor.this.getIndex()));
-			}
-		});
-
 		deleteIcon.getElement().getStyle().setMarginTop(20, Unit.PX);
 		deleteIcon.getElement().getStyle().setPadding(0, Unit.PX);
 
@@ -294,5 +244,22 @@ public class AddressEditor extends Composite implements Editor<PostalAddressDto>
 	private void createFullAddress() {
 		fullAddress.setValue(
 				country.getValue() + ", " + postcode.getValue() + " " + city.getValue() + ", " + street.getValue());
+	}
+
+	@Override
+	public void toEditable() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void toReadOnly() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void setReadOnly(Boolean readOnly) {
+		fullPanel.setVisible(readOnly);
+		details.setVisible(!readOnly);
 	}
 }

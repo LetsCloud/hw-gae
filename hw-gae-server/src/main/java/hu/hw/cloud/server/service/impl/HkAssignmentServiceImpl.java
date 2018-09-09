@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.collections4.Predicate;
 //import org.apache.commons.collections.CollectionUtils;
@@ -17,8 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 //import org.springframework.beans.factory.annotation.Autowired;
 
-import hu.hw.cloud.server.entity.Utils;
-import hu.hw.cloud.server.entity.common.AppUser;
 import hu.hw.cloud.server.entity.hk.HkAssignment;
 import hu.hw.cloud.server.entity.hotel.Hotel;
 import hu.hw.cloud.server.entity.hotel.Room;
@@ -31,7 +28,6 @@ import hu.hw.cloud.server.repository.RoomRepository;
 import hu.hw.cloud.server.service.HkAssignmentService;
 import hu.hw.cloud.shared.cnst.ReservationStatus;
 import hu.hw.cloud.shared.cnst.RoomStatus;
-import hu.hw.cloud.shared.dto.common.AppUserDto;
 import hu.hw.cloud.shared.dto.hk.HkAssignmentDto;
 import hu.hw.cloud.shared.dto.hk.AssignmentSummaryDto;
 
@@ -39,7 +35,7 @@ import hu.hw.cloud.shared.dto.hk.AssignmentSummaryDto;
  * @author CR
  *
  */
-public class HkAssignmentServiceImpl extends CrudServiceImpl<HkAssignment, HkAssignmentDto, HkAssignmentRepo>
+public class HkAssignmentServiceImpl extends CrudServiceImpl<HkAssignment, HkAssignmentRepo>
 		implements HkAssignmentService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(HkAssignmentServiceImpl.class.getName());
 
@@ -97,8 +93,8 @@ public class HkAssignmentServiceImpl extends CrudServiceImpl<HkAssignment, HkAss
 				if (assignmentDto == null) {
 					assignmentDto = new HkAssignmentDto();
 					assignmentDto.setBusinessDate(date);
-					assignmentDto.setHotelDto(Hotel.createDto(room.getHotel()));
-					assignmentDto.setRoomDto(Room.createDto(room));
+// cr					assignmentDto.setHotelDto(Hotel.createDto(room.getHotel()));
+					// cr					assignmentDto.setRoomDto(Room.createDto(room));
 				}
 				// A beosztáshoz hozzáadjuk az érkező és a lakó foglalásokat
 				for (Reservation reservation : reservations) {
@@ -114,7 +110,7 @@ public class HkAssignmentServiceImpl extends CrudServiceImpl<HkAssignment, HkAss
 					});
 					// Érkezik
 					if (reservation.getStatus().equals(ReservationStatus.DEFINITIVE)) {
-						assignmentDto.addReservationDto(reservation.createDto());
+						// cr assignmentDto.addReservationDto(reservation.createDto());
 					}
 					// Lakó foglalás
 					if (reservation.getStatus().equals(ReservationStatus.CHECKED_IN)) {
@@ -128,16 +124,6 @@ public class HkAssignmentServiceImpl extends CrudServiceImpl<HkAssignment, HkAss
 			}
 		}
 		return null;
-	}
-
-	@Override
-	protected HkAssignment createEntity(HkAssignmentDto dto) {
-		return new HkAssignment(dto);
-	}
-
-	@Override
-	protected HkAssignment updateEntity(HkAssignment entity, HkAssignmentDto dto) {
-		return entity.update(dto);
 	}
 
 	@Override
@@ -174,15 +160,16 @@ public class HkAssignmentServiceImpl extends CrudServiceImpl<HkAssignment, HkAss
 		for (HkAssignment assignment : assignments) {
 			if (rooms.contains(assignment.getRoom()))
 				rooms.remove(assignment.getRoom());
-
-			AppUserDto attendantDto = AppUser.createDto(assignment.getAttendant());
-			AssignmentSummaryDto asd = Utils.findByAttendant(result, attendantDto);
+/*
+						AppUserDto attendantDto = AppUser.createDto(assignment.getAttendant());
+						AssignmentSummaryDto asd = Utils.findByAttendant(result, attendantDto);
 
 			if (asd != null) {
 				asd.addRoom(assignment.getRoom().getRoomStatus());
 			} else {
 				result.add(new AssignmentSummaryDto(attendantDto, assignment.getRoom().getRoomStatus(), 1));
 			}
+*/
 		}
 
 		if (rooms.size() > 0)
@@ -196,11 +183,5 @@ public class HkAssignmentServiceImpl extends CrudServiceImpl<HkAssignment, HkAss
 		for (Room room : rooms)
 			result.addRoom(room.getRoomStatus());
 		return result;
-	}
-
-	@Override
-	protected HkAssignment updateEntity(HkAssignment oldEntity, HkAssignment newEntity) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

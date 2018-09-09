@@ -18,9 +18,6 @@ import hu.hw.cloud.server.repository.ChatRepository;
 import hu.hw.cloud.server.service.ChatService;
 import hu.hw.cloud.server.service.impl.fcm.FcmService2;
 import hu.hw.cloud.shared.dto.NotificationDto;
-import hu.hw.cloud.shared.dto.chat.AddPostDto;
-import hu.hw.cloud.shared.dto.chat.ChatDto;
-import hu.hw.cloud.shared.dto.chat.ChatPostDto;
 import hu.hw.cloud.shared.exception.EntityValidationException;
 import hu.hw.cloud.shared.exception.UniqueIndexConflictException;
 
@@ -28,7 +25,7 @@ import hu.hw.cloud.shared.exception.UniqueIndexConflictException;
  * @author robi
  *
  */
-public class ChatServiceImpl extends CrudServiceImpl<Chat, ChatDto, ChatRepository> implements ChatService {
+public class ChatServiceImpl extends CrudServiceImpl<Chat, ChatRepository> implements ChatService {
 	private static final Logger logger = Logger.getLogger(ChatServiceImpl.class.getName());
 
 	private final ChatRepository repository;
@@ -51,34 +48,10 @@ public class ChatServiceImpl extends CrudServiceImpl<Chat, ChatDto, ChatReposito
 	}
 
 	@Override
-	public Chat create(ChatDto dto) throws Throwable {
+	public Chat create(Chat dto) throws Throwable {
 		Chat entiy = super.create(dto);
 		notifyReceivers(entiy.getSender(), entiy, false);
 		return entiy;
-	}
-
-	@Override
-	protected Chat createEntity(ChatDto dto) {
-		Date created = new Date();
-		dto.setCreated(created);
-		dto.setUpdated(created);
-		for (ChatPostDto post : dto.getPosts()) {
-			post.setCreated(created);
-		}
-		return new Chat(dto);
-	}
-
-	@Override
-	protected Chat updateEntity(Chat entity, ChatDto dto) {
-		entity.updEntityWithDto(dto);
-		entity.setUpdated(new Date());
-		return entity;
-	}
-
-	@Override
-	protected Chat updateEntity(Chat oldEntity, Chat newEntity) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -96,14 +69,14 @@ public class ChatServiceImpl extends CrudServiceImpl<Chat, ChatDto, ChatReposito
 	}
 
 	@Override
-	public Chat addPost(AddPostDto dto) throws EntityValidationException, UniqueIndexConflictException {
+	public Chat addPost(String chatKey, ChatPost post) throws EntityValidationException, UniqueIndexConflictException {
 		Date updated = new Date();
-		Chat chat = repository.findByWebSafeKey(dto.getChatWebSafeKey());
-		AppUser sender = new AppUser(dto.getSender());
-		chat.getPosts().add(new ChatPost(sender, dto.getMessage(), updated));
+		Chat chat = repository.findByWebSafeKey(chatKey);
+		post.setCreated(updated);
+		chat.getPosts().add(post);
 		chat.setUpdated(updated);
 		chat = repository.save(chat);
-		notifyReceivers(sender, chat, true);
+		notifyReceivers(chat.getSender(), chat, true);
 		return chat;
 	}
 

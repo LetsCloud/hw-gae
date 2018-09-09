@@ -15,15 +15,13 @@ public class UserGroupDto extends AccountChildDto {
 
 	private String name;
 
-	private List<AppUserDto> memberDtos = new ArrayList<AppUserDto>();
+	private List<AppUserDto> members = new ArrayList<AppUserDto>();
 
 	public UserGroupDto() {
 	}
 
-	public UserGroupDto(AppUserDto appUserDto) {
-		super(appUserDto);
-		this.name = appUserDto.getName();
-		this.memberDtos.add(appUserDto);
+	public UserGroupDto(AppUserDto member) {
+		members.add(member);
 	}
 
 	public String getName() {
@@ -34,12 +32,12 @@ public class UserGroupDto extends AccountChildDto {
 		this.name = name;
 	}
 
-	public List<AppUserDto> getMemberDtos() {
-		return memberDtos;
+	public List<AppUserDto> getMembers() {
+		return members;
 	}
 
-	public void setMemberDtos(List<AppUserDto> memberDtos) {
-		this.memberDtos = memberDtos;
+	public void setMembers(List<AppUserDto> members) {
+		this.members = members;
 	}
 
 }

@@ -33,7 +33,6 @@ public abstract class BaseController {
 	 * 
 	 * @param request
 	 * @param accountId
-	 * @return
 	 * @throws RestApiException
 	 */
 	public void accountIdValidation(WebRequest request, String accountId) throws RestApiException {

@@ -13,13 +13,12 @@ import org.slf4j.LoggerFactory;
 import hu.hw.cloud.server.entity.reservation.Reservation;
 import hu.hw.cloud.server.repository.ReservationRepository;
 import hu.hw.cloud.server.service.ReservationService;
-import hu.hw.cloud.shared.dto.reservation.ReservationDto;
 
 /**
  * @author CR
  *
  */
-public class ReservationServiceImpl extends CrudServiceImpl<Reservation, ReservationDto, ReservationRepository>
+public class ReservationServiceImpl extends CrudServiceImpl<Reservation, ReservationRepository>
 		implements ReservationService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ReservationServiceImpl.class.getName());
 	
@@ -36,24 +35,7 @@ public class ReservationServiceImpl extends CrudServiceImpl<Reservation, Reserva
 	}
 
 	@Override
-	protected Reservation createEntity(ReservationDto dto) {
-		return new Reservation(dto);
-	}
-
-	@Override
-	protected Reservation updateEntity(Reservation entity, ReservationDto dto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	protected List<Object> getParents(Long accountId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Reservation updateEntity(Reservation oldEntity, Reservation newEntity) {
 		// TODO Auto-generated method stub
 		return null;
 	}

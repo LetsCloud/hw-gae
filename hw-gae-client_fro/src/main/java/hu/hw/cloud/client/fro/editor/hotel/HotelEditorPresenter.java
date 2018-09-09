@@ -24,14 +24,14 @@ import hu.hw.cloud.client.core.event.SetPageTitleEvent;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.core.util.ErrorHandlerAsyncCallback;
-import hu.hw.cloud.client.fro.FroNameTokens;
-import hu.hw.cloud.client.fro.browser.AbstractBrowserPresenter;
 import hu.hw.cloud.client.fro.editor.AbstractEditorPresenter;
-import hu.hw.cloud.client.fro.editor.EditorView;
+import hu.hw.cloud.client.fro.editor.AbstractEditorView;
 import hu.hw.cloud.shared.api.HotelResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
+
+import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
 
 /**
  * @author robi
@@ -42,7 +42,7 @@ public class HotelEditorPresenter
 		implements HotelEditorUiHandlers {
 	private static Logger logger = Logger.getLogger(HotelEditorPresenter.class.getName());
 
-	public interface MyView extends EditorView<HotelDto>, HasUiHandlers<HotelEditorUiHandlers> {
+	public interface MyView extends AbstractEditorView<HotelDto>, HasUiHandlers<HotelEditorUiHandlers> {
 
 		void displayError(EntityPropertyCode code, String message);
 	}
@@ -78,14 +78,14 @@ public class HotelEditorPresenter
 			create();
 		} else {
 			SetPageTitleEvent.fire(i18n.hotelEditorModifyTitle(), "", MenuItemType.MENU_ITEM, HotelEditorPresenter.this);
-			edit(filters.get(AbstractBrowserPresenter.PARAM_DTO_KEY));
+			edit(filters.get(WEBSAFEKEY));
 		}
 	}
 
 	@Override
 	protected HotelDto createDto() {
 		HotelDto dto = new HotelDto();
-		dto.setAccountDto(currentUser.getAppUserDto().getAccountDto());
+		dto.setAccount(currentUser.getAppUserDto().getAccount());
 		return dto;
 	}
 
@@ -94,7 +94,7 @@ public class HotelEditorPresenter
 			@Override
 			public void onSuccess(HotelDto dto) {
 				logger.info("AppUserEditorPresenter().edit().onSuccess()->dto=" + dto);
-				getView().edit(false, dto);
+				getView().edit(dto);
 			}
 
 			@Override
@@ -109,7 +109,7 @@ public class HotelEditorPresenter
 		resourceDelegate.withCallback(new ErrorHandlerAsyncCallback<HotelDto>(this) {
 			@Override
 			public void onSuccess(HotelDto userDto) {
-				PlaceRequest placeRequest = new Builder().nameToken(FroNameTokens.HOTEL_CONFIG).build();
+				PlaceRequest placeRequest = new Builder().nameToken(CoreNameTokens.HOTEL_CONFIG).build();
 				placeManager.revealPlace(placeRequest);
 			}
 

@@ -17,15 +17,16 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
-import hu.hw.cloud.client.fro.browser.AbstractBrowserPresenter;
 import hu.hw.cloud.shared.dto.BaseDto;
+
+import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
 
 /**
  * @author robi
  *
  */
-public abstract class AbstractEditorPresenter<T extends BaseDto, V extends EditorView<T>, P extends Proxy<?>>
-		extends Presenter<V, P> implements EditorUiHandlers<T> {
+public abstract class AbstractEditorPresenter<T extends BaseDto, V extends AbstractEditorView<T>, P extends Proxy<?>>
+		extends Presenter<V, P> implements AbstractEditorUiHandlers<T> {
 	private static Logger logger = Logger.getLogger(AbstractEditorPresenter.class.getName());
 
 	protected Map<String, String> filters = new HashMap<String, String>();
@@ -63,13 +64,13 @@ public abstract class AbstractEditorPresenter<T extends BaseDto, V extends Edito
 	protected abstract void loadData();
 
 	protected Boolean isNew() {
-		return Strings.isNullOrEmpty(filters.get(AbstractBrowserPresenter.PARAM_DTO_KEY));
+		return Strings.isNullOrEmpty(filters.get(WEBSAFEKEY));
 	}
 
 	protected void create() {
 		logger.info("AbstractEditorPresenter().create()");
 		T dto = createDto();
-		getView().edit(true, dto);
+		getView().edit(dto);
 	}
 
 	protected abstract T createDto();

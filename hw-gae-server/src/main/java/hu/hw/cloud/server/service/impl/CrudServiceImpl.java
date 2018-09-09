@@ -17,15 +17,14 @@ import com.googlecode.objectify.Work;
 import hu.hw.cloud.server.entity.BaseEntity;
 import hu.hw.cloud.server.repository.CrudRepository;
 import hu.hw.cloud.server.service.CrudService;
-import hu.hw.cloud.shared.dto.BaseDto;
 import hu.hw.cloud.shared.exception.EntityVersionConflictException;
 
 /**
  * @author CR
  *
  */
-public abstract class CrudServiceImpl<T extends BaseEntity, D extends BaseDto, R extends CrudRepository<T>>
-		implements CrudService<T, D> {
+public abstract class CrudServiceImpl<T extends BaseEntity, R extends CrudRepository<T>>
+		implements CrudService<T> {
 	private static final Logger logger = LoggerFactory.getLogger(CrudServiceImpl.class.getName());
 
 	protected R repository;
@@ -35,30 +34,22 @@ public abstract class CrudServiceImpl<T extends BaseEntity, D extends BaseDto, R
 		this.repository = repository;
 	}
 
-	protected abstract T createEntity(D dto);
-
-	protected abstract T updateEntity(T entity, D dto);
-
-	protected abstract T updateEntity(T oldEntity, T newEntity);
-
 	protected abstract List<Object> getParents(Long accountId);
 
 	protected abstract List<Object> getParents(String accountWebSafeKey);
 
 	@Override
-	public T create(final D dto) throws Throwable {
+	public T create(final T entity) throws Throwable {
 		// A tranzakció végrehajtása folyamán jelentkező kivétel elfogása
 		// céljából...
 		try {
 			// Objectify tranzakció indul
 			T th = ofy().transact(new Work<T>() {
 				public T run() {
-					// A DTO-ból létrehozzuk a Hotel entitást
-					T entity = createEntity(dto);
 					try {
 						// majd megpróbáljuk elmenteni
-						entity = repository.save(entity);
-						return entity;
+						T entity2 = repository.save(entity);
+						return entity2;
 					} catch (Throwable e) {
 						// Kivétel esetén csomagoljuk azt egy futásidejű
 						// kivételbe, majd kiváltjuk
@@ -79,39 +70,18 @@ public abstract class CrudServiceImpl<T extends BaseEntity, D extends BaseDto, R
 	}
 
 	@Override
-	public T update(final T entity) throws Throwable {
-		try {
-			T th = ofy().transact(new Work<T>() {
-				public T run() {
-					try {
-						T entity2 = repository.save(entity);
-						return entity2;
-					} catch (Throwable e) {
-						e.printStackTrace(System.out);
-						throw new RuntimeException(e);
-					}
-				}
-			});
-			return th;
-		} catch (RuntimeException re) {
-			throw re.getCause();
-		}
-	}
-
-	@Override
-	public T update(final D dto) throws Throwable {
+	public T update(final T entity1) throws Throwable {
 		logger.info("update");
 
 		try {
 			T th = ofy().transact(new Work<T>() {
 				public T run() {
-					T entity = repository.findByWebSafeKey(dto.getWebSafeKey());
+					T entity2 = repository.findByWebSafeKey(entity1.getWebSafeKey());
 					try {
-						if (entity.getVersion() > dto.getVersion())
+						if (entity2.getVersion() > entity1.getVersion())
 							throw new EntityVersionConflictException();
-						entity = updateEntity(entity, dto);
-						entity = repository.save(entity);
-						return entity;
+						entity2 = repository.save(entity1);
+						return entity2;
 					} catch (Throwable e) {
 						e.printStackTrace(System.out);
 						throw new RuntimeException(e);

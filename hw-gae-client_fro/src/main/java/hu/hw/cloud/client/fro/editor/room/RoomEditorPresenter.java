@@ -32,10 +32,8 @@ import hu.hw.cloud.client.core.datasource.RoomTypeDataSource;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.security.CurrentUser;
-import hu.hw.cloud.client.fro.FroNameTokens;
-import hu.hw.cloud.client.fro.browser.AbstractBrowserPresenter;
 import hu.hw.cloud.client.fro.editor.AbstractEditorPresenter;
-import hu.hw.cloud.client.fro.editor.EditorView;
+import hu.hw.cloud.client.fro.editor.AbstractEditorView;
 import hu.hw.cloud.shared.api.RoomResource;
 import hu.hw.cloud.shared.cnst.InventoryType;
 import hu.hw.cloud.shared.cnst.MenuItemType;
@@ -44,6 +42,9 @@ import hu.hw.cloud.shared.dto.hotel.HotelDto;
 import hu.hw.cloud.shared.dto.hotel.RoomAvailabilityDto;
 import hu.hw.cloud.shared.dto.hotel.RoomDto;
 import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
+
+import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
+import static hu.hw.cloud.shared.api.ApiParameters.HOTEL_KEY;
 
 /**
  * @author robi
@@ -54,7 +55,7 @@ public class RoomEditorPresenter
 		implements RoomEditorUiHandlers {
 	private static Logger logger = Logger.getLogger(RoomEditorPresenter.class.getName());
 
-	public interface MyView extends EditorView<RoomDto>, HasUiHandlers<RoomEditorUiHandlers> {
+	public interface MyView extends AbstractEditorView<RoomDto>, HasUiHandlers<RoomEditorUiHandlers> {
 		void setRoomTypeData(List<RoomTypeDto> roomTypeData);
 
 		void displayError(EntityPropertyCode code, String message);
@@ -92,8 +93,8 @@ public class RoomEditorPresenter
 	@Override
 	protected void loadData() {
 		roomTypeDataSource.setOnlyActive(true);
-		roomTypeDataSource.setHotelKey(filters.get(AbstractBrowserPresenter.PARAM_HOTEL_KEY));
-		hotelDataSource.setWebSafeKey(filters.get(AbstractBrowserPresenter.PARAM_HOTEL_KEY));
+		roomTypeDataSource.setHotelKey(filters.get(HOTEL_KEY));
+		hotelDataSource.setWebSafeKey(filters.get(HOTEL_KEY));
 		
 		LoadCallback<RoomTypeDto> roomTypeLoadCallback = new LoadCallback<RoomTypeDto>() {
 			@Override
@@ -119,7 +120,7 @@ public class RoomEditorPresenter
 					};
 					hotelDataSource.get(new LoadConfig<HotelDto>(0, 0, null, null), hotelLoadCallback);
 				} else {
-					edit(filters.get(AbstractBrowserPresenter.PARAM_DTO_KEY));
+					edit(filters.get(WEBSAFEKEY));
 				}
 			}
 
@@ -134,9 +135,9 @@ public class RoomEditorPresenter
 	@Override
 	protected RoomDto createDto() {
 		RoomDto dto = new RoomDto();
-		dto.setHotelDto(currentUser.getAppUserDto().getDefaultHotelDto());
+		dto.setHotel(currentUser.getAppUserDto().getDefaultHotel());
 		RoomAvailabilityDto ra = new RoomAvailabilityDto(true, new Date());
-		dto.addRoomAvailabilityDto(ra);
+		dto.addRoomAvailability(ra);
 		return dto;
 	}
 
@@ -144,15 +145,15 @@ public class RoomEditorPresenter
 		resourceDelegate.withCallback(new AsyncCallback<RoomDto>() {
 			@Override
 			public void onSuccess(RoomDto dto) {
-				List<RoomAvailabilityDto> availabilities = dto.getRoomAvailabilityDtos();
+				List<RoomAvailabilityDto> availabilities = dto.getRoomAvailabilities();
 				if (availabilities != null)
 					availabilities.sort(
 							(RoomAvailabilityDto o1, RoomAvailabilityDto o2) -> o1.getDate().compareTo(o2.getDate()));
 
-				SetPageTitleEvent.fire(i18nCore.roomEditorModifyTitle(), dto.getHotelDto().getName(),
+				SetPageTitleEvent.fire(i18nCore.roomEditorModifyTitle(), dto.getHotel().getName(),
 						MenuItemType.MENU_ITEM, RoomEditorPresenter.this);
 
-				getView().edit(false, dto);
+				getView().edit(dto);
 			}
 
 			@Override
@@ -167,7 +168,7 @@ public class RoomEditorPresenter
 		resourceDelegate.withCallback(new AsyncCallback<RoomDto>() {
 			@Override
 			public void onSuccess(RoomDto dto) {
-				PlaceRequest placeRequest = new Builder().nameToken(FroNameTokens.HOTEL_CONFIG).build();
+				PlaceRequest placeRequest = new Builder().nameToken(CoreNameTokens.HOTEL_CONFIG).build();
 				placeManager.revealPlace(placeRequest);
 			}
 

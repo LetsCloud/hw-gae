@@ -16,7 +16,7 @@ import gwt.material.design.client.ui.MaterialToast;
 import hu.hw.cloud.client.core.promise.xgwt.Fn;
 import hu.hw.cloud.client.firebase.messaging.MessagingManager;
 import hu.hw.cloud.client.firebase.messaging.js.Fnx;
-import hu.hw.cloud.shared.FcmService;
+import hu.hw.cloud.shared.api.FcmResource;
 
 /**
  * @author CR
@@ -28,11 +28,11 @@ public class AppServiceWorkerManager extends ServiceWorkerManager {
 	private final EventBus eventBus;
 	private final MessagingManager fcmManager;
 	private final RestDispatch dispatch;
-	private final FcmService fcmService;
+	private final FcmResource fcmService;
 	private String endpoint, auth, key;
 
 	public AppServiceWorkerManager(String resource, EventBus eventBus, MessagingManager fcmManager,
-			RestDispatch dispatch, FcmService fcmService) {
+			RestDispatch dispatch, FcmResource fcmService) {
 		super(resource);
 		this.eventBus = eventBus;
 		this.fcmManager = fcmManager;

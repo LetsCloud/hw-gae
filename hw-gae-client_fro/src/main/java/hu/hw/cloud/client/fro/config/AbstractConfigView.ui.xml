@@ -27,20 +27,23 @@
 	<g:HTMLPanel addStyleNames="{style.mainPanel}">
 		<!-- MOBILE SELECTOR -->
 		<!-- -->
-		<m:MaterialPanel ui:field="mobilePanel" hideOn="HIDE_ON_LARGE" showOn="SHOW_ON_MED_DOWN"
+		<m:MaterialPanel ui:field="mobilePanel"
+			hideOn="HIDE_ON_LARGE" showOn="SHOW_ON_MED_DOWN"
 			addStyleNames="{style.mobileSelectPanel}">
-			<m:MaterialButton
-				text="{i18n.systemConfigMobileSelect}" iconType="ARROW_DROP_DOWN"
-				iconPosition="RIGHT" textColor="WHITE" activates="dp-2" width="100%" />
-			<!-- My Drop Down -->
-			<m:MaterialDropDown ui:field="mobileDropDown"
-				activator="dp-2" constrainWidth="true" />
+			<m:MaterialButton ui:field="mobileMenuButton"
+				iconType="ARROW_DROP_DOWN" iconPosition="RIGHT" textColor="WHITE"
+				width="100%" />
+			<!-- My Drop Down <m:MaterialDropDown ui:field="mobileDropDown" activator="dp-2" 
+				constrainWidth="true" /> activates="dp-2" -->
+			<m:MaterialCollection ui:field="mobileMenu"
+				addStyleNames="{style.collection}" visible="false" />
 		</m:MaterialPanel>
 
 		<m:MaterialRow>
 			<m:MaterialColumn grid="l3">
 				<!-- -->
-				<m:MaterialPanel ui:field="desktopPanel" hideOn="HIDE_ON_MED_DOWN" showOn="SHOW_ON_LARGE">
+				<m:MaterialPanel ui:field="desktopPanel"
+					hideOn="HIDE_ON_MED_DOWN" showOn="SHOW_ON_LARGE">
 
 					<m:MaterialCollection ui:field="desktopMenu"
 						addStyleNames="{style.collection}" />

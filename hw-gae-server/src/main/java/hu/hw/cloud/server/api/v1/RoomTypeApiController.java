@@ -11,6 +11,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import hu.hw.cloud.server.entity.hotel.RoomType;
 import hu.hw.cloud.server.repository.HotelRepository;
 import hu.hw.cloud.server.repository.RoomTypeRepository;
 import hu.hw.cloud.server.service.RoomTypeService;
+import hu.hw.cloud.shared.dto.common.AppUserDto;
 import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
 import hu.hw.cloud.shared.exception.RestApiException;
 
@@ -47,6 +49,9 @@ public class RoomTypeApiController extends BaseController {
 	@Autowired
 	private RoomTypeRepository roomTypeRepository;
 
+	@Autowired
+	private ModelMapper modelMapper;
+
 	/**
 	 * Új hotel rögzítése
 	 * 
@@ -59,15 +64,15 @@ public class RoomTypeApiController extends BaseController {
 			throws RestApiException {
 		LOGGER.info("createRoomType");
 
-		String accountId = hotelRepository.getAccountId(dto.getHotelWebSafeKey());
+		String accountId = "";  // hotelRepository.getAccountId(dto.getHotelWebSafeKey());
 		// Ha nem egyezik a HotelDto előfizetői azonosító és az autentikációban
 		// található előfizetői azonosítóval, akkor gáz van.
 		accountIdValidation(request, accountId);
 
 		try {
 			LOGGER.info("createRoomType->try");
-			RoomType entity = roomTypeService.create(dto);
-			dto = RoomType.createDto(entity);
+			RoomType entity = roomTypeService.create(modelMapper.map(dto, RoomType.class));
+			dto = modelMapper.map(entity, RoomTypeDto.class);
 			return new ResponseEntity<RoomTypeDto>(dto, OK);
 		} catch (Throwable e) {
 			throw new RestApiException(e);
@@ -88,7 +93,7 @@ public class RoomTypeApiController extends BaseController {
 
 		try {
 			RoomType entity = roomTypeService.read(roomTypeId);
-			RoomTypeDto dto = RoomType.createDto(entity);
+			RoomTypeDto dto = modelMapper.map(entity, RoomTypeDto.class);
 			return new ResponseEntity<RoomTypeDto>(dto, OK);
 		} catch (Throwable e) {
 			throw new RestApiException(e);
@@ -97,7 +102,7 @@ public class RoomTypeApiController extends BaseController {
 
 	/**
 	 * 
-	 * @param hotelDto
+	 * @param dto
 	 * @param request
 	 * @return
 	 * @throws Throwable
@@ -112,8 +117,8 @@ public class RoomTypeApiController extends BaseController {
 		accountIdValidation(request, accountId);
 
 		try {
-			RoomType entity = roomTypeService.update(dto);
-			dto = RoomType.createDto(entity);
+			RoomType entity = roomTypeService.update(modelMapper.map(dto, RoomType.class));
+			dto = modelMapper.map(entity, RoomTypeDto.class);
 			return new ResponseEntity<RoomTypeDto>(dto, OK);
 		} catch (Throwable e) {
 			throw new RestApiException(e);

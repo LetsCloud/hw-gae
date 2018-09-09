@@ -28,15 +28,17 @@ import hu.hw.cloud.client.core.datasource.HotelDataSource;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.security.CurrentUser;
-import hu.hw.cloud.client.fro.FroNameTokens;
-import hu.hw.cloud.client.fro.browser.AbstractBrowserPresenter;
 import hu.hw.cloud.client.fro.editor.AbstractEditorPresenter;
-import hu.hw.cloud.client.fro.editor.EditorView;
+import hu.hw.cloud.client.fro.editor.AbstractEditorView;
 import hu.hw.cloud.shared.api.RoomTypeResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
 import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
+
+import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
+import static hu.hw.cloud.shared.api.ApiParameters.HOTEL_KEY;
+
 
 /**
  * @author robi
@@ -47,7 +49,7 @@ public class RoomTypeEditorPresenter
 		implements RoomTypeEditorUiHandlers {
 	private static Logger logger = Logger.getLogger(RoomTypeEditorPresenter.class.getName());
 
-	public interface MyView extends EditorView<RoomTypeDto>, HasUiHandlers<RoomTypeEditorUiHandlers> {
+	public interface MyView extends AbstractEditorView<RoomTypeDto>, HasUiHandlers<RoomTypeEditorUiHandlers> {
 
 		void displayError(EntityPropertyCode code, String message);
 	}
@@ -81,7 +83,7 @@ public class RoomTypeEditorPresenter
 	@Override
 	protected void loadData() {
 		if (isNew()) {
-			hotelDataSource.setWebSafeKey(filters.get(AbstractBrowserPresenter.PARAM_HOTEL_KEY));
+			hotelDataSource.setWebSafeKey(filters.get(HOTEL_KEY));
 			LoadCallback<HotelDto> hotelLoadCallback = new LoadCallback<HotelDto>() {
 				@Override
 				public void onSuccess(LoadResult<HotelDto> loadResult) {
@@ -97,7 +99,7 @@ public class RoomTypeEditorPresenter
 			};
 			hotelDataSource.get(new LoadConfig<HotelDto>(0, 0, null, null), hotelLoadCallback);
 		} else {
-			edit(filters.get(AbstractBrowserPresenter.PARAM_DTO_KEY));
+			edit(filters.get(WEBSAFEKEY));
 		}
 	}
 
@@ -105,7 +107,7 @@ public class RoomTypeEditorPresenter
 	protected RoomTypeDto createDto() {
 		logger.info("RoomTypeEditorPresenter().createDto()");
 		RoomTypeDto dto = new RoomTypeDto();
-		dto.setHotelDto(currentUser.getAppUserDto().getDefaultHotelDto());
+		dto.setHotel(currentUser.getAppUserDto().getDefaultHotel());
 		logger.info("RoomTypeEditorPresenter().createDto()->dto=" + dto);
 		return dto;
 	}
@@ -115,10 +117,10 @@ public class RoomTypeEditorPresenter
 		resourceDelegate.withCallback(new AsyncCallback<RoomTypeDto>() {
 			@Override
 			public void onSuccess(RoomTypeDto dto) {
-				SetPageTitleEvent.fire(i18n.roomTypeEditorModifyTitle(), dto.getHotelDto().getName(),
+				SetPageTitleEvent.fire(i18n.roomTypeEditorModifyTitle(), dto.getHotel().getName(),
 						MenuItemType.MENU_ITEM, RoomTypeEditorPresenter.this);
 
-				getView().edit(false, dto);
+				getView().edit(dto);
 			}
 
 			@Override
@@ -133,7 +135,7 @@ public class RoomTypeEditorPresenter
 		resourceDelegate.withCallback(new AsyncCallback<RoomTypeDto>() {
 			@Override
 			public void onSuccess(RoomTypeDto dto) {
-				PlaceRequest placeRequest = new Builder().nameToken(FroNameTokens.HOTEL_CONFIG).build();
+				PlaceRequest placeRequest = new Builder().nameToken(CoreNameTokens.HOTEL_CONFIG).build();
 				placeManager.revealPlace(placeRequest);
 			}
 

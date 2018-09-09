@@ -27,7 +27,7 @@ import hu.hw.cloud.client.core.event.SetPageTitleEvent.SetPageTitleHandler;
 import hu.hw.cloud.client.core.security.AppData;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.core.security.HasPermissionsGatekeeper;
-import hu.hw.cloud.shared.AuthService;
+import hu.hw.cloud.shared.api.AuthResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.dto.core.MenuItemDto;
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
@@ -72,13 +72,13 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView>
 
 	private final PlaceManager placeManager;
 	private final RestDispatch dispatcher;
-	private final AuthService authService;
+	private final AuthResource authService;
 	private final CurrentUser currentUser;
 	private final AppData appData;
 
 	@Inject
 	MenuPresenter(EventBus eventBus, MyView view, PlaceManager placeManager, RestDispatch dispatcher,
-			AuthService authService, CurrentUser currentUser, AppData appData,
+			AuthResource authService, CurrentUser currentUser, AppData appData,
 			HasPermissionsGatekeeper menItemGatekeeper) {
 		super(eventBus, view);
 		logger.info("MenuPresenter()");
@@ -171,12 +171,12 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView>
 
 	@Override
 	public void referesh() {
-		getView().setAccountName(currentUser.getAppUserDto().getAccountDto().getName());
+		getView().setAccountName(currentUser.getAppUserDto().getAccount().getName());
 		if (currentUser.getCurrentHotelDto()!=null) {
 			if (!Strings.isNullOrEmpty(currentUser.getCurrentHotelDto().getName()))
 				getView().setHotelName(currentUser.getCurrentHotelDto().getName());
 		}
-		getView().setPermittedHotels(currentUser.getAppUserDto().getAvailableHotelDtos());
+		getView().setPermittedHotels(currentUser.getAppUserDto().getAvailableHotels());
 		getView().setUserImageUrl(currentUser.getAppUserDto().getPicture());
 		getView().setUserName(currentUser.getAppUserDto().getName());
 	}

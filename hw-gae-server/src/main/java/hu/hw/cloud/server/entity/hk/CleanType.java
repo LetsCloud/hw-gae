@@ -6,7 +6,6 @@ package hu.hw.cloud.server.entity.hk;
 import com.googlecode.objectify.annotation.Entity;
 
 import hu.hw.cloud.server.entity.hotel.HotelChild;
-import hu.hw.cloud.shared.dto.hk.CleanTypeDto;
 
 /**
  * @author CR
@@ -22,11 +21,6 @@ public class CleanType extends HotelChild {
 	private Integer time;
 
 	public CleanType() {
-	}
-
-	public CleanType(CleanTypeDto dto) {
-		super(dto);
-		this.updEntityWithDto(dto);
 	}
 
 	public String getCode() {
@@ -51,35 +45,5 @@ public class CleanType extends HotelChild {
 
 	public void setTime(Integer time) {
 		this.time = time;
-	}
-
-	public void update(CleanType dto) {
-		this.setCode(dto.getCode());
-		this.setDescription(dto.getDescription());
-		this.setTime(dto.getTime());
-	}
-
-	/**
-	 * Létrehozza az entitás DTO megfelelőjét
-	 * 
-	 * @param entity
-	 * @return
-	 */
-	public static CleanTypeDto createDto(CleanType entity) {
-		return entity.updateDto(new CleanTypeDto());
-	}
-
-	/**
-	 * Az átadott DTO megmódosítása saját adatokkal
-	 * 
-	 * @param dto
-	 * @return
-	 */
-	public CleanTypeDto updateDto(CleanTypeDto dto) {
-		dto = (CleanTypeDto) super.updDtoWithEntity(dto);
-		dto.setCode(this.getCode());
-		dto.setDescription(this.getDescription());
-		dto.setTime(this.getTime());
-		return dto;
 	}
 }

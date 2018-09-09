@@ -3,12 +3,11 @@ package hu.hw.cloud.server.service;
 import java.util.List;
 
 import hu.hw.cloud.shared.dto.RegisterDto;
-import hu.hw.cloud.shared.dto.common.AppUserDto;
 import hu.hw.cloud.shared.exception.EntityValidationException;
 import hu.hw.cloud.shared.exception.UniqueIndexConflictException;
 import hu.hw.cloud.server.entity.common.AppUser;
 
-public interface AppUserService extends CrudService<AppUser, AppUserDto> {
+public interface AppUserService extends CrudService<AppUser> {
 
 	AppUser getUserByUsername(String username, Long accountGeneratedId);
 

@@ -55,7 +55,7 @@ public class TaskEditorPresenter extends PresenterWidget<TaskEditorPresenter.MyV
 		isNew = true;
 
 		TaskDto dto = new TaskDto();
-		dto.setAccountDto(currentUser.getAppUserDto().getAccountDto());
+		dto.setAccount(currentUser.getAppUserDto().getAccount());
 
 		getView().open(isNew, dto);
 	}

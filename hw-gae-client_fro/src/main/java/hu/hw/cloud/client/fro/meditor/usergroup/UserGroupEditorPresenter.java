@@ -18,7 +18,7 @@ import hu.hw.cloud.client.core.event.RefreshTableEvent;
 import hu.hw.cloud.client.core.gin.CustomActionException;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.fro.edit.appuser.AppUserEditPresenter;
-import hu.hw.cloud.shared.UserGroupResource;
+import hu.hw.cloud.shared.api.UserGroupResource;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
 import hu.hw.cloud.shared.dto.common.UserGroupDto;
 
@@ -61,7 +61,7 @@ public class UserGroupEditorPresenter extends PresenterWidget<UserGroupEditorPre
 		isNew = true;
 
 		UserGroupDto dto = new UserGroupDto();
-		dto.setAccountDto(currentUser.getAppUserDto().getAccountDto());
+		dto.setAccount(currentUser.getAppUserDto().getAccount());
 
 		getView().open(isNew, dto);
 	}

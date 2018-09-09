@@ -107,7 +107,13 @@ public class RoomTypeEditorView extends ViewWithUiHandlers<RoomTypeEditorUiHandl
 	}
 
 	@Override
-	public void edit(Boolean isNew, RoomTypeDto dto) {
+	public void show(RoomTypeDto dto) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void edit(RoomTypeDto dto) {
 		driver.edit(dto);
 
 		Timer t = new Timer() {

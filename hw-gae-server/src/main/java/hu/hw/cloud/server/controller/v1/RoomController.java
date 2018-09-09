@@ -25,6 +25,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,16 +56,20 @@ public class RoomController extends HotelChildController<Room, RoomDto> {
 
 	private final RoomService roomService;
 
+	private final ModelMapper modelMapper;
+
 	@Autowired
-	RoomController(RoomService roomService) {
-		super(roomService);
+	RoomController(RoomService roomService, ModelMapper modelMapper) {
+		super(Room.class, roomService, modelMapper);
 		logger.info("RoomController()");
 		this.roomService = roomService;
+		this.modelMapper = modelMapper;
 	}
 
 	@Override
 	protected RoomDto createDto(Room entity) {
-		return Room.createDto(entity);
+		RoomDto dto = modelMapper.map(entity, RoomDto.class);
+		return dto;
 	}
 
 	@RequestMapping(method = GET)
@@ -76,7 +81,7 @@ public class RoomController extends HotelChildController<Room, RoomDto> {
 			List<RoomDto> result = new ArrayList<RoomDto>();
 			for (Room room : roomService.getActiveRoomsByHotel(hotelKey)) {
 				logger.info("RoomController().getByHotel()->onlyActive->room.getCode()=" + room.getCode());
-				result.add(Room.createDto(room));
+				result.add(modelMapper.map(room, RoomDto.class));
 			}
 			return new ResponseEntity<List<RoomDto>>(result, OK);
 		} else {
@@ -110,7 +115,7 @@ public class RoomController extends HotelChildController<Room, RoomDto> {
 		Room room;
 		try {
 			room = roomService.changeStatus(roomKey, roomStatus);
-			RoomDto roomDto = Room.createDto(room);
+			RoomDto roomDto = modelMapper.map(room, RoomDto.class);
 			// LOGGER.info("changeStatus()->roomDto=" + roomDto);
 			return new ResponseEntity<RoomDto>(roomDto, OK);
 		} catch (Throwable e) {
@@ -130,7 +135,11 @@ public class RoomController extends HotelChildController<Room, RoomDto> {
 		List<Room> allRooms = roomService.getAvailableRoomsByHotelOnDateWithReservations(filterDto.getHotelKey(),
 				filterDto.getDate());
 		allRooms = Room.filterByRoomStatus(allRooms, filterDto);
-		List<RoomDto> roomDtos = Room.createDtos(allRooms);
+
+		List<RoomDto> roomDtos = new ArrayList<RoomDto>();
+		for (Room room : allRooms)
+			roomDtos.add(modelMapper.map(room, RoomDto.class));
+		
 		return new ResponseEntity<List<RoomDto>>(roomDtos, OK);
 	}
 }

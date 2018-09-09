@@ -3,63 +3,51 @@
  */
 package hu.hw.cloud.server.entity.common;
 
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Parent;
 
 import hu.hw.cloud.server.entity.BaseEntity;
-import hu.hw.cloud.shared.dto.common.AccountChildDto;
 
 /**
+ * Az Account entitás gyermekeinek őse.
+ * <p>
+ * Az ős Account-ra való hivatkozással egészül ki.
+ * 
  * @author CR
  *
  */
 public class AccountChild extends BaseEntity {
-//	private static final Logger logger = LoggerFactory.getLogger(AccountChild.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(AccountChild.class.getName());
 
 	@Parent
-	private Ref<Account> accountRef;
+	private Ref<Account> account;
 
 	/**
-	 * Objectify miatt
+	 * Objectify miatt van rá szükség.
 	 */
 	public AccountChild() {
-//		logger.info("AccountChild()");
+		super();
+		logger.info("AccountChild()");
 	}
 
 	public Account getAccount() {
-		return accountRef.get();
+		if (account == null)
+			return null;
+		return account.get();
 	}
 
 	public void setAccount(Account account) {
-		this.accountRef = Ref.create(account);
+		logger.info("setAccount()->" + account);
+		if (account.getId() != null)
+			this.account = Ref.create(account);
 	}
 
-	/**
-	 * Entitás módosítása DTO adataival
-	 * 
-	 * @param dto
-	 */
-	public void updEntityWithDto(AccountChildDto dto) {
-		super.updEntityWithDto(dto);
-
-		if (dto.getAccountDto() != null)
-			setAccount(new Account(dto.getAccountDto()));
-	}
-
-	/**
-	 * DTO módosítása entitás attribútumokkal
-	 * 
-	 * @param dto
-	 * @return
-	 */
-	public AccountChildDto updDtoWithEntity(AccountChildDto dto) {
-		dto = (AccountChildDto) super.updDtoWithEntity(dto);
-		if (getAccount() != null)
-			dto.setAccountDto(Account.createDto(getAccount()));
-		return dto;
+	@Override
+	public String toString() {
+		return "AccountChild:[account=" + getAccount() + "]>>" + super.toString();
 	}
 
 	/**

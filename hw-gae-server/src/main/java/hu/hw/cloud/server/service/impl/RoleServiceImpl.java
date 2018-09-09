@@ -21,14 +21,13 @@ import hu.hw.cloud.server.repository.RoleRepository;
 import hu.hw.cloud.server.service.MessageSourceHandler;
 import hu.hw.cloud.server.service.RoleService;
 import hu.hw.cloud.shared.cnst.Permissions;
-import hu.hw.cloud.shared.dto.common.RoleDto;
 
 /**
  * @author CR
  *
  */
 //@Service
-public class RoleServiceImpl extends CrudServiceImpl<Role, RoleDto, RoleRepository> implements RoleService {
+public class RoleServiceImpl extends CrudServiceImpl<Role, RoleRepository> implements RoleService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AppUserServiceImpl.class);
 
 	private static final String CODE = "Code";
@@ -83,17 +82,6 @@ public class RoleServiceImpl extends CrudServiceImpl<Role, RoleDto, RoleReposito
 	}
 
 	@Override
-	protected Role createEntity(RoleDto dto) {
-		return new Role(dto);
-	}
-
-	@Override
-	protected Role updateEntity(Role entity, RoleDto dto) {
-		entity.update(dto);
-		return entity;
-	}
-
-	@Override
 	protected List<Object> getParents(Long accountId) {
 		List<Object> parents = new ArrayList<Object>();
 		parents.add(accountRepository.findById(accountId));
@@ -102,12 +90,6 @@ public class RoleServiceImpl extends CrudServiceImpl<Role, RoleDto, RoleReposito
 
 	@Override
 	public List<Role> getAll(String accountWebSafeKey) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Role updateEntity(Role oldEntity, Role newEntity) {
 		// TODO Auto-generated method stub
 		return null;
 	}

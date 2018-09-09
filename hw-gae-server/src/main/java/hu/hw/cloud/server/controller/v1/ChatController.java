@@ -15,6 +15,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import hu.hw.cloud.server.api.v1.BaseController;
 import hu.hw.cloud.server.entity.chat.Chat;
+import hu.hw.cloud.server.entity.chat.ChatPost;
 import hu.hw.cloud.server.entity.common.AppUser;
 import hu.hw.cloud.server.service.AppUserService;
 import hu.hw.cloud.server.service.ChatService;
@@ -48,10 +50,13 @@ public class ChatController extends BaseController {
 
 	private final AppUserService appUserService;
 
+	private final ModelMapper modelMapper;
+
 	@Autowired
-	ChatController(ChatService chatService, AppUserService appUserService) {
+	ChatController(ChatService chatService, AppUserService appUserService, ModelMapper modelMapper) {
 		this.chatService = chatService;
 		this.appUserService = appUserService;
+		this.modelMapper = modelMapper;
 	}
 
 	@RequestMapping(method = GET)
@@ -67,30 +72,31 @@ public class ChatController extends BaseController {
 			return new ResponseEntity<List<ChatDto>>(dtos, OK);
 
 		for (Chat entity : chatService.getAll(accountWebSafeKey)) {
-			dtos.add(Chat.createDto(entity));
+			dtos.add(modelMapper.map(entity, ChatDto.class));
 		}
 		return new ResponseEntity<List<ChatDto>>(dtos, OK);
 	}
 
 	@RequestMapping(value = PATH_WEBSAFEKEY, method = GET)
 	public @ResponseBody ResponseEntity<ChatDto> getByKey(@PathVariable String webSafeKey) throws RestApiException {
-		logger.info("getByKey()->webSafeKey="+webSafeKey);
+		logger.info("getByKey()->webSafeKey=" + webSafeKey);
 		Chat entity;
 		try {
 			entity = chatService.read(webSafeKey);
-			logger.info("getByKey()->entity.getWebSafeKey()="+entity.getWebSafeKey());
+			logger.info("getByKey()->entity.getWebSafeKey()=" + entity.getWebSafeKey());
 		} catch (Throwable e) {
 			throw new RestApiException(e);
 		}
-		return new ResponseEntity<ChatDto>(Chat.createDto(entity), OK);
+		ChatDto dto = modelMapper.map(entity, ChatDto.class);
+		return new ResponseEntity<ChatDto>(dto, OK);
 	}
 
 	@RequestMapping(method = POST)
 	public ResponseEntity<ChatDto> create(@RequestBody ChatDto dto) throws RestApiException {
 		logger.info("create()");
 		try {
-			Chat entity = chatService.create(dto);
-			dto = Chat.createDto(entity);
+			Chat entity = chatService.create(modelMapper.map(dto, Chat.class));
+			dto = modelMapper.map(entity, ChatDto.class);
 			return new ResponseEntity<ChatDto>(dto, OK);
 		} catch (Throwable e) {
 			throw new RestApiException(e);
@@ -101,8 +107,9 @@ public class ChatController extends BaseController {
 	public ResponseEntity<ChatDto> addPost(@RequestBody AddPostDto postDto) throws RestApiException {
 		logger.info("create()");
 		try {
-			Chat entity = chatService.addPost(postDto);
-			ChatDto dto = Chat.createDto(entity);
+			ChatPost post = modelMapper.map(postDto, ChatPost.class);
+			Chat entity = chatService.addPost(postDto.getChatWebSafeKey(), post);
+			ChatDto dto = modelMapper.map(entity, ChatDto.class);
 			return new ResponseEntity<ChatDto>(dto, OK);
 		} catch (Throwable e) {
 			throw new RestApiException(e);

@@ -12,6 +12,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
@@ -43,17 +44,21 @@ public class AppUserController extends CrudController<AppUser, AppUserDto> {
 
 	private final ApplicationEventPublisher eventPublisher;
 
+	private final ModelMapper modelMapper;
+
 	@Autowired
-	AppUserController(AppUserService service, ApplicationEventPublisher eventPublisher) {
-		super(service);
+	AppUserController(AppUserService service, ApplicationEventPublisher eventPublisher, ModelMapper modelMapper) {
+		super(AppUser.class, service, modelMapper);
 		logger.info("AppUserController()");
 		this.service = service;
 		this.eventPublisher = eventPublisher;
+		this.modelMapper = modelMapper;
 	}
 
 	@Override
 	protected AppUserDto createDto(AppUser entity) {
-		return AppUser.createDto(entity);
+		AppUserDto dto = modelMapper.map(entity, AppUserDto.class);
+		return dto;
 	}
 
 	@Override
@@ -78,8 +83,8 @@ public class AppUserController extends CrudController<AppUser, AppUserDto> {
 	public ResponseEntity<AppUserDto> invite(@RequestBody AppUserDto userDto, WebRequest request) {
 		try {
 			String appUrl = request.getContextPath();
-			eventPublisher
-					.publishEvent(new OnRegistrationCompleteEvent(new AppUser(userDto), request.getLocale(), appUrl));
+			AppUser user = modelMapper.map(userDto, AppUser.class);
+			eventPublisher.publishEvent(new OnRegistrationCompleteEvent(user, request.getLocale(), appUrl));
 			return new ResponseEntity<AppUserDto>(userDto, OK);
 		} catch (Throwable e) {
 			e.printStackTrace();

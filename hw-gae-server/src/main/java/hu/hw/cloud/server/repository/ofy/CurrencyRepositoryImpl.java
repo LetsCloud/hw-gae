@@ -42,4 +42,10 @@ public class CurrencyRepositoryImpl extends CrudRepositoryImpl<Currency> impleme
 		Key<Account> key = Key.create(parentWebSafeKey);
 		return key;
 	}
+
+	@Override
+	protected void loadUniqueIndexMap(Currency entiy) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -17,11 +17,9 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
 
 import hu.hw.cloud.server.entity.common.Currency;
-import hu.hw.cloud.server.entity.hotel.Hotel;
 import hu.hw.cloud.server.entity.hotel.HotelChild;
 import hu.hw.cloud.server.entity.hotel.Room;
 import hu.hw.cloud.shared.cnst.ReservationStatus;
-import hu.hw.cloud.shared.dto.reservation.ReservationDto;
 
 /**
  * @author CR
@@ -67,14 +65,6 @@ public class Reservation extends HotelChild {
 	private List<Ref<Reservation>> reservationRefs = new ArrayList<Ref<Reservation>>();
 
 	public Reservation() {
-	}
-
-	public Reservation(ReservationDto dto) {
-		this();
-
-		this.setCurrencyRef(Currency.createRef(dto.getCurrencyDto().getWebSafeKey()));
-		this.setFixedCharges(FixedCharge.createList(dto.getFixedChargeDtos()));
-		this.setHotel(new Hotel(dto.getHotelDto()));
 	}
 
 	/**
@@ -138,22 +128,6 @@ public class Reservation extends HotelChild {
 
 	public void setReservationRefs(List<Ref<Reservation>> reservationRefs) {
 		this.reservationRefs = reservationRefs;
-	}
-
-	public ReservationDto createDto() {
-		ReservationDto dto = new ReservationDto();
-		dto = updateDto(dto);
-		return dto;
-	}
-
-	public ReservationDto updateDto(ReservationDto dto) {
-		if (getCurrency() != null)
-			dto.setCurrencyDto(Currency.createDto(getCurrency()));
-		if (getFixedCharges() != null)
-			dto.setFixedChargeDtos(FixedCharge.createDtos(getFixedCharges()));
-		if (getProfileLinks() != null)
-			dto.setProfileLinkDtos(ProfileLink.createDtos(getProfileLinks()));
-		return dto;
 	}
 
 	public static Builder builder() {

@@ -12,6 +12,8 @@ import gwt.material.design.client.ui.table.cell.TextColumn;
 import hu.hw.cloud.shared.dto.BaseDto;
 
 /**
+ * Adatoszlop beállítás.
+ * 
  * @author robi
  *
  */

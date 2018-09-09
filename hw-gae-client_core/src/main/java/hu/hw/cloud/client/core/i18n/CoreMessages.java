@@ -31,12 +31,14 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("Required field")
 	String comRequiredField();
 
+	
 	/*
 	 * Server data exceptions
 	 */
 	@DefaultMessage("Login")
 	String UNIQUE_INDEX_CONFLICT();
 
+	
 	/*
 	 * LOGIN
 	 */
@@ -76,6 +78,7 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("Umknwon login problem!")
 	String loginErrorUnknownProblem();
 
+	
 	/*
 	 * REGISTER
 	 */
@@ -115,6 +118,7 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("Submit")
 	String regSubmit();
 
+	
 	/*
 	 * SUCCESS
 	 */
@@ -131,6 +135,7 @@ public interface CoreMessages extends Messages {
 			+ "registration details and activate your account!")
 	String sucLine3();
 
+
 	/*
 	 * ACTIVATE
 	 */
@@ -142,21 +147,6 @@ public interface CoreMessages extends Messages {
 
 	@DefaultMessage("Clicking on the link below you can login and start your work:")
 	String actLine2();
-
-	/*
-	 * SIDE NAV
-	 */
-	@DefaultMessage("Configuration")
-	String mainMenuGroupConfig();
-
-	@DefaultMessage("Hotels")
-	String mainMenuItemHotels();
-
-	@DefaultMessage("Users")
-	String mainMenuItemUsers();
-
-	@DefaultMessage("Roles")
-	String mainMenuItemRoles();
 
 	
 	/*
@@ -179,6 +169,22 @@ public interface CoreMessages extends Messages {
 
 	
 	/*
+	 * SIDE NAV
+	 */
+	@DefaultMessage("Configuration")
+	String mainMenuGroupConfig();
+
+	@DefaultMessage("Hotels")
+	String mainMenuItemHotels();
+
+	@DefaultMessage("Users")
+	String mainMenuItemUsers();
+
+	@DefaultMessage("Roles")
+	String mainMenuItemRoles();
+
+	
+	/*
 	 * BREADCRUMBS
 	 */
 	
@@ -198,15 +204,52 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("Dashboard")
 	String pageDashboardTitle();
 
+	
 	/*
-	 * USERS TABLE
+	 * SYSTEM CONFIG
+	 */
+
+	@DefaultMessage("System configuration")
+	String systemConfigTitle();
+
+	@DefaultMessage("Basic settings that determine the operation of the system")
+	String systemConfigDescription();
+
+	
+	/*
+	 * USER GROUP BROWSER
+	 */
+
+	@DefaultMessage("User Groups")
+	String userGroupBrowserTitle();
+
+	@DefaultMessage("Name")
+	String userGroupBrowserName();
+
+	
+	/*
+	 * USER_GROUP EDITOR
+	 */
+
+	@DefaultMessage("Create User Group")
+	String userGroupEditorCreateTitle();
+
+	@DefaultMessage("Modify User Group")
+	String userGroupEditorModifyTitle();
+
+	@DefaultMessage("Name")
+	String userGroupEditorName();
+	
+	
+	/*
+	 * USER BROWSER
 	 */
 
 	@DefaultMessage("Users")
-	String usersTableTitle();
+	String userBrowserTitle();
 
 	@DefaultMessage("Username")
-	String usersTableUsername();
+	String usersBrowserUsername();
 
 	@DefaultMessage("Email")
 	String usersTableEmail();
@@ -261,45 +304,188 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("Password")
 	String userEditorPassword();
 
+	
 	/*
-	 * USER GROUPS TABLE
+	 * PROFILE CONFIG
 	 */
 
-	@DefaultMessage("User Groups")
-	String userGroupTableTitle();
+	@DefaultMessage("Profile configuration")
+	String profileConfigTitle();
 
-	@DefaultMessage("Name")
-	String userGroupTableName();
+	@DefaultMessage("Manage your organization's profile or contact information")
+	String profileConfigDescription();
 
 	
 	/*
-	 * USER_GROUP EDITOR
+	 * PROFILE GROUP BROWSER
 	 */
 
-	@DefaultMessage("Create User Group")
-	String userGroupEditorCreateTitle();
+	@DefaultMessage("Profile Groups")
+	String profileGroupBrowserTitle();
 
-	@DefaultMessage("Modify User Group")
-	String userGroupEditorModifyTitle();
+	@DefaultMessage("Code")
+	String profileGroupBrowserCode();
 
-	@DefaultMessage("Name")
-	String userGroupEditorName();
+	@DefaultMessage("Description")
+	String profileGroupBrowserDescription();
+
+	@DefaultMessage("Active")
+	String profileGroupBrowserActive();
 
 	
 	/*
-	 * CUSTOMER EDITOR
+	 * PROFILE GROUP EDITOR
 	 */
+
+	@DefaultMessage("Create Profile Group")
+	String profileGroupCreateTitle();
+
+	@DefaultMessage("Edit Profile Group")
+	String profileGroupEditTitle();
+
+	@DefaultMessage("Code")
+	String profileGroupCode();
+
+	@DefaultMessage("Description")
+	String profileGroupDescription();
+
+	@DefaultMessage("Profile Type")
+	String profileGroupType();
+
+	@DefaultMessage("Active")
+	String profileGroupActive();
+
+	
+	/*
+	 * ORGANIZATION CONFIG
+	 */
+	@DefaultMessage("Organizations")
+	String organizationConfigTitle();
+	
+	@DefaultMessage("Organizations ...")
+	String organizationConfigDescription();
+	
+	
+	/*
+	 * ORGANIZATION BROWSER
+	 */
+
+	@DefaultMessage("Organizations")
+	String organizationBrowserTitle();
+
+	@DefaultMessage("Code")
+	String organizationBrowserColCode();
+
+	@DefaultMessage("Name")
+	String organizationBrowserColName();
+
+	
+	/*
+	 * ORGANIZATION CREATOR
+	 */
+	@DefaultMessage("Create Organization")
+	String organizationCreatorTitle();
+
+	@DefaultMessage("Common data...")
+	String organizationCreatorDescription();
+
+	
+	/*
+	 * ORGANIZATION EDITOR
+	 */
+	@DefaultMessage("Company name")
+	String customerEditorName();
+
+	@DefaultMessage("Code")
+	String customerEditorCode();
+
+	@DefaultMessage("Profile Group")
+	String customerEditorProfileGroup();
 
 	@DefaultMessage("Communication")
 	String customerEditorCommunication();
 	
 	@DefaultMessage("Addresses")
 	String customerEditorAdresses();
+
+	
+	/*
+	 * CONTACT BROWSER
+	 */
+	@DefaultMessage("Contacts")
+	String contactBrowserTitle();
+
+	@DefaultMessage("Name")
+	String contactBrowserColName();
+
+	
+	/*
+	 * CONTACT CREATOR
+	 */
+	@DefaultMessage("Create Organization")
+	String contactCreatorTitle();
+
+	@DefaultMessage("Common data...")
+	String contactCreatorDescription();
+
+	
+	/*
+	 * CONTACT DISPLAY
+	 */
+	@DefaultMessage("Contact Profile View")
+	String contactDisplayTitle();
+
+	@DefaultMessage("Contact information ...")
+	String contactDisplayDescription();
+
+	
+	/*
+	 * CONTACT EDITOR
+	 */
+	@DefaultMessage("Edit Contact Profile")
+	String contactEditorTitle();
+
+	@DefaultMessage("General Data")
+	String contactEditorDescription();
+
+	@DefaultMessage("Contact name")
+	String contactEditorName();
+
+	@DefaultMessage("Profile Group")
+	String contactEditorProfileGroup();
+
+	@DefaultMessage("Links")
+	String contactEditorLink();
+	
+	@DefaultMessage("Communication")
+	String contactEditorCommunication();
+	
+	@DefaultMessage("Addresses")
+	String contactEditorAdresses();
+	
+	@DefaultMessage("Web Presence")
+	String contactEditorWebPresence();
+
+	@DefaultMessage("Profile operations")
+	String contactDisplayFAB();
+
+	@DefaultMessage("Delete Profile")
+	String contactDisplayDelete();
+
+	
+	/*
+	 * HOTEL CONFIG
+	 */
+	@DefaultMessage("Hotel Configuration")
+	String hotelConfigTitle();
+
+	@DefaultMessage("Hotel Configuration...")
+	String hotelConfigDescription();
+
 	
 	/*
 	 * COMMUNICATION EDITOR
 	 */
-
 	@DefaultMessage("Communication Mode")
 	String communicationEditorLabel();
 
@@ -337,12 +523,13 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("City")
 	String addressEditorCity();
 	
+	
 	/*
-	 * HOTEL TABLE
+	 * HOTEL BROWSER
 	 */
 	
 	@DefaultMessage("Hotels Data")
-	String hotelsTableTitle();
+	String hotelBrowserTitle();
 	
 	@DefaultMessage("Code")
 	String hotelsTableCode();
@@ -369,11 +556,11 @@ public interface CoreMessages extends Messages {
 
 	
 	/*
-	 * ROOMTYPES TABLE
+	 * ROOMTYPE BROWSER
 	 */
 	
-	@DefaultMessage("Room Type Data")
-	String roomTypesTableTitle();
+	@DefaultMessage("Room Types")
+	String roomTypeBrowserTitle();
 	
 	@DefaultMessage("Choose a hotel")
 	String roomTypesTableHotelsPlaceholder();
@@ -461,8 +648,8 @@ public interface CoreMessages extends Messages {
 	 * ROOMS TABLE
 	 */
 	
-	@DefaultMessage("Rooms table")
-	String roomsTableTitle();
+	@DefaultMessage("Rooms")
+	String roomBrowserTitle();
 	
 	@DefaultMessage("Code")
 	String roomsTableCode();
@@ -530,6 +717,15 @@ public interface CoreMessages extends Messages {
 	
 	@DefaultMessage("Remove")
 	String roomEditorAvailabilityRemove();
+
+	
+	/*
+	 * MARKET GROUP BROWSER
+	 */
+
+	@DefaultMessage("Market Groups")
+	String marketGroupBrowserTitle();
+	
 	
 	/*
 	 * SEND MESSAGE

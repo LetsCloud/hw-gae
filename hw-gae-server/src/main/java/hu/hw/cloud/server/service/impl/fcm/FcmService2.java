@@ -31,8 +31,6 @@ public class FcmService2 {
 	 *
 	 * @param tokenId
 	 *            Generated and provided from Android Client Developer
-	 * @param server_key
-	 *            Key which is Generated in FCM Server
 	 * @param message
 	 *            which contains actual information.
 	 *

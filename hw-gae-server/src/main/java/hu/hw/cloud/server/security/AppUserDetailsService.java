@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.modelmapper.ModelMapper;
+
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 
@@ -17,6 +19,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import hu.hw.cloud.server.entity.common.AppUser;
 import hu.hw.cloud.server.service.AppUserService;
+import hu.hw.cloud.shared.dto.common.AppUserDto;
 
 public class AppUserDetailsService implements UserDetailsService {
 //	private static final Logger logger = LoggerFactory.getLogger(AppUserDetailsService.class);
@@ -25,10 +28,14 @@ public class AppUserDetailsService implements UserDetailsService {
 
 	private LoginAttemptService loginAttemptService;
 
-	AppUserDetailsService(AppUserService userService, LoginAttemptService loginAttemptService) {
+	private final ModelMapper modelMapper;
+
+	AppUserDetailsService(AppUserService userService, LoginAttemptService loginAttemptService,
+			ModelMapper modelMapper) {
 //		logger.info("AppUserDetailsService()");
 		this.userService = userService;
 		this.loginAttemptService = loginAttemptService;
+		this.modelMapper = modelMapper;
 	}
 
 	@Override
@@ -54,8 +61,8 @@ public class AppUserDetailsService implements UserDetailsService {
 		 * for (String permission : permissions) { grantedAuthorities.add(new
 		 * SimpleGrantedAuthority(permission)); }
 		 */
-		AppUserDetails aud = new AppUserDetails(input, AppUser.createDto(appUser), grantedAuthorities,
-				accountNonLocked);
+		AppUserDto dto = modelMapper.map(appUser, AppUserDto.class);
+		AppUserDetails aud = new AppUserDetails(input, dto, grantedAuthorities, accountNonLocked);
 
 		return aud;
 	}

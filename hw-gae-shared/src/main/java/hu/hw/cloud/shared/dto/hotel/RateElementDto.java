@@ -19,7 +19,7 @@ public class RateElementDto implements Dto {
 	/**
 	 * Szolgáltatáskód hivatkozás.
 	 */
-	private ServiceDto serviceDto;
+	private ServiceDto service;
 
 	/**
 	 * Egységár.
@@ -29,7 +29,7 @@ public class RateElementDto implements Dto {
 	/**
 	 * Egységár valutaneme (hivatkozás).
 	 */
-	private CurrencyDto currencyDto;
+	private CurrencyDto currency;
 
 	/**
 	 * Terhelendő mennyiség.
@@ -56,12 +56,12 @@ public class RateElementDto implements Dto {
 	 */
 	private Boolean arrangement;
 
-	public ServiceDto getServiceDto() {
-		return serviceDto;
+	public ServiceDto getService() {
+		return service;
 	}
 
-	public void setServiceDto(ServiceDto serviceDto) {
-		this.serviceDto = serviceDto;
+	public void setService(ServiceDto service) {
+		this.service = service;
 	}
 
 	public Double getPrice() {
@@ -72,12 +72,12 @@ public class RateElementDto implements Dto {
 		this.price = price;
 	}
 
-	public CurrencyDto getCurrencyDto() {
-		return currencyDto;
+	public CurrencyDto getCurrency() {
+		return currency;
 	}
 
-	public void setCurrencyDto(CurrencyDto currencyDto) {
-		this.currencyDto = currencyDto;
+	public void setCurrency(CurrencyDto currency) {
+		this.currency = currency;
 	}
 
 	public Integer getQty() {

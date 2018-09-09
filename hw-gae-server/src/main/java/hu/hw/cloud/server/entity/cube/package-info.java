@@ -2,9 +2,9 @@
  * Az Rms entitások napra és dimenziókra összesített teljesítmény valamint
  * előrejelzés adatokat tárolnak.
  * <p>
- * CubeBase->CubeCapAct->CapFcst
+ * CubeBase- CubeCapAct- CapFcst
  * <p>
- * CubeBase->CubePrfmAct->CubePrfmFcst
+ * CubeBase- CubePrfmAct- CubePrfmFcst
  * 
  * @author CR
  *

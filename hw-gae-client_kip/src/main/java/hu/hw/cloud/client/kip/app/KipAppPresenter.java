@@ -27,7 +27,7 @@ import hu.hw.cloud.client.kip.gfilter.config.GfilterConfigPresenter;
 import hu.hw.cloud.client.kip.gfilter.config.GfilterConfigPresenterFactory;
 import hu.hw.cloud.client.kip.gfilter.display.GfilterDisplayPresenter;
 import hu.hw.cloud.client.kip.i18n.KipMessages;
-import hu.hw.cloud.shared.AuthService;
+import hu.hw.cloud.shared.api.AuthResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.cnst.SubSystem;
 import hu.hw.cloud.shared.dto.core.MenuItemDto;
@@ -48,7 +48,7 @@ public class KipAppPresenter extends AppPresenter<KipAppPresenter.MyProxy> {
 
 	@Inject
 	KipAppPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager, KipMessages i18n,
-			RestDispatch dispatch, AuthService authenticationService, CurrentUser currentUser,
+			RestDispatch dispatch, AuthResource authenticationService, CurrentUser currentUser,
 			MenuPresenter menuPresenter, GfilterDisplayPresenter gfilterDisplayPresenter,
 			GfilterConfigPresenterFactory gfilterConfigPresenterFactory, AppData appData,
 			AppServiceWorkerManager messagingManager) {

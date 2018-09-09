@@ -4,7 +4,7 @@
 	xmlns:m="urn:import:gwt.material.design.client.ui"
 	xmlns:m.html="urn:import:gwt.material.design.client.ui.html"
 	xmlns:combobox="urn:import:gwt.material.design.addins.client.combobox"
-	xmlns:ui2="urn:import:hu.hw.cloud.client.fro.ui">
+	xmlns:ui2="urn:import:gwt.material.design.addext.client.ui">
 
 	<ui:style
 		type="hu.hw.cloud.client.fro.editor.profile.AddressEditor.MyStyle">
@@ -32,27 +32,19 @@
 		<m:MaterialRow ui:field="fullPanel" marginBottom="0"
 			addStyleNames="{style.heightTransition}">
 			<ui2:MaterialTextAreaAdd
-				ui:field="fullAddress" grid="s11" />
-
-			<m:MaterialColumn grid="s1" padding="0">
-				<m:MaterialIcon ui:field="detailsIcon"
-					iconType="UNFOLD_MORE" />
-				<m:MaterialIcon ui:field="placeIcon" iconType="PLACE" />
-				<m:MaterialIcon ui:field="deleteIcon1"
-					iconType="DELETE" />
-			</m:MaterialColumn>
+				ui:field="fullAddress" grid="s12" rightIconType="MAP_MARKER_ALT"
+				readOnly="true" />
 		</m:MaterialRow>
 
-		<m:MaterialRow ui:field="details" marginBottom="0"
-			addStyleNames="{style.heightTransition} {style.collapsed}">
+		<m:MaterialRow ui:field="details" marginBottom="0">
 
 			<combobox:MaterialComboBox
 				ui:field="labelCombo" grid="s6" multiple="false"
 				label="{i18nCore.addressEditorLabel}" />
 			<m:MaterialCheckBox ui:field="primary" grid="s5"
 				text="{i18nCore.addressEditorPrimary}" />
-			<m:MaterialIcon ui:field="closeDetails"
-				iconType="UNFOLD_LESS" grid="s1" />
+			<m:MaterialIcon ui:field="deleteIcon"
+				iconType="DELETE" grid="s1" />
 
 			<m:MaterialTextBox ui:field="street"
 				label="{i18nCore.addressEditorStreet}" grid="s12" />
@@ -63,12 +55,10 @@
 			<m:MaterialTextBox ui:field="postcode" grid="s5"
 				label="{i18nCore.addressEditorPostcode}" />
 
-			<m:MaterialTextBox ui:field="city" grid="s6"
+			<m:MaterialTextBox ui:field="city" grid="s7"
 				label="{i18nCore.addressEditorCity}" />
 			<m:MaterialTextBox ui:field="region" grid="s5"
 				label="Region" />
-			<m:MaterialIcon ui:field="deleteIcon"
-				iconType="DELETE" grid="s1" />
 		</m:MaterialRow>
 	</g:HTMLPanel>
 </ui:UiBinder> 

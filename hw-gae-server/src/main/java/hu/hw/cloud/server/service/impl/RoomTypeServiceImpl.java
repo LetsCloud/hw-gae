@@ -16,13 +16,12 @@ import hu.hw.cloud.server.repository.HotelRepository;
 import hu.hw.cloud.server.repository.RoomRepository;
 import hu.hw.cloud.server.repository.RoomTypeRepository;
 import hu.hw.cloud.server.service.RoomTypeService;
-import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
 
 /**
  * @author CR
  *
  */
-public class RoomTypeServiceImpl extends HotelChildServiceImpl<RoomType, RoomTypeDto, RoomTypeRepository>
+public class RoomTypeServiceImpl extends HotelChildServiceImpl<RoomType, RoomTypeRepository>
 		implements RoomTypeService {
 	private static final Logger logger = LoggerFactory.getLogger(RoomTypeServiceImpl.class.getName());
 
@@ -33,23 +32,6 @@ public class RoomTypeServiceImpl extends HotelChildServiceImpl<RoomType, RoomTyp
 		super(roomTypeRepository, accountRepository, hotelRepository);
 		logger.info("RoomTypeServiceImpl");
 		this.roomRepository = roomRepository;
-	}
-
-	@Override
-	protected RoomType createEntity(RoomTypeDto dto) {
-		return new RoomType(dto);
-	}
-
-	@Override
-	protected RoomType updateEntity(RoomType entity, RoomTypeDto dto) {
-		entity.updEntityWithDto(dto);
-		return entity;
-	}
-
-	@Override
-	protected RoomType updateEntity(RoomType oldEntity, RoomType newEntity) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

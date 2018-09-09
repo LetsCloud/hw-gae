@@ -51,39 +51,39 @@ public class AppUserDto extends AccountChildDto {
 	private String emailAddress;
 
 	/**
-	 * 
+	 * Engedélyezett
 	 */
 	private Boolean enabled;
 
 	/**
-	 * 
+	 * Rendszergazda
 	 */
 	private Boolean admin;
 
 	/**
-	 * 
+	 * Felhasználói csoportok
 	 */
-	private List<UserGroupDto> userGroupDtos = new ArrayList<UserGroupDto>();
+	private List<UserGroupDto> userGroups = new ArrayList<UserGroupDto>();
 
 	/**
-	 * 
+	 * Szerepkörök 
 	 */
-	private List<RoleDto> roleDtos = new ArrayList<RoleDto>();
+	private List<RoleDto> roles = new ArrayList<RoleDto>();
 
 	/**
-	 * 
+	 * Alapértelmezett hotel
 	 */
-	private List<HotelDto> availableHotelDtos = new ArrayList<HotelDto>();
+	private HotelDto defaultHotel;
 
 	/**
-	 * 
+	 * Engedélyezett hotelek
 	 */
-	private List<FcmTokenDto> fcmTokenDtos = new ArrayList<FcmTokenDto>();
+	private List<HotelDto> availableHotels = new ArrayList<HotelDto>();
 
 	/**
-	 * 
+	 * Firebase Messaging Token
 	 */
-	private HotelDto defaultHotelDto;
+	private List<FcmTokenDto> fcmTokens = new ArrayList<FcmTokenDto>();
 
 	public AppUserDto() {
 	}
@@ -161,28 +161,28 @@ public class AppUserDto extends AccountChildDto {
 		this.admin = admin;
 	}
 
-	public List<RoleDto> getRoleDtos() {
-		return roleDtos;
+	public List<RoleDto> getRoles() {
+		return roles;
 	}
 
-	public void setRoleDtos(List<RoleDto> roleDtos) {
-		this.roleDtos = roleDtos;
+	public void setRoles(List<RoleDto> roles) {
+		this.roles = roles;
 	}
 
-	public HotelDto getDefaultHotelDto() {
-		return defaultHotelDto;
+	public HotelDto getDefaultHotel() {
+		return defaultHotel;
 	}
 
-	public void setDefaultHotelDto(HotelDto defaultHotelDto) {
-		this.defaultHotelDto = defaultHotelDto;
+	public void setDefaultHotel(HotelDto defaultHotel) {
+		this.defaultHotel = defaultHotel;
 	}
 
-	public List<HotelDto> getAvailableHotelDtos() {
-		return availableHotelDtos;
+	public List<HotelDto> getAvailableHotels() {
+		return availableHotels;
 	}
 
-	public void setAvailableHotelDtos(List<HotelDto> availableHotelDtos) {
-		this.availableHotelDtos = availableHotelDtos;
+	public void setAvailableHotels(List<HotelDto> availableHotels) {
+		this.availableHotels = availableHotels;
 	}
 
 	public String getPicture() {
@@ -193,27 +193,27 @@ public class AppUserDto extends AccountChildDto {
 		this.picture = picture;
 	}
 
-	public List<UserGroupDto> getUserGroupDtos() {
-		return userGroupDtos;
+	public List<UserGroupDto> getUserGroups() {
+		return userGroups;
 	}
 
-	public void setUserGroupDtos(List<UserGroupDto> userGroupDtos) {
-		this.userGroupDtos = userGroupDtos;
+	public void setUserGroups(List<UserGroupDto> userGroups) {
+		this.userGroups = userGroups;
 	}
 
-	public List<FcmTokenDto> getFcmTokenDtos() {
-		return fcmTokenDtos;
+	public List<FcmTokenDto> getFcmTokens() {
+		return fcmTokens;
 	}
 
-	public void setFcmTokenDtos(List<FcmTokenDto> fcmTokenDtos) {
-		this.fcmTokenDtos = fcmTokenDtos;
+	public void setFcmTokens(List<FcmTokenDto> fcmTokens) {
+		this.fcmTokens = fcmTokens;
 	}
 
 	@Override
 	public String toString() {
 		String ret = "AppUserDto:{" + super.toString() + ", name=" + name + ", username=" + username + ", password="
 				+ password + ", emailAddress=" + emailAddress + ", picture=" + picture + ", enabled=" + enabled
-				+ ", admin=" + admin + ", roleDtos=" + roleDtos + ", userGroupDtos=" + userGroupDtos +"}";
+				+ ", admin=" + admin + ", roles=" + roles + ", userGroups=" + userGroups +"}";
 		return ret;
 	}
 }

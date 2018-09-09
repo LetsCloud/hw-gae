@@ -51,17 +51,17 @@ public class RoomStayDto implements Dto {
 	/**
 	 * Szoba hivatkozás.
 	 */
-	private RoomDto roomDto;
+	private RoomDto room;
 
 	/**
 	 * Szobafoglaláshoz rendelt árkódok.
 	 */
-	private List<RateDto> rateDtos;
+	private List<RateDto> rates;
 
 	/**
 	 * Szobafoglalás vendégtartózkodásai.
 	 */
-	private List<GuestStayDto> guestStayDtos;
+	private List<GuestStayDto> guestStays;
 
 	private List<String> amenities = new ArrayList<String>();
 
@@ -97,11 +97,11 @@ public class RoomStayDto implements Dto {
 		this.movedOut = movedOut;
 	}
 
-	public RoomTypeDto getRoomTypeDto() {
+	public RoomTypeDto getRoomType() {
 		return roomTypeDto;
 	}
 
-	public void setRoomTypeDto(RoomTypeDto roomTypeDto) {
+	public void setRoomType(RoomTypeDto roomTypeDto) {
 		this.roomTypeDto = roomTypeDto;
 	}
 
@@ -113,28 +113,28 @@ public class RoomStayDto implements Dto {
 		this.quantity = quantity;
 	}
 
-	public RoomDto getRoomDto() {
-		return roomDto;
+	public RoomDto getRoom() {
+		return room;
 	}
 
-	public void setRoomDto(RoomDto roomDto) {
-		this.roomDto = roomDto;
+	public void setRoom(RoomDto roomDto) {
+		this.room = roomDto;
 	}
 
-	public List<RateDto> getRateDtos() {
-		return rateDtos;
+	public List<RateDto> getRates() {
+		return rates;
 	}
 
-	public void setRateDtos(List<RateDto> rateDtos) {
-		this.rateDtos = rateDtos;
+	public void setRates(List<RateDto> rateDtos) {
+		this.rates = rateDtos;
 	}
 
-	public List<GuestStayDto> getGuestStayDtos() {
-		return guestStayDtos;
+	public List<GuestStayDto> getGuestStays() {
+		return guestStays;
 	}
 
-	public void setGuestStayDtos(List<GuestStayDto> guestStayDtos) {
-		this.guestStayDtos = guestStayDtos;
+	public void setGuestStays(List<GuestStayDto> guestStayDtos) {
+		this.guestStays = guestStayDtos;
 	}
 
 	public List<String> getAmenities() {

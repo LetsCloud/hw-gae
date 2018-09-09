@@ -20,11 +20,9 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Ignore;
 import com.googlecode.objectify.annotation.Index;
 
-import hu.hw.cloud.shared.dto.hotel.RoomDto;
 import hu.hw.cloud.shared.cnst.FoRoomStatus;
 import hu.hw.cloud.shared.cnst.RoomStatus;
 import hu.hw.cloud.shared.dto.filter.RoomStatusFilterDto;
-import hu.hw.cloud.shared.dto.hotel.RoomAvailabilityDto;
 
 /**
  * Szoba entitás
@@ -35,8 +33,6 @@ import hu.hw.cloud.shared.dto.hotel.RoomAvailabilityDto;
 @Entity
 public class Room extends HotelChild {
 //	private static final Logger logger = LoggerFactory.getLogger(Room.class.getName());
-
-	private static final String ROOM_CODE = "code";
 
 	/**
 	 * Szállodán belöl egyedi szobaszám
@@ -85,34 +81,6 @@ public class Room extends HotelChild {
 //		logger.info("Room()");
 	}
 
-	/**
-	 * Entitás másolása
-	 * 
-	 * @param source
-	 */
-	public Room(Room source) {
-		super(source);
-		this.code = source.code;
-		this.roomType = source.roomType;
-		this.floor = source.floor;
-		this.description = source.description;
-		this.roomStatus = source.roomStatus;
-		this.occupied = source.occupied;
-		this.foRoomStatus = source.foRoomStatus;
-		for (RoomAvailability ra : roomAvailabilities) {
-			this.roomAvailabilities.add(new RoomAvailability(ra));
-		}
-	}
-
-	/**
-	 * Entitás létrehozása DTO-ból
-	 * 
-	 * @param dto
-	 */
-	public Room(RoomDto dto) {
-		this.update(dto);
-	}
-
 	public String getCode() {
 		return code;
 	}
@@ -144,7 +112,7 @@ public class Room extends HotelChild {
 	}
 
 	public void setRoomType(RoomType roomType) {
-		if (roomType != null)
+		if (roomType.getId() != null)
 			this.roomType = Ref.create(roomType);
 	}
 
@@ -180,143 +148,12 @@ public class Room extends HotelChild {
 		this.roomAvailabilities = roomAvailabilities;
 	}
 
-	/**
-	 * 
-	 * @param dto
-	 * @return
-	 */
-	public Room update(RoomDto dto) {
-		super.updEntityWithDto(dto);
-
-		if (dto.getCode() != null) {
-			setCode(dto.getCode());
-			if (dto.getCode().equals(getCode()))
-				addUniqueIndex(ROOM_CODE, dto.getCode());
-		}
-
-		if (dto.getRoomTypeDto() != null) {
-			setRoomType(new RoomType(dto.getRoomTypeDto()));
-		}
-
-		if (dto.getFloor() != null)
-			setFloor(dto.getFloor());
-
-		if (dto.getDescription() != null)
-			setDescription(dto.getDescription());
-
-		if (dto.getRoomStatus() != null)
-			setRoomStatus(dto.getRoomStatus());
-
-		if (dto.getOccupied() != null)
-			setOccupied(dto.getOccupied());
-
-		if (dto.getFoRoomStatus() != null)
-			setFoRoomStatus(dto.getFoRoomStatus());
-
-		if (dto.getRoomAvailabilityDtos() != null)
-			setRoomAvailabilities(RoomAvailability.createList(dto.getRoomAvailabilityDtos()));
-		return this;
-	}
-
-	public Room updEntityWithEntity(Room entity) {
-		super.updEntityWithEntity(entity);
-
-		if (entity.getCode() != null)
-			setCode(entity.getCode());
-
-		if (entity.getRoomType() != null)
-			setRoomType(entity.getRoomType());
-
-		if (entity.getFloor() != null)
-			setFloor(entity.getFloor());
-
-		if (entity.getDescription() != null)
-			setDescription(entity.getDescription());
-
-		if (entity.getRoomStatus() != null)
-			setRoomStatus(entity.getRoomStatus());
-
-		if (entity.getOccupied() != null)
-			setOccupied(entity.getOccupied());
-
-		if (entity.getRoomAvailabilities() != null)
-			setRoomAvailabilities(entity.getRoomAvailabilities());
-
-		return this;
-	}
-
 	@Override
 	public String toString() {
 		return "Room [" + super.toString() + ", code=" + this.code + ", floor=" + this.floor + ", description="
 				+ this.description + ", roomType=" + this.roomType + ", roomStatus=" + this.roomStatus + ", occupied="
 				+ this.occupied + ", foRoomStatus=" + this.foRoomStatus + ", roomAvailabilies="
 				+ this.roomAvailabilities + "]";
-	}
-
-	/**
-	 * DTO létrehozása entitásból
-	 * 
-	 * @param entity
-	 * @return
-	 */
-	public static RoomDto createDto(Room entity) {
-		RoomDto dto = new RoomDto();
-		dto = entity.updDtoWithEntity(dto);
-		return dto;
-	}
-
-	/**
-	 * DTO módosítása entitás értékekkel
-	 * 
-	 * @param dto
-	 * @return
-	 */
-	public RoomDto updDtoWithEntity(RoomDto dto) {
-		dto = (RoomDto) super.updDtoWithEntity(dto);
-
-		if (this.getCode() != null)
-			dto.setCode(getCode());
-
-		if (this.getRoomType() != null)
-			dto.setRoomTypeDto(RoomType.createDto(getRoomType()));
-
-		if (this.getFloor() != null)
-			dto.setFloor(getFloor());
-
-		if (this.getDescription() != null)
-			dto.setDescription(getDescription());
-
-		if (this.getRoomAvailabilities() != null) {
-			List<RoomAvailabilityDto> roomOpeningsDtos = new ArrayList<RoomAvailabilityDto>();
-			for (RoomAvailability roomOpening : this.getRoomAvailabilities()) {
-				roomOpeningsDtos.add(RoomAvailability.createDto(roomOpening));
-			}
-			dto.setRoomAvailabilityDtos(roomOpeningsDtos);
-		}
-
-		if (this.getRoomStatus() != null)
-			dto.setRoomStatus(getRoomStatus());
-
-		if (this.getOccupied() != null)
-			dto.setOccupied(getOccupied());
-
-		if (this.getFoRoomStatus() != null)
-			dto.setFoRoomStatus(getFoRoomStatus());
-		return dto;
-	}
-
-	/**
-	 * Entitás lsitából DTO listát hoz létre
-	 * 
-	 * @param entities
-	 * @return
-	 */
-	public static List<RoomDto> createDtos(List<Room> entities) {
-		List<RoomDto> dtos = new ArrayList<RoomDto>();
-		for (Room entity : entities) {
-			dtos.add(Room.createDto(entity));
-		}
-		return dtos;
 	}
 
 	/**

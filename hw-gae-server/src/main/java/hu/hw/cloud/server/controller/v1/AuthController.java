@@ -23,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import hu.hw.cloud.server.api.v1.BaseController;
+import hu.hw.cloud.server.entity.MyMapper;
 import hu.hw.cloud.server.entity.common.AppUser;
 import hu.hw.cloud.server.service.AppUserService;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
@@ -38,9 +39,12 @@ public class AuthController extends BaseController {
 
 	private final AppUserService userService;
 
+	private final MyMapper modelMapper;
+
 	@Autowired
-	AuthController(AppUserService userService) {
+	AuthController(AppUserService userService, MyMapper modelMapper) {
 		this.userService = userService;
+		this.modelMapper = modelMapper;
 	}
 
 	@RequestMapping(method = GET, value = IS_LOGGED_IN)
@@ -52,8 +56,11 @@ public class AuthController extends BaseController {
 
 	@RequestMapping(method = GET, value = CURRENTUSER)
 	ResponseEntity<AppUserDto> getCurrentUser() {
-		AppUserDto appUserDto = AppUser.createDto(userService.getCurrentUser());
-		logger.info("getCurrentUser()->" + appUserDto);
+		logger.info("getCurrentUser()");
+		AppUser appUser = userService.getCurrentUser();
+		logger.info("getCurrentUser()->appUser=");
+		AppUserDto appUserDto = modelMapper.map(appUser, AppUserDto.class);
+		logger.info("getCurrentUser()->appUserDto=" + appUserDto);
 		return new ResponseEntity<AppUserDto>(appUserDto, HttpStatus.OK);
 	}
 

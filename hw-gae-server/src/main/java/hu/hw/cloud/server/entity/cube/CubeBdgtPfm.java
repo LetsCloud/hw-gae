@@ -96,7 +96,8 @@ public class CubeBdgtPfm extends CubeBasePfm {
 	/**
 	 * Visszaadja az entitás measure paraméterrel jelölt mezőjének értékét.
 	 * 
-	 * @param measure
+	 * @param measure1
+	 * @param measure2
 	 * @return
 	 */
 	@Override

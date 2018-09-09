@@ -53,10 +53,10 @@ public class RoomEditorView extends ViewWithUiHandlers<RoomEditorUiHandlers>
 	@Ignore
 	@UiField
 	MaterialComboBox<RoomTypeDto> roomTypeCombo;
-	TakesValueEditor<RoomTypeDto> roomTypeDto;
+	TakesValueEditor<RoomTypeDto> roomType;
 
 	@UiField(provided = true)
-	AvailabilityListEditor roomAvailabilityDtos;
+	AvailabilityListEditor roomAvailabilities;
 	
 	@UiField
 	MaterialButton saveButton;
@@ -68,11 +68,19 @@ public class RoomEditorView extends ViewWithUiHandlers<RoomEditorUiHandlers>
 	RoomEditorView(Binder uiBinder, Driver driver, CoreConstants i18nCoreCnst, AvailabilityListEditor roomAvailabilityDtos) {
 		logger.info("RoomTypeEditorView()");
 		
-		this.roomAvailabilityDtos = roomAvailabilityDtos;
+		this.roomAvailabilities = roomAvailabilityDtos;
 		
 		initWidget(uiBinder.createAndBindUi(this));
 
-		roomTypeDto = TakesValueEditor.of(new TakesValue<RoomTypeDto>() {
+		this.driver = driver;
+		driver.initialize(this);
+		
+		initRoomTypeCombo();
+	}
+
+	private void initRoomTypeCombo() {
+
+		roomType = TakesValueEditor.of(new TakesValue<RoomTypeDto>() {
 
 			@Override
 			public void setValue(RoomTypeDto value) {
@@ -84,13 +92,16 @@ public class RoomEditorView extends ViewWithUiHandlers<RoomEditorUiHandlers>
 				return roomTypeCombo.getSingleValue();
 			}
 		});
-
-		this.driver = driver;
-		driver.initialize(this);
 	}
 
 	@Override
-	public void edit(Boolean isNew, RoomDto dto) {
+	public void show(RoomDto dto) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void edit(RoomDto dto) {
 		driver.edit(dto);
 
 		Timer t = new Timer() {

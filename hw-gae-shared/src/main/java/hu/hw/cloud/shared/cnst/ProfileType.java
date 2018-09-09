@@ -9,5 +9,5 @@ package hu.hw.cloud.shared.cnst;
  *
  */
 public enum ProfileType {
-	CUSTOMER, AGENT, INVOICE_RECIPIENT
+	PT_COMPANY, PT_CONTACT, PT_GUEST
 }

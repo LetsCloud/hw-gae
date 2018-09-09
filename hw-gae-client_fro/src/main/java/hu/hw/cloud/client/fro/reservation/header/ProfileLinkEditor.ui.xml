@@ -2,7 +2,7 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
 	xmlns:m="urn:import:gwt.material.design.client.ui"
-	xmlns:ui2="urn:import:hu.hw.cloud.client.fro.ui">
+	xmlns:ui2="urn:import:gwt.material.design.addext.client.ui">
 
 	<ui:style>
 	/* Add CSS here. See the GWT docs on UI Binder for more details */
@@ -11,7 +11,7 @@
 	<m:MaterialRow marginBottom="0">
 		<ui2:MaterialAutoCompleteAdd
 			ui:field="source" type="TEXT" limit="1" label="Egyéb forrás"
-			grid="s12" iconType="ADD_BOX">
+			grid="s12" iconType="PLUS_SQUARE">
 		</ui2:MaterialAutoCompleteAdd>
 	</m:MaterialRow>
 </ui:UiBinder> 

@@ -13,11 +13,10 @@ import hu.hw.cloud.server.repository.AppUserRepository;
 import hu.hw.cloud.server.security.LoggedInChecker;
 import hu.hw.cloud.server.service.AppUserService;
 import hu.hw.cloud.shared.dto.RegisterDto;
-import hu.hw.cloud.shared.dto.common.AppUserDto;
 import hu.hw.cloud.shared.exception.EntityValidationException;
 import hu.hw.cloud.shared.exception.UniqueIndexConflictException;
 
-public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserDto, AppUserRepository>
+public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserRepository>
 		implements AppUserService {
 	private static final Logger logger = Logger.getLogger(AppUserServiceImpl.class.getName());
 
@@ -53,7 +52,7 @@ public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserDto, App
 
 	@Override
 	public AppUser getCurrentUser() {
-		// LOGGER.info("getCurrentUser()");
+		logger.info("getCurrentUser()");
 		return loggedInChecker.getLoggedInUser();
 	}
 
@@ -70,17 +69,6 @@ public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserDto, App
 		tokens.add(myToken);
 		user.setVerificationTokens(tokens);
 		appUserRepository.save(user);
-	}
-
-	@Override
-	protected AppUser createEntity(AppUserDto dto) {
-		return new AppUser(dto);
-	}
-
-	@Override
-	protected AppUser updateEntity(AppUser entity, AppUserDto dto) {
-		entity.updEntityWithDto(dto);
-		return entity;
 	}
 
 	@Override
@@ -121,12 +109,6 @@ public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserDto, App
 		appUser = appUserRepository.save(appUser);
 		// LOGGER.info("createAdminUser->after appUserRepository.save()");
 		return appUser;
-	}
-
-	@Override
-	protected AppUser updateEntity(AppUser oldEntity, AppUser newEntity) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

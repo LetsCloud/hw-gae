@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.ws.rs.QueryParam;
 
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,15 +49,19 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class RoomTypeController extends HotelChildController<RoomType, RoomTypeDto> {
 	private static final Logger logger = LoggerFactory.getLogger(RoomTypeController.class);
 
+	private final ModelMapper modelMapper;
+
 	@Autowired
-	RoomTypeController(RoomTypeService service) {
-		super(service);
+	RoomTypeController(RoomTypeService service, ModelMapper modelMapper) {
+		super(RoomType.class, service, modelMapper);
 		logger.info("RoomTypeController()");
+		this.modelMapper = modelMapper;
 	}
 
 	@Override
 	protected RoomTypeDto createDto(RoomType entity) {
-		return RoomType.createDto(entity);
+		RoomTypeDto dto = modelMapper.map(entity, RoomTypeDto.class);
+		return dto;
 	}
 
 	@RequestMapping(method = GET)

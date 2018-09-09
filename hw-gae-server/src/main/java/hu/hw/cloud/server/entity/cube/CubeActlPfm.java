@@ -92,8 +92,8 @@ public class CubeActlPfm extends CubeAcstPfm {
 	/**
 	 * Visszaadja az entitás measure paraméterrel jelölt mezőjének értékét.
 	 * 
-	 * @param measNamePart1
-	 * @param measNamePart2
+	 * @param measure1
+	 * @param measure2
 	 * @return
 	 */
 	@Override

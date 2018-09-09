@@ -12,26 +12,24 @@ import com.gwtplatform.mvp.client.HasUiHandlers;
 
 import hu.hw.cloud.client.core.datasource.HotelDataSource;
 import hu.hw.cloud.client.core.security.CurrentUser;
-import hu.hw.cloud.client.fro.filter.AbstractFilterPresenter;
 import hu.hw.cloud.client.fro.filter.AbstractFilterUiHandlers;
+import hu.hw.cloud.client.fro.filter.hotelchild.AbstractHotelChildFilterPresenter;
 import hu.hw.cloud.shared.cnst.InventoryType;
 
 /**
  * @author robi
  *
  */
-public class RoomTypeFilterPresenter extends AbstractFilterPresenter<RoomTypeFilterPresenter.MyView> {
+public class RoomTypeFilterPresenter extends AbstractHotelChildFilterPresenter<RoomTypeFilterPresenter.MyView> {
 	private static Logger logger = Logger.getLogger(RoomTypeFilterPresenter.class.getName());
 
-	public interface MyView extends AbstractFilterPresenter.MyView, HasUiHandlers<AbstractFilterUiHandlers> {
-		Boolean isOnlyActive();
-
+	public interface MyView extends AbstractHotelChildFilterPresenter.MyView, HasUiHandlers<AbstractFilterUiHandlers> {
 		InventoryType getSelectedInventoryType();
 	}
 
 	@Inject
-	RoomTypeFilterPresenter(EventBus eventBus, MyView view, HotelDataSource hotelDataSource, CurrentUser currentUser) {
-		super(eventBus, view, hotelDataSource, currentUser);
+	RoomTypeFilterPresenter(EventBus eventBus, MyView view, CurrentUser currentUser, HotelDataSource hotelDataSource) {
+		super(eventBus, view, currentUser, hotelDataSource);
 		logger.info("RoomTypeFilterPresenter()");
 		getView().setUiHandlers(this);
 	}

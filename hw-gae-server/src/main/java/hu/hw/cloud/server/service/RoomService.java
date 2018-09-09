@@ -8,17 +8,16 @@ import java.util.List;
 
 import hu.hw.cloud.server.entity.hotel.Room;
 import hu.hw.cloud.shared.cnst.RoomStatus;
-import hu.hw.cloud.shared.dto.hotel.RoomDto;
 
 /**
  * @author CR
  *
  */
-public interface RoomService extends HotelChildService<Room, RoomDto> {
+public interface RoomService extends HotelChildService<Room> {
 
 	/**
 	 * 
-	 * @param hotel
+	 * @param hotelKey
 	 * @return
 	 */
 	List<Room> getActiveRoomsByHotel(String hotelKey);
@@ -26,7 +25,8 @@ public interface RoomService extends HotelChildService<Room, RoomDto> {
 	/**
 	 * Visszaadja a megadott szálloda adott adott nappon rendelkezésre álló szobáit
 	 * 
-	 * @param hotel
+	 * @param hotelKey
+	 * @param date
 	 * @return
 	 */
 	List<Room> getAvailableRoomsByHotelOnDate(String hotelKey, Date date);

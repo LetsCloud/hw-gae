@@ -17,39 +17,39 @@ public class HotelConfigDto implements Dto {
 	/**
 	 * Alapértelmezett valutanem.
 	 */
-	private CurrencyDto currencyRef;
+	private CurrencyDto currency;
 
 	/**
 	 * Árfolyamnyereség szolgáltatás.
 	 */
-	private ServiceDto xrtGainServiceRef;
+	private ServiceDto xrtGainService;
 
 	/**
 	 * Árfolyamvesztesség szolgáltatás.
 	 */
-	private ServiceDto xrtLossServiceRef;
+	private ServiceDto xrtLossService;
 
-	public CurrencyDto getCurrencyRef() {
-		return currencyRef;
+	public CurrencyDto getCurrency() {
+		return currency;
 	}
 
-	public void setCurrencyRef(CurrencyDto currencyRef) {
-		this.currencyRef = currencyRef;
+	public void setCurrency(CurrencyDto currency) {
+		this.currency = currency;
 	}
 
-	public ServiceDto getXrtGainServiceRef() {
-		return xrtGainServiceRef;
+	public ServiceDto getXrtGainService() {
+		return xrtGainService;
 	}
 
-	public void setXrtGainServiceRef(ServiceDto xrtGainServiceRef) {
-		this.xrtGainServiceRef = xrtGainServiceRef;
+	public void setXrtGainService(ServiceDto xrtGainService) {
+		this.xrtGainService = xrtGainService;
 	}
 
-	public ServiceDto getXrtLossServiceRef() {
-		return xrtLossServiceRef;
+	public ServiceDto getXrtLossService() {
+		return xrtLossService;
 	}
 
-	public void setXrtLossServiceRef(ServiceDto xrtLossServiceRef) {
-		this.xrtLossServiceRef = xrtLossServiceRef;
+	public void setXrtLossService(ServiceDto xrtLossService) {
+		this.xrtLossService = xrtLossService;
 	}
 }

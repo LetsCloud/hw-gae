@@ -103,4 +103,10 @@ public class ReservationRepositoryImpl extends CrudRepositoryImpl<Reservation> i
 		Key<Hotel> key = Key.create(parentWebSafeKey);
 		return key;
 	}
+
+	@Override
+	protected void loadUniqueIndexMap(Reservation entiy) {
+		// TODO Auto-generated method stub
+		
+	}
 }

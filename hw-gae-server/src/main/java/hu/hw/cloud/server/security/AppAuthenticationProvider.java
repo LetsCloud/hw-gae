@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -20,6 +21,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import hu.hw.cloud.server.entity.common.AppUser;
 import hu.hw.cloud.server.service.AppUserService;
+import hu.hw.cloud.shared.dto.common.AppUserDto;
 import hu.hw.cloud.shared.exception.ExceptionType;
 
 /**
@@ -32,10 +34,14 @@ public class AppAuthenticationProvider implements AuthenticationProvider {
 	private final AppUserService userService;
 	private final LoginAttemptService loginAttemptService;
 
-	AppAuthenticationProvider(AppUserService userService, LoginAttemptService loginAttemptService) {
+	private final ModelMapper modelMapper;
+
+	AppAuthenticationProvider(AppUserService userService, LoginAttemptService loginAttemptService,
+			ModelMapper modelMapper) {
 		LOGGER.info("AppUserDetailsService()");
 		this.userService = userService;
 		this.loginAttemptService = loginAttemptService;
+		this.modelMapper = modelMapper;
 		// this.request = request;
 	}
 
@@ -75,7 +81,8 @@ public class AppAuthenticationProvider implements AuthenticationProvider {
 		List<String> permissions = userService.getPermissions(appUser.getUsername());
 		for (String permission : permissions)
 			grantedAuthorities.add(new SimpleGrantedAuthority(permission));
-		AppUserDetails aud = new AppUserDetails(name, AppUser.createDto(appUser), grantedAuthorities, true);
+		AppUserDto appUserDto = modelMapper.map(appUser, AppUserDto.class);
+		AppUserDetails aud = new AppUserDetails(name, appUserDto, grantedAuthorities, true);
 
 		// return authentication;
 

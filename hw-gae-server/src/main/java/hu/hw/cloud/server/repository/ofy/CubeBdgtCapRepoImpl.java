@@ -63,4 +63,10 @@ public class CubeBdgtCapRepoImpl extends CrudRepositoryImpl<CubeBdgtCap> impleme
 		return null;
 	}
 
+	@Override
+	protected void loadUniqueIndexMap(CubeBdgtCap entiy) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

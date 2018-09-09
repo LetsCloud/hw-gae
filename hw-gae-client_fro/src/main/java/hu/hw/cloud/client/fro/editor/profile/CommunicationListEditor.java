@@ -19,6 +19,8 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 
+import hu.hw.cloud.client.fro.editor.HasEditorSwitch;
+import hu.hw.cloud.shared.cnst.CommMode;
 import hu.hw.cloud.shared.dto.profile.CommunicationDto;
 
 /**
@@ -26,7 +28,7 @@ import hu.hw.cloud.shared.dto.profile.CommunicationDto;
  *
  */
 public class CommunicationListEditor extends Composite
-		implements IsEditor<ListEditor<CommunicationDto, CommunicationEditor>> {
+		implements IsEditor<ListEditor<CommunicationDto, CommunicationEditor>>, HasEditorSwitch {
 	private static Logger logger = Logger.getLogger(CommunicationListEditor.class.getName());
 
 	interface Binder extends UiBinder<Widget, CommunicationListEditor> {
@@ -58,8 +60,7 @@ public class CommunicationListEditor extends Composite
 			if (index % 2 == 0)
 				subEditor.setBackgeoundColor();
 			subEditor.setIndex(index);
-			eventBus.fireEvent(new CommunicationActionEvent(CommunicationActionEvent.Action.OPEN, index));
-//			subEditor.openDetails(true);
+			subEditor.setReadOnly(readOnly);
 
 			listPanel.insert(subEditor, index);
 			return subEditor;
@@ -85,14 +86,13 @@ public class CommunicationListEditor extends Composite
 
 	private ListEditor<CommunicationDto, CommunicationEditor> editor = ListEditor.of(new CommunicationEditorSource());
 
-	private final EventBus eventBus;
+	private Boolean readOnly = false;
 
 	/**
 	 */
 	@Inject
 	CommunicationListEditor(Binder uiBinder, EventBus eventBus) {
 		logger.info("CommunicationListEditor()");
-		this.eventBus = eventBus;
 		initWidget(uiBinder.createAndBindUi(this));
 
 		eventBus.addHandler(CommunicationActionEvent.TYPE,
@@ -113,12 +113,26 @@ public class CommunicationListEditor extends Composite
 	}
 
 	public void addItem() {
-		CommunicationDto e = new CommunicationDto();
-		editor.getList().add(e);
+		editor.getList().add(new CommunicationDto(true, CommMode.MOBILE));
 	}
 
 	private void remove(final int index) {
 		editor.getList().remove(index);
 	}
 
+	@Override
+	public void toEditable() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void toReadOnly() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void setReadOnly(Boolean readOnly) {
+		this.readOnly = readOnly;
+	}
 }

@@ -39,4 +39,10 @@ public class GuestRepositoryImpl extends CrudRepositoryImpl<Guest> implements Gu
 		return key;
 	}
 
+	@Override
+	protected void loadUniqueIndexMap(Guest entiy) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

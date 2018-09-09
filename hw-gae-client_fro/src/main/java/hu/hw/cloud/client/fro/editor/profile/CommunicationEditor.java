@@ -5,7 +5,6 @@ package hu.hw.cloud.client.fro.editor.profile;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
@@ -21,18 +20,17 @@ import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.TakesValue;
-import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 
+import gwt.material.design.addext.client.ui.MaterialTextBoxAdd;
+import gwt.material.design.addext.client.ui.constants.AwesomeIconType;
 import gwt.material.design.addins.client.combobox.MaterialComboBox;
-import gwt.material.design.client.constants.Display;
 import gwt.material.design.client.ui.MaterialCheckBox;
-import gwt.material.design.client.ui.MaterialIcon;
 import gwt.material.design.client.ui.MaterialRow;
-import gwt.material.design.client.ui.MaterialTextBox;
 
 import hu.hw.cloud.client.core.i18n.CoreConstants;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
@@ -66,7 +64,7 @@ public class CommunicationEditor extends Composite implements Editor<Communicati
 	MaterialRow fullPanel, detailsPanel;
 
 	@UiField
-	MaterialTextBox parameter;
+	MaterialTextBoxAdd parameter;
 
 	@UiField
 	MaterialCheckBox primary;
@@ -76,13 +74,13 @@ public class CommunicationEditor extends Composite implements Editor<Communicati
 	MaterialComboBox<CommMode> modeCombo;
 	TakesValueEditor<CommMode> mode;
 
-	@Ignore
-	@UiField
-	MaterialIcon detailsIcon, closeDetails, placeIcon, deleteIcon1;
-
 	private int index;
 
 	private final EventBus eventBus;
+
+	private final CoreConstants i18nCoreCnst;
+
+	private Boolean readOnly = true;
 
 	@Inject
 	CommunicationEditor(Binder uiBinder, EventBus eventBus, CoreMessages i18nCore, CoreConstants i18nCoreCnst,
@@ -92,17 +90,10 @@ public class CommunicationEditor extends Composite implements Editor<Communicati
 
 		primary.getElement().getStyle().setMarginTop(20, Unit.PX);
 
-		placeIcon.setDisplay(Display.NONE);
-
+		this.i18nCoreCnst = i18nCoreCnst;
 		this.eventBus = eventBus;
 
-		initPlaceIcon();
-
-		initDetailsIcon();
-
-		initLabelCombo(i18nCoreCnst.communicationModeMap());
-
-		initCloseDetails();
+		initLabelCombo();
 
 		initDeleteIcon();
 
@@ -111,59 +102,32 @@ public class CommunicationEditor extends Composite implements Editor<Communicati
 
 					@Override
 					public void onCommunicationAction(CommunicationActionEvent event) {
-						if (event.getAction().equals(CommunicationActionEvent.Action.OPEN))
-							openDetails(CommunicationEditor.this.index == event.getIndex());
+						logger.info("CommunicationEditor().onCommu=nicationAction()->event" + event.getAction() + " / "
+								+ event.getIndex());
+						if ((CommunicationEditor.this.index == event.getIndex()) || (event.getIndex() == -1)) {
+							logger.info("CommunicationEditor().onCommu=nicationAction()->OK");
+							if (event.getAction().equals(CommunicationActionEvent.Action.OPEN))
+								setReadOnly(false);
 
-						if (event.getAction().equals(CommunicationActionEvent.Action.CLOSE)) {
-							if (CommunicationEditor.this.index == event.getIndex())
-								openDetails(false);
+							if (event.getAction().equals(CommunicationActionEvent.Action.CLOSE)) {
+								setReadOnly(true);
+							}
 						}
 					}
 
 				});
-
-		// saveButton.setBackgroundColor(Color.GREY);
-
 	}
 
-	private void initDetailsIcon() {
-//		MaterialIcon detailsIcon = fullAddress.getRightIcon();
-		detailsIcon.getElement().getStyle().setMarginTop(10, Unit.PX);
-		detailsIcon.getElement().getStyle().setPadding(0, Unit.PX);
-
-		detailsIcon.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				logger.info("AddressEditor()->detailsIcon.onClick()");
-				eventBus.fireEvent(new CommunicationActionEvent(CommunicationActionEvent.Action.OPEN,
-						CommunicationEditor.this.getIndex()));
-			}
-		});
-	}
-
-	private void initPlaceIcon() {
-
-//		placeIcon.setDisplay(Display.NONE);
-		placeIcon.getElement().getStyle().setMarginTop(10, Unit.PX);
-		placeIcon.getElement().getStyle().setPadding(0, Unit.PX);
-
-		placeIcon.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-			}
-		});
-	}
-
-	private void initLabelCombo(Map<String, String> i18nAddressTypes) {
+	private void initLabelCombo() {
 		Arrays.asList(CommMode.values())
-				.forEach(type -> modeCombo.addItem(i18nAddressTypes.get(type.toString()), type));
+				.forEach(type -> modeCombo.addItem(i18nCoreCnst.communicationModeMap().get(type.toString()), type));
 
 		modeCombo.addValueChangeHandler(new ValueChangeHandler<List<CommMode>>() {
 			@Override
 			public void onValueChange(ValueChangeEvent<List<CommMode>> event) {
 				List<CommMode> values = event.getValue();
 				if ((values != null) && (!values.isEmpty()))
-					parameter.setLabel(i18nAddressTypes.get(values.get(0).toString()));
+					setParamaterLabel(values.get(0));
 			}
 		});
 		modeCombo.setTabIndex(1);
@@ -172,6 +136,9 @@ public class CommunicationEditor extends Composite implements Editor<Communicati
 			@Override
 			public void setValue(CommMode value) {
 				modeCombo.setSingleValue(value);
+				setParamaterLabel(value);
+				if (readOnly)
+					setParamaterIcon(value);
 			}
 
 			@Override
@@ -181,53 +148,64 @@ public class CommunicationEditor extends Composite implements Editor<Communicati
 		});
 	}
 
-	private void initCloseDetails() {
-		closeDetails.getElement().getStyle().setMarginTop(20, Unit.PX);
-		closeDetails.getElement().getStyle().setPadding(0, Unit.PX);
+	private void setParamaterLabel(CommMode mode) {
+		parameter.setLabel(i18nCoreCnst.communicationModeMap().get(mode.toString()));
+	}
 
-		closeDetails.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				eventBus.fireEvent(new CommunicationActionEvent(CommunicationActionEvent.Action.CLOSE,
-						CommunicationEditor.this.getIndex()));
-			}
-		});
+	private void setParamaterIcon(CommMode mode) {
+		if (isPhone(mode))
+			parameter.setRightIconType(AwesomeIconType.PHONE);
+		if (isEmail(mode))
+			parameter.setRightIconType(AwesomeIconType.ENVELOPE);
+		if (mode.equals(CommMode.SKYPE))
+			parameter.setRightIconType(AwesomeIconType.SKYPE);
 	}
 
 	private void initDeleteIcon() {
-		deleteIcon1.getElement().getStyle().setMarginTop(20, Unit.PX);
-		deleteIcon1.getElement().getStyle().setPadding(0, Unit.PX);
-
-		deleteIcon1.addClickHandler(new ClickHandler() {
+		parameter.getRightIcon().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				eventBus.fireEvent(new CommunicationActionEvent(CommunicationActionEvent.Action.DELETE,
-						CommunicationEditor.this.getIndex()));
+				if (readOnly) {
+					if (isEmail(mode.getValue())) {
+						parameter.getRightIcon().addClickHandler(new ClickHandler() {
+							@Override
+							public void onClick(ClickEvent event) {
+								openEmailClient(parameter.getValue());
+							}
+						});
+					}
+				} else
+					eventBus.fireEvent(new CommunicationActionEvent(CommunicationActionEvent.Action.DELETE,
+							CommunicationEditor.this.getIndex()));
 			}
 		});
 	}
 
-	public void openDetails(Boolean open) {
+	private Boolean isPhone(CommMode mode) {
+		switch (mode) {
+		case MOBILE:
+			return true;
+		case WORK_PHONE:
+			return true;
+		case HOME_PHONE:
+			return true;
+		case OTHER_PHONE:
+			return true;
+		default:
+			return false;
+		}
+	}
 
-		if (open) {
-//			fullPanel.getElement().addClassName(style.collapsed());
-
-			Timer t = new Timer() {
-				@Override
-				public void run() {
-					detailsPanel.getElement().removeClassName(style.collapsed());
-				}
-			};
-			t.schedule(1000);
-		} else {
-			detailsPanel.getElement().addClassName(style.collapsed());
-			/*
-			 * Timer t = new Timer() {
-			 * 
-			 * @Override public void run() {
-			 * fullPanel.getElement().removeClassName(style.collapsed()); } };
-			 * t.schedule(1000);
-			 */
+	private Boolean isEmail(CommMode mode) {
+		switch (mode) {
+		case WORK_EMAIL:
+			return true;
+		case HOME_EMAIL:
+			return true;
+		case OTHER_EMAIL:
+			return true;
+		default:
+			return false;
 		}
 	}
 
@@ -241,5 +219,19 @@ public class CommunicationEditor extends Composite implements Editor<Communicati
 
 	public void setBackgeoundColor() {
 		panel.getElement().getStyle().setBackgroundColor("#f5f5f5");
+	}
+
+	public void setReadOnly(Boolean readOnly) {
+		this.readOnly = readOnly;
+		parameter.setReadOnly(readOnly);
+		detailsPanel.setVisible(!readOnly);
+
+		if (!readOnly) {
+			parameter.setRightIconType(AwesomeIconType.ERASER);
+		}
+	}
+
+	private void openEmailClient(String address) {
+		Window.open("mailto:" + address, "_blank", "");
 	}
 }
