@@ -3,6 +3,8 @@
  */
 package hu.hw.cloud.shared.dto.profile;
 
+import com.google.common.base.Strings;
+
 import hu.hw.cloud.shared.cnst.PostalAddressLabel;
 import hu.hw.cloud.shared.dto.Dto;
 
@@ -107,7 +109,30 @@ public class AddressDto implements Dto {
 	}
 
 	public String getFullAddress() {
-		fullAddress = country + ", " + region + ", " + postcode + " " + city + ", " + street;
+		StringBuilder sb = new StringBuilder();
+
+		if (!Strings.isNullOrEmpty(country))
+			sb.append(country);
+
+		if (!Strings.isNullOrEmpty(postcode)) {
+			if (sb.length() != 0)
+				sb.append(", ");
+			sb.append(postcode);
+		}
+
+		if (!Strings.isNullOrEmpty(city)) {
+			if (sb.length() != 0)
+				sb.append(" ");
+			sb.append(city);
+		}
+
+		if (!Strings.isNullOrEmpty(street)) {
+			if (sb.length() != 0)
+				sb.append(", ");
+			sb.append(street);
+		}
+
+		fullAddress = sb.toString();
 		return fullAddress;
 	}
 
