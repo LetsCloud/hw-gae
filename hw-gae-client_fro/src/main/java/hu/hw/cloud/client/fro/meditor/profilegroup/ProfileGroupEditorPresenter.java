@@ -58,7 +58,7 @@ public class ProfileGroupEditorPresenter
 	protected ProfileGroupDto createDto() {
 		logger.info("ProfileGroupEditorPresenter().createDto");
 		ProfileGroupDto dto = new ProfileGroupDto();
-		dto.setAccount(currentUser.getAppUserDto().getAccount());
+		dto.getAccount().setId(currentUser.getAppUserDto().getAccount().getId());
 		return dto;
 	}
 

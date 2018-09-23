@@ -32,11 +32,11 @@ public abstract class CrudController<T extends BaseEntity, D extends BaseDto> ex
 	private static final Logger logger = LoggerFactory.getLogger(CrudController.class);
 
 	@Autowired
-	private AppUserService userService;
+	protected AppUserService userService;
 
-	private final CrudService<T> service;
+	protected final CrudService<T> service;
 
-	private final ModelMapper modelMapper;
+	protected final ModelMapper modelMapper;
 
 	private final Class<T> clazz;
 
@@ -71,21 +71,23 @@ public abstract class CrudController<T extends BaseEntity, D extends BaseDto> ex
 	}
 
 	public ResponseEntity<D> get(String webSafeKey) throws RestApiException {
-		logger.info("CrudController().get()-1");
 		try {
-			logger.info("CrudController().get()-2");
 			T entity = service.read(webSafeKey);
-			logger.info("CrudController().get()-3");
 			D dto = createDto(entity);
-			logger.info("CrudController().get()-4");
+			dto = afterGet(dto, entity);
 			return new ResponseEntity<D>(dto, HttpStatus.OK);
 		} catch (Throwable e) {
 			throw new RestApiException(e);
 		}
 	}
 
+	protected D afterGet(D dto, T entity) throws RestApiException {
+		return dto;
+	}
+
 	public ResponseEntity<D> saveOrCreate(D dto) throws RestApiException {
 		logger.info("saveOrCreate->source=" + dto);
+		beforeSaveOrCreate(dto);
 		try {
 			T entity = modelMapper.map(dto, clazz);
 			logger.info("saveOrCreate->mapped=" + entity);
@@ -95,13 +97,20 @@ public abstract class CrudController<T extends BaseEntity, D extends BaseDto> ex
 				entity = service.update(entity);
 			}
 			logger.info("saveOrCreate->saved=" + entity);
-			dto = createDto(entity);
+			D dto2 = createDto(entity);
 			logger.info("saveOrCreate->saved2=" + dto);
-			return new ResponseEntity<D>(dto, HttpStatus.OK);
+			afterSaveOrCreate(dto, entity);
+			return new ResponseEntity<D>(dto2, HttpStatus.OK);
 		} catch (Throwable e) {
 			e.printStackTrace();
 			throw new RestApiException(e);
 		}
+	}
+
+	protected void beforeSaveOrCreate(D dto) throws RestApiException {
+	}
+
+	protected void afterSaveOrCreate(D dto, T saved) throws RestApiException {
 	}
 
 	public void delete(String webSafeKey) throws RestApiException {

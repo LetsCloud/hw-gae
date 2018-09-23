@@ -1,35 +1,25 @@
 /**
  * 
  */
-package hu.hw.cloud.server.entity.profile;
+package hu.hw.cloud.shared.dto.profile;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.googlecode.objectify.annotation.Entity;
-
-import hu.hw.cloud.server.entity.common.AccountChild;
+import hu.hw.cloud.shared.dto.common.AccountChildDtor;
 
 /**
  * @author robi
  *
  */
-@Entity
-public class Relationship extends AccountChild {
-	private static final Logger logger = LoggerFactory.getLogger(Relationship.class);
+@SuppressWarnings("serial")
+public class RelationshipDtor extends AccountChildDtor {
 
 	private String forward;
 
 	private String reverse;
 
-	/**
-	 * Aktív, Inaktív
-	 */
 	private Boolean active;
 
-	public Relationship() {
-		logger.info("Relationship()");
-	}
+	public RelationshipDtor() {
+	};
 
 	public String getForward() {
 		return forward;
@@ -60,7 +50,7 @@ public class Relationship extends AccountChild {
 	 */
 	@Override
 	public String toString() {
-		String ret = "Relationship:{" + "forward=" + forward + ", reverse=" + reverse + ", active=" + active + ", "
+		String ret = "RelationshipDtor:{" + "forward=" + forward + ", reverse=" + reverse + ", active=" + active + ", "
 				+ super.toString() + "}";
 		return ret;
 	}

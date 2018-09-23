@@ -29,6 +29,7 @@ import gwt.material.design.client.ui.MaterialTextBox;
 import hu.hw.cloud.client.fro.editor.profile.AddressListEditor;
 import hu.hw.cloud.client.fro.editor.profile.CommunicationActionEvent;
 import hu.hw.cloud.client.fro.editor.profile.CommunicationListEditor;
+import hu.hw.cloud.client.fro.editor.profile.ProfileLinkListEditor;
 import hu.hw.cloud.client.fro.editor.profile.WebPresenceListEditor;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
 import hu.hw.cloud.shared.dto.profile.ContactDto;
@@ -59,6 +60,9 @@ public class ContactEditorView extends ViewWithUiHandlers<ContactEditorUiHandler
 	TakesValueEditor<ProfileGroupDto> profileGroup;
 
 	@UiField(provided = true)
+	ProfileLinkListEditor profileLinks;
+
+	@UiField(provided = true)
 	CommunicationListEditor communications;
 
 	@UiField(provided = true)
@@ -69,7 +73,7 @@ public class ContactEditorView extends ViewWithUiHandlers<ContactEditorUiHandler
 
 	@Ignore
 	@UiField
-	MaterialIcon addCommunication, addAddress, addWebPresence;
+	MaterialIcon addCommunication, addAddress, addWebPresence, addProfileLink;
 
 	@Ignore
 	@UiField
@@ -82,13 +86,14 @@ public class ContactEditorView extends ViewWithUiHandlers<ContactEditorUiHandler
 	*/
 	@Inject
 	ContactEditorView(Binder uiBinder, EventBus eventBus, Driver driver, CommunicationListEditor communications,
-			AddressListEditor addresses, WebPresenceListEditor webPresences) {
+			AddressListEditor addresses, WebPresenceListEditor webPresences, ProfileLinkListEditor profileLinks) {
 		logger.info("ContactEditorView()");
 
 		this.eventBus = eventBus;
 		this.communications = communications;
 		this.addresses = addresses;
 		this.webPresences = webPresences;
+		this.profileLinks = profileLinks;
 
 		initWidget(uiBinder.createAndBindUi(this));
 
@@ -113,7 +118,6 @@ public class ContactEditorView extends ViewWithUiHandlers<ContactEditorUiHandler
 				return profileGroupCombo.getSingleValue();
 			}
 		});
-
 	}
 
 	@Override
@@ -182,6 +186,11 @@ public class ContactEditorView extends ViewWithUiHandlers<ContactEditorUiHandler
 		webPresences.addItem();
 	}
 
+	@UiHandler("addProfileLink")
+	public void onAddProfileLinkClick(ClickEvent event) {
+		profileLinks.addItem();
+	}
+
 	@Override
 	public void setProfileGroupData(List<ProfileGroupDto> profileGroupData) {
 		profileGroupCombo.clear();
@@ -203,6 +212,9 @@ public class ContactEditorView extends ViewWithUiHandlers<ContactEditorUiHandler
 
 		addWebPresence.setVisible(!readOnly);
 		webPresences.setReadOnly(readOnly);
+
+		addProfileLink.setVisible(!readOnly);
+		profileLinks.setReadOnly(readOnly);
 
 		editButton.setVisible(readOnly);
 		deleteButton.setVisible(readOnly);

@@ -4,14 +4,14 @@
 package hu.hw.cloud.shared.dto.profile;
 
 import hu.hw.cloud.shared.cnst.ProfileType;
-import hu.hw.cloud.shared.dto.common.AccountChildDto;
+import hu.hw.cloud.shared.dto.common.AccountChildDtor;
 
 /**
  * @author robi
  *
  */
 @SuppressWarnings("serial")
-public class ProfileGroupDto extends AccountChildDto {
+public class ProfileGroupDto extends AccountChildDtor {
 
 	/**
 	 * Egyedi azonosító

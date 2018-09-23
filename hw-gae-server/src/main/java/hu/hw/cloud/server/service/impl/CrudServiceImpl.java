@@ -76,7 +76,10 @@ public abstract class CrudServiceImpl<T extends BaseEntity, R extends CrudReposi
 		try {
 			T th = ofy().transact(new Work<T>() {
 				public T run() {
+					logger.info("update->entity1=" + entity1);
+					logger.info("update->entity1.getWebSafeKey()=" + entity1.getWebSafeKey());
 					T entity2 = repository.findByWebSafeKey(entity1.getWebSafeKey());
+					logger.info("update->entity2=" + entity2);
 					try {
 						if (entity2.getVersion() > entity1.getVersion())
 							throw new EntityVersionConflictException();

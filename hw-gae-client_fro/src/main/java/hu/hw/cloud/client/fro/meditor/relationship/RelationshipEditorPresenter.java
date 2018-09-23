@@ -57,7 +57,7 @@ public class RelationshipEditorPresenter
 	@Override
 	protected RelationshipDto createDto() {
 		RelationshipDto dto = new RelationshipDto();
-		dto.setAccount(currentUser.getAppUserDto().getAccount());
+		dto.getAccount().setId(currentUser.getAppUserDto().getAccount().getId());
 		return dto;
 	}
 

@@ -6,14 +6,14 @@ package hu.hw.cloud.shared.dto.profile;
 import java.util.ArrayList;
 import java.util.List;
 
-import hu.hw.cloud.shared.dto.common.AccountChildDto;
+import hu.hw.cloud.shared.dto.common.AccountChildDtor;
 
 /**
  * @author CR
  *
  */
 @SuppressWarnings("serial")
-public class ProfileDto extends AccountChildDto {
+public class ProfileDto extends AccountChildDtor {
 
 	private String name;
 
@@ -24,6 +24,8 @@ public class ProfileDto extends AccountChildDto {
 	private List<AddressDto> addresses = new ArrayList<AddressDto>();
 
 	private List<WebPresenceDto> webPresences = new ArrayList<WebPresenceDto>();
+
+	private List<ProfileLinkDto> profileLinks = new ArrayList<ProfileLinkDto>();
 
 	public ProfileDto() {
 	}
@@ -66,6 +68,14 @@ public class ProfileDto extends AccountChildDto {
 
 	public void setWebPresences(List<WebPresenceDto> webPresences) {
 		this.webPresences = webPresences;
+	}
+
+	public List<ProfileLinkDto> getProfileLinks() {
+		return profileLinks;
+	}
+
+	public void setProfileLinks(List<ProfileLinkDto> profileLinks) {
+		this.profileLinks = profileLinks;
 	}
 
 	/*
