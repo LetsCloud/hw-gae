@@ -7,6 +7,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
 import hu.hw.cloud.client.core.CoreNameTokens;
@@ -23,6 +24,9 @@ public class SystemConfigPresenter
 		implements SystemConfigUiHandlers, ContentPushEvent.ContentPushHandler {
 	private static Logger logger = Logger.getLogger(SystemConfigPresenter.class.getName());
 
+	private static final String USER_GROUPS = "userGroups";
+	private static final String APP_USERS = "appUsers";
+
 	interface MyView extends AbstractConfigPresenter.MyView {
 	}
 
@@ -33,17 +37,18 @@ public class SystemConfigPresenter
 	}
 
 	@Inject
-	SystemConfigPresenter(EventBus eventBus, MyView view, MyProxy proxy,
+	SystemConfigPresenter(EventBus eventBus, PlaceManager placeManager, MyView view, MyProxy proxy,
 			UserGroupBrowserFactory userGroupBrowserFactory, AppUserBrowserFactory appUserBrowserFactory,
 			CoreMessages i18n) {
-		super(eventBus, view, proxy, AppPresenter.SLOT_MAIN);
+		super(eventBus, placeManager, view, proxy, AppPresenter.SLOT_MAIN);
 		logger.info("SystemConfigPresenter()");
 
 		setCaption(i18n.systemConfigTitle());
 		setDescription(i18n.systemConfigDescription());
+		setPlaceToken(CoreNameTokens.SYSTEM_CONFIG);
 
-		addContent(i18n.userGroupBrowserTitle(), userGroupBrowserFactory.createUserGroupTablePresenter());
-		addContent(i18n.userBrowserTitle(), appUserBrowserFactory.createAppUserTablePresenter());
+		addContent(i18n.userGroupBrowserTitle(), userGroupBrowserFactory.createUserGroupTablePresenter(), USER_GROUPS);
+		addContent(i18n.userBrowserTitle(), appUserBrowserFactory.createAppUserTablePresenter(), APP_USERS);
 
 		getView().setUiHandlers(this);
 	}

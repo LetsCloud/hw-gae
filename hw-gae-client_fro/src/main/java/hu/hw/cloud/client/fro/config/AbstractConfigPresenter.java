@@ -14,8 +14,10 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 import hu.hw.cloud.client.core.event.ContentPushEvent;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent;
@@ -43,19 +45,27 @@ public abstract class AbstractConfigPresenter<V extends AbstractConfigPresenter.
 	private String caption;
 
 	private String description;
+
+	private String placeToken;
 	
 	protected Boolean firstReveal = true;
 	
 	private List<String> captions = new ArrayList<String>();
+	
+	private List<String> placeParams = new ArrayList<String>();
 
 	private List<PresenterWidget<?>> browsers = new ArrayList<PresenterWidget<?>>();
 
+	private final PlaceManager placeManager;
+	
 	public static final SingleSlot<PresenterWidget<?>> SLOT_CONTENT = new SingleSlot<>();
 
-	public AbstractConfigPresenter(EventBus eventBus, V view, P proxy, GwtEvent.Type<RevealContentHandler<?>> slot) {
+	private final static String PLACE_PARAM = "placeParam";
+
+	public AbstractConfigPresenter(EventBus eventBus, PlaceManager placeManager, V view, P proxy, GwtEvent.Type<RevealContentHandler<?>> slot) {
 		super(eventBus, view, proxy, null, slot);
 		logger.info("AbstractConfigPresenter()");
-
+		this.placeManager = placeManager;
 		addRegisteredHandler(ContentPushEvent.TYPE, this);
 	}
 
@@ -66,11 +76,21 @@ public abstract class AbstractConfigPresenter<V extends AbstractConfigPresenter.
 	}
 
 	@Override
+	public void prepareFromRequest(PlaceRequest request) {
+		logger.info("AbstractConfigPresenter().prepareFromRequest()");
+		Integer index = placeParams.indexOf(request.getParameter(PLACE_PARAM, null));
+		if (index == -1) index = 0;
+		getView().setDesktopMenu(index);
+		getView().setMobileButtonText(captions.get(index));
+		setInSlot(SLOT_CONTENT, beforeShowContent(browsers.get(index)));
+	}
+
+	@Override
 	protected void onReveal() {
 		super.onReveal();
 		SetPageTitleEvent.fire(caption, description, MenuItemType.MENU_ITEM, this);
 		if (firstReveal) {
-			showContent(0);
+//			showContent(0);
 			firstReveal = false;
 		}
 	}
@@ -92,15 +112,19 @@ public abstract class AbstractConfigPresenter<V extends AbstractConfigPresenter.
 
 	@Override
 	public void showContent(Integer index) {
-		logger.info("AbstractConfigPresenter().showTable(" + index + ")");
-		getView().setDesktopMenu(index);
-		getView().setMobileButtonText(captions.get(index));
-		setInSlot(SLOT_CONTENT, beforeShowContent(browsers.get(index)));
+		logger.info("AbstractConfigPresenter().showContent(" + index + ")");
+		PlaceRequest placeRequest = new PlaceRequest.Builder()
+	            .nameToken(placeToken)
+	            .with(PLACE_PARAM, placeParams.get(index))
+	            .build();
+
+	    placeManager.revealPlace(placeRequest);
 	}
 
-	public void addContent(String caption, PresenterWidget<?> widget) {
+	public void addContent(String caption, PresenterWidget<?> widget, String placeParam) {
 		captions.add(caption);
 		browsers.add(widget);
+		placeParams.add(placeParam);
 	}
 
 	public String getCaption() {
@@ -113,6 +137,14 @@ public abstract class AbstractConfigPresenter<V extends AbstractConfigPresenter.
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getPlaceToken() {
+		return placeToken;
+	}
+
+	public void setPlaceToken(String placeToken) {
+		this.placeToken = placeToken;
 	}
 
 }

@@ -1,5 +1,6 @@
 package hu.hw.cloud.client.core.security;
 
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
@@ -15,7 +16,7 @@ import hu.hw.cloud.client.core.CoreNameTokens;
 public class LoggedInGatekeeper implements Gatekeeper {
 	private static Logger logger = Logger.getLogger(LoggedInGatekeeper.class.getName());
 
-	private final String PLACE_TO_GO = "placeToGo";
+	public static final String PLACE_TO_GO = "placeToGo";
 
 	private final PlaceManager placeManager;
 	private final CurrentUser currentUser;
@@ -35,8 +36,19 @@ public class LoggedInGatekeeper implements Gatekeeper {
 	}
 
 	private void goToLogin() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(placeManager.getCurrentPlaceRequest().getNameToken());
+		
+		Set<String> params = placeManager.getCurrentPlaceRequest().getParameterNames();
+		for (String param : params) {
+			sb.append("?");
+			sb.append(param);
+			sb.append("=");
+			sb.append(placeManager.getCurrentPlaceRequest().getParameter(param, null));
+		}
+		
 		PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken(CoreNameTokens.LOGIN)
-				.with(PLACE_TO_GO, placeManager.getCurrentPlaceRequest().getNameToken()).build();
+				.with(PLACE_TO_GO, sb.toString()).build();
 		placeManager.revealPlace(placeRequest);
 	}
 

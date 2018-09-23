@@ -1,5 +1,7 @@
 package hu.hw.cloud.client.core.login;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
@@ -24,6 +26,7 @@ import hu.hw.cloud.client.core.gin.CustomActionException;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.security.AppData;
 import hu.hw.cloud.client.core.security.CurrentUser;
+import hu.hw.cloud.client.core.security.LoggedInGatekeeper;
 import hu.hw.cloud.shared.api.AuthResource;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
@@ -56,6 +59,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 	private final CoreMessages i18n;
 
 	private String placeToGo;
+	private Map<String, String> placeParams = new HashMap<String, String>();
 
 	@Inject
 	LoginPresenter(EventBus eventBus, MyView view, MyProxy proxy, PlaceManager placeManager, RestDispatch dispatcher,
@@ -75,8 +79,18 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
 	@Override
 	public void prepareFromRequest(PlaceRequest request) {
-		placeToGo = request.getParameter("placeToGo", null);
-
+		String requestToken = request.getParameter(LoggedInGatekeeper.PLACE_TO_GO, null);
+		Integer paramStart = requestToken.indexOf("?");
+		if (paramStart == -1) {
+			placeToGo = requestToken;
+		} else {
+			placeToGo = requestToken.substring(0, paramStart);
+			String requestParams = requestToken.substring(paramStart+1);
+			Integer equalSign = requestParams.indexOf("=");
+			placeParams.put(requestParams.substring(0, equalSign), requestParams.substring(equalSign+1));
+			logger.info("LoginPresenter().prepareFromRequest()->placeToGo=" + placeToGo);
+			logger.info("LoginPresenter().prepareFromRequest()->placeParams=" + placeParams);
+		}
 		checkCurentUser();
 	}
 
@@ -163,7 +177,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 
 			@Override
 			public void onSuccess(AppUserDto result) {
-				logger.info("LoginPresenter().onSuccessLogin()->AppUserDto="+result);
+				logger.info("LoginPresenter().onSuccessLogin()->AppUserDto=" + result);
 				Cookies.setCookie(ACCOUNT_ID, result.getAccount().getId().toString());
 				currentUser.setLoggedIn(true);
 				currentUser.setAppUserDto(result);
@@ -192,8 +206,14 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 	 * @param place
 	 */
 	private void goToPlace(String place) {
-		PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken(place).build();
-		placeManager.revealPlace(placeRequest);
+		PlaceRequest.Builder placeRequest = new PlaceRequest.Builder().nameToken(place);
+		for (Map.Entry<String, String> entry : placeParams.entrySet()) {
+			logger.info("LoginPresenter().goToPlace()->paramName=" + entry.getKey());
+			logger.info("LoginPresenter().goToPlace()->paramValue=" + entry.getValue());
+			placeRequest.with(entry.getKey(), entry.getValue());
+		}
+		
+		placeManager.revealPlace(placeRequest.build());
 	}
 
 	private void customMessage(CustomActionException e) {
