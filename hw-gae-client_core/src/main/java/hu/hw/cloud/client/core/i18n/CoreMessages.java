@@ -432,20 +432,29 @@ public interface CoreMessages extends Messages {
 	/*
 	 * ORGANIZATION EDITOR
 	 */
-	@DefaultMessage("Company name")
-	String customerEditorName();
+	@DefaultMessage("Edit Organization Profile")
+	String organizationEditorTitle();
+
+	@DefaultMessage("General Data")
+	String organizationEditorDescription();
+
+	@DefaultMessage("Organization name")
+	String organizationEditorName();
 
 	@DefaultMessage("Code")
-	String customerEditorCode();
+	String organizationEditorCode();
 
 	@DefaultMessage("Profile Group")
-	String customerEditorProfileGroup();
+	String organizationEditorProfileGroup();
 
 	@DefaultMessage("Communication")
-	String customerEditorCommunication();
+	String organizationEditorCommunication();
 	
 	@DefaultMessage("Addresses")
-	String customerEditorAdresses();
+	String organizationEditorAdresses();
+	
+	@DefaultMessage("Web Presence")
+	String organizationEditorWebPresence();
 
 	
 	/*
