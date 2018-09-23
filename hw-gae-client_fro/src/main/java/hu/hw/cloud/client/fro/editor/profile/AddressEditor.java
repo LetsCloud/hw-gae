@@ -40,7 +40,7 @@ import hu.hw.cloud.client.fro.editor.profile.AddressActionEvent.AddressActiEvent
 import hu.hw.cloud.shared.cnst.PostalAddressLabel;
 import hu.hw.cloud.shared.dto.profile.AddressDto;
 
-public class AddressEditor extends Composite implements Editor<AddressDto>, HasEditorSwitch {
+public class AddressEditor extends Composite implements Editor<AddressDto> {
 	private static Logger logger = Logger.getLogger(AddressEditor.class.getName());
 
 	interface MyStyle extends CssResource {
@@ -244,18 +244,6 @@ public class AddressEditor extends Composite implements Editor<AddressDto>, HasE
 	private void createFullAddress() {
 		fullAddress.setValue(
 				country.getValue() + ", " + postcode.getValue() + " " + city.getValue() + ", " + street.getValue());
-	}
-
-	@Override
-	public void toEditable() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void toReadOnly() {
-		// TODO Auto-generated method stub
-
 	}
 
 	public void setReadOnly(Boolean readOnly) {

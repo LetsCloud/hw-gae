@@ -6,6 +6,7 @@ package hu.hw.cloud.shared.api;
 import static hu.hw.cloud.shared.api.ApiParameters.ONLY_ACTIVE;
 import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
 import static hu.hw.cloud.shared.api.ApiPaths.PATH_WEBSAFEKEY;
+import static hu.hw.cloud.shared.api.ApiPaths.REDUCED;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.RELATIONSHIP;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.ROOT;
 
@@ -21,6 +22,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import hu.hw.cloud.shared.dto.profile.RelationshipDto;
+import hu.hw.cloud.shared.dto.profile.RelationshipDtor;
 
 /**
  * @author robi
@@ -32,6 +34,10 @@ public interface RelationshipResource {
 
 	@GET
 	List<RelationshipDto> getAll(@QueryParam(ONLY_ACTIVE) Boolean onlyActive);
+
+	@GET
+	@Path(REDUCED)
+	List<RelationshipDtor> getAllReduced(@QueryParam(ONLY_ACTIVE) Boolean onlyActive);
 
 	@GET
 	@Path(PATH_WEBSAFEKEY)

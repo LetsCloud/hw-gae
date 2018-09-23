@@ -9,24 +9,23 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import hu.hw.cloud.server.entity.profile.Contact;
+import hu.hw.cloud.server.entity.profile.Profile;
 import hu.hw.cloud.server.repository.AccountRepository;
-import hu.hw.cloud.server.repository.ContactRepository;
-import hu.hw.cloud.server.service.ContactService;
+import hu.hw.cloud.server.repository.ProfileRepository;
+import hu.hw.cloud.server.service.ProfileService;
 
 /**
  * @author robi
  *
  */
-public class ContactServiceImpl extends CrudServiceImpl<Contact, ContactRepository>
-		implements ContactService {
-	private static final Logger logger = LoggerFactory.getLogger(OrganizationServiceImpl.class.getName());
+public class ProfileServiceImpl extends CrudServiceImpl<Profile, ProfileRepository> implements ProfileService {
+	private static final Logger logger = LoggerFactory.getLogger(ProfileServiceImpl.class.getName());
 
 	private final AccountRepository accountRepository;
 
-	public ContactServiceImpl(ContactRepository repository, AccountRepository accountRepository) {
+	public ProfileServiceImpl(ProfileRepository repository, AccountRepository accountRepository) {
 		super(repository);
-		logger.info("ContactServiceImpl()");
+		logger.info("ProfileServiceImpl()");
 		this.accountRepository = accountRepository;
 	}
 
@@ -43,5 +42,4 @@ public class ContactServiceImpl extends CrudServiceImpl<Contact, ContactReposito
 		parents.add(accountRepository.findByWebSafeKey(accountWebSafeKey));
 		return parents;
 	}
-	
 }

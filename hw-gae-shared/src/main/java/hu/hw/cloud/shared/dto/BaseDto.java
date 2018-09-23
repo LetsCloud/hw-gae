@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  */
 @SuppressWarnings("serial")
-public abstract class BaseDto implements Dto {
+public class BaseDto implements Dto {
 
 	/**
 	 * Generált ID amit az Objectify használ az entitás példány entitás típuson
@@ -29,6 +29,11 @@ public abstract class BaseDto implements Dto {
 	private Long version = 0L;
 
 	public BaseDto() {
+	}
+
+	public BaseDto(Long id) {
+		this();
+		this.id = id;
 	}
 
 	public BaseDto(BaseDto source) {

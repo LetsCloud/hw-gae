@@ -3,6 +3,7 @@ package hu.hw.cloud.shared.api;
 public class ApiPaths {
     public static final String PATH_WEBSAFEKEY = "/{" + ApiParameters.WEBSAFEKEY + "}";
     public static final String PATH_HOTEL_KEY = "/{" + ApiParameters.HOTEL_KEY + "}";
+    public static final String REDUCED = "/reduced";
 	
 	public class SpaV1 {
 		public static final String ROOT = "/spa/v1";
@@ -31,6 +32,7 @@ public class ApiPaths {
 
 		public static final String PROFILE_GROUP = "/profileGroup";
 		public static final String RELATIONSHIP = "/relationship";
+		public static final String PROFILE = "/profile";
 		public static final String ORGANIZATION = "/organization";
 		public static final String CONTACT = "/contact";
 

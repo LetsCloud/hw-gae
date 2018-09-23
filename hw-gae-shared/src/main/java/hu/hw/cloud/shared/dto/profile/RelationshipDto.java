@@ -3,14 +3,14 @@
  */
 package hu.hw.cloud.shared.dto.profile;
 
-import hu.hw.cloud.shared.dto.common.AccountChildDto;
+import hu.hw.cloud.shared.dto.common.AccountChildDtor;
 
 /**
  * @author robi
  *
  */
 @SuppressWarnings("serial")
-public class RelationshipDto extends AccountChildDto {
+public class RelationshipDto extends AccountChildDtor {
 
 	private String forward;
 

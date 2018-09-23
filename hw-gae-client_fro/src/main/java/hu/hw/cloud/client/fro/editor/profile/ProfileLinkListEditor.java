@@ -19,20 +19,17 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 
-import hu.hw.cloud.client.core.security.CurrentUser;
-import hu.hw.cloud.client.fro.editor.HasEditorSwitch;
-import hu.hw.cloud.client.fro.editor.profile.AddressActionEvent.AddressActiEventHandler;
-import hu.hw.cloud.shared.dto.profile.AddressDto;
+import hu.hw.cloud.shared.dto.profile.ProfileLinkDto;
 
 /**
  * @author robi
  *
  */
-public class AddressListEditor extends Composite
-		implements IsEditor<ListEditor<AddressDto, AddressEditor>> {
-	private static Logger logger = Logger.getLogger(AddressListEditor.class.getName());
+public class ProfileLinkListEditor extends Composite
+		implements IsEditor<ListEditor<ProfileLinkDto, ProfileLinkEditor>> {
+	private static Logger logger = Logger.getLogger(ProfileLinkListEditor.class.getName());
 
-	interface Binder extends UiBinder<Widget, AddressListEditor> {
+	interface Binder extends UiBinder<Widget, ProfileLinkListEditor> {
 	}
 
 	@Ignore
@@ -40,7 +37,7 @@ public class AddressListEditor extends Composite
 	FlowPanel listPanel;
 
 	@Inject
-	Provider<AddressEditor> editorProvider;
+	Provider<ProfileLinkEditor> editorProvider;
 
 	/**
 	 * An entity capable of creating and destroying instances of Editors. This type
@@ -49,15 +46,15 @@ public class AddressListEditor extends Composite
 	 * @author cr
 	 * 
 	 */
-	private class AddressEditorSource extends EditorSource<AddressEditor> {
+	private class ProfileLinkEditorSource extends EditorSource<ProfileLinkEditor> {
 
 		/**
 		 * Create a new Editor. Parameters: index - the position at which the new Editor
 		 * should be displayed Returns: an Editor of type E
 		 */
 		@Override
-		public AddressEditor create(final int index) {
-			AddressEditor subEditor = editorProvider.get();
+		public ProfileLinkEditor create(final int index) {
+			ProfileLinkEditor subEditor = editorProvider.get();
 			if (index % 2 == 0)
 				subEditor.setBackgeoundColor();
 			subEditor.setIndex(index);
@@ -72,7 +69,7 @@ public class AddressListEditor extends Composite
 		 * implementation is a no-op.
 		 */
 		@Override
-		public void dispose(AddressEditor subEditor) {
+		public void dispose(ProfileLinkEditor subEditor) {
 			subEditor.removeFromParent();
 		}
 
@@ -80,40 +77,39 @@ public class AddressListEditor extends Composite
 		 * Re-order a sub-Editor. The default implementation is a no-op.
 		 */
 		@Override
-		public void setIndex(AddressEditor editor, int index) {
+		public void setIndex(ProfileLinkEditor editor, int index) {
 			listPanel.insert(editor, index);
 		}
 	}
 
-	private ListEditor<AddressDto, AddressEditor> editor = ListEditor.of(new AddressEditorSource());
+	private ListEditor<ProfileLinkDto, ProfileLinkEditor> editor = ListEditor.of(new ProfileLinkEditorSource());
 
 	private Boolean readOnly = false;
 
 	/**
 	 */
 	@Inject
-	AddressListEditor(Binder uiBinder, EventBus eventBus) {
-		logger.info("AddressListEditor()");
+	ProfileLinkListEditor(Binder uiBinder, EventBus eventBus) {
+		logger.info("ProfileLinkListEditor()");
 		initWidget(uiBinder.createAndBindUi(this));
-
-		eventBus.addHandler(AddressActionEvent.TYPE, new AddressActiEventHandler() {
-
-			@Override
-			public void onAddressAction(AddressActionEvent event) {
-				if (event.getAction().equals(AddressActionEvent.Action.DELETE))
-					remove(event.getIndex());
-			}
-
-		});
+		/*
+		 * eventBus.addHandler(AddressActionEvent.TYPE, new AddressActiEventHandler() {
+		 * 
+		 * @Override public void onAddressAction(AddressActionEvent event) { if
+		 * (event.getAction().equals(AddressActionEvent.Action.DELETE))
+		 * remove(event.getIndex()); }
+		 * 
+		 * });
+		 */
 	}
 
 	@Override
-	public ListEditor<AddressDto, AddressEditor> asEditor() {
+	public ListEditor<ProfileLinkDto, ProfileLinkEditor> asEditor() {
 		return editor;
 	}
 
 	public void addItem() {
-		AddressDto e = new AddressDto();
+		ProfileLinkDto e = new ProfileLinkDto();
 		editor.getList().add(e);
 	}
 
@@ -124,5 +120,4 @@ public class AddressListEditor extends Composite
 	public void setReadOnly(Boolean readOnly) {
 		this.readOnly = readOnly;
 	}
-
 }

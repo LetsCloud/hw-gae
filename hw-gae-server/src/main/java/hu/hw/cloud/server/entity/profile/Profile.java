@@ -59,11 +59,8 @@ public class Profile extends AccountChild {
 	}
 
 	public void setProfileGroup(ProfileGroup profileGroup) {
-		logger.info("Profile().setProfileGroup(" + profileGroup + ")");
-		if (profileGroup.getId() != null) {
-			logger.info("Profile().setProfileGroup()->(profileGroup.getId() != null)");
+		if (profileGroup.getId() != null)
 			this.profileGroup = Ref.create(profileGroup);
-		}
 	}
 
 	public List<Communication> getCommunications() {

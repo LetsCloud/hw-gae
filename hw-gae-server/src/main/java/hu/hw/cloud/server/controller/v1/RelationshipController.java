@@ -6,12 +6,15 @@ package hu.hw.cloud.server.controller.v1;
 import static hu.hw.cloud.shared.api.ApiParameters.ONLY_ACTIVE;
 import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
 import static hu.hw.cloud.shared.api.ApiPaths.PATH_WEBSAFEKEY;
+import static hu.hw.cloud.shared.api.ApiPaths.REDUCED;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.RELATIONSHIP;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.ROOT;
+import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.QueryParam;
@@ -29,9 +32,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import hu.hw.cloud.server.entity.common.AppUser;
 import hu.hw.cloud.server.entity.profile.Relationship;
 import hu.hw.cloud.server.service.RelationshipService;
 import hu.hw.cloud.shared.dto.profile.RelationshipDto;
+import hu.hw.cloud.shared.dto.profile.RelationshipDtor;
 import hu.hw.cloud.shared.exception.RestApiException;
 
 /**
@@ -61,6 +66,24 @@ public class RelationshipController extends CrudController<Relationship, Relatio
 	@RequestMapping(method = GET)
 	public ResponseEntity<List<RelationshipDto>> getAll(@QueryParam(ONLY_ACTIVE) Boolean onlyActive) {
 		return super.getAll();
+	}
+
+	@RequestMapping(value = REDUCED, method = GET)
+	public ResponseEntity<List<RelationshipDtor>> getAllReduced(@QueryParam(ONLY_ACTIVE) Boolean onlyActive) {
+		List<RelationshipDtor> dtos = new ArrayList<RelationshipDtor>();
+
+		AppUser appUser = userService.getCurrentUser();
+		if (appUser == null)
+			return new ResponseEntity<List<RelationshipDtor>>(dtos, OK);
+
+		String accountWebSafeKey = appUser.getAccount().getWebSafeKey();
+		if (accountWebSafeKey == null)
+			return new ResponseEntity<List<RelationshipDtor>>(dtos, OK);
+
+		for (Relationship entity : service.getChildren(accountWebSafeKey))
+			dtos.add(modelMapper.map(entity, RelationshipDtor.class));
+
+		return new ResponseEntity<List<RelationshipDtor>>(dtos, OK);
 	}
 
 	@Override
