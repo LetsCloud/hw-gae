@@ -26,6 +26,7 @@ public class ProfileGroupRepositoryImpl extends CrudRepositoryImpl<ProfileGroup>
 
 	@Override
 	protected Object getParent(ProfileGroup entity) {
+		logger.info("getParent->entity=" + entity);
 		return entity.getAccount();
 	}
 

@@ -22,6 +22,12 @@ public class ProfileEditorModule extends AbstractPresenterModule {
 		bind(AddressEditor.class);		
 		bind(AddressListEditor.class);
 
+		bind(WebPresenceEditor.class);		
+		bind(WebPresenceListEditor.class);
+
+		bind(ProfileLinkEditor.class);		
+		bind(ProfileLinkListEditor.class);
+
 		install(new OrganizationEditorModule());
 		install(new ContactEditorModule());
 	}

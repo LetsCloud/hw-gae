@@ -21,6 +21,7 @@ import hu.hw.cloud.client.core.security.LoggedInGatekeeper;
 import hu.hw.cloud.client.fro.browser.contact.ContactBrowserFactory;
 import hu.hw.cloud.client.fro.browser.organization.OrganizationBrowserFactory;
 import hu.hw.cloud.client.fro.browser.profilegroup.ProfileGroupBrowserFactory;
+import hu.hw.cloud.client.fro.browser.relationship.RelationshipBrowserFactory;
 import hu.hw.cloud.client.fro.config.AbstractConfigPresenter;
 import hu.hw.cloud.client.fro.i18n.FroMessages;
 
@@ -51,6 +52,7 @@ public class ProfileConfigPresenter
 			ProfileGroupBrowserFactory profileGroupFactory, OrganizationBrowserFactory organizationFactory,
 			ContactBrowserFactory contactFactory, FroMessages i18n, CoreMessages i18nCore) {
 		super(eventBus, placeManager, view, proxy, AppPresenter.SLOT_MAIN);
+
 		logger.info("ProfileConfigPresenter()");
 
 		setCaption(i18nCore.profileConfigTitle());

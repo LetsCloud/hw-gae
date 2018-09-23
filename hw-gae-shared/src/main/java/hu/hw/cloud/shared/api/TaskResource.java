@@ -18,7 +18,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import hu.hw.cloud.shared.dto.hotel.HotelDto;
 import hu.hw.cloud.shared.dto.task.TaskDto;
 
 /**

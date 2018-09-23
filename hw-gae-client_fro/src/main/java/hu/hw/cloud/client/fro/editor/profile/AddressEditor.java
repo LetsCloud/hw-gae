@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
+import com.google.common.base.Strings;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.editor.client.adapters.TakesValueEditor;
@@ -35,12 +36,11 @@ import gwt.material.design.client.ui.MaterialTextBox;
 import hu.hw.cloud.client.core.i18n.CoreConstants;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.i18n.CountryConstants;
-import hu.hw.cloud.client.fro.editor.HasEditorSwitch;
 import hu.hw.cloud.client.fro.editor.profile.AddressActionEvent.AddressActiEventHandler;
 import hu.hw.cloud.shared.cnst.PostalAddressLabel;
 import hu.hw.cloud.shared.dto.profile.AddressDto;
 
-public class AddressEditor extends Composite implements Editor<AddressDto>, HasEditorSwitch {
+public class AddressEditor extends Composite implements Editor<AddressDto> {
 	private static Logger logger = Logger.getLogger(AddressEditor.class.getName());
 
 	interface MyStyle extends CssResource {
@@ -242,20 +242,28 @@ public class AddressEditor extends Composite implements Editor<AddressDto>, HasE
 	}
 
 	private void createFullAddress() {
-		fullAddress.setValue(
-				country.getValue() + ", " + postcode.getValue() + " " + city.getValue() + ", " + street.getValue());
-	}
+		fullAddress.clear();
 
-	@Override
-	public void toEditable() {
-		// TODO Auto-generated method stub
+		if (!Strings.isNullOrEmpty(country.getValue()))
+			fullAddress.setValue(country.getValue());
 
-	}
+		if (!Strings.isNullOrEmpty(postcode.getValue())) {
+			if (!Strings.isNullOrEmpty(fullAddress.getValue()))
+				fullAddress.setValue(fullAddress.getValue() + ", ");
+			fullAddress.setValue(fullAddress.getValue() + postcode.getValue());
+		}
 
-	@Override
-	public void toReadOnly() {
-		// TODO Auto-generated method stub
+		if (!Strings.isNullOrEmpty(city.getValue())) {
+			if (!Strings.isNullOrEmpty(fullAddress.getValue()))
+				fullAddress.setValue(fullAddress.getValue() + " ");
+			fullAddress.setValue(fullAddress.getValue() + city.getValue());
+		}
 
+		if (!Strings.isNullOrEmpty(street.getValue())) {
+			if (!Strings.isNullOrEmpty(fullAddress.getValue()))
+				fullAddress.setValue(fullAddress.getValue() + ", ");
+			fullAddress.setValue(fullAddress.getValue() + street.getValue());
+		}
 	}
 
 	public void setReadOnly(Boolean readOnly) {

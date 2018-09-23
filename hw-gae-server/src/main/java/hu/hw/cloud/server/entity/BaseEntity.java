@@ -107,11 +107,15 @@ public abstract class BaseEntity {
 	 * @return Egyedi kulcs.
 	 */
 	public String getWebSafeKey() {
+		
+		if (id != null)
+			return webSafeKey;
+		
 		if (id != null) {
 			Key<BaseEntity> key = Key.create(this);
 			return key.getString();
 		}
-		return webSafeKey;
+		return null;
 	}
 
 	/**

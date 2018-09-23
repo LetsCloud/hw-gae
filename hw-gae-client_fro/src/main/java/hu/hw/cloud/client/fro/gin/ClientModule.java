@@ -3,6 +3,8 @@
  */
 package hu.hw.cloud.client.fro.gin;
 
+import java.util.logging.Logger;
+
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
 import hu.hw.cloud.client.fro.app.FroAppModule;
@@ -24,11 +26,12 @@ import hu.hw.cloud.client.core.gin.CoreModule;
  *
  */
 public class ClientModule extends AbstractPresenterModule {
+	private static Logger logger = Logger.getLogger(ClientModule.class.getName());
 
 	@Override
 	protected void configure() {
 		install(new CoreModule());
-		
+
 		bind(ResourceLoader.class).asEagerSingleton();
 
 		install(new FroAppModule());
@@ -36,7 +39,7 @@ public class ClientModule extends AbstractPresenterModule {
 		install(new DashboardModule());
 		install(new ResNewModule());
 		install(new ReservationModule());
-		
+
 		install(new SystemConfigModule());
 		install(new ProfileConfigModule());
 		install(new HotelConfigModule());
@@ -46,7 +49,7 @@ public class ClientModule extends AbstractPresenterModule {
 
 		install(new OrganizationCreateModule());
 		install(new ContactCreateModule());
-		
+
 		install(new FilterModule());
 
 	}

@@ -26,7 +26,7 @@ public class ContactServiceImpl extends CrudServiceImpl<Contact, ContactReposito
 
 	public ContactServiceImpl(ContactRepository repository, AccountRepository accountRepository) {
 		super(repository);
-		logger.info("OrganizationServiceImpl()");
+		logger.info("ContactServiceImpl()");
 		this.accountRepository = accountRepository;
 	}
 
@@ -43,4 +43,5 @@ public class ContactServiceImpl extends CrudServiceImpl<Contact, ContactReposito
 		parents.add(accountRepository.findByWebSafeKey(accountWebSafeKey));
 		return parents;
 	}
+	
 }

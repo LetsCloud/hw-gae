@@ -16,7 +16,6 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 
 import hu.hw.cloud.client.core.CoreNameTokens;
-import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.fro.meditor.AbstractMeditorPresenter;
 import hu.hw.cloud.client.fro.meditor.MeditorView;
@@ -41,18 +40,16 @@ public class ProfileGroupEditorPresenter
 	private final PlaceManager placeManager;
 	private final ResourceDelegate<ProfileGroupResource> resourceDelegate;
 	private final CurrentUser currentUser;
-	private final CoreMessages i18n;
 
 	@Inject
 	ProfileGroupEditorPresenter(EventBus eventBus, PlaceManager placeManager, MyView view,
-			ResourceDelegate<ProfileGroupResource> resourceDelegate, CurrentUser currentUser, CoreMessages i18n) {
+			ResourceDelegate<ProfileGroupResource> resourceDelegate, CurrentUser currentUser) {
 		super(eventBus, view);
 		logger.info("ProfileGroupEditorPresenter()");
 
 		this.placeManager = placeManager;
 		this.resourceDelegate = resourceDelegate;
 		this.currentUser = currentUser;
-		this.i18n = i18n;
 
 		getView().setUiHandlers(this);
 	}
@@ -61,7 +58,7 @@ public class ProfileGroupEditorPresenter
 	protected ProfileGroupDto createDto() {
 		logger.info("ProfileGroupEditorPresenter().createDto");
 		ProfileGroupDto dto = new ProfileGroupDto();
-		dto.setAccount(currentUser.getAppUserDto().getAccount());
+		dto.getAccount().setId(currentUser.getAppUserDto().getAccount().getId());
 		return dto;
 	}
 

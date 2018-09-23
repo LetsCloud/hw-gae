@@ -4,15 +4,11 @@
 package hu.hw.cloud.server.entity.data;
 
 import hu.hw.cloud.server.entity.common.Account;
-import hu.hw.cloud.server.entity.profile.EmailAddress;
 import hu.hw.cloud.server.entity.profile.Guest;
-import hu.hw.cloud.server.entity.profile.Address;
 import hu.hw.cloud.server.repository.GuestRepository;
 import hu.hw.cloud.server.service.DataBuilderService;
 import hu.hw.cloud.server.utils.DateUtils;
-import hu.hw.cloud.shared.cnst.EmailAddressLabel;
 import hu.hw.cloud.shared.cnst.Gender;
-import hu.hw.cloud.shared.cnst.PostalAddressLabel;
 
 /**
  * @author CR

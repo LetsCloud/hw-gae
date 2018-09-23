@@ -47,7 +47,7 @@ public class AccountChild extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "AccountChild:[account=" + getAccount() + "]>>" + super.toString();
+		return "AccountChild:[account=" + getAccount() + ", " + super.toString() + "]";
 	}
 
 	/**

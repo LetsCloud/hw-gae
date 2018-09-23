@@ -19,6 +19,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 
+import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.fro.editor.HasEditorSwitch;
 import hu.hw.cloud.client.fro.editor.profile.AddressActionEvent.AddressActiEventHandler;
 import hu.hw.cloud.shared.dto.profile.AddressDto;
@@ -28,7 +29,7 @@ import hu.hw.cloud.shared.dto.profile.AddressDto;
  *
  */
 public class AddressListEditor extends Composite
-		implements IsEditor<ListEditor<AddressDto, AddressEditor>>, HasEditorSwitch {
+		implements IsEditor<ListEditor<AddressDto, AddressEditor>> {
 	private static Logger logger = Logger.getLogger(AddressListEditor.class.getName());
 
 	interface Binder extends UiBinder<Widget, AddressListEditor> {
@@ -118,18 +119,6 @@ public class AddressListEditor extends Composite
 
 	private void remove(final int index) {
 		editor.getList().remove(index);
-	}
-
-	@Override
-	public void toEditable() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void toReadOnly() {
-		// TODO Auto-generated method stub
-
 	}
 
 	public void setReadOnly(Boolean readOnly) {

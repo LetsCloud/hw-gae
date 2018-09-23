@@ -28,6 +28,12 @@ public interface CoreMessages extends Messages {
 	@DefaultMessage("Cancel")
 	String comCancel();
 
+	@DefaultMessage("Active")
+	String comActive();
+
+	@DefaultMessage("Inactive")
+	String comInactive();
+
 	@DefaultMessage("Required field")
 	String comRequiredField();
 
@@ -317,6 +323,39 @@ public interface CoreMessages extends Messages {
 
 	
 	/*
+	 * RELATIONSHIP BROWSER
+	 */
+	@DefaultMessage("Relationships")
+	String relationshipBrowserTitle();
+
+	@DefaultMessage("Forward")
+	String relationshipBrowserColForward();
+
+	@DefaultMessage("Reverse")
+	String relationshipBrowserColReverse();
+
+	@DefaultMessage("Active")
+	String relationshipBrowserColActive();
+
+	
+	/*
+	 * RELATIONSHIPP EDITOR
+	 */
+
+	@DefaultMessage("Create Relationship Group")
+	String relationshipCreateTitle();
+
+	@DefaultMessage("Edit Relationship Group")
+	String relationshipEditTitle();
+
+	@DefaultMessage("Forward")
+	String relationshipFldForward();
+
+	@DefaultMessage("Reverse")
+	String relationshipFldReverse();
+
+	
+	/*
 	 * PROFILE GROUP BROWSER
 	 */
 
@@ -393,20 +432,29 @@ public interface CoreMessages extends Messages {
 	/*
 	 * ORGANIZATION EDITOR
 	 */
-	@DefaultMessage("Company name")
-	String customerEditorName();
+	@DefaultMessage("Edit Organization Profile")
+	String organizationEditorTitle();
+
+	@DefaultMessage("General Data")
+	String organizationEditorDescription();
+
+	@DefaultMessage("Organization name")
+	String organizationEditorName();
 
 	@DefaultMessage("Code")
-	String customerEditorCode();
+	String organizationEditorCode();
 
 	@DefaultMessage("Profile Group")
-	String customerEditorProfileGroup();
+	String organizationEditorProfileGroup();
 
 	@DefaultMessage("Communication")
-	String customerEditorCommunication();
+	String organizationEditorCommunication();
 	
 	@DefaultMessage("Addresses")
-	String customerEditorAdresses();
+	String organizationEditorAdresses();
+	
+	@DefaultMessage("Web Presence")
+	String organizationEditorWebPresence();
 
 	
 	/*

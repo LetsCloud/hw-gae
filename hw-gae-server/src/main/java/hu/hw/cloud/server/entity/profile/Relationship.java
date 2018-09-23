@@ -17,13 +17,18 @@ import hu.hw.cloud.server.entity.common.AccountChild;
 @Entity
 public class Relationship extends AccountChild {
 	private static final Logger logger = LoggerFactory.getLogger(Relationship.class);
-	
+
 	private String forward;
-	
+
 	private String reverse;
-	
+
+	/**
+	 * Aktív, Inaktív
+	 */
+	private Boolean active;
+
 	public Relationship() {
-		logger.info("ProfileLinkType()");
+		logger.info("Relationship()");
 	}
 
 	public String getForward() {
@@ -41,5 +46,23 @@ public class Relationship extends AccountChild {
 	public void setReverse(String reverse) {
 		this.reverse = reverse;
 	}
-	
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	/*
+	 * toString
+	 */
+	@Override
+	public String toString() {
+		String ret = "Relationship:{" + "forward=" + forward + ", reverse=" + reverse + ", active=" + active + ", "
+				+ super.toString() + "}";
+		return ret;
+	}
+
 }

@@ -49,12 +49,19 @@
 		class="hu.hw.cloud.server.repository.ofy.AppUserRepositoryImpl" />
 	<bean id="currencyRepository"
 		class="hu.hw.cloud.server.repository.ofy.CurrencyRepositoryImpl" />
-	<bean id="profileGroupRepository"
-		class="hu.hw.cloud.server.repository.ofy.ProfileGroupRepositoryImpl" />
+
+	<bean id="profileRepository"
+		class="hu.hw.cloud.server.repository.ofy.ProfileRepositoryImpl" />
 	<bean id="organizationRepository"
 		class="hu.hw.cloud.server.repository.ofy.OrganizationRepositoryImpl" />
 	<bean id="contactRepository"
 		class="hu.hw.cloud.server.repository.ofy.ContactRepositoryImpl" />
+	<bean id="profileGroupRepository"
+		class="hu.hw.cloud.server.repository.ofy.ProfileGroupRepositoryImpl" />
+	<bean id="relationshipRepository"
+		class="hu.hw.cloud.server.repository.ofy.RelationshipRepositoryImpl" />
+	<bean id="profileLinkRepository"
+		class="hu.hw.cloud.server.repository.ofy.ProfileLinkRepositoryImpl" />
 
 	<bean id="chatRepository"
 		class="hu.hw.cloud.server.repository.ofy.ChatRepositoryImpl" />
@@ -121,9 +128,11 @@
 		<constructor-arg ref="accountRepository" />
 		<constructor-arg ref="appUserRepository" />
 	</bean>
-	<bean id="profileGroupService"
-		class="hu.hw.cloud.server.service.impl.ProfileGroupServiceImpl">
-		<constructor-arg ref="profileGroupRepository" />
+	
+	
+	<bean id="profileService"
+		class="hu.hw.cloud.server.service.impl.ProfileServiceImpl">
+		<constructor-arg ref="profileRepository" />
 		<constructor-arg ref="accountRepository" />
 	</bean>
 	<bean id="organizationService"
@@ -136,6 +145,22 @@
 		<constructor-arg ref="contactRepository" />
 		<constructor-arg ref="accountRepository" />
 	</bean>
+	<bean id="profileGroupService"
+		class="hu.hw.cloud.server.service.impl.ProfileGroupServiceImpl">
+		<constructor-arg ref="profileGroupRepository" />
+		<constructor-arg ref="accountRepository" />
+	</bean>
+	<bean id="relationshipService"
+		class="hu.hw.cloud.server.service.impl.RelationshipServiceImpl">
+		<constructor-arg ref="relationshipRepository" />
+		<constructor-arg ref="accountRepository" />
+	</bean>
+	<bean id="profileLinkService"
+		class="hu.hw.cloud.server.service.impl.ProfileLinkServiceImpl">
+		<constructor-arg ref="profileLinkRepository" />
+		<constructor-arg ref="accountRepository" />
+	</bean>
+
 
 	<bean id="chatService"
 		class="hu.hw.cloud.server.service.impl.ChatServiceImpl">

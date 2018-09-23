@@ -531,6 +531,68 @@
             <Value disabled="false">Hatékony ügyfélkezelés</Value>
         </Property>
         <Comment>
+            <Value>RELATIONSHIP BROWSER</Value>
+        </Comment>
+        <Property>
+            <Name>relationshipBrowserTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Relationships</Value>
+            <Value disabled="false">Kapcsolat típusok</Value>
+        </Property>
+        <Property>
+            <Name>relationshipBrowserColForward</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Forward</Value>
+            <Value disabled="false">Kapcsolat típus</Value>
+        </Property>
+        <Property>
+            <Name>relationshipBrowserColReverse</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Reverse</Value>
+            <Value disabled="false">Fordított</Value>
+        </Property>
+        <Property>
+            <Name>relationshipBrowserColActive</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Active</Value>
+            <Value disabled="false">Aktív</Value>
+        </Property>
+        <Comment>
+            <Value>RELATIONSHIP EDITOR</Value>
+        </Comment>
+        <Property>
+            <Name>relationshipCreateTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Create Relationshop</Value>
+            <Value disabled="false">Kapcsolat típus létrehozása</Value>
+        </Property>
+        <Property>
+            <Name>relationshipEditTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Edit Relationship</Value>
+            <Value disabled="false">Kapcsolat típus szerkesztése</Value>
+        </Property>
+        <Property>
+            <Name>relationshipFldForward</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Forward</Value>
+            <Value disabled="false">Kapcsolat típus</Value>
+        </Property>
+        <Property>
+            <Name>relationshipFldReverse</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Reverse</Value>
+            <Value disabled="false">Fordítva</Value>
+        </Property>
+        <Comment>
             <Value>PROFILE GROUP BROWSER</Value>
         </Comment>
         <Property>
@@ -623,18 +685,60 @@
             <Value>ORGANIZATION EDITOR</Value>
         </Comment>
         <Property>
-            <Name>customerEditorCommunication</Name>
+            <Name>organizationEditorTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Edit Organization Profile</Value>
+            <Value disabled="false">Szervezet profile szerkesztése</Value>
+        </Property>
+        <Property>
+            <Name>organizationEditorDescription</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">General Data</Value>
+            <Value disabled="false">Általános adatok</Value>
+        </Property>
+        <Property>
+            <Name>organizationEditorName</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Organization name</Value>
+            <Value disabled="false">Szervezet neve</Value>
+        </Property>
+        <Property>
+            <Name>organizationEditorCode</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Code</Value>
+            <Value disabled="false">Kód</Value>
+        </Property>
+        <Property>
+            <Name>organizationEditorProfileGroup</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Profile Group</Value>
+            <Value disabled="false">Profil csoport</Value>
+        </Property>
+        <Property>
+            <Name>organizationEditorCommunication</Name>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
             <Value disabled="false">Communication</Value>
             <Value disabled="false">Kommunikácó</Value>
         </Property>
         <Property>
-            <Name>customerEditorAdresses</Name>
+            <Name>organizationEditorAdresses</Name>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
             <Value disabled="false">Addresses</Value>
             <Value disabled="false">Címek</Value>
+        </Property>
+        <Property>
+            <Name>organizationEditorWebPresence</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Web Presence</Value>
+            <Value disabled="false">Online jelenlét</Value>
         </Property>
         <Comment>
             <Value>CONTACT BROWSER</Value>
@@ -709,7 +813,7 @@
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
             <Value disabled="false">Contact Name</Value>
-            <Value disabled="false">A kapcsolat neve</Value>
+            <Value disabled="false">Kapcsolat neve</Value>
         </Property>
         <Property>
             <Name>contactEditorProfileGroup</Name>
