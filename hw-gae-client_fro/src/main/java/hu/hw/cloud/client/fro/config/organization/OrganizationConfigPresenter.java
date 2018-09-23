@@ -57,7 +57,7 @@ public class OrganizationConfigPresenter
 		setCaption(i18nCore.organizationConfigTitle());
 		setDescription(i18nCore.organizationConfigDescription());
 
-		addContent("Base Data", organizationEditorFactory.createOrganizationEditor());
+		addContent(i18nCore.organizationEditorDescription(), organizationEditorFactory.createOrganizationEditor());
 //		addContent(i18nCore.customerBrowserTitle(), customerFactory.createCustomerBrowser());
 
 		getView().setUiHandlers(this);

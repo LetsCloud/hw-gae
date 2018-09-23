@@ -685,18 +685,60 @@
             <Value>ORGANIZATION EDITOR</Value>
         </Comment>
         <Property>
-            <Name>customerEditorCommunication</Name>
+            <Name>organizationEditorTitle</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Edit Organization Profile</Value>
+            <Value disabled="false">Szervezet profile szerkesztése</Value>
+        </Property>
+        <Property>
+            <Name>organizationEditorDescription</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">General Data</Value>
+            <Value disabled="false">Általános adatok</Value>
+        </Property>
+        <Property>
+            <Name>organizationEditorName</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Organization name</Value>
+            <Value disabled="false">Szervezet neve</Value>
+        </Property>
+        <Property>
+            <Name>organizationEditorCode</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Code</Value>
+            <Value disabled="false">Kód</Value>
+        </Property>
+        <Property>
+            <Name>organizationEditorProfileGroup</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Profile Group</Value>
+            <Value disabled="false">Profil csoport</Value>
+        </Property>
+        <Property>
+            <Name>organizationEditorCommunication</Name>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
             <Value disabled="false">Communication</Value>
             <Value disabled="false">Kommunikácó</Value>
         </Property>
         <Property>
-            <Name>customerEditorAdresses</Name>
+            <Name>organizationEditorAdresses</Name>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
             <Value disabled="false">Addresses</Value>
             <Value disabled="false">Címek</Value>
+        </Property>
+        <Property>
+            <Name>organizationEditorWebPresence</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Web Presence</Value>
+            <Value disabled="false">Online jelenlét</Value>
         </Property>
         <Comment>
             <Value>CONTACT BROWSER</Value>

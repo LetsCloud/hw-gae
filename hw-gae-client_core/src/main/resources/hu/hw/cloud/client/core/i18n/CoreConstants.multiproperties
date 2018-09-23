@@ -17,7 +17,7 @@
         <Column>
             <Name>hu_HU</Name>
             <Description></Description>
-            <Width>620</Width>
+            <Width>938</Width>
             <HandlerConfiguration>/hw-gae-client_core/src/main/resources/hu/hw/cloud/client/core/i18n/CoreConstants_hu_HU.properties|false|false|false|false</HandlerConfiguration>
         </Column>
     </Columns>
@@ -148,7 +148,7 @@
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
             <Value disabled="false">Work Email</Value>
-            <Value disabled="false">Munkahely emal</Value>
+            <Value disabled="false">Munkahelyi email</Value>
         </Property>
         <Property>
             <Name>HOME_EMAIL</Name>

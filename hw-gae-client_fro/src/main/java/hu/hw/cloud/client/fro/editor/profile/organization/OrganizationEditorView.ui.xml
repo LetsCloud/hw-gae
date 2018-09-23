@@ -47,20 +47,20 @@
 			<m:MaterialColumn grid="s12 m6">
 				<m:MaterialRow marginBottom="0">
 					<m:MaterialTextBox ui:field="name" grid="s12"
-						type="TEXT" label="{i18nCore.customerEditorName}" />
+						type="TEXT" label="{i18nCore.organizationEditorName}" />
 
 					<m:MaterialTextBox ui:field="code" grid="xm12 l6"
-						type="TEXT" label="{i18nCore.customerEditorCode}" />
+						type="TEXT" label="{i18nCore.organizationEditorCode}" />
 
 					<ui2:MaterialComboBoxAdd
 						ui:field="profileGroupCombo" grid="xm12 l6" multiple="false"
-						label="{i18nCore.customerEditorProfileGroup}" />
+						label="{i18nCore.organizationEditorProfileGroup}" />
 				</m:MaterialRow>
 
 				<!-- KOMMUNIKÁCIÓ -->
 				<m:MaterialRow ui:field="communicationPanel"
 					addStyleNames="{style.dataGroupBox}">
-					<g:Label text="{i18nCore.customerEditorCommunication}"
+					<g:Label text="{i18nCore.organizationEditorCommunication}"
 						addStyleNames="{style.dataGroupTitle}" />
 					<m:MaterialIcon ui:field="addCommunication"
 						iconType="ADD_BOX" waves="DEFAULT" backgroundColor="WHITE"
@@ -74,7 +74,7 @@
 				<!-- CÍMEK -->
 				<g:HTMLPanel ui:field="addressPanel"
 					addStyleNames="{style.dataGroupBox}">
-					<g:Label text="{i18nCore.customerEditorAdresses}"
+					<g:Label text="{i18nCore.organizationEditorAdresses}"
 						addStyleNames="{style.dataGroupTitle}" />
 					<m:MaterialIcon ui:field="addAddress"
 						iconType="ADD_BOX" waves="DEFAULT" backgroundColor="WHITE"
@@ -86,7 +86,7 @@
 				<!-- CÍMEK -->
 				<g:HTMLPanel ui:field="webPresencePanel"
 					addStyleNames="{style.dataGroupBox}">
-					<g:Label text="{i18nCore.customerEditorAdresses}"
+					<g:Label text="{i18nCore.organizationEditorWebPresence}"
 						addStyleNames="{style.dataGroupTitle}" />
 					<m:MaterialIcon ui:field="addWebPresence"
 						iconType="ADD_BOX" waves="DEFAULT" backgroundColor="WHITE"
