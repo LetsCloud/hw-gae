@@ -11,6 +11,7 @@ import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
@@ -36,6 +37,8 @@ public class OrganizationConfigPresenter
 		implements OrganizationConfigUiHandlers, ContentPushEvent.ContentPushHandler {
 	private static Logger logger = Logger.getLogger(OrganizationConfigPresenter.class.getName());
 
+	private static final String GENERAL_DATA = "generalData";
+
 	interface MyView extends AbstractConfigPresenter.MyView {
 	}
 
@@ -48,16 +51,17 @@ public class OrganizationConfigPresenter
 	private String webSafeKey;
 
 	@Inject
-	OrganizationConfigPresenter(EventBus eventBus, MyView view, MyProxy proxy,
+	OrganizationConfigPresenter(EventBus eventBus, PlaceManager placeManager, MyView view, MyProxy proxy,
 			OrganizationEditorFactory organizationEditorFactory, OrganizationBrowserFactory customerFactory,
 			FroMessages i18n, CoreMessages i18nCore) {
-		super(eventBus, view, proxy, AppPresenter.SLOT_MAIN);
+		super(eventBus, placeManager, view, proxy, AppPresenter.SLOT_MAIN);
 		logger.info("OrganizationConfigPresenter()");
 
 		setCaption(i18nCore.organizationConfigTitle());
 		setDescription(i18nCore.organizationConfigDescription());
+		setPlaceToken(CoreNameTokens.ORGANIZATION_DISPLAY);
 
-		addContent("Base Data", organizationEditorFactory.createOrganizationEditor());
+		addContent("Base Data", organizationEditorFactory.createOrganizationEditor(), GENERAL_DATA);
 //		addContent(i18nCore.customerBrowserTitle(), customerFactory.createCustomerBrowser());
 
 		getView().setUiHandlers(this);
