@@ -813,7 +813,7 @@
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
             <Value disabled="false">Contact Name</Value>
-            <Value disabled="false">A kapcsolat neve</Value>
+            <Value disabled="false">Kapcsolat neve</Value>
         </Property>
         <Property>
             <Name>contactEditorProfileGroup</Name>
