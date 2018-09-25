@@ -80,16 +80,19 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 	@Override
 	public void prepareFromRequest(PlaceRequest request) {
 		String requestToken = request.getParameter(LoggedInGatekeeper.PLACE_TO_GO, null);
+		if (Strings.isNullOrEmpty(requestToken)) {
+			checkCurentUser();
+			return;
+		}
+
 		Integer paramStart = requestToken.indexOf("?");
 		if (paramStart == -1) {
 			placeToGo = requestToken;
 		} else {
 			placeToGo = requestToken.substring(0, paramStart);
-			String requestParams = requestToken.substring(paramStart+1);
+			String requestParams = requestToken.substring(paramStart + 1);
 			Integer equalSign = requestParams.indexOf("=");
-			placeParams.put(requestParams.substring(0, equalSign), requestParams.substring(equalSign+1));
-			logger.info("LoginPresenter().prepareFromRequest()->placeToGo=" + placeToGo);
-			logger.info("LoginPresenter().prepareFromRequest()->placeParams=" + placeParams);
+			placeParams.put(requestParams.substring(0, equalSign), requestParams.substring(equalSign + 1));
 		}
 		checkCurentUser();
 	}
@@ -212,7 +215,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 			logger.info("LoginPresenter().goToPlace()->paramValue=" + entry.getValue());
 			placeRequest.with(entry.getKey(), entry.getValue());
 		}
-		
+
 		placeManager.revealPlace(placeRequest.build());
 	}
 

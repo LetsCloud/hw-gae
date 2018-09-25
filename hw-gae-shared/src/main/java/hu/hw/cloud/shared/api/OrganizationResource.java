@@ -19,6 +19,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import hu.hw.cloud.shared.dto.profile.OrganizationDto;
+import hu.hw.cloud.shared.dto.profile.OrganizationDtor;
 
 /**
  * @author robi
@@ -29,7 +30,7 @@ import hu.hw.cloud.shared.dto.profile.OrganizationDto;
 public interface OrganizationResource {
 
 	@GET
-	List<OrganizationDto> list();
+	List<OrganizationDtor> list();
 
 	@GET
 	@Path(PATH_WEBSAFEKEY)

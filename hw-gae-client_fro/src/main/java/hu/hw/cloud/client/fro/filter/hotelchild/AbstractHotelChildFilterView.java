@@ -31,12 +31,12 @@ public abstract class AbstractHotelChildFilterView extends AbstractFilterView im
 	}
 
 	@Override
-	protected void initView(CoreMessages i18nCore) {
-		super.initView(i18nCore);
-		initHotelFilter(i18nCore);
+	protected void initView() {
+		super.initView();
+		initHotelFilter();
 	}
 
-	private void initHotelFilter(CoreMessages i18nCore) {
+	private void initHotelFilter() {
 		hotelChip = new MaterialChip();
 		collapsibleHeader.insert(hotelChip, 1);
 		

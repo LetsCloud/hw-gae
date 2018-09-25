@@ -35,8 +35,8 @@ public class RoomTypeFilterView extends AbstractHotelChildFilterView implements 
 	}
 
 	@Override
-	protected void initView(CoreMessages i18nCore) {
-		super.initView(i18nCore);
+	protected void initView() {
+		super.initView();
 	}
 
 	private void initInventoryTypeFilter(Map<String, String> i18nSalesTypes, CoreMessages i18nCore) {

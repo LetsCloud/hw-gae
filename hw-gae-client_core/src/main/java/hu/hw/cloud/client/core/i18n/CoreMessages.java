@@ -420,6 +420,23 @@ public interface CoreMessages extends Messages {
 
 	
 	/*
+	 * PROFILE FILTER
+	 */
+	
+	@DefaultMessage("Code filter")
+	String profileFilterCodeLabel();
+	
+	@DefaultMessage("Code~")
+	String profileFilterCode();
+	
+	@DefaultMessage("Name filter")
+	String profileFilterNameLabel();
+	
+	@DefaultMessage("Name~")
+	String profileFilterName();
+
+	
+	/*
 	 * ORGANIZATION CREATOR
 	 */
 	@DefaultMessage("Create Organization")

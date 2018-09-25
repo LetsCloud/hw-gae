@@ -39,6 +39,8 @@ public abstract class AbstractFilterView extends ViewWithUiHandlers<AbstractFilt
 
 	private MaterialChip onlyActiveChip;
 
+	protected final CoreMessages i18nCore;
+	
 	@UiField
 	MaterialCheckBox onlyActiveCheckBox;
 
@@ -47,14 +49,16 @@ public abstract class AbstractFilterView extends ViewWithUiHandlers<AbstractFilt
 
 		initWidget(uiBinder.createAndBindUi(this));
 
-		initView(i18nCore);
+		this.i18nCore = i18nCore;
+		
+		initView();
 	}
 
-	protected void initView(CoreMessages i18nCore) {
-		initOnlyActiveFilter(i18nCore);
+	protected void initView() {
+		initOnlyActiveFilter();
 	}
 
-	private void initOnlyActiveFilter(CoreMessages i18nCore) {
+	private void initOnlyActiveFilter() {
 		onlyActiveChip = new MaterialChip();
 		onlyActiveChip.setText(i18nCore.roomTypesTableOnlyActive());
 
