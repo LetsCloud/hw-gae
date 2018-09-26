@@ -39,6 +39,21 @@ public class ProfileFilterView extends AbstractFilterView implements ProfileFilt
 	}
 
 	@Override
+	protected void createLayout() {
+		codeTextBox.setGrid("s12 m6");
+		controlPanel.add(codeTextBox);
+
+		nameTextBox.setGrid("s12 m6");
+		controlPanel.add(nameTextBox);
+
+		profileGroupCombo.setGrid("s12 m6");
+		controlPanel.add(profileGroupCombo);
+
+		onlyActiveCheckBox.setGrid("s12 m6");
+		controlPanel.add(onlyActiveCheckBox);
+	}
+
+	@Override
 	protected void initView() {
 		super.initView();
 
@@ -62,7 +77,6 @@ public class ProfileFilterView extends AbstractFilterView implements ProfileFilt
 				getUiHandlers().filterChange();
 			}
 		});
-		col1.add(codeTextBox);
 	}
 
 	private void setCodeChip(String code) {
@@ -100,7 +114,6 @@ public class ProfileFilterView extends AbstractFilterView implements ProfileFilt
 				getUiHandlers().filterChange();
 			}
 		});
-		col2.add(nameTextBox);
 	}
 
 	private void setNameChip(String name) {
@@ -132,8 +145,8 @@ public class ProfileFilterView extends AbstractFilterView implements ProfileFilt
 		profileGroupCombo.setAllowBlank(true);
 		profileGroupCombo.setCloseOnSelect(false);
 		profileGroupCombo.setMarginTop(25);
-		profileGroupCombo.setLabel(i18nCore.roomFilterRoomTypesLabel());
-		profileGroupCombo.setPlaceholder(i18nCore.roomFilterRoomTypesPlaceholder());
+		profileGroupCombo.setLabel(i18nCore.profileFilterProfileGroupLabel());
+//		profileGroupCombo.setPlaceholder(i18nCore.roomFilterRoomTypesPlaceholder());
 		profileGroupCombo.addSelectionHandler(e -> {
 			String roomTypesText = null;
 			for (ProfileGroupDto roomType : e.getSelectedValues()) {
@@ -150,7 +163,6 @@ public class ProfileFilterView extends AbstractFilterView implements ProfileFilt
 			setProfileGroupChip(null);
 			getUiHandlers().filterChange();
 		});
-		col1.add(profileGroupCombo);
 	}
 
 	private void setProfileGroupChip(String profileGroup) {

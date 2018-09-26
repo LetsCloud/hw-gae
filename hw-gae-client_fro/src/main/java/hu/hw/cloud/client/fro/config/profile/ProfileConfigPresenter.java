@@ -21,7 +21,6 @@ import hu.hw.cloud.client.core.security.LoggedInGatekeeper;
 import hu.hw.cloud.client.fro.browser.contact.ContactBrowserFactory;
 import hu.hw.cloud.client.fro.browser.organization.OrganizationBrowserFactory;
 import hu.hw.cloud.client.fro.browser.profilegroup.ProfileGroupBrowserFactory;
-import hu.hw.cloud.client.fro.browser.relationship.RelationshipBrowserFactory;
 import hu.hw.cloud.client.fro.config.AbstractConfigPresenter;
 import hu.hw.cloud.client.fro.i18n.FroMessages;
 

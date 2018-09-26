@@ -14,7 +14,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import gwt.material.design.client.ui.MaterialCheckBox;
 import gwt.material.design.client.ui.MaterialChip;
 import gwt.material.design.client.ui.MaterialCollapsibleHeader;
-import gwt.material.design.client.ui.MaterialColumn;
+import gwt.material.design.client.ui.MaterialRow;
 
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 
@@ -35,14 +35,13 @@ public abstract class AbstractFilterView extends ViewWithUiHandlers<AbstractFilt
 	protected MaterialCollapsibleHeader collapsibleHeader;
 
 	@UiField
-	protected MaterialColumn col1, col2;
-
+	protected MaterialRow controlPanel;
+	
+	protected MaterialCheckBox onlyActiveCheckBox;
+	
 	private MaterialChip onlyActiveChip;
 
 	protected final CoreMessages i18nCore;
-	
-	@UiField
-	MaterialCheckBox onlyActiveCheckBox;
 
 	public AbstractFilterView(CoreMessages i18nCore) {
 		logger.info("AbstractFilterView()");
@@ -52,6 +51,13 @@ public abstract class AbstractFilterView extends ViewWithUiHandlers<AbstractFilt
 		this.i18nCore = i18nCore;
 		
 		initView();
+		
+		createLayout();
+	}
+
+	protected void createLayout() {
+		onlyActiveCheckBox.setGrid("s12 m6");
+		controlPanel.add(onlyActiveCheckBox);
 	}
 
 	protected void initView() {
@@ -62,6 +68,8 @@ public abstract class AbstractFilterView extends ViewWithUiHandlers<AbstractFilt
 		onlyActiveChip = new MaterialChip();
 		onlyActiveChip.setText(i18nCore.roomTypesTableOnlyActive());
 
+		onlyActiveCheckBox = new MaterialCheckBox();
+		onlyActiveCheckBox.setText(i18nCore.roomTypesTableOnlyActive());
 		onlyActiveCheckBox.setValue(true);
 		onlyActiveCheckBox.addValueChangeHandler(e -> {
 			setOnlyActiveChip(e.getValue());

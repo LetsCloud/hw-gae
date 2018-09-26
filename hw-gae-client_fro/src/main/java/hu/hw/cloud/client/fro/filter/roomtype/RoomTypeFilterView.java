@@ -35,6 +35,18 @@ public class RoomTypeFilterView extends AbstractHotelChildFilterView implements 
 	}
 
 	@Override
+	protected void createLayout() {
+		hotelComboBox.setGrid("s12 m6");
+		controlPanel.add(hotelComboBox);
+
+		inventoryTypeCombo.setGrid("s12 m6");
+		controlPanel.add(inventoryTypeCombo);
+
+		onlyActiveCheckBox.setGrid("s12 m6");
+		controlPanel.add(onlyActiveCheckBox);
+	}
+
+	@Override
 	protected void initView() {
 		super.initView();
 	}
@@ -58,7 +70,6 @@ public class RoomTypeFilterView extends AbstractHotelChildFilterView implements 
 			setInventoryTypeChip(null);
 			getUiHandlers().filterChange();
 		});
-		col1.add(inventoryTypeCombo);
 
 		Arrays.asList(InventoryType.values())
 				.forEach(st -> inventoryTypeCombo.addItem(i18nSalesTypes.get(st.toString()), st));

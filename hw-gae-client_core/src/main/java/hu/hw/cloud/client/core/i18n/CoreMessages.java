@@ -434,6 +434,12 @@ public interface CoreMessages extends Messages {
 	
 	@DefaultMessage("Name~")
 	String profileFilterName();
+	
+	@DefaultMessage("ProfileGroup filter")
+	String profileFilterProfileGroupLabel();
+	
+	@DefaultMessage("Group~")
+	String profileFilterProfileGroup();
 
 	
 	/*

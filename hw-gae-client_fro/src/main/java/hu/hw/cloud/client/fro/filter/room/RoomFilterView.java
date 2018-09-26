@@ -35,6 +35,21 @@ public class RoomFilterView extends AbstractHotelChildFilterView implements Room
 	}
 
 	@Override
+	protected void createLayout() {
+		hotelComboBox.setGrid("s12 m6");
+		controlPanel.add(hotelComboBox);
+
+		floorCombo.setGrid("s12 m6");
+		controlPanel.add(floorCombo);
+
+		roomTypeCombo.setGrid("s12 m6");
+		controlPanel.add(roomTypeCombo);
+
+		onlyActiveCheckBox.setGrid("s12 m6");
+		controlPanel.add(onlyActiveCheckBox);
+	}
+
+	@Override
 	protected void initView() {
 		super.initView();
 
@@ -63,8 +78,6 @@ public class RoomFilterView extends AbstractHotelChildFilterView implements Room
 			setFloorChip(null);
 			getUiHandlers().filterChange();
 		});
-
-		col1.add(floorCombo);
 	}
 
 	private void setFloorChip(String type) {
@@ -120,7 +133,6 @@ public class RoomFilterView extends AbstractHotelChildFilterView implements Room
 			setRoomTypesChip(null);
 			getUiHandlers().filterChange();
 		});
-		col2.add(roomTypeCombo);
 	}
 
 	private void setRoomTypesChip(String roomTypes) {
