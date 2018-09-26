@@ -624,6 +624,44 @@
             <Value disabled="false">Aktív</Value>
         </Property>
         <Comment>
+            <Value>PROFILE FILTER</Value>
+        </Comment>
+        <Property>
+            <Name>profileFilterCodeLabel</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Code filter</Value>
+            <Value disabled="false">Kód szűrő</Value>
+        </Property>
+        <Property>
+            <Name>profileFilterCode</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Code~</Value>
+            <Value disabled="false">Kód~</Value>
+        </Property>
+        <Property>
+            <Name>profileFilterNameLabel</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Name filter</Value>
+            <Value disabled="false">Név szűrő</Value>
+        </Property>
+        <Property>
+            <Name>profileFilterName</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Name~</Value>
+            <Value disabled="false">Név~</Value>
+        </Property>
+        <Property>
+            <Name>profileFilterProfileGroupLabel</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">ProfileGroup filter</Value>
+            <Value disabled="false">Profil csoport szűrő</Value>
+        </Property>
+        <Comment>
             <Value>ORGANIZATION BROWSER </Value>
         </Comment>
         <Property>

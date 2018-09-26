@@ -48,19 +48,17 @@ public abstract class AbstractConfigPresenter<V extends AbstractConfigPresenter.
 
 	private String placeToken;
 	
-	protected Boolean firstReveal = true;
+	protected List<String> captions = new ArrayList<String>();
 	
-	private List<String> captions = new ArrayList<String>();
-	
-	private List<String> placeParams = new ArrayList<String>();
+	protected List<String> placeParams = new ArrayList<String>();
 
-	private List<PresenterWidget<?>> browsers = new ArrayList<PresenterWidget<?>>();
+	protected List<PresenterWidget<?>> browsers = new ArrayList<PresenterWidget<?>>();
 
 	private final PlaceManager placeManager;
 	
 	public static final SingleSlot<PresenterWidget<?>> SLOT_CONTENT = new SingleSlot<>();
 
-	private final static String PLACE_PARAM = "placeParam";
+	protected final static String PLACE_PARAM = "placeParam";
 
 	public AbstractConfigPresenter(EventBus eventBus, PlaceManager placeManager, V view, P proxy, GwtEvent.Type<RevealContentHandler<?>> slot) {
 		super(eventBus, view, proxy, null, slot);
@@ -89,10 +87,6 @@ public abstract class AbstractConfigPresenter<V extends AbstractConfigPresenter.
 	protected void onReveal() {
 		super.onReveal();
 		SetPageTitleEvent.fire(caption, description, MenuItemType.MENU_ITEM, this);
-		if (firstReveal) {
-//			showContent(0);
-			firstReveal = false;
-		}
 	}
 
 	@Override

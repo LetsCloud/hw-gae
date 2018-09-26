@@ -21,9 +21,10 @@ import gwt.material.design.client.data.component.RowComponent;
 import gwt.material.design.client.ui.MaterialIcon;
 import gwt.material.design.client.ui.table.cell.TextColumn;
 import gwt.material.design.client.ui.table.cell.WidgetColumn;
+
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.fro.browser.AbstractBrowserView;
-import hu.hw.cloud.shared.dto.profile.OrganizationDto;
+import hu.hw.cloud.shared.dto.profile.OrganizationDtor;
 
 /**
  * @author robi
@@ -33,7 +34,7 @@ public class OrganizationBrowserView extends ViewWithUiHandlers<OrganizationBrow
 		implements OrganizationBrowserPresenter.MyView {
 	private static Logger logger = Logger.getLogger(OrganizationBrowserView.class.getName());
 
-	private final AbstractBrowserView<OrganizationDto> table;
+	private final AbstractBrowserView<OrganizationDtor> table;
 
 	private final CoreMessages i18nCore;
 
@@ -41,13 +42,15 @@ public class OrganizationBrowserView extends ViewWithUiHandlers<OrganizationBrow
 	* 
 	*/
 	@Inject
-	OrganizationBrowserView(AbstractBrowserView<OrganizationDto> table, CoreMessages i18nCore) {
+	OrganizationBrowserView(AbstractBrowserView<OrganizationDtor> table, CoreMessages i18nCore) {
 		logger.info("CustomerBrowserView()");
 
 		initWidget(table);
 
 		this.table = table;
 		this.i18nCore = i18nCore;
+
+		bindSlot(OrganizationBrowserPresenter.SLOT_FILTER, table.getFilterPanel());
 
 		init();
 	}
@@ -63,19 +66,19 @@ public class OrganizationBrowserView extends ViewWithUiHandlers<OrganizationBrow
 		/*
 		 * CODE
 		 */
-		table.getTable().addColumn(new TextColumn<OrganizationDto>() {
+		table.getTable().addColumn(new TextColumn<OrganizationDtor>() {
 			@Override
 			public boolean isSortable() {
 				return true;
 			}
 
 			@Override
-			public Comparator<? super RowComponent<OrganizationDto>> sortComparator() {
+			public Comparator<? super RowComponent<OrganizationDtor>> sortComparator() {
 				return (o1, o2) -> o1.getData().getCode().compareToIgnoreCase(o2.getData().getCode());
 			}
 
 			@Override
-			public String getValue(OrganizationDto object) {
+			public String getValue(OrganizationDtor object) {
 				return object.getCode();
 			}
 		}, i18nCore.organizationBrowserColCode());
@@ -83,19 +86,19 @@ public class OrganizationBrowserView extends ViewWithUiHandlers<OrganizationBrow
 		/*
 		 * NAME
 		 */
-		table.getTable().addColumn(new TextColumn<OrganizationDto>() {
+		table.getTable().addColumn(new TextColumn<OrganizationDtor>() {
 			@Override
 			public boolean isSortable() {
 				return true;
 			}
 
 			@Override
-			public Comparator<? super RowComponent<OrganizationDto>> sortComparator() {
+			public Comparator<? super RowComponent<OrganizationDtor>> sortComparator() {
 				return (o1, o2) -> o1.getData().getName().compareToIgnoreCase(o2.getData().getName());
 			}
 
 			@Override
-			public String getValue(OrganizationDto object) {
+			public String getValue(OrganizationDtor object) {
 				return object.getName();
 			}
 		}, i18nCore.organizationBrowserColName());
@@ -103,14 +106,14 @@ public class OrganizationBrowserView extends ViewWithUiHandlers<OrganizationBrow
 		//
 		// EDIT ICON
 		//
-		table.getTable().addColumn(new WidgetColumn<OrganizationDto, MaterialIcon>() {
+		table.getTable().addColumn(new WidgetColumn<OrganizationDtor, MaterialIcon>() {
 			@Override
 			public TextAlign textAlign() {
 				return TextAlign.RIGHT;
 			}
 
 			@Override
-			public MaterialIcon getValue(OrganizationDto object) {
+			public MaterialIcon getValue(OrganizationDtor object) {
 				MaterialIcon icon = new MaterialIcon();
 				icon.addClickHandler(new ClickHandler() {
 					@Override
@@ -130,7 +133,7 @@ public class OrganizationBrowserView extends ViewWithUiHandlers<OrganizationBrow
 	}
 
 	@Override
-	public void setData(List<OrganizationDto> data) {
+	public void setData(List<OrganizationDtor> data) {
 		table.setData(data);
 	}
 }

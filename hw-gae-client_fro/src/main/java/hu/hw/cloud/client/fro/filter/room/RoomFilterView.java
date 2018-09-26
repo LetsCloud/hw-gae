@@ -24,7 +24,6 @@ import hu.hw.cloud.shared.dto.hotel.RoomTypeDto;
 public class RoomFilterView extends AbstractHotelChildFilterView implements RoomFilterPresenter.MyView {
 	private static Logger logger = Logger.getLogger(RoomFilterView.class.getName());
 
-	private final CoreMessages i18nCore;
 	private MaterialChip floorChip, roomTypesChip;
 	private MaterialComboBox<String> floorCombo;
 	private MaterialComboBox<RoomTypeDto> roomTypeCombo;
@@ -33,19 +32,32 @@ public class RoomFilterView extends AbstractHotelChildFilterView implements Room
 	RoomFilterView(CoreMessages i18nCore, CoreConstants cnstCore) {
 		super(i18nCore, cnstCore);
 		logger.info("RoomFilterView()");
-
-		this.i18nCore = i18nCore;
 	}
 
 	@Override
-	protected void initView(CoreMessages i18nCore) {
-		super.initView(i18nCore);
+	protected void createLayout() {
+		hotelComboBox.setGrid("s12 m6");
+		controlPanel.add(hotelComboBox);
 
-		initFloorFilter(i18nCore);
-		initRoomTypeFilter(i18nCore);
+		floorCombo.setGrid("s12 m6");
+		controlPanel.add(floorCombo);
+
+		roomTypeCombo.setGrid("s12 m6");
+		controlPanel.add(roomTypeCombo);
+
+		onlyActiveCheckBox.setGrid("s12 m6");
+		controlPanel.add(onlyActiveCheckBox);
 	}
 
-	private void initFloorFilter(CoreMessages i18nCore) {
+	@Override
+	protected void initView() {
+		super.initView();
+
+		initFloorFilter();
+		initRoomTypeFilter();
+	}
+
+	private void initFloorFilter() {
 		floorChip = new MaterialChip();
 
 		floorCombo = new MaterialComboBox<String>();
@@ -66,8 +78,6 @@ public class RoomFilterView extends AbstractHotelChildFilterView implements Room
 			setFloorChip(null);
 			getUiHandlers().filterChange();
 		});
-
-		col1.add(floorCombo);
 	}
 
 	private void setFloorChip(String type) {
@@ -96,7 +106,7 @@ public class RoomFilterView extends AbstractHotelChildFilterView implements Room
 		return floorCombo.getSingleValue();
 	}
 
-	private void initRoomTypeFilter(CoreMessages i18nCore) {
+	private void initRoomTypeFilter() {
 		roomTypesChip = new MaterialChip();
 
 		roomTypeCombo = new MaterialComboBox<RoomTypeDto>();
@@ -123,7 +133,6 @@ public class RoomFilterView extends AbstractHotelChildFilterView implements Room
 			setRoomTypesChip(null);
 			getUiHandlers().filterChange();
 		});
-		col2.add(roomTypeCombo);
 	}
 
 	private void setRoomTypesChip(String roomTypes) {

@@ -3,6 +3,7 @@
  */
 package hu.hw.cloud.server.controller.v1;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.QueryParam;
@@ -20,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import hu.hw.cloud.server.entity.common.AppUser;
 import hu.hw.cloud.server.entity.profile.Organization;
 import hu.hw.cloud.server.service.OrganizationService;
 import hu.hw.cloud.shared.dto.profile.OrganizationDto;
+import hu.hw.cloud.shared.dto.profile.OrganizationDtor;
 import hu.hw.cloud.shared.exception.RestApiException;
 
 import static hu.hw.cloud.shared.api.ApiParameters.ONLY_ACTIVE;
@@ -30,7 +33,7 @@ import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
 import static hu.hw.cloud.shared.api.ApiPaths.PATH_WEBSAFEKEY;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.ORGANIZATION;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.ROOT;
-
+import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -60,8 +63,21 @@ public class OrganizationController extends CrudController<Organization, Organiz
 	}
 
 	@RequestMapping(method = GET)
-	public ResponseEntity<List<OrganizationDto>> getAll(@QueryParam(ONLY_ACTIVE) Boolean onlyActive) {
-		return super.getAll();
+	public ResponseEntity<List<OrganizationDtor>> getAll(@QueryParam(ONLY_ACTIVE) Boolean onlyActive) {
+		List<OrganizationDtor> dtos = new ArrayList<OrganizationDtor>();
+
+		AppUser appUser = userService.getCurrentUser();
+		if (appUser == null)
+			return new ResponseEntity<List<OrganizationDtor>>(dtos, OK);
+
+		String accountWebSafeKey = appUser.getAccount().getWebSafeKey();
+		if (accountWebSafeKey == null)
+			return new ResponseEntity<List<OrganizationDtor>>(dtos, OK);
+
+		for (Organization entity : service.getChildren(accountWebSafeKey))
+			dtos.add(modelMapper.map(entity, OrganizationDtor.class));
+
+		return new ResponseEntity<List<OrganizationDtor>>(dtos, OK);
 	}
 
 	@Override
@@ -74,7 +90,7 @@ public class OrganizationController extends CrudController<Organization, Organiz
 	@Override
 	@RequestMapping(method = POST)
 	public ResponseEntity<OrganizationDto> saveOrCreate(@RequestBody OrganizationDto dto) throws RestApiException {
-		logger.info("OrganizationController().saveOrCreate("+dto+")");
+		logger.info("OrganizationController().saveOrCreate(" + dto + ")");
 		return super.saveOrCreate(dto);
 	}
 

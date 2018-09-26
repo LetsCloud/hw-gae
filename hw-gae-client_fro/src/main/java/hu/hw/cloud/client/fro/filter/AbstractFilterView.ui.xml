@@ -23,23 +23,12 @@
 				ui:field="collapsibleHeader">
 				<m:MaterialIcon iconType="FILTER_LIST" float="RIGHT"
 					marginRight="0" />
-<!-- 				<m:MaterialChip ui:field="hotelChip" /> -->
+				<!-- <m:MaterialChip ui:field="hotelChip" /> -->
 			</m:MaterialCollapsibleHeader>
 
 			<m:MaterialCollapsibleBody
 				ui:field="collapsibleBody" paddingTop="15" paddingBottom="0">
-				<m:MaterialRow>
-					<m:MaterialColumn ui:field="col1" grid="s12 m6">
-<!-- 						<combobox:MaterialComboBox
-							ui:field="hotelComboBox" /> -->
-					</m:MaterialColumn>
-					<m:MaterialColumn ui:field="col2" grid="s12 m6">
-						<m.html:Div addStyleNames="{style.onlyActiveCheckBox}">
-							<m:MaterialCheckBox
-								ui:field="onlyActiveCheckBox"
-								text="{i18nCore.roomTypesTableOnlyActive}" />
-						</m.html:Div>
-					</m:MaterialColumn>
+				<m:MaterialRow ui:field="controlPanel">
 				</m:MaterialRow>
 			</m:MaterialCollapsibleBody>
 		</m:MaterialCollapsibleItem><!-- Other Collapsible items here -->

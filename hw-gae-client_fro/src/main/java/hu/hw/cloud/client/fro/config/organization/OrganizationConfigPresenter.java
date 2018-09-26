@@ -71,8 +71,12 @@ public class OrganizationConfigPresenter
 	public void prepareFromRequest(PlaceRequest request) {
 		webSafeKey = request.getParameter(WEBSAFEKEY, null);
 		logger.info("OrganizationConfigPresenter().prepareFromRequest()->webSafeKey=" + webSafeKey);
-		showContent(0);
-		firstReveal = false;
+		
+		Integer index = placeParams.indexOf(request.getParameter(PLACE_PARAM, null));
+		if (index == -1) index = 0;
+		getView().setDesktopMenu(index);
+		getView().setMobileButtonText(captions.get(index));
+		setInSlot(SLOT_CONTENT, beforeShowContent(browsers.get(index)));
 	}
 
 	@Override

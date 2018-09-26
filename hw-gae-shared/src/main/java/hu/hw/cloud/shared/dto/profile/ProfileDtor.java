@@ -15,6 +15,8 @@ public class ProfileDtor extends AccountChildDtor {
 
 	private String name;
 
+	private ProfileGroupDto profileGroup;
+
 	public ProfileDtor() {
 	}
 
@@ -30,6 +32,14 @@ public class ProfileDtor extends AccountChildDtor {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public ProfileGroupDto getProfileGroup() {
+		return profileGroup;
+	}
+
+	public void setProfileGroup(ProfileGroupDto profileGroup) {
+		this.profileGroup = profileGroup;
 	}
 
 	/*

@@ -5,6 +5,7 @@ package hu.hw.cloud.client.fro.filter;
 
 import hu.hw.cloud.client.fro.filter.accountchild.AccountChildFilterPresenter;
 import hu.hw.cloud.client.fro.filter.hotelchild.HotelChildFilterPresenter;
+import hu.hw.cloud.client.fro.filter.profile.ProfileFilterPresenter;
 import hu.hw.cloud.client.fro.filter.room.RoomFilterPresenter;
 import hu.hw.cloud.client.fro.filter.roomtype.RoomTypeFilterPresenter;
 import hu.hw.cloud.client.fro.table.filter.FilterWidgetPresenter;
@@ -24,5 +25,7 @@ public interface FilterPresenterFactory {
 	RoomTypeFilterPresenter createRoomTypeFilterPresenter();
 
 	RoomFilterPresenter createRoomFilterPresenter();
+
+	ProfileFilterPresenter createProfileFilterPresenter();
 
 }

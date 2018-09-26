@@ -10,6 +10,8 @@ import hu.hw.cloud.client.fro.filter.accountchild.AccountChildFilterPresenter;
 import hu.hw.cloud.client.fro.filter.accountchild.AccountChildFilterView;
 import hu.hw.cloud.client.fro.filter.hotelchild.HotelChildFilterPresenter;
 import hu.hw.cloud.client.fro.filter.hotelchild.HotelChildFilterView;
+import hu.hw.cloud.client.fro.filter.profile.ProfileFilterPresenter;
+import hu.hw.cloud.client.fro.filter.profile.ProfileFilterView;
 import hu.hw.cloud.client.fro.filter.room.RoomFilterPresenter;
 import hu.hw.cloud.client.fro.filter.room.RoomFilterView;
 import hu.hw.cloud.client.fro.filter.roomtype.RoomTypeFilterPresenter;
@@ -37,6 +39,8 @@ public class FilterModule extends AbstractPresenterModule {
 				RoomTypeFilterView.class);
 
 		bindPresenterWidget(RoomFilterPresenter.class, RoomFilterPresenter.MyView.class, RoomFilterView.class);
+
+		bindPresenterWidget(ProfileFilterPresenter.class, ProfileFilterPresenter.MyView.class, ProfileFilterView.class);
 
 		install(new GinFactoryModuleBuilder().build(FilterPresenterFactory.class));
 	}

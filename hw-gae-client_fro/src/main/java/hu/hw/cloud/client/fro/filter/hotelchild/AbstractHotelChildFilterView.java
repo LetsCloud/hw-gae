@@ -23,7 +23,7 @@ public abstract class AbstractHotelChildFilterView extends AbstractFilterView im
 
 	private MaterialChip hotelChip;
 
-	private MaterialComboBox<HotelDto> hotelComboBox;
+	protected MaterialComboBox<HotelDto> hotelComboBox;
 
 	public AbstractHotelChildFilterView(CoreMessages i18nCore, CoreConstants cnstCore) {
 		super(i18nCore);
@@ -31,12 +31,21 @@ public abstract class AbstractHotelChildFilterView extends AbstractFilterView im
 	}
 
 	@Override
-	protected void initView(CoreMessages i18nCore) {
-		super.initView(i18nCore);
-		initHotelFilter(i18nCore);
+	protected void createLayout() {
+		hotelComboBox.setGrid("s12 m6");
+		controlPanel.add(hotelComboBox);
+
+		onlyActiveCheckBox.setGrid("s12 m6");
+		controlPanel.add(onlyActiveCheckBox);
 	}
 
-	private void initHotelFilter(CoreMessages i18nCore) {
+	@Override
+	protected void initView() {
+		super.initView();
+		initHotelFilter();
+	}
+
+	private void initHotelFilter() {
 		hotelChip = new MaterialChip();
 		collapsibleHeader.insert(hotelChip, 1);
 		
@@ -48,7 +57,6 @@ public abstract class AbstractHotelChildFilterView extends AbstractFilterView im
 			setHotelChip(e.getSelectedValues().get(0));
 			getUiHandlers().filterChange();
 		});
-		col1.add(hotelComboBox);
 	}
 
 	private void setHotelChip(HotelDto hoteDto) {
