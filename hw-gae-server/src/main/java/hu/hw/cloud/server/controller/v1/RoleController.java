@@ -1,20 +1,10 @@
 package hu.hw.cloud.server.controller.v1;
 
-import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.ROOT;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.ROLE;
-import static org.springframework.http.HttpStatus.OK;
-import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,6 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import hu.hw.cloud.shared.dto.common.RoleDto;
+
+import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.ROLE;
+import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.ROOT;
+import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 @Controller
 @RequestMapping(value = ROOT + ROLE, produces = MediaType.APPLICATION_JSON_VALUE)
