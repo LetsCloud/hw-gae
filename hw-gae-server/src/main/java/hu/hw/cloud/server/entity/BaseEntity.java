@@ -72,6 +72,8 @@ public abstract class BaseEntity {
 	private void onLoad() {
 		Key<BaseEntity> key = Key.create(this);
 		this.webSafeKey = key.getString();
+		logger.info("onLoad()->id=" + id);
+		logger.info("onLoad()->webSafeKey=" + webSafeKey);
 	}
 
 	/**
@@ -107,15 +109,7 @@ public abstract class BaseEntity {
 	 * @return Egyedi kulcs.
 	 */
 	public String getWebSafeKey() {
-		
-		if (id != null)
-			return webSafeKey;
-		
-		if (id != null) {
-			Key<BaseEntity> key = Key.create(this);
-			return key.getString();
-		}
-		return null;
+		return webSafeKey;
 	}
 
 	/**
@@ -124,7 +118,6 @@ public abstract class BaseEntity {
 	 * @param webSafeKey A beállítandó egyedi kulcs.
 	 */
 	public void setWebSafeKey(String webSafeKey) {
-		logger.info("setWebSafeKey()->" + webSafeKey);
 		this.webSafeKey = webSafeKey;
 	}
 
@@ -143,7 +136,6 @@ public abstract class BaseEntity {
 	 * @param version Beállítandó verziószám.
 	 */
 	public void setVersion(Long version) {
-		logger.info("setVersion()->" + version);
 		this.version = version;
 	}
 

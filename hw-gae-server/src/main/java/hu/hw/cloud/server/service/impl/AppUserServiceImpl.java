@@ -2,7 +2,9 @@ package hu.hw.cloud.server.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import hu.hw.cloud.server.entity.VerificationToken;
 import hu.hw.cloud.server.entity.chat.FcmToken;
@@ -18,7 +20,7 @@ import hu.hw.cloud.shared.exception.UniqueIndexConflictException;
 
 public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserRepository>
 		implements AppUserService {
-	private static final Logger logger = Logger.getLogger(AppUserServiceImpl.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(AppUserServiceImpl.class.getName());
 
 	private final LoggedInChecker loggedInChecker;
 	private final AccountRepository accountRepository;
@@ -64,6 +66,7 @@ public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserReposito
 
 	@Override
 	public void createVerificationToken(AppUser user, String token) throws Throwable {
+		logger.info("createVerificationToken()->user="+user);
 		VerificationToken myToken = new VerificationToken(token);
 		List<VerificationToken> tokens = new ArrayList<VerificationToken>();
 		tokens.add(myToken);
@@ -98,16 +101,15 @@ public class AppUserServiceImpl extends CrudServiceImpl<AppUser, AppUserReposito
 	@Override
 	public AppUser createAdminUser(RegisterDto registerDto)
 			throws EntityValidationException, UniqueIndexConflictException {
-		// LOGGER.info("createAdminUser->registerDto.getAccountId()=" +
-		// registerDto.getAccountId());
 		Account account = accountRepository.findById(registerDto.getAccountId());
+		logger.info("createAdminUser()->account="+account);
 
 		AppUser appUser = new AppUser(registerDto);
 		appUser.setAccount(account);
 		appUser.setAdmin(true);
-		// LOGGER.info("createAdminUser->before appUserRepository.save()");
 		appUser = appUserRepository.save(appUser);
-		// LOGGER.info("createAdminUser->after appUserRepository.save()");
+		logger.info("createAdminUser()->appUser="+appUser);
+
 		return appUser;
 	}
 

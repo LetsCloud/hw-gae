@@ -20,6 +20,7 @@ import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.fro.meditor.AbstractMeditorPresenter;
 import hu.hw.cloud.client.fro.meditor.MeditorView;
 import hu.hw.cloud.shared.api.ProfileGroupResource;
+import hu.hw.cloud.shared.dto.BaseDto;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
 import hu.hw.cloud.shared.dto.profile.ProfileGroupDto;
 
@@ -58,6 +59,7 @@ public class ProfileGroupEditorPresenter
 	protected ProfileGroupDto createDto() {
 		logger.info("ProfileGroupEditorPresenter().createDto");
 		ProfileGroupDto dto = new ProfileGroupDto();
+		dto.setAccount(new BaseDto());
 		dto.getAccount().setId(currentUser.getAppUserDto().getAccount().getId());
 		return dto;
 	}

@@ -3,14 +3,14 @@
  */
 package hu.hw.cloud.server.repository.ofy;
 
-import static com.googlecode.objectify.ObjectifyService.ofy;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Lists;
 import com.googlecode.objectify.Key;
@@ -19,17 +19,19 @@ import com.googlecode.objectify.cmd.Query;
 import hu.hw.cloud.server.entity.BaseEntity;
 import hu.hw.cloud.shared.exception.UniqueIndexConflictException;
 
+import static com.googlecode.objectify.ObjectifyService.ofy;
+
 /**
  * @author CR
  *
  */
 public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
-	private static final Logger LOGGER = Logger.getLogger(ObjectifyBaseRepository.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(ObjectifyBaseRepository.class.getName());
 
 	private final Class<T> clazz;
 
 	protected ObjectifyBaseRepository(final Class<T> clazz) {
-		LOGGER.info("ObjectifyBaseRepository()");
+		logger.info("ObjectifyBaseRepository()");
 		this.clazz = clazz;
 	}
 
@@ -56,6 +58,9 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 	public T putAndLoad(T entity) {
 		Key<T> key = put(entity);
 		entity = get(key);
+		// You should assign webSafeKey manually, because the @Load method does not run
+		// because the get method works from the cache.
+		entity.setWebSafeKey(key.getString());
 		while (entity == null) {
 			entity = get(key);
 		}
@@ -336,8 +341,7 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 	/**
 	 * Visszaadja a szülő entitás összes gyermekét.
 	 * 
-	 * @param parent
-	 *            Szülő entitás
+	 * @param parent Szülő entitás
 	 * @return
 	 */
 	public List<T> getChildren(Object parent) {
@@ -347,12 +351,9 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 	/**
 	 * Visszaadja a szülő entitás megadott feltételnek megfelelő első gyermekét.
 	 * 
-	 * @param parent
-	 *            Szülő entitás
-	 * @param propName
-	 *            Feltétel tulajdonság neve
-	 * @param propValue
-	 *            Feltétel tulajdonság értéke
+	 * @param parent    Szülő entitás
+	 * @param propName  Feltétel tulajdonság neve
+	 * @param propValue Feltétel tulajdonság értéke
 	 * @return
 	 */
 	public T getChildByProperty(Object parent, String propName, Object propValue) {
@@ -362,12 +363,9 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 	/**
 	 * Visszaadja a szülő entitás megadott feltételnek megfelelő összes gyermeket.
 	 * 
-	 * @param parent
-	 *            Szülő entitás
-	 * @param propName
-	 *            Feltétel tulajdonság neve
-	 * @param propValue
-	 *            Feltétel tulajdonság értéke
+	 * @param parent    Szülő entitás
+	 * @param propName  Feltétel tulajdonság neve
+	 * @param propValue Feltétel tulajdonság értéke
 	 * @return
 	 */
 	public List<T> getChildrenByProperty(Object parent, String propName, Object propValue) {
@@ -377,10 +375,8 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 	/**
 	 * Visszaadja a szülő entitás megadott feltételeknek megfelelő összes gyermeket.
 	 * 
-	 * @param parent
-	 *            Szülő entitás
-	 * @param filters
-	 *            Feltételek
+	 * @param parent  Szülő entitás
+	 * @param filters Feltételek
 	 * @return
 	 */
 	public List<T> getChildrenByFilters(Object parent, Map<String, Object> filters) {
@@ -393,12 +389,9 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 	 * Visszaadja a szülő entitás megadott feltételeknek valamint a megadott
 	 * tulajdonság MAXimum értékének megfelő gyermekét.
 	 * 
-	 * @param parent
-	 *            Szülő entitás
-	 * @param property
-	 *            Tulajdonság
-	 * @param filters
-	 *            Feltételek
+	 * @param parent   Szülő entitás
+	 * @param property Tulajdonság
+	 * @param filters  Feltételek
 	 * @return
 	 */
 	public T getChildByMaxProperty(Object parent, String property, Map<String, Object> filters) {
@@ -409,8 +402,7 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 	 * Visszaadja a szülő entitás megadott feltételeknek valamint a megadott
 	 * tulajdonság MINimum értékének megfelő gyermekét.
 	 * 
-	 * @param parent
-	 *            Szülő entitás
+	 * @param parent Szülő entitás
 	 * @return
 	 */
 	public T getChildByMinProperty(Object parent, String property, Map<String, Object> filters) {
@@ -480,13 +472,12 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 	/**
 	 * Egyedi kulcs ütközések vizsgálata.
 	 * 
-	 * @param parent
-	 *            Gyermek entitás esetén szüksége van a szülő kulcsára.
-	 * @param entity
-	 *            Az új vagy módosítandó entitás.
+	 * @param parent Gyermek entitás esetén szüksége van a szülő kulcsára.
+	 * @param entity Az új vagy módosítandó entitás.
 	 * @throws UniqueIndexConflictException
 	 */
 	public void checkUniqueIndexConflict(Object parent, T entity) throws UniqueIndexConflictException {
+		logger.info("checkUniqueIndexConflict()->entity" + entity);
 		// Az entitás egyedi indexeinek begyűjtése
 		Map<String, Object> uniqueIndexes = entity.getUniqueIndexes();
 		// A egyedi indexek végigpásztázása
@@ -503,14 +494,10 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 	/**
 	 * Egy egyedi kulcs ütközés vizsgálata.
 	 * 
-	 * @param parent
-	 *            Gyermek entitás esetén szüksége van a szülő kulcsára.
-	 * @param webSafeKey
-	 *            Az új vagy módosítandó entitás azonosítója.
-	 * @param property
-	 *            Az egyedi index mőjének neve.
-	 * @param value
-	 *            A vizsgált egyedi kulcsértéke.
+	 * @param parent     Gyermek entitás esetén szüksége van a szülő kulcsára.
+	 * @param webSafeKey Az új vagy módosítandó entitás azonosítója.
+	 * @param property   Az egyedi index mőjének neve.
+	 * @param value      A vizsgált egyedi kulcsértéke.
 	 * @return A vizsgálat eredménye true=van ütközés, false=nincs ütközés
 	 */
 	public Boolean isUniqueIndexConflict(Object parent, String webSafeKey, String property, Object value) {
@@ -520,22 +507,26 @@ public abstract class ObjectifyBaseRepository<T extends BaseEntity> {
 
 		// Ha nincsen ilyen entitás, akkor kulcs ütközés sincs
 		if ((keys == null) || (keys.isEmpty())) {
+			logger.info("isUniqueIndexConflict()->1");
 			return false;
 		}
 
 		// Ha rögzítendő entitás azonosítója null, akkor az entitás új és
 		// ütközik az előzőleg megtalált entitással.
-		if (webSafeKey == null) {
+		if ((webSafeKey == null) && (keys.size() > 0)) {
+			logger.info("isUniqueIndexConflict()->2");
 			return true;
 		}
 
 		// Ha egyedül a módosítandó entitás azonosítója található meg a
 		// találatok között, akkor nincs szó ütközésről.
 		if ((keys.contains(Key.create(webSafeKey))) && (keys.size() == 1)) {
+			logger.info("isUniqueIndexConflict()->3");
 			return false;
 		}
 
 		// Egyébként egyedi kulcs ütközésrül van szó
+		logger.info("isUniqueIndexConflict()->4");
 		return true;
 	}
 }
