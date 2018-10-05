@@ -77,10 +77,10 @@ public class HotelDto extends AccountChildDto {
 	public void setCityTaxes(List<CityTaxDto> cityTaxes) {
 		this.cityTaxes = cityTaxes;
 	}
-	
+
 	@Override
 	public String toString() {
-		String ret = "HotelDto:{" + super.toString() + ", code=" + code + ", name=" + name + "}";
+		String ret = "HotelDto:{code=" + code + ", name=" + name + ", " + super.toString() + "}";
 		return ret;
 	}
 }

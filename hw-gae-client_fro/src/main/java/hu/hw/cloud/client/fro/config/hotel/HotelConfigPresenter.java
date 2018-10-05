@@ -22,7 +22,6 @@ import hu.hw.cloud.client.fro.browser.marketgroup.MarketGroupBrowserFactory;
 import hu.hw.cloud.client.fro.browser.room.RoomBrowserFactory;
 import hu.hw.cloud.client.fro.browser.roomtype.RoomTypeBrowserFactory;
 import hu.hw.cloud.client.fro.config.AbstractConfigPresenter;
-import hu.hw.cloud.client.fro.i18n.FroMessages;
 
 /**
  * @author robi

@@ -66,7 +66,7 @@ public class AppUserDto extends AccountChildDto {
 	private List<UserGroupDto> userGroups = new ArrayList<UserGroupDto>();
 
 	/**
-	 * Szerepkörök 
+	 * Szerepkörök
 	 */
 	private List<RoleDto> roles = new ArrayList<RoleDto>();
 
@@ -211,9 +211,9 @@ public class AppUserDto extends AccountChildDto {
 
 	@Override
 	public String toString() {
-		String ret = "AppUserDto:{" + super.toString() + ", name=" + name + ", username=" + username + ", password="
-				+ password + ", emailAddress=" + emailAddress + ", picture=" + picture + ", enabled=" + enabled
-				+ ", admin=" + admin + ", roles=" + roles + ", userGroups=" + userGroups +"}";
+		String ret = "AppUserDto:{name=" + name + ", username=" + username + ", password=" + password
+				+ ", emailAddress=" + emailAddress + ", picture=" + picture + ", enabled=" + enabled + ", admin="
+				+ admin + ", roles=" + roles + ", userGroups=" + userGroups + ", " + super.toString() + "}";
 		return ret;
 	}
 }

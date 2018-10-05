@@ -96,7 +96,7 @@ public class ContactEditorPresenter extends AbstractEditorPresenterWidget<Contac
 	@Override
 	protected ContactDto createDto() {
 		ContactDto dto = new ContactDto();
-		dto.getAccount().setId(currentUser.getAppUserDto().getAccount().getId());
+		dto.setAccount(currentUser.getAppUserDto().getAccount());
 		dto.getCommunications().add(new CommunicationDto(true, CommMode.MOBILE));
 		dto.getAddresses().add(new AddressDto());
 		return dto;
