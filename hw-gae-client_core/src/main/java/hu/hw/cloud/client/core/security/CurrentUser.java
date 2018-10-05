@@ -4,14 +4,14 @@ import hu.hw.cloud.shared.dto.common.AppUserDto;
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
 
 public class CurrentUser {
-	
-	private AppUserDto appUserDto;
-	
-	private HotelDto currentHotelDto;
-	
-    private boolean loggedIn;
 
-    public AppUserDto getAppUserDto() {
+	private AppUserDto appUserDto;
+
+	private HotelDto currentHotelDto;
+
+	private boolean loggedIn;
+
+	public AppUserDto getAppUserDto() {
 		return appUserDto;
 	}
 
@@ -29,10 +29,17 @@ public class CurrentUser {
 	}
 
 	public boolean isLoggedIn() {
-        return loggedIn;
-    }
+		return loggedIn;
+	}
 
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
-    }
+	public void setLoggedIn(boolean loggedIn) {
+		this.loggedIn = loggedIn;
+	}
+
+	@Override
+	public String toString() {
+		String ret = "CurrentUser:{appUserDto=" + appUserDto + ", currentHotelDto=" + currentHotelDto + ", loggedIn=" + loggedIn +", " + super.toString() + "}";
+		return ret;
+	}
+
 }

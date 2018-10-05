@@ -41,7 +41,7 @@ public class AccountDto extends BaseDto {
 
 	@Override
 	public String toString() {
-		String ret = "AccountDto:{" + super.toString() + ", name=" + name + "}";
+		String ret = "AccountDto:{name=" + name + ", " + super.toString() + "}";
 		return ret;
 	}
 

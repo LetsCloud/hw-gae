@@ -93,8 +93,9 @@ public final class OrganizationEditorPresenter
 
 	@Override
 	protected OrganizationDto createDto() {
+		logger.info("createDto()->currentUser=" + currentUser);
 		OrganizationDto dto = new OrganizationDto();
-		dto.getAccount().setId(currentUser.getAppUserDto().getAccount().getId());
+		dto.setAccount(currentUser.getAppUserDto().getAccount());
 		dto.getCommunications().add(new CommunicationDto(true, CommMode.MOBILE));
 		dto.getAddresses().add(new AddressDto());
 		return dto;

@@ -21,6 +21,7 @@ import hu.hw.cloud.client.core.security.LoggedInGatekeeper;
 import hu.hw.cloud.client.fro.browser.contact.ContactBrowserFactory;
 import hu.hw.cloud.client.fro.browser.organization.OrganizationBrowserFactory;
 import hu.hw.cloud.client.fro.browser.profilegroup.ProfileGroupBrowserFactory;
+import hu.hw.cloud.client.fro.browser.relationship.RelationshipBrowserFactory;
 import hu.hw.cloud.client.fro.config.AbstractConfigPresenter;
 import hu.hw.cloud.client.fro.i18n.FroMessages;
 
@@ -34,6 +35,7 @@ public class ProfileConfigPresenter
 	private static Logger logger = Logger.getLogger(ProfileConfigPresenter.class.getName());
 
 	private static final String PROFILE_GROUPS = "profileGroups";
+	private static final String RELATIONSHIPS = "relationships";
 	private static final String ORGANIZATIONS = "organizations";
 	private static final String CONTACTS = "contacts";
 
@@ -48,8 +50,9 @@ public class ProfileConfigPresenter
 
 	@Inject
 	ProfileConfigPresenter(EventBus eventBus, PlaceManager placeManager, MyView view, MyProxy proxy,
-			ProfileGroupBrowserFactory profileGroupFactory, OrganizationBrowserFactory organizationFactory,
-			ContactBrowserFactory contactFactory, FroMessages i18n, CoreMessages i18nCore) {
+			ProfileGroupBrowserFactory profileGroupFactory, RelationshipBrowserFactory relationshipFactory,
+			OrganizationBrowserFactory organizationFactory, ContactBrowserFactory contactFactory, FroMessages i18n,
+			CoreMessages i18nCore) {
 		super(eventBus, placeManager, view, proxy, AppPresenter.SLOT_MAIN);
 
 		logger.info("ProfileConfigPresenter()");
@@ -60,6 +63,7 @@ public class ProfileConfigPresenter
 
 		addContent(i18nCore.profileGroupBrowserTitle(), profileGroupFactory.createProfileGroupBrowser(),
 				PROFILE_GROUPS);
+		addContent("Kapcsolat típusok", relationshipFactory.createRelationshipBrowser(), RELATIONSHIPS);
 		addContent(i18nCore.organizationBrowserTitle(), organizationFactory.createOrganisationBrowser(), ORGANIZATIONS);
 		addContent(i18nCore.contactBrowserTitle(), contactFactory.createContactBrowser(), CONTACTS);
 
