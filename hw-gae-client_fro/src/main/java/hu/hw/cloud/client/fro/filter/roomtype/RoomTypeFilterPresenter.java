@@ -10,7 +10,7 @@ import javax.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 
-import hu.hw.cloud.client.core.datasource.HotelDataSource;
+import hu.hw.cloud.client.core.datasource.HotelDataSource2;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.fro.filter.AbstractFilterUiHandlers;
 import hu.hw.cloud.client.fro.filter.hotelchild.AbstractHotelChildFilterPresenter;
@@ -28,7 +28,7 @@ public class RoomTypeFilterPresenter extends AbstractHotelChildFilterPresenter<R
 	}
 
 	@Inject
-	RoomTypeFilterPresenter(EventBus eventBus, MyView view, CurrentUser currentUser, HotelDataSource hotelDataSource) {
+	RoomTypeFilterPresenter(EventBus eventBus, MyView view, CurrentUser currentUser, HotelDataSource2 hotelDataSource) {
 		super(eventBus, view, currentUser, hotelDataSource);
 		logger.info("RoomTypeFilterPresenter()");
 		getView().setUiHandlers(this);

@@ -17,7 +17,7 @@ import hu.hw.cloud.shared.cnst.RoomStatus;
  *
  */
 @SuppressWarnings("serial")
-public class RoomDto extends HotelChildDto {
+public class RoomDto extends HotelChildDtor {
 
 	/**
 	 * Egyedi szobaszám

@@ -13,10 +13,11 @@ import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
-import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 
 import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.security.CurrentUser;
+import hu.hw.cloud.client.fro.config.AbstractConfigPresenter;
+import hu.hw.cloud.client.fro.config.profile.ProfileConfigPresenter;
 import hu.hw.cloud.client.fro.meditor.AbstractMeditorPresenter;
 import hu.hw.cloud.client.fro.meditor.MeditorView;
 import hu.hw.cloud.shared.api.RelationshipResource;
@@ -67,7 +68,8 @@ public class RelationshipEditorPresenter
 			@Override
 			public void onSuccess(RelationshipDto dto) {
 				getView().close();
-				PlaceRequest placeRequest = new Builder().nameToken(CoreNameTokens.PROFILE_CONFIG).build();
+				PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken(CoreNameTokens.PROFILE_CONFIG)
+						.with(AbstractConfigPresenter.PLACE_PARAM, ProfileConfigPresenter.RELATIONSHIPS).build();
 				placeManager.revealPlace(placeRequest);
 			}
 

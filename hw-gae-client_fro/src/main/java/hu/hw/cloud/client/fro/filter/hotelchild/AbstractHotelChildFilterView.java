@@ -13,6 +13,7 @@ import hu.hw.cloud.client.core.i18n.CoreConstants;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.fro.filter.AbstractFilterView;
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
+import hu.hw.cloud.shared.dto.hotel.HotelDtor;
 
 /**
  * @author robi
@@ -23,7 +24,7 @@ public abstract class AbstractHotelChildFilterView extends AbstractFilterView im
 
 	private MaterialChip hotelChip;
 
-	protected MaterialComboBox<HotelDto> hotelComboBox;
+	protected MaterialComboBox<HotelDtor> hotelComboBox;
 
 	public AbstractHotelChildFilterView(CoreMessages i18nCore, CoreConstants cnstCore) {
 		super(i18nCore);
@@ -49,7 +50,7 @@ public abstract class AbstractHotelChildFilterView extends AbstractFilterView im
 		hotelChip = new MaterialChip();
 		collapsibleHeader.insert(hotelChip, 1);
 		
-		hotelComboBox = new MaterialComboBox<HotelDto>();
+		hotelComboBox = new MaterialComboBox<HotelDtor>();
 		hotelComboBox.setLabel(i18nCore.roomTypesTableHotelsLabel());
 		hotelComboBox.setPlaceholder(i18nCore.roomTypesTableHotelsPlaceholder());
 
@@ -59,26 +60,26 @@ public abstract class AbstractHotelChildFilterView extends AbstractFilterView im
 		});
 	}
 
-	private void setHotelChip(HotelDto hoteDto) {
+	private void setHotelChip(HotelDtor hoteDto) {
 		hotelChip.setText(hoteDto.getName());
 	}
 	
 	@Override
-	public void setHotelData(List<HotelDto> hotelData) {
-		for (HotelDto hd : hotelData) {
+	public void setHotelData(List<HotelDtor> hotelData) {
+		for (HotelDtor hd : hotelData) {
 			hotelComboBox.addItem(hd.getName(), hd);
 		}
 	}
 
 	@Override
-	public void setSelectedHotel(HotelDto hotelDto) {
+	public void setSelectedHotel(HotelDtor hotelDto) {
 		Integer index = hotelComboBox.getValueIndex(hotelDto);
 		hotelComboBox.setSelectedIndex(index);
 		setHotelChip(hotelDto);
 	}
 
 	@Override
-	public HotelDto getSelectedHotel() {
+	public HotelDtor getSelectedHotel() {
 		return hotelComboBox.getSelectedValue().get(0);
 	}
 

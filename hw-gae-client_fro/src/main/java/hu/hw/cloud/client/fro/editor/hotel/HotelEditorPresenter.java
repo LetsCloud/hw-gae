@@ -15,8 +15,6 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
-import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 
 import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.app.AppPresenter;
@@ -109,8 +107,7 @@ public class HotelEditorPresenter
 		resourceDelegate.withCallback(new ErrorHandlerAsyncCallback<HotelDto>(this) {
 			@Override
 			public void onSuccess(HotelDto userDto) {
-				PlaceRequest placeRequest = new Builder().nameToken(CoreNameTokens.HOTEL_CONFIG).build();
-				placeManager.revealPlace(placeRequest);
+				placeManager.navigateBack();
 			}
 
 			@Override

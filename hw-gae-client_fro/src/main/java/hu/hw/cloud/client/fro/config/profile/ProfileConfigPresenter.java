@@ -34,10 +34,10 @@ public class ProfileConfigPresenter
 		implements ProfileConfigUiHandlers, ContentPushEvent.ContentPushHandler {
 	private static Logger logger = Logger.getLogger(ProfileConfigPresenter.class.getName());
 
-	private static final String PROFILE_GROUPS = "profileGroups";
-	private static final String RELATIONSHIPS = "relationships";
-	private static final String ORGANIZATIONS = "organizations";
-	private static final String CONTACTS = "contacts";
+	public static final String PROFILE_GROUPS = "profileGroups";
+	public static final String RELATIONSHIPS = "relationships";
+	public static final String ORGANIZATIONS = "organizations";
+	public static final String CONTACTS = "contacts";
 
 	interface MyView extends AbstractConfigPresenter.MyView {
 	}

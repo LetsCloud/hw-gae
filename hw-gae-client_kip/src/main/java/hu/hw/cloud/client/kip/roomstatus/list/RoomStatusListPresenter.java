@@ -90,8 +90,8 @@ public class RoomStatusListPresenter extends Presenter<RoomStatusListPresenter.M
 	}
 
 	private void loadRooms(RoomStatusFilterDto filterDto) {
-		filterDto.setHotelKey(currentUser.getCurrentHotelDto().getWebSafeKey());
-		filterDto.setDate(currentUser.getCurrentHotelDto().getBusinessDate());
+		filterDto.setHotelKey(currentUser.getCurrentHotel().getWebSafeKey());
+//		filterDto.setDate(currentUser.getCurrentHotel().getBusinessDate());
 
 		roomDelegate.withCallback(new AbstractAsyncCallback<List<RoomDto>>() {
 			@Override

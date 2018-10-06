@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
@@ -23,7 +23,7 @@ import hu.hw.cloud.shared.exception.ExceptionType;
  */
 @Entity
 public class Hotel extends AccountChild {
-//	private static final Logger logger = LoggerFactory.getLogger(Hotel.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(Hotel.class.getName());
 
 	// private static final String PROPERTY_ACCOUNTID = "accounId";
 	private static final String PROPERTY_CODE = "code";
@@ -59,7 +59,7 @@ public class Hotel extends AccountChild {
 	 * 
 	 */
 	public Hotel() {
-//		logger.info("Hotel()");
+		logger.info("Hotel()");
 	}
 
 	public String getCode() {
@@ -67,6 +67,7 @@ public class Hotel extends AccountChild {
 	}
 
 	public void setCode(String code) {
+		logger.info("setCode()->code=" + code);
 		this.code = code;
 	}
 
@@ -75,6 +76,7 @@ public class Hotel extends AccountChild {
 	}
 
 	public void setName(String name) {
+		logger.info("setName()->code=" + code);
 		this.name = name;
 	}
 
@@ -104,7 +106,7 @@ public class Hotel extends AccountChild {
 
 	@Override
 	public String toString() {
-		return "Hotel [ generatedId=" + this.getId() + ", code=" + code + ", name=" + name + "]";
+		return "Hotel:[code=" + code + ", name=" + name + ", " + super.toString() + "]";
 	}
 
 	@Override

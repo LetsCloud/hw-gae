@@ -38,6 +38,15 @@ public class HotelDto extends AccountChildDto {
 
 	private List<CityTaxDto> cityTaxes = new ArrayList<CityTaxDto>();
 
+	public HotelDto() {}
+
+	public HotelDto(HotelDtor source) {
+		this.setId(source.getId());
+		this.setWebSafeKey(source.getWebSafeKey());
+		this.setCode(source.getCode());
+		this.setName(source.getName());
+	}
+	
 	public String getCode() {
 		return code;
 	}

@@ -32,10 +32,10 @@ public class HotelConfigPresenter
 		implements HotelConfigUiHandlers {
 	private static Logger logger = Logger.getLogger(HotelConfigPresenter.class.getName());
 
-	private static final String HOTELS = "hotels";
-	private static final String ROOM_TYPES = "roomTypes";
-	private static final String ROOMS = "rooms";
-	private static final String MARKET_GROUPS = "marketGroups";
+	public static final String HOTELS = "hotels";
+	public static final String ROOM_TYPES = "roomTypes";
+	public static final String ROOMS = "rooms";
+	public static final String MARKET_GROUPS = "marketGroups";
 
 	interface MyView extends AbstractConfigPresenter.MyView {
 	}

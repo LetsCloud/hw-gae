@@ -17,8 +17,6 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
-import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
 
 import gwt.material.design.client.data.loader.LoadCallback;
 import gwt.material.design.client.data.loader.LoadConfig;
@@ -26,7 +24,7 @@ import gwt.material.design.client.data.loader.LoadResult;
 
 import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.app.AppPresenter;
-import hu.hw.cloud.client.core.datasource.HotelDataSource;
+import hu.hw.cloud.client.core.datasource.HotelDataSource2;
 import hu.hw.cloud.client.core.datasource.UserGroupDataSource;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
@@ -39,7 +37,7 @@ import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
 import hu.hw.cloud.shared.dto.common.UserGroupDto;
-import hu.hw.cloud.shared.dto.hotel.HotelDto;
+import hu.hw.cloud.shared.dto.hotel.HotelDtor;
 
 import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
 
@@ -58,7 +56,7 @@ public class AppUserEditorPresenter
 
 		void setUserGroupData(List<UserGroupDto> data);
 
-		void setHotelData(List<HotelDto> data);
+		void setHotelData(List<HotelDtor> data);
 
 		void displayError(EntityPropertyCode code, String message);
 	}
@@ -71,14 +69,14 @@ public class AppUserEditorPresenter
 	private final PlaceManager placeManager;
 	private final ResourceDelegate<AppUserResource> resourceDelegate;
 	private final UserGroupDataSource userGroupDataSource;
-	private final HotelDataSource hotelDataSource;
+	private final HotelDataSource2 hotelDataSource;
 	private final CurrentUser currentUser;
 	private final CoreMessages i18n;
 
 	@Inject
 	AppUserEditorPresenter(EventBus eventBus, PlaceManager placeManager, MyView view, MyProxy proxy,
 			ResourceDelegate<AppUserResource> resourceDelegate, UserGroupDataSource userGroupDataSource,
-			HotelDataSource hotelDataSource, CurrentUser currentUser, CoreMessages i18n) {
+			HotelDataSource2 hotelDataSource, CurrentUser currentUser, CoreMessages i18n) {
 		super(eventBus, placeManager, view, proxy, AppPresenter.SLOT_MAIN);
 		logger.info("AppUserEditorPresenter()");
 
@@ -110,9 +108,9 @@ public class AppUserEditorPresenter
 		};
 		userGroupDataSource.load(new LoadConfig<UserGroupDto>(0, 0, null, null), groupLC);
 
-		LoadCallback<HotelDto> hotelLoadCallback = new LoadCallback<HotelDto>() {
+		LoadCallback<HotelDtor> hotelLoadCallback = new LoadCallback<HotelDtor>() {
 			@Override
-			public void onSuccess(LoadResult<HotelDto> loadResult) {
+			public void onSuccess(LoadResult<HotelDtor> loadResult) {
 				getView().setHotelData(loadResult.getData());
 				if (areDataSourcesLoaded()) {
 					start();
@@ -124,7 +122,7 @@ public class AppUserEditorPresenter
 				// TODO Auto-generated method stub
 			}
 		};
-		hotelDataSource.load(new LoadConfig<HotelDto>(0, 0, null, null), hotelLoadCallback);
+		hotelDataSource.load(new LoadConfig<HotelDtor>(0, 0, null, null), hotelLoadCallback);
 	}
 
 	private void start() {
@@ -176,8 +174,10 @@ public class AppUserEditorPresenter
 		resourceDelegate.withCallback(new ErrorHandlerAsyncCallback<AppUserDto>(this) {
 			@Override
 			public void onSuccess(AppUserDto dto) {
-				PlaceRequest placeRequest = new Builder().nameToken(CoreNameTokens.SYSTEM_CONFIG).build();
-				placeManager.revealPlace(placeRequest);
+//				PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken(CoreNameTokens.SYSTEM_CONFIG)
+//						.with(AbstractConfigPresenter.PLACE_PARAM, SystemConfigPresenter.APP_USERS).build();
+//				placeManager.revealPlace(placeRequest);
+				placeManager.navigateBack();
 			}
 
 			@Override

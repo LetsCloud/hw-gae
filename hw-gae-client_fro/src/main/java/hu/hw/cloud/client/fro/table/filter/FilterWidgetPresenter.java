@@ -22,6 +22,7 @@ import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.fro.filter.FilterChangeEvent;
 import hu.hw.cloud.client.fro.filter.FilterChangeEvent.DataTable;
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
+import hu.hw.cloud.shared.dto.hotel.HotelDtor;
 
 /**
  * @author robi
@@ -33,11 +34,11 @@ public class FilterWidgetPresenter extends PresenterWidget<FilterWidgetPresenter
 
 	public interface MyView extends View, HasUiHandlers<FilterWidgetUiHandlers> {
 
-		void setHotelData(List<HotelDto> hotelData);
+		void setHotelData(List<HotelDtor> hotelData);
 
-		void setSelectedHotel(HotelDto hotelDto);
+		void setSelectedHotel(HotelDtor hotelDto);
 
-		HotelDto getSelectedHotel();
+		HotelDtor getSelectedHotel();
 		
 		Boolean isOnlyActive();
 	}
@@ -67,7 +68,7 @@ public class FilterWidgetPresenter extends PresenterWidget<FilterWidgetPresenter
 			public void onSuccess(LoadResult<HotelDto> loadResult) {
 				logger.info("FilterWidgetPresenter().loadData().onSuccess()");
 				getView().setHotelData(currentUser.getAppUserDto().getAvailableHotels());
-				getView().setSelectedHotel(currentUser.getCurrentHotelDto());
+				getView().setSelectedHotel(currentUser.getCurrentHotel());
 				FilterChangeEvent.fire(FilterWidgetPresenter.this, DataTable.ROOM_TYPE);
 			}
 
@@ -88,7 +89,7 @@ public class FilterWidgetPresenter extends PresenterWidget<FilterWidgetPresenter
 		FilterChangeEvent.fire(FilterWidgetPresenter.this, DataTable.ROOM_TYPE);
 	}
 	
-	public HotelDto getSelectedHotel() {
+	public HotelDtor getSelectedHotel() {
 		return getView().getSelectedHotel();
 	}
 	

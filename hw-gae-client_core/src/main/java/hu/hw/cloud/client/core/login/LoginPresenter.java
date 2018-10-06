@@ -184,7 +184,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 				Cookies.setCookie(ACCOUNT_ID, result.getAccount().getId().toString());
 				currentUser.setLoggedIn(true);
 				currentUser.setAppUserDto(result);
-				currentUser.setCurrentHotelDto(result.getDefaultHotel());
+				currentUser.setCurrentHotel(result.getDefaultHotel());
 
 				if (Strings.isNullOrEmpty(placeToGo)) {
 					goToPlace(CoreNameTokens.HOME);

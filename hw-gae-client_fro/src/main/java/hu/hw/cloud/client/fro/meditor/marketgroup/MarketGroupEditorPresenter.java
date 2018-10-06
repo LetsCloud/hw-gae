@@ -19,6 +19,9 @@ import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.datasource.HotelDataSource;
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.client.core.security.CurrentUser;
+import hu.hw.cloud.client.fro.config.AbstractConfigPresenter;
+import hu.hw.cloud.client.fro.config.hotel.HotelConfigPresenter;
+import hu.hw.cloud.client.fro.config.profile.ProfileConfigPresenter;
 import hu.hw.cloud.client.fro.meditor.AbstractMeditorPresenter;
 import hu.hw.cloud.client.fro.meditor.MeditorView;
 
@@ -75,7 +78,8 @@ public class MarketGroupEditorPresenter
 			@Override
 			public void onSuccess(MarketGroupDto dto) {
 				getView().close();
-				PlaceRequest placeRequest = new Builder().nameToken(CoreNameTokens.HOTEL_CONFIG).build();
+				PlaceRequest placeRequest = new PlaceRequest.Builder().nameToken(CoreNameTokens.HOTEL_CONFIG)
+						.with(AbstractConfigPresenter.PLACE_PARAM, HotelConfigPresenter.MARKET_GROUPS).build();
 				placeManager.revealPlace(placeRequest);
 			}
 
@@ -89,6 +93,6 @@ public class MarketGroupEditorPresenter
 	@Override
 	public void cancel() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

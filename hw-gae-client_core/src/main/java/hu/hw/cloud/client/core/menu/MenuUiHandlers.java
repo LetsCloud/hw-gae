@@ -6,7 +6,7 @@ package hu.hw.cloud.client.core.menu;
 import com.gwtplatform.mvp.client.UiHandlers;
 
 import hu.hw.cloud.client.core.event.ContentPushEvent.MenuState;
-import hu.hw.cloud.shared.dto.hotel.HotelDto;
+import hu.hw.cloud.shared.dto.hotel.HotelDtor;
 
 /**
  * @author CR
@@ -22,5 +22,5 @@ public interface MenuUiHandlers extends UiHandlers {
 	
 	void referesh();
 	
-	void setCurrentHotel(HotelDto hotel);
+	void setCurrentHotel(HotelDtor hotel);
 }

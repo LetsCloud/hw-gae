@@ -257,7 +257,9 @@ public class AppUser extends AccountChild {
 	}
 
 	public void setDefaultHotel(Hotel defaultHotel) {
-		logger.info("setDefaultHotel()");
+		logger.info("setDefaultHotel()->defaultHotel=" + defaultHotel);
+		if (defaultHotel.getId() == null)
+			return;
 		this.defaultHotel = Ref.create(defaultHotel);
 	}
 

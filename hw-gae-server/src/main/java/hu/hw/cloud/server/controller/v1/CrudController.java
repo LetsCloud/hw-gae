@@ -70,6 +70,23 @@ public abstract class CrudController<T extends BaseEntity, D extends BaseDto> ex
 		return new ResponseEntity<List<D>>(dtos, OK);
 	}
 
+	public List<T> getAll2() {
+		List<T> dtos = new ArrayList<T>();
+
+		AppUser appUser = userService.getCurrentUser();
+		if (appUser == null)
+			return dtos;
+
+		String accountWebSafeKey = appUser.getAccount().getWebSafeKey();
+		if (accountWebSafeKey == null)
+			return dtos;
+
+		for (T entity : service.getChildren(accountWebSafeKey))
+			dtos.add(entity);
+
+		return dtos;
+	}
+
 	public ResponseEntity<D> get(String webSafeKey) throws RestApiException {
 		try {
 			T entity = service.read(webSafeKey);

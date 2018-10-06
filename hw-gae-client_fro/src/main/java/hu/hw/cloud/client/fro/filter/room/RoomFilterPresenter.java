@@ -12,7 +12,7 @@ import gwt.material.design.client.data.loader.LoadCallback;
 import gwt.material.design.client.data.loader.LoadConfig;
 import gwt.material.design.client.data.loader.LoadResult;
 
-import hu.hw.cloud.client.core.datasource.HotelDataSource;
+import hu.hw.cloud.client.core.datasource.HotelDataSource2;
 import hu.hw.cloud.client.core.datasource.RoomTypeDataSource;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.fro.filter.AbstractFilterUiHandlers;
@@ -41,7 +41,7 @@ public class RoomFilterPresenter extends AbstractHotelChildFilterPresenter<RoomF
 	private final CurrentUser currentUser;
 
 	@Inject
-	RoomFilterPresenter(EventBus eventBus, MyView view, CurrentUser currentUser, HotelDataSource hotelDataSource,
+	RoomFilterPresenter(EventBus eventBus, MyView view, CurrentUser currentUser, HotelDataSource2 hotelDataSource,
 			RoomTypeDataSource roomTypeDataSource) {
 		super(eventBus, view, currentUser, hotelDataSource);
 		logger.info("RoomFilterPresenter()");
@@ -71,7 +71,7 @@ public class RoomFilterPresenter extends AbstractHotelChildFilterPresenter<RoomF
 		};
 		logger.info("RoomFilterPresenter().onReveal()-2");
 
-		roomTypeDataSource.setHotelKey(currentUser.getCurrentHotelDto().getWebSafeKey());
+		roomTypeDataSource.setHotelKey(currentUser.getCurrentHotel().getWebSafeKey());
 		logger.info("RoomFilterPresenter().onReveal()-3");
 		roomTypeDataSource.setOnlyActive(true);
 		logger.info("RoomFilterPresenter().onReveal()-4");
