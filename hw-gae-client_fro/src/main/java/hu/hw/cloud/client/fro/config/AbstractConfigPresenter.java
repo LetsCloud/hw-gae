@@ -58,7 +58,7 @@ public abstract class AbstractConfigPresenter<V extends AbstractConfigPresenter.
 	
 	public static final SingleSlot<PresenterWidget<?>> SLOT_CONTENT = new SingleSlot<>();
 
-	protected final static String PLACE_PARAM = "placeParam";
+	public final static String PLACE_PARAM = "placeParam";
 
 	public AbstractConfigPresenter(EventBus eventBus, PlaceManager placeManager, V view, P proxy, GwtEvent.Type<RevealContentHandler<?>> slot) {
 		super(eventBus, view, proxy, null, slot);

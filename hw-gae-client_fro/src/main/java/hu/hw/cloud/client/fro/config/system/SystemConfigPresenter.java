@@ -25,7 +25,7 @@ public class SystemConfigPresenter
 	private static Logger logger = Logger.getLogger(SystemConfigPresenter.class.getName());
 
 	private static final String USER_GROUPS = "userGroups";
-	private static final String APP_USERS = "appUsers";
+	public static final String APP_USERS = "appUsers";
 
 	interface MyView extends AbstractConfigPresenter.MyView {
 	}

@@ -52,6 +52,7 @@ import hu.hw.cloud.shared.dto.cube.dw.DataWidgetConfigDto;
 import hu.hw.cloud.shared.dto.cube.dw.DataWidgetFieldDto;
 import hu.hw.cloud.shared.dto.cube.query.CubeMeasureParamDto;
 import hu.hw.cloud.shared.dto.cube.query.CubeQueryParamDto;
+import hu.hw.cloud.shared.dto.hotel.HotelDto;
 
 /**
  * @author CR
@@ -610,7 +611,7 @@ public class DashboardPresenter extends Presenter<DashboardPresenter.MyView, Das
 
 		CubeQueryParamDto valueQuery = new CubeQueryParamDto();
 		// valueQuery.setHotelDto(gps.getHotel());
-		valueQuery.setHotelDto(currentUser.getCurrentHotelDto());
+		valueQuery.setHotelDto(new HotelDto(currentUser.getCurrentHotel()));
 		valueQuery = setDates(valueQuery, field.getQueryPeriodType(), field.getDataSource(),
 				field.getPeriodDimension());
 		valueQuery.addMeasure(measure);

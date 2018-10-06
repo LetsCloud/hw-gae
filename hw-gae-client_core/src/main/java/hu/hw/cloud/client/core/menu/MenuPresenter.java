@@ -30,7 +30,7 @@ import hu.hw.cloud.client.core.security.HasPermissionsGatekeeper;
 import hu.hw.cloud.shared.api.AuthResource;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.dto.core.MenuItemDto;
-import hu.hw.cloud.shared.dto.hotel.HotelDto;
+import hu.hw.cloud.shared.dto.hotel.HotelDtor;
 
 /**
  * @author CR
@@ -57,7 +57,7 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView>
 
 		void setHotelName(String hotelName);
 
-		void setPermittedHotels(List<HotelDto> hotels);
+		void setPermittedHotels(List<HotelDtor> hotels);
 
 		void setBusinessDate(Date businessDate);
 
@@ -172,9 +172,9 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView>
 	@Override
 	public void referesh() {
 		getView().setAccountName(currentUser.getAppUserDto().getAccount().getName());
-		if (currentUser.getCurrentHotelDto()!=null) {
-			if (!Strings.isNullOrEmpty(currentUser.getCurrentHotelDto().getName()))
-				getView().setHotelName(currentUser.getCurrentHotelDto().getName());
+		if (currentUser.getCurrentHotel()!=null) {
+			if (!Strings.isNullOrEmpty(currentUser.getCurrentHotel().getName()))
+				getView().setHotelName(currentUser.getCurrentHotel().getName());
 		}
 		getView().setPermittedHotels(currentUser.getAppUserDto().getAvailableHotels());
 		getView().setUserImageUrl(currentUser.getAppUserDto().getPicture());
@@ -182,8 +182,8 @@ public class MenuPresenter extends PresenterWidget<MenuPresenter.MyView>
 	}
 
 	@Override
-	public void setCurrentHotel(HotelDto hotel) {
-		currentUser.setCurrentHotelDto(hotel);
+	public void setCurrentHotel(HotelDtor hotel) {
+		currentUser.setCurrentHotel(hotel);
 		getView().setHotelName(hotel.getName());
 	}
 }

@@ -8,7 +8,7 @@ package hu.hw.cloud.shared.dto.hotel;
  *
  */
 @SuppressWarnings("serial")
-public class MarketGroupDto extends HotelChildDto {
+public class MarketGroupDto extends HotelChildDtor {
 
 	private String code;
 	

@@ -23,6 +23,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import gwt.material.design.client.pwa.PwaManager;
 import gwt.material.design.client.ui.MaterialLink;
 import gwt.material.design.client.ui.MaterialToast;
+
 import hu.hw.cloud.client.core.CoreNameTokens;
 import hu.hw.cloud.client.core.app.AppPresenter.MyView;
 import hu.hw.cloud.client.core.event.SetPageTitleEvent;
@@ -31,7 +32,7 @@ import hu.hw.cloud.client.core.menu.MenuPresenter;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.shared.api.AuthResource;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
-import hu.hw.cloud.shared.dto.hotel.HotelDto;
+import hu.hw.cloud.shared.dto.hotel.HotelDtor;
 
 public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<MyView, Proxy_>
 		implements NavigationHandler, SetPageTitleHandler {
@@ -119,7 +120,7 @@ public abstract class AppPresenter<Proxy_ extends Proxy<?>> extends Presenter<My
 				}
 				currentUser.setAppUserDto(result);
 				currentUser.getAppUserDto().getAvailableHotels()
-						.sort((HotelDto h1, HotelDto h2) -> h1.getName().compareTo(h2.getName()));
+						.sort((HotelDtor h1, HotelDtor h2) -> h1.getName().compareTo(h2.getName()));
 				currentUser.setLoggedIn(true);
 
 				menuPresenter.referesh();

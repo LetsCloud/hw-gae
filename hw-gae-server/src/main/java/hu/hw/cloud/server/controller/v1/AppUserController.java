@@ -76,6 +76,7 @@ public class AppUserController extends CrudController<AppUser, AppUserDto> {
 	@Override
 	@RequestMapping(method = POST)
 	public ResponseEntity<AppUserDto> saveOrCreate(@RequestBody AppUserDto dto) throws RestApiException {
+		logger.info("saveOrCreate()->dto="+dto);
 		return super.saveOrCreate(dto);
 	}
 

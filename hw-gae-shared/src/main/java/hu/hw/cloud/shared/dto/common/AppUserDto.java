@@ -6,7 +6,7 @@ package hu.hw.cloud.shared.dto.common;
 import java.util.ArrayList;
 import java.util.List;
 
-import hu.hw.cloud.shared.dto.hotel.HotelDto;
+import hu.hw.cloud.shared.dto.hotel.HotelDtor;
 
 /**
  * @author CR
@@ -73,12 +73,12 @@ public class AppUserDto extends AccountChildDto {
 	/**
 	 * Alapértelmezett hotel
 	 */
-	private HotelDto defaultHotel;
+	private HotelDtor defaultHotel;
 
 	/**
 	 * Engedélyezett hotelek
 	 */
-	private List<HotelDto> availableHotels = new ArrayList<HotelDto>();
+	private List<HotelDtor> availableHotels = new ArrayList<HotelDtor>();
 
 	/**
 	 * Firebase Messaging Token
@@ -169,19 +169,19 @@ public class AppUserDto extends AccountChildDto {
 		this.roles = roles;
 	}
 
-	public HotelDto getDefaultHotel() {
+	public HotelDtor getDefaultHotel() {
 		return defaultHotel;
 	}
 
-	public void setDefaultHotel(HotelDto defaultHotel) {
+	public void setDefaultHotel(HotelDtor defaultHotel) {
 		this.defaultHotel = defaultHotel;
 	}
 
-	public List<HotelDto> getAvailableHotels() {
+	public List<HotelDtor> getAvailableHotels() {
 		return availableHotels;
 	}
 
-	public void setAvailableHotels(List<HotelDto> availableHotels) {
+	public void setAvailableHotels(List<HotelDtor> availableHotels) {
 		this.availableHotels = availableHotels;
 	}
 
@@ -213,7 +213,8 @@ public class AppUserDto extends AccountChildDto {
 	public String toString() {
 		String ret = "AppUserDto:{name=" + name + ", username=" + username + ", password=" + password
 				+ ", emailAddress=" + emailAddress + ", picture=" + picture + ", enabled=" + enabled + ", admin="
-				+ admin + ", roles=" + roles + ", userGroups=" + userGroups + ", " + super.toString() + "}";
+				+ admin + ", roles=" + roles + ", userGroups=" + userGroups + ", defaultHotel=" + defaultHotel + ", "
+				+ super.toString() + "}";
 		return ret;
 	}
 }

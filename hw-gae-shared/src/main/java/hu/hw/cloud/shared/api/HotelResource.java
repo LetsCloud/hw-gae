@@ -3,11 +3,6 @@
  */
 package hu.hw.cloud.shared.api;
 
-import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
-import static hu.hw.cloud.shared.api.ApiPaths.PATH_WEBSAFEKEY;
-import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.HOTEL;
-import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.ROOT;
-
 import java.util.List;
 
 import javax.ws.rs.DELETE;
@@ -19,6 +14,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
+import hu.hw.cloud.shared.dto.hotel.HotelDtor;
+
+import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
+import static hu.hw.cloud.shared.api.ApiPaths.PATH_WEBSAFEKEY;
+import static hu.hw.cloud.shared.api.ApiPaths.REDUCED;
+import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.HOTEL;
+import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.ROOT;
 
 /**
  * @author CR
@@ -30,6 +32,10 @@ public interface HotelResource {
 
 	@GET
 	List<HotelDto> list();
+
+	@GET
+	@Path(REDUCED)
+	List<HotelDtor> listReduced();
 
 	@GET
 	@Path(PATH_WEBSAFEKEY)

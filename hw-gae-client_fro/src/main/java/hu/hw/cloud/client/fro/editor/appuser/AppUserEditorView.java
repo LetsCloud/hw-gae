@@ -31,7 +31,7 @@ import gwt.material.design.client.ui.MaterialTextBox;
 import hu.hw.cloud.shared.dto.EntityPropertyCode;
 import hu.hw.cloud.shared.dto.common.AppUserDto;
 import hu.hw.cloud.shared.dto.common.UserGroupDto;
-import hu.hw.cloud.shared.dto.hotel.HotelDto;
+import hu.hw.cloud.shared.dto.hotel.HotelDtor;
 
 /**
  * @author robi
@@ -63,12 +63,12 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 	MaterialComboBox<UserGroupDto> userGroups;
 
 	@UiField
-	MaterialComboBox<HotelDto> availableHotels;
+	MaterialComboBox<HotelDtor> availableHotels;
 
 	@UiField
 	@Ignore
-	MaterialComboBox<HotelDto> defaultHotelCombo;
-	TakesValueEditor<HotelDto> defaultHotel;
+	MaterialComboBox<HotelDtor> defaultHotelCombo;
+	TakesValueEditor<HotelDtor> defaultHotel;
 
 	String picture;
 	
@@ -78,15 +78,15 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 
 		initWidget(uiBinder.createAndBindUi(this));
 
-		defaultHotel = TakesValueEditor.of(new TakesValue<HotelDto>() {
+		defaultHotel = TakesValueEditor.of(new TakesValue<HotelDtor>() {
 
 			@Override
-			public void setValue(HotelDto value) {
+			public void setValue(HotelDtor value) {
 				defaultHotelCombo.setSingleValue(value);
 			}
 
 			@Override
-			public HotelDto getValue() {
+			public HotelDtor getValue() {
 				return defaultHotelCombo.getSingleValue();
 			}
 		});
@@ -94,10 +94,10 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 		this.driver = driver;
 		driver.initialize(this);
 
-		availableHotels.addSelectionHandler(new SelectComboHandler<HotelDto>() {
+		availableHotels.addSelectionHandler(new SelectComboHandler<HotelDtor>() {
 
 			@Override
-			public void onSelectItem(SelectItemEvent<HotelDto> event) {
+			public void onSelectItem(SelectItemEvent<HotelDtor> event) {
 				setDefHotelCombo(event.getSelectedValues());
 			}
 		});
@@ -133,16 +133,16 @@ public class AppUserEditorView extends ViewWithUiHandlers<AppUserEditorUiHandler
 	}
 
 	@Override
-	public void setHotelData(List<HotelDto> data) {
+	public void setHotelData(List<HotelDtor> data) {
 		availableHotels.clear();
-		for (HotelDto dto : data) {
+		for (HotelDtor dto : data) {
 			availableHotels.addItem(dto.getName(), dto);
 		}
 	}
 
-	private void setDefHotelCombo(List<HotelDto> dtos) {
+	private void setDefHotelCombo(List<HotelDtor> dtos) {
 		defaultHotelCombo.clear();
-		for (HotelDto hd : dtos) {
+		for (HotelDtor hd : dtos) {
 			defaultHotelCombo.addItem(hd.getName(), hd);
 		}
 	}

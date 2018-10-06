@@ -12,7 +12,7 @@ import hu.hw.cloud.shared.cnst.InventoryType;
  *
  */
 @SuppressWarnings("serial")
-public class RoomTypeDto extends HotelChildDto {
+public class RoomTypeDto extends HotelChildDtor {
 
 	private String code;
 

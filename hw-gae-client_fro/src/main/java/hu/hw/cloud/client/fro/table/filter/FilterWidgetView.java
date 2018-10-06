@@ -20,6 +20,7 @@ import gwt.material.design.client.ui.MaterialCollapsibleHeader;
 
 import hu.hw.cloud.client.core.i18n.CoreMessages;
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
+import hu.hw.cloud.shared.dto.hotel.HotelDtor;
 
 /**
  * @author robi
@@ -43,7 +44,7 @@ public class FilterWidgetView extends ViewWithUiHandlers<FilterWidgetUiHandlers>
 	MaterialChip hotelChip;
 
 	@UiField
-	MaterialComboBox<HotelDto> hotelComboBox;
+	MaterialComboBox<HotelDtor> hotelComboBox;
 
 	@UiField
 	MaterialCheckBox onlyActiveCheckBox;
@@ -78,15 +79,15 @@ public class FilterWidgetView extends ViewWithUiHandlers<FilterWidgetUiHandlers>
 	}
 
 	@Override
-	public void setHotelData(List<HotelDto> hotelData) {
-		for (HotelDto hd : hotelData) {
+	public void setHotelData(List<HotelDtor> hotelData) {
+		for (HotelDtor hd : hotelData) {
 			logger.info("RoomTypeTableView().setHotelData()->hd=" + hd.getName());
 			hotelComboBox.addItem(hd.getName(), hd);
 		}
 	}
 
 	@Override
-	public void setSelectedHotel(HotelDto hotelDto) {
+	public void setSelectedHotel(HotelDtor hotelDto) {
 		logger.info("RoomTypeTableView().setSelectedHotel()->hotelDto=" + hotelDto);
 		Integer index = hotelComboBox.getValueIndex(hotelDto);
 		logger.info("RoomTypeTableView().setSelectedHotel()->index=" + index);
@@ -94,7 +95,7 @@ public class FilterWidgetView extends ViewWithUiHandlers<FilterWidgetUiHandlers>
 		setHotelChip(hotelDto);
 	}
 
-	private void setHotelChip(HotelDto hoteDto) {
+	private void setHotelChip(HotelDtor hoteDto) {
 		hotelChip.setText(hoteDto.getName());
 	}
 
@@ -107,7 +108,7 @@ public class FilterWidgetView extends ViewWithUiHandlers<FilterWidgetUiHandlers>
 	}
 
 	@Override
-	public HotelDto getSelectedHotel() {
+	public HotelDtor getSelectedHotel() {
 		return hotelComboBox.getSelectedValue().get(0);
 	}
 

@@ -5,11 +5,14 @@ package hu.hw.cloud.server.controller.v1;
 
 import static hu.hw.cloud.shared.api.ApiParameters.WEBSAFEKEY;
 import static hu.hw.cloud.shared.api.ApiPaths.PATH_WEBSAFEKEY;
+import static hu.hw.cloud.shared.api.ApiPaths.REDUCED;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.HOTEL;
 import static hu.hw.cloud.shared.api.ApiPaths.SpaV1.ROOT;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -32,6 +35,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import hu.hw.cloud.server.entity.hotel.Hotel;
 import hu.hw.cloud.server.service.HotelService;
 import hu.hw.cloud.shared.dto.hotel.HotelDto;
+import hu.hw.cloud.shared.dto.hotel.HotelDtor;
 import hu.hw.cloud.shared.exception.RestApiException;
 
 /**
@@ -68,6 +72,22 @@ public class HotelController extends CrudController<Hotel, HotelDto> {
 	@RequestMapping(method = GET)
 	public @ResponseBody ResponseEntity<List<HotelDto>> getAll() {
 		return super.getAll();
+	}
+
+	/**
+	 * Visszaadja a bejelentkezett felhasználó előfizetéséhez tartozó összes
+	 * szállodát
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = REDUCED, method = GET)
+	public @ResponseBody ResponseEntity<List<HotelDtor>> getAllReduced() {
+		List<HotelDtor> dtos = new ArrayList<HotelDtor>();
+
+		for (Hotel entity : getAll2())
+			dtos.add(modelMapper.map(entity, HotelDtor.class));
+
+		return new ResponseEntity<List<HotelDtor>>(dtos, OK);
 	}
 
 	@Override

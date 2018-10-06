@@ -23,6 +23,12 @@ public class WebPresenceDto implements Dto {
 	 */
 	private String url;
 
+	public WebPresenceDto() {}
+
+	public WebPresenceDto(WebPresenceType label) {
+		this.label = label;		
+	}
+	
 	public WebPresenceType getLabel() {
 		return label;
 	}

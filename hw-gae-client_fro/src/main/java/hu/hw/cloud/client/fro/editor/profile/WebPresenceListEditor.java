@@ -20,6 +20,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 
 import hu.hw.cloud.client.fro.editor.HasEditorSwitch;
+import hu.hw.cloud.shared.cnst.WebPresenceType;
 import hu.hw.cloud.shared.dto.profile.WebPresenceDto;
 
 /**
@@ -112,7 +113,7 @@ public class WebPresenceListEditor extends Composite
 	}
 
 	public void addItem() {
-		editor.getList().add(new WebPresenceDto());
+		editor.getList().add(new WebPresenceDto(WebPresenceType.WEB_URL));
 	}
 
 	private void remove(final int index) {

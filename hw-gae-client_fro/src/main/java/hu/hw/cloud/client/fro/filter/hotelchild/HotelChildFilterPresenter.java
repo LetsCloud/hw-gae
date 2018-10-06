@@ -11,6 +11,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 
 import hu.hw.cloud.client.core.datasource.HotelDataSource;
+import hu.hw.cloud.client.core.datasource.HotelDataSource2;
 import hu.hw.cloud.client.core.security.CurrentUser;
 import hu.hw.cloud.client.fro.filter.AbstractFilterUiHandlers;
 
@@ -26,7 +27,7 @@ public class HotelChildFilterPresenter extends AbstractHotelChildFilterPresenter
 
 	@Inject
 	HotelChildFilterPresenter(EventBus eventBus, MyView view, CurrentUser currentUser,
-			HotelDataSource hotelDataSource) {
+			HotelDataSource2 hotelDataSource) {
 		super(eventBus, view, currentUser, hotelDataSource);
 		logger.info("HotelChildFilterPresenter()");
 

@@ -135,8 +135,7 @@ public class RoomTypeEditorPresenter
 		resourceDelegate.withCallback(new AsyncCallback<RoomTypeDto>() {
 			@Override
 			public void onSuccess(RoomTypeDto dto) {
-				PlaceRequest placeRequest = new Builder().nameToken(CoreNameTokens.HOTEL_CONFIG).build();
-				placeManager.revealPlace(placeRequest);
+				placeManager.navigateBack();
 			}
 
 			@Override

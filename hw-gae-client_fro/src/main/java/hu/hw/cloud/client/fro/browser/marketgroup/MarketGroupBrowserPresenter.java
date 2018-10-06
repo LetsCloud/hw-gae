@@ -79,7 +79,7 @@ public class MarketGroupBrowserPresenter extends AbstractBrowserPresenter<Market
 			public void onSuccess(List<MarketGroupDto> result) {
 				getView().setData(result);
 			}
-		}).getAll(currentUser.getCurrentHotelDto().getWebSafeKey(), false);
+		}).getAll(currentUser.getCurrentHotel().getWebSafeKey(), false);
 	}
 
 	@Override

@@ -41,6 +41,7 @@ import hu.hw.cloud.shared.cnst.cube.Measure;
 import hu.hw.cloud.shared.dto.cube.D3m6Dto;
 import hu.hw.cloud.shared.dto.cube.query.CubeMeasureParamDto;
 import hu.hw.cloud.shared.dto.cube.query.CubeQueryParamDto;
+import hu.hw.cloud.shared.dto.hotel.HotelDto;
 
 /**
  * @author CR
@@ -188,7 +189,7 @@ public class AnalyticsPresenter extends Presenter<AnalyticsPresenter.MyView, Ana
 		measures.add(new CubeMeasureParamDto(DataWidgetFieldType.VALUE3, DataSource.FRO_ACTL_PERF, Measure.RRES_DEP));
 
 		CubeQueryParamDto param = new CubeQueryParamDto();
-		param.setHotelDto(currentUser.getCurrentHotelDto());
+		param.setHotelDto(new HotelDto(currentUser.getCurrentHotel()));
 		param.setFromDate(fmt.parse("2015-06-01"));
 		param.setToDate(fmt.parse("2015-06-01"));
 		param.setDimensions(dimensions);

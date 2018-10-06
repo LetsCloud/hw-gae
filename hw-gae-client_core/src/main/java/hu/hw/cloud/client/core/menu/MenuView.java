@@ -34,12 +34,13 @@ import gwt.material.design.client.ui.MaterialLink;
 import gwt.material.design.client.ui.MaterialNavBar;
 import gwt.material.design.client.ui.MaterialSideNavPush;
 import gwt.material.design.client.ui.MaterialToast;
+
 import hu.hw.cloud.client.core.event.ContentPushEvent.MenuState;
 import hu.hw.cloud.client.core.resources.CoreResources;
 import hu.hw.cloud.shared.cnst.MenuItemType;
 import hu.hw.cloud.shared.cnst.SubSystem;
 import hu.hw.cloud.shared.dto.core.MenuItemDto;
-import hu.hw.cloud.shared.dto.hotel.HotelDto;
+import hu.hw.cloud.shared.dto.hotel.HotelDtor;
 
 /**
  * @author CR
@@ -232,14 +233,14 @@ public class MenuView extends ViewWithUiHandlers<MenuUiHandlers> implements Menu
 	}
 
 	@Override
-	public void setPermittedHotels(List<HotelDto> hotels) {
+	public void setPermittedHotels(List<HotelDtor> hotels) {
 		hotelDropDown.clear();
-		for (HotelDto hotel : hotels) {
+		for (HotelDtor hotel : hotels) {
 			hotelDropDown.add(createHotelLink(hotel));
 		}
 	}
 
-	private MaterialLink createHotelLink(HotelDto dto) {
+	private MaterialLink createHotelLink(HotelDtor dto) {
 		MaterialLink link = new MaterialLink(dto.getName());
 		link.addClickHandler(e -> {
 			getUiHandlers().setCurrentHotel(dto);

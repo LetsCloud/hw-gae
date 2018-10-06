@@ -50,6 +50,7 @@ public final class OrganizationEditorPresenter
 		void setReadOnly(Boolean readOnly);
 	}
 
+	private final PlaceManager placeManager;
 	private final ResourceDelegate<OrganizationResource> resourceDelegate;
 	private final ProfileGroupDataSource profileGroupDataSource;
 	private final CurrentUser currentUser;
@@ -61,6 +62,7 @@ public final class OrganizationEditorPresenter
 		super(eventBus, placeManager, view);
 		logger.info("OrganizationEditorPresenter()");
 
+		this.placeManager = placeManager;
 		this.resourceDelegate = resourceDelegate;
 		this.profileGroupDataSource = profileGroupDataSource;
 		this.currentUser = currentUser;
@@ -130,7 +132,9 @@ public final class OrganizationEditorPresenter
 			@Override
 			public void onSuccess(OrganizationDto dto) {
 				logger.info("OrganizationEditorPresenter().save().onSuccess()->webSafeKey=" + dto.getWebSafeKey());
-				loadData();
+//				loadData();
+//				setReadOnly(true);
+				placeManager.navigateBack();
 //				eventBus.fireEvent(new CommunicationActionEvent(CommunicationActionEvent.Action.CLOSE, -1));
 //				Builder placeBuilder = new Builder().nameToken(FroNameTokens.ORGANIZATION_DISPLAY);
 //				placeBuilder.with(WEBSAFEKEY, String.valueOf(dto.getWebSafeKey()));
